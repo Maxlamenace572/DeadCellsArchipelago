@@ -10,3 +10,4 @@ E:\DeadCellsArchipelago\obj\Debug\net10.0\DeadCellsArchipelago.dll
 E:\DeadCellsArchipelago\obj\Debug\net10.0\refint\DeadCellsArchipelago.dll
 E:\DeadCellsArchipelago\obj\Debug\net10.0\DeadCellsArchipelago.pdb
 E:\DeadCellsArchipelago\obj\Debug\net10.0\ref\DeadCellsArchipelago.dll
+E:\DeadCellsArchipelago\obj\Debug\net10.0\DeadCellsArchipelago.sourcelink.json
