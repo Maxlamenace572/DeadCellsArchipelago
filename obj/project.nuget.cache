@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "rYcXhNS4pss=",
+  "success": true,
+  "projectFilePath": "E:\\DeadCellsArchipelago\\DeadCellsArchipelago.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maxen\\.nuget\\packages\\deadcellscoremodding.mdk\\1.0.1\\deadcellscoremodding.mdk.1.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

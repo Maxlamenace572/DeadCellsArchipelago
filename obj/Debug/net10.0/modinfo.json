@@ -1,0 +1,11 @@
+{
+  "name": "DeadCellsArchipelago",
+  "version": "1.0.0",
+  "type": "mod",
+  "dccmversion": "35.9.6",
+  "assemblies": [
+    "DeadCellsArchipelago.dll"
+  ],
+  "main": "DeadCellsArchipelago.ModEntry",
+  "dependencies": []
+}
