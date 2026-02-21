@@ -1,9 +1,12 @@
 ﻿using dc.en;
+using dc.en.loot;
 using ModCore.Mods;
+using ModCore.Utilities;
 using Serilog;
 
 using static DeadCellsArchipelago.BossManager;
 using static DeadCellsArchipelago.ItemManager;
+using static DeadCellsArchipelago.BlueprintManager;
 
 namespace DeadCellsArchipelago{
     //E:\SteamLibrary\steamapps\common\Dead Cells\coremod\core\host\startup -> path to launch DeadCellsModding.exe
@@ -18,37 +21,29 @@ namespace DeadCellsArchipelago{
 
             Hook_Hero.init += OnHeroInit;
 
+            Hook_Hero.pickBlueprint += OnBlueprintPicked;
+            Hook_Hero.hasBlueprint += ReallyHasBlueprint;
+
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
-
 
         private void OnHeroInit(Hook_Hero.orig_init orig, Hero self)
         {
             orig(self);
             hero = self;
-            HERO = self;
+            ItemManager.HERO = self;
+            BlueprintManager.HERO = self;
             
             Log.Information($"=== Hero initialized ! ===");
-            //will be removed, but giving an item to a player saved at a level transition do nothing (can pose future problems)
-            LogInventory();
-            //test each category
-            GiveItemToPlayer("HeavyTurret");
-            GiveItemToPlayer("FastGrenade");
-            GiveItemToPlayer("SideTurret");
-            GiveItemToPlayer("SlowOrb");
-            GiveItemToPlayer("AdminWeapon");
-            GiveItemToPlayer("ExplosiveCrossBow");
-            GiveItemToPlayer("IceShield");
-            GiveItemToPlayer("Immortality");
-            GiveItemToPlayer("MariaCatKey");
-            GiveItemToPlayer("BreakableGroundKey");
+            //giving an item to a player saved at a level transition do nothing or errors (can pose future problems)
+            //LogInventory();
+            GiveItemToPlayer("DiverseDeckWatcher");
             GiveItemToPlayer("AnyUp");
             GiveItemToPlayer("LegendGem");
-            GiveItemToPlayer("P_ManyMobsAround");
-            GiveItemToPlayer("PrisonerGold");
-            GiveItemToPlayer("HandOfTheKingFlame");
-            GiveItemToPlayer("ASP_ToxinLover");
-            GiveItemToPlayer("BRS_Skull");
+            UnlockBlueprint("FastBow");
+            UnlockBlueprint("EvilSword");
+            UnlockBlueprint("FastBow");
+            UnlockBlueprint("BackStabber");
         }
     }
 }

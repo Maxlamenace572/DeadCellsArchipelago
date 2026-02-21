@@ -58,7 +58,7 @@ namespace DeadCellsArchipelago {
 
         private static InventItem? CreateInventItemById(string itemName)
         {
-            string json = System.IO.File.ReadAllText("E:\\DeadCellsArchipelago\\itemsId-Category.json"); //todo : use a better filepath
+            string json = System.IO.File.ReadAllText("./coremod/mods/DeadCellsArchipelago/itemsId-Category.json"); //the json should be placed next to the modinfo.json
 
             Dictionary<string, string>? items = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
 
@@ -70,7 +70,7 @@ namespace DeadCellsArchipelago {
 
             if (items.TryGetValue(itemName, out string? category))
             {
-                Console.WriteLine($"L'objet {itemName} existe et sa catégorie est {category}");
+                Console.WriteLine($"=== Item {itemName} exists with category {category} ===");
             }
             else
             {
