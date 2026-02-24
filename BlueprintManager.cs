@@ -11,6 +11,7 @@ namespace DeadCellsArchipelago {
         // I have completed the other 4 flawless (servents, queen, death, dracula), but they may be given later, should search. (maybe when biome unlocked ?)
         public static Hero? HERO { get; set; }
         public static ArchipelagoSaveData? SAVED_DATA { get; set; }
+        public static ArchipelagoManager? ARCHIPELAGO { get; set; }
         
         //Called when the hero get a blueprint, picked in game or by UnlockBlueprint.
         public static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
@@ -24,6 +25,7 @@ namespace DeadCellsArchipelago {
             {
                 Log.Information($"=== Blueprint picked up : {k} ===");
                 // TODO: send check to Archipelago
+                SendBlueprintCheck(k.ToString());
                 if (SAVED_DATA != null)
                 {
                     SAVED_DATA.SaveCheckSent(k.ToString());
@@ -66,6 +68,18 @@ namespace DeadCellsArchipelago {
                 return true;
             }
             return false;
+        }
+
+        public static void SendBlueprintCheck(string blueprintId)
+        {
+            if (ARCHIPELAGO != null)
+            {
+                ARCHIPELAGO.SendCheck($"Blueprint: {blueprintId}");
+            }
+            else
+            {
+                Log.Error($"=== Error while sending blueprint check ===");
+            }
         }
     }
 }

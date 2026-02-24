@@ -23,6 +23,7 @@ namespace DeadCellsArchipelago{
         IOnAfterLoadingSave,
         IOnBeforeSavingSave
     {
+        private ArchipelagoManager archipelago = new();
         private ArchipelagoSaveData savedData = new();
         private Hero? hero;
         public override void Initialize()
@@ -34,7 +35,11 @@ namespace DeadCellsArchipelago{
             Hook_Hero.init += OnHeroInit;
 
             Hook_Hero.pickBlueprint += OnBlueprintPicked;
-            Hook_ItemMetaManager.hasRevealedItem += ReallyHasBlueprint;;
+            Hook_ItemMetaManager.hasRevealedItem += ReallyHasBlueprint;
+
+            // TODO: Get infos from file or ui
+            /*archipelago.Connect("localhost:38281", "Player1");
+            BlueprintManager.ARCHIPELAGO = archipelago;*/
 
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
@@ -65,7 +70,7 @@ namespace DeadCellsArchipelago{
             {
                 Log.Information($"=== Chargement de la save slot {data.userId} ===");
                 
-                // Charger les données Archipelago pour ce slot
+                // Load Archipelago data for this game
                 var savePath = GetSaveFilePath(data.userId);
                 if (System.IO.File.Exists(savePath))
                 {

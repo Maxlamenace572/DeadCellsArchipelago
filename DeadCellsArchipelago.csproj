@@ -8,10 +8,19 @@
     <ModType>mod</ModType>
     <ModMain>DeadCellsArchipelago.ModEntry</ModMain>
     <AutoInstallMod>true</AutoInstallMod>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DeadCellsCoreModding.MDK" Version="1.0.1" />
+    <PackageReference Include="Archipelago.MultiClient.Net" Version="6.3.1" />
   </ItemGroup>
 
+  <Target Name="CopyArchipelagoDependencies" AfterTargets="Build">
+    <ItemGroup>
+      <ArchipelagoDlls Include="$(NuGetPackageRoot)archipelago.multiclient.net\6.3.1\lib\net6.0\*.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ArchipelagoDlls)" DestinationFolder="$(OutputPath)" />
+    <Message Importance="high" Text="Copied Archipelago DLLs to output" />
+  </Target>
 </Project>
