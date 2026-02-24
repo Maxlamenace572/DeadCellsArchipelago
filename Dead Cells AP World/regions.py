@@ -130,3 +130,4 @@ def connect_regions(world: DeadCellsAPWorld) -> None:
     insuff_crypt.connect(graveyard, "Insufferable Crypt to Graveyard", lambda state: state.has("Spider Rune", world.player))
 
     # Fourth Stage Connections
+    stilt_village.connect(clock_tower, "Clock Tower to Clock Village")
