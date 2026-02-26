@@ -14,7 +14,9 @@ using dc.level;
 using dc.tool;
 using ModCore.Events.Interfaces.Game.Save;
 using Newtonsoft.Json;
+using System.Text.Json;
 using dc;
+using dc.hl.types;
 
 
 namespace DeadCellsArchipelago{
@@ -25,7 +27,7 @@ namespace DeadCellsArchipelago{
     {
         private ArchipelagoManager archipelago = new();
         private ArchipelagoSaveData savedData = new();
-        private Hero? hero;
+
         public override void Initialize()
         {
             Log.Information("=== Archipelago Mod is loading... ===");
@@ -36,10 +38,17 @@ namespace DeadCellsArchipelago{
 
             Hook_Hero.pickBlueprint += OnBlueprintPicked;
             Hook_ItemMetaManager.hasRevealedItem += ReallyHasBlueprint;
+            Hook_ItemMetaManager.revealAllBaseItems += ReallyRevealAllBaseItems;
+            Hook_LevelGen.generate += OnLevelGenGenerate;
+            
 
+            archipelago.EnableMockMode();
             // TODO: Get infos from file or ui
-            /*archipelago.Connect("localhost:38281", "Player1");
-            BlueprintManager.ARCHIPELAGO = archipelago;*/
+            //archipelago.Connect("localhost:38281", "Player1");
+            ARCHIPELAGO = archipelago;
+
+            string json = System.IO.File.ReadAllText("./coremod/mods/DeadCellsArchipelago/itemsId-Category.json"); //the json should be placed next to the modinfo.json
+            ITEMS = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ItemData>>(json);
 
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
@@ -47,9 +56,7 @@ namespace DeadCellsArchipelago{
         private void OnHeroInit(Hook_Hero.orig_init orig, Hero self)
         {
             orig(self);
-            hero = self;
-            ItemManager.HERO = self;
-            BlueprintManager.HERO = self;
+            HERO = self;
             
             Log.Information($"=== Hero initialized ! ===");
             //giving an item to a player saved at a level transition do nothing or errors (can pose future problems)
@@ -68,6 +75,8 @@ namespace DeadCellsArchipelago{
             savedData = new();
             if (data != null)
             {
+                ITEM_META_MANAGER = data.itemMeta;
+
                 Log.Information($"=== Chargement de la save slot {data.userId} ===");
                 
                 // Load Archipelago data for this game
@@ -91,7 +100,7 @@ namespace DeadCellsArchipelago{
             {
                 Log.Information($"=== New Save ===");
             }
-            BlueprintManager.SAVED_DATA = savedData;
+            SAVED_DATA = savedData;
         }
         
         public void OnBeforeSavingSave(IOnBeforeSavingSave.EventData data)
@@ -118,6 +127,13 @@ namespace DeadCellsArchipelago{
             
             Directory.CreateDirectory(saveDir);
             return System.IO.Path.Combine(saveDir, $"archipelagoUserId_{slot}.json");
+        }
+
+        private ArrayObj OnLevelGenGenerate(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, Hashlink.Virtuals.virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, HaxeProxy.Runtime.Ref<bool> resetCount)
+        {
+            ITEM_META_MANAGER = user.itemMeta;
+            var result = orig(self, user, seed, ldat, resetCount);
+            return result;
         }
     }
 }

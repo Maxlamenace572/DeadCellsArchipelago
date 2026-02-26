@@ -18,6 +18,14 @@ namespace DeadCellsArchipelago
         private string _serverUrl = "localhost:38281";  // By default
         private string _slotName = "";
         private string? _password = null;
+        private bool _mockMode = false;
+
+        public void EnableMockMode() //used only for tests
+        {
+            _mockMode = true;
+            _isConnected = true;
+            Log.Information("=== Mode mock Archipelago activated ===");
+        }
         
         public bool IsConnected => _isConnected;
         
@@ -29,7 +37,7 @@ namespace DeadCellsArchipelago
             
             try
             {
-                Log.Information($"=== Connexion à Archipelago: {_serverUrl} (slot: {_slotName}) ===");
+                Log.Information($"=== Connecting to Archipelago: {_serverUrl} (slot: {_slotName}) ===");
                 
                 _session = ArchipelagoSessionFactory.CreateSession(_serverUrl);
                 
@@ -80,6 +88,17 @@ namespace DeadCellsArchipelago
         
         public void SendCheck(string locationName)
         {
+            if (_mockMode) //log check when we are on test mod
+            {
+                Log.Information($"=== [MOCK] Check sent: {locationName} ===");
+                
+                // Simulate a blueprint send from server
+                Log.Information($"=== [MOCK] Simulate item send ===");
+                BlueprintManager.UnlockBlueprint("Flask1");
+                return;
+            }
+
+            
             if (!_isConnected || _session == null)
             {
                 Log.Warning($"=== Impossible to send check to {locationName}: not connected ===");

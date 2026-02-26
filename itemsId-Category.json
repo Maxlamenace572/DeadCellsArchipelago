@@ -1,647 +1,2582 @@
 {
-  "HorizontalTurret": "DeployedTrap",
-  "StandardTurret": "DeployedTrap",
-  "HeavyTurret": "DeployedTrap",
-  "CeilTurret": "DeployedTrap",
-  "FireTurret": "DeployedTrap",
-  "GroundSaw": "DeployedTrap",
-  "RootTrap": "DeployedTrap",
-  "Crusher": "DeployedTrap",
-  "Decoy": "DeployedTrap",
-  "PortableDoor": "DeployedTrap",
-  "TeslaCoil": "DeployedTrap",
-  "Cannon": "DeployedTrap",
-  "DarknessLantern": "DeployedTrap",
-  "ExplosiveGrenade": "Grenade",
-  "FastGrenade": "Grenade",
-  "ClusterBomb": "Grenade",
-  "MagnetGrenade": "Grenade",
-  "StunningGrenade": "Grenade",
-  "IceBomb": "Grenade",
-  "FireBomb": "Grenade",
-  "RootBomb": "Grenade",
-  "OilBomb": "Grenade",
-  "SideBomb": "Grenade",
-  "Pokebomb": "Grenade",
-  "HolyWater": "Grenade",
-  "SideTurret": "SideKick",
-  "SlowOrb": "Power",
-  "Tornado": "Power",
-  "KnivesCircle": "Power",
-  "DamageBuff": "Power",
-  "LeechBuff": "Power",
-  "ExtraHeal": "Power",
-  "BulletKiller": "Power",
-  "Hook": "Power",
-  "BackBlink": "Power",
-  "TimeDistorsion": "Power",
-  "ToxicCloud": "Power",
-  "DamageAura": "Power",
-  "Shockwave": "Power",
-  "Wings": "Power",
-  "ComboMult": "Power",
-  "Pokecharge": "Power",
-  "Map": "Power",
-  "Owl": "Power",
-  "OwlUp": "Power",
-  "Chicken": "Power",
-  "SpeedRunner": "Power",
-  "Dash": "Power",
-  "BackDash": "Power",
-  "GiantWhistle": "Power",
-  "SeismicStomp": "Power",
-  "CollectorSpin": "Power",
-  "SmokeBomb": "Power",
-  "SpawnFriendlyHardy": "Power",
-  "ExplodeFriendlyHardy": "Power",
-  "IceArmor": "Power",
-  "LightningRod": "Power",
-  "GardenerSickles": "Power",
-  "FlyingSword": "Power",
-  "FlyingSwordCallback": "Power",
-  "BubbleShieldPower": "Power",
-  "FaceFlask": "Power",
-  "PolloPower": "Power",
-  "SpawnLilStaphy": "Power",
-  "LilStaphyStab": "Power",
-  "SpawnAdultLilStaphy": "Power",
-  "AdultLilStaphyStab": "Power",
-  "DiverseDeckJuggernaut": "Power",
-  "DiverseDeckCatalyst": "Power",
-  "DiverseDeckElectro": "Power",
-  "DiverseDeckWatcher": "Power",
-  "Taunt": "Power",
-  "BouncingStone": "Power",
-  "SpawnCat": "Power",
-  "CatAttack": "Power",
-  "BatVolley": "Power",
-  "RichterCross": "Power",
-  "Indulgence": "Power",
-  "StartSword": "Melee",
-  "AdminWeapon": "Melee",
-  "QuickSword": "Melee",
-  "RevengeSword": "Melee",
-  "BackStabber": "Melee",
-  "Bleeder": "Melee",
-  "DualDaggers": "Melee",
-  "BroadSword": "Melee",
-  "Shovel": "Melee",
-  "EvilSword": "Melee",
-  "BleedCrit": "Melee",
-  "SpeedBlade": "Melee",
-  "GiantKiller": "Melee",
-  "BulletBlade": "Melee",
-  "SismicBlade": "Melee",
-  "Spear": "Melee",
-  "ImpaleSpear": "Melee",
-  "KingsSpear": "Melee",
-  "Rapier": "Melee",
-  "DashSword": "Melee",
-  "StunMace": "Melee",
-  "BumpBoots": "Melee",
-  "SpikedBoots": "Melee",
-  "MultiKickBoots": "Melee",
-  "QuickFists": "Melee",
-  "Whip": "Melee",
-  "HookWhip": "Melee",
-  "OilSword": "Melee",
-  "Burner": "Melee",
-  "LowHealth": "Melee",
-  "PerfectHalberd": "Melee",
-  "BehemothHammer": "Melee",
-  "TentacleWhip": "Melee",
-  "Pan": "Melee",
-  "ParryBlade": "Melee",
-  "TickScytheLeft": "Melee",
-  "TickScytheRight": "Melee",
-  "RhythmicBlade": "Melee",
-  "Crowbar": "Melee",
-  "SnakeFang": "Melee",
-  "GiantStaff": "Melee",
-  "Lantern": "Melee",
-  "NotFlyingSword": "Melee",
-  "Katana": "Melee",
-  "ExplosiveCrossBowOffHand": "Melee",
-  "Tombstone": "Melee",
-  "HeavyAxe": "Melee",
-  "Club": "Melee",
-  "ClubBroken": "Melee",
-  "MachetePistol": "Melee",
-  "HardLightSword": "Melee",
-  "PureNail": "Melee",
-  "SkulBone": "Melee",
-  "Trident": "Melee",
-  "HandHook": "Melee",
-  "Shark": "Melee",
-  "ElbowBlades": "Melee",
-  "WreckingBall": "Melee",
-  "QueenRapier": "Melee",
-  "CupidityDagger": "Melee",
-  "GoldDigger": "Melee",
-  "GoldDiggerEvolved": "Melee",
-  "KingScepter": "Melee",
-  "BaseballBat": "Melee",
-  "NunchuckPan": "Melee",
-  "Starfury": "Melee",
-  "TPSword": "Melee",
-  "WiggleWhip": "Melee",
-  "Bible": "Melee",
-  "SnakeSwordWeapon": "Melee",
-  "SnakeSwordWeaponAlt": "Melee",
-  "SnakeSwordSwap": "Melee",
-  "VampireKiller": "Melee",
-  "AdeleScythe": "Melee",
-  "RichterVampireKiller": "Melee",
-  "CombinedTickScythe": "Melee",
-  "Pistol": "Melee",
-  "Scissor": "Melee",
-  "Comb": "Melee",
-  "Misericord": "Melee",
-  "StartBow": "Ranged",
-  "DualBow": "Ranged",
-  "InfiniteBow": "Ranged",
-  "LongBow": "Ranged",
-  "SonicCrossbow": "Ranged",
-  "CloseCombatBow": "Ranged",
-  "FastBow": "Ranged",
-  "FrostBow": "Ranged",
-  "CrossBow": "Ranged",
-  "CrossBowOffHand": "Ranged",
-  "MultiCrossBow": "Ranged",
-  "MultiCrossBowOffHand": "Ranged",
-  "FrostCrossBow": "Ranged",
-  "FrostCrossBowOffHand": "Ranged",
-  "ExplosiveCrossBow": "Ranged",
-  "AlchemicGun": "Ranged",
-  "Boomerang": "Ranged",
-  "BleedAxe": "Ranged",
-  "GodAxe": "Ranged",
-  "ThrowingSpear": "Ranged",
-  "MarkBow": "Ranged",
-  "PreciseBow": "Ranged",
-  "ThrowingKnife": "Ranged",
-  "LightningWhip": "Ranged",
-  "ThrowingTorch": "Ranged",
-  "ThrowingIce": "Ranged",
-  "FireBall": "Ranged",
-  "Lightning": "Ranged",
-  "FlameThrower": "Ranged",
-  "Freeze": "Ranged",
-  "MagicSalve": "Ranged",
-  "Blowgun": "Ranged",
-  "BarrelLauncher": "Ranged",
-  "LanternOffHand": "Ranged",
-  "HardLightGun": "Ranged",
-  "ThrowingCards": "Ranged",
-  "HeavyBow": "Ranged",
-  "MoneyShooter": "Ranged",
-  "MagicBow": "Ranged",
-  "ThrowableStuff": "Ranged",
-  "LaserGlaive": "Ranged",
-  "HydraSpell": "Ranged",
-  "Cross": "Ranged",
-  "ThrowingAxe": "Ranged",
-  "MedusaHead": "Ranged",
-  "Anathema": "Ranged",
-  "StartShield": "Shield",
-  "WarriorShield": "Shield",
-  "Shield": "Shield",
-  "AreaShield": "Shield",
-  "BumpShield": "Shield",
-  "Rampart": "Shield",
-  "DashShield": "Shield",
-  "BloodShield": "Shield",
-  "GreedShield": "Shield",
-  "SpikeShield": "Shield",
-  "ParryShield": "Shield",
-  "HoldShield": "Shield",
-  "ThunderShield": "Shield",
-  "IceShield": "Shield",
-  "AlucardShield": "Shield",
-  "PrisonerCloth": "Talisman",
-  "TwitchTalisman": "Talisman",
-  "Talisman1": "Talisman",
-  "Talisman2": "Talisman",
-  "Talisman3": "Talisman",
-  "Talisman4": "Talisman",
-  "Talisman5": "Talisman",
-  "Immortality": "Talisman",
-  "GenericKey": "BagItem",
-  "CellMapKey": "BagItem",
-  "CorruptedKey": "BagItem",
-  "CemeteryKey": "BagItem",
-  "CryptKey": "BagItem",
-  "CemSecretKey": "BagItem",
-  "VillageKey": "BagItem",
-  "TowerKey": "BagItem",
-  "TowerSecretKey": "BagItem",
-  "CourtyardKey": "BagItem",
-  "ChristmasKey": "BagItem",
-  "CastleKey": "BagItem",
-  "AstrolabKeyA": "BagItem",
-  "AstrolabKeyB": "BagItem",
-  "AstrolabKeyC": "BagItem",
-  "AstrolabKeyBoss": "BagItem",
-  "ConvertedKey": "BagItem",
-  "ChristmasSkinKey": "BagItem",
-  "PrisonDepthsKey1": "BagItem",
-  "PrisonDepthsKey2": "BagItem",
-  "SewerDepthsKey": "BagItem",
-  "CavernKey": "BagItem",
-  "GreenhouseKey": "BagItem",
-  "DistilleryKey": "BagItem",
-  "LighthouseKey": "BagItem",
-  "StiltStaphyKey": "BagItem",
-  "TridentKey": "BagItem",
-  "ShipwreckKey": "BagItem",
-  "PetrifiedKey": "BagItem",
-  "SurvivalUp": "BagItem",
-  "BrutalityUp": "BagItem",
-  "TacticUp": "BagItem",
-  "QuarterUp": "BagItem",
-  "SpecialFlask": "BagItem",
-  "TridentMapQuarter": "BagItem",
-  "TridentMap": "BagItem",
-  "BankFloor1Keycard": "BagItem",
-  "BankFloor2Keycard": "BagItem",
-  "BankFloor3Keycard": "BagItem",
-  "LilStaphyEvoDummy": "BagItem",
-  "STSMerchantKey": "BagItem",
-  "STSEliteKey": "BagItem",
-  "STSAltarKey": "BagItem",
-  "MariaCatKey": "BagItem",
-  "LadderKey": "Meta",
-  "TeleportKey": "Meta",
-  "ScoringKey": "Meta",
-  "CustomKey": "Meta",
-  "BreakableGroundKey": "Meta",
-  "WallJumpKey": "Meta",
-  "HomKey": "Meta",
-  "ExploKey": "Meta",
-  "BackPackKey": "Meta",
-  "RichterUppercutKey": "Meta",
-  "RichterDashKey": "Meta",
-  "Flask1": "Meta",
-  "Flask2": "Meta",
-  "Flask3": "Meta",
-  "Flask4": "Meta",
-  "Money1": "Meta",
-  "Money2": "Meta",
-  "Money3": "Meta",
-  "Money4": "Meta",
-  "Money5": "Meta",
-  "RandomBow": "Meta",
-  "RandomShield": "Meta",
-  "RandomCC": "Meta",
-  "Recycling1": "Meta",
-  "Recycling2": "Meta",
-  "ShopRerolls": "Meta",
-  "ShopCategories": "Meta",
-  "PokebombUnlock": "Meta",
-  "MirrorUnlock": "Meta",
-  "BankUnlock": "Meta",
-  "BossRushUnlock": "Meta",
-  "ArmoryUnlock": "Meta",
-  "BackpackUnlock": "Meta",
-  "TrainingUnlock": "Meta",
-  "ForgeRefine1": "Meta",
-  "BossRune1": "Meta",
-  "BossRune2": "Meta",
-  "BossRune3": "Meta",
-  "BossRune4": "Meta",
-  "BossRune5": "Meta",
-  "BossRushStatue": "Meta",
-  "AnyUp": "Consumable",
-  "BTUp": "Consumable",
-  "BSUp": "Consumable",
-  "TSUp": "Consumable",
-  "AllUp": "Consumable",
-  "SurvivalStuff": "Consumable",
-  "BrutalityStuff": "Consumable",
-  "TacticStuff": "Consumable",
-  "BossRushUp": "Consumable",
-  "TwitchAnyUp": "Consumable",
-  "TwitchBTUp": "Consumable",
-  "TwitchBSUp": "Consumable",
-  "TwitchTSUp": "Consumable",
-  "DeathMoney": "Consumable",
-  "DeathCells": "Consumable",
-  "GemPack": "Consumable",
-  "Cell": "Consumable",
-  "SmallMeat": "Consumable",
-  "LargeMeat": "Consumable",
-  "SmallVeggie": "Consumable",
-  "LargeVeggie": "Consumable",
-  "SmallMonster": "Consumable",
-  "LargeMonster": "Consumable",
-  "SmallFruit": "Consumable",
-  "LargeFruit": "Consumable",
-  "SmallCastlevania": "Consumable",
-  "LargeCastlevania": "Consumable",
-  "SmallBaguette": "Consumable",
-  "LargeBaguette": "Consumable",
-  "SmallHalfLife": "Consumable",
-  "LargeHalfLife": "Consumable",
-  "SmallCheese": "Consumable",
-  "LargeCheese": "Consumable",
-  "FlaskRefill": "Consumable",
-  "PermanentPoisonRemedy": "Consumable",
-  "InfectionRemedy": "Consumable",
-  "InfectionRemedySmall": "Consumable",
-  "ComboMultDrop": "Consumable",
-  "LoreNotes": "Consumable",
-  "CellBonus": "Consumable",
-  "LegendGem": "PreciousLoot",
-  "HugeGem": "PreciousLoot",
-  "BigGem": "PreciousLoot",
-  "MediumGem": "PreciousLoot",
-  "SmallGem": "PreciousLoot",
-  "MinorGem": "PreciousLoot",
-  "SpawnerGem": "PreciousLoot",
-  "GreedGem": "PreciousLoot",
-  "CellGold": "PreciousLoot",
-  "GreedArrow": "PreciousLoot",
-  "BigGemScore": "PreciousLoot",
-  "MediumGemScore": "PreciousLoot",
-  "SmallGemScore": "PreciousLoot",
-  "CursedGem": "PreciousLoot",
-  "P_CDR_Kill": "Perk",
-  "P_DmgKill": "Perk",
-  "P_DmgRevenge": "Perk",
-  "P_ManyMobsAround": "Perk",
-  "P_DmgDotsAround": "Perk",
-  "P_Bleed": "Perk",
-  "P_CorruptedHealing": "Perk",
-  "P_DodgeHeal": "Perk",
-  "P_SpeedHeal": "Perk",
-  "P_DmgSkl": "Perk",
-  "P_CooldownGrenade": "Perk",
-  "P_DmgFirstHit": "Perk",
-  "P_InvisibilityOnKill": "Perk",
-  "P_Backpack_Melee": "Perk",
-  "P_DeployedDmg": "Perk",
-  "P_DeathBomb": "Perk",
-  "P_NoMobAround": "Perk",
-  "P_AmmoOnHit": "Perk",
-  "P_DmgSkillRanged": "Perk",
-  "P_DmgPlantedArrow": "Perk",
-  "P_DmgNearRanged": "Perk",
-  "P_Cooldown": "Perk",
-  "P_ShareDamage": "Perk",
-  "P_Caltrops": "Perk",
-  "P_DodgeSlow": "Perk",
-  "P_CDR_Distance": "Perk",
-  "P_Backpack_Ranged": "Perk",
-  "P_ScaledHealth": "Perk",
-  "P_DeathShield": "Perk",
-  "P_CDR_Parry": "Perk",
-  "P_DmgParry": "Perk",
-  "P_HealOnParry": "Perk",
-  "P_HealOnKill": "Perk",
-  "P_Hot": "Perk",
-  "P_Food": "Perk",
-  "P_SuperParry": "Perk",
-  "P_CDR_locked": "Perk",
-  "P_AttackSpeed_Combo": "Perk",
-  "P_Backpack_Shield": "Perk",
-  "P_Yolo": "Perk",
-  "P_YoloDepleted": "Perk",
-  "P_ColdDmg": "Perk",
-  "P_Rally": "Perk",
-  "P_QuickHeal": "Perk",
-  "P_SpeedBuff": "Perk",
-  "P_Health": "Perk",
-  "P_Curse": "Perk",
-  "P_EasierCurse": "Perk",
-  "P_Traps": "Perk",
-  "P_Disengage": "Perk",
-  "P_Execute_LowHealth": "Perk",
-  "P_CDR_Crit": "Perk",
-  "P_Ammo": "Perk",
-  "P_U28_PerkGoldShield": "Perk",
-  "P_U28_PerkGoldSpeed": "Perk",
-  "P_U28_PerkGoldPerDamage": "Perk",
-  "P_Wishes": "Perk",
-  "P_WishesDepleted": "Perk",
-  "P_CursedFlask": "Perk",
-  "P_DamnedVigor": "Perk",
-  "P_DemonicForce": "Perk",
-  "KingsHandBoss": "Skin",
-  "DookuScarf": "Skin",
-  "PrisonerDefault": "Skin",
-  "PrisonerGold": "Skin",
-  "PrisonerSonGoku": "Skin",
-  "PrisonerBlack": "Skin",
-  "PrisonerGhost": "Skin",
-  "PrisonerSewers": "Skin",
-  "PrisonerSanta": "Skin",
-  "PrisonerStilt": "Skin",
-  "PrisonerSkeleton": "Skin",
-  "PrisonerCarduus": "Skin",
-  "PrisonerAphrodite": "Skin",
-  "PrisonerShaman": "Skin",
-  "PrisonerCloud": "Skin",
-  "PrisonerHyperlight": "Skin",
-  "PrisonerAladdin": "Skin",
-  "PrisonerBison": "Skin",
-  "PrisonerWarrior": "Skin",
-  "PrisonerMage": "Skin",
-  "PrisonerNeon": "Skin",
-  "PrisonerBobby": "Skin",
-  "PrisonerDemon": "Skin",
-  "PrisonerSylvanian": "Skin",
-  "PrisonerSand": "Skin",
-  "PrisonerGOG": "Skin",
-  "PrisonerFrench": "Skin",
-  "PrisonerXmas": "Skin",
-  "PrisonerGardener": "Skin",
-  "PrisonerFriendlyHardy": "Skin",
-  "PrisonerMushroom": "Skin",
-  "PrisonerFugitive": "Skin",
-  "PrisonerBlowgunner": "Skin",
-  "PrisonerTick": "Skin",
-  "RoyalGardener": "Skin",
-  "PrisonerRetro": "Skin",
-  "FreemanSkin": "Skin",
-  "PrisonerJavelinSnake": "Skin",
-  "PrisonerNecromant": "Skin",
-  "PrisonerBootleg": "Skin",
-  "PrisonerKamikaze": "Skin",
-  "PrisonerCrossbowMan": "Skin",
-  "PrisonerKillBill": "Skin",
-  "KingDefault": "Skin",
-  "KingWhite": "Skin",
-  "BehemothDefault": "Skin",
-  "Behemoth1": "Skin",
-  "Behemoth2": "Skin",
-  "Behemoth3": "Skin",
-  "Behemoth4": "Skin",
-  "BeholderDefault": "Skin",
-  "Beholder1": "Skin",
-  "Beholder2": "Skin",
-  "Beholder3": "Skin",
-  "Beholder4": "Skin",
-  "AssassinDefault": "Skin",
-  "Assassin1": "Skin",
-  "Assassin2": "Skin",
-  "Assassin3": "Skin",
-  "Assassin4": "Skin",
-  "GiantDefault": "Skin",
-  "Giant1": "Skin",
-  "Giant2": "Skin",
-  "Giant3": "Skin",
-  "Giant4": "Skin",
-  "HotkDefault": "Skin",
-  "Hotk1": "Skin",
-  "Hotk2": "Skin",
-  "Hotk3": "Skin",
-  "Hotk4": "Skin",
-  "Statue": "Skin",
-  "CollectorDefault": "Skin",
-  "TickDefault": "Skin",
-  "Tick1": "Skin",
-  "Tick2": "Skin",
-  "Tick3": "Skin",
-  "Tick4": "Skin",
-  "TickSacrifice": "Skin",
-  "GardenerDefault": "Skin",
-  "Gardener1": "Skin",
-  "Gardener2": "Skin",
-  "Gardener3": "Skin",
-  "Gardener4": "Skin",
-  "Cultist": "Skin",
-  "FlawlessBehemoth": "Skin",
-  "FlawlessBeholder": "Skin",
-  "FlawlessAssassin": "Skin",
-  "FlawlessGiant": "Skin",
-  "FlawlessHotk": "Skin",
-  "FlawlessTick": "Skin",
-  "FlawlessGardener": "Skin",
-  "Snowman": "Skin",
-  "SantaKLOS": "Skin",
-  "HollowKnight": "Skin",
-  "Blasphemous": "Skin",
-  "Guacamelee": "Skin",
-  "Skul": "Skin",
-  "HyperLightDrifter": "Skin",
-  "CurseofTheDeadGods": "Skin",
-  "SoulKnight": "Skin",
-  "Staphy": "Skin",
-  "ANCHORGUY": "Skin",
-  "ServanteDefault": "Skin",
-  "Servante1": "Skin",
-  "Servante2": "Skin",
-  "Servante3": "Skin",
-  "Servante4": "Skin",
-  "FlawlessServante": "Skin",
-  "QueenDefault": "Skin",
-  "Queen1": "Skin",
-  "Queen2": "Skin",
-  "Queen3": "Skin",
-  "Queen4": "Skin",
-  "FlawlessQueen": "Skin",
-  "BlueErinaceus": "Skin",
-  "Banker": "Skin",
-  "GuillainThief": "Skin",
-  "Bobby": "Skin",
-  "ShovelKnight": "Skin",
-  "HotlineMiamiOwl": "Skin",
-  "HotlineMiamiHorse": "Skin",
-  "HotlineMiamiChicken": "Skin",
-  "KatanaZero": "Skin",
-  "RiskOfRain": "Skin",
-  "Terraria": "Skin",
-  "SlayTheSpire": "Skin",
-  "Mentor": "Skin",
-  "Mentor1": "Skin",
-  "Mentor2": "Skin",
-  "Mentor3": "Skin",
-  "VictoriusBeheaded": "Skin",
-  "VictoriusBeheaded1": "Skin",
-  "VictoriusBeheaded2": "Skin",
-  "VictoriusBeheaded3": "Skin",
-  "Simon": "Skin",
-  "Alucard": "Skin",
-  "RichterROB": "Skin",
-  "Sypha": "Skin",
-  "Trevor": "Skin",
-  "Maria": "Skin",
-  "Hector": "Skin",
-  "HauntedArmor": "Skin",
-  "AdeleDefault": "Skin",
-  "Adele1": "Skin",
-  "Adele2": "Skin",
-  "Adele3": "Skin",
-  "Adele4": "Skin",
-  "FlawlessAdele": "Skin",
-  "DookuDefault": "Skin",
-  "Dooku1": "Skin",
-  "Dooku2": "Skin",
-  "Dooku3": "Skin",
-  "Dooku4": "Skin",
-  "FlawlessDooku": "Skin",
-  "BaseFlame": "Head",
-  "BobbyFlame": "Head",
-  "ConciergeFlame": "Head",
-  "ConjunctiviusHead": "Head",
-  "MamaTickEye": "Head",
-  "TimeKeeperHat": "Head",
-  "GiantFlame": "Head",
-  "ScarecrowHat": "Head",
-  "HandOfTheKingFlame": "Head",
-  "ServantsMask": "Head",
-  "QueenFlame": "Head",
-  "CollectorHood": "Head",
-  "BlackHole": "Head",
-  "BlackHoleWhite": "Head",
-  "BlackHoleViolet": "Head",
-  "BlackHoleRed": "Head",
-  "BlackHoleGreen": "Head",
-  "BlackHoleBlue": "Head",
-  "Bitter": "Head",
-  "VortexHelloDarkness": "Head",
-  "VortexBadSeed": "Head",
-  "VortexAndSea": "Head",
-  "VortexFoundry": "Head",
-  "Guillain": "Head",
-  "Pecheur": "Head",
-  "StaphyHead": "Head",
-  "Flawless": "Head",
-  "CellHead": "Head",
-  "EvilEmpire": "Head",
-  "BlobbyFlame": "Head",
-  "GlitchyHead": "Head",
-  "MushroomBoi": "Head",
-  "HordesZeroHood": "Head",
-  "BlobbyFlameMagma": "Head",
-  "BlobbyFlameMalaise": "Head",
-  "BlobbyFlameGum": "Head",
-  "GlitchyHeadDeepSpace": "Head",
-  "GlitchyHeadRed": "Head",
-  "BlowTorchBlack": "Head",
-  "BlowTorch": "Head",
-  "BlowTorchGold": "Head",
-  "BlowTorchRed": "Head",
-  "BossCellHead": "Head",
-  "ASP_BloodDrinker": "Aspect",
-  "ASP_Stomper": "Aspect",
-  "ASP_Shatter": "Aspect",
-  "ASP_ToxinLover": "Aspect",
-  "ASP_Berzerker": "Aspect",
-  "ASP_GottaGoFast": "Aspect",
-  "ASP_Tinker": "Aspect",
-  "ASP_Firestarter": "Aspect",
-  "ASP_Menagerie": "Aspect",
-  "ASP_Grenadier": "Aspect",
-  "ASP_Superconductor": "Aspect",
-  "ASP_Assassin": "Aspect",
-  "ASP_Damned": "Aspect",
-  "BRS_Basement": "BossRushStatueUnlock",
-  "BRS_Cap": "BossRushStatueUnlock",
-  "BRS_Pant": "BossRushStatueUnlock",
-  "BRS_Skirt": "BossRushStatueUnlock",
-  "BRS_Skull": "BossRushStatueUnlock",
-  "BRS_Top": "BossRushStatueUnlock",
-  "BRS_Weapon": "BossRushStatueUnlock",
-  "BRS_Material": "BossRushStatueUnlock"
+  "HorizontalTurret": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "StandardTurret": {
+    "category": "DeployedTrap",
+    "isBaseItem": true
+  },
+  "HeavyTurret": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "CeilTurret": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "FireTurret": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "GroundSaw": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "RootTrap": {
+    "category": "DeployedTrap",
+    "isBaseItem": true
+  },
+  "Crusher": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "Decoy": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "PortableDoor": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "TeslaCoil": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "Cannon": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "DarknessLantern": {
+    "category": "DeployedTrap",
+    "isBaseItem": false
+  },
+  "ExplosiveGrenade": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "FastGrenade": {
+    "category": "Grenade",
+    "isBaseItem": true
+  },
+  "ClusterBomb": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "MagnetGrenade": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "StunningGrenade": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "IceBomb": {
+    "category": "Grenade",
+    "isBaseItem": true
+  },
+  "FireBomb": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "RootBomb": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "OilBomb": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "SideBomb": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "Pokebomb": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "HolyWater": {
+    "category": "Grenade",
+    "isBaseItem": false
+  },
+  "SideTurret": {
+    "category": "SideKick",
+    "isBaseItem": false
+  },
+  "SlowOrb": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Tornado": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "KnivesCircle": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "DamageBuff": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "LeechBuff": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "ExtraHeal": {
+    "category": "Power",
+    "isBaseItem": true
+  },
+  "BulletKiller": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Hook": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "BackBlink": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "TimeDistorsion": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "ToxicCloud": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "DamageAura": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Shockwave": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Wings": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "ComboMult": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Pokecharge": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Map": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Owl": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "OwlUp": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Chicken": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "SpeedRunner": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Dash": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "BackDash": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "GiantWhistle": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "SeismicStomp": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "CollectorSpin": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "SmokeBomb": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "SpawnFriendlyHardy": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "ExplodeFriendlyHardy": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "IceArmor": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "LightningRod": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "GardenerSickles": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "FlyingSword": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "FlyingSwordCallback": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "BubbleShieldPower": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "FaceFlask": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "PolloPower": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "SpawnLilStaphy": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "LilStaphyStab": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "SpawnAdultLilStaphy": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "AdultLilStaphyStab": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "DiverseDeckJuggernaut": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "DiverseDeckCatalyst": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "DiverseDeckElectro": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "DiverseDeckWatcher": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Taunt": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "BouncingStone": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "SpawnCat": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "CatAttack": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "BatVolley": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "RichterCross": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "Indulgence": {
+    "category": "Power",
+    "isBaseItem": false
+  },
+  "StartSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "AdminWeapon": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "QuickSword": {
+    "category": "Melee",
+    "isBaseItem": true
+  },
+  "RevengeSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "BackStabber": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Bleeder": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "DualDaggers": {
+    "category": "Melee",
+    "isBaseItem": true
+  },
+  "BroadSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Shovel": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "EvilSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "BleedCrit": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SpeedBlade": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "GiantKiller": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "BulletBlade": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SismicBlade": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Spear": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "ImpaleSpear": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "KingsSpear": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Rapier": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "DashSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "StunMace": {
+    "category": "Melee",
+    "isBaseItem": true
+  },
+  "BumpBoots": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SpikedBoots": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "MultiKickBoots": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "QuickFists": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Whip": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "HookWhip": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "OilSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Burner": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "LowHealth": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "PerfectHalberd": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "BehemothHammer": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "TentacleWhip": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Pan": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "ParryBlade": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "TickScytheLeft": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "TickScytheRight": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "RhythmicBlade": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Crowbar": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SnakeFang": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "GiantStaff": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Lantern": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "NotFlyingSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Katana": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "ExplosiveCrossBowOffHand": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Tombstone": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "HeavyAxe": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Club": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "ClubBroken": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "MachetePistol": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "HardLightSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "PureNail": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SkulBone": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Trident": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "HandHook": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Shark": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "ElbowBlades": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "WreckingBall": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "QueenRapier": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "CupidityDagger": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "GoldDigger": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "GoldDiggerEvolved": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "KingScepter": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "BaseballBat": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "NunchuckPan": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Starfury": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "TPSword": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "WiggleWhip": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Bible": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SnakeSwordWeapon": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SnakeSwordWeaponAlt": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "SnakeSwordSwap": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "VampireKiller": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "AdeleScythe": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "RichterVampireKiller": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "CombinedTickScythe": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Pistol": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Scissor": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Comb": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "Misericord": {
+    "category": "Melee",
+    "isBaseItem": false
+  },
+  "StartBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "DualBow": {
+    "category": "Ranged",
+    "isBaseItem": true
+  },
+  "InfiniteBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "LongBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "SonicCrossbow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "CloseCombatBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "FastBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "FrostBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "CrossBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "CrossBowOffHand": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "MultiCrossBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "MultiCrossBowOffHand": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "FrostCrossBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "FrostCrossBowOffHand": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "ExplosiveCrossBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "AlchemicGun": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "Boomerang": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "BleedAxe": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "GodAxe": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "ThrowingSpear": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "MarkBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "PreciseBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "ThrowingKnife": {
+    "category": "Ranged",
+    "isBaseItem": true
+  },
+  "LightningWhip": {
+    "category": "Ranged",
+    "isBaseItem": true
+  },
+  "ThrowingTorch": {
+    "category": "Ranged",
+    "isBaseItem": true
+  },
+  "ThrowingIce": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "FireBall": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "Lightning": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "FlameThrower": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "Freeze": {
+    "category": "Ranged",
+    "isBaseItem": true
+  },
+  "MagicSalve": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "Blowgun": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "BarrelLauncher": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "LanternOffHand": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "HardLightGun": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "ThrowingCards": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "HeavyBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "MoneyShooter": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "MagicBow": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "ThrowableStuff": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "LaserGlaive": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "HydraSpell": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "Cross": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "ThrowingAxe": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "MedusaHead": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "Anathema": {
+    "category": "Ranged",
+    "isBaseItem": false
+  },
+  "StartShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "WarriorShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "Shield": {
+    "category": "Shield",
+    "isBaseItem": true
+  },
+  "AreaShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "BumpShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "Rampart": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "DashShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "BloodShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "GreedShield": {
+    "category": "Shield",
+    "isBaseItem": true
+  },
+  "SpikeShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "ParryShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "HoldShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "ThunderShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "IceShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "AlucardShield": {
+    "category": "Shield",
+    "isBaseItem": false
+  },
+  "PrisonerCloth": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "TwitchTalisman": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "Talisman1": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "Talisman2": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "Talisman3": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "Talisman4": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "Talisman5": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "Immortality": {
+    "category": "Talisman",
+    "isBaseItem": false
+  },
+  "GenericKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CellMapKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CorruptedKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CemeteryKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CryptKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CemSecretKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "VillageKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "TowerKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "TowerSecretKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CourtyardKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "ChristmasKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CastleKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "AstrolabKeyA": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "AstrolabKeyB": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "AstrolabKeyC": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "AstrolabKeyBoss": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "ConvertedKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "ChristmasSkinKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "PrisonDepthsKey1": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "PrisonDepthsKey2": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "SewerDepthsKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "CavernKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "GreenhouseKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "DistilleryKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "LighthouseKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "StiltStaphyKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "TridentKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "ShipwreckKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "PetrifiedKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "SurvivalUp": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "BrutalityUp": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "TacticUp": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "QuarterUp": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "SpecialFlask": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "TridentMapQuarter": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "TridentMap": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "BankFloor1Keycard": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "BankFloor2Keycard": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "BankFloor3Keycard": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "LilStaphyEvoDummy": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "STSMerchantKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "STSEliteKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "STSAltarKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "MariaCatKey": {
+    "category": "BagItem",
+    "isBaseItem": false
+  },
+  "LadderKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "TeleportKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "ScoringKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "CustomKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BreakableGroundKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "WallJumpKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "HomKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "ExploKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BackPackKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "RichterUppercutKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "RichterDashKey": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Flask1": {
+    "category": "Meta",
+    "isBaseItem": true
+  },
+  "Flask2": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Flask3": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Flask4": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Money1": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Money2": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Money3": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Money4": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Money5": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "RandomBow": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "RandomShield": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "RandomCC": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Recycling1": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "Recycling2": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "ShopRerolls": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "ShopCategories": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "PokebombUnlock": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "MirrorUnlock": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BankUnlock": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BossRushUnlock": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "ArmoryUnlock": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BackpackUnlock": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "TrainingUnlock": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "ForgeRefine1": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BossRune1": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BossRune2": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BossRune3": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BossRune4": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BossRune5": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "BossRushStatue": {
+    "category": "Meta",
+    "isBaseItem": false
+  },
+  "AnyUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "BTUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "BSUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "TSUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "AllUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SurvivalStuff": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "BrutalityStuff": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "TacticStuff": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "BossRushUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "TwitchAnyUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "TwitchBTUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "TwitchBSUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "TwitchTSUp": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "DeathMoney": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "DeathCells": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "GemPack": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "Cell": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallMeat": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeMeat": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallVeggie": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeVeggie": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallMonster": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeMonster": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallFruit": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeFruit": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallCastlevania": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeCastlevania": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallBaguette": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeBaguette": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallHalfLife": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeHalfLife": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "SmallCheese": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LargeCheese": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "FlaskRefill": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "PermanentPoisonRemedy": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "InfectionRemedy": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "InfectionRemedySmall": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "ComboMultDrop": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LoreNotes": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "CellBonus": {
+    "category": "Consumable",
+    "isBaseItem": false
+  },
+  "LegendGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "HugeGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "BigGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "MediumGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "SmallGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "MinorGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "SpawnerGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "GreedGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "CellGold": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "GreedArrow": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "BigGemScore": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "MediumGemScore": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "SmallGemScore": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "CursedGem": {
+    "category": "PreciousLoot",
+    "isBaseItem": false
+  },
+  "P_CDR_Kill": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgKill": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgRevenge": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_ManyMobsAround": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgDotsAround": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Bleed": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_CorruptedHealing": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DodgeHeal": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_SpeedHeal": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgSkl": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_CooldownGrenade": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgFirstHit": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_InvisibilityOnKill": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Backpack_Melee": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DeployedDmg": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DeathBomb": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_NoMobAround": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_AmmoOnHit": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgSkillRanged": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgPlantedArrow": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgNearRanged": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Cooldown": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_ShareDamage": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Caltrops": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DodgeSlow": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_CDR_Distance": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Backpack_Ranged": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_ScaledHealth": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DeathShield": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_CDR_Parry": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DmgParry": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_HealOnParry": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_HealOnKill": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Hot": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Food": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_SuperParry": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_CDR_locked": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_AttackSpeed_Combo": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Backpack_Shield": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Yolo": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_YoloDepleted": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_ColdDmg": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Rally": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_QuickHeal": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_SpeedBuff": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Health": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Curse": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_EasierCurse": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Traps": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Disengage": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Execute_LowHealth": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_CDR_Crit": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Ammo": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_U28_PerkGoldShield": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_U28_PerkGoldSpeed": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_U28_PerkGoldPerDamage": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_Wishes": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_WishesDepleted": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_CursedFlask": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DamnedVigor": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "P_DemonicForce": {
+    "category": "Perk",
+    "isBaseItem": false
+  },
+  "KingsHandBoss": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "DookuScarf": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerGold": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerSonGoku": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerBlack": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerGhost": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerSewers": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerSanta": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerStilt": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerSkeleton": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerCarduus": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerAphrodite": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerShaman": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerCloud": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerHyperlight": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerAladdin": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerBison": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerWarrior": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerMage": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerNeon": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerBobby": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerDemon": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerSylvanian": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerSand": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerGOG": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerFrench": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerXmas": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerGardener": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerFriendlyHardy": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerMushroom": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerFugitive": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerBlowgunner": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerTick": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "RoyalGardener": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerRetro": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FreemanSkin": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerJavelinSnake": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerNecromant": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerBootleg": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerKamikaze": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerCrossbowMan": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "PrisonerKillBill": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "KingDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "KingWhite": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "BehemothDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Behemoth1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Behemoth2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Behemoth3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Behemoth4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "BeholderDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Beholder1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Beholder2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Beholder3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Beholder4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "AssassinDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Assassin1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Assassin2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Assassin3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Assassin4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "GiantDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Giant1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Giant2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Giant3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Giant4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "HotkDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Hotk1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Hotk2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Hotk3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Hotk4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Statue": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "CollectorDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "TickDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Tick1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Tick2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Tick3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Tick4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "TickSacrifice": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "GardenerDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Gardener1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Gardener2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Gardener3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Gardener4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Cultist": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessBehemoth": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessBeholder": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessAssassin": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessGiant": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessHotk": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessTick": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessGardener": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Snowman": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "SantaKLOS": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "HollowKnight": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Blasphemous": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Guacamelee": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Skul": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "HyperLightDrifter": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "CurseofTheDeadGods": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "SoulKnight": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Staphy": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "ANCHORGUY": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "ServanteDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Servante1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Servante2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Servante3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Servante4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessServante": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "QueenDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Queen1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Queen2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Queen3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Queen4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessQueen": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "BlueErinaceus": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Banker": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "GuillainThief": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Bobby": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "ShovelKnight": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "HotlineMiamiOwl": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "HotlineMiamiHorse": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "HotlineMiamiChicken": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "KatanaZero": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "RiskOfRain": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Terraria": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "SlayTheSpire": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Mentor": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Mentor1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Mentor2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Mentor3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "VictoriusBeheaded": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "VictoriusBeheaded1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "VictoriusBeheaded2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "VictoriusBeheaded3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Simon": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Alucard": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "RichterROB": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Sypha": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Trevor": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Maria": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Hector": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "HauntedArmor": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "AdeleDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Adele1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Adele2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Adele3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Adele4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessAdele": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "DookuDefault": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Dooku1": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Dooku2": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Dooku3": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "Dooku4": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "FlawlessDooku": {
+    "category": "Skin",
+    "isBaseItem": false
+  },
+  "BaseFlame": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BobbyFlame": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "ConciergeFlame": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "ConjunctiviusHead": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "MamaTickEye": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "TimeKeeperHat": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "GiantFlame": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "ScarecrowHat": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "HandOfTheKingFlame": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "ServantsMask": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "QueenFlame": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "CollectorHood": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlackHole": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlackHoleWhite": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlackHoleViolet": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlackHoleRed": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlackHoleGreen": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlackHoleBlue": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "Bitter": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "VortexHelloDarkness": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "VortexBadSeed": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "VortexAndSea": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "VortexFoundry": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "Guillain": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "Pecheur": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "StaphyHead": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "Flawless": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "CellHead": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "EvilEmpire": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlobbyFlame": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "GlitchyHead": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "MushroomBoi": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "HordesZeroHood": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlobbyFlameMagma": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlobbyFlameMalaise": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlobbyFlameGum": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "GlitchyHeadDeepSpace": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "GlitchyHeadRed": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlowTorchBlack": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlowTorch": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlowTorchGold": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BlowTorchRed": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "BossCellHead": {
+    "category": "Head",
+    "isBaseItem": false
+  },
+  "ASP_BloodDrinker": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Stomper": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Shatter": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_ToxinLover": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Berzerker": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_GottaGoFast": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Tinker": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Firestarter": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Menagerie": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Grenadier": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Superconductor": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Assassin": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "ASP_Damned": {
+    "category": "Aspect",
+    "isBaseItem": false
+  },
+  "BRS_Basement": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  },
+  "BRS_Cap": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  },
+  "BRS_Pant": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  },
+  "BRS_Skirt": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  },
+  "BRS_Skull": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  },
+  "BRS_Top": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  },
+  "BRS_Weapon": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  },
+  "BRS_Material": {
+    "category": "BossRushStatueUnlock",
+    "isBaseItem": false
+  }
 }

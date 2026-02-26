@@ -5,12 +5,15 @@ using dc.tool;
 using ModCore.Utilities;
 using Serilog;
 using static dc.tool.InventItemKind;
-using System.Text.Json;
 
 namespace DeadCellsArchipelago {
     public static class ItemManager
     {
         public static Hero? HERO { get; set; }
+        public static ArchipelagoSaveData? SAVED_DATA { get; set; }
+        public static ArchipelagoManager? ARCHIPELAGO { get; set; }
+        public static Dictionary<string, ItemData>? ITEMS { get; set; }
+        public static ItemMetaManager? ITEM_META_MANAGER { get; set; }
 
         //Drop the item with the id @itemName to the player position
         //Warning: all items can be dropped, but if it has no pick up implementation, it will crash the game when you take it.
@@ -58,19 +61,16 @@ namespace DeadCellsArchipelago {
 
         private static InventItem? CreateInventItemById(string itemName)
         {
-            string json = System.IO.File.ReadAllText("./coremod/mods/DeadCellsArchipelago/itemsId-Category.json"); //the json should be placed next to the modinfo.json
 
-            Dictionary<string, string>? items = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-
-            if (items == null)
+            if (ITEMS == null)
             {
                 Log.Error($"=== Could not get the json list of items ===");
                 return null;
             }
 
-            if (items.TryGetValue(itemName, out string? category))
+            if (ITEMS.TryGetValue(itemName, out ItemData? itemData))
             {
-                Console.WriteLine($"=== Item {itemName} exists with category {category} ===");
+                Console.WriteLine($"=== Item {itemName} exists with category {itemData.Category} ===");
             }
             else
             {
@@ -80,7 +80,7 @@ namespace DeadCellsArchipelago {
 
             InventItem? inventItem = null;
 
-            switch (category)
+            switch (itemData.Category)
             {
                 case "DeployedTrap":
                 case "Grenade":
@@ -177,6 +177,12 @@ namespace DeadCellsArchipelago {
             {
                 Log.Error("=== Cannot log inventory, hero is null ===");
             }
+        }
+
+        public static void ReallyRevealAllBaseItems(Hook_ItemMetaManager.orig_revealAllBaseItems orig, ItemMetaManager self)
+        {
+            Log.Warning("=== This method was called ===");
+            //orig(self);
         }
     }
 }
