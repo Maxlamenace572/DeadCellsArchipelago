@@ -70,7 +70,7 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck($"Rune: {runeId}");
+                ARCHIPELAGO.SendCheck(runeId, "Rune:");
             }
             else
             {
@@ -85,6 +85,6 @@ namespace DeadCellsArchipelago {
                 return orig(self, k);
             }
             return SAVED_DATA != null && SAVED_DATA.IsCheckSent(k.ToString()); //If we already have the rune check, don't generate the arena
-        } 
+        }
     }
 }

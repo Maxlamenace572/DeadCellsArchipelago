@@ -245,6 +245,7 @@ namespace DeadCellsArchipelago {
             if(!useOriginalUnlockItem)
             {
                 SendItemWithoutBlueprintCheck(k.ToString());
+                return false;
             }
             return orig(self, k);
         }
@@ -253,7 +254,7 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck($"Item: {itemId}");
+                ARCHIPELAGO.SendCheck(itemId, "Item:");
             }
             else
             {

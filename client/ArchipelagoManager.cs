@@ -89,11 +89,11 @@ namespace DeadCellsArchipelago
             }
         }
         
-        public void SendCheck(string locationName)
+        public void SendCheck(string locationName, string message)
         {
             if (_mockMode) //log check when we are on test mod
             {
-                Log.Information($"=== [MOCK] Check sent: {locationName} ===");
+                Log.Information($"=== [MOCK] Check sent: {message} {locationName} ===");
                 
                 // Simulate a blueprint send from server
                 Log.Information($"=== [MOCK] Simulate item send ===");

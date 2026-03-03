@@ -52,7 +52,7 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck($"Boss: {bossName}");
+                ARCHIPELAGO.SendCheck(bossName, "Boss:");
             }
             else
             {

@@ -32,6 +32,7 @@ using dc.level.@struct;
 using dc.en.inter.door;
 using dc.level.lore;
 using dc.ui;
+using Hashlink.Virtuals;
 
 
 namespace DeadCellsArchipelago{
@@ -52,6 +53,7 @@ namespace DeadCellsArchipelago{
             Hook_Hero.init += OnHeroInit;
             Hook_Hero.pickBlueprint += OnBlueprintPicked;
             Hook_Hero.applyItemPickEffect += OnApplyItemPickEffect; //used for runes
+            Hook_Hero.onDie += OnHeroDie;
 
             Hook_ItemMetaManager.hasRevealedItem += ReallyHasBlueprint; //might check rune
             Hook_ItemMetaManager.revealAllBaseItems += ReallyRevealAllBaseItems;
@@ -67,6 +69,9 @@ namespace DeadCellsArchipelago{
             //TriggeredDoor;
             Hook_TriggeredDoor.onActivate += OnTriggeredDoorActivate;
             Hook_Door.closeFast += OnDoorCloseFast;
+
+            //LevelGen
+            Hook_LevelGen.generate += OnGenerate;
 
             archipelago.EnableMockMode();
             // TODO: Get infos from file or ui
