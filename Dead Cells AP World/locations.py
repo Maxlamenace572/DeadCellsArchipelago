@@ -134,7 +134,7 @@ def create_regular_locations(world: DeadCellsAPWorld) -> None:
          ])
     prison_quarter.add_locations(prison_quarter_locations, DeadCellsLocation)
 
-    
+
 
 
 def create_events(world: DeadCellsAPWorld) -> None:

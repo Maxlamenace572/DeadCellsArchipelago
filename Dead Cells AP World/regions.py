@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from BaseClasses import Entrance, Region
+from BaseClasses import Region
 
 if TYPE_CHECKING:
     from .world import DeadCellsAPWorld
@@ -20,7 +20,7 @@ def create_all_regions(world: DeadCellsAPWorld) -> None:
     # Second Stages
     condemned_promenade = Region("Promenade of the Condemned", world.player, world.multiworld)
     toxic_sewer = Region("Toxic Sewers", world.player, world.multiworld)
-    
+
     # Optional Stages
     prison_depths = Region("Prison Depths", world.player, world.multiworld)
     corrupt_prison = Region("Corrupted Prison", world.player, world.multiworld)
@@ -65,6 +65,51 @@ def create_all_regions(world: DeadCellsAPWorld) -> None:
         high_peak_castle, derelict_distillery,
         throne_room]
 
+    # Rise of the Giant DLC Regions
+    if world.options.rise_of_the_giant:
+        cavern = Region("Cavern", world.player, world.multiworld)
+        guardians_haven = Region("Guardians Haven", world.player, world.multiworld)
+        astrolab = Region("Astrolab", world.player, world.multiworld)
+        observatory = Region("Observatory", world.player, world.multiworld)
+        regions.append(cavern)
+        regions.append(guardians_haven)
+        regions.append(astrolab)
+        regions.append(observatory)
+    # Bad Seed DLC Regions
+    if world.options.bad_seed:
+        dilapidated_arboretum = Region("Dilapidated Arboretum", world.player, world.multiworld)
+        morass_banished = Region("Morass of the Banished", world.player, world.multiworld)
+        nest = Region("Nest", world.player, world.multiworld)
+        regions.append(dilapidated_arboretum)
+        regions.append(morass_banished)
+        regions.append(nest)
+    # Fatal Falls DLC Regions
+    if world.options.fatal_falls:
+        fractured_shrines = Region("Fractured Shrines", world.player, world.multiworld)
+        undying_shores = Region("Undying Shores", world.player, world.multiworld)
+        mausoleum = Region("Mausoleum", world.player, world.multiworld)
+        regions.append(fractured_shrines)
+        regions.append(undying_shores)
+        regions.append(mausoleum)
+    # Queen and the Sea DLC Regions
+    if world.options.queen_and_the_sea:
+        infested_shipwreck = Region("Infested Shipwreck", world.player, world.multiworld)
+        lighthouse = Region("Lighthouse", world.player, world.multiworld)
+        the_crown = Region("The Crown", world.player, world.multiworld)
+        regions.append(infested_shipwreck)
+        regions.append(lighthouse)
+        regions.append(the_crown)
+    # Return to Castlevania DLC Regions
+    if world.options.return_to_castlevania:
+        castle_outskirts = Region("Castle Outskirts", world.player, world.multiworld)
+        dracula_castle = Region("Dracula Castle", world.player, world.multiworld)
+        defiled_necropolis = Region("Defiled Necropolis", world.player, world.multiworld)
+        masters_keep = Region("Masters Keep", world.player, world.multiworld)
+        regions.append(castle_outskirts)
+        regions.append(dracula_castle)
+        regions.append(defiled_necropolis)
+        regions.append(masters_keep)
+
     # Adds regions to multiworld
     world.multiworld.regions += regions
 
@@ -90,6 +135,28 @@ def connect_regions(world: DeadCellsAPWorld) -> None:
     high_peak_castle = world.get_region("High Peak Castle")
     derelict_distillery = world.get_region("Derelict Distillery")
     throne_room = world.get_region("Throne Room")
+    if world.options.rise_of_the_giant:
+        cavern = world.get_region("Cavern")
+        guardians_haven = world.get_region("Guardians Haven")
+        astrolab = world.get_region("Astrolab")
+        observatory = world.get_region("Observatory")
+    if world.options.bad_seed:
+        dilapidated_arboretum = world.get_region("Dilapidated Arboretum")
+        morass_banished = world.get_region("Morass of the Banished")
+        nest = world.get_region("Nest")
+    if world.options.fatal_falls:
+        fractured_shrines = world.get_region("Fractured Shrines")
+        undying_shores = world.get_region("Undying Shores")
+        mausoleum = world.get_region("Mausoleum")
+    if world.options.queen_and_the_sea:
+        infested_shipwreck = world.get_region("Infested Shipwreck")
+        lighthouse = world.get_region("Lighthouse")
+        the_crown = world.get_region("The Crown")
+    if world.options.return_to_castlevania:
+        castle_outskirts = world.get_region("Castle Outskirts")
+        dracula_castle = world.get_region("Dracula Castle")
+        defiled_necropolis = world.get_region("Defiled Necropolis")
+        masters_keep = world.get_region("Masters Keep")
 
 
     # First Stage Connections
