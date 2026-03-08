@@ -403,6 +403,9 @@ def create_regions(world: "DeadCellsWorld") -> None:
         loc_dlc = loc_data["dlc"]
         if loc_dlc and loc_dlc not in enabled_dlcs:
             continue
+        
+        if loc_data.get("min_bc", 0) > bc_level:
+            continue
 
         # For grouped checks in "Checks" region: skip if no source accessible
         if region_name == "Checks":

@@ -32,7 +32,7 @@ namespace DeadCellsArchipelago {
                 case "BossRune3":
                 case "BossRune4":
                 case "BossRune5":
-                    SendRuneCheck(i._itemData.id.ToString());
+                    SendBscCheck(i._itemData.id.ToString());
                     break;
                 default:
                     orig(self, from, i);

@@ -188,5 +188,16 @@ namespace DeadCellsArchipelago
                 Log.Error("=== Couldn't save check ===");
             }
         }
+
+        private void SendVictory()
+        {
+            if (_session == null) return;
+            
+            var statusUpdate = new StatusUpdatePacket
+            {
+                Status = ArchipelagoClientState.ClientGoal
+            };
+            _session.Socket.SendPacket(statusUpdate);
+        }
     }
 }

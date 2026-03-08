@@ -33,7 +33,7 @@ from .base_classes import DeadCellsItem
 BASE_WEAPONS = {
     "QuickSword", "DualDaggers", "BroadSword", "KingsSpear", "StunMace",
     "Pan", "Crowbar", "MachetePistol", "HardLightSword", "PureNail",
-    "SkulBone", "NunchuckPan", "BaseballBat", "KingScepter", "Starfury",
+    "SkulBone", "NunchuckPan", "BaseballBat",
     "Scissor", "Comb",
     "DualBow", "LongBow", "ExplosiveCrossBow", "Boomerang",
     "ThrowingKnife", "LightningWhip", "ThrowingTorch", "Freeze",
@@ -167,17 +167,47 @@ class DeadCellsWorld(World):
         active_locs = get_locations_for_bc(self.enabled_dlcs, bc)
         pool_size = len(active_locs)
 
+        # DEBUG
+        print("Beholder4 in pool:", "Blueprint_Beholder4" in active_locs)
+        print("BossRune4 in pool:", "BSC_BossRune4" in active_locs)
+        print("BossRune5 in pool:", "BSC_BossRune5" in active_locs)
+        prog_items = get_progression_items(self.enabled_dlcs)
+        useful_items = [
+            name for name, data in get_items_for_dlcs(self.enabled_dlcs).items()
+            if data[1] == USFL and self._item_enabled(name)
+        ]
+        print(f"[DC DEBUG] pool_size (locations): {pool_size}")
+        print(f"[DC DEBUG] prog_items: {len(prog_items)}")
+        print(f"[DC DEBUG] useful_items: {len(useful_items)}")
+        print(f"[DC DEBUG] prog + useful: {len(prog_items) + len(useful_items)}")
+        remaining = pool_size - len(prog_items) - len(useful_items)
+        print(f"[DC DEBUG] remaining for fillers/traps: {remaining}")
+        filler_pool = [name for name, data in get_filler_items(self.enabled_dlcs).items() if self._item_enabled(name)]
+        print(f"[DC DEBUG] filler_pool size: {len(filler_pool)}")
+        # END DEBUG
+
         items_to_place: List[DeadCellsItem] = []
+        
+        reachable_item_names = {
+            data["item"]
+            for data in active_locs.values()
+            if data.get("item") is not None
+        }
 
         # ── Progression items (always included) ──────────────────────────────
         prog_items = get_progression_items(self.enabled_dlcs)
         for name in prog_items:
+            # BossRuneN est dans le pool seulement si N <= bc_level
+            if name.startswith("BossRune"):
+                n = int(name[-1])
+                if n > bc:
+                    continue
             items_to_place.append(self.create_item(name))
 
         # ── Useful items ──────────────────────────────────────────────────────
         useful_items = [
             name for name, data in get_items_for_dlcs(self.enabled_dlcs).items()
-            if data[1] == USFL and self._item_enabled(name)
+            if data[1] == USFL and self._item_enabled(name) and name in reachable_item_names
         ]
         for name in useful_items:
             items_to_place.append(self.create_item(name))

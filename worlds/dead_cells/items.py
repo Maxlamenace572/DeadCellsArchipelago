@@ -85,7 +85,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "BossRune5":            (0x000C, PROG, DLC_RISE_OF_GIANT),
 
     # ── Meta Upgrades (Useful) ────────────────────────────────────────
-    "Flask1":               (0x0100, USFL, DLC_BASE),
+    "Flask1":               (0x0100, PROG, DLC_BASE),
     "Flask2":               (0x0101, USFL, DLC_BASE),
     "Flask3":               (0x0102, USFL, DLC_BASE),
     "Flask4":               (0x0103, USFL, DLC_BASE),
@@ -150,7 +150,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Katana":               (0x0227, PROG, DLC_BASE),
     "Tombstone":            (0x0228, USFL, DLC_BASE),
     "HeavyAxe":             (0x0229, USFL, DLC_BASE),
-    "Club":                 (0x022A, USFL, DLC_BASE),
+    "Club":                 (0x022A, USFL, DLC_RISE_OF_GIANT),
     "MachetePistol":        (0x022B, USFL, DLC_BASE),
     "HardLightSword":       (0x022C, PROG, DLC_BASE),
     "PureNail":             (0x022D, PROG, DLC_BASE),
