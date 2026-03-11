@@ -55,7 +55,7 @@ namespace DeadCellsArchipelago
                     "Dead Cells",           // Game name
                     _slotName,              // Slot name
                     ItemsHandlingFlags.AllItems,
-                    new Version(6, 3, 1),
+                    new Version(6, 7, 0),
                     password: _password
                 );
                 

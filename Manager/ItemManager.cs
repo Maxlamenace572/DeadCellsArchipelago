@@ -223,6 +223,13 @@ namespace DeadCellsArchipelago {
                         GiveItemToPlayer(itemName);
                         RuneManager.ActivateMinimapTracking(itemName);
                         return;
+                    case "BossRune1":
+                    case "BossRune2":
+                    case "BossRune3":
+                    case "BossRune4":
+                    case "BossRune5":
+                        ITEM_META_MANAGER.addPermanentItem(itemName.AsHaxeString());
+                        return;
 
                 }//todo: other kinds
                 BlueprintManager.UnlockBlueprint(itemName);
