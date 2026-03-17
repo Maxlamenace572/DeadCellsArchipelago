@@ -57,17 +57,17 @@ namespace DeadCellsArchipelago {
         public static ArrayObj OnGenerate(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
         {
             Log.Warning($"=== start last level {lastLevel} ===");
-            if(lastLevel != null && SAVED_DATA != null && !SAVED_DATA.IsCheckSent($"Ending_{ldat.id}"))
+            if(lastLevel != null && SAVED_DATA != null && !SAVED_DATA.IsCheckSent($"{ldat.id}_Exit"))
             {
-                   SendBiomeCheck(lastLevel + "_Exit", lastLevel);
+                   SendBiomeCheck(lastLevel + "_Exit");
                    Log.Warning("=== send end ===");
             }
 
             if(ldat.id.ToString().Substring(0, 2) != "T_")
             {
-                if(SAVED_DATA != null && !SAVED_DATA.IsCheckSent($"Ending_{ldat.id}"))
+                if(SAVED_DATA != null && !SAVED_DATA.IsCheckSent($"{ldat.id}_Exit"))
                 {
-                    SendBiomeCheck(ldat.id.ToString() + "_Enter", ldat.id.ToString());
+                    SendBiomeCheck(ldat.id.ToString() + "_Enter");
                     Log.Warning("=== send start ===");
                 }
                 lastLevel = ldat.id.ToString();
@@ -83,11 +83,11 @@ namespace DeadCellsArchipelago {
             orig(self);
         }
 
-        public static void SendBiomeCheck(string locationId, string biomeId)
+        public static void SendBiomeCheck(string locationId)
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck(locationId, biomeId, "Biome:");
+                ARCHIPELAGO.SendCheck(locationId, locationId, "Biome:");
             }
             else
             {

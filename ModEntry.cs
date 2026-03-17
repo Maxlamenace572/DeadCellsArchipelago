@@ -35,6 +35,9 @@ using dc.level.lore;
 using dc.ui;
 using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
+using dc.uicore;
+using dc.hl;
+using dc.uicore.element;
 
 
 namespace DeadCellsArchipelago{
@@ -63,7 +66,6 @@ namespace DeadCellsArchipelago{
             Hook_ItemMetaManager.unlockItem += OnUnlockItem;
             //hasPermanentItem (5559) is used on too many things. should check on what call it later for bsc
             Hook_ItemMetaManager.hasPermanentItem += ReallyHasPermanentItem;
-            
             Hook_LevelGen.generate += OnLevelGenGenerate;
 
             InitializeRoomHooks();
@@ -81,12 +83,14 @@ namespace DeadCellsArchipelago{
             archipelago.Connect("localhost:38281", "TestPlayer");
             ARCHIPELAGO = archipelago;
 
-            string json = System.IO.File.ReadAllText(System.IO.Path.Combine(AppContext.BaseDirectory, "coremod", "mods", "DeadCellsArchipelago", "itemsId-Category.json")); //the json should be placed next to the modinfo.json
+            string json = System.IO.File.ReadAllText(System.IO.Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "itemsId-Category.json")); //the json should be placed next to the modinfo.json
             ITEMS = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, ItemData>>(json);
 
             Log.Information("=== Archipelago Mod loaded ! ===");
-
-            
+            Hook_LogManager.blueprint += BlueprintUILog;
+            Hook_ItemMetaManager.hasUnlockedItem += OnHasUnlockedItem;
+            Hook_ItemMetaManager.investOnItemProgress += OnInvestOnItemProgress;
+            //ItemMetaManager
         }
 
         private void OnHeroInit(Hook_Hero.orig_init orig, Hero self)
@@ -94,7 +98,7 @@ namespace DeadCellsArchipelago{
             orig(self);
             HERO = self;
             
-            Log.Information($"=== Hero initialized ! ===");
+            Log.Information("=== Hero initialized ! ===");
             //giving an item to a player saved at a level transition do nothing or errors (can pose future problems)
             //LogInventory();
             /*GiveItemToPlayer("DiverseDeckWatcher");
@@ -120,6 +124,30 @@ namespace DeadCellsArchipelago{
             if (data != null)
             {
                 ITEM_META_MANAGER = data.itemMeta;
+                var items = ITEM_META_MANAGER.getAllUnlockedWeapons();
+
+                if (items.length > 0)
+                {
+                    var hasNext = true;
+                    var i = 0;
+                    var item = items.getDyn(i);
+                    while (hasNext)
+                    {
+                        Log.Information($"{i} : {item}");
+                        i++;
+                        item = items.getDyn(i);
+                        if(item == null)
+                        {
+                            hasNext = false;
+                        }
+                    }
+                }
+                Log.Information($"{ITEM_META_MANAGER.hasUnlockedItem("QuickSword".AsHaxeString())}");
+                Log.Information($"{ITEM_META_MANAGER.hasUnlockedItem("StunMace".AsHaxeString())}");
+                Log.Information($"{ITEM_META_MANAGER.hasUnlockedItem("DashSword".AsHaxeString())}");
+                Log.Information($"{ITEM_META_MANAGER.hasUnlockedItem("Spear".AsHaxeString())}");
+                
+                
                 USER = data;
 
                 Log.Information($"=== Chargement de la save slot {data.userId} ===");
@@ -168,7 +196,7 @@ namespace DeadCellsArchipelago{
         
         private string GetSaveFilePath(int slot)
         {
-            string saveDir = System.IO.Path.Combine(AppContext.BaseDirectory, "coremod", "mods", "DeadCellsArchipelago", "data");
+            string saveDir = System.IO.Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "data");
             
             Directory.CreateDirectory(saveDir);
             return System.IO.Path.Combine(saveDir, $"archipelagoUserId_{slot}.json");

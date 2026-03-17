@@ -1039,6 +1039,10 @@
         "mob": "Ninja",
         "maxDifficulty": 2,
         "minDifficulty": 1
+      },
+      {
+        "mob": "Tick",
+        "minDifficulty": 0
       }
     ]
   },

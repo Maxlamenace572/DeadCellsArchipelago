@@ -165,7 +165,9 @@ def _has_and_boss(item: str, boss_loc: str):
 LOCATION_RULES = [
 
     # ── Gameplay items ────────────────────────────────────────────────────────
-    ("Blueprint_P_Disengage",   _has("HomKey")),
+    ("Blueprint_P_Disengage", _has("HomKey")),
+    ("Money5",  _has("HomKey")),
+    
     # P_Health rule is applied on the enemy check below, not on P_Wishes
     # P_Health is a Perk dropped by Lancer (Castle biome), not a floor blueprint
     # Rule applied via enemy check: Castle_Blueprint_P_Health_from_Lancer
@@ -202,6 +204,9 @@ LOCATION_RULES = [
     ("Blueprint_PrisonerNeon", _has("LadderKey")),
     ("Blueprint_PrisonerWarrior", _has("LadderKey")),
     ("Blueprint_Shockwave", _has("LadderKey")),
+    
+    ("Blueprint_LongBow", _has("LadderKey")),
+    ("Blueprint_ExplosiveCrossBow", _has("LadderKey") and _has("BreakableGroundKey") and (_has("WallJumpKey") or _has("HomKey"))),
 
     # ── Lighthouse access (no LighthouseKey item yet) ─────────────────────────
     # Requires having visited SewerShort AND StiltVillage
@@ -212,10 +217,8 @@ LOCATION_RULES = [
     # ── Prisoner skin BSC gates ───────────────────────────────────────────────
 
     # ── Collab skins (item requirements) ─────────────────────────────────────
-    ("Blueprint_HollowKnight",
-        _has("PureNail")),
-    ("Blueprint_Blasphemous",
-        _has("FaceFlask")),
+    ("Blueprint_HollowKnight", _has("PureNail")),
+    ("Blueprint_Blasphemous", _has("FaceFlask")),
     # Guacamelee: requires visiting Crypt + having a kick-type boot
     # Boots (MultiKickBoots etc.) are useful items — promote MultiKickBoots to PROG
     # and simplify rule to just require Crypt + MultiKickBoots
@@ -235,12 +238,10 @@ LOCATION_RULES = [
     )),
     # Terraria: requires BackpackUnlock — rule disabled for now to avoid fill errors
     # TODO: re-enable once BackpackUnlock is confirmed as progression item
-    ("Blueprint_HotlineMiamiChicken",
-        _has("BaseballBat")),
-    ("Blueprint_KatanaZero",
-        _has("Katana")),
-    ("Blueprint_ShovelKnight",
-        _has("Shovel")),
+    ("Blueprint_Terraria", _has("BackpackUnlock") and _boss_killed("Boss_KingsHand")),
+    ("Blueprint_HotlineMiamiChicken", _has("BaseballBat")),
+    ("Blueprint_KatanaZero", _has("Katana")),
+    ("Blueprint_ShovelKnight", _has("Shovel")),
 
     # ── Scissor / Comb (skin count gates) ────────────────────────────────────
     # Scissor/Comb: skin count gates disabled for now
@@ -250,20 +251,28 @@ LOCATION_RULES = [
     # ("Blueprint_Comb",      _skin_count(51)),
 
     # ── KingDefault / KingWhite (boss kill chain) ─────────────────────────────
-    ("Blueprint_KingDefault",
-        _boss_killed("Observatory_Boss_Collector")),
-    ("Blueprint_KingWhite",
-        _has("KingDefault")),
+    ("Blueprint_KingDefault", _boss_killed("Boss_Collector")),
+    ("Blueprint_KingWhite", _has("KingDefault")),
 
     # ── TickSacrifice ─────────────────────────────────────────────────────────
-    ("Blueprint_TickSacrifice",
-        _has("SpawnFriendlyHardy")),
+    ("Blueprint_TickSacrifice", _has("SpawnFriendlyHardy")),
+    
+    # ── PokebombUnlock ────────────────────────────────────────────────────────
+    ("Blueprint_PrisonerGold", _has("PokebombUnlock")),
 
-    # ── TODO: Cemetery -> Cavern rule (KingsHand vs bsc1 + HomKey) ───────────
+    # ── TODO: Cemetery -> Cavern rule (KingsHand vs bsc1 + HomKey) ────────────
     # Currently KingsHand boss kill is used in transition.json.
     # Needs in-game testing to confirm if HomKey is also required.
     # Uncomment and adjust once confirmed:
     # TODO: Cemetery->Cavern may also require HomKey — needs in-game testing
+    
+    # ── Heads ────────────────────────────────────────────────────────────────
+    # TODO: (red/blue/green black hole heads) && (VortexFoundry, Pecheur, GlitchyHeadDeepSpace) && Flawless
+    ("Item_StaphyHead", _has("SpawnLilStaphy")),
+    ("Item_MushroomBoi", _has("SpawnFriendlyHardy")),
+    ("Item_BlobbyFlameMagma", _boss_killed("Boss_KingsHand")),
+    ("Item_BlowTorchRed", _has("FlameThrower")),
+    ("Item_BossCellHead", _has("BossRune5")),
 ]
 
 
@@ -319,6 +328,15 @@ def _build_grouped_rules(world: "DeadCellsWorld") -> None:
             return rule
 
         location.access_rule = make_rule(biomes)
+        
+        # Rare/Legendary blueprints require PokebombUnlock
+        if loc_data.get("rarity") in ("Rare", "Legendary"):
+            base_rule = location.access_rule
+            def make_rarity_rule(existing_rule, p=player):
+                def rule(state):
+                    return existing_rule(state) and state.has("PokebombUnlock", p)
+                return rule
+            location.access_rule = make_rarity_rule(location.access_rule)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Main entry point — called from __init__.py set_rules()

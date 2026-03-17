@@ -170,7 +170,6 @@ def build_rule(requires, world: "DeadCellsWorld"):
 TRANSITIONS = {
     "Menu": [
         {"to": "PrisonStart", "require": None},
-        {"to": "Bank",        "require": None},
         {"to": "Challenge",   "require": None},
     ],
     "PrisonStart": [
@@ -270,6 +269,7 @@ TRANSITIONS = {
     ],
     "Throne": [
         {"to": "Astrolab", "require": "bsc5"},
+        {"to": "Bank",     "require": None},
         {"to": "End",      "require": None},
     ],
     "Astrolab": [

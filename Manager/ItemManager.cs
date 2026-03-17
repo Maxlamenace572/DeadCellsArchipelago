@@ -231,8 +231,14 @@ namespace DeadCellsArchipelago {
                         ITEM_META_MANAGER.addPermanentItem(itemName.AsHaxeString());
                         return;
 
-                }//todo: other kinds
+                }//todo: other kinds && add base aspects
                 BlueprintManager.UnlockBlueprint(itemName);
+                if(USER != null)
+                {
+                    BlueprintManager.showBlueprintLog = true;
+                    USER.game.log.blueprint(itemName.AsHaxeString(), "Always".AsHaxeString(), false, false);
+                    BlueprintManager.showBlueprintLog = false;
+                }
             }
         }
 
@@ -267,6 +273,64 @@ namespace DeadCellsArchipelago {
             {
                 Log.Error("=== Error while sending Item check ===");
             }
+        }
+
+        public static bool OnInvestOnItemProgress(Hook_ItemMetaManager.orig_investOnItemProgress orig, ItemMetaManager self, dc.String k)
+        {
+            var isUnlocked = orig(self, k);
+            if(isUnlocked && IsUnlockedByDefault(k.ToString()) && SAVED_DATA != null)
+            {
+                SAVED_DATA.AddBaseItemUnlocked(k.ToString());
+            }
+            return isUnlocked;
+        }
+
+        public static bool OnHasUnlockedItem(Hook_ItemMetaManager.orig_hasUnlockedItem orig, ItemMetaManager self, dc.String k)
+        {
+            Log.Information($"=== test {k} ===");
+            if (IsUnlockedByDefault(k.ToString()) && SAVED_DATA != null)
+            {
+                return SAVED_DATA.IsBaseItemUnlocked(k.ToString());
+            }
+            return orig(self, k);
+        }
+
+        public static bool IsUnlockedByDefault(string id)
+        {
+            switch (id)
+            {
+                case "DualDaggers":
+                case "StunMace":
+                case "DualBow":
+                case "ThrowingKnife":
+                case "LightningWhip":
+                case "ThrowingTorch":
+                case "Freeze":
+                case "Shield":
+                case "GreedShield":
+                case "StandardTurret":
+                case "RootTrap":
+                case "FastGrenade":
+                case "IceBomb":
+                case "ExtraHeal":
+                case "QuickSword":
+                case "P_CDR_Kill":
+                case "P_DmgKill":
+                case "P_DmgRevenge":
+                case "P_DeployedDmg":
+                case "P_NoMobAround":
+                case "P_CDR_Distance":
+                case "P_CDR_Parry":
+                case "P_DmgParry":
+                case "P_HealOnKill":
+                case "P_Yolo":
+                case "P_CDR_Crit":
+                case "ASP_Firestarter":
+                case "ASP_ToxinLover":
+                case "ASP_Shatter":
+                    return true;
+            }
+            return false;
         }
     }
 }

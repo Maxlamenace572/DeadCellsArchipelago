@@ -1,5 +1,6 @@
 using dc.en;
 using dc.tool;
+using dc.ui;
 using ModCore.Utilities;
 using Serilog;
 
@@ -8,6 +9,8 @@ using static DeadCellsArchipelago.ItemManager;
 namespace DeadCellsArchipelago {
     public static class BlueprintManager
     {
+        public static bool showBlueprintLog = false;
+
         //todo: fix; when the player have hitless bosses on another save, at the 3rd run, "FlawlessBehemoth", "FlawlessBeholder", "FlawlessAssassin", 
         // "FlawlessHotk", "FlawlessGiant", "FlawlessTick" and "FlawlessGardener" skin blueprints are automatically given.
         // I have completed the other 4 flawless (servents, queen, death, dracula), but they may be given later, should search. (maybe when biome unlocked ?)
@@ -55,6 +58,14 @@ namespace DeadCellsArchipelago {
             else
             {
                 Log.Error("=== Error while sending blueprint check ===");
+            }
+        }
+
+        public static void BlueprintUILog(Hook_LogManager.orig_blueprint orig, LogManager self, dc.String k, dc.String baseRarity, bool isRevealed, bool isScoring)
+        {
+            if (showBlueprintLog)
+            {
+                orig(self, k, baseRarity, isRevealed, isScoring);
             }
         }
     }

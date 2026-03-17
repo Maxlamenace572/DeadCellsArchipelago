@@ -3,6 +3,7 @@ namespace DeadCellsArchipelago {
     {
         public HashSet<string> SentChecks { get; set; } = [];
         public HashSet<string> RecievedItem { get; set; } = [];
+        public HashSet<string> BaseItemUnlocked { get; set; } = [];
 
         public void SaveCheckSent(string checkName)
         {
@@ -14,6 +15,11 @@ namespace DeadCellsArchipelago {
             RecievedItem.Add(itemName);
         }
 
+        public void AddBaseItemUnlocked(string itemName)
+        {
+            BaseItemUnlocked.Add(itemName);
+        }
+
         public bool IsCheckSent(string checkName)
         {
             return SentChecks.Contains(checkName);
@@ -22,6 +28,11 @@ namespace DeadCellsArchipelago {
         public bool IsItemRecieved(string itemName)
         {
             return RecievedItem.Contains(itemName);
+        }
+
+        public bool IsBaseItemUnlocked(string itemName)
+        {
+            return BaseItemUnlocked.Contains(itemName);
         }
     }
 }

@@ -31,17 +31,39 @@ from .base_classes import DeadCellsItem
 # Excluded when include_base_weapons is off
 # ─────────────────────────────────────────────────────────────────────────────
 BASE_WEAPONS = {
-    "QuickSword", "DualDaggers", "BroadSword", "KingsSpear", "StunMace",
-    "Pan", "Crowbar", "MachetePistol", "HardLightSword", "PureNail",
-    "SkulBone", "NunchuckPan", "BaseballBat",
-    "Scissor", "Comb",
-    "DualBow", "LongBow", "ExplosiveCrossBow", "Boomerang",
-    "ThrowingKnife", "LightningWhip", "ThrowingTorch", "Freeze",
-    "ThrowableStuff", "LaserGlaive", "HydraSpell",
-    "Shield", "AreaShield", "DashShield", "GreedShield",
-    "ExtraHeal", "FaceFlask", "PolloPower", "DiverseDeckJuggernaut", "Taunt",
-    "FastGrenade", "IceBomb", "RootBomb",
+    "QuickSword", "DualDaggers", "StunMace",
+    "DualBow", "ThrowingKnife", "LightningWhip", "ThrowingTorch", "Freeze",
+    "Shield", "GreedShield",
+    "ExtraHeal",
+    "FastGrenade", "IceBomb",
     "StandardTurret", "RootTrap",
+}
+
+BASE_META = {#"Flask1" in prog
+    "Flask2", "Flask3", "Flask4",
+    "Money1", "Money2", "Money3", "Money4",
+    "RandomBow", "RandomShield", "RandomCC",
+    "Recycling1", "Recycling2",
+    "ShopRerolls", "PokebombUnlock", "MirrorUnlock", "BackpackUnlock",
+}
+
+BASE_PERKS = {
+    "P_CDR_Kill", "P_DmgKill", "P_DmgRevenge",
+    "P_DeployedDmg", "P_NoMobAround", "P_CDR_Distance",
+    "P_CDR_Parry", "P_DmgParry", "P_HealOnKill",
+    "P_Yolo", "P_CDR_Crit",
+}
+
+BASE_ASPECTS = {
+    "ASP_Shatter", "ASP_ToxinLover", "ASP_Firestarter",
+}
+
+BASE_SKINS = {
+    "PrisonerGOG", "PrisonerFrench", "PrisonerRetro", "Snowman", "SantaKLOS",
+}
+
+BASE_HEADS = {
+    "BlackHoleViolet", "VortexHelloDarkness", "BlowTorch",
 }
 
 # Cosmetic categories excluded when include_cosmetics is off
@@ -197,7 +219,7 @@ class DeadCellsWorld(World):
         # ── Progression items (always included) ──────────────────────────────
         prog_items = get_progression_items(self.enabled_dlcs)
         for name in prog_items:
-            # BossRuneN est dans le pool seulement si N <= bc_level
+            # BossRuneN is in the pool only if N <= bsc_level
             if name.startswith("BossRune"):
                 n = int(name[-1])
                 if n > bc:
@@ -211,8 +233,27 @@ class DeadCellsWorld(World):
         ]
         for name in useful_items:
             items_to_place.append(self.create_item(name))
+            
+        # ── Base items ───────────────────────────────────────────────────────
+        for name in BASE_WEAPONS:
+            items_to_place.append(self.create_item(name))
+        
+        for name in BASE_META:
+            items_to_place.append(self.create_item(name))
+                
+        for name in BASE_PERKS:
+            items_to_place.append(self.create_item(name))
+        
+        for name in BASE_ASPECTS:
+            items_to_place.append(self.create_item(name))
+        
+        for name in BASE_SKINS:
+            items_to_place.append(self.create_item(name))
+        
+        for name in BASE_HEADS:
+            items_to_place.append(self.create_item(name))
 
-        # ── Trim or pad to pool_size ──────────────────────────────────────────
+        # ── Trim or pad to pool_size ─────────────────────────────────────────
         remaining = pool_size - len(items_to_place)
 
         if remaining < 0:
