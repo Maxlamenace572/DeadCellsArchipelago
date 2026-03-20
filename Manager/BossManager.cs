@@ -38,13 +38,18 @@ namespace DeadCellsArchipelago {
             if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent(bossName)){
                 SendBossCheck(bossName);
             }
-            // Test give item to player if concierge
-            if(bossName == "The Concierge")
+            switch(bossName)
             {
-                for (int i = 0; i < 20; i++)
-                {
-                    DropItemToPlayer("AllUp");
-                }
+                case "KingsHand":
+                case "Collector":
+                case "Queen":
+                case "DookuBeast":
+                    if (ARCHIPELAGO != null && SAVED_DATA != null && USER != null &&
+                        SAVED_DATA.bscLevelToWin == USER.bossRuneActivated)
+                    {
+                        ARCHIPELAGO.SendVictory();
+                    }
+                    break;
             }
         }
 

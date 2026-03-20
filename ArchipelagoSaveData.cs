@@ -4,6 +4,7 @@ namespace DeadCellsArchipelago {
         public HashSet<string> SentChecks { get; set; } = [];
         public HashSet<string> RecievedItem { get; set; } = [];
         public HashSet<string> BaseItemUnlocked { get; set; } = [];
+        public int bscLevelToWin = 4;
 
         public void SaveCheckSent(string checkName)
         {

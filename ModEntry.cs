@@ -42,6 +42,7 @@ using dc.hl;
 using dc.uicore.element;
 using dc.achievements;
 using dc.en.inter.npc;
+using ModCore.Modules;
 
 
 namespace DeadCellsArchipelago{
@@ -70,8 +71,10 @@ namespace DeadCellsArchipelago{
             Hook_ItemMetaManager.unlockItem += OnUnlockItem;
             //hasPermanentItem (5559) is used on too many things. should check on what call it later for bsc
             Hook_ItemMetaManager.hasPermanentItem += ReallyHasPermanentItem;
+            Hook_ItemMetaManager.addPermanentItem += OnAddPermanentItem;
             Hook_LevelGen.generate += OnLevelGenGenerate;
-
+            dc.en.inter.Hook_Throne.nextScene += OnNextScene;
+            
             InitializeRoomHooks();
 
             //PerkSelect;
@@ -88,6 +91,7 @@ namespace DeadCellsArchipelago{
             Hook_SteamAchievementManager.shouldDisplayInGameNotification += RemoveShouldDisplayInGameNotification;
 
             Hook_LogManager.blueprint += BlueprintUILog;
+            Hook_LogManager.head += HeadUILog;
             Hook_ItemMetaManager.hasUnlockedItem += OnHasUnlockedItem;
             Hook_ItemMetaManager.investOnItemProgress += OnInvestOnItemProgress;
             Hook_AspectMaster.onActivate += NoAspectActivate;
@@ -96,11 +100,14 @@ namespace DeadCellsArchipelago{
             //InventItemKind
 
             //archipelago.EnableMockMode();
-            // TODO: Get infos from file or ui
-            archipelago.Connect("localhost:38281", "TestPlayer");
+            // TODO: Get infos from ui
+            var confData = GetConfData();
+
+            archipelago.Connect(confData.serverIp, confData.slotName, confData.password);
             ARCHIPELAGO = archipelago;
 
             Log.Information("=== Archipelago Mod loaded ! ===");
+            //dc.level.@struct.Throne
         }
 
         public void OnHeroUpdate(double dt)
@@ -162,6 +169,10 @@ namespace DeadCellsArchipelago{
                 Log.Information($"=== New Save ===");
             }
             SAVED_DATA = savedData;
+            if(ARCHIPELAGO != null)
+            {
+                SAVED_DATA.bscLevelToWin = ARCHIPELAGO.bscOption;
+            }
         }
         
         public void OnBeforeSavingSave(IOnBeforeSavingSave.EventData data)
@@ -190,6 +201,11 @@ namespace DeadCellsArchipelago{
             return System.IO.Path.Combine(saveDir, $"archipelagoUserId_{slot}.json");
         }
 
+        private string GetConfFilePath()
+        {
+            return System.IO.Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "conf.json");
+        }
+
         private ArrayObj OnLevelGenGenerate(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, Hashlink.Virtuals.virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
         {
             if(USER == null)
@@ -199,6 +215,23 @@ namespace DeadCellsArchipelago{
             ITEM_META_MANAGER = user.itemMeta;
             var result = orig(self, user, seed, ldat, resetCount);
             return result;
+        }
+
+        private ConfData GetConfData()
+        {
+            var confPath = GetConfFilePath();
+            var confData = new ConfData();
+            if (System.IO.File.Exists(confPath))
+            {
+                var json = System.IO.File.ReadAllText(confPath);
+                confData = JsonConvert.DeserializeObject<ConfData>(json) ?? new();
+            }
+            else
+            {
+                var json = JsonConvert.SerializeObject(confData, Formatting.Indented);
+                System.IO.File.WriteAllText(confPath, json);
+            }
+            return confData;
         }
     }
 }

@@ -67,5 +67,10 @@ namespace DeadCellsArchipelago {
                 orig(self, k, baseRarity, isRevealed, isScoring);
             }
         }
+
+        public static void HeadUILog(Hook_LogManager.orig_head orig, LogManager self, dc.String headKind)
+        {
+            //remove head log
+        }
     }
 }

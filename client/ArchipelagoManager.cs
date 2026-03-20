@@ -23,6 +23,7 @@ namespace DeadCellsArchipelago
         private string _slotName = "";
         private string? _password = null;
         private bool _mockMode = false;
+        public int bscOption;
 
         public void EnableMockMode() //used only for tests
         {
@@ -64,6 +65,10 @@ namespace DeadCellsArchipelago
                     _isConnected = true;
                     Log.Information($"=== Connected to Archipelago ! Slot #{success.Slot} ===");
                     
+                    var slotData = success.SlotData;
+
+                    bscOption = Convert.ToInt32(slotData["boss_cells"]);
+
                     // Get every items received
                     SyncReceivedItems();
                 }
@@ -189,7 +194,7 @@ namespace DeadCellsArchipelago
             }
         }
 
-        private void SendVictory()
+        public void SendVictory()
         {
             if (_session == null) return;
             

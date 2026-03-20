@@ -23,9 +23,11 @@ namespace DeadCellsArchipelago
 
             if(!SAVED_DATA.IsItemRecieved(itemName))
             {
-                GiveItemFromArchipelago(itemName);
+                if (GiveItemFromArchipelago(itemName))
+                {
+                    SAVED_DATA.SaveItemRecieved(itemName);
+                }
                 Log.Information($"=== Item {itemName} given ===");
-                SAVED_DATA.SaveItemRecieved(itemName);
             }
             else
             {

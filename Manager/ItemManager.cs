@@ -206,7 +206,8 @@ namespace DeadCellsArchipelago {
             //todo: lock base weapon, not just stop revealing them (but maybe not here, this function is checked each run/load)
         }
 
-        public static void GiveItemFromArchipelago(string itemName)
+        //the boolean returned here is for saving or not the item in local data
+        public static bool GiveItemFromArchipelago(string itemName)
         {
             if (ITEM_META_MANAGER != null) {
                 switch (itemName)
@@ -223,7 +224,7 @@ namespace DeadCellsArchipelago {
                         GiveItemToPlayer(itemName);
                         RuneManager.ActivateMinimapTracking(itemName);
                         LogItem(itemName);
-                        return;
+                        return true;
                     case "BossRune1":
                     case "BossRune2":
                     case "BossRune3":
@@ -231,10 +232,26 @@ namespace DeadCellsArchipelago {
                     case "BossRune5":
                         ITEM_META_MANAGER.addPermanentItem(itemName.AsHaxeString());
                         LogItem(itemName);
-                        return;
+                        return true;
 
                 }//todo: other kinds
-                if("ASP" == itemName[..3])
+                if (itemName.Length >= 5 && itemName[..5] == "Trap_")
+                {
+                    switch (itemName)
+                    {
+                        case "Trap_Curse":
+                            if(HERO != null)
+                            {
+                                bool hidePopup = false;
+                                bool useAltSound = false;
+                                HERO.curse(50, "Archipelago trap".AsHaxeString(), new HaxeProxy.Runtime.Ref<bool>(ref hidePopup), new HaxeProxy.Runtime.Ref<bool>(ref useAltSound));
+                            }
+                            break;
+                    }
+                    Log.Warning("=== if nothing append, I forgot to implement it ===");
+                    return false;
+                }
+                else if(itemName.Length >= 3 && itemName[..3] == "ASP")
                 {
                     if (IsUnlockedByDefault(itemName))
                     {
@@ -252,7 +269,9 @@ namespace DeadCellsArchipelago {
                     BlueprintManager.UnlockBlueprint(itemName);
                 }
                 LogItem(itemName);
+                return true;
             }
+            return false;
         }
 
         public static void LogItem(string itemId)
@@ -310,7 +329,6 @@ namespace DeadCellsArchipelago {
 
         public static bool OnHasUnlockedItem(Hook_ItemMetaManager.orig_hasUnlockedItem orig, ItemMetaManager self, dc.String k)
         {
-            //Log.Information($"=== test {k} ===");
             if (SAVED_DATA != null)
             {
                 if (heroJustDead && aspectsToIter <= 12)//the game use hasUnlockedItem to add aspects in its random give pool
