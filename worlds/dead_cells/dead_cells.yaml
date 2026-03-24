@@ -8,3 +8,5 @@ Dead Cells:
   dlc_fatal_falls: true
   dlc_the_queen_and_the_sea: true
   dlc_return_to_castlevania: true
+  include_cosmetics: true
+  death_link: 150

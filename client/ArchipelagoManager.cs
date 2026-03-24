@@ -182,7 +182,6 @@ namespace DeadCellsArchipelago
         {
             var item = helper.PeekItem();
             AddItemToQueue(item.ItemName);
-            //ProcessReceivedItem(item);
             helper.DequeueItem();
         }
         

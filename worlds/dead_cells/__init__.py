@@ -109,6 +109,7 @@ class DeadCellsWorld(World):
 
     # Populated in generate_early, used throughout
     enabled_dlcs: Set[str] = set()
+    cosmetics: set[str] = set()
 
     # ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -126,6 +127,19 @@ class DeadCellsWorld(World):
         if self.options.dlc_return_to_castlevania:
             dlcs.add(DLC_PURPLE)
         return dlcs
+    
+    def _location_enabled(self, location_id: str) -> bool:
+        """Return True if this location should be included in the pool."""
+        data = LOCATION_TABLE[location_id]
+        _, classification, dlc = data
+
+        #filter cosmetics if option if off
+        if not self.options.include_cosmetics.value:
+            cat = self._LOCATION_CATEGORY.get(data)
+            if cat in COSMETIC_CATEGORIES:
+                return False
+            
+        return True
 
     def _item_enabled(self, item_id: str) -> bool:
         """Return True if this item should be included in the pool."""
@@ -137,13 +151,13 @@ class DeadCellsWorld(World):
             return False
 
         # Filter cosmetics if option is off
-        if not self.options.include_cosmetics:
-            cat = _ITEM_CATEGORY.get(item_id, "")
+        if not self.options.include_cosmetics.value:
+            cat = _ITEM_CATEGORY.get(data)
             if cat in COSMETIC_CATEGORIES:
                 return False
 
         # Filter base weapons if option is off
-        if not self.options.include_base_weapons:
+        if not self.options.include_base_weapons.value:
             if item_id in BASE_WEAPONS:
                 return False
 
@@ -182,10 +196,15 @@ class DeadCellsWorld(World):
         trap_pct = self.options.trap_percentage.value / 100.0
 
         # Active locations (determines pool size)
-        active_locs = get_locations_for_bc(self.enabled_dlcs, bc)
+        disabled_types = set()
+        if self.options.include_cosmetics.value == 0:
+            disabled_types.add("skin")
+            disabled_types.add("head") 
+        active_locs = get_locations_for_bc(self.enabled_dlcs, disabled_types, bc)
         pool_size = len(active_locs)
 
         # DEBUG
+        print(f"[DC DEBUG] disabled_types: {(disabled_types)}")   
         print("Beholder4 in pool:", "Blueprint_Beholder4" in active_locs)
         print("BossRune4 in pool:", "BSC_BossRune4" in active_locs)
         print("BossRune5 in pool:", "BSC_BossRune5" in active_locs)
@@ -202,7 +221,8 @@ class DeadCellsWorld(World):
         print(f"[DC DEBUG] remaining for fillers/traps: {remaining}")
         filler_pool = [name for name, data in get_filler_items(self.enabled_dlcs).items() if self._item_enabled(name)]
         print(f"[DC DEBUG] filler_pool size: {len(filler_pool)}")
-        # END DEBUG
+        print(f"[DC DEBUG] option.include_cosmetics.value: {self.options.include_cosmetics.value}")
+        # END DEBUG 
 
         items_to_place: List[DeadCellsItem] = []
         
@@ -239,12 +259,13 @@ class DeadCellsWorld(World):
                 
         for name in BASE_PERKS:
             items_to_place.append(self.create_item(name))
-        
-        for name in BASE_SKINS:
-            items_to_place.append(self.create_item(name))
-        
-        for name in BASE_HEADS:
-            items_to_place.append(self.create_item(name))
+
+        if self.options.include_cosmetics:
+            for name in BASE_SKINS:
+                items_to_place.append(self.create_item(name))
+
+            for name in BASE_HEADS:
+                items_to_place.append(self.create_item(name))
 
         # ── Trim or pad to pool_size ─────────────────────────────────────────
         remaining = pool_size - len(items_to_place)

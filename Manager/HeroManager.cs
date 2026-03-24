@@ -30,7 +30,7 @@ namespace DeadCellsArchipelago {
             Log.Information("=== Hero initialized ! ===");
         }
 
-        public static void DeathLink(string userWithSkillIssue)
+        public static void DieByDeathLink(string userWithSkillIssue)
         {
             if(HERO != null && ARCHIPELAGO != null)
             {

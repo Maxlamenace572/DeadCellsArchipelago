@@ -405,6 +405,9 @@ def create_regions(world: "DeadCellsWorld") -> None:
         if loc_dlc and loc_dlc not in enabled_dlcs:
             continue
         
+        if (loc_data["type"] == "skin" or loc_data["type"] == "head" ) and world.options.include_cosmetics.value ==0:
+            continue
+        
         if loc_data.get("min_bc", 0) > bc_level:
             continue
 
