@@ -244,6 +244,14 @@ namespace DeadCellsArchipelago {
         public static bool GiveItemFromArchipelago(string itemName)
         {
             if (ITEM_META_MANAGER != null) {
+                if(IsItemProgressive(itemName))
+                {
+                    string unlockedName = HandleProgressive(itemName);
+                    BlueprintManager.UnlockBlueprint(unlockedName);
+                    LogItem(unlockedName);
+                    return false;
+                }
+
                 switch (itemName)
                 {
                     case "LadderKey":
@@ -314,6 +322,18 @@ namespace DeadCellsArchipelago {
             }
             return false;
         }
+
+        private static string HandleProgressive(string itemName)
+        {
+            var newProgName = NewInCategory(itemName);
+            if(SAVED_DATA != null)
+            {
+                SAVED_DATA.SaveItemRecieved(newProgName);
+                SAVED_DATA.AddProgressionItem(itemName);
+            }
+            return newProgName;
+        }
+
 
         public static bool InDropableList(string itemName)
         {
@@ -457,6 +477,87 @@ namespace DeadCellsArchipelago {
                     return true;
             }
             return false;
+        }
+
+        public static bool IsItemProgressive(string itemName)
+        {
+            switch (itemName)
+            {
+                case "Flask1":
+                case "Flask2":
+                case "Flask3":
+                case "Flask4":
+                case "Money1":
+                case "Money2":
+                case "Money3":
+                case "Money4":
+                case "Money5":
+                case "Recycling1":
+                case "Recycling2":
+                    return true;
+            }
+            return false;
+        }
+
+        private static string NewInCategory(string itemName)
+        {
+            string res = "";
+            if(SAVED_DATA != null)
+            {
+                switch(itemName[0]){
+                    case 'F':
+                        if (SAVED_DATA.IsItemRecieved("Flask3"))
+                        {
+                            res = "Flask4";
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Flask2"))
+                        {
+                            res = "Flask3";
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Flask1"))
+                        {
+                            res = "Flask2";
+                        }
+                        else
+                        {
+                            res = "Flask1";
+                        }
+                        break;
+                    case 'M':
+                        if (SAVED_DATA.IsItemRecieved("Money4"))
+                        {
+                            res = "Money5";
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Money3"))
+                        {
+                            res = "Money4";
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Money2"))
+                        {
+                            res = "Money3";
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Money1"))
+                        {
+                            res = "Money2";
+                        }
+                        else
+                        {
+                            res = "Money1";
+                        }
+                        break;
+                    case 'R':
+                        if (SAVED_DATA.IsItemRecieved("Recycling1"))
+                        {
+                            res = "Recycling2";
+                        }
+                        else
+                        {
+                            res = "Recycling1";
+                        }
+                        break;
+                }
+            }
+            return res;
         }
     }
 }

@@ -201,7 +201,12 @@ namespace DeadCellsArchipelago
             if (SAVED_DATA != null)
             {
                 SAVED_DATA.SaveCheckSent(internalId);
-            } else
+                if(USER != null)
+                {
+                    SAVED_DATA.AppendToSentChecksJson(internalId, USER.userId);
+                }
+            }
+            else
             {
                 Log.Error("=== Couldn't save check ===");
             }

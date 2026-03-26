@@ -21,7 +21,9 @@ namespace DeadCellsArchipelago
 
             var itemName = pendingItems[0];
 
-            if(!SAVED_DATA.IsItemRecieved(itemName))
+            //if not prog, check classic list OR prog, check prog list
+            if((!IsItemProgressive(itemName) && !SAVED_DATA.IsItemRecieved(itemName)) ||
+                (IsItemProgressive(itemName) && !SAVED_DATA.IsProgressionItemRecieved(itemName)))
             {
                 if (GiveItemFromArchipelago(itemName))
                 {
