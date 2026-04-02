@@ -78,7 +78,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "HomKey":               (0x0006, PROG, DLC_BASE),
     "ExploKey":             (0x0007, PROG, DLC_BASE),
     "LighthouseKey":        (0x0010, PROG, DLC_BASE),
-    "ProgBossRune":            (0x0008, PROG, DLC_BASE),
+    "ProgBossRune":         (0x0008, PROG, DLC_BASE),
   
 
     # ── Meta Upgrades (Useful) ────────────────────────────────────────
@@ -612,6 +612,39 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Trap_RemoveGold":      (0x1502, TRAP, DLC_BASE),
     "Trap_BreakWeapon":     (0x1503, TRAP, DLC_BASE),
     "Trap_InvertControls":  (0x1504, TRAP, DLC_BASE),
+
+    # region lock items
+    "Prison Depths":        (0x1600, PROG, DLC_BASE),
+    "Corrupted Prison":     (0x1601, PROG, DLC_BASE),
+    "Ossuary":              (0x1602, PROG, DLC_BASE),
+    "Ancient Sewers":       (0x1603, PROG, DLC_BASE),
+    "Insufferable Crypt":   (0x1604, PROG, DLC_BASE),
+    "Stilt Village":        (0x1605, PROG, DLC_BASE),
+    "Slumbering Sanctuary": (0x1606, PROG, DLC_BASE),
+    "Graveyard":            (0x1607, PROG, DLC_BASE),
+    "Clock Tower":          (0x1608, PROG, DLC_BASE),
+    "Forgotten Sepulcher":  (0x1609, PROG, DLC_BASE),
+    "Clock Room":           (0x160A, PROG, DLC_BASE),
+    "High Peak Castle":     (0x160B, PROG, DLC_BASE),
+    "Derelict Distillery":  (0x160C, PROG, DLC_BASE),
+    "Throne Room":          (0x160D, PROG, DLC_BASE),
+    "Cavern":               (0x160E, PROG, DLC_RISE_OF_GIANT),
+    "Guardian's Haven":     (0x160F, PROG, DLC_RISE_OF_GIANT),
+    "Astrolab":             (0x1610, PROG, DLC_RISE_OF_GIANT),
+    "Observatory":          (0x1611, PROG, DLC_RISE_OF_GIANT),
+    "Dilapidated Arboretum": (0x1612, PROG, DLC_BAD_SEED),
+    "Morass of the Condemned": (0x1613, PROG, DLC_BAD_SEED),
+    "Nest":                 (0x1614, PROG, DLC_BAD_SEED),
+    "Fractured Shrines":    (0x1615, PROG, DLC_FATAL_FALLS),
+    "Undying Shores":       (0x1616, PROG, DLC_FATAL_FALLS),
+    "Mausoleum":            (0x1617, PROG, DLC_FATAL_FALLS),
+    "Infested Shipwreck":   (0x1618, PROG, DLC_QUEEN_AND_SEA),
+    "Lighthouse":           (0x1619, PROG, DLC_QUEEN_AND_SEA),
+    "Crown":                (0x161A, PROG, DLC_QUEEN_AND_SEA),
+    "Castle Outskirts":     (0x161B, PROG, DLC_PURPLE),
+    "Draclua's Castle":     (0x161C, PROG, DLC_PURPLE),
+    "Defiled Necropolis":   (0x161D, PROG, DLC_PURPLE),
+    "Master's Keep":        (0x161E, PROG, DLC_PURPLE),
 }
 
 

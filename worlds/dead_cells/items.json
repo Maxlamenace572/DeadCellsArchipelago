@@ -2023,5 +2023,137 @@
   "ASP_Damned": {
     "category": "Aspect",
     "dlc": ""
+  },
+  "Prison Depths":{
+    "category": "region",
+    "dlc":""
+  },
+  "Corrupted Prison":{
+    "category": "region",
+    "dlc":""
+  },
+  "Ossuary":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Ancient Sewers":{
+    "category": "region",
+    "dlc":""
+  },
+  "Insufferable Crypt":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Stilt Village":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Slumbering Sanctuary":{
+    "category": "region",
+    "dlc":""
+  },
+  "Graveyard":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Clock Tower":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Forgotten Sepulcher":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Clock Room":{
+    "category": "region",
+    "dlc":""
+  },
+  "High Peak Castle":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Derelict Distillery":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Throne Room":{
+    "category": "region",
+    "dlc":""
+  },
+  "Bank":{
+    "category": "region",
+    "dlc":""
+  }, 
+  "Challenge":{
+    "category": "region",
+    "dlc":""
+  },
+  "Cavern":{
+    "category": "region",
+    "dlc":"RiseOfTheGiant"
+  }, 
+  "Guardian's Haven":{
+    "category": "region",
+    "dlc":"RiseOfTheGiant"
+  }, 
+  "Astrolab":{
+    "category": "region",
+    "dlc":"RiseOfTheGiant"
+  }, 
+  "Observatory":{
+    "category": "region",
+    "dlc":"RiseOfTheGiant"
+  }, 
+  "Dilapidated Arboretum":{
+    "category": "region",
+    "dlc":"TheBadSeed"
+  }, 
+  "Morass of the Condemned":{
+    "category": "region",
+    "dlc":"TheBadSeed"
+  }, 
+  "Nest":{
+    "category": "region",
+    "dlc":"TheBadSeed"
+  },
+  "Fractured Shrines":{
+    "category": "region",
+    "dlc":"FatalFalls"
+  }, 
+  "Undying Shores":{
+    "category": "region",
+    "dlc":"FatalFalls"
+  }, 
+  "Mausoleum":{
+    "category": "region",
+    "dlc":"FatalFalls"
+  }, 
+  "Infested Shipwreck":{
+    "category": "region",
+    "dlc":"TheQueenAndTheSea"
+  }, 
+  "Lighthouse":{
+    "category": "region",
+    "dlc":"TheQueenAndTheSea"
+  }, 
+  "Crown":{
+    "category": "region",
+    "dlc":"TheQueenAndTheSea"
+  }, 
+  "Castle Outskirts":{
+    "category": "region",
+    "dlc":"Purple"
+  }, 
+  "Draclua's Castle":{
+    "category": "region",
+    "dlc":"Purple"
+  }, 
+  "Defiled Necropolis":{
+    "category": "region",
+    "dlc":"Purple"
+  }, 
+  "Master's Keep":{
+    "category": "region",
+    "dlc":"Purple"
   }
 }
