@@ -8,6 +8,7 @@ namespace DeadCellsArchipelago {
         public HashSet<string> RecievedItem { get; set; } = [];
         public HashSet<string> BaseItemUnlocked { get; set; } = [];
         public HashSet<string> RecievedProgressionItem { get; set; } = [];
+        public Dictionary<string, int> RecievedFillerItem { get; set; } = [];
         public int bscLevelToWin = 4;
 
         public void SaveCheckSent(string checkName)
@@ -30,6 +31,18 @@ namespace DeadCellsArchipelago {
             RecievedProgressionItem.Add(itemName);
         }
 
+        public void AddFillerItem(string itemName)
+        {
+            if(RecievedFillerItem.ContainsKey(itemName))
+            {
+                RecievedFillerItem[itemName]++;
+            }
+            else
+            {
+                RecievedFillerItem[itemName] = 1;
+            }
+        }
+
         public bool IsCheckSent(string checkName)
         {
             return SentChecks.Contains(checkName);
@@ -48,6 +61,15 @@ namespace DeadCellsArchipelago {
         public bool IsProgressionItemRecieved(string itemName)
         {
             return RecievedProgressionItem.Contains(itemName);
+        }
+
+        public int HowManyFillerItemRecieved(string itemName)
+        {
+            if(RecievedFillerItem.ContainsKey(itemName))
+            {
+                return RecievedFillerItem[itemName];
+            }
+            return 0;
         }
 
         public bool HasReceivedAspect()

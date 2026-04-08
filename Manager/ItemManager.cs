@@ -25,6 +25,7 @@ namespace DeadCellsArchipelago {
         public static int aspectsToIter = 0;
         public static List<string> dropableList = [];
         public static int bossRuneGivenSinceLaunch = 0;
+        public static Dictionary<string, int> fillerItemGivenSinceLaunch { get; set; } = [];
 
         public static void InitDropableList()
         {
@@ -292,16 +293,19 @@ namespace DeadCellsArchipelago {
                 }//todo: other kinds
                 if (itemName.Length >= 5 && itemName[..5] == "Trap_")
                 {
-                    switch (itemName)
+                    if(ShouldDropItem(itemName))
                     {
-                        case "Trap_Curse":
-                            if(HERO != null)
-                            {
-                                bool hidePopup = false;
-                                bool useAltSound = false;
-                                HERO.curse(50, "Archipelago trap".AsHaxeString(), new HaxeProxy.Runtime.Ref<bool>(ref hidePopup), new HaxeProxy.Runtime.Ref<bool>(ref useAltSound));
-                            }
-                            break;
+                        switch (itemName)
+                        {
+                            case "Trap_Curse":
+                                if(HERO != null)
+                                {
+                                    bool hidePopup = false;
+                                    bool useAltSound = false;
+                                    HERO.curse(50, "Archipelago trap".AsHaxeString(), new HaxeProxy.Runtime.Ref<bool>(ref hidePopup), new HaxeProxy.Runtime.Ref<bool>(ref useAltSound));
+                                }
+                                break;
+                        }
                     }
                     Log.Warning("=== if nothing append, I forgot to implement it ===");
                     return false;
@@ -309,7 +313,10 @@ namespace DeadCellsArchipelago {
 
                 if(InDropableList(itemName))
                 {
-                    DropItemToPlayer(itemName);
+                    if(ShouldDropItem(itemName))
+                    {
+                        DropItemToPlayer(itemName);
+                    }
                     return false;
                 }
 
@@ -350,6 +357,37 @@ namespace DeadCellsArchipelago {
                 return true;
             }
             return false;
+        }
+
+        private static bool ShouldDropItem(string itemName)
+        {
+            if(SAVED_DATA != null)
+            {
+                if(!fillerItemGivenSinceLaunch.ContainsKey(itemName))
+                {
+                    fillerItemGivenSinceLaunch[itemName] = 0;
+                }
+                if(fillerItemGivenSinceLaunch[itemName] >= SAVED_DATA.HowManyFillerItemRecieved(itemName))
+                {
+                    SAVED_DATA.AddFillerItem(itemName);
+                    AddFillerItemGivenSinceLaunch(itemName);
+                    return true;
+                }
+                AddFillerItemGivenSinceLaunch(itemName);
+            }
+            return false;
+        }
+
+        private static void AddFillerItemGivenSinceLaunch(string itemName)
+        {
+            if(fillerItemGivenSinceLaunch.ContainsKey(itemName))
+            {
+                fillerItemGivenSinceLaunch[itemName]++;
+            }
+            else
+            {
+                fillerItemGivenSinceLaunch[itemName] = 1;
+            }
         }
 
         private static string HandleProgressive(string itemName)
