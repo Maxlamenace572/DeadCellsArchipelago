@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeadCellsInstaller", "DeadCellsInstaller.csproj", "{52E506E0-E512-0AF7-90C9-5317E322316C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52E506E0-E512-0AF7-90C9-5317E322316C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E506E0-E512-0AF7-90C9-5317E322316C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E506E0-E512-0AF7-90C9-5317E322316C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E506E0-E512-0AF7-90C9-5317E322316C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AD51271-E770-412C-9BE2-F8D869F9E06E}
+	EndGlobalSection
+EndGlobal
