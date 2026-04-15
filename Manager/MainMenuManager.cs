@@ -315,9 +315,9 @@ namespace DeadCellsArchipelago {
         {
             var confPath = GetConfFilePath();
             var confData = new ConfData();
-            if (System.IO.File.Exists(confPath))
+            if (File.Exists(confPath))
             {
-                var json = System.IO.File.ReadAllText(confPath);
+                var json = File.ReadAllText(confPath);
                 confData = JsonConvert.DeserializeObject<ConfData>(json) ?? new();
             }
             else

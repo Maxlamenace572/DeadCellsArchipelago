@@ -24,10 +24,11 @@ namespace DeadCellsArchipelago {
         public static bool heroJustDead = false;
         public static int aspectsToIter = 0;
         public static List<string> dropableList = [];
+        public static List<string> cosmeticsList = [];
         public static int bossRuneGivenSinceLaunch = 0;
         public static Dictionary<string, int> fillerItemGivenSinceLaunch { get; set; } = [];
 
-        public static void InitDropableList()
+        public static void InitLists()
         {
             foreach (var item in Data.Class.item.all)
             {
@@ -40,6 +41,10 @@ namespace DeadCellsArchipelago {
                 if(group == 10 || group == 11)
                 {
                     dropableList.Add(item.id.ToString());
+                }
+                if(group == 13 || group == 14)
+                {
+                    cosmeticsList.Add(item.id.ToString());
                 }
             }
         }
@@ -455,9 +460,25 @@ namespace DeadCellsArchipelago {
         {
             if(!dropableList.Any())
             {
-                InitDropableList();
+                InitLists();
             }
             foreach (var item in dropableList)
+            {
+                if(item == itemName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool InCosmeticList(string itemName)
+        {
+            if(!cosmeticsList.Any())
+            {
+                InitLists();
+            }
+            foreach (var item in cosmeticsList)
             {
                 if(item == itemName)
                 {
@@ -490,7 +511,7 @@ namespace DeadCellsArchipelago {
         public static bool OnUnlockItem(Hook_ItemMetaManager.orig_unlockItem orig, ItemMetaManager self, dc.String k)//utilisé pour les items comme la poelle 
         {
             //Log.Warning($"=== This method was called for {k} in on unlock ===");//to be removed when all unlocked item with this are found
-            if(!useOriginalUnlockItem)
+            if(!useOriginalUnlockItem && ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
             {
                 SendItemWithoutBlueprintCheck(k.ToString());
                 return false;
@@ -510,7 +531,7 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck("Item_" + itemId, itemId, "Item:");//todo
+                ARCHIPELAGO.SendCheck("Item_" + itemId, itemId, "Item:");
             }
             else
             {

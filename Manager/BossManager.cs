@@ -28,6 +28,8 @@ namespace DeadCellsArchipelago {
             Hook_Queen.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_DookuBeast.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_Collector.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+
+            Hook_Entity.onDie += OnOnDie;
             
             Log.Information("=== Boss Hooks loaded ! ===");
         }
@@ -62,6 +64,17 @@ namespace DeadCellsArchipelago {
             else
             {
                 Log.Error("=== Error while sending Boss check ===");
+            }
+        }
+
+        public static void OnOnDie(Hook_Entity.orig_onDie orig, Entity self)
+        {
+            orig(self);
+
+            int randomNumber = new Random().Next(1, 10001);
+            if (randomNumber == 1)
+            {
+                DropItemToPlayer("TimeDistorsion");
             }
         }
     }

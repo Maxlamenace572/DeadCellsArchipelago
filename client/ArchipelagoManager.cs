@@ -21,18 +21,11 @@ namespace DeadCellsArchipelago
         private string _serverUrl = "localhost:38281";  // By default
         private string _slotName = "";
         private string? _password = null;
-        private bool _mockMode = false;
 
         //options
         public int bscOption;
         public int deathLinkEnabled;
-
-        public void EnableMockMode() //used only for tests
-        {
-            _mockMode = true;
-            _isConnected = true;
-            Log.Information("=== Mode mock Archipelago activated ===");
-        }
+        public bool includeCosmetics;
         
         public bool IsConnected => _isConnected;
         
@@ -71,6 +64,7 @@ namespace DeadCellsArchipelago
 
                     bscOption = Convert.ToInt32(slotData["boss_cells"]);
                     deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
+                    includeCosmetics = Convert.ToBoolean(slotData["include_cosmetics"]);
 
                     if (deathLinkEnabled >= 0)
                     {
@@ -107,20 +101,6 @@ namespace DeadCellsArchipelago
         
         public void SendCheck(string locationName, string internalId, string message)
         {
-            if (_mockMode) //log check when we are on test mod
-            {
-                Log.Information($"=== [MOCK] Check sent: {message} {locationName} ===");
-                
-                // Simulate a blueprint send from server
-                Log.Information($"=== [MOCK] Simulate item send ===");
-                GiveItemFromArchipelago("Flask1");
-                GiveItemFromArchipelago("BlobbyFlame");
-                GiveItemFromArchipelago("LadderKey");//LadderKey//TeleportKey//BreakableGroundKey
-                SaveChecks(locationName);
-                return;
-            }
-
-            
             if (!_isConnected || _session == null)
             {
                 Log.Warning($"=== Impossible to send check to {locationName}: not connected ===");

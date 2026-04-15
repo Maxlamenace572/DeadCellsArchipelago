@@ -11,18 +11,16 @@ namespace DeadCellsArchipelago {
     {
         public static bool showBlueprintLog = false;
 
-        //todo: fix; when the player have hitless bosses on another save, at the 3rd run, "FlawlessBehemoth", "FlawlessBeholder", "FlawlessAssassin", 
-        // "FlawlessHotk", "FlawlessGiant", "FlawlessTick" and "FlawlessGardener" skin blueprints are automatically given.
-        // I have completed the other 4 flawless (servents, queen, death, dracula), but they may be given later, should search. (maybe when biome unlocked ?)
-
-        
         //Called when the hero get a blueprint, picked in game or by UnlockBlueprint.
         public static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
         {
             //the blueprint is comming from the game, so we need to send a archipelago check
-            Log.Information($"=== Blueprint picked up: {k} ===");
-            SendBlueprintCheck(k.ToString());
-            return true;
+            if(ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
+            {
+                SendBlueprintCheck(k.ToString());
+                return true;
+            }
+            return orig(self, k);
         }
 
         //Instantly unlock the blueprint
@@ -45,7 +43,11 @@ namespace DeadCellsArchipelago {
         //hasRevealedItem allow or not the blueprint to spawn
         public static bool ReallyHasBlueprint(Hook_ItemMetaManager.orig_hasRevealedItem orig, ItemMetaManager self, dc.String k)
         {
-            return SAVED_DATA != null && SAVED_DATA.IsCheckSent(k.ToString()); //Drop the blueprint only when he is not in the saved checklist
+            if(ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
+            {
+                return SAVED_DATA != null && SAVED_DATA.IsCheckSent(k.ToString()); //Drop the blueprint only when he is not in the saved checklist
+            }
+            return orig(self, k);
         }
 
         public static void SendBlueprintCheck(string blueprintId)
@@ -66,11 +68,18 @@ namespace DeadCellsArchipelago {
             {
                 orig(self, k, baseRarity, isRevealed, isScoring);
             }
+            if (ARCHIPELAGO != null && !ARCHIPELAGO.includeCosmetics && InCosmeticList(k.ToString()))
+            {
+                orig(self, k, baseRarity, isRevealed, false);
+            }
         }
 
         public static void HeadUILog(Hook_LogManager.orig_head orig, LogManager self, dc.String headKind)
         {
-            //remove head log
+            if (ARCHIPELAGO != null && !ARCHIPELAGO.includeCosmetics)
+            {
+                orig(self, headKind);
+            }
         }
     }
 }
