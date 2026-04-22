@@ -27,6 +27,7 @@ namespace DeadCellsArchipelago {
         public static List<string> dropableList = [];
         public static List<string> cosmeticsList = [];
         public static int bossRuneGivenSinceLaunch = 0;
+        public static Dictionary<string, int> ProgressionItemGivenSinceLaunch { get; set; } = [];
         public static Dictionary<string, int> fillerItemGivenSinceLaunch { get; set; } = [];
 
         public static void InitLists()
@@ -266,9 +267,12 @@ namespace DeadCellsArchipelago {
             if (ITEM_META_MANAGER != null) {
                 if(IsItemProgressive(itemName))
                 {
-                    string unlockedName = HandleProgressive(itemName);
-                    BlueprintManager.UnlockBlueprint(unlockedName);
-                    LogItem(unlockedName);
+                    string? unlockedName = HandleProgressive(itemName);
+                    if (unlockedName != null)
+                    {
+                        BlueprintManager.UnlockBlueprint(unlockedName);
+                        LogItem(unlockedName);
+                    }
                     return false;
                 }
 
@@ -334,11 +338,8 @@ namespace DeadCellsArchipelago {
 
                 if(itemName.Length >= 3 && itemName[..3] == "ASP")
                 {
-                    if (IsUnlockedByDefault(itemName))
-                    {
-                        var progress = new ItemProgress(itemName.AsHaxeString());
-                        ITEM_META_MANAGER.itemProgress.push(progress);
-                    }
+                    var progress = new ItemProgress(itemName.AsHaxeString());
+                    ITEM_META_MANAGER.itemProgress.push(progress);
                     UnlockItem(itemName);
                     ITEM_META_MANAGER.getItemProgress(itemName.AsHaxeString()).unlocked = true;
                     if (IsUnlockedByDefault(itemName) && SAVED_DATA != null)
@@ -396,15 +397,40 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        private static string HandleProgressive(string itemName)
+        private static string? HandleProgressive(string itemName)
         {
-            var newProgName = NewInCategory(itemName);
             if(SAVED_DATA != null)
             {
-                SAVED_DATA.SaveItemRecieved(newProgName);
-                SAVED_DATA.AddProgressionItem(itemName);
+                if(!ProgressionItemGivenSinceLaunch.ContainsKey(itemName))
+                {
+                    ProgressionItemGivenSinceLaunch[itemName] = 0;
+                }
+                if(ProgressionItemGivenSinceLaunch[itemName] >= SAVED_DATA.HowManyProgressionItemRecieved(itemName))
+                {
+                    string? newProgName = NewInCategory(itemName);
+                    if (newProgName != null)
+                    {
+                        SAVED_DATA.SaveItemRecieved(newProgName);
+                        SAVED_DATA.AddProgressionItem(itemName);
+                        AddProgressionItemGivenSinceLaunch(itemName);
+                    }
+                    return newProgName;
+                }
+                AddProgressionItemGivenSinceLaunch(itemName);
             }
-            return newProgName;
+            return null;
+        }
+
+        private static void AddProgressionItemGivenSinceLaunch(string itemName)
+        {
+            if(ProgressionItemGivenSinceLaunch.ContainsKey(itemName))
+            {
+                ProgressionItemGivenSinceLaunch[itemName]++;
+            }
+            else
+            {
+                ProgressionItemGivenSinceLaunch[itemName] = 1;
+            }
         }
 
         private static string? HandleBossRune()
@@ -639,14 +665,18 @@ namespace DeadCellsArchipelago {
             return false;
         }
 
-        private static string NewInCategory(string itemName)
+        private static string? NewInCategory(string itemName)
         {
-            string res = "";
+            string? res = null;
             if(SAVED_DATA != null)
             {
                 switch(itemName[0]){
                     case 'F':
-                        if (SAVED_DATA.IsItemRecieved("Flask3"))
+                        if (SAVED_DATA.IsItemRecieved("Flask4"))
+                        {
+                            res = null;
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Flask3"))
                         {
                             res = "Flask4";
                         }
@@ -664,7 +694,11 @@ namespace DeadCellsArchipelago {
                         }
                         break;
                     case 'M':
-                        if (SAVED_DATA.IsItemRecieved("Money4"))
+                        if (SAVED_DATA.IsItemRecieved("Money5"))
+                        {
+                            res = null;
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Money4"))
                         {
                             res = "Money5";
                         }
@@ -686,7 +720,11 @@ namespace DeadCellsArchipelago {
                         }
                         break;
                     case 'R':
-                        if (SAVED_DATA.IsItemRecieved("Recycling1"))
+                        if (SAVED_DATA.IsItemRecieved("Recycling2"))
+                        {
+                            res = null;
+                        }
+                        else if (SAVED_DATA.IsItemRecieved("Recycling1"))
                         {
                             res = "Recycling2";
                         }

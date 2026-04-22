@@ -7,7 +7,7 @@ namespace DeadCellsArchipelago {
         public HashSet<string> SentChecks { get; set; } = [];
         public HashSet<string> RecievedItem { get; set; } = [];
         public HashSet<string> BaseItemUnlocked { get; set; } = [];
-        public HashSet<string> RecievedProgressionItem { get; set; } = [];
+        public Dictionary<string, int> RecievedProgressionItem { get; set; } = [];
         public Dictionary<string, int> RecievedFillerItem { get; set; } = [];
         public int bscLevelToWin = 4;
 
@@ -28,7 +28,14 @@ namespace DeadCellsArchipelago {
 
         public void AddProgressionItem(string itemName)
         {
-            RecievedProgressionItem.Add(itemName);
+            if(RecievedProgressionItem.ContainsKey(itemName))
+            {
+                RecievedProgressionItem[itemName]++;
+            }
+            else
+            {
+                RecievedProgressionItem[itemName] = 1;
+            }
         }
 
         public void AddFillerItem(string itemName)
@@ -58,9 +65,13 @@ namespace DeadCellsArchipelago {
             return BaseItemUnlocked.Contains(itemName);
         }
 
-        public bool IsProgressionItemRecieved(string itemName)
+        public int HowManyProgressionItemRecieved(string itemName)
         {
-            return RecievedProgressionItem.Contains(itemName);
+            if(RecievedProgressionItem.ContainsKey(itemName))
+            {
+                return RecievedProgressionItem[itemName];
+            }
+            return 0;
         }
 
         public int HowManyFillerItemRecieved(string itemName)

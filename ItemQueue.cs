@@ -27,9 +27,7 @@ namespace DeadCellsArchipelago
                 itemName = GetId(itemName);
             }
 
-            //if not prog, check classic list OR prog, check prog list
-            if((!IsItemProgressive(itemName) && !SAVED_DATA.IsItemRecieved(itemName)) ||
-                (IsItemProgressive(itemName) && !SAVED_DATA.IsProgressionItemRecieved(itemName)))
+            if(!SAVED_DATA.IsItemRecieved(itemName))
             {
                 useOriginalRevealItem = true;
                 if (GiveItemFromArchipelago(itemName))
