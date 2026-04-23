@@ -83,6 +83,14 @@ TRANSITIONS = {
         {"to": "Greenhouse", "require": ["Teleportation Rune", "Dilapidated Arboretum"]},
         {"to": "PurpleGarden", "require": "Castle Outskirts"},
     ],
+<<<<<<< Updated upstream
+=======
+    "Greenhouse": [
+        {"to": "PrisonDepths", "require": "WallJumpKey"},
+        {"to": "Swamp",        "require": "Morass of the Banished"},
+        {"to": "PrisonRoof", "require": None},
+    ],
+>>>>>>> Stashed changes
     "PrisonCourtyard": [
         {"to": "Ossuary", "require": ["Vine Rune", "Teleportation Rune", "Ossuary"]},
         {"to": "PrisonRoof", "require": "Vine Rune"},

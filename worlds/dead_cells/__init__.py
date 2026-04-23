@@ -328,18 +328,22 @@ class DeadCellsWorld(World):
             itempool = itempool[:total_locations]
             remaining_slots = 0
 
-    # ─────────────────────────────────────
-    # 5. Add useful items
-    # ─────────────────────────────────────
+        # ─────────────────────────────────────
+        # 5. Add useful items (one copy each)
+        # ─────────────────────────────────────
         useful_list = list(useful_items)
 
-    # Shuffle for variety
+            # Safety: remove any progression items that somehow remained
+        useful_list = [name for name in useful_list if name not in progression_items]
+
+            # Optional shuffle so order is not predictable
         import random
         random.shuffle(useful_list)
 
-        useful_limit = min(len(useful_list), int(remaining_slots * 0.5))
-        itempool += useful_list[:useful_limit]
-        remaining_slots -= useful_limit
+            # Only add one copy of each useful item, up to remaining slots
+        useful_to_add = useful_list[:remaining_slots]
+        itempool += useful_to_add
+        remaining_slots -= len(useful_to_add)
 
     # ─────────────────────────────────────
     # 6. Add traps

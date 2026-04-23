@@ -458,6 +458,13 @@ def _head_count(count: int):
         ) >= count
     )
 
+def _can_reach_location_if_exists(state, world, loc_name: str) -> bool:
+    try:
+        world.multiworld.get_location(loc_name, world.player)
+    except KeyError:
+        return False
+    return state.can_reach_location(loc_name, world.player)
+
 def set_rules(world):
     """
     Apply source-based access rules from LOCATION_TABLE.
@@ -580,6 +587,7 @@ LOCATION_RULES = [
     ),
 
     (
+<<<<<<< Updated upstream
         "Blueprint_CurseofTheDeadGods",
         lambda world: (
             lambda state: any(
@@ -590,6 +598,16 @@ LOCATION_RULES = [
                     "DookuArena_Exit"
                 ]
             )
+=======
+    "Curse of the Dead Gods Outfit",
+    lambda world: lambda state: any(
+        _can_reach_location_if_exists(state, world, loc)
+        for loc in [
+            "Throne Room Exit",
+            "Crown Exit",
+            "Master's Keep Exit",
+        ]
+>>>>>>> Stashed changes
         )
     ),
 
@@ -643,6 +661,7 @@ LOCATION_RULES = [
 
 
     # ── Heads ────────────────────────────────────────────────────────────────
+<<<<<<< Updated upstream
     ("Item_StaphyHead", _has("Leghugger")),
 
     ("Item_MushroomBoi", _has("Mushroom Boi!")),
@@ -652,29 +671,56 @@ LOCATION_RULES = [
     ),
 
     ("Item_BlowTorchRed", _has("Pyrotechnics")),
+=======
+    ("Leghugger Head", _has("Leghugger")),
+
+    ("Mushroom Boi Cap", _has("Mushroom Boi!")),
+
+    ("Magma Blob",
+        _boss_killed("The Hand of the King")
+    ),
+
+    ("Bright Red Blowtorch", _has("Pyrotechnics")),
+>>>>>>> Stashed changes
 
     ("Item_BossCellHead", _bsc(5)),
 
     ("Item_Guillain", _boss_rush_trials_1_2()),
 
+<<<<<<< Updated upstream
     ("Blueprint_Bobby", _has("Progressive Stem Cell")),
 
     ("Item_GlitchyHeadDeepSpace",
+=======
+    ("Spatial Anomaly",
+>>>>>>> Stashed changes
      lambda world: lambda state:
         _head_count(35)(world)(state) 
-        or state.can_reach("Throne", "Region", world.player)),
+        or (state.can_reach("Throne", "Region", world.player)
+        and get_bc_level(state, world.player) >= 5)),
 
     ("Item_BlackHoleRed",
     lambda world: lambda state: 
         _head_count(7)(world)(state)
         or (
                 state.can_reach("Throne", "Region", world.player)
-                and get_bc_level(state, world.player) >= 5
             )
     ),
+<<<<<<< Updated upstream
     ("Item_Pecheur",
+=======
+    ("Fisherman's Hood",
+>>>>>>> Stashed changes
     lambda world: lambda state: 
         _head_count(40)(world)(state)
+        or (
+                state.can_reach("Throne", "Region", world.player)
+                and get_bc_level(state, world.player) >= 5
+            )),
+    
+    ("Dark Vortex",
+    lambda world: lambda state: 
+        _head_count(15)(world)(state)
         or (
                 state.can_reach("Throne", "Region", world.player)
                 and get_bc_level(state, world.player) >= 5
