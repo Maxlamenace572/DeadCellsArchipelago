@@ -16,6 +16,7 @@ using dc.ui;
 using ModCore.Utilities;
 
 using static DeadCellsArchipelago.Translator;
+using static DeadCellsArchipelago.PokeManager;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager
@@ -88,6 +89,7 @@ namespace DeadCellsArchipelago {
 
         public static void OnActiviteExit(Hook_Exit.orig_onActivate orig, Exit self, Hero by, bool lp)
         {
+            ResetFrontPokebomb();
             if(SAVED_DATA != null && USER != null && !IsMultipleExitsTransition(self.destLevel.ToString()) && !CanTakeExit(self.getDestBasedOnNextLevels().ToString()))
             {
                 string msg = $"You need the key for {self.getDestName()} !";
@@ -106,6 +108,7 @@ namespace DeadCellsArchipelago {
                 else
                 {
                     PrepareBiomeCheck(self.destLevel.ToString(), " Enter", self.destLevel.ToString());
+                    if(SAVED_DATA != null) SAVED_DATA.numberOfPokebombUse ++;
                 }
                 orig(self, by, lp);
             }

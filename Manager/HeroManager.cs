@@ -1,6 +1,6 @@
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RoomManager;
-using static DeadCellsArchipelago.ItemQueue;
+using static DeadCellsArchipelago.PokeManager;
 using dc.en;
 using Serilog;
 using ModCore.Utilities;
@@ -33,6 +33,8 @@ namespace DeadCellsArchipelago {
         {
             if(from is DefaultPause)
             {
+                ResetFrontPokebomb();
+
                 var originalOnValidate = onValidate;
 
                 onValidate = () => {
@@ -59,7 +61,6 @@ namespace DeadCellsArchipelago {
             HERO = self;
             
             Log.Information("=== Hero initialized ! ===");
-            //DropItemToPlayer("Pokebomb");
         }
 
         public static void DieByDeathLink()

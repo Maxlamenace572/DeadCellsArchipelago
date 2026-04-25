@@ -55,6 +55,8 @@ using dc.en.gr;
 using dc.pow;
 using dc.ui.pause;
 using dc.hxd.res;
+using dc.ui.hud;
+using dc.tool.weap.dual;
 
 
 namespace DeadCellsArchipelago{
@@ -66,7 +68,6 @@ namespace DeadCellsArchipelago{
         //IOn
     {
         private ArchipelagoManager archipelago = new();
-        private ArchipelagoSaveData savedData = new();
 
         public override void Initialize()
         {
@@ -144,7 +145,7 @@ namespace DeadCellsArchipelago{
 
             Hook_LootGen.addBlueprintAt += FixNotSpawningBlueprint;
 
-            Hook_Pokecharge.removeItem += OnRemoveItem;
+            Hook_Pokecharge.removeItem += OnRemoveItemPokecharge;
             //DefaultPause
             //dc.h2d.Interactive
             //botMenu
@@ -155,8 +156,11 @@ namespace DeadCellsArchipelago{
             Hook__Confirmation.__constructor__ += OnRestart;
             Hook_Portal.onActivate += OnActivatePortal;
             Hook_Portal.close += OnClosePortal;
-            //Portal
 
+            Hook_HeroActiveSkillsManager.onActiveSkill += OnOnActiveSkill;
+            Hook_HeroActiveSkillsManager.canUseActiveSkill += OnCanUseActiveSkill;
+            Hook_HeroActiveSkillsManager.updateSkills += OnUpdateSkills;
+            Hook_Inventory.swapSkills += OnSwapSkills;
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
 
@@ -171,7 +175,7 @@ namespace DeadCellsArchipelago{
 
         public void OnAfterLoadingSave(User data)
         {
-            savedData = new();
+            SAVED_DATA = new();
             if (data != null)
             {
                 ITEM_META_MANAGER = data.itemMeta;
@@ -205,9 +209,9 @@ namespace DeadCellsArchipelago{
                     try
                     {
                         var json = System.IO.File.ReadAllText(savePath);
-                        savedData = JsonConvert.DeserializeObject<ArchipelagoSaveData>(json) ?? new();
+                        SAVED_DATA = JsonConvert.DeserializeObject<ArchipelagoSaveData>(json) ?? new();
                         
-                        Log.Information($"=== Données chargées : {savedData.SentChecks.Count} checks envoyés ===");
+                        Log.Information($"=== Données chargées : {SAVED_DATA.SentChecks.Count} checks envoyés ===");
                     }
                     catch (Exception ex)
                     {
@@ -219,7 +223,7 @@ namespace DeadCellsArchipelago{
             {
                 Log.Information($"=== New Save ===");
             }
-            SAVED_DATA = savedData;
+            Log.Information($"=== {SAVED_DATA.numberOfPokebombUse} ===");
             if(ARCHIPELAGO != null)
             {
                 SAVED_DATA.bscLevelToWin = ARCHIPELAGO.bscOption;
@@ -233,10 +237,10 @@ namespace DeadCellsArchipelago{
             var savePath = GetSaveFilePath(data.Data.userId);
             try
             {
-                var json = JsonConvert.SerializeObject(savedData, Formatting.Indented);
+                var json = JsonConvert.SerializeObject(SAVED_DATA, Formatting.Indented);
                 System.IO.File.WriteAllText(savePath, json);
                 
-                Log.Information($"=== Sauvegarde réussie : {savedData.SentChecks.Count} checks ===");
+                Log.Information($"=== Sauvegarde réussie : {SAVED_DATA?.SentChecks.Count} checks ===");
             }
             catch (Exception ex)
             {
