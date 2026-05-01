@@ -340,5 +340,10 @@ namespace DeadCellsArchipelago {
             double B = b /255;
             return new dc.h3d.Vector(new Ref<double>(ref R), new Ref<double>(ref G), new Ref<double>(ref B), new Ref<double>(ref A));
         }
+
+        public static bool OnSetVisible(Hook_LeaderboardPanel.orig_set_visible orig, LeaderboardPanel self, bool v)
+        {
+            return false;
+        }
     }
 }

@@ -169,6 +169,7 @@ namespace DeadCellsArchipelago{
             //LevelGen
             //ModCore.Utilities.ArrayUtils
             //dc.haxe.ds.
+            Hook_LeaderboardPanel.set_visible += OnSetVisible;
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
 
