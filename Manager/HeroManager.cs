@@ -135,11 +135,9 @@ namespace DeadCellsArchipelago {
                         items.Add(iis);
                     }
                 }
-                Log.Information($"=|= {items.Count} =|=");
                 if(items.Count > 0)
                 {
                     InventItem ii = items[new Random().Next(0, items.Count)];
-                    Log.Information($"=|= {ii._itemData.id} =|=");
                     HERO.inventory.remove(ii);
                     
                     bool updateHUD = true;

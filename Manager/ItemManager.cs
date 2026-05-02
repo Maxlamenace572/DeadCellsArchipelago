@@ -8,6 +8,7 @@ using dc.hl.types;
 using dc.level;
 using dc.pr;
 using dc.tool;
+using dc.ui;
 using dc.ui.hud;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
@@ -28,7 +29,8 @@ namespace DeadCellsArchipelago {
         public static User? USER { get; set; }
         public static bool useOriginalUnlockItem { get; set; } = false;
         public static bool useOriginalRevealItem { get; set; } = false;
-        public static bool useHaveFlaskUnlockItem { get; set; } = false;
+        public static bool removeCollectorBaseFilterAndLock { get; set; } = false;
+        public static string currentFilterFor { get; set; } = "";
         public static bool heroJustDead = false;
         public static int aspectsToIter = 0;
         public static List<string> dropableList = [];
@@ -591,10 +593,29 @@ namespace DeadCellsArchipelago {
 
         public static bool OnCanInvestOnItem(Hook_ItemMetaManager.orig_canInvestOnItem orig, ItemMetaManager self, dc.String k)
         {
-            useHaveFlaskUnlockItem = true;
+            removeCollectorBaseFilterAndLock = true;
             bool res = orig(self, k);
-            useHaveFlaskUnlockItem = false;
+            removeCollectorBaseFilterAndLock = false;
             return res;
+        }
+
+        public static bool OnUserFilter(Hook_CollectorPanel.orig_userFilter orig, CollectorPanel self, ItemProgress data)
+        {
+            removeCollectorBaseFilterAndLock = true;
+            currentFilterFor = data.itemId.ToString();
+            bool res = orig(self, data);
+            removeCollectorBaseFilterAndLock = false;
+            currentFilterFor = "";
+            return res;
+        }
+
+        public static int OnCountUnlockedItems(Hook_ItemMetaManager.orig_countUnlockedItems orig, ItemMetaManager self)
+        {
+            if(removeCollectorBaseFilterAndLock)
+            {
+                return 100;
+            }
+            return orig(self);
         }
 
         public static void SendItemWithoutBlueprintCheck(string itemId)
@@ -628,10 +649,19 @@ namespace DeadCellsArchipelago {
                     aspectsToIter++;
                     return SAVED_DATA.IsCheckSent(k.ToString());
                 }
-                if(useHaveFlaskUnlockItem)
+
+                if(removeCollectorBaseFilterAndLock && currentFilterFor != "")
+                {
+                    if(new[] {"Money1", "Recycling1", "MirrorUnlock", "ForgeRefine1"}.Any(currentFilterFor.Contains))
+                    {
+                        return true;
+                    }
+                }
+                else if(removeCollectorBaseFilterAndLock)
                 {
                     return true;
                 }
+
                 if (IsUnlockedByDefault(k.ToString()))
                 {
                     return SAVED_DATA.IsBaseItemUnlocked(k.ToString());

@@ -93,7 +93,9 @@ namespace DeadCellsArchipelago {
             }
             if(ldat.id.ToString() == "Ossuary")
             {
+                ResetFrontPokebomb();
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
+                if(SAVED_DATA != null) SAVED_DATA.numberOfPokebombUse ++;
             }
 
             var level = Data.Class.level.byId.get("Challenge".AsHaxeString());

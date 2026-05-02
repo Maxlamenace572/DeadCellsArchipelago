@@ -170,6 +170,8 @@ namespace DeadCellsArchipelago{
             //ModCore.Utilities.ArrayUtils
             //dc.haxe.ds.
             Hook_LeaderboardPanel.set_visible += OnSetVisible;
+            Hook_CollectorPanel.userFilter += OnUserFilter;
+            Hook_ItemMetaManager.countUnlockedItems += OnCountUnlockedItems;
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
 
