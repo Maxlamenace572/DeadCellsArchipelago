@@ -91,7 +91,7 @@ namespace DeadCellsArchipelago {
                 }
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
             }
-            if(ldat.id.ToString() == "Ossuary")
+            if(new[] {"Ossuary", "QueenArena", "Bank"}.Any(ldat.id.ToString().Contains))
             {
                 ResetFrontPokebomb();
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
@@ -230,6 +230,7 @@ namespace DeadCellsArchipelago {
                 case "T_Castle":
                 case "T_AfterSwamp":
                 case "T_AfterBridge":
+                case "T_Bank":
                     return true;
             }
             return false;
