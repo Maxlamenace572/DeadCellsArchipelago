@@ -91,7 +91,7 @@ namespace DeadCellsArchipelago {
                 }
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
             }
-            if(new[] {"Ossuary", "QueenArena", "Bank"}.Any(ldat.id.ToString().Contains))
+            if(new[] {"Ossuary", "QueenArena", "Bank", "DeathArena"}.Any(ldat.id.ToString().Contains))
             {
                 ResetFrontPokebomb();
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
