@@ -1,5 +1,6 @@
 using dc;
 using dc.en;
+using dc.en.mob;
 using dc.en.mob.boss;
 using dc.en.mob.boss.death;
 using Serilog;
@@ -16,15 +17,17 @@ namespace DeadCellsArchipelago {
             Hook_Behemoth.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_Beholder.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_MamaTick.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_Death.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); }; //need to be tested
+            Hook_Death.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
 
             Hook_TimeKeeper.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_Giant.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_GardenerBoss.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
 
             Hook_KingsHand.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_Fx.servantChaseDefeat += (orig, self, e) => { orig(self, e); OnBossKilled("TODO : servants "); }; //need to be tested
-            Hook_Dooku.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); }; //might not use it, dracula first form
+
+            Hook_AmazonBrutal.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+            Hook_AmazonTactic.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+            Hook_AmazonSurvival.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
 
             Hook_Queen.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_DookuBeast.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
