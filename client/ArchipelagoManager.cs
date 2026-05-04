@@ -27,6 +27,8 @@ namespace DeadCellsArchipelago
         public int bscOption;
         public int deathLinkEnabled;
         public bool includeCosmetics;
+        public bool disableDeathLinkForAspects;
+        public bool respawnUpScroll;
         
         public bool IsConnected => _isConnected;
         
@@ -66,6 +68,8 @@ namespace DeadCellsArchipelago
                     bscOption = Convert.ToInt32(slotData["boss_cells"]);
                     deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
                     includeCosmetics = Convert.ToBoolean(slotData["include_cosmetics"]);
+                    disableDeathLinkForAspects = Convert.ToBoolean(slotData["death_link_aspect"]);
+                    respawnUpScroll = Convert.ToBoolean(slotData["respawn_up"]);
 
                     if (deathLinkEnabled >= 0)
                     {
@@ -213,12 +217,15 @@ namespace DeadCellsArchipelago
 
         public void SendDeathLink(string message = "")
         {
-            if(message == "")
+            if (!disableDeathLinkForAspects || disableDeathLinkForAspects && SAVED_DATA != null && SAVED_DATA.CountSentAspect() == 13)
             {
-                message = $"{_slotName} died in Dead Cells";
-            }
-            if(deathLinkService != null && _session != null) {
-                deathLinkService.SendDeathLink(new DeathLink(_slotName, message));
+                if(message == "")
+                {
+                    message = $"{_slotName} died in Dead Cells";
+                }
+                if(deathLinkService != null && _session != null) {
+                    deathLinkService.SendDeathLink(new DeathLink(_slotName, message));
+                }
             }
         }
     }

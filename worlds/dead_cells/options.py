@@ -164,6 +164,28 @@ class DeadCellsDeathLink(Range):
     default = -1
 
 
+class DisableDeathLinkForAspects(Toggle):
+    """
+    At the start of your game you have 13 aspects to find, and you'll have to die
+    a lot on purpose. That's a little incompatible with Death Link, so with this
+    option enabled you won't send Death Link while you still have aspects to check.
+    """
+    display_name = "Disable Death Link for Aspects"
+    default = 1
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Gameplay
+# ─────────────────────────────────────────────────────────────────────────────
+
+class RespawnUpScroll(Toggle):
+    """
+    At the start of each run, every filler stat up scroll will be given again.
+    """
+    display_name = "Respawn Stat Up Scroll"
+    default = 0
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Option set — referenced in __init__.py as DeadCellsWorld.options_dataclass
 # ─────────────────────────────────────────────────────────────────────────────
@@ -188,3 +210,7 @@ class DeadCellsOptions(PerGameCommonOptions):
 
     # Multiplayer
     death_link: DeadCellsDeathLink
+    death_link_aspect: DisableDeathLinkForAspects
+    
+    # Gameplay
+    respawn_up: RespawnUpScroll

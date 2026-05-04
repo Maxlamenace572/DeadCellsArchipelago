@@ -844,5 +844,19 @@ namespace DeadCellsArchipelago {
             }
             return false;
         }
+
+        public static bool IsUpScroll(string itemName)
+        {
+            switch (itemName)
+            {
+                case "AnyUp":
+                case "BTUp":
+                case "BSUp":
+                case "TSUp":
+                case "AllUp":
+                    return true;
+            }
+            return false;
+        }
     }
 }

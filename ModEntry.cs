@@ -194,6 +194,20 @@ namespace DeadCellsArchipelago{
                         GiveItemToPlayer("ShipwreckKey");
                         HERO?.hudInitItems();
                     }
+
+                    if (ARCHIPELAGO != null && ARCHIPELAGO.respawnUpScroll)
+                    {
+                        foreach (var (itemName, number) in SAVED_DATA.RecievedFillerItem)
+                        {
+                            if (IsUpScroll(itemName))
+                            {
+                                for (int i = 0; i < number; i++)
+                                {
+                                    DropItemToPlayer(itemName);
+                                }
+                            }
+                        }
+                    }
                 }
             }
 

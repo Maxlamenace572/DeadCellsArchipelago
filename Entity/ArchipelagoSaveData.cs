@@ -99,6 +99,20 @@ namespace DeadCellsArchipelago {
             return false;
         }
 
+        public int CountSentAspect()
+        {
+            int res = 0;
+            foreach (string item in SentChecks)
+            {
+                if ("ASP" == item[..3])
+                {
+                    res++;
+                }
+            }
+
+            return res;
+        }
+
         public void AppendToSentChecksJson(string value, int slot)
         {
             var savePath = GetSaveFilePath(slot);
