@@ -80,7 +80,7 @@ namespace DeadCellsArchipelago {
         {
             if(ldat.id.ToString() == "PrisonStart")
             {
-                if(SAVED_DATA != null && SAVED_DATA.currentLevelId != "PrisonStart")
+                if(SAVED_DATA != null && SAVED_DATA.currentLevelId != "PrisonStart" && !resetOnNextPrisonStart)
                 {
                     PrepareBiomeCheck(SAVED_DATA.currentLevelId, " Exit", ldat.id.ToString());
                 }
