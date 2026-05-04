@@ -84,8 +84,9 @@ TRANSITIONS = {
         {"to": "PurpleGarden", "require": "Castle Outskirts"},
     ],
     "Greenhouse": [
-        {"to": "PrisonDepths", "require": "WallJumpKey"},
-        {"to": "Swamp",        "require": None},
+        {"to": "PrisonDepths", "require": ["Spider Rune", "Prison Depths"]},
+        {"to": "Swamp",        "require": "Morass of the Banished"},
+        {"to": "PrisonRoof", "require": None},
     ],
     "PrisonCourtyard": [
         {"to": "Ossuary", "require": ["Vine Rune", "Teleportation Rune", "Ossuary"]},
@@ -138,7 +139,7 @@ TRANSITIONS = {
     ],
     "Cemetery": [
         {"to": "Cliff", "require": [["Cultist Outfit", "Undying Shores"], ["Undying Shores", "Region:Tumulus", "Homunculus Rune"]]},
-        {"to": "Cavern", "require": ["Homunculus Rune", "Cavern", "KingsHand"]},
+        {"to": "Cavern", "require": ["Homunculus Rune", "Cavern", "The Hand of the King"]},
         {"to": "Crypt", "require": ["Teleportation Rune", "Forgotten Sepulcher"]},
     ],
     "ClockTower": [
@@ -150,7 +151,7 @@ TRANSITIONS = {
     ],
     "TopClockTower": [
         {"to": "Shipwreck", "require": ["Lighthouse Key", "Infested Shipwreck"]},
-        {"to": "Distillery", "require": "Derelict Distillery"},
+        {"to": "Distillery", "require": ["Derelict Distillery", "High Peak Castle", "Throne Room"]},
         {"to": "Castle", "require": "High Peak Castle"},
         {"to": "DookuCastleHard", "require": ["Death", "Dracula's Castle"]},
     ],
@@ -195,6 +196,7 @@ TRANSITIONS = {
     "Tumulus": [
         {"to": "ClockTower", "require": "Clock Tower"},
         {"to": "Crypt", "require": ["Teleportation Rune", "Forgotten Sepulcher"]},
+        {"to": "Cliff", "require": [["Cultist Outfit", "Undying Shores"], ["Undying Shores", "Region:Tumulus", "Homunculus Rune"]]},
     ],
     "Cliff": [
         {"to": "GardenerStage", "require": "Mausoleum"},

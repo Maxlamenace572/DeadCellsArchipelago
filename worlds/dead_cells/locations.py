@@ -1554,7 +1554,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     "Acceptance": {
         "id": 0x0185, "region": "Checks", "type": "blueprint_enemy",
         "dlc": "", "min_bc": 0, "item": "P_Curse",
-        "sources": [{'biome': 'Bridge', 'min_bc': 0, 'max_bc': 5, 'dlc': '', 'type': 'blueprint_enemy'}],
+        "sources": [{'biome': 'Bridge', 'min_bc': 3, 'max_bc': 5, 'dlc': '', 'type': 'blueprint_enemy'}],
     },
     "Concierge Outfit": {
         "id": 0x0186, "region": "Checks", "type": "skin",
