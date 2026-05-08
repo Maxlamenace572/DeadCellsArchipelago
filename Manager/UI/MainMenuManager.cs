@@ -330,7 +330,7 @@ namespace DeadCellsArchipelago {
         public static void SaveConfData(ConfData confData)
         {
             var json = JsonConvert.SerializeObject(confData, Formatting.Indented);
-            System.IO.File.WriteAllText(GetConfFilePath(), json);
+            File.WriteAllText(GetConfFilePath(), json);
         }
 
         public static dc.h3d.Vector ColorVectorRGBA(double r, double g, double b, double A)
