@@ -204,7 +204,7 @@ namespace DeadCellsArchipelago{
 
                     if (ARCHIPELAGO != null && ARCHIPELAGO.respawnUpScroll)
                     {
-                        foreach (var (itemName, number) in SAVED_DATA.RecievedFillerItem)
+                        foreach (var (itemName, number) in SAVED_DATA.GivenFillerItem)
                         {
                             if (IsUpScroll(itemName))
                             {

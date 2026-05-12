@@ -9,6 +9,7 @@ namespace DeadCellsArchipelago {
         public HashSet<string> BaseItemUnlocked { get; set; } = [];
         public Dictionary<string, int> RecievedProgressionItem { get; set; } = [];
         public Dictionary<string, int> RecievedFillerItem { get; set; } = [];
+        public Dictionary<string, int> GivenFillerItem { get; set; } = [];
         public bool isDoingChallenge = false;
         public int bscLevelToWin = 4;
         public int numberOfPokebombUse = 1;
@@ -53,6 +54,18 @@ namespace DeadCellsArchipelago {
             }
         }
 
+        public void AddFillerItemGiven(string itemName)
+        {
+            if(GivenFillerItem.ContainsKey(itemName))
+            {
+                GivenFillerItem[itemName]++;
+            }
+            else
+            {
+                GivenFillerItem[itemName] = 1;
+            }
+        }
+
         public bool IsCheckSent(string checkName)
         {
             return SentChecks.Contains(checkName);
@@ -82,6 +95,15 @@ namespace DeadCellsArchipelago {
             if(RecievedFillerItem.ContainsKey(itemName))
             {
                 return RecievedFillerItem[itemName];
+            }
+            return 0;
+        }
+
+        public int HowManyFillerItemGiven(string itemName)
+        {
+            if(GivenFillerItem.ContainsKey(itemName))
+            {
+                return GivenFillerItem[itemName];
             }
             return 0;
         }

@@ -1,7 +1,9 @@
 using dc;
 using dc.h2d;
 using dc.h2d.col;
+using dc.level.lore;
 using dc.tool;
+using dc.tool.weap.dual;
 using dc.ui;
 using dc.ui.hud;
 using dc.ui.icon;
@@ -28,6 +30,8 @@ namespace DeadCellsArchipelago {
         public static Bitmap? cellBitmap = null;
         public static dc.ui.Text? cellsNumber = null;
         public static int shopPrice = 400;
+        public static SkillScroller<ItemLine>? scrollerFiller;
+
         
 
         public static void OnUpdateDefaultPause(Hook_DefaultPause.orig_update orig, DefaultPause self)
@@ -40,6 +44,9 @@ namespace DeadCellsArchipelago {
 
             AddCellsCount(self);
             AddIncolorMenu(self);
+            AddFillerMenu(self);
+            
+            
         }
 
         public static void ActualiseVanillaMenu(DefaultPause self)
@@ -210,6 +217,21 @@ namespace DeadCellsArchipelago {
             }
         }
 
+        private static void AddFillerMenu(DefaultPause self) {
+            if (scrollerFiller == null)
+            {
+                scrollerFiller = new SkillScroller<ItemLine>(50, 550, self.bg, 450);
+                scrollerFiller.Refresh();
+
+                List<string> ids = new List<string>();
+                for (int i = 0; i < 20; i++) {
+                    ids.Add($"Gardener{(i%4)+1}");
+                }
+                scrollerFiller.SetContentItemLine(ids);
+            }
+            scrollerFiller.SetVisible(!showClassicMenu);
+        }
+
         public static void ResetUI()
         {
             logoBitmap = null;
@@ -221,6 +243,7 @@ namespace DeadCellsArchipelago {
             buttonSkill2.Reset();
             cellBitmap = null;
             cellsNumber = null;
+            scrollerFiller = null;
         }
 
         public static void OnSwapWeaponsApMenu(Hook_Inventory.orig_swapWeapons orig, Inventory self)
