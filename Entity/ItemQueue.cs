@@ -27,12 +27,12 @@ namespace DeadCellsArchipelago
                 itemName = GetId(itemName);
             }
 
-            if(!SAVED_DATA.IsItemRecieved(itemName))
+            if(!SAVED_DATA.IsItemReceived(itemName))
             {
                 useOriginalRevealItem = true;
                 if (GiveItemFromArchipelago(itemName))
                 {
-                    SAVED_DATA.SaveItemRecieved(itemName);
+                    SAVED_DATA.SaveItemReceived(itemName);
                 }
                 useOriginalRevealItem = false;
             }

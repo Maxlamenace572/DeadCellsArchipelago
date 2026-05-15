@@ -364,7 +364,7 @@ namespace DeadCellsArchipelago {
                 {
                     if(ShouldDropItem(itemName))
                     {
-                        DropItemToPlayer(itemName);
+                        LogItem(itemName);
                     }
                     return false;
                 }
@@ -413,7 +413,7 @@ namespace DeadCellsArchipelago {
                 {
                     fillerItemGivenSinceLaunch[itemName] = 0;
                 }
-                if(fillerItemGivenSinceLaunch[itemName] >= SAVED_DATA.HowManyFillerItemRecieved(itemName))
+                if(fillerItemGivenSinceLaunch[itemName] >= SAVED_DATA.HowManyFillerItemReceived(itemName))
                 {
                     SAVED_DATA.AddFillerItem(itemName);
                     AddFillerItemGivenSinceLaunch(itemName);
@@ -444,12 +444,12 @@ namespace DeadCellsArchipelago {
                 {
                     ProgressionItemGivenSinceLaunch[itemName] = 0;
                 }
-                if(ProgressionItemGivenSinceLaunch[itemName] >= SAVED_DATA.HowManyProgressionItemRecieved(itemName))
+                if(ProgressionItemGivenSinceLaunch[itemName] >= SAVED_DATA.HowManyProgressionItemReceived(itemName))
                 {
                     string? newProgName = NewInCategory(itemName);
                     if (newProgName != null)
                     {
-                        SAVED_DATA.SaveItemRecieved(newProgName);
+                        SAVED_DATA.SaveItemReceived(newProgName);
                         SAVED_DATA.AddProgressionItem(itemName);
                         AddProgressionItemGivenSinceLaunch(itemName);
                     }
@@ -477,7 +477,7 @@ namespace DeadCellsArchipelago {
             var newRuneName = NewRuneBossName();
             if(SAVED_DATA != null && newRuneName != null)
             {
-                SAVED_DATA.SaveItemRecieved(newRuneName);
+                SAVED_DATA.SaveItemReceived(newRuneName);
                 return newRuneName;
             }
             return null;
@@ -487,27 +487,27 @@ namespace DeadCellsArchipelago {
         {
             if (SAVED_DATA != null)
             {
-                if (bossRuneGivenSinceLaunch < SAVED_DATA.NumberOfBossRuneRecieved())
+                if (bossRuneGivenSinceLaunch < SAVED_DATA.NumberOfBossRuneReceived())
                 {
                     bossRuneGivenSinceLaunch++;
                     return null;
                 }
-                else if (SAVED_DATA.NumberOfBossRuneRecieved() < 5)
+                else if (SAVED_DATA.NumberOfBossRuneReceived() < 5)
                 {
                     string? res = null;
-                    if (SAVED_DATA.IsItemRecieved("BossRune4"))
+                    if (SAVED_DATA.IsItemReceived("BossRune4"))
                     {
                         res = "BossRune5";
                     }
-                    else if (SAVED_DATA.IsItemRecieved("BossRune3"))
+                    else if (SAVED_DATA.IsItemReceived("BossRune3"))
                     {
                         res = "BossRune4";
                     }
-                    else if (SAVED_DATA.IsItemRecieved("BossRune2"))
+                    else if (SAVED_DATA.IsItemReceived("BossRune2"))
                     {
                         res = "BossRune3";
                     }
-                    else if (SAVED_DATA.IsItemRecieved("BossRune1"))
+                    else if (SAVED_DATA.IsItemReceived("BossRune1"))
                     {
                         res = "BossRune2";
                     }
@@ -739,19 +739,19 @@ namespace DeadCellsArchipelago {
             {
                 switch(itemName[0]){
                     case 'F':
-                        if (SAVED_DATA.IsItemRecieved("Flask4"))
+                        if (SAVED_DATA.IsItemReceived("Flask4"))
                         {
                             res = null;
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Flask3"))
+                        else if (SAVED_DATA.IsItemReceived("Flask3"))
                         {
                             res = "Flask4";
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Flask2"))
+                        else if (SAVED_DATA.IsItemReceived("Flask2"))
                         {
                             res = "Flask3";
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Flask1"))
+                        else if (SAVED_DATA.IsItemReceived("Flask1"))
                         {
                             res = "Flask2";
                         }
@@ -761,23 +761,23 @@ namespace DeadCellsArchipelago {
                         }
                         break;
                     case 'M':
-                        if (SAVED_DATA.IsItemRecieved("Money5"))
+                        if (SAVED_DATA.IsItemReceived("Money5"))
                         {
                             res = null;
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Money4"))
+                        else if (SAVED_DATA.IsItemReceived("Money4"))
                         {
                             res = "Money5";
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Money3"))
+                        else if (SAVED_DATA.IsItemReceived("Money3"))
                         {
                             res = "Money4";
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Money2"))
+                        else if (SAVED_DATA.IsItemReceived("Money2"))
                         {
                             res = "Money3";
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Money1"))
+                        else if (SAVED_DATA.IsItemReceived("Money1"))
                         {
                             res = "Money2";
                         }
@@ -787,11 +787,11 @@ namespace DeadCellsArchipelago {
                         }
                         break;
                     case 'R':
-                        if (SAVED_DATA.IsItemRecieved("Recycling2"))
+                        if (SAVED_DATA.IsItemReceived("Recycling2"))
                         {
                             res = null;
                         }
-                        else if (SAVED_DATA.IsItemRecieved("Recycling1"))
+                        else if (SAVED_DATA.IsItemReceived("Recycling1"))
                         {
                             res = "Recycling2";
                         }

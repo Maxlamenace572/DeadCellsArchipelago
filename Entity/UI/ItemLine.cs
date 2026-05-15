@@ -10,6 +10,7 @@ using Serilog;
 
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.Translator;
+using static DeadCellsArchipelago.ItemManager;
 
 namespace DeadCellsArchipelago {
     public class ItemLine : Line
@@ -17,10 +18,13 @@ namespace DeadCellsArchipelago {
         public Skill skill;
         public dc.ui.Text text;
         public string itemId;
+        public int? nb;
+        public bool canHighlight = true;
 
-        public ItemLine(double x, double y, string itemId, int color)
+        public ItemLine(double x, double y, string itemId, int? nb, int color)
             : base(700, 100, x, y, color)
         {
+            this.nb = nb;
             bool ctrlShow = false;
             double scaleSkill = 1.0/3;
             skill = new Skill(0, bgBox, new Ref<bool>(ref ctrlShow), new Ref<bool>(ref ctrlShow))
@@ -93,7 +97,12 @@ namespace DeadCellsArchipelago {
             else
             {
                 skill.setItemIcon(itemId.AsHaxeString());
-                text.set_text($" {Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString())}".AsHaxeString());
+                string itemNumber = "";
+                if(nb != null)
+                {
+                    itemNumber = $"({nb}) ";
+                }
+                text.set_text($" {itemNumber}{Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString())}".AsHaxeString());
             }
             skill.btn.visible = false;
         }
@@ -117,12 +126,26 @@ namespace DeadCellsArchipelago {
 
         public void Highlight()
         {
-            text.set_textColor(16776960);
+            if(canHighlight) text.set_textColor(16776960);
         }
 
         public void StopHighlight()
         {
-            text.set_textColor(16777215);
+            if(canHighlight) text.set_textColor(16777215);
+        }
+
+        public void DecNumber()
+        {
+            if (SAVED_DATA == null) return;
+            nb--;
+            SAVED_DATA.AddFillerItemGiven(itemId);
+            text.set_text($" ({nb}) {Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString())}".AsHaxeString());
+
+            if (nb == 0)
+            {
+                text.set_textColor(16711680);
+                canHighlight = false;
+            }
         }
     }
 }

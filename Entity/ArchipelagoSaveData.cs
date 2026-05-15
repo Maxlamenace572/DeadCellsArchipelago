@@ -5,10 +5,10 @@ namespace DeadCellsArchipelago {
     public class ArchipelagoSaveData
     {
         public HashSet<string> SentChecks { get; set; } = [];
-        public HashSet<string> RecievedItem { get; set; } = [];
+        public HashSet<string> ReceivedItem { get; set; } = [];
         public HashSet<string> BaseItemUnlocked { get; set; } = [];
-        public Dictionary<string, int> RecievedProgressionItem { get; set; } = [];
-        public Dictionary<string, int> RecievedFillerItem { get; set; } = [];
+        public Dictionary<string, int> ReceivedProgressionItem { get; set; } = [];
+        public Dictionary<string, int> ReceivedFillerItem { get; set; } = [];
         public Dictionary<string, int> GivenFillerItem { get; set; } = [];
         public bool isDoingChallenge = false;
         public int bscLevelToWin = 4;
@@ -20,9 +20,9 @@ namespace DeadCellsArchipelago {
             SentChecks.Add(checkName);
         }
 
-        public void SaveItemRecieved(string itemName)
+        public void SaveItemReceived(string itemName)
         {
-            RecievedItem.Add(itemName);
+            ReceivedItem.Add(itemName);
         }
 
         public void AddBaseItemUnlocked(string itemName)
@@ -32,25 +32,25 @@ namespace DeadCellsArchipelago {
 
         public void AddProgressionItem(string itemName)
         {
-            if(RecievedProgressionItem.ContainsKey(itemName))
+            if(ReceivedProgressionItem.ContainsKey(itemName))
             {
-                RecievedProgressionItem[itemName]++;
+                ReceivedProgressionItem[itemName]++;
             }
             else
             {
-                RecievedProgressionItem[itemName] = 1;
+                ReceivedProgressionItem[itemName] = 1;
             }
         }
 
         public void AddFillerItem(string itemName)
         {
-            if(RecievedFillerItem.ContainsKey(itemName))
+            if(ReceivedFillerItem.ContainsKey(itemName))
             {
-                RecievedFillerItem[itemName]++;
+                ReceivedFillerItem[itemName]++;
             }
             else
             {
-                RecievedFillerItem[itemName] = 1;
+                ReceivedFillerItem[itemName] = 1;
             }
         }
 
@@ -71,9 +71,9 @@ namespace DeadCellsArchipelago {
             return SentChecks.Contains(checkName);
         }
 
-        public bool IsItemRecieved(string itemName)
+        public bool IsItemReceived(string itemName)
         {
-            return RecievedItem.Contains(itemName);
+            return ReceivedItem.Contains(itemName);
         }
 
         public bool IsBaseItemUnlocked(string itemName)
@@ -81,20 +81,20 @@ namespace DeadCellsArchipelago {
             return BaseItemUnlocked.Contains(itemName);
         }
 
-        public int HowManyProgressionItemRecieved(string itemName)
+        public int HowManyProgressionItemReceived(string itemName)
         {
-            if(RecievedProgressionItem.ContainsKey(itemName))
+            if(ReceivedProgressionItem.ContainsKey(itemName))
             {
-                return RecievedProgressionItem[itemName];
+                return ReceivedProgressionItem[itemName];
             }
             return 0;
         }
 
-        public int HowManyFillerItemRecieved(string itemName)
+        public int HowManyFillerItemReceived(string itemName)
         {
-            if(RecievedFillerItem.ContainsKey(itemName))
+            if(ReceivedFillerItem.ContainsKey(itemName))
             {
-                return RecievedFillerItem[itemName];
+                return ReceivedFillerItem[itemName];
             }
             return 0;
         }
@@ -110,7 +110,7 @@ namespace DeadCellsArchipelago {
 
         public bool HasReceivedAspect()
         {
-            foreach (string item in RecievedItem)
+            foreach (string item in ReceivedItem)
             {
                 if ("ASP" == item[..3])
                 {
@@ -157,10 +157,10 @@ namespace DeadCellsArchipelago {
             return Path.Combine(saveDir, $"archipelagoUserId_{slot}.json");
         }
 
-        public int NumberOfBossRuneRecieved()
+        public int NumberOfBossRuneReceived()
         {
             int res = 0;
-            foreach (string item in RecievedItem)
+            foreach (string item in ReceivedItem)
             {
                 if (item.Length >= 8 && "BossRune" == item[..8])
                 {

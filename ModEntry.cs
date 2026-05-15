@@ -196,7 +196,7 @@ namespace DeadCellsArchipelago{
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)
                 {
                     shouldGiveItemsNewRun = false;
-                    if (SAVED_DATA.IsItemRecieved("ShipwreckKey"))
+                    if (SAVED_DATA.IsItemReceived("ShipwreckKey"))
                     {
                         GiveItemToPlayer("ShipwreckKey");
                         HERO?.hudInitItems();

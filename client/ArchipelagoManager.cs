@@ -165,7 +165,7 @@ namespace DeadCellsArchipelago
             var countDifferent = 0;
             foreach (var item in receivedItems)
             {
-                if (SAVED_DATA != null && SAVED_DATA.IsItemRecieved(item.ItemName))
+                if (SAVED_DATA != null && SAVED_DATA.IsItemReceived(item.ItemName))
                 {
                     AddItemToQueue(item.ItemName);
                     countDifferent++;

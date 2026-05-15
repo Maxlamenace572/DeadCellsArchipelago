@@ -218,7 +218,7 @@ namespace DeadCellsArchipelago {
         {
             if(SAVED_DATA != null)
             {
-                return !ExistKey(biomeId) || SAVED_DATA.IsItemRecieved(biomeId);
+                return !ExistKey(biomeId) || SAVED_DATA.IsItemReceived(biomeId);
             }
             return false;
         }

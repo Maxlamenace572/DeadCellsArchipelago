@@ -61,13 +61,16 @@ namespace DeadCellsArchipelago {
                 flow.interactive.onWheel = (e) => {
                     double res = flow.y;
                     int scrollMultiplier = 100;
-                    if (e.wheelDelta > 0)
+                    if (flow.get_outerHeight() > maskHeight)
                     {
-                        res = Math.Max(flow.y - e.wheelDelta * scrollMultiplier, -(flow.get_outerHeight()-maskHeight));
-                    }
-                    else
-                    {
-                        res = Math.Min(flow.y - e.wheelDelta * scrollMultiplier, 0);
+                        if (e.wheelDelta > 0)
+                        {
+                            res = Math.Max(flow.y - e.wheelDelta * scrollMultiplier, -(flow.get_outerHeight()-maskHeight));
+                        }
+                        else
+                        {
+                            res = Math.Min(flow.y - e.wheelDelta * scrollMultiplier, 0);
+                        }
                     }
 
                     if(interactiveLines)
@@ -101,7 +104,12 @@ namespace DeadCellsArchipelago {
                     {
                         if (typeof(T) == typeof(ItemLine))
                         {
-                            DropItemToPlayer(((ItemLine)(Line) lines[lastHighlight]).itemId);
+                            ItemLine iL = (ItemLine)(Line) lines[lastHighlight];
+                            if (iL.nb > 0)
+                            {
+                                iL.DecNumber();
+                                DropItemToPlayer(iL.itemId);
+                            }
                         }
                         else if (lastHighlightCell != -1 && typeof(T) == typeof(BiomeLine))
                         {
@@ -121,7 +129,27 @@ namespace DeadCellsArchipelago {
             {
                 int index = 0;
                 foreach (string id in newList) {
-                    lines.Add((T)(Line) new ItemLine(0, 0, id, color));
+                    lines.Add((T)(Line) new ItemLine(0, 0, id, null, color));
+                    lines[index].AddParent(flow);
+                    if(mask.width < lines[index].bgBox.wid)
+                    {
+                        mask.width = lines[index].bgBox.wid;
+                    }
+                    index ++;
+                }
+                tempHeight += 100 -1;
+            }
+            mask.updateMask();
+        }
+
+        public void SetContentItemLine(Dictionary<string, int> rest, int color)
+        {
+            if (flow == null || mask == null) return;
+            if (typeof(T) == typeof(ItemLine))
+            {
+                int index = 0;
+                foreach (KeyValuePair<string, int> id in rest) {
+                    lines.Add((T)(Line) new ItemLine(0, 0, id.Key, id.Value, color));
                     lines[index].AddParent(flow);
                     if(mask.width < lines[index].bgBox.wid)
                     {
@@ -171,12 +199,15 @@ namespace DeadCellsArchipelago {
             {
                 if (!onOut)
                 {
-                    if(lastHighlight != -1)
+                    if (lastHighlight != -1)
                     {
                         ((ItemLine)(Line) lines[lastHighlight]).StopHighlight();
                     }
-                    ((ItemLine)(Line) lines[(int) lastMousePosY / tempHeight]).Highlight();
-                    lastHighlight = (int) lastMousePosY / tempHeight;
+                    if (((int) lastMousePosY / tempHeight) >= 0 && ((int) lastMousePosY / tempHeight) < lines.Count)
+                    {
+                        ((ItemLine)(Line) lines[(int) lastMousePosY / tempHeight]).Highlight();
+                        lastHighlight = (int) lastMousePosY / tempHeight;
+                    }
                 }
                 else
                 {

@@ -250,10 +250,8 @@ namespace DeadCellsArchipelago {
                 scrollerFiller = new SkillScroller<ItemLine>(50, 550, self.bg, 500, true);
                 scrollerFiller.Refresh(10);
 
-                List<string> ids = new List<string>();
-                for (int i = 0; i < 20; i++) {
-                    ids.Add($"Gardener{(i%4)+1}");
-                }
+                Dictionary<string, int> ids = CalculateDiffFiller();
+
                 scrollerFiller.SetContentItemLine(ids, 660257);
             }
             scrollerFiller.SetVisible(!showClassicMenu);
@@ -323,6 +321,29 @@ namespace DeadCellsArchipelago {
             buttonSkill2.Reset();
             if (defaultPause != null) AddIncolorSkills(defaultPause, true);
             orig(self);
+        }
+
+        public static Dictionary<string, int> CalculateDiffFiller()
+        {
+            Dictionary<string, int> res = new Dictionary<string, int>();
+            if (SAVED_DATA == null) return res;
+
+            foreach (KeyValuePair<string, int> item in SAVED_DATA.ReceivedFillerItem)
+            {
+                if (!(item.Key.Length >= 5 && item.Key[..5] == "Trap_"))
+                {
+                    if (SAVED_DATA.GivenFillerItem.ContainsKey(item.Key) && item.Value - SAVED_DATA.GivenFillerItem[item.Key] != 0)
+                    {
+                        res[item.Key] = item.Value - SAVED_DATA.GivenFillerItem[item.Key];
+                    }
+                    else if (!SAVED_DATA.GivenFillerItem.ContainsKey(item.Key))
+                    {
+                        res[item.Key] = item.Value;
+                    }
+                }
+            }
+
+            return res;
         }
     }
 }
