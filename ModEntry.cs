@@ -183,6 +183,7 @@ namespace DeadCellsArchipelago{
             Hook_DefaultPause.update += OnUpdateDefaultPause;
             Hook_Inventory.swapSkills += OnSwapSkillsApMenu;
             Hook_Inventory.swapWeapons += OnSwapWeaponsApMenu;
+            Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
 

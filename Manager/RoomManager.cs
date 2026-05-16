@@ -92,7 +92,7 @@ namespace DeadCellsArchipelago {
                 }
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
             }
-            if(new[] {"Ossuary", "QueenArena", "Bank", "DeathArena", "DookuArena"}.Any(ldat.id.ToString().Contains))
+            if(new[] {"Ossuary", "QueenArena", "Bank", "DeathArena", "DookuArena"}.Any(ldat.id.ToString().Contains) && !isInTraining)
             {
                 ResetFrontPokebomb();
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
@@ -127,6 +127,13 @@ namespace DeadCellsArchipelago {
         public static void OnActiviteExit(Hook_Exit.orig_onActivate orig, Exit self, Hero by, bool lp)
         {
             ResetFrontPokebomb();
+
+            if (isInTraining)
+            {
+                orig(self, by, lp);
+                return;
+            }
+
             string tempCurrentLevelId = "";
             if (self.destLevel.ToString()[..2] == "T_" && SAVED_DATA != null)
             {
@@ -197,6 +204,12 @@ namespace DeadCellsArchipelago {
                 SAVED_DATA.isDoingChallenge = !SAVED_DATA.isDoingChallenge;
             }
             orig(self);
+        }
+
+        public static void OnActivateTrainingDoor(Hook_TrainingDoor.orig_onActivate orig, TrainingDoor self, Hero by, bool longPress)
+        {
+            isInTraining = !isInTraining;
+            orig(self, by, longPress);
         }
 
         private static void PrepareBiomeCheck(string locationId, string kind, string destinationId)
