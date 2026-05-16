@@ -38,6 +38,7 @@ namespace DeadCellsArchipelago {
         public static int bossRuneGivenSinceLaunch = 0;
         public static Dictionary<string, int> ProgressionItemGivenSinceLaunch { get; set; } = [];
         public static Dictionary<string, int> fillerItemGivenSinceLaunch { get; set; } = [];
+        public static List<string> History = [];
 
         public static void InitLists()
         {
@@ -271,7 +272,7 @@ namespace DeadCellsArchipelago {
         }
 
         //the boolean returned here is for saving or not the item in local data in item received
-        public static bool GiveItemFromArchipelago(string itemName)
+        public static bool GiveItemFromArchipelago(string itemName, string LogName)
         {
             if (ITEM_META_MANAGER != null) {
                 if(IsItemProgressive(itemName))
@@ -281,6 +282,7 @@ namespace DeadCellsArchipelago {
                     {
                         BlueprintManager.UnlockBlueprint(unlockedName);
                         LogItem(unlockedName);
+                        AddToHistory(LogName);
                     }
                     return false;
                 }
@@ -299,6 +301,7 @@ namespace DeadCellsArchipelago {
                         GiveItemToPlayer(itemName);
                         RuneManager.ActivateMinimapTracking(itemName);
                         LogItem(itemName);
+                        AddToHistory(LogName);
                         return true;
                     case "BossRune":
                         string? unlockedName = HandleBossRune();
@@ -306,12 +309,14 @@ namespace DeadCellsArchipelago {
                         {
                             ITEM_META_MANAGER.addPermanentItem(unlockedName.AsHaxeString());
                             LogItem(unlockedName);
+                            AddToHistory(LogName);
                         }
                         return false;
                     case "ShipwreckKey" :
                         GiveItemToPlayer(itemName);
                         HERO?.hudInitItems();
                         LogItem(itemName);
+                        AddToHistory(LogName);
                         return true;
                 }
                 if (itemName.Length >= 5 && itemName[..5] == "Trap_")
@@ -356,6 +361,7 @@ namespace DeadCellsArchipelago {
                                 Log.Warning("=== Not implemented yet ===");
                                 break;
                         }
+                        AddToHistory(LogName);
                     }
                     return false;
                 }
@@ -365,6 +371,7 @@ namespace DeadCellsArchipelago {
                     if(ShouldDropItem(itemName))
                     {
                         LogItem(itemName);
+                        AddToHistory(LogName);
                     }
                     return false;
                 }
@@ -372,6 +379,7 @@ namespace DeadCellsArchipelago {
                 if(IsLevelKey(itemName))
                 {
                     LogItem("GenericKey");
+                    AddToHistory(LogName);
                     return true;
                 }
 
@@ -393,10 +401,11 @@ namespace DeadCellsArchipelago {
                 
                 try {
                     LogItem(itemName);
+                    AddToHistory(LogName);
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"=== Item doesn't exist {ex} ===");
+                    Log.Error($"=== Item {itemName} doesn't exist {ex} ===");
                     return false;
                 }
                 
@@ -672,6 +681,11 @@ namespace DeadCellsArchipelago {
                 }
             }
             return orig(self, k);
+        }
+
+        public static void AddToHistory(string logName)
+        {
+            History.Add(logName);
         }
 
         public static bool IsUnlockedByDefault(string id)

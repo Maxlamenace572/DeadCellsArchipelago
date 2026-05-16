@@ -24,10 +24,7 @@ namespace DeadCellsArchipelago {
         public static bool changedMethodCall = false;
         public static bool changedMethodCallController = false;
         public static dc.ui.Text? apMenuButton = null;
-        public static SkillShopSlot buttonWeapon1 = new SkillShopSlot();
-        public static SkillShopSlot buttonWeapon2 = new SkillShopSlot();
-        public static SkillShopSlot buttonSkill1 = new SkillShopSlot();
-        public static SkillShopSlot buttonSkill2 = new SkillShopSlot();
+        public static SkillShop skillShopMenu = new SkillShop(50, 150);
         public static Bitmap? cellBitmap = null;
         public static dc.ui.Text? cellsNumber = null;
         public static int shopPrice = 400;
@@ -35,6 +32,12 @@ namespace DeadCellsArchipelago {
         public static SkillScroller<BiomeLine>? scrollerBiome;
         public static PopUpTracker? popUpTracker;
         public static bool showPopUp;
+        public static SkillScroller<LogLine>? scrollerHistory;
+        public static dc.ui.Text? shopTitle = null;
+        public static dc.ui.Text? historyTitle = null;
+        public static dc.ui.Text? biomeTitle = null;
+        public static dc.ui.Text? fillerTitle = null;
+        public static dc.ui.Text? menuTitle = null;
 
         
 
@@ -51,8 +54,10 @@ namespace DeadCellsArchipelago {
             AddIncolorMenu(self);
             AddFillerMenu(self);
             AddBiomeMenu(self);
+            AddHistoryMenu(self);
+            AddTitles(self);
+
             AddPopUpMenu(self);
-            
         }
 
         public static void ActualiseVanillaMenu(DefaultPause self)
@@ -180,8 +185,8 @@ namespace DeadCellsArchipelago {
 
                     cellBitmap = new Bitmap(logoTile, self.bg)
                     {
-                        x = 700,
-                        y = 10,
+                        x = 50,
+                        y = 40,
                     };
                 }
                 
@@ -205,43 +210,11 @@ namespace DeadCellsArchipelago {
 
         private static void AddIncolorMenu(DefaultPause self)
         {
-            AddIncolorWeapons(self, false);
-            AddIncolorSkills(self, false);
+            skillShopMenu.AddIncolorWeapons(self, false);
+            skillShopMenu.AddIncolorSkills(self, false);
 
-            buttonWeapon1.SetVisible(!showClassicMenu);
-            buttonWeapon2.SetVisible(!showClassicMenu);
-            buttonSkill1.SetVisible(!showClassicMenu);
-            buttonSkill2.SetVisible(!showClassicMenu);
+            skillShopMenu.SetVisible(!showClassicMenu);
             
-        }
-
-        private static void AddIncolorWeapons(DefaultPause self, bool invert)
-        {
-            if(!invert)
-            {
-                buttonWeapon1.InitButton(self, 100, 100, () => HERO?.inventory.getEquippedWeaponOn(0), self.weaLeft);
-                buttonWeapon2.InitButton(self, 250, 100, () => HERO?.inventory.getEquippedWeaponOn(1), self.weaRight);
-            }
-            else
-            {
-                buttonWeapon1.InitButton(self, 100, 100, () => HERO?.inventory.getEquippedWeaponOn(1), self.weaLeft);
-                buttonWeapon2.InitButton(self, 250, 100, () => HERO?.inventory.getEquippedWeaponOn(0), self.weaRight);
-            }
-             
-        }
-
-        private static void AddIncolorSkills(DefaultPause self, bool invert)
-        {
-            if(!invert)
-            {
-                buttonSkill1.InitButton(self, 250, 250, () => HERO?.inventory.getActiveOn(0), self.skillRight);
-                buttonSkill2.InitButton(self, 100, 250, () => HERO?.inventory.getActiveOn(1), self.skillLeft);
-            }
-            else
-            {
-                buttonSkill1.InitButton(self, 250, 250, () => HERO?.inventory.getActiveOn(1), self.skillRight);
-                buttonSkill2.InitButton(self, 100, 250, () => HERO?.inventory.getActiveOn(0), self.skillLeft);
-            }
         }
 
         private static void AddFillerMenu(DefaultPause self) {
@@ -277,6 +250,67 @@ namespace DeadCellsArchipelago {
             popUpTracker.SetVisible(showPopUp && !showClassicMenu);
         }
 
+        private static void AddHistoryMenu(DefaultPause self) {
+            if (scrollerHistory == null)
+            {
+                scrollerHistory = new SkillScroller<LogLine>(350, 150, self.bg, 265, false);
+                scrollerHistory.Refresh(10);
+
+                scrollerHistory.SetContentLogLine(History, 660257);
+                scrollerHistory.SetScrollAtEnd();
+            }
+            scrollerHistory.SetVisible(!showClassicMenu);
+        }
+
+        private static void AddTitles(DefaultPause self) {
+            if (shopTitle == null)
+            {
+                double scale = 1;
+                shopTitle = new dc.ui.Text(self.bg, false, true, new Ref<double>(ref scale), null, null);
+                shopTitle.set_text("Colorless Shop".AsHaxeString());
+                CenterX(250, shopTitle);
+                shopTitle.x += 50;
+                shopTitle.y = 80;
+
+                historyTitle = new dc.ui.Text(self.bg, false, true, new Ref<double>(ref scale), null, null);
+                historyTitle.set_text("History".AsHaxeString());
+                if (scrollerHistory != null && scrollerHistory.mask != null)
+                {
+                    CenterX(400, historyTitle);
+                    historyTitle.x += scrollerHistory.mask.x;
+                }
+                historyTitle.y = 80;
+
+                biomeTitle = new dc.ui.Text(self.bg, false, true, new Ref<double>(ref scale), null, null);
+                biomeTitle.set_text("Biomes".AsHaxeString());
+                if (scrollerBiome != null && scrollerBiome.mask != null)
+                {
+                    CenterX(scrollerBiome.mask.width, biomeTitle);
+                    biomeTitle.x += scrollerBiome.mask.x;
+                }
+                biomeTitle.y = 80;
+
+                fillerTitle = new dc.ui.Text(self.bg, false, true, new Ref<double>(ref scale), null, null);
+                fillerTitle.set_text("Filler Inventory".AsHaxeString());
+                if (scrollerFiller != null && scrollerFiller.mask != null)
+                {
+                    CenterX(700, fillerTitle);
+                    fillerTitle.x += scrollerFiller.mask.x;
+                }
+                fillerTitle.y = 480;
+
+                menuTitle = new dc.ui.Text(self.bg, false, true, new Ref<double>(ref scale), null, null);
+                menuTitle.set_text("ARCHIPELAGO MENU".AsHaxeString());
+                CenterX(self.bg, menuTitle);
+                menuTitle.y = self.title.y;
+            }
+            shopTitle?.visible = !showClassicMenu;
+            historyTitle?.visible = !showClassicMenu;
+            biomeTitle?.visible = !showClassicMenu;
+            fillerTitle?.visible = !showClassicMenu;
+            menuTitle?.visible = !showClassicMenu;
+        }
+
         public static void UpdateTopPopUp() {
             if (popUpTracker != null)
             {
@@ -295,32 +329,29 @@ namespace DeadCellsArchipelago {
             logoBitmap = null;
             changedMethodCall = false;
             apMenuButton = null;
-            buttonWeapon1.Reset();
-            buttonWeapon2.Reset();
-            buttonSkill1.Reset();
-            buttonSkill2.Reset();
+            skillShopMenu.Reset();
             cellBitmap = null;
             cellsNumber = null;
             scrollerFiller = null;
             scrollerBiome = null;
             popUpTracker = null;
             showPopUp = false;
+            scrollerHistory = null;
+            shopTitle = null;
+            historyTitle = null;
+            biomeTitle = null;
+            fillerTitle = null;
+            menuTitle = null;
         }
 
         public static void OnSwapWeaponsApMenu(Hook_Inventory.orig_swapWeapons orig, Inventory self)
         {
-            buttonWeapon1.Reset();
-            buttonWeapon2.Reset();
-            if (defaultPause != null) AddIncolorWeapons(defaultPause, true);
-            orig(self);
+            skillShopMenu.SwapWeaponsApMenu(orig, self);
         }
 
         public static void OnSwapSkillsApMenu(Hook_Inventory.orig_swapSkills orig, Inventory self)
         {
-            buttonSkill1.Reset();
-            buttonSkill2.Reset();
-            if (defaultPause != null) AddIncolorSkills(defaultPause, true);
-            orig(self);
+            skillShopMenu.SwapSkillsApMenu(orig, self);
         }
 
         public static Dictionary<string, int> CalculateDiffFiller()

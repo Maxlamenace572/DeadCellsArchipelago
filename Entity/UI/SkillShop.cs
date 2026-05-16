@@ -14,164 +14,80 @@ using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 
 namespace DeadCellsArchipelago {
-    public class SkillShopSlot
+    public class SkillShop
     {
-        public Skill? skill;
-        public dc.ui.Text? label;
-        public Bitmap? cellBitmap;
-        public Interactive? inter;
+        public double x;
+        public double y;
+        public SkillShopSlot buttonWeapon1 = new SkillShopSlot();
+        public SkillShopSlot buttonWeapon2 = new SkillShopSlot();
+        public SkillShopSlot buttonSkill1 = new SkillShopSlot();
+        public SkillShopSlot buttonSkill2 = new SkillShopSlot();
 
-        public void InitButton(DefaultPause self, double x, double y, Func<InventItem?> getItem, NewItemDesc desc)
+        public SkillShop(double x, double y)
         {
-            int price = shopPrice;
-            if (skill != null) return;
+            this.x = x;
+            this.y = y;
+        }
 
-            bool ctrlShow = false;
-            skill = new Skill(0, self.bg, new Ref<bool>(ref ctrlShow), new Ref<bool>(ref ctrlShow))
+        public void AddIncolorWeapons(DefaultPause self, bool invert)
+        {
+            if(!invert)
             {
-                x = x,
-                y = y
-            };
-
-            InventItem? ii = getItem();
-            skill.btn.visible = false;
-
-            if (ii != null)
-            {
-                skill.useItem(ii);
-                skill.btn.visible = false;
-                foreach (Bitmap ammoIcon in skill.ammoIcons)
-                    ammoIcon.visible = false;
-
-                if (!HasAffix(ii, "Colorless"))
-                {
-                    SetPrice(self, price);
-
-                    Skill capturedSkill = skill;
-                    Bounds boundsSkill = skill.getSize(new Bounds());
-                    inter = new Interactive(boundsSkill.xMax, boundsSkill.yMax, skill, null)
-                    {
-                        onClick = (e) =>
-                        {
-                            if (HERO == null) return;
-                            if (HasAffix(ii, "Colorless")) return;
-
-                            if (HERO.cells >= price)
-                            {
-                                bool noStats = false;
-                                HERO.substractCells(price, new Ref<bool>(ref noStats));
-                                if (cellsNumber != null)
-                                    cellsNumber.set_text($" {HERO.cells}".AsHaxeString());
-
-                                ii.affixes.pushDyn("Colorless".AsHaxeString());
-                                bool updateHUD = true;
-                                bool durings = false;
-                                HERO.onEquipedItemsChange(new Ref<bool>(ref updateHUD), new Ref<bool>(ref durings), new Ref<bool>(ref durings));
-                                desc.setItem(ii);
-
-                                capturedSkill.useItem(ii);
-                                capturedSkill.btn.visible = false;
-                                foreach (Bitmap ammoIcon in capturedSkill.ammoIcons)
-                                    ammoIcon.visible = false;
-
-                                SetNoPrice(self);
-                                skill.removeChild(inter);
-                            }
-                            else
-                            {
-                                label?.set_textColor(16711680);
-                            }
-                        },
-                        onMove = (e) =>
-                        {
-                            if (label != null && label.textColor != 16711680)
-                                label.set_textColor(47103);
-                        },
-                        onOut = (e) =>
-                        {
-                            label?.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
-                        }
-                    };
-                }
-                else
-                {
-                    SetNoPrice(self);
-                }
+                buttonWeapon1.InitButton(self, x, y, () => HERO?.inventory.getEquippedWeaponOn(0), self.weaLeft);
+                buttonWeapon2.InitButton(self, x+150, y, () => HERO?.inventory.getEquippedWeaponOn(1), self.weaRight);
             }
             else
             {
-                SetNoPrice(self);
+                buttonWeapon1.InitButton(self, x, y, () => HERO?.inventory.getEquippedWeaponOn(1), self.weaLeft);
+                buttonWeapon2.InitButton(self, x+150, y, () => HERO?.inventory.getEquippedWeaponOn(0), self.weaRight);
             }
+             
         }
 
-        public static bool HasAffix(InventItem ii, string affixToCheck)
+        public void AddIncolorSkills(DefaultPause self, bool invert)
         {
-            foreach(dc.String affix in ii.affixes)
+            if(!invert)
             {
-                if (affix.ToString() == affixToCheck)
-                {
-                    return true;
-                }
+                buttonSkill1.InitButton(self, x+150, y+150, () => HERO?.inventory.getActiveOn(0), self.skillRight);
+                buttonSkill2.InitButton(self, x, y+150, () => HERO?.inventory.getActiveOn(1), self.skillLeft);
             }
-            return false;
+            else
+            {
+                buttonSkill1.InitButton(self, x+150, y+150, () => HERO?.inventory.getActiveOn(1), self.skillRight);
+                buttonSkill2.InitButton(self, x, y+150, () => HERO?.inventory.getActiveOn(0), self.skillLeft);
+            }
         }
 
-        public void SetVisible(bool visible)
+        public void SwapWeaponsApMenu(Hook_Inventory.orig_swapWeapons orig, Inventory self)
         {
-            skill?.visible = visible;
-            label?.visible = visible;
-            cellBitmap?.visible = visible;
+            buttonWeapon1.Reset();
+            buttonWeapon2.Reset();
+            if (defaultPause != null) AddIncolorWeapons(defaultPause, true);
+            orig(self);
+        }
+
+        public void SwapSkillsApMenu(Hook_Inventory.orig_swapSkills orig, Inventory self)
+        {
+            buttonSkill1.Reset();
+            buttonSkill2.Reset();
+            if (defaultPause != null) AddIncolorSkills(defaultPause, true);
+            orig(self);
         }
 
         public void Reset()
         {
-            skill = null;
-            label = null;
-            cellBitmap = null;
+            buttonWeapon1.Reset();
+            buttonWeapon2.Reset();
+            buttonSkill1.Reset();
+            buttonSkill2.Reset();
         }
 
-        internal void SetNoPrice(DefaultPause self)
+        public void SetVisible(bool visible)
         {
-            if(skill == null) return;
-            cellBitmap?.remove();
-            label?.remove();
-
-            Bounds boundsSkill = skill.getSize(new Bounds());
-            double scale = 1;
-            label = new dc.ui.Text(self.bg, false, false, new Ref<double>(ref scale), null, null)
-            {
-                y = boundsSkill.yMax + skill.y
-            };
-            label.set_text("-".AsHaxeString());
-            label.x = ((boundsSkill.xMax - label.get_textWidth()) /2) + skill.x;
-            label.set_textColor(16777215);
-        }
-
-        internal void SetPrice(DefaultPause self, int number)
-        {
-            if(skill == null) return;
-
-            Bounds boundsSkill = skill.getSize(new Bounds());
-            double scale = 1;
-            label = new dc.ui.Text(self.bg, false, false, new Ref<double>(ref scale), null, null);
-            label.set_text($" {number}".AsHaxeString());
-            label.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
-
-
-            int frame = 0;
-            double XY = 0;
-            var cellTile = Assets.Class.gameElements.getTile("cell".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
-
-            cellBitmap = new Bitmap(cellTile, self.bg)
-            {
-                y = boundsSkill.yMax + skill.y + 10,
-                x = (boundsSkill.xMax -(22 + label.get_textWidth())) /2 + skill.x
-            };
-            
-            Bounds boundsCell = cellBitmap.getSize(new Bounds());
-
-            label.y = (boundsCell.yMax - label.get_textHeight()) /2 + cellBitmap.y;
-            label.x = boundsCell.xMax + cellBitmap.x;
+            buttonWeapon1.SetVisible(visible);
+            buttonWeapon2.SetVisible(visible);
+            buttonSkill1.SetVisible(visible);
+            buttonSkill2.SetVisible(visible);
         }
     }
 }

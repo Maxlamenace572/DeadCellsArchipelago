@@ -72,6 +72,13 @@ namespace DeadCellsArchipelago {
             child.posChanged = true;
         }
 
+        public static void CenterX(int widthParent, dc.h2d.Object child)
+        {
+            Bounds boundsChild = child.getSize(new Bounds());
+            child.x = (widthParent - boundsChild.xMax) /2;
+            child.posChanged = true;
+        }
+
         public static void CenterY(dc.h2d.Object parent, dc.h2d.Object child)
         {
             Bounds boundsParent = parent.getSize(new Bounds());

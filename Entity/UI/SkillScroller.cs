@@ -193,6 +193,26 @@ namespace DeadCellsArchipelago {
             mask.updateMask();
         }
 
+        public void SetContentLogLine(List<string> logs, int color)
+        {
+            if (flow == null || mask == null) return;
+            if (typeof(T) == typeof(LogLine))
+            {
+                int index = 0;
+                foreach (string log in logs) {
+                    lines.Add((T)(Line) new LogLine(0, 0, log, color));
+                    lines[index].AddParent(flow);
+                    if(mask.width < lines[index].bgBox.wid)
+                    {
+                        mask.width = lines[index].bgBox.wid;
+                    }
+                    index ++;
+                }
+                tempHeight += 50 -1;
+            }
+            mask.updateMask();
+        }
+
         public void UpdateHighlight(bool onOut)
         {
             if (typeof(T) == typeof(ItemLine))
@@ -268,6 +288,12 @@ namespace DeadCellsArchipelago {
                 "Shipwreck", "Distillery", "Throne", "DookuArena", "Lighthouse", "QueenArena",
                 "Astrolab", "Observatory", "Bank"
             ];
+        }
+
+        public void SetScrollAtEnd()
+        {
+            flow?.y = -(flow.get_outerHeight()-maskHeight);
+            flow?.posChanged = true;
         }
     }
 }

@@ -17,28 +17,24 @@ namespace DeadCellsArchipelago
 
         public static void GiveItemInQueue()
         {
-            if(IsQueueEmpty()) { return; }
-            if(SAVED_DATA == null) { return; }
+            if(IsQueueEmpty() || SAVED_DATA == null) return;
 
-            var itemName = pendingItems[0];
+            string itemName = pendingItems[0];
 
-            if (NameToIdKeyExist(itemName))
+            string itemId = itemName;
+            if (NameToIdKeyExist(itemId))
             {
-                itemName = GetId(itemName);
+                itemId = GetId(itemId);
             }
 
-            if(!SAVED_DATA.IsItemReceived(itemName))
+            if(!SAVED_DATA.IsItemReceived(itemId))
             {
                 useOriginalRevealItem = true;
-                if (GiveItemFromArchipelago(itemName))
+                if (GiveItemFromArchipelago(itemId, itemName))
                 {
-                    SAVED_DATA.SaveItemReceived(itemName);
+                    SAVED_DATA.SaveItemReceived(itemId);
                 }
                 useOriginalRevealItem = false;
-            }
-            else
-            {
-                Log.Error($"=== Item {itemName} already given ===");
             }
             pendingItems.RemoveAt(0);
         }
