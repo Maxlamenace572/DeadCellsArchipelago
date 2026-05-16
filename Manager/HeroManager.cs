@@ -66,6 +66,7 @@ namespace DeadCellsArchipelago {
                 trapChallenge = false;
                 trapChallengeStartEntered = false;
                 trapChallengeCurseReceived = false;
+                shouldGiveItemsNewRun = true;
             }
         }
 
