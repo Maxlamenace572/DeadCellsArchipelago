@@ -127,6 +127,14 @@ namespace DeadCellsArchipelago {
         public static void OnActiviteExit(Hook_Exit.orig_onActivate orig, Exit self, Hero by, bool lp)
         {
             ResetFrontPokebomb();
+            string tempCurrentLevelId = "";
+            if (self.destLevel.ToString()[..2] == "T_" && SAVED_DATA != null)
+            {
+                tempCurrentLevelId = SAVED_DATA.currentLevelId;
+                PrepareBiomeCheck(SAVED_DATA.currentLevelId, " Exit", self.destLevel.ToString());
+                SAVED_DATA.currentLevelId = tempCurrentLevelId;
+            }
+
             if(SAVED_DATA != null && USER != null && !IsMultipleExitsTransition(self.destLevel.ToString()) && !CanTakeExit(self.getDestBasedOnNextLevels().ToString()))
             {
                 string msg = $"You need the key for {self.getDestName()} !";
@@ -140,7 +148,7 @@ namespace DeadCellsArchipelago {
                 {
                     bool noStats = false;
                     by.addCells(10, new Ref<bool>(ref noStats));
-                    if(SAVED_DATA != null) PrepareBiomeCheck(SAVED_DATA.currentLevelId, " Exit", self.destLevel.ToString());
+                    if(SAVED_DATA != null) SAVED_DATA.currentLevelId = self.destLevel.ToString();
                 }
                 else
                 {
