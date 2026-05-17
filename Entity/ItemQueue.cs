@@ -22,6 +22,11 @@ namespace DeadCellsArchipelago
             string itemName = pendingItems[0];
 
             string itemId = itemName;
+            if (itemId.Length >= 7 && itemId[^7..] == " Unlock")
+            {
+                itemId = itemId[..^7];
+            }
+
             if (NameToIdKeyExist(itemId))
             {
                 itemId = GetId(itemId);

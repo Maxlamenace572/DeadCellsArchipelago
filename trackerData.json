@@ -3028,13 +3028,6 @@
                 "mob": "Rat"
             },
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Rat"
-            },
-            {
                 "biome": "Shipwreck",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -3237,13 +3230,6 @@
                 "mob": "Runner"
             },
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Runner"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -3261,13 +3247,6 @@
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "",
-                "mob": "Runner"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Runner"
             },
             {
@@ -3289,13 +3268,6 @@
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "",
-                "mob": "Runner"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Runner"
             },
             {
@@ -4130,14 +4102,14 @@
         "sources": [
             {
                 "biome": "SewerShort",
-                "min_bc": 0,
+                "min_bc": 2,
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "Scorpio"
             },
             {
                 "biome": "Bank",
-                "min_bc": 0,
+                "min_bc": 2,
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "Scorpio"
@@ -4160,13 +4132,6 @@
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "",
-                "mob": "Worm"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Worm"
             },
             {
@@ -4198,13 +4163,6 @@
                 "mob": "Worm"
             },
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Worm"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -4230,13 +4188,6 @@
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "",
-                "mob": "Worm"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Worm"
             },
             {
@@ -4273,13 +4224,6 @@
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "WormZombie"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "WormZombie"
             }
         ]
     },
@@ -4308,13 +4252,6 @@
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "WormZombie"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 1,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "WormZombie"
             }
         ]
     },
@@ -4342,13 +4279,6 @@
                 "min_bc": 4,
                 "max_bc": 5,
                 "dlc": "TheBadSeed",
-                "mob": "Fly"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Fly"
             },
             {
@@ -4383,13 +4313,6 @@
                 "min_bc": 4,
                 "max_bc": 5,
                 "dlc": "TheBadSeed",
-                "mob": "Fly"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Fly"
             },
             {
@@ -4557,13 +4480,6 @@
                 "mob": "Comboter"
             },
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Comboter"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -4614,13 +4530,6 @@
             },
             {
                 "biome": "Tumulus",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Comboter"
-            },
-            {
-                "biome": "Cliff",
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "FatalFalls",
@@ -4683,13 +4592,6 @@
                 "mob": "Comboter"
             },
             {
-                "biome": "Cliff",
-                "min_bc": 3,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Comboter"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 3,
                 "max_bc": 5,
@@ -4739,13 +4641,6 @@
             },
             {
                 "biome": "Tumulus",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Comboter"
-            },
-            {
-                "biome": "Cliff",
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "FatalFalls",
@@ -4894,13 +4789,6 @@
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "",
-                "mob": "Blobby"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Blobby"
             },
             {
@@ -5209,13 +5097,6 @@
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "",
-                "mob": "Spawner"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
                 "mob": "Spawner"
             }
         ]
@@ -5835,13 +5716,6 @@
                 "mob": "Hooker"
             },
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Hooker"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -5870,13 +5744,6 @@
                 "mob": "Hooker"
             },
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Hooker"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -5899,13 +5766,6 @@
             },
             {
                 "biome": "Tumulus",
-                "min_bc": 4,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "Hooker"
-            },
-            {
-                "biome": "Cliff",
                 "min_bc": 4,
                 "max_bc": 5,
                 "dlc": "FatalFalls",
@@ -6461,14 +6321,14 @@
         "sources": [
             {
                 "biome": "Castle",
-                "min_bc": 0,
+                "min_bc": 4,
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "Lancer"
             },
             {
                 "biome": "Bank",
-                "min_bc": 0,
+                "min_bc": 4,
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "Lancer"
@@ -6668,13 +6528,6 @@
                 "max_bc": 5,
                 "dlc": "TheBadSeed",
                 "mob": "ThrowableMushroom"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "TheBadSeed",
-                "mob": "ThrowableMushroom"
             }
         ]
     },
@@ -6684,13 +6537,6 @@
         "sources": [
             {
                 "biome": "Greenhouse",
-                "min_bc": 1,
-                "max_bc": 5,
-                "dlc": "TheBadSeed",
-                "mob": "ThrowableMushroom"
-            },
-            {
-                "biome": "Cliff",
                 "min_bc": 1,
                 "max_bc": 5,
                 "dlc": "TheBadSeed",
@@ -6735,13 +6581,6 @@
                 "max_bc": 5,
                 "dlc": "TheBadSeed",
                 "mob": "Blowgunner"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "TheBadSeed",
-                "mob": "Blowgunner"
             }
         ]
     },
@@ -6751,13 +6590,6 @@
         "sources": [
             {
                 "biome": "Swamp",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "TheBadSeed",
-                "mob": "Blowgunner"
-            },
-            {
-                "biome": "Cliff",
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "TheBadSeed",
@@ -6872,13 +6704,6 @@
                 "max_bc": 5,
                 "dlc": "FatalFalls",
                 "mob": "JavelinSnake"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "JavelinSnake"
             }
         ]
     },
@@ -6960,13 +6785,6 @@
         "dlc": "",
         "sources": [
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "U28_Steal"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -6980,13 +6798,6 @@
         "dlc": "",
         "sources": [
             {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "U28_Steal"
-            },
-            {
                 "biome": "Bank",
                 "min_bc": 0,
                 "max_bc": 5,
@@ -6999,13 +6810,6 @@
         "type": "blueprint_enemy",
         "dlc": "Purple",
         "sources": [
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "Purple",
-                "mob": "Harpy"
-            },
             {
                 "biome": "PurpleGarden",
                 "min_bc": 0,
@@ -7033,13 +6837,6 @@
         "type": "blueprint_enemy",
         "dlc": "Purple",
         "sources": [
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "Purple",
-                "mob": "Buer"
-            },
             {
                 "biome": "DookuCastle",
                 "min_bc": 0,

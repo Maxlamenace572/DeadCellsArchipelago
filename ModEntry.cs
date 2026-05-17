@@ -185,17 +185,7 @@ namespace DeadCellsArchipelago{
             Hook_Inventory.swapWeapons += OnSwapWeaponsApMenu;
             Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
             Log.Information("=== Archipelago Mod loaded ! ===");
-            //Hook_TailorDaughter.checkHeads += OnCheckHeads;
         }
-
-        /*private bool OnCheckHeads(Hook_TailorDaughter.orig_checkHeads orig, TailorDaughter self)
-        {
-            dontGiveBobbyHead = true;
-            Log.Information("DEB");
-            bool res = orig(self);
-            
-            return res;
-        }*/
 
         public void OnHeroUpdate(double dt)
         {
