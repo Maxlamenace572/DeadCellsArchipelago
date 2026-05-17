@@ -15,11 +15,12 @@ from .items import (
     DLC_RISE_OF_GIANT, DLC_BAD_SEED, DLC_FATAL_FALLS,
     DLC_QUEEN_AND_SEA, DLC_PURPLE,
     get_items_for_dlcs, get_filler_items, get_trap_items,
-    get_progression_items, item_id, PROG, USFL, FILR, TRAP, is_cosmetic
+    get_progression_items, item_id, PROG, USFL, FILR, TRAP, is_cosmetic,
+    deadcells_item_groups
 )
 from .locations import (
     LOCATION_TABLE, BASE_ID as LOC_BASE_ID,
-    get_valid_locations, location_id,
+    get_valid_locations, location_id, deadcells_location_groups
 )
 from .regions import create_regions, REGION_DLC
 from .rules import set_rules as apply_location_rules
@@ -44,7 +45,7 @@ BASE_WEAPONS = {
     "Throwing Knife",
     "Electric Whip",
     "Firebrands",
-    "Ice Blast",
+    "Frost Blast",
 
     "Cudgel",
     "Greed Shield",
@@ -71,7 +72,7 @@ BASE_META = {
     "Random Melee Weapon",
     "Progressive Recycling",
     "Restock",
-    "Specialist's Showroom",
+    "The Specialist's Showroom",
     "Hunter's Mirror",
     "Backpack",
 }
@@ -92,7 +93,7 @@ BASE_PERKS = {
     "Spite",
     "Frenzy",
     "Ygdar Orus Li Ox",
-    "Critical Recovery",
+    "Instinct of the Master of Arms",
 }
 
 
@@ -101,11 +102,11 @@ BASE_PERKS = {
 # ─────────────────────────────────────
 
 BASE_SKINS = {
-    "GOG Outfit",
-    "French Outfit",
+    "Galaxy Outfit",
+    "Baguette Outfit",
     "Retro Outfit",
-    "Snowman Outfit",
-    "Santa Outfit",
+    "Winter Outfit",
+    "Reverse Burglar's Outfit",
 }
 
 
@@ -114,14 +115,30 @@ BASE_SKINS = {
 # ─────────────────────────────────────
 
 BASE_HEADS = {
-    "Violet Black Hole",
-    "Hello Darkness Vortex",
+    "Violet Hole",
+    "Vortex",
     "Blowtorch",
 }
 
 # Cosmetic categories excluded when include_cosmetics is off
 COSMETIC_CATEGORIES = {"Skin", "Head"}
 
+# ─────────────────────────────────────
+# ITEM - LOCATION BOSS
+# ─────────────────────────────────────
+BOSS_DEFEAT_PAIRS = {
+    "Concierge Defeated":        "Concierge Defeat",
+    "Conjunctivius Defeated":    "Conjunctivius Defeat",
+    "Mama Tick Defeated":        "Mama Tick Defeat",
+    "Death Defeated":            "Death Defeat",
+    "Time Keeper Defeated":      "Time Keeper Defeat",
+    "Scarecrow Defeated":        "Scarecrow Defeat",
+    "Giant Defeated":            "Giant Defeat",
+    "Hand of the King Defeated": "Hand of the King Defeat",
+    "Queen Defeated":            "Queen Defeat",
+    "Dracula Defeated":          "Dracula Defeat",
+    "Collector Defeated":        "Collector Defeat",
+}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Web world (documentation / hints for the AP website)
@@ -163,6 +180,8 @@ class DeadCellsWorld(World):
         name: LOC_BASE_ID + data["id"]
         for name, data in LOCATION_TABLE.items()
     }
+    location_name_groups = deadcells_location_groups
+    item_name_groups = deadcells_item_groups
 
     # Populated in generate_early, used throughout
     enabled_dlcs: Set[str] = set()
@@ -190,6 +209,8 @@ class DeadCellsWorld(World):
         data = ITEM_TABLE[item_name]
         _, classification, dlc = data
 
+    
+
     # DLC filter
         if dlc and dlc not in self.enabled_dlcs:
             return False
@@ -211,6 +232,7 @@ class DeadCellsWorld(World):
                 return False
 
         return True
+    
 
     # ── AP World interface ────────────────────────────────────────────────────
 
@@ -224,6 +246,8 @@ class DeadCellsWorld(World):
         if not self.options.include_base_mutations.value:
             for name in BASE_PERKS:
                 self.multiworld.push_precollected(self.create_item(name))
+        
+        
 
     def create_regions(self) -> None:
         """Create all regions and wire transitions."""
@@ -243,16 +267,33 @@ class DeadCellsWorld(World):
         multiworld = self.multiworld
         player = self.player
         enabled_dlcs = self.enabled_dlcs
+        
+        # ─────────────────────────────────────
+        # 0. Fill items locked to a location
+        # ─────────────────────────────────────
+        locked_items: set[str] = set()
+        for item_name, location_name in BOSS_DEFEAT_PAIRS.items():
+            try:
+                location = multiworld.get_location(location_name, player)
+                location.place_locked_item(self.create_item(item_name))
+                locked_items.add(item_name)
+            except KeyError:
+                pass
 
         # ─────────────────────────────────────
         # 1. Gather item groups
         # ─────────────────────────────────────
+        for item_name, data in get_items_for_dlcs(enabled_dlcs).items():
+            if item_name in locked_items:
+                continue
+        
         progression_items = get_progression_items(enabled_dlcs)   # dict[name, (offset, class, dlc)]
         useful_items = get_items_for_dlcs(enabled_dlcs)           # dict[name, (offset, class, dlc)]
         filler_items = get_filler_items(enabled_dlcs)             # list[str]
         trap_items = get_trap_items()                             # list[str]
+        
 
-    # Remove progression items from useful pool
+        # Remove progression items from useful pool
         useful_items = [name for name in useful_items if name not in progression_items]
 
     # ─────────────────────────────────────
@@ -323,6 +364,65 @@ class DeadCellsWorld(World):
             and "Cultist Outfit" not in itempool
         ):
             itempool.append("Cultist Outfit")
+
+    # Redundancy: Remove Astrolab and Observatory keys from item fill if <5 BSC settings
+        if (
+            "Astrolab" in itempool
+            and self.options.boss_cells.value != 5
+        ):
+            itempool.remove("Astrolab")
+        if (
+            "Observatory" in itempool
+            and self.options.boss_cells.value != 5
+        ):
+            itempool.remove("Observatory")
+
+    # Handle Boss Defeat items to not generate without the associated DLC
+        if (
+            "Mama Tick Defeated" in itempool
+            and DLC_BAD_SEED not in self.enabled_dlcs
+        ):
+            itempool.remove("Mama Tick Defeated")
+        if (
+            "Scarecrow Defeated" in itempool
+            and DLC_FATAL_FALLS not in self.enabled_dlcs
+        ):
+            itempool.remove("Scarecrow Defeated")
+        if (
+            "Giant Defeated" in itempool
+            and DLC_RISE_OF_GIANT not in self.enabled_dlcs
+        ):
+            itempool.remove("Giant Defeated")
+        if (
+            "Collector Defeated" in itempool
+            and DLC_RISE_OF_GIANT not in self.enabled_dlcs
+        ):
+            itempool.remove("Collector Defeated")
+        if (
+            "Queen Defeated" in itempool
+            and DLC_QUEEN_AND_SEA not in self.enabled_dlcs
+        ):
+            itempool.remove("Queen Defeated")
+        if (
+            "Death Defeated" in itempool
+            and DLC_PURPLE not in self.enabled_dlcs
+        ):
+            itempool.remove("Death Defeated")
+        if (
+            "Dracula Defeated" in itempool
+            and DLC_PURPLE not in self.enabled_dlcs
+        ):
+            itempool.remove("Dracula Defeated")
+
+
+    #Force "Boss Defeat" locations to hold their associated "Boss Defeated" items if theyre still in the pool
+    #My understanding of where this "Pseudo-Plando" SHOULD go but nothing ive tried worked
+   #    if (
+   #        "Concierge Defeated" in itempool
+   #        and "Concierge Defeat" in self.created_locations
+   #    ):
+   #        itempool.remove("Concierge Defeated"),
+   #        "Concierge Defeat" == self.create_item("Concierge Defeated")
 
     # Calculate remaining slots
         remaining_slots = total_locations - len(itempool)

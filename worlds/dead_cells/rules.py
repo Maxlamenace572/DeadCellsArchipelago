@@ -36,141 +36,141 @@ if TYPE_CHECKING:
 SKIN_ITEMS = [
 
     # base outfits
-    "Golden Outfit", "Son Goku Outfit", "Black Outfit", "Ghost Outfit",
-    "Sewers Outfit", "Santa Outfit", "Stilt Outfit", "Skeleton Outfit",
+    "Golden Outfit", "Legendary Warrior's Outfit", "Ninja Outfit", "Ghost Outfit",
+    "Donatello Outfit", "Santa Outfit", "Fisherman's Outfit", "Skeleton Outfit",
     "Carduus Outfit", "Aphrodite Outfit", "Shaman Outfit", "Cloud Outfit",
-    "Hyper Light Drifter Outfit", "Aladdin Outfit", "Bison Outfit", "Warrior Outfit",
+    "The Magician's Outfit", "A Thousand and One Nights Outfit", "Dictator Outfit", "Warrior Outfit",
     "Mage Outfit", "Neon Outfit", "Bobby Outfit", "Demon Outfit",
-    "Sylvanian Outfit", "Sand Outfit", "GOG Outfit", "French Outfit",
-    "Festive Outfit", "Gardener Outfit", "Friendly Hardy Outfit", "Mushroom Outfit",
-    "Fugitive Outfit", "Blowgunner Outfit", "Tick Outfit", "Royal Gardener Outfit",
-    "Retro Outfit", "Gordon Freeman Outfit", "Javelin Snake Outfit", "Necromancer Outfit",
-    "Bootleg Outfit", "Kamikaze Outfit", "Crossbowman Outfit", "Kill Bill Outfit",
+    "Robin Hood Outfit", "Desert Dweller Outfit", "Galaxy Outfit", "Baguette Outfit",
+    "Festive Outfit", "Gardener's Outfit", "Mushroom Boi's Outfit", "Mushroom Outfit",
+    "Banished's Outfit", "Blowgunner's Outfit", "Tick Trainer's Outfit", "The Royal Gardener's Outfit",
+    "Retro Outfit", "HEV Outfit", "Lizard Outfit", "Apostate Outfit",
+    "Bootleg Outfit", "Kamikaze Outfit", "Arbalester's Outfit", "Blade Master's Outfit",
 
     # king
     "King Outfit", "White King Outfit",
 
     # concierge
-    "Concierge Outfit",
+    "Classic Concierge Outfit",
     "Piccolo Concierge Outfit",
     "Misunderstood Concierge Outfit",
-    "Blacksmith Concierge Outfit",
-    "Golden Concierge Outfit",
+    "Ascended Concierge Outfit",
+    "Ultimate Concierge Outfit",
 
     # conjunctivius
     "Classic Conjunctivius Outfit",
     "Starved Conjunctivius Outfit",
     "Enraged Conjunctivius Outfit",
-    "Tentacled Conjunctivius Outfit",
-    "Aurora Borealis Conjunctivius Outfit",
+    "Revolted Conjunctivius Outfit",
+    "Legendary Conjuctivius Outfit",
 
     # time keeper
     "Classic Temporal Outfit",
-    "Apex Temporal Outfit",
-    "Red Temporal Outfit",
-    "White Shadow Temporal Outfit",
-    "Devilish Temporal Outfit",
+    "Desert Temporal Outfit",
+    "Volcanic Temporal Outfit",
+    "Hunter's Temporal Outfit",
+    "Collector's Temporal Outfit",
 
     # giant
     "Classic Giant Outfit",
-    "Mutineer Giant Outfit",
-    "Royal Giant Outfit",
+    "Disappointed Giant's Outfit",
+    "Cursed Giant's Outfit",
+    "Misunderstood Giant's Outfit",
     "Frustrated Giant's Outfit",
-    "Cavern Dweller Giant Outfit",
 
     # hand of the king
     "The Hand of the King Outfit",
     "Loyal Hand of the King Outfit",
-    "Majestic Hand of the King Outfit",
-    "Red Hand of the King Outfit",
-    "The Leeching Hand of the King Outfit",
+    "Incorruptible Hand of the King Outfit",
+    "Faithful Hand of the King Outfit",
+    "Devoted Hand of the King Outfit",
 
     "Statue Outfit",
-    "Collector Outfit",
+    "Fallen Collector's Outfit",
 
     # mama tick
-    "Classic Mama Tick Outfit",
-    "Sharp Mama Tick Outfit",
-    "Wigged Mama Tick Outfit",
-    "Scarlet Mama Tick Outfit",
-    "Vibrant Mama Tick Outfit",
+    "Giant Tick Outfit",
+    "Annoyed Tick Outfit",
+    "Irritated Tick Outfit",
+    "Mad Tick Outfit",
+    "Furious Mama Tick Outfit",
     "Sacrificial Tick Outfit",
 
     # scarecrow
     "Classic Scarecrow Outfit",
-    "Rusted Scarecrow Outfit",
-    "Cardinal Scarecrow Outfit",
-    "Festering Scarecrow Outfit",
-    "Murderous Scarecrow Outfit",
+    "Green Thumb Scarecrow Outfit",
+    "Wicked Scarecrow of the West Outfit",
+    "Cutecrow Outfit",
+    "Gothic Scarecrow Outfit",
     "Cultist Outfit",
 
     # flawless boss outfits
     "Flawless Concierge Outfit",
     "Flawless Conjunctivius Outfit",
-    "Flawless Time Keeper Outfit",
+    "Flawless Temporal Outfit",
     "Flawless Giant Outfit",
     "Flawless Hand of the King Outfit",
-    "Flawless Mama Tick Outfit",
+    "Flawless Tick Outfit",
     "Flawless Scarecrow Outfit",
 
     # misc
-    "Snowman Outfit",
-    "Santa Outfit",
+    "Winter Outfit",
+    "Reverse Burglar's Outfit",
 
     # crossover outfits
-    "Hollow Knight Outfit",
-    "Blasphemous Outfit",
-    "Guacamelee Outfit",
-    "Skul Outfit",
-    "Hyper Light Drifter Outfit",
-    "Curse of the Dead Gods Outfit",
-    "Soul Knight Outfit",
+    "Vessel's Outfit",
+    "Pentinent's Outfit",
+    "Luchador's Outfit",
+    "Little Bone's Outfit",
+    "The Magician's Outfit",
+    "Explorer's Outfit",
+    "Knight's Outfit",
 
     # pets / misc
-    "Staphy Outfit",
-    "Anchor Guy Outfit",
+    "Armored Shrimp Carcass Outfit",
+    "Mutineer Outfit",
 
     # servants
-    "Servants Outfit",
-    "Burnished Servants Outfit",
-    "Indigo Servants Outfit",
-    "Shining Servants Outfit",
-    "Luminous Servants Outfit",
-    "Flawless Servants Outfit",
+    "Servant Outfit",
+    "Toxic Servant Outfit",
+    "Silver Servant Outfit",
+    "Aurora Servant Outfit",
+    "King's Servant Outfit",
+    "Flawless Servant Outfit",
 
     # queen
     "Queen Outfit",
     "White Gold Queen Outfit",
     "Cherry Blossom Queen Outfit",
+    "Frozen Queen Outfit",
     "Spicy Queen Outfit",
-    "Stinging Queen Outfit",
     "Flawless Queen Outfit",
 
     "Blue Erinaceus Outfit",
 
     # npcs
-    "Banker Outfit",
-    "Guillain Outfit",
+    "Gentleman's Outfit",
+    "Robber Outfit",
     "Bobby Outfit",
 
     # indie crossovers
     "Shovel Knight Outfit",
-    "Hotline Miami Outfit",
-    "Katana ZERO Outfit",
-    "Risk of Rain Outfit",
-    "Terraria Outfit",
-    "Slay the Spire Outfit",
+    "Modernized Bomber Outfit",
+    "ZERO Outfit",
+    "Commando Outfit",
+    "Familiar Outfit",
+    "Ironclad Outfit",
 
     # boss rush
-    "Mentor Outfit",
-    "Mentor Outfit 1",
-    "Mentor Outfit 2",
-    "Mentor Outfit 3",
+    "Boss Knight Outfit",
+    "Barbarian Boss Knight Outfit",
+    "Triumphant Boss Knight Outfit",
+    "Luminous Boss Knight Outfit",
 
-    "Victorious Outfit",
-    "Victorious Outfit 1",
-    "Victorious Outfit 2",
-    "Victorious Outfit 3",
+    "Triumph Outfit",
+    "Bisonnica Triumph Outfit",
+    "Mentoral Triumph Outfit",
+    "Radiant Triumph Outfit",
 
     # castlevania
     "Simon Outfit",
@@ -178,24 +178,24 @@ SKIN_ITEMS = [
     "Richter Outfit",
     "Sypha Outfit",
     "Trevor Outfit",
-    "Maria Outfit",
+    "Maria Renard Outfit",
     "Hector Outfit",
     "Haunted Armor Outfit",
 
     # death
     "Death Outfit",
     "Sanguine Death Outfit",
-    "Twilight Death Outfit",
-    "Regal Death Outfit",
-    "Pale Death Outfit",
+    "Red Death Outfit",
+    "Edgy Death Outfit",
+    "Spectral Death Outfit",
     "Flawless Death Outfit",
 
     # dracula
     "Dracula Outfit",
-    "Moonlit Dracula Outfit",
-    "Grand Dracula Outfit",
-    "Vampiric Dracula Outfit",
-    "Dark Lord Dracula Outfit",
+    "Mathias Cronqvist Outfit",
+    "Doctor Dracula Outfit",
+    "Pompous Dracula Outfit",
+    "Vigilante Dracula Outfit",
     "Flawless Dracula Outfit",
 ]
 BOSS_RUSH_TIER_1 = [
@@ -223,65 +223,65 @@ BOSS_RUSH_TIER_3 = [
 HEAD_ITEMS = [
 
     # boss flames
-    "Bobby Flame",
+    "Bobby Head",
     "Concierge Flame",
     "Giant Flame",
     "Queen Flame",
     "Hand of the King Flame",
 
     # boss themed heads
-    "Conjunctivius Head",
+    "Conjunctivius Tentacles",
     "Mama Tick Eye",
-    "Time Keeper Hat",
+    "Time Keeper Mask",
     "Scarecrow Hat",
-    "Servants Mask",
+    "Servant Mask",
     "Collector Hood",
 
     # black hole variants
     "Black Hole",
-    "White Black Hole",
-    "Violet Black Hole",
-    "Red Black Hole",
-    "Green Black Hole",
-    "Blue Black Hole",
+    "White Hole",
+    "Violet Hole",
+    "Red Hole",
+    "Green Hole",
+    "Blue Hole",
 
     # vortex heads
-    "Hello Darkness Vortex",
-    "Bad Seed Vortex",
-    "Queen and the Sea Vortex",
-    "Foundry Vortex",
+    "Vortex",
+    "Sanguine Vortex",
+    "Abyssal Vortex",
+    "Dark Vortex",
 
     # misc
     "Guillain Head",
     "Pecheur Head",
     "Staphy Head",
-    "Flawless Head",
+    "Flawless Torch",
     "Cell Head",
-    "Evil Empire Head",
+    "Evil Minion Head",
 
     # blob heads
-    "Blobby Flame",
-    "Magma Blobby Flame",
-    "Malaise Blobby Flame",
-    "Gum Blobby Flame",
+    "Toxic Blob",
+    "Magma Flame",
+    "Shadow Flame",
+    "Sweet Blob",
 
     # glitch heads
-    "Glitchy Head",
-    "Deep Space Glitchy Head",
-    "Red Glitchy Head",
+    "Glitch Head",
+    "Spacial Anomaly",
+    "Menacing Anomaly",
 
     # mushroom
     "Mushroom Boi Head",
 
     # torch heads
-    "Black Blowtorch",
+    "Dark Blowtorch",
     "Blowtorch",
-    "Gold Blowtorch",
-    "Red Blowtorch",
+    "Golden Blowtorch",
+    "Bright Red Blowtorch",
 
     # misc uniques
-    "Bitter",
-    "Hordes Zero Hood",
+    "Biter Head",
+    "Horde Zero Hood",
     "Boss Cell Head",
 ]
 
@@ -527,8 +527,8 @@ LOCATION_RULES = [
     ("Meat Skewer",     _has("Challenger's Rune")),
 
 
-    # ── Lighthouse Key logic ─────────────────────────────────────────────────
-    ("Lighthouse Key", lambda world: (
+    # ── Crowned Key logic ─────────────────────────────────────────────────
+    ("Crowned Key", lambda world: (
         lambda state: state.can_reach("SewerShort", "Region", world.player)
     )),
 
@@ -538,7 +538,7 @@ LOCATION_RULES = [
     ("Spartan Sandals", _has("Vine Rune")),
     ("Corrupted Power", _has("Vine Rune")),
     ("Explosive Decoy", _has("Vine Rune")),
-    ("Powerful Gernade", _has("Vine Rune")),
+    ("Powerful Grenade", _has("Vine Rune")),
     ("Cleaver", _has("Vine Rune")),
     ("Knife Dance", _has("Vine Rune")),
     ("Execution", _has("Vine Rune")),
@@ -547,7 +547,7 @@ LOCATION_RULES = [
     ("Oiled Sword", _has("Vine Rune")),
     ("Berserker", _has("Vine Rune")),
     ("Aphrodite Outfit", _has("Vine Rune")),
-    ("Black Outfit", _has("Vine Rune")),
+    ("Ninja Outfit", _has("Vine Rune")),
     ("Kamikaze Outfit", _has("Vine Rune")),
     ("Neon Outfit", _has("Vine Rune")),
     ("Warrior Outfit", _has("Vine Rune")),
@@ -564,16 +564,20 @@ LOCATION_RULES = [
 
     ("Promenade of the Condemned Exit", _has("Vine Rune")),
 
+
+    # ── Dilapidated Arboretum Entrance ───────────────────────────────────────
+    ("The Royal Gardener's Outfit", _has("Teleportation Rune")),
+
     # ── Half life lore room ──────────────────────────────────────────────────
     ("Crowbar", _has("Teleportation Rune")),
-    ("Gordon Freeman Outfit", _has("Teleportation Rune")),
+    ("HEV Outfit", _has("Teleportation Rune")),
 
     # ── Collab skins ─────────────────────────────────────────────────────────
-    ("Hollow Knight Outfit", _has("Pure Nail")),
-    ("Blasphemous Outfit", _has("Face Flask")),
+    ("Vessel's Outfit", _has("Pure Nail")),
+    ("Pentinent's Outfit", _has("Face Flask")),
 
     (
-    "Guacamelee Outfit",
+    "Luchador's Outfit",
     lambda world: (
         lambda state:
             state.can_reach("Crypt", "Region", world.player)
@@ -591,7 +595,7 @@ LOCATION_RULES = [
     ),
 
     (
-    "Curse of the Dead Gods Outfit",
+    "Explorer's Outfit",
     lambda world: lambda state: any(
         _can_reach_location_if_exists(state, world, loc)
         for loc in [
@@ -611,8 +615,8 @@ LOCATION_RULES = [
         )
     ),
 
-    ("Hotline Miami Outfit", _has("Baseball Bat")),
-    ("Katana ZERO Outfit", _has("Hattori's Katana")),
+    ("Modernized Bomber Outfit", _has("Baseball Bat")),
+    ("ZERO Outfit", _has("Hattori's Katana")),
     ("Shovel Knight Outfit", _has("Shovel")),
 
 
@@ -646,7 +650,7 @@ LOCATION_RULES = [
 
 
     # ── Specialist showroom unlock ───────────────────────────────────────────
-    ("Golden Outfit", _has("Specialist's Showroom")),
+    ("Golden Outfit", _has("The Specialist's Showroom")),
 
     ("Wish", _boss_rush_trials_3_4()),
 
@@ -658,11 +662,22 @@ LOCATION_RULES = [
 
     ("Magma Blob", _boss_killed("The Hand of the King")),
 
-    ("Bright Red Blowtorch", _has("Pyrotechnics")),
+    ("Bright Red Blowtorch", _has("Fire Blast")),
 
     ("Boss Cell Head", _bsc(5)),
 
     ("Guillain Head", _boss_rush_trials_1_2()),
+
+    ("Concierge Flame", _boss_rush_trials_1_2()),
+    ("Conjunctivius Tentacles", _boss_rush_trials_1_2()),
+    ("Mama Tick Eye", _boss_rush_trials_1_2()),
+    ("Time Keeper Mask", _boss_rush_trials_1_2()),
+    ("Giant Flame", _boss_rush_trials_1_2()),
+    ("Scarecrow Hat", _boss_rush_trials_1_2()),
+    ("Hand of the King Flame", _boss_rush_trials_1_2()),
+    ("Servant Mask", _boss_rush_trials_1_2()),
+    ("Queen Flame", _boss_rush_trials_1_2()),
+    ("Collector Hood", _boss_rush_trials_1_2()),
 
     ("Spatial Anomaly",
      lambda world: lambda state:
@@ -670,13 +685,13 @@ LOCATION_RULES = [
         or (state.can_reach("Throne", "Region", world.player)
         and get_bc_level(state, world.player) >= 5)),
 
-    ("Red Black Hole",
+    ("Red Hole",
     lambda world: lambda state: 
         _head_count(7)(world)(state)
         or state.can_reach("Throne", "Region", world.player)
     ),
 
-    ("Fisherman's Hood",
+    ("Fisherman Hood",
     lambda world: lambda state: 
         _head_count(40)(world)(state)
         or (
@@ -692,7 +707,7 @@ LOCATION_RULES = [
                 and get_bc_level(state, world.player) >= 5
     )),
 
-    ("Blue Black Hole",
+    ("Blue Hole",
     lambda world: (
         lambda state:
             state.has("Vine Rune", world.player)
@@ -707,7 +722,7 @@ LOCATION_RULES = [
             and state.has("Advanced Forge 1", world.player)
             and state.has("Recycling Tubes", world.player)
             and state.has("Hunter's Mirror", world.player)
-            and state.has("Specialist's Showroom", world.player)
+            and state.has("The Specialist's Showroom", world.player)
             and state.has("Restock", world.player)
             and state.has("Merchandise Categories", world.player)
             and state.count("Progressive Flask", world.player) >= 4
@@ -715,7 +730,7 @@ LOCATION_RULES = [
             and state.count("Progressive Gold Reserves", world.player) >= 5
     )),
     
-    ("Green Black Hole",
+    ("Green Hole",
     lambda world: (
         lambda state:
             sum(
