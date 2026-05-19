@@ -60,6 +60,10 @@ using dc.hxd.res;
 using dc.ui.hud;
 using dc.tool.weap.dual;
 using dc.en.mob.boss;
+using dc.haxe.ds;
+using System.Text.RegularExpressions;
+using System.Dynamic;
+using Hashlink.Proxy.Objects;
 
 
 namespace DeadCellsArchipelago{
@@ -67,8 +71,8 @@ namespace DeadCellsArchipelago{
     public class ModEntry(ModInfo info) : ModBase(info), 
         IOnAfterLoadingSave,
         IOnBeforeSavingSave,
-        IOnHeroUpdate//,
-        //IOn
+        IOnHeroUpdate,
+        IOnAfterLoadingCDB
     {
         private ArchipelagoManager archipelago = new();
 
@@ -184,7 +188,7 @@ namespace DeadCellsArchipelago{
             Hook_Inventory.swapSkills += OnSwapSkillsApMenu;
             Hook_Inventory.swapWeapons += OnSwapWeaponsApMenu;
             Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
-            Log.Information("=== Archipelago Mod loaded ! ===");
+            Log.Information("=== Archipelago hooks loaded ! ===");
         }
 
         public void OnHeroUpdate(double dt)
@@ -345,5 +349,19 @@ namespace DeadCellsArchipelago{
             var result = orig(self, user, seed, ldat, resetCount);
             return result;
         }
+
+        public void OnAfterLoadingCDB(_Data_ cdb)
+        {
+            Dictionary<string, int> newHeadsCount = BossHeadsCount();
+            foreach (KeyValuePair<string, int> head in newHeadsCount)
+            {
+                var itemPropsDyn = (HaxeDynObj) cdb.item.byId.get(head.Key.AsHaxeString()).props;
+                var itemProps = itemPropsDyn.ToVirtual<virtual_ang_aoeDuration_bonus_buff_bump_castTime_chance_color_color2_cooldown_count_debuff_distance_dotDps_dps_dps2_duration_duration2_duration3_effectCD_effectCharge_frict_height_item2_life_limit_lock_max_maxNumberOfMarks_min_mob_offsetX_offsetY_power_power2_power3_prct_prct2_prct3_range_size_speed_speed2_tick_triggerOnHit_uses_width_>();
+                itemProps.count = head.Value;
+            }
+            Log.Information("=== Archipelago Mod loaded ! ===");
+        }
+
+        
     }
 }

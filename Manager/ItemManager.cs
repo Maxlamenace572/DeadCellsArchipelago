@@ -5,6 +5,7 @@ using dc.cine;
 using dc.en;
 using dc.en.inter;
 using dc.hl.types;
+using dc.hxd;
 using dc.level;
 using dc.pr;
 using dc.tool;
@@ -41,7 +42,6 @@ namespace DeadCellsArchipelago {
         public static Dictionary<string, int> fillerItemGivenSinceLaunch { get; set; } = [];
         public static List<string> History = [];
         public static bool disableTrapOnEndBoss = false;
-        public static bool dontGiveBobbyHead = false;
 
         public static void InitLists()
         {
@@ -906,6 +906,22 @@ namespace DeadCellsArchipelago {
                     return true;
             }
             return false;
+        }
+
+        public static Dictionary<string, int> BossHeadsCount()
+        {
+            Dictionary<string, int> res = [];
+            res.Add("ConciergeFlame", 8);
+            res.Add("ConjunctiviusHead", 7);
+            res.Add("MamaTickEye", 2);
+            res.Add("TimeKeeperHat", 8);
+            res.Add("GiantFlame", 4);
+            res.Add("ScarecrowHat", 2);
+            res.Add("HandOfTheKingFlame", 2);
+            res.Add("ServantsMask", 4);
+            res.Add("QueenFlame", 2);
+            res.Add("CollectorHood", 3);
+            return res;
         }
     }
 }
