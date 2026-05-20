@@ -89,29 +89,38 @@ namespace DeadCellsArchipelago {
             {
                 if (itemName == "LadderKey")
                 {
-                    ArrayObj array = USER.game.curLevel.entitiesByClass.get(35400); //35400 is the internal id for VineLadder
-                    for (int i = 0; i < array.length; i++)
+                    ArrayObj? array = USER.game.curLevel.entitiesByClass?.get(35400); //35400 is the internal id for VineLadder
+                    if(array != null)
                     {
-                        VineLadder vineLadder = (VineLadder) array.getDyn(i);
-                        vineLadder.minimapTracking();
+                        for (int i = 0; i < array.length; i++)
+                        {
+                            VineLadder vineLadder = (VineLadder) array.getDyn(i);
+                            vineLadder.minimapTracking();
+                        }
                     }
                 }
                 else if (itemName == "TeleportKey")
                 {
-                    ArrayObj array = USER.game.curLevel.entitiesByClass.get(23651); //23651 is the internal id for RedTeleporter
-                    for (int i = 0; i < array.length; i++)
+                    ArrayObj? array = USER.game.curLevel.entitiesByClass?.get(23651); //23651 is the internal id for RedTeleporter
+                    if(array != null)
                     {
-                        RedTeleporter redTeleporter = (RedTeleporter) array.getDyn(i);
-                        redTeleporter.minimapTracking();
+                        for (int i = 0; i < array.length; i++)
+                        {
+                            RedTeleporter redTeleporter = (RedTeleporter) array.getDyn(i);
+                            redTeleporter.minimapTracking();
+                        }
                     }
                 }
                 else if (itemName == "BreakableGroundKey")
                 {
-                    ArrayObj array = USER.game.curLevel.entitiesByClass.get(32866); //32866 is the internal id for BreakableGround
-                    for (int i = 0; i < array.length; i++)
+                    ArrayObj? array = USER.game.curLevel.entitiesByClass?.get(32866); //32866 is the internal id for BreakableGround
+                    if(array != null)
                     {
-                        BreakableGround breakableGround = (BreakableGround) array.getDyn(i);
-                        breakableGround.minimapTracking();
+                        for (int i = 0; i < array.length; i++)
+                        {
+                            BreakableGround breakableGround = (BreakableGround) array.getDyn(i);
+                            breakableGround.minimapTracking();
+                        }
                     }
                 }
             }
