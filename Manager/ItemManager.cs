@@ -42,6 +42,7 @@ namespace DeadCellsArchipelago {
         public static Dictionary<string, int> fillerItemGivenSinceLaunch { get; set; } = [];
         public static List<string> History = [];
         public static bool disableTrapOnEndBoss = false;
+        public static bool useModdedHasUnlock = false;
 
         public static void InitLists()
         {
@@ -602,7 +603,7 @@ namespace DeadCellsArchipelago {
             if(USER != null && USER.game != null)
             {
                 BlueprintManager.showBlueprintLog = true;
-                USER.game.log.blueprint(itemId.AsHaxeString(), "Always".AsHaxeString(), false, false);
+                USER.game.log?.blueprint(itemId.AsHaxeString(), "Always".AsHaxeString(), false, false);
                 BlueprintManager.showBlueprintLog = false;
             }
         }
@@ -694,6 +695,11 @@ namespace DeadCellsArchipelago {
                 if (heroJustDead && k.ToString().Length >= 3 && k.ToString()[..3] == "ASP" && aspectsToIter <= 12)//the game use hasUnlockedItem to add aspects in its random give pool
                 {
                     aspectsToIter++;
+                    return SAVED_DATA.IsCheckSent(k.ToString());
+                }
+
+                if (useModdedHasUnlock && ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
+                {
                     return SAVED_DATA.IsCheckSent(k.ToString());
                 }
 

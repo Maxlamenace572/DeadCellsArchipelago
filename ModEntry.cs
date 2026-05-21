@@ -19,6 +19,7 @@ using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.EnemyManager;
 using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.UnlockItemManager;
 using dc.en.mob;
 using dc._Data;
 using dc.pr;
@@ -51,7 +52,6 @@ using dc.en.inter.npc;
 using ModCore.Modules;
 using ModCore.Events.Interfaces.Game;
 using ModCore.Events.Interfaces;
-using dc.level.disp;
 using dc.h2d.col;
 using dc.en.gr;
 using dc.pow;
@@ -64,6 +64,7 @@ using dc.haxe.ds;
 using System.Text.RegularExpressions;
 using System.Dynamic;
 using Hashlink.Proxy.Objects;
+using dc.en.hero;
 
 
 namespace DeadCellsArchipelago{
@@ -188,6 +189,10 @@ namespace DeadCellsArchipelago{
             Hook_Inventory.swapSkills += OnSwapSkillsApMenu;
             Hook_Inventory.swapWeapons += OnSwapWeaponsApMenu;
             Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
+            Hook_User.getPokebombBlueprintFor += OnGetPokebombBlueprintFor;
+            Hook_ItemMetaManager.hasRevealedItemOrInCollector += OnHasRevealedItemOrInCollector;
+            Hook_Beheaded.displayCursePopup += OnDisplayCursePopup;
+            Hook_Shipwreck.canGenerateThisLoreRoom += OnCanGenerateThisLoreRoomShipwreck;
             Log.Information("=== Archipelago hooks loaded ! ===");
         }
 

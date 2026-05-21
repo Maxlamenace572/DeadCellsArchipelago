@@ -8,6 +8,7 @@ using HaxeProxy.Runtime;
 using ModCore.Utilities;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ImageManager;
+using dc.hl.types;
 
 namespace DeadCellsArchipelago {
     public static class PokeManager
@@ -103,6 +104,23 @@ namespace DeadCellsArchipelago {
         {
             ResetFrontPokebomb();
             orig(self);
+        }
+
+        public static dc.String OnGetPokebombBlueprintFor(Hook_User.orig_getPokebombBlueprintFor orig, User self, dc.String k, ArrayObj invBlueprints)
+        {
+            useModdedHasUnlock = true;
+            var res = orig(self, k, invBlueprints);
+            useModdedHasUnlock = false;
+            return res;
+        }
+
+        public static bool OnHasRevealedItemOrInCollector(Hook_ItemMetaManager.orig_hasRevealedItemOrInCollector orig, ItemMetaManager self, dc.String k)
+        {
+            if (useModdedHasUnlock && SAVED_DATA != null)
+            {
+                return SAVED_DATA.IsCheckSent(k.ToString());
+            }
+            return orig(self, k);
         }
     }
 }

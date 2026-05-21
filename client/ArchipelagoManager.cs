@@ -70,6 +70,11 @@ namespace DeadCellsArchipelago
                     
                     var slotData = success.SlotData;
 
+                    foreach (KeyValuePair<string, object> data in slotData)
+                    {
+                        Log.Information($"| {data.Key} |");
+                    }
+
                     bscOption = Convert.ToInt32(slotData["boss_cells"]);
                     deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
                     includeCosmetics = Convert.ToBoolean(slotData["include_cosmetics"]);

@@ -58,28 +58,71 @@ namespace DeadCellsInstaller
         // ════════════════════════════════════════════════════════════════
         //  CONFIG PERSISTANTE
         // ════════════════════════════════════════════════════════════════
+        // ─── Config helpers (format "key=value" par ligne) ─────────────
+        private string ReadConfig(string key)
+        {
+            try
+            {
+                if (!File.Exists(ConfigPath)) return null;
+                foreach (var line in File.ReadAllLines(ConfigPath))
+                {
+                    int idx = line.IndexOf('=');
+                    if (idx > 0 && line.Substring(0, idx).Trim() == key)
+                        return line.Substring(idx + 1).Trim();
+                }
+            }
+            catch { }
+            return null;
+        }
+
+        private void WriteConfig(string key, string value)
+        {
+            try
+            {
+                var lines = new System.Collections.Generic.List<string>();
+                if (File.Exists(ConfigPath))
+                    lines.AddRange(File.ReadAllLines(ConfigPath));
+
+                bool found = false;
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    int idx = lines[i].IndexOf('=');
+                    if (idx > 0 && lines[i].Substring(0, idx).Trim() == key)
+                    {
+                        lines[i] = key + "=" + value;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) lines.Add(key + "=" + value);
+                File.WriteAllLines(ConfigPath, lines);
+            }
+            catch { }
+        }
+
         private void LoadSavedPath()
         {
             try
             {
-                if (File.Exists(ConfigPath))
-                {
-                    string saved = File.ReadAllText(ConfigPath).Trim();
-                    if (!string.IsNullOrEmpty(saved))
-                    {
-                        txtPath.Text = saved;
-                        return;
-                    }
-                }
+                string saved = ReadConfig("path");
+                txtPath.Text = !string.IsNullOrEmpty(saved) ? saved : DEFAULT_PATH;
             }
-            catch { }
-            txtPath.Text = DEFAULT_PATH;
+            catch { txtPath.Text = DEFAULT_PATH; }
         }
 
         private void SavePath(string path)
         {
-            try { File.WriteAllText(ConfigPath, path); }
-            catch { }
+            WriteConfig("path", path);
+        }
+
+        private bool LoadFallbackMode()
+        {
+            return ReadConfig("fallback") == "true";
+        }
+
+        private void SaveFallbackMode(bool fallback)
+        {
+            WriteConfig("fallback", fallback ? "true" : "false");
         }
 
         // ════════════════════════════════════════════════════════════════
@@ -364,14 +407,31 @@ namespace DeadCellsInstaller
         private void LaunchGame()
         {
             string coremodDir  = Path.Combine(deadCellsDir, "coremod");
-            // Launcher standard (méthode PS1)
             string launcherExe = Path.Combine(coremodDir, "core", "host", "startup", "DeadCellsModding.exe");
-            // Launcher fallback (méthode sans PS1 — placé directement dans Dead Cells\)
             string fallbackExe = Path.Combine(deadCellsDir, "DeadCellsModding.exe");
 
-            string exeToLaunch = File.Exists(launcherExe) ? launcherExe
-                               : File.Exists(fallbackExe) ? fallbackExe
-                               : null;
+            string exeToLaunch;
+
+            if (LoadFallbackMode())
+            {
+                // Installation via fallback (sans PS1) : on utilise Dead Cells\DeadCellsModding.exe
+                exeToLaunch = File.Exists(fallbackExe) ? fallbackExe : null;
+                if (exeToLaunch == null)
+                    Log("  Warning: fallback exe not found, trying standard path…");
+            }
+            else
+            {
+                // Installation standard (avec PS1) : on utilise le launcher dans coremod
+                exeToLaunch = File.Exists(launcherExe) ? launcherExe : null;
+                if (exeToLaunch == null)
+                    Log("  Warning: standard launcher not found, trying fallback path…");
+            }
+
+            // Filet de sécurité : si le chemin attendu est absent, on essaie l'autre
+            if (exeToLaunch == null)
+                exeToLaunch = File.Exists(launcherExe) ? launcherExe
+                            : File.Exists(fallbackExe) ? fallbackExe
+                            : null;
 
             if (exeToLaunch == null)
             {
@@ -492,6 +552,7 @@ namespace DeadCellsInstaller
             if (File.Exists(corePs1))
             {
                 Log("→ core already installed, download skipped. ✓");
+                SaveFallbackMode(false);
                 SetProgress(40);
             }
             else
@@ -509,6 +570,7 @@ namespace DeadCellsInstaller
                 ExtractZip(coreZip, coremodDir);
                 File.Delete(coreZip);
                 Log("  Extraction done. ✓");
+                SaveFallbackMode(false);
                 SetProgress(40);
             }
 
@@ -559,6 +621,7 @@ namespace DeadCellsInstaller
             if (File.Exists(destExe)) File.Delete(destExe);
             File.Move(tempExe, destExe);
             Log("  DeadCellsModding.exe placed in Dead Cells\\. ✓");
+            SaveFallbackMode(true);
             SetProgress(55);
         }
 
