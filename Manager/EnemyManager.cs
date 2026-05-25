@@ -1,4 +1,5 @@
 using dc.en;
+using dc.level;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
 using static DeadCellsArchipelago.ItemManager;
@@ -7,12 +8,15 @@ using static DeadCellsArchipelago.RuneManager;
 namespace DeadCellsArchipelago {
     public static class EnemyManager
     {
+        public static bool changeNextCallDmgTier = false;
+        public static bool changeNextCallLifeTier = false;
+
         public static void SpawnMobOnPlayer(string id, bool elite, bool anger)
         {
             if (HERO != null)
             {
                 int lifeTier = HERO._level.map.mobLifeTier;
-                Mob mob = Mob.Class.create(id.AsHaxeString(), HERO._level, HERO.cx, HERO.cy, HERO._level.map.mobDmgTier, new Ref<int>(ref lifeTier));
+                dc.en.Mob mob = dc.en.Mob.Class.create(id.AsHaxeString(), HERO._level, HERO.cx, HERO.cy, HERO._level.map.mobDmgTier, new Ref<int>(ref lifeTier));
                 if (elite)
                 {
                     mob.setElite(false);
@@ -50,6 +54,46 @@ namespace DeadCellsArchipelago {
             useOriginalHasPermanentItem = false;
             orig(self);
             useOriginalHasPermanentItem = true;
+        }
+
+        public static int GetDailyLife()
+        {
+            if (SAVED_DATA == null) return 0;
+
+            if (!SAVED_DATA.IsCheckSent("SpeedBlade")) return 0;
+            else if (!SAVED_DATA.IsCheckSent("DamageAura")) return 1;
+            else if (!SAVED_DATA.IsCheckSent("DashSword")) return 3;
+            return 5;
+        }
+
+        public static int GetDailyDmg()
+        {
+            if (SAVED_DATA == null) return 0;
+
+            if (!SAVED_DATA.IsCheckSent("SpeedBlade")) return 0;
+            else if (!SAVED_DATA.IsCheckSent("DamageAura")) return 3;
+            else if (!SAVED_DATA.IsCheckSent("DashSword")) return 7;
+            return 10;
+        }
+
+        public static int OnGetLifeTier(Hook_MobsGen.orig_getLifeTier orig, MobsGen self, LevelMap map, Room room, int levelMaxDist)
+        {
+            if (changeNextCallLifeTier)
+            {
+                changeNextCallLifeTier = false;
+                return orig(self, map, room, levelMaxDist) + GetDailyLife();
+            } 
+            return orig(self, map, room, levelMaxDist);
+        }
+
+        public static int OnGetDmgTier(Hook_MobsGen.orig_getDmgTier orig, MobsGen self, LevelMap map, Room room, int levelMaxDist)
+        {
+            if (changeNextCallDmgTier)
+            {
+                changeNextCallDmgTier = false;
+                return orig(self, map, room, levelMaxDist) + GetDailyDmg();
+            } 
+            return orig(self, map, room, levelMaxDist);
         }
     }
 }

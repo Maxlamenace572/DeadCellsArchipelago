@@ -20,14 +20,11 @@ using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.EnemyManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.UnlockItemManager;
-using dc.en.mob;
-using dc._Data;
 using dc.pr;
 using dc.level;
 using dc.tool;
 using ModCore.Events.Interfaces.Game.Save;
 using Newtonsoft.Json;
-using System.Text.Json;
 using dc;
 using dc.hl.types;
 using dc.cine;
@@ -35,35 +32,16 @@ using dc.hxd;
 using dc.tool.hero;
 using HaxeProxy.Runtime;
 using dc.en.inter;
-using dc.steam.ugc;
-using Archipelago.MultiClient.Net.Models;
-using dc.tool.utils;
 using dc.level.@struct;
 using dc.en.inter.door;
-using dc.level.lore;
 using dc.ui;
 using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
-using dc.uicore;
-using dc.hl;
-using dc.uicore.element;
 using dc.achievements;
 using dc.en.inter.npc;
-using ModCore.Modules;
 using ModCore.Events.Interfaces.Game;
-using ModCore.Events.Interfaces;
-using dc.h2d.col;
-using dc.en.gr;
 using dc.pow;
 using dc.ui.pause;
-using dc.hxd.res;
-using dc.ui.hud;
-using dc.tool.weap.dual;
-using dc.en.mob.boss;
-using dc.haxe.ds;
-using System.Text.RegularExpressions;
-using System.Dynamic;
-using Hashlink.Proxy.Objects;
 using dc.en.hero;
 
 
@@ -193,6 +171,9 @@ namespace DeadCellsArchipelago{
             Hook_ItemMetaManager.hasRevealedItemOrInCollector += OnHasRevealedItemOrInCollector;
             Hook_Beheaded.displayCursePopup += OnDisplayCursePopup;
             Hook_Shipwreck.canGenerateThisLoreRoom += OnCanGenerateThisLoreRoomShipwreck;
+            Hook_User.getDailyRewards += OnGetDailyRewards;
+            Hook_MobsGen.getDmgTier += OnGetDmgTier;
+            Hook_MobsGen.getLifeTier += OnGetLifeTier;
             Log.Information("=== Archipelago hooks loaded ! ===");
         }
 
@@ -281,10 +262,10 @@ namespace DeadCellsArchipelago{
                         
                         Log.Information($"=== Données chargées : {SAVED_DATA.SentChecks.Count} checks envoyés ===");
 
-                        if (ARCHIPELAGO != null && loadDataInPlayMenu)
+                        if (ARCHIPELAGO != null && loadDataInPlayMenu == 1)
                         {
                             ARCHIPELAGO.SyncAll();
-                            loadDataInPlayMenu = false;
+                            loadDataInPlayMenu = 0;
                         }
                     }
                     catch (Exception ex)
@@ -296,10 +277,10 @@ namespace DeadCellsArchipelago{
             else
             {
                 Log.Information($"=== New Save ===");
-                if (ARCHIPELAGO != null && loadDataInPlayMenu)
+                if (ARCHIPELAGO != null && loadDataInPlayMenu == 2)
                 {
                     ARCHIPELAGO.SyncAll();
-                    loadDataInPlayMenu = false;
+                    loadDataInPlayMenu = 0;
                 }
             }
             if(ARCHIPELAGO != null)

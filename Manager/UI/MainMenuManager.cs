@@ -5,6 +5,7 @@ using HaxeProxy.Runtime;
 using ModCore.Utilities;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ImageManager;
+using static DeadCellsArchipelago.HeroManager;
 using Newtonsoft.Json;
 
 namespace DeadCellsArchipelago {
@@ -16,12 +17,20 @@ namespace DeadCellsArchipelago {
         public static dc.h2d.TextInput? slotName = null;
         public static dc.h2d.TextInput? password = null;
         public static Text? connectButton = null;
-        public static bool loadDataInPlayMenu = false;
+        public static int loadDataInPlayMenu = 0;
+        public static bool isOnMenu = false;
 
         public static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
             self.news.hidden = true;
             self.news.updateVisible();
+
+            if (!isOnMenu)
+            {
+                ResetGameData();
+                isOnMenu = true;
+            }
+
             int menuScale = 3;
             if (apMenuContainer == null) {
                 apMenuContainer = new dc.h2d.Object(self.root)
@@ -275,8 +284,9 @@ namespace DeadCellsArchipelago {
 
         public static void OnPlayMenu(Hook_TitleScreen.orig_playMenu orig, TitleScreen self)
         {
+            loadDataInPlayMenu = 1;
             orig(self);
-            loadDataInPlayMenu = true;
+            if(loadDataInPlayMenu != 0) loadDataInPlayMenu = 2;
             self.news.hidden = true;
             self.news.updateVisible();
         }
@@ -289,6 +299,7 @@ namespace DeadCellsArchipelago {
             slotName = null;
             password = null;
             connectButton = null;
+            isOnMenu = false;
             orig(self, mode, tpause, fadeOutS);
         }
 
@@ -344,6 +355,16 @@ namespace DeadCellsArchipelago {
         public static bool OnSetVisible(Hook_LeaderboardPanel.orig_set_visible orig, LeaderboardPanel self, bool v)
         {
             return false;
+        }
+
+        private static void ResetGameData()
+        {
+            SAVED_DATA = null;
+            bossRuneGivenSinceLaunch = 0;
+            ProgressionItemGivenSinceLaunch = [];
+            fillerItemGivenSinceLaunch = [];
+            History = [];
+            resetOnNextPrisonStart = false;
         }
     }
 }

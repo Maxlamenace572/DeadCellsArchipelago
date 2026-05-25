@@ -1,7 +1,10 @@
+using dc;
 using dc.en;
+using dc.hl.types;
 using dc.level;
 using dc.tool;
 using dc.ui;
+using Hashlink.Marshaling;
 using ModCore.Utilities;
 using Serilog;
 
@@ -92,6 +95,21 @@ namespace DeadCellsArchipelago {
         {
             //I don't know why but without this hook, blueprints like the two in half life lore room won't spawn without DualBow
             orig(self, map, cx, cy, k, freeItemAsAlt, noAlt);
+        }
+
+        public static ArrayObj OnGetDailyRewards(Hook_User.orig_getDailyRewards orig, User self)
+        {
+            ArrayObj res = new ArrayObj()
+            {
+                array = new(HashlinkMarshal.Module.KnownTypes.String, 0),
+                length = 0
+            };
+            if (SAVED_DATA == null) return res;
+
+            if (!SAVED_DATA.IsCheckSent("SpeedBlade")) res.push("SpeedBlade".AsHaxeString());
+            else if (!SAVED_DATA.IsCheckSent("DamageAura")) res.push("DamageAura".AsHaxeString());
+            else if (!SAVED_DATA.IsCheckSent("DashSword")) res.push("DashSword".AsHaxeString());
+            return res;
         }
     }
 }
