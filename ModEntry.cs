@@ -195,15 +195,9 @@ namespace DeadCellsArchipelago{
 
                     if (ARCHIPELAGO != null && ARCHIPELAGO.respawnUpScroll)
                     {
-                        foreach (var (itemName, number) in SAVED_DATA.GivenFillerItem)
+                        foreach (string itemName in GetUpScrolls())
                         {
-                            if (IsUpScroll(itemName))
-                            {
-                                for (int i = 0; i < number; i++)
-                                {
-                                    DropItemToPlayer(itemName);
-                                }
-                            }
+                            SAVED_DATA.GivenFillerItem[itemName] = 0;
                         }
                     }
                 }

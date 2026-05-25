@@ -900,18 +900,9 @@ namespace DeadCellsArchipelago {
             return false;
         }
 
-        public static bool IsUpScroll(string itemName)
+        public static List<string> GetUpScrolls()
         {
-            switch (itemName)
-            {
-                case "AnyUp":
-                case "BTUp":
-                case "BSUp":
-                case "TSUp":
-                case "AllUp":
-                    return true;
-            }
-            return false;
+            return ["AnyUp", "BTUp", "BSUp", "TSUp", "AllUp"];
         }
 
         public static Dictionary<string, int> BossHeadsCount()
