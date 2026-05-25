@@ -24,7 +24,7 @@ namespace DeadCellsArchipelago {
     public static class ItemManager
     {
         public static Hero? HERO { get; set; }
-        public static ArchipelagoSaveData? SAVED_DATA { get; set; }
+        public static ArchipelagoSaveData? SAVED_DATA { get; set; } = null;
         public static ArchipelagoManager? ARCHIPELAGO { get; set; }
         public static ItemMetaManager? ITEM_META_MANAGER { get; set; }
         public static User? USER { get; set; }

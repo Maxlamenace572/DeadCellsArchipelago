@@ -1007,7 +1007,7 @@
             }
         ]
     },
-    "Behemoth": {
+    "Boss_Behemoth": {
         "type": "boss",
         "dlc": "",
         "sources": [
@@ -1019,7 +1019,7 @@
             }
         ]
     },
-    "Beholder": {
+    "Boss_Beholder": {
         "type": "boss",
         "dlc": "",
         "sources": [
@@ -1031,7 +1031,7 @@
             }
         ]
     },
-    "TimeKeeper": {
+    "Boss_TimeKeeper": {
         "type": "boss",
         "dlc": "",
         "sources": [
@@ -1043,7 +1043,7 @@
             }
         ]
     },
-    "Giant": {
+    "Boss_Giant": {
         "type": "boss",
         "dlc": "RiseOfTheGiant",
         "sources": [
@@ -1055,7 +1055,7 @@
             }
         ]
     },
-    "KingsHand": {
+    "Boss_KingsHand": {
         "type": "boss",
         "dlc": "",
         "sources": [
@@ -1067,7 +1067,7 @@
             }
         ]
     },
-    "Collector": {
+    "Boss_Collector": {
         "type": "boss",
         "dlc": "RiseOfTheGiant",
         "sources": [
@@ -1079,7 +1079,7 @@
             }
         ]
     },
-    "MamaTick": {
+    "Boss_MamaTick": {
         "type": "boss",
         "dlc": "TheBadSeed",
         "sources": [
@@ -1091,7 +1091,7 @@
             }
         ]
     },
-    "GardenerBoss": {
+    "Boss_GardenerBoss": {
         "type": "boss",
         "dlc": "FatalFalls",
         "sources": [
@@ -1103,7 +1103,7 @@
             }
         ]
     },
-    "AmazonSurvival": {
+    "Boss_AmazonSurvival": {
         "type": "boss",
         "dlc": "TheQueenAndTheSea",
         "sources": [
@@ -1115,7 +1115,7 @@
             }
         ]
     },
-    "AmazonTactic": {
+    "Boss_AmazonTactic": {
         "type": "boss",
         "dlc": "TheQueenAndTheSea",
         "sources": [
@@ -1127,7 +1127,7 @@
             }
         ]
     },
-    "AmazonBrutal": {
+    "Boss_AmazonBrutal": {
         "type": "boss",
         "dlc": "TheQueenAndTheSea",
         "sources": [
@@ -1139,7 +1139,7 @@
             }
         ]
     },
-    "Queen": {
+    "Boss_Queen": {
         "type": "boss",
         "dlc": "TheQueenAndTheSea",
         "sources": [
@@ -1151,7 +1151,7 @@
             }
         ]
     },
-    "Death": {
+    "Boss_Death": {
         "type": "boss",
         "dlc": "Purple",
         "sources": [
@@ -1163,7 +1163,7 @@
             }
         ]
     },
-    "DookuBeast": {
+    "Boss_DookuBeast": {
         "type": "boss",
         "dlc": "Purple",
         "sources": [
@@ -7468,7 +7468,7 @@
             }
         ]
     },
-    "LighthouseKey": {
+    "ShipwreckKey": {
         "type": "item_no_blueprint",
         "dlc": "",
         "sources": [

@@ -54,5 +54,10 @@ namespace DeadCellsArchipelago
         {
             return pendingItems.Count == 0;
         }
+
+        public static void ClearQueue()
+        {
+            pendingItems = [];
+        }
     }
 }

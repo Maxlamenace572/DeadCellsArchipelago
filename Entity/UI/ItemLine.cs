@@ -38,7 +38,7 @@ namespace DeadCellsArchipelago {
             double scaleText = 1.0/3;
             text = new dc.ui.Text(null, true, false, new Ref<double>(ref scaleText), null, null);
 
-            if((itemId.Length >= 5 && (itemId[^5..] == "Enter" || itemId[^5..] == " Exit")) || GetBossId().Contains(itemId))
+            if(itemId.Length >= 5 && (itemId[^5..] == "Enter" || itemId[^5..] == " Exit" || itemId[..5] == "Boss_"))
             {
                 if(itemId[^5..] == "Enter")
                 {
@@ -84,6 +84,7 @@ namespace DeadCellsArchipelago {
                 }
                 else
                 {
+                    itemId = itemId[5..];
                     Icon bossIcon = Icon.Class.createMobIcon(itemId.AsHaxeString(), skill);
                     double px = 0.5;
                     double py = 0.5;
@@ -116,12 +117,6 @@ namespace DeadCellsArchipelago {
             Bounds boundsSkill = skill.getSize(new Bounds());
             text.x = boundsSkill.xMax + skill.x;
             text.y = (boundsSkill.yMax - (text.get_textHeight()*text.scaleX))/2 +skill.y;
-        }
-
-        public List<string> GetBossId()
-        {
-            return ["Behemoth", "Beholder", "TimeKeeper", "Giant", "KingsHand", "Collector", "MamaTick", "GardenerBoss",
-            "AmazonSurvival","AmazonTactic", "AmazonBrutal", "Queen", "Death", "DookuBeast"];
         }
 
         public void Highlight()

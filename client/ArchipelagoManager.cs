@@ -9,6 +9,7 @@ using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ItemQueue;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.Translator;
+using System.Collections.ObjectModel;
 
 namespace DeadCellsArchipelago
 {
@@ -51,6 +52,7 @@ namespace DeadCellsArchipelago
                 
                 // Subscribe to events
                 _session.Items.ItemReceived += OnItemReceived;
+                _session.Locations.CheckedLocationsUpdated += OnLocationsChecked;
                 _session.Socket.ErrorReceived += OnError;
                 _session.Socket.SocketClosed += OnDisconnected;
                 
@@ -87,9 +89,6 @@ namespace DeadCellsArchipelago
                         deathLinkService.EnableDeathLink();
                         deathLinkService.OnDeathLinkReceived += OnDeathLinkReceived;
                     }
-
-                    // Get every items received
-                    SyncReceivedItems();
                 }
                 else if (result is LoginFailure failure)
                 {
@@ -153,6 +152,13 @@ namespace DeadCellsArchipelago
                 Log.Error($"=== Erreur envoi check: {ex.Message} ===");
             }
         }
+
+        public void SyncAll()
+        {
+            ClearQueue();
+            SyncReceivedItems();
+            SyncReceivedLocations();
+        }
         
         private void SyncReceivedItems()
         {
@@ -167,9 +173,10 @@ namespace DeadCellsArchipelago
             {
                 if (SAVED_DATA != null && SAVED_DATA.IsItemReceived(item.ItemName))
                 {
-                    AddItemToQueue(item.ItemName);
-                    countDifferent++;
+                    continue;
                 }
+                AddItemToQueue(item.ItemName);
+                countDifferent++;
             }
             Log.Information($"=== Synchronisation ended with {countDifferent} new items ===");
         }
@@ -179,6 +186,45 @@ namespace DeadCellsArchipelago
             var item = helper.PeekItem();
             AddItemToQueue(item.ItemName);
             helper.DequeueItem();
+        }
+
+        private void SyncReceivedLocations()
+        {
+            if (_session == null || SAVED_DATA == null) return;
+            
+            var checkedLocations = _session.Locations.AllLocationsChecked;
+            
+            Log.Information($"=== Synchronisation: {checkedLocations.Count} locations on server ===");
+            
+            var countDifferent = 0;
+            foreach (var locationId in checkedLocations)
+            {
+                string locationName = _session.Locations.GetLocationNameFromId(locationId);
+
+                string locationGameId = locationName;
+                if (FullNameToIdKeyExist(locationGameId))
+                {
+                    locationGameId = GetId(locationGameId);
+                }
+
+                if (!SAVED_DATA.IsCheckSent(locationGameId))
+                {
+                    SaveChecks(locationGameId);
+                    countDifferent++;
+                }
+            }
+            Log.Information($"=== Synchronisation ended with {countDifferent} new location ===");
+        }
+
+        private void OnLocationsChecked(ReadOnlyCollection<long> newCheckedLocations)
+        {
+            if (_session == null || SAVED_DATA == null ) return;
+
+            foreach(long locationId in newCheckedLocations)
+            {
+                string locationName = _session.Locations.GetLocationNameFromId(locationId);
+                SAVED_DATA.SaveCheckSent(locationName);
+            }
         }
         
         private void OnError(Exception ex, string message)

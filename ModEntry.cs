@@ -266,26 +266,6 @@ namespace DeadCellsArchipelago{
             SAVED_DATA = new();
             if (data != null)
             {
-                ITEM_META_MANAGER = data.itemMeta;
-                var items = ITEM_META_MANAGER.getAllUnlockedWeapons();
-
-                if (items.length > 0)
-                {
-                    var hasNext = true;
-                    var i = 0;
-                    var item = items.getDyn(i);
-                    while (hasNext)
-                    {
-                        Log.Information($"{i} : {item}");
-                        i++;
-                        item = items.getDyn(i);
-                        if(item == null)
-                        {
-                            hasNext = false;
-                        }
-                    }
-                }
-                
                 USER = data;
 
                 Log.Information($"=== Chargement de la save slot {data.userId} ===");
@@ -300,6 +280,12 @@ namespace DeadCellsArchipelago{
                         SAVED_DATA = JsonConvert.DeserializeObject<ArchipelagoSaveData>(json) ?? new();
                         
                         Log.Information($"=== Données chargées : {SAVED_DATA.SentChecks.Count} checks envoyés ===");
+
+                        if (ARCHIPELAGO != null && loadDataInPlayMenu)
+                        {
+                            ARCHIPELAGO.SyncAll();
+                            loadDataInPlayMenu = false;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -310,8 +296,12 @@ namespace DeadCellsArchipelago{
             else
             {
                 Log.Information($"=== New Save ===");
+                if (ARCHIPELAGO != null && loadDataInPlayMenu)
+                {
+                    ARCHIPELAGO.SyncAll();
+                    loadDataInPlayMenu = false;
+                }
             }
-            Log.Information($"=== {SAVED_DATA.numberOfPokebombUse} ===");
             if(ARCHIPELAGO != null)
             {
                 SAVED_DATA.bscLevelToWin = ARCHIPELAGO.bscOption;

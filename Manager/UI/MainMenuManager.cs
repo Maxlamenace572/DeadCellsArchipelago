@@ -16,6 +16,7 @@ namespace DeadCellsArchipelago {
         public static dc.h2d.TextInput? slotName = null;
         public static dc.h2d.TextInput? password = null;
         public static Text? connectButton = null;
+        public static bool loadDataInPlayMenu = false;
 
         public static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
@@ -228,16 +229,22 @@ namespace DeadCellsArchipelago {
                         SaveFields();
                         var archipelago = new ArchipelagoManager();
                         archipelago.Connect(serverIp.text.ToString(), slotName.text.ToString(), password.text?.ToString());
-                        ARCHIPELAGO = archipelago;
-                        if (ARCHIPELAGO.IsConnected)
+                        if (archipelago.IsConnected)
                         {
                             connectionStatus.set_text("Connected".AsHaxeString());
                             connectionStatus.set_textColor(2883371);
+                            ARCHIPELAGO = archipelago;
+                            
+                            if (SAVED_DATA != null)
+                            {
+                                ARCHIPELAGO.SyncAll();
+                            }
                         }
                         else
                         {
                             connectionStatus.set_text("Failed to Connect".AsHaxeString());
                             connectionStatus.set_textColor(16711680);
+                            archipelago.Disconnect();
                         }
                     },
                     onMove = (e) =>
@@ -269,6 +276,7 @@ namespace DeadCellsArchipelago {
         public static void OnPlayMenu(Hook_TitleScreen.orig_playMenu orig, TitleScreen self)
         {
             orig(self);
+            loadDataInPlayMenu = true;
             self.news.hidden = true;
             self.news.updateVisible();
         }
