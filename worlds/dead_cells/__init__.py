@@ -370,15 +370,15 @@ class DeadCellsWorld(World):
 
     # Redundancy: Remove Astrolab and Observatory keys from item fill if <5 BSC settings
         if (
-            "Astrolab" in itempool
+            "Astrolab Unlock" in itempool
             and self.options.boss_cells.value != 5
         ):
-            itempool.remove("Astrolab")
+            itempool.remove("Astrolab Unlock")
         if (
-            "Observatory" in itempool
+            "Observatory Unlock" in itempool
             and self.options.boss_cells.value != 5
         ):
-            itempool.remove("Observatory")
+            itempool.remove("Observatory Unlock")
 
     # Calculate remaining slots
         remaining_slots = total_locations - len(itempool)

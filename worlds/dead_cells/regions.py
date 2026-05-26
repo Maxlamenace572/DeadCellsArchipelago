@@ -81,7 +81,7 @@ TRANSITIONS = {
     ],
     "PrisonStart": [
         {"to": "PrisonCourtyard", "require": None},
-        {"to": "SewerShort", "require": "Vine Rune"},
+        {"to": "SewerShort", "require": [["Vine Rune"], ["Spider Rune"]] },
         {"to": "Greenhouse", "require": ["Teleportation Rune", "Dilapidated Arboretum Unlock"]},
         {"to": "PurpleGarden", "require": "Castle Outskirts Unlock"}
     ],
