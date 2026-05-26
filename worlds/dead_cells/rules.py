@@ -85,7 +85,7 @@ SKIN_ITEMS = [
     "Faithful Hand of the King Outfit",
     "Devoted Hand of the King Outfit",
 
-    "Statue Outfit",
+    "Rocky Outfit",
     "Fallen Collector's Outfit",
 
     # mama tick

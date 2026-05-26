@@ -1907,7 +1907,7 @@ LOCATION_TABLE: Dict[str, dict] = {
         "dlc": "FatalFalls", "min_bc": 0, "item": "GiantStaff",
         "sources": [{'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'AxeStatue'}],
     },
-    "Statue Outfit": {
+    "Rocky Outfit": {
         "id": 0x022C, "region": "Checks", "type": "skin",
         "dlc": "FatalFalls", "min_bc": 0, "item": "Statue",
         "sources": [{'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'AxeStatue'}],
