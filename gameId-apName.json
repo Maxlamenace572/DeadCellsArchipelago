@@ -551,6 +551,16 @@
     "Trap_RemoveGold": "Gold Trap",
     "Trap_BreakWeapon": "Weapon Break Trap",
     "Trap_InvertControls": "Reverse Trap",
-    "Trap_FlawlessChallenge": "Challenge Trap"
-
+    "Trap_FlawlessChallenge": "Challenge Trap",
+    "D_Behemoth": "Concierge Defeat",
+    "D_Beholder": "Conjunctivius Defeat",
+    "D_TimeKeeper": "Time Keeper Defeat",
+    "D_Giant": "Giant Defeat",
+    "D_KingsHand": "Hand of the King Defeat",
+    "D_Collector": "Collector Defeat",
+    "D_MamaTick": "Mama Tick Defeat",
+    "D_GardenerBoss": "Scarecrow Defeat",
+    "D_Queen": "Queen Defeat",
+    "D_Death": "Death Defeat",
+    "D_DookuBeast": "Dracula Defeat"
 }

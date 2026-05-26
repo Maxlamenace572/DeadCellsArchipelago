@@ -81,6 +81,18 @@ namespace DeadCellsArchipelago {
             }
         }
 
+        public static void SendUTBossCheckHelper(string bossName)
+        {
+            if (ARCHIPELAGO != null)
+            {
+                ARCHIPELAGO.SendCheck("D_" + bossName, bossName, "Boss:");
+            }
+            else
+            {
+                Log.Error("=== Error while sending Boss check ===");
+            }
+        }
+
         public static void OnOnDie(Hook_Mob.orig_onDie orig, Mob self)
         {
             orig(self);

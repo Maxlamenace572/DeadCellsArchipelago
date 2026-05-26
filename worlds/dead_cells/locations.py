@@ -1242,12 +1242,12 @@ LOCATION_TABLE: Dict[str, dict] = {
         "dlc": "FatalFalls", "min_bc": 2, "item": "Gardener2",
         "sources": [{'biome': 'GardenerStage', 'min_bc': 2, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy'}],
     },
-    "Festering Scarecrow Outfit": {
+    "Cutecrow Outfit": {
         "id": 0x0143, "region": "Checks", "type": "skin",
         "dlc": "FatalFalls", "min_bc": 3, "item": "Gardener3",
         "sources": [{'biome': 'GardenerStage', 'min_bc': 3, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy'}],
     },
-    "Murderous Scarecrow Outfit": {
+    "Gothic Scarecrow Outfit": {
         "id": 0x0144, "region": "Checks", "type": "skin",
         "dlc": "FatalFalls", "min_bc": 4, "item": "Gardener4",
         "sources": [{'biome': 'GardenerStage', 'min_bc': 4, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy'}],
@@ -1422,7 +1422,7 @@ LOCATION_TABLE: Dict[str, dict] = {
         "dlc": "Purple", "min_bc": 1, "item": "Dooku1",
         "sources": [{'biome': 'DookuArena', 'min_bc': 1, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy'}],
     },
-    "Grand Dracula Outfit": {
+    "Doctor Dracula Outfit": {
         "id": 0x0167, "region": "Checks", "type": "skin",
         "dlc": "Purple", "min_bc": 2, "item": "Dooku2",
         "sources": [{'biome': 'DookuArena', 'min_bc': 2, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy'}],
@@ -1942,7 +1942,7 @@ LOCATION_TABLE: Dict[str, dict] = {
         "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "Staphy", "rarity": "Rare",
         "sources": [{'biome': 'Shipwreck', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'BoilerRoom'}],
     },
-    "Homunculus Rune": {"id": 0x0233, "region": "Throne", "type": "rune", "dlc": "", "item": "HomKey"},
+    "Homunculus Rune": {"id": 0x0233, "region": "Throne", "type": "rune", "dlc": "", "item": "HomKey", "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'rune'}],},
     "Maria Renard Outfit": {
         "id": 0x0234, "region": "Checks", "type": "skin",
         "dlc": "Purple", "min_bc": 0, "item": "Maria",
