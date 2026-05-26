@@ -222,8 +222,10 @@ namespace DeadCellsArchipelago
 
             foreach(long locationId in newCheckedLocations)
             {
-                string locationName = _session.Locations.GetLocationNameFromId(locationId);
-                SAVED_DATA.SaveCheckSent(locationName);
+                string locationGameId = _session.Locations.GetLocationNameFromId(locationId);;
+                if (FullNameToIdKeyExist(locationGameId)) locationGameId = GetId(locationGameId);
+
+                if (!SAVED_DATA.IsCheckSent(locationGameId)) SaveChecks(locationGameId);
             }
         }
         

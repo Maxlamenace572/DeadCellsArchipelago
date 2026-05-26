@@ -169,11 +169,10 @@ namespace DeadCellsArchipelago{
             Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
             Hook_User.getPokebombBlueprintFor += OnGetPokebombBlueprintFor;
             Hook_ItemMetaManager.hasRevealedItemOrInCollector += OnHasRevealedItemOrInCollector;
-            Hook_Beheaded.displayCursePopup += OnDisplayCursePopup;
-            Hook_Shipwreck.canGenerateThisLoreRoom += OnCanGenerateThisLoreRoomShipwreck;
             Hook_User.getDailyRewards += OnGetDailyRewards;
             Hook_MobsGen.getDmgTier += OnGetDmgTier;
             Hook_MobsGen.getLifeTier += OnGetLifeTier;
+            UnlockItemHooks();
             Log.Information("=== Archipelago hooks loaded ! ===");
         }
 
