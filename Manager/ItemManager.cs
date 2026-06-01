@@ -26,7 +26,6 @@ namespace DeadCellsArchipelago {
         public static Hero? HERO { get; set; }
         public static ArchipelagoSaveData? SAVED_DATA { get; set; } = null;
         public static ArchipelagoManager? ARCHIPELAGO { get; set; }
-        public static ItemMetaManager? ITEM_META_MANAGER { get; set; }
         public static User? USER { get; set; }
         public static bool useOriginalUnlockItem { get; set; } = false;
         public static bool useOriginalRevealItem { get; set; } = false;
@@ -283,7 +282,11 @@ namespace DeadCellsArchipelago {
         //the boolean returned here is for saving or not the item in local data in item received
         public static bool GiveItemFromArchipelago(string itemName, string LogName)
         {
-            if (ITEM_META_MANAGER != null) {
+            if (SAVED_DATA == null) Log.Error($"--- saved data at null");
+            if (USER == null) {Log.Error($"--- USER at null"); return false;}
+            if (USER.itemMeta == null) Log.Error($"--- item meta at null");
+
+            if (USER.itemMeta != null) {
                 if(IsItemProgressive(itemName))
                 {
                     string? unlockedName = HandleProgressive(itemName);
@@ -306,7 +309,7 @@ namespace DeadCellsArchipelago {
                     case "WallJumpKey":
                     case "HomKey":
                     case "ExploKey":
-                        ITEM_META_MANAGER.addPermanentItem(itemName.AsHaxeString());
+                        USER.itemMeta.addPermanentItem(itemName.AsHaxeString());
                         GiveItemToPlayer(itemName);
                         RuneManager.ActivateMinimapTracking(itemName);
                         LogItem(itemName);
@@ -316,16 +319,20 @@ namespace DeadCellsArchipelago {
                         string? unlockedName = HandleBossRune();
                         if(unlockedName != null)
                         {
-                            ITEM_META_MANAGER.addPermanentItem(unlockedName.AsHaxeString());
+                            USER.itemMeta.addPermanentItem(unlockedName.AsHaxeString());
                             LogItem(unlockedName);
                             AddToHistory(LogName);
                         }
                         return false;
-                    case "ShipwreckKey" :
+                    case "ShipwreckKey":
                         GiveItemToPlayer(itemName);
                         HERO?.hudInitItems();
                         LogItem(itemName);
                         AddToHistory(LogName);
+                        return true;
+                    case "BossRushUnlock":
+                        LogItem(itemName);
+                        USER?.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
                         return true;
                 }
                 if (itemName.Length >= 5 && itemName[..5] == "Trap_")
@@ -405,9 +412,9 @@ namespace DeadCellsArchipelago {
                 if(itemName.Length >= 3 && itemName[..3] == "ASP" || InHeadList(itemName))
                 {
                     var progress = new ItemProgress(itemName.AsHaxeString());
-                    ITEM_META_MANAGER.itemProgress.push(progress);
+                    USER.itemMeta.itemProgress.push(progress);
                     UnlockItem(itemName);
-                    ITEM_META_MANAGER.getItemProgress(itemName.AsHaxeString()).unlocked = true;
+                    USER.itemMeta.getItemProgress(itemName.AsHaxeString()).unlocked = true;
                     if (IsUnlockedByDefault(itemName) && SAVED_DATA != null)
                     {
                         SAVED_DATA.AddBaseItemUnlocked(itemName);
@@ -610,10 +617,10 @@ namespace DeadCellsArchipelago {
 
         public static void UnlockItem(string itemId)
         {
-            if(ITEM_META_MANAGER != null)
+            if(USER != null)
             {
                 useOriginalUnlockItem = true;
-                ITEM_META_MANAGER.unlockItem(itemId.AsHaxeString());
+                USER.itemMeta.unlockItem(itemId.AsHaxeString());
                 useOriginalUnlockItem = false;
             }
         }

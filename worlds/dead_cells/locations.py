@@ -2128,9 +2128,23 @@ LOCATION_TABLE: Dict[str, dict] = {
     "Scarecrow Defeat":        {"id": 0x025C, "region": "GardenerStage", "type": "boss", "dlc": "FatalFalls", "item": None, "sources": [{'biome': 'GardenerStage', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'boss'}],},
     "Giant Defeat":            {"id": 0x025D, "region": "Giant", "type": "boss", "dlc": "RiseOfTheGiant", "item": None, "sources": [{'biome': 'Giant', 'min_bc': 0, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'boss'}],},
     "Hand of the King Defeat": {"id": 0x025E, "region": "Throne", "type": "boss", "dlc": "", "item": None, "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'boss'}],},
-    "Queen Defeat":            {"id": 0x026F, "region": "QueenArena", "type": "boss", "dlc": "TheQueenAndTheSea", "item": None, "sources": [{'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'boss'}],},
+    "Queen Defeat":            {"id": 0x025F, "region": "QueenArena", "type": "boss", "dlc": "TheQueenAndTheSea", "item": None, "sources": [{'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'boss'}],},
     "Dracula Defeat":          {"id": 0x0260, "region": "DookuArena", "type": "boss", "dlc": "Purple", "item": None, "sources": [{'biome': 'DookuArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'boss'}],},
     "Collector Defeat":        {"id": 0x0261, "region": "Observatory", "type": "boss", "dlc": "RiseOfTheGiant", "item": None, "sources": [{'biome': 'Observatory', 'min_bc': 5, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'boss'}],},
+    # end Boss Event Locations
+    
+    # Boss Rush
+    "BossRushUnlock": {"id": 0x0262, "region": "Checks", "type": "rune", "dlc": "", "item": "BossRushUnlock", "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'rune'}, {'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'rune'}, {'biome': 'DookuArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'rune'}],},
+    "Boss Knight Outfit": {"id": 0x0263, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "Mentor", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Barbarian Boss Knight Outfit": {"id": 0x0264, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "Mentor1", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Triumphant Boss Knight Outfit": {"id": 0x0265, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "Mentor2", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Luminous Boss Knight Outfit": {"id": 0x0266, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "Mentor3", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Triumph Outfit": {"id": 0x0267, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "VictoriusBeheaded", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Bisonnica Triumph Outfit": {"id": 0x0268, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "VictoriusBeheaded1", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Mentoral Triumph Outfit": {"id": 0x0269, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "VictoriusBeheaded2", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Radiant Triumph Outfit": {"id": 0x026A, "region": "PrisonStart", "type": "skin", "dlc": "", "item": "VictoriusBeheaded3", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+    "Peril Glyphs": {"id": 0x026B, "region": "PrisonStart", "type": "blueprint_floor", "dlc": "", "item": "HydraSpell", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+    "Taunt": {"id": 0x026C, "region": "PrisonStart", "type": "blueprint_floor", "dlc": "", "item": "Taunt", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
 }
 
 def location_id(name: str) -> int:

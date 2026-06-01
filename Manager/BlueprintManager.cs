@@ -32,12 +32,12 @@ namespace DeadCellsArchipelago {
         public static void UnlockBlueprint(string blueprintId)
         {
             //Log.Information($" {HERO == null}  {ITEM_META_MANAGER == null} ===");
-            if (HERO != null && ITEM_META_MANAGER != null)
+            if (HERO != null && USER != null)
             {
                 try
                 {
                     useOriginalHasRevealItem = true;
-                    ITEM_META_MANAGER.revealItem(blueprintId.AsHaxeString(), true);
+                    USER.itemMeta.revealItem(blueprintId.AsHaxeString(), true);
                     useOriginalHasRevealItem = false;
                     Log.Information($"=== Blueprint unlocked:  {blueprintId} ===");
 

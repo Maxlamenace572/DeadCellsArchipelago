@@ -15,6 +15,7 @@ using dc.tool;
 using dc.tool.atk;
 using Hashlink.Virtuals;
 using HaxeProxy.Runtime;
+using ModCore.Utilities;
 using static DeadCellsArchipelago.ItemManager;
 
 namespace DeadCellsArchipelago {
@@ -49,6 +50,8 @@ namespace DeadCellsArchipelago {
             Hook_Merchant.onActivate += onActivateMerchant;
             Hook_MerchantPan.canBeActivated += OnCanBeActivatedMerchantPan;
             Hook_MerchantPan.postUpdate += OnPostUpdateMerchantPan;
+            Hook_Game.loadMainLevel += OnLoadMainLevel;
+            Hook_PrisonStart.buildPrisonHUBZDoor += OnBuildPrisonHUBZDoorPrisonStart;
         }
 
         public static void OnDisplayCursePopup(Hook_Beheaded.orig_displayCursePopup orig, Beheaded self, int count, dc.String reason, Ref<bool> hidePopup)
@@ -232,6 +235,18 @@ namespace DeadCellsArchipelago {
             useModdedHasUnlock = true;
             orig(self);
             useModdedHasUnlock = false;
+        }
+
+        private static void OnLoadMainLevel(Hook_Game.orig_loadMainLevel orig, Game self, LevelTransition cine, dc.String id, Ref<bool> activate, int? forcedSeed)
+        {//BossRushUnlock (part 1)
+            if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 0);
+            orig(self, cine, id, activate, forcedSeed);
+        }
+
+        private static void OnBuildPrisonHUBZDoorPrisonStart(Hook_PrisonStart.orig_buildPrisonHUBZDoor orig, PrisonStart self)
+        {//BossRushUnlock (part 2)
+            if (SAVED_DATA != null && SAVED_DATA.IsItemReceived("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
+            orig(self);
         }
     }
 }
