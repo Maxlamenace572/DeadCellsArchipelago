@@ -236,6 +236,13 @@ namespace DeadCellsArchipelago {
                     onClick = (e) =>
                     {
                         SaveFields();
+
+                        if (ARCHIPELAGO != null)
+                        {
+                            ARCHIPELAGO.Disconnect();
+                            ARCHIPELAGO = null;
+                        }
+
                         var archipelago = new ArchipelagoManager();
                         archipelago.Connect(serverIp.text.ToString(), slotName.text.ToString(), password.text?.ToString());
                         if (archipelago.IsConnected)
