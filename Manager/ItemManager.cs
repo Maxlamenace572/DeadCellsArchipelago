@@ -612,6 +612,8 @@ namespace DeadCellsArchipelago {
         {
             if(USER != null && USER.game != null)
             {
+                if(USER.game.log == null) Log.Error($"game's log at null");
+                
                 showBlueprintLog = true;
                 USER.game.log?.blueprint(itemId.AsHaxeString(), "Always".AsHaxeString(), false, false);
                 showBlueprintLog = false;

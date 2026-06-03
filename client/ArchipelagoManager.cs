@@ -10,19 +10,20 @@ using static DeadCellsArchipelago.ItemQueue;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.Translator;
 using System.Collections.ObjectModel;
+using Archipelago.MultiClient.Net.MessageLog.Messages;
 
 namespace DeadCellsArchipelago
 {
     public class ArchipelagoManager
     {
-        private ArchipelagoSession? _session;
+        private ArchipelagoSession? session;
         private DeathLinkService? deathLinkService;
-        private bool _isConnected;
+        public bool isConnected;
         
         // Configurate connection
-        private string _serverUrl = "localhost:38281";  // By default
-        private string _slotName = "";
-        private string? _password = null;
+        private string serverUrl = "localhost:38281";
+        private string slotName = "";
+        private string? password = null;
 
         //options
         public int bscOption;
@@ -36,38 +37,39 @@ namespace DeadCellsArchipelago
         public bool theQueenAndTheSea;
         public bool returnToCastlevania;
         
-        public bool IsConnected => _isConnected;
-        
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
-            _serverUrl = serverUrl;
-            _slotName = slotName;
-            _password = password;
+            this.serverUrl = serverUrl;
+            this.slotName = slotName;
+            this.password = password;
             
             try
             {
-                Log.Information($"=== Connecting to Archipelago: {_serverUrl} (slot: {_slotName}) ===");
+                Log.Information($"=== Connecting to Archipelago: {serverUrl} (slot: {slotName}) ===");
                 
-                _session = ArchipelagoSessionFactory.CreateSession(_serverUrl);
+                session = ArchipelagoSessionFactory.CreateSession(serverUrl);
                 
                 // Subscribe to events
-                _session.Items.ItemReceived += OnItemReceived;
-                _session.Locations.CheckedLocationsUpdated += OnLocationsChecked;
-                _session.Socket.ErrorReceived += OnError;
-                _session.Socket.SocketClosed += OnDisconnected;
+                session.Items.ItemReceived += OnItemReceived;
+                session.Locations.CheckedLocationsUpdated += OnLocationsChecked;
+                session.Socket.ErrorReceived += OnError;
+                session.Socket.SocketClosed += OnDisconnected;
+                session.MessageLog.OnMessageReceived += OnMessageReceived;
+
+                //session
                 
                 // Connect
-                var result = _session.TryConnectAndLogin(
-                    "Dead Cells",           // Game name
-                    _slotName,              // Slot name
+                var result = session.TryConnectAndLogin(
+                    "Dead Cells",
+                    slotName,
                     ItemsHandlingFlags.AllItems,
                     new Version(6, 7, 0),
-                    password: _password
+                    password: password
                 );
                 
                 if (result is LoginSuccessful success)
                 {
-                    _isConnected = true;
+                    isConnected = true;
                     Log.Information($"=== Connected to Archipelago ! Slot #{success.Slot} ===");
                     
                     var slotData = success.SlotData;
@@ -85,37 +87,37 @@ namespace DeadCellsArchipelago
 
                     if (deathLinkEnabled >= 0)
                     {
-                        deathLinkService = _session.CreateDeathLinkService();
+                        deathLinkService = session.CreateDeathLinkService();
                         deathLinkService.EnableDeathLink();
                         deathLinkService.OnDeathLinkReceived += OnDeathLinkReceived;
                     }
                 }
                 else if (result is LoginFailure failure)
                 {
-                    _isConnected = false;
+                    isConnected = false;
                     Log.Error($"=== Failed to connect to Archipelago: {string.Join(", ", failure.Errors)} ===");
                 }
             }
             catch (Exception ex)
             {
-                _isConnected = false;
+                isConnected = false;
                 Log.Error($"=== Error connecting to Archipelago: {ex.Message} ===");
             }
         }
-        
+
         public void Disconnect()
         {
-            if (_session != null)
+            if (session != null)
             {
-                _session.Socket.DisconnectAsync();
-                _isConnected = false;
-                Log.Information("=== Deconnecting from Archipelago ===");
+                session.Socket.DisconnectAsync();
+                isConnected = false;
+                Log.Information("=== Disconnecting from Archipelago ===");
             }
         }
         
         public void SendCheck(string locationName, string internalId, string message)
         {
-            if (!_isConnected || _session == null)
+            if (!isConnected || session == null)
             {
                 Log.Warning($"=== Impossible to send check to {locationName}: not connected ===");
                 return;
@@ -129,7 +131,7 @@ namespace DeadCellsArchipelago
                 }
 
                 // Get localization id from name
-                var locationId = _session.Locations.GetLocationIdFromName("Dead Cells", locationName);
+                var locationId = session.Locations.GetLocationIdFromName("Dead Cells", locationName);
                 
                 if (locationId == -1)
                 {
@@ -137,34 +139,34 @@ namespace DeadCellsArchipelago
                     return;
                 }
 
-                if (_session.Locations.AllLocationsChecked.Contains(locationId))
+                if (session.Locations.AllLocationsChecked.Contains(locationId))
                 {
                     Log.Error($"=== Location already sent: {locationName} ===");
                     return;
                 }
 
-                _session.Locations.CompleteLocationChecks(locationId);
+                session.Locations.CompleteLocationChecks(locationId);
                 Log.Information($"=== Location sent: {locationName} (ID: {locationId}) ===");
                 SaveChecks(internalId);
             }
             catch (Exception ex)
             {
-                Log.Error($"=== Erreur envoi check: {ex.Message} ===");
+                Log.Error($"=== Error while sending chacke: {ex.Message} ===");
             }
         }
 
         public void SyncAll()
         {
-            ClearQueue();
+            ClearQueues();
             SyncReceivedItems();
             SyncReceivedLocations();
         }
         
         private void SyncReceivedItems()
         {
-            if (_session == null) return;
+            if (session == null) return;
             
-            var receivedItems = _session.Items.AllItemsReceived;
+            var receivedItems = session.Items.AllItemsReceived;
             
             Log.Information($"=== Synchronisation: {receivedItems.Count} items on server ===");
             
@@ -190,16 +192,16 @@ namespace DeadCellsArchipelago
 
         private void SyncReceivedLocations()
         {
-            if (_session == null || SAVED_DATA == null) return;
+            if (session == null || SAVED_DATA == null) return;
             
-            var checkedLocations = _session.Locations.AllLocationsChecked;
+            var checkedLocations = session.Locations.AllLocationsChecked;
             
             Log.Information($"=== Synchronisation: {checkedLocations.Count} locations on server ===");
             
             var countDifferent = 0;
             foreach (var locationId in checkedLocations)
             {
-                string locationName = _session.Locations.GetLocationNameFromId(locationId);
+                string locationName = session.Locations.GetLocationNameFromId(locationId);
 
                 string locationGameId = locationName;
                 if (FullNameToIdKeyExist(locationGameId))
@@ -218,11 +220,11 @@ namespace DeadCellsArchipelago
 
         private void OnLocationsChecked(ReadOnlyCollection<long> newCheckedLocations)
         {
-            if (_session == null || SAVED_DATA == null ) return;
+            if (session == null || SAVED_DATA == null ) return;
 
             foreach(long locationId in newCheckedLocations)
             {
-                string locationGameId = _session.Locations.GetLocationNameFromId(locationId);;
+                string locationGameId = session.Locations.GetLocationNameFromId(locationId);;
                 if (FullNameToIdKeyExist(locationGameId)) locationGameId = GetId(locationGameId);
 
                 if (!SAVED_DATA.IsCheckSent(locationGameId)) SaveChecks(locationGameId);
@@ -231,13 +233,13 @@ namespace DeadCellsArchipelago
         
         private void OnError(Exception ex, string message)
         {
-            Log.Error($"=== Erreur Archipelago: {message} - {ex.Message} ===");
+            Log.Error($"=== Archipelago Error: {message} - {ex.Message} ===");
         }
         
         private void OnDisconnected(string reason)
         {
-            _isConnected = false;
-            Log.Warning($"=== Déconnecté d'Archipelago: {reason} ===");
+            isConnected = false;
+            Log.Warning($"=== Disconnected from Archipelago: {reason} ===");
         }
 
         private void SaveChecks(string internalId)
@@ -258,13 +260,13 @@ namespace DeadCellsArchipelago
 
         public void SendVictory()
         {
-            if (_session == null) return;
+            if (session == null) return;
             
             var statusUpdate = new StatusUpdatePacket
             {
                 Status = ArchipelagoClientState.ClientGoal
             };
-            _session.Socket.SendPacket(statusUpdate);
+            session.Socket.SendPacket(statusUpdate);
         }
 
         private void OnDeathLinkReceived(DeathLink deathLink)
@@ -279,10 +281,25 @@ namespace DeadCellsArchipelago
             {
                 if(message == "")
                 {
-                    message = $"{_slotName} died in Dead Cells";
+                    message = $"{slotName} died in Dead Cells";
                 }
-                if(deathLinkService != null && _session != null) {
-                    deathLinkService.SendDeathLink(new DeathLink(_slotName, message));
+                if(deathLinkService != null && session != null) {
+                    deathLinkService.SendDeathLink(new DeathLink(slotName, message));
+                }
+            }
+        }
+
+        private void OnMessageReceived(LogMessage message)
+        {
+            if (message is ItemSendLogMessage)
+            {
+                if (message is ItemCheatLogMessage || message is HintItemSendLogMessage) return;
+
+                ItemSendLogMessage itemMessage = (ItemSendLogMessage) message;
+                if (itemMessage.IsSenderTheActivePlayer && !itemMessage.IsReceiverTheActivePlayer)
+                {
+                    Log.Warning($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
+                    AddLogToQueue($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
                 }
             }
         }

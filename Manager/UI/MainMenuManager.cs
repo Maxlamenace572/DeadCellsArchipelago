@@ -82,11 +82,12 @@ namespace DeadCellsArchipelago {
                 };
                 index++;
 
-                if (ARCHIPELAGO == null || ARCHIPELAGO.IsConnected == false)
+                if (ARCHIPELAGO == null || ARCHIPELAGO.isConnected == false)
                 {
                     connectionStatus.set_text("Not Connected".AsHaxeString());
                     connectionStatus.set_textColor(16711680);
-                } else
+                }
+                else
                 {
                     connectionStatus.set_text("Connected".AsHaxeString());
                     connectionStatus.set_textColor(2883371);
@@ -245,7 +246,7 @@ namespace DeadCellsArchipelago {
 
                         var archipelago = new ArchipelagoManager();
                         archipelago.Connect(serverIp.text.ToString(), slotName.text.ToString(), password.text?.ToString());
-                        if (archipelago.IsConnected)
+                        if (archipelago.isConnected)
                         {
                             connectionStatus.set_text("Connected".AsHaxeString());
                             connectionStatus.set_textColor(2883371);

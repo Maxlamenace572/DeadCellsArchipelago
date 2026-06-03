@@ -45,6 +45,7 @@ using dc.ui.pause;
 using dc.en.hero;
 using dc.tool.bossRush;
 using dc.hxd.snd;
+using dc.ui.icon;
 
 
 namespace DeadCellsArchipelago{
@@ -179,6 +180,7 @@ namespace DeadCellsArchipelago{
             Hook__Achievements.hasAchievement += OnHasAchievement;
             Hook__Achievements.setAchievement += OnSetAchievement;
             Hook__ItemTools.getBlueprintLocalizedName += OnGetBlueprintLocalizedName;
+            Hook__Icon.createItemIcon += OnCreateItemIcon;
             Log.Information("=== Archipelago hooks loaded ! ===");
             //LogManager
             //BrBlueprint
@@ -190,6 +192,7 @@ namespace DeadCellsArchipelago{
             if (HERO != null && HERO.awake)
             {    
                 GiveItemInQueue();
+                ShowLogInQueue();
                 CheckDeathLink();
 
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)

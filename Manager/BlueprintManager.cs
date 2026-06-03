@@ -4,12 +4,16 @@ using dc.hl.types;
 using dc.level;
 using dc.tool;
 using dc.ui;
+using dc.ui.icon;
 using Hashlink.Marshaling;
 using Hashlink.Virtuals;
 using ModCore.Utilities;
 using Serilog;
 
 using static DeadCellsArchipelago.ItemManager;
+using static DeadCellsArchipelago.ImageManager;
+using dc.h2d;
+using HaxeProxy.Runtime;
 
 namespace DeadCellsArchipelago {
     public static class BlueprintManager
@@ -18,6 +22,7 @@ namespace DeadCellsArchipelago {
         public static bool useOriginalHasRevealItem = false;
         public static bool changeLogDesc = false;
         public static string logDesc = "";
+        public static bool changeLogIcon = false;
 
         //Called when the hero get a blueprint, picked in game or by UnlockBlueprint.
         public static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
@@ -124,6 +129,21 @@ namespace DeadCellsArchipelago {
                 return logDesc.AsHaxeString();
             }
             return orig(item);
+        }
+
+        public static Icon OnCreateItemIcon(Hook__Icon.orig_createItemIcon orig, dc.String itemKind, dc.h2d.Object parent)
+        {
+            if (changeLogIcon)
+            {
+                changeLogIcon = false;
+                Tile logoTile = LoadTileFromPng(GetResPath("logo.png"));
+                Icon res = new Icon(logoTile, parent);
+                res.scaleToSize(40, 40);
+                double center = 0.5;
+                res.setCenterRatio(new Ref<double>(ref center), new Ref<double>(ref center));
+                return res;
+            }
+            return orig(itemKind, parent);
         }
     }
 }
