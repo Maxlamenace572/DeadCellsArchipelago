@@ -81,7 +81,7 @@ TRANSITIONS = {
     ],
     "PrisonStart": [
         {"to": "PrisonCourtyard", "require": None},
-        {"to": "SewerShort", "require": "Vine Rune"},
+        {"to": "SewerShort", "require": [["Vine Rune"], ["Spider Rune"]] },
         {"to": "Greenhouse", "require": ["Teleportation Rune", "Dilapidated Arboretum Unlock"]},
         {"to": "PurpleGarden", "require": "Castle Outskirts Unlock"}
     ],
@@ -291,6 +291,7 @@ def build_rule(requirements, world: "DeadCellsWorld"):
 
 
 RARITY_BC_REQUIREMENTS = {
+    "Uncommon": 1,
     "Rare": 2,
     "Legendary": 3,
 }
@@ -312,10 +313,10 @@ def _inject_rarity_into_sources(loc_data):
 
 def _source_meets_rarity(state, player, source):
     """
-    Only Rare and Legendary require Specialist's Showroom.
+    Uncommon, Rare and Legendary require Specialist's Showroom.
     """
     return (
-        source.get("rarity") not in ("Rare", "Legendary")
+        source.get("rarity") not in ("Uncommon", "Rare", "Legendary")
         or state.has("The Specialist's Showroom", player)
     )
 

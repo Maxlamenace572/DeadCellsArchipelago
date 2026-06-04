@@ -536,6 +536,62 @@ LOCATION_RULES = [
         lambda state: state.can_reach("SewerShort", "Region", world.player)
     )),
 
+    # Cursed Biome drops
+    (
+        "Anathema", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Cursed Flask", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Demon Strength", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Misericorde", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Damned Vigor", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Indulgence", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+
 
     # ── PrisonCourtyard mid-biome gate (Vine Rune) ────────────────────────────
     ("Phaser", _has("Vine Rune")),

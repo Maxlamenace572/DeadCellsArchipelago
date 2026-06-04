@@ -299,7 +299,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Adrenaline": {
         "id": 0x0086, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 3, "item": "P_DodgeHeal",
+        "dlc": "", "min_bc": 3, "item": "P_DodgeHeal", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonStart', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'SewerShort', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'PrisonDepths', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'PrisonRoof', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'StiltVillage', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'AncientTemple', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'Castle', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'Greenhouse', 'min_bc': 3, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'Swamp', 'min_bc': 3, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'Cliff', 'min_bc': 3, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Rampager'}, {'biome': 'Shipwreck', 'min_bc': 3, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'Rampager'}],
     },
     "Double Crossb-o-matic": {
@@ -324,12 +324,12 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Oven Axe": {
         "id": 0x008B, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 2, "item": "HeavyAxe",
+        "dlc": "", "min_bc": 2, "item": "HeavyAxe", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonStart', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Enforcer'}, {'biome': 'PrisonRoof', 'min_bc': 4, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Enforcer'}, {'biome': 'ClockTower', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Enforcer'}, {'biome': 'Cavern', 'min_bc': 2, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'blueprint_enemy', 'mob': 'Enforcer'}, {'biome': 'Distillery', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Enforcer'}, {'biome': 'Bank', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Enforcer'}],
     },
     "Infantry Bow": {
         "id": 0x008C, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "CloseCombatBow",
+        "dlc": "", "min_bc": 0, "item": "CloseCombatBow", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 0, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Archer'}, {'biome': 'SewerShort', 'min_bc': 0, 'max_bc': 0, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Archer'}, {'biome': 'PrisonDepths', 'min_bc': 0, 'max_bc': 0, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Archer'}, {'biome': 'PrisonRoof', 'min_bc': 0, 'max_bc': 0, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Archer'}, {'biome': 'ClockTower', 'min_bc': 0, 'max_bc': 3, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Archer'}, {'biome': 'Castle', 'min_bc': 0, 'max_bc': 0, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Archer'}, {'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 3, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Archer'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 0, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Archer'}],
     },
     "Ice Bow": {
@@ -349,7 +349,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Lightning Bolt": {
         "id": 0x0090, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "Lightning",
+        "dlc": "", "min_bc": 0, "item": "Lightning", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonStart', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'PrisonCorrupt', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'PrisonRoof', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'Ossuary', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'AncientTemple', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'Cemetery', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'Crypt', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Mage360'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Mage360'}],
     },
     "Vampirism": {
@@ -364,7 +364,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Great Owl of War": {
         "id": 0x0093, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 1, "item": "Owl",
+        "dlc": "", "min_bc": 1, "item": "Owl", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonStart', 'min_bc': 1, 'max_bc': 1, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'KunaiMaster'}, {'biome': 'PrisonDepths', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'KunaiMaster'}, {'biome': 'Crypt', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'KunaiMaster'}, {'biome': 'Castle', 'min_bc': 1, 'max_bc': 3, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'KunaiMaster'}, {'biome': 'Cliff', 'min_bc': 1, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'KunaiMaster'}, {'biome': 'DookuCastle', 'min_bc': 1, 'max_bc': 2, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'KunaiMaster'}, {'biome': 'DookuCastleHard', 'min_bc': 1, 'max_bc': 2, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'KunaiMaster'}],
     },
     "Legendary Warrior's Outfit": {
@@ -409,7 +409,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Fire Grenade": {
         "id": 0x009C, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "FireBomb",
+        "dlc": "", "min_bc": 0, "item": "FireBomb", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 1, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'PrisonCourtyard', 'min_bc': 0, 'max_bc': 2, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'SewerShort', 'min_bc': 1, 'max_bc': 3, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'PrisonCorrupt', 'min_bc': 0, 'max_bc': 2, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'Ossuary', 'min_bc': 0, 'max_bc': 1, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'AncientTemple', 'min_bc': 0, 'max_bc': 1, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 1, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'Cliff', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Grenader'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 1, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Grenader'}],
     },
     "Magnetic Grenade": {
@@ -434,7 +434,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Cleaver": {
         "id": 0x00A1, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "GroundSaw",
+        "dlc": "", "min_bc": 0, "item": "GroundSaw", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonCourtyard', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Runner'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Runner'}],
     },
     "Spartan Sandals": {
@@ -469,7 +469,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Oiled Sword": {
         "id": 0x00A8, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "OilSword",
+        "dlc": "", "min_bc": 0, "item": "OilSword", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonCourtyard', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatDasher'}, {'biome': 'Cemetery', 'min_bc': 0, 'max_bc': 1, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatDasher'}, {'biome': 'Greenhouse', 'min_bc': 0, 'max_bc': 3, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'BatDasher'}, {'biome': 'Cliff', 'min_bc': 0, 'max_bc': 2, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'BatDasher'}],
     },
     "Wave of Denial": {
@@ -494,7 +494,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Hayabusa Boots": {
         "id": 0x00AD, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 1, "item": "MultiKickBoots",
+        "dlc": "", "min_bc": 1, "item": "MultiKickBoots", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonCourtyard', 'min_bc': 2, 'max_bc': 3, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Ninja'}, {'biome': 'Ossuary', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Ninja'}, {'biome': 'ClockTower', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Ninja'}, {'biome': 'Crypt', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Ninja'}, {'biome': 'Swamp', 'min_bc': 1, 'max_bc': 2, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Ninja'}, {'biome': 'Bank', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Ninja'}, {'biome': 'PurpleGarden', 'min_bc': 2, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Ninja'}],
     },
     "Ninja Outfit": {
@@ -509,7 +509,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Kamikaze Outfit": {
         "id": 0x00B0, "region": "Checks", "type": "skin",
-        "dlc": "", "min_bc": 0, "item": "PrisonerKamikaze",
+        "dlc": "", "min_bc": 0, "item": "PrisonerKamikaze", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonCourtyard', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'SewerShort', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'PrisonDepths', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'SewerDepths', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'StiltVillage', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'AncientTemple', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'Cemetery', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'Crypt', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'Distillery', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}, {'biome': 'Shipwreck', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'BatKamikaze'}],
     },
     "Neon Outfit": {
@@ -579,7 +579,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Fire Blast": {
         "id": 0x00BE, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "FlameThrower",
+        "dlc": "", "min_bc": 0, "item": "FlameThrower", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonDepths', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Fogger'}, {'biome': 'AncientTemple', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Fogger'}, {'biome': 'Cemetery', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Fogger'}, {'biome': 'Swamp', 'min_bc': 4, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Fogger'}],
     },
     "Ghost Outfit": {
@@ -599,7 +599,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Cluster Grenade": {
         "id": 0x00C2, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "ClusterBomb",
+        "dlc": "", "min_bc": 0, "item": "ClusterBomb", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonDepths', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'PrisonRoof', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Ossuary', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Cemetery', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Swamp', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}],
     },
     "Heavy Turret": {
@@ -614,7 +614,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "No Mercy": {
         "id": 0x00C5, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "P_Execute_LowHealth",
+        "dlc": "", "min_bc": 0, "item": "P_Execute_LowHealth", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonDepths', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'PrisonRoof', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Ossuary', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Cemetery', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Swamp', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Comboter'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Comboter'}],
     },
     "Crusher": {
@@ -659,7 +659,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Hattori's Katana": {
         "id": 0x00CE, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "Katana",
+        "dlc": "", "min_bc": 0, "item": "Katana", "rarity": "Uncommon",
         "sources": [{'biome': 'PrisonCorrupt', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Samurai'}, {'biome': 'StiltVillage', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Samurai'}, {'biome': 'Crypt', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Samurai'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Samurai'}],
     },
     "Blade Master's Outfit": {
@@ -699,7 +699,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Torch": {
         "id": 0x00D6, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "Burner",
+        "dlc": "", "min_bc": 0, "item": "Burner", "rarity": "Uncommon",
         "sources": [{'biome': 'Ossuary', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Spawner'}, {'biome': 'Distillery', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Spawner'}],
     },
     "Spiked Boots": {
@@ -709,12 +709,12 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Barnacle": {
         "id": 0x00D8, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "CeilTurret",
+        "dlc": "", "min_bc": 0, "item": "CeilTurret", "rarity": "Uncommon",
         "sources": [{'biome': 'Ossuary', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'SpikedSatyr'}, {'biome': 'Greenhouse', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'SpikedSatyr'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'SpikedSatyr'}],
     },
     "Armadillopack": {
         "id": 0x00D9, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "P_Backpack_Shield",
+        "dlc": "", "min_bc": 0, "item": "P_Backpack_Shield", "rarity": "Uncommon",
         "sources": [{'biome': 'Ossuary', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'SpikedSatyr'}, {'biome': 'Greenhouse', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'SpikedSatyr'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'SpikedSatyr'}],
     },
     "Seismic Strike": {
@@ -739,7 +739,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Sadist's Stiletto": {
         "id": 0x00DE, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "BleedCrit",
+        "dlc": "", "min_bc": 0, "item": "BleedCrit", "rarity": "Uncommon",
         "sources": [{'biome': 'SewerDepths', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Spiker'}, {'biome': 'Greenhouse', 'min_bc': 1, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Spiker'}],
     },
     "Piccolo Concierge Outfit": {
@@ -804,7 +804,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Scavenged Bombard": {
         "id": 0x00EB, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "Cannon",
+        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "Cannon", "rarity": "Uncommon",
         "sources": [{'biome': 'StiltVillage', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'PirateChief'}, {'biome': 'Shipwreck', 'min_bc': 2, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'PirateChief'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'PirateChief'}],
     },
     "Emergency Door": {
@@ -829,7 +829,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Pyrotechnics": {
         "id": 0x00F0, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "FireBall",
+        "dlc": "", "min_bc": 0, "item": "FireBall", "rarity": "Uncommon",
         "sources": [{'biome': 'AncientTemple', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'OrbLauncher'}],
     },
     "Ranger's Gear": {
@@ -874,7 +874,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Hokuto's Bow": {
         "id": 0x00F9, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "MarkBow",
+        "dlc": "", "min_bc": 0, "item": "MarkBow", "rarity": "Uncommon",
         "sources": [{'biome': 'Cemetery', 'min_bc': 4, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'LeapingDuelyst'}, {'biome': 'ClockTower', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'LeapingDuelyst'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'LeapingDuelyst'}],
     },
     "Dictator Outfit": {
@@ -899,7 +899,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Tombstone": {
         "id": 0x00FE, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "Tombstone",
+        "dlc": "", "min_bc": 0, "item": "Tombstone", "rarity": "Uncommon",
         "sources": [{'biome': 'Cemetery', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'FlyZombie'}],
     },
     "Predator": {
@@ -947,7 +947,7 @@ LOCATION_TABLE: Dict[str, dict] = {
         "dlc": "", "min_bc": 4, "item": "Assassin4",
         "sources": [{'biome': 'TopClockTower', 'min_bc': 4, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy'}],
     },
-    "Throwing Spear": {
+    "War Javelin": {
         "id": 0x0108, "region": "Checks", "type": "blueprint_floor",
         "dlc": "RiseOfTheGiant", "min_bc": 0, "item": "ThrowingSpear",
         "sources": [{'biome': 'Cavern', 'min_bc': 0, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'blueprint_floor'}],
@@ -959,7 +959,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "The Boy's Axe": {
         "id": 0x010A, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "RiseOfTheGiant", "min_bc": 0, "item": "GodAxe",
+        "dlc": "RiseOfTheGiant", "min_bc": 0, "item": "GodAxe", "rarity": "Uncommon",
         "sources": [{'biome': 'Cavern', 'min_bc': 0, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'blueprint_enemy', 'mob': 'Earthquaker'}],
     },
     "Ice Armor": {
@@ -1039,7 +1039,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Dead Inside": {
         "id": 0x011A, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 4, "item": "P_Health",
+        "dlc": "", "min_bc": 4, "item": "P_Health", "rarity": "Uncommon",
         "sources": [{'biome': 'Castle', 'min_bc': 4, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Lancer'}, {'biome': 'Bank', 'min_bc': 4, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'Lancer'}],
     },
     "Barrel Launcher": {
@@ -1109,7 +1109,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Mushroom King Outfit": {
         "id": 0x0128, "region": "Checks", "type": "skin",
-        "dlc": "TheBadSeed", "min_bc": 3, "item": "PrisonerMushroom",
+        "dlc": "TheBadSeed", "min_bc": 3, "item": "PrisonerMushroom", "rarity": "Uncommon",
         "sources": [{'biome': 'Greenhouse', 'min_bc': 3, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Pitcher'}],
     },
     "Mushroom Boi!": {
@@ -1119,7 +1119,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Mushroom Boi's Outfit": {
         "id": 0x012A, "region": "Checks", "type": "skin",
-        "dlc": "TheBadSeed", "min_bc": 1, "item": "PrisonerFriendlyHardy",
+        "dlc": "TheBadSeed", "min_bc": 1, "item": "PrisonerFriendlyHardy", "rarity": "Uncommon",
         "sources": [{'biome': 'Greenhouse', 'min_bc': 1, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'ThrowableMushroom'}],
     },
     "Smoke Bomb": {
@@ -1129,17 +1129,17 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Banished's Outfit": {
         "id": 0x012C, "region": "Checks", "type": "skin",
-        "dlc": "TheBadSeed", "min_bc": 2, "item": "PrisonerFugitive",
+        "dlc": "TheBadSeed", "min_bc": 2, "item": "PrisonerFugitive", "rarity": "Uncommon",
         "sources": [{'biome': 'Swamp', 'min_bc': 2, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Fugitive'}],
     },
     "Blowgun": {
         "id": 0x012D, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "TheBadSeed", "min_bc": 0, "item": "Blowgun",
+        "dlc": "TheBadSeed", "min_bc": 0, "item": "Blowgun", "rarity": "Uncommon",
         "sources": [{'biome': 'Swamp', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Blowgunner'}],
     },
     "Blowgunner's Outfit": {
         "id": 0x012E, "region": "Checks", "type": "skin",
-        "dlc": "TheBadSeed", "min_bc": 0, "item": "PrisonerBlowgunner",
+        "dlc": "TheBadSeed", "min_bc": 0, "item": "PrisonerBlowgunner", "rarity": "Uncommon",
         "sources": [{'biome': 'Swamp', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Blowgunner'}],
     },
     "Sacrificial Tick Outfit": {
@@ -1169,7 +1169,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Tick Trainer's Outfit": {
         "id": 0x0134, "region": "Checks", "type": "skin",
-        "dlc": "TheBadSeed", "min_bc": 4, "item": "PrisonerTick",
+        "dlc": "TheBadSeed", "min_bc": 4, "item": "PrisonerTick", "rarity": "Uncommon",
         "sources": [{'biome': 'Swamp', 'min_bc': 4, 'max_bc': 255, 'dlc': 'TheBadSeed', 'type': 'blueprint_enemy', 'mob': 'Tick'}],
     },
     "Serenade": {
@@ -1184,12 +1184,12 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Snake Fangs": {
         "id": 0x0137, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "FatalFalls", "min_bc": 0, "item": "SnakeFang",
+        "dlc": "FatalFalls", "min_bc": 0, "item": "SnakeFang", "rarity": "Uncommon",
         "sources": [{'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'JavelinSnake'}],
     },
     "Lizard Outfit": {
         "id": 0x0138, "region": "Checks", "type": "skin",
-        "dlc": "FatalFalls", "min_bc": 0, "item": "PrisonerJavelinSnake",
+        "dlc": "FatalFalls", "min_bc": 0, "item": "PrisonerJavelinSnake", "rarity": "Uncommon",
         "sources": [{'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'JavelinSnake'}, {'biome': 'Cliff', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'JavelinSnake'}],
     },
     "Ferryman's Lantern": {
@@ -1199,12 +1199,12 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Apostate Outfit": {
         "id": 0x013A, "region": "Checks", "type": "skin",
-        "dlc": "FatalFalls", "min_bc": 0, "item": "PrisonerNecromant",
+        "dlc": "FatalFalls", "min_bc": 0, "item": "PrisonerNecromant", "rarity": "Uncommon",
         "sources": [{'biome': 'Cliff', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'Necromant'}],
     },
     "Lightning Rods": {
         "id": 0x013B, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "FatalFalls", "min_bc": 0, "item": "LightningRod",
+        "dlc": "FatalFalls", "min_bc": 0, "item": "LightningRod", "rarity": "Uncommon",
         "sources": [{'biome': 'Cliff', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'BootlegHomunculus'}],
     },
     "Bootleg Outfit": {
@@ -1214,22 +1214,22 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Dagger of Profit": {
         "id": 0x013D, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "CupidityDagger",
+        "dlc": "", "min_bc": 0, "item": "CupidityDagger", "rarity": "Uncommon",
         "sources": [{'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'U28_Steal'}],
     },
     "Robber Outfit": {
         "id": 0x013E, "region": "Checks", "type": "skin",
-        "dlc": "", "min_bc": 0, "item": "GuillainThief",
+        "dlc": "", "min_bc": 0, "item": "GuillainThief", "rarity": "Uncommon",
         "sources": [{'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'U28_Steal'}],
     },
     "Whip Sword": {
         "id": 0x013F, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "SnakeSwordWeapon",
+        "dlc": "Purple", "min_bc": 0, "item": "SnakeSwordWeapon", "rarity": "Uncommon",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Harpy'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Harpy'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Harpy'}],
     },
     "Rebound Stone": {
         "id": 0x0140, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "BouncingStone",
+        "dlc": "Purple", "min_bc": 0, "item": "BouncingStone", "rarity": "Uncommon",
         "sources": [{'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Buer'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Buer'}],
     },
     "Green Thumb Scarecrow Outfit": {
@@ -1259,7 +1259,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Maw of the Deep": {
         "id": 0x0146, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "Shark",
+        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "Shark", "rarity": "Uncommon",
         "sources": [{'biome': 'Shipwreck', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'AnchorGuy'}],
     },
     "Mutineer Outfit": {
@@ -1319,17 +1319,17 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Gold Digger": {
         "id": 0x0152, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "GoldDigger",
+        "dlc": "", "min_bc": 0, "item": "GoldDigger", "rarity": "Uncommon",
         "sources": [{'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'U28_VacuumCleaner'}],
     },
     "Midas' Blood": {
         "id": 0x0153, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "P_U28_PerkGoldPerDamage",
+        "dlc": "", "min_bc": 0, "item": "P_U28_PerkGoldPerDamage", "rarity": "Uncommon",
         "sources": [{'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'U28_VacuumCleaner'}],
     },
     "Money Shooter": {
         "id": 0x0154, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "", "min_bc": 0, "item": "MoneyShooter",
+        "dlc": "", "min_bc": 0, "item": "MoneyShooter", "rarity": "Uncommon",
         "sources": [{'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_enemy', 'mob': 'GoldenBatKamikaze'}],
     },
     "Alucard's Shield": {
@@ -1339,32 +1339,32 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Bible": {
         "id": 0x0156, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "Bible",
+        "dlc": "Purple", "min_bc": 0, "item": "Bible", "rarity": "Uncommon",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 2, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'MiniWerewolf'}, {'biome': 'PurpleGarden', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 2, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'MiniWerewolf'}, {'biome': 'DookuCastle', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 0, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'MiniWerewolf'}, {'biome': 'DookuCastleHard', 'min_bc': 1, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}],
     },
     "Hector Outfit": {
         "id": 0x0157, "region": "Checks", "type": "skin",
-        "dlc": "Purple", "min_bc": 1, "item": "Hector",
+        "dlc": "Purple", "min_bc": 1, "item": "Hector", "rarity": "Uncommon",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastle', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastleHard', 'min_bc': 1, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}],
     },
     "Haunted Armor Outfit": {
         "id": 0x0158, "region": "Checks", "type": "skin",
-        "dlc": "Purple", "min_bc": 0, "item": "HauntedArmor",
+        "dlc": "Purple", "min_bc": 0, "item": "HauntedArmor", "rarity": "Uncommon",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 2, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'LancerPurple'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'HauntedArmor'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'LancerPurple'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'HauntedArmor'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'LancerPurple'}],
     },
     "Holy Water": {
         "id": 0x0159, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "HolyWater",
+        "dlc": "Purple", "min_bc": 0, "item": "HolyWater", "rarity": "Uncommon",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Merman'}],
     },
     "Bat Volley": {
         "id": 0x015A, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "BatVolley",
+        "dlc": "Purple", "min_bc": 0, "item": "BatVolley", "rarity": "Uncommon",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BatDasherPurple'}],
     },
     "Cross": {
         "id": 0x015B, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "Cross",
+        "dlc": "Purple", "min_bc": 0, "item": "Cross", "rarity": "Uncommon",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BoneThrower'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BoneThrower'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BoneThrower'}],
     },
     "Simon Outfit": {
@@ -1374,7 +1374,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Throwing Axe": {
         "id": 0x015D, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "ThrowingAxe",
+        "dlc": "Purple", "min_bc": 0, "item": "ThrowingAxe", "rarity": "Uncommon",
         "sources": [{'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'HauntedArmor'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'HauntedArmor'}],
     },
     "Richter Outfit": {
@@ -1929,12 +1929,12 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Hand Hook": {
         "id": 0x0230, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "HandHook",
+        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "HandHook", "rarity": "Uncommon",
         "sources": [{'biome': 'Shipwreck', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'BoilerRoom'}],
     },
     "Killing Deck": {
         "id": 0x0231, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "ThrowingCards",
+        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "ThrowingCards", "rarity": "Uncommon",
         "sources": [{'biome': 'Shipwreck', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'blueprint_enemy', 'mob': 'BoilerRoom'}],
     },
     "Armored Shrimp Carcass Outfit": {

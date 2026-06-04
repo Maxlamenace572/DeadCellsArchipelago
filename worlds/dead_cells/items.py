@@ -184,7 +184,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Boomerang":               (0x030C, USFL, DLC_BASE),
     "Hemorrhage":              (0x030D, USFL, DLC_RISE_OF_GIANT),
     "The Boy's Axe":           (0x030E, USFL, DLC_RISE_OF_GIANT),
-    "Throwing Spear":          (0x030F, USFL, DLC_RISE_OF_GIANT),
+    "War Javelin":          (0x030F, USFL, DLC_RISE_OF_GIANT),
     "Hokuto's Bow":            (0x0310, USFL, DLC_BASE),
     "Nerves of Steel":         (0x0311, USFL, DLC_BASE),
     "Throwing Knife":          (0x0312, USFL, DLC_BASE),
@@ -399,7 +399,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Ingot":                                (0x1105, FILR, DLC_BASE),
     "Shiny Rock":                           (0x1106, FILR, DLC_BASE),
     "Gold Tooth":                           (0x1107, FILR, DLC_BASE),
-    "Golden Cell":                          (0x1108, FILR, DLC_BASE),
+    "Gold Cell":                          (0x1108, FILR, DLC_BASE),
     "Golden Arrow":                         (0x1109, FILR, DLC_BASE),
     "Corrupted Artifact":                   (0x110A, FILR, DLC_BASE),
 
@@ -841,7 +841,7 @@ deadcells_item_groups = {
         "Boomerang",
         "Hemorrhage",
         "The Boy's Axe",
-        "Throwing Spear",
+        "War Javelin",
         "Hokuto's Bow",
         "Nerves of Steel",
         "Throwing Knife",
@@ -1302,7 +1302,7 @@ deadcells_item_groups = {
         "Ingot",
         "Shiny Rock",
         "Gold Tooth",
-        "Golden Cell",
+        "Gold Cell",
         "Golden Arrow",
         "Corrupted Artifact"
     }
