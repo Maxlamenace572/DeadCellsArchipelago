@@ -1675,6 +1675,7 @@
     "P_DodgeHeal": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonStart",
@@ -2121,6 +2122,7 @@
     "HeavyAxe": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonStart",
@@ -2169,6 +2171,7 @@
     "CloseCombatBow": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonStart",
@@ -2420,6 +2423,7 @@
     "Lightning": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonStart",
@@ -2629,6 +2633,7 @@
     "Owl": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonStart",
@@ -3046,6 +3051,7 @@
     "FireBomb": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonStart",
@@ -3221,6 +3227,7 @@
     "GroundSaw": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonCourtyard",
@@ -3401,6 +3408,7 @@
     "OilSword": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonCourtyard",
@@ -3700,6 +3708,7 @@
     "MultiKickBoots": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonCourtyard",
@@ -3888,6 +3897,7 @@
     "PrisonerKamikaze": {
         "type": "skin",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonCourtyard",
@@ -4327,6 +4337,7 @@
     "FlameThrower": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonDepths",
@@ -4436,6 +4447,7 @@
     "ClusterBomb": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonDepths",
@@ -4603,6 +4615,7 @@
     "P_Execute_LowHealth": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonDepths",
@@ -4942,6 +4955,7 @@
     "Katana": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PrisonCorrupt",
@@ -5084,6 +5098,7 @@
     "Burner": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Ossuary",
@@ -5132,6 +5147,7 @@
     "CeilTurret": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Ossuary",
@@ -5159,6 +5175,7 @@
     "P_Backpack_Shield": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Ossuary",
@@ -5280,6 +5297,7 @@
     "BleedCrit": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "SewerDepths",
@@ -5475,6 +5493,7 @@
     "Cannon": {
         "type": "blueprint_enemy",
         "dlc": "TheQueenAndTheSea",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "StiltVillage",
@@ -5551,6 +5570,7 @@
     "FireBall": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "AncientTemple",
@@ -5783,6 +5803,7 @@
     "MarkBow": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Cemetery",
@@ -5879,6 +5900,7 @@
     "Tombstone": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Cemetery",
@@ -6063,6 +6085,7 @@
     "GodAxe": {
         "type": "blueprint_enemy",
         "dlc": "RiseOfTheGiant",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Cavern",
@@ -6318,6 +6341,7 @@
     "P_Health": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Castle",
@@ -6508,6 +6532,7 @@
     "PrisonerMushroom": {
         "type": "skin",
         "dlc": "TheBadSeed",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Greenhouse",
@@ -6534,6 +6559,7 @@
     "PrisonerFriendlyHardy": {
         "type": "skin",
         "dlc": "TheBadSeed",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Greenhouse",
@@ -6561,6 +6587,7 @@
     "PrisonerFugitive": {
         "type": "skin",
         "dlc": "TheBadSeed",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Swamp",
@@ -6574,6 +6601,7 @@
     "Blowgun": {
         "type": "blueprint_enemy",
         "dlc": "TheBadSeed",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Swamp",
@@ -6587,6 +6615,7 @@
     "PrisonerBlowgunner": {
         "type": "skin",
         "dlc": "TheBadSeed",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Swamp",
@@ -6660,6 +6689,7 @@
     "PrisonerTick": {
         "type": "skin",
         "dlc": "TheBadSeed",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Swamp",
@@ -6697,6 +6727,7 @@
     "SnakeFang": {
         "type": "blueprint_enemy",
         "dlc": "FatalFalls",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Tumulus",
@@ -6710,6 +6741,7 @@
     "PrisonerJavelinSnake": {
         "type": "skin",
         "dlc": "FatalFalls",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Tumulus",
@@ -6744,6 +6776,7 @@
     "PrisonerNecromant": {
         "type": "skin",
         "dlc": "FatalFalls",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Cliff",
@@ -6757,6 +6790,7 @@
     "LightningRod": {
         "type": "blueprint_enemy",
         "dlc": "FatalFalls",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Cliff",
@@ -6783,6 +6817,7 @@
     "CupidityDagger": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Bank",
@@ -6796,6 +6831,7 @@
     "GuillainThief": {
         "type": "skin",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Bank",
@@ -6809,6 +6845,7 @@
     "SnakeSwordWeapon": {
         "type": "blueprint_enemy",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PurpleGarden",
@@ -6836,6 +6873,7 @@
     "BouncingStone": {
         "type": "blueprint_enemy",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "DookuCastle",
@@ -6916,6 +6954,7 @@
     "Shark": {
         "type": "blueprint_enemy",
         "dlc": "TheQueenAndTheSea",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Shipwreck",
@@ -7063,6 +7102,7 @@
     "GoldDigger": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Bank",
@@ -7076,6 +7116,7 @@
     "P_U28_PerkGoldPerDamage": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Bank",
@@ -7089,6 +7130,7 @@
     "MoneyShooter": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Bank",
@@ -7114,6 +7156,7 @@
     "Bible": {
         "type": "blueprint_enemy",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PurpleGarden",
@@ -7162,6 +7205,7 @@
     "Hector": {
         "type": "skin",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PurpleGarden",
@@ -7189,6 +7233,7 @@
     "HauntedArmor": {
         "type": "skin",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PurpleGarden",
@@ -7230,6 +7275,7 @@
     "HolyWater": {
         "type": "blueprint_enemy",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PurpleGarden",
@@ -7243,6 +7289,7 @@
     "BatVolley": {
         "type": "blueprint_enemy",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PurpleGarden",
@@ -7256,6 +7303,7 @@
     "Cross": {
         "type": "blueprint_enemy",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "PurpleGarden",
@@ -7295,6 +7343,7 @@
     "ThrowingAxe": {
         "type": "blueprint_enemy",
         "dlc": "Purple",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "DookuCastle",
@@ -8696,6 +8745,7 @@
     "HandHook": {
         "type": "blueprint_enemy",
         "dlc": "TheQueenAndTheSea",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Shipwreck",
@@ -8709,6 +8759,7 @@
     "ThrowingCards": {
         "type": "blueprint_enemy",
         "dlc": "TheQueenAndTheSea",
+        "rarity": "Uncommon",
         "sources": [
             {
                 "biome": "Shipwreck",
