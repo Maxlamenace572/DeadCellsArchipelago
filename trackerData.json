@@ -9188,5 +9188,149 @@
                 "dlc": ""
             }
         ]
+    },
+    "BossRushUnlock": {
+        "type": "rune",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "Throne",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": ""
+            },
+            {
+                "biome": "QueenArena",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "TheQueenAndTheSea"
+            },
+            {
+                "biome": "DookuArena",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "Purple"
+            }
+        ]
+    },
+    "Mentor": {
+        "type": "skin",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "Mentor1": {
+        "type": "skin",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 3,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "Mentor2": {
+        "type": "skin",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 3,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "Mentor3": {
+        "type": "skin",
+        "dlc": "", "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 5,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "VictoriusBeheaded": {
+        "type": "skin",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "VictoriusBeheaded1": {
+        "type": "skin",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart", 
+                "min_bc": 3,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "VictoriusBeheaded2": {
+        "type": "skin",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 5,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "VictoriusBeheaded3": {
+        "type": "skin",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 5,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "HydraSpell": {
+        "type": "blueprint_floor",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "Taunt": {
+        "type": "blueprint_floor",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "",
+                "type": "blueprint_floor"
+            }
+        ]
     }
 }

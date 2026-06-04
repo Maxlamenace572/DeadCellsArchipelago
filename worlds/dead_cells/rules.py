@@ -422,13 +422,15 @@ def _boss_rush_trials_1_2():
     Trials 1 and 2:
     at least 1 cleared Tier 1 boss,
     at least 1 cleared Tier 2 boss,
-    at least 1 cleared Tier 3 boss.
+    at least 1 cleared Tier 3 boss,
+    and the BossRushUnlock.
     """
     return lambda world: (
         lambda state: (
             _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_1) >= 1
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_2) >= 1
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_3) >= 1
+            and _has("BossRushUnlock")
         )
     )
 
@@ -438,13 +440,15 @@ def _boss_rush_trials_3_4():
     Trials 3 and 4:
     at least 2 cleared Tier 1 bosses,
     at least 2 cleared Tier 2 bosses,
-    at least 1 cleared Tier 3 boss.
+    at least 1 cleared Tier 3 boss,
+    and the BossRushUnlock.
     """
     return lambda world: (
         lambda state: (
             _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_1) >= 2
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_2) >= 2
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_3) >= 1
+            and _has("BossRushUnlock")
         )
     )
 
@@ -568,6 +572,22 @@ LOCATION_RULES = [
     # ── Dilapidated Arboretum Entrance ───────────────────────────────────────
     ("The Royal Gardener's Outfit", _has("Teleportation Rune")),
 
+    # ── Boss Rush Items ──────────────────────────────────────────────────────
+    ("Boss Knight Outfit", _boss_rush_trials_1_2()),
+    ("Barbarian Boss Knight Outfit", _boss_rush_trials_3_4() and _bsc(3)),
+    ("Triumphant Boss Knight Outfit", _boss_rush_trials_1_2() and _bsc(3)),
+    ("Luminous Boss Knight Outfit", _boss_rush_trials_1_2() and _bsc(5)),
+    
+    ("Triumph Outfit", _boss_rush_trials_3_4()),
+    ("Bisonnica Triumph Outfit", _boss_rush_trials_3_4() and _bsc(3)),
+    ("Mentoral Triumph Outfit", _boss_rush_trials_3_4() and _bsc(5)),
+    ("Radiant Triumph Outfit", _boss_rush_trials_3_4() and _bsc(5)),
+    
+    ("Peril Glyphs", _boss_rush_trials_1_2()),
+    ("Taunt", _boss_rush_trials_1_2()), 
+    ("Wish", _boss_rush_trials_3_4()),
+
+
     # ── Half life lore room ──────────────────────────────────────────────────
     ("Crowbar", _has("Teleportation Rune")),
     ("HEV Outfit", _has("Teleportation Rune")),
@@ -651,9 +671,6 @@ LOCATION_RULES = [
 
     # ── Specialist showroom unlock ───────────────────────────────────────────
     ("Golden Outfit", _has("The Specialist's Showroom")),
-
-    ("Wish", _boss_rush_trials_3_4()),
-
 
     # ── Heads ────────────────────────────────────────────────────────────────
     ("Leghugger Head", _has("Leghugger")),

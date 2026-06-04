@@ -3,6 +3,8 @@ using dc.en;
 using dc.en.mob;
 using dc.en.mob.boss;
 using dc.en.mob.boss.death;
+using dc.hl.types;
+using ModCore.Utilities;
 using Serilog;
 
 using static DeadCellsArchipelago.ItemManager;
@@ -101,6 +103,24 @@ namespace DeadCellsArchipelago {
             if (randomNumber == 1)
             {
                 DropItemToPlayer("TimeDistorsion");
+            }
+        }
+        
+        public static void TempFixRemoveFromLoot(Hook_Mob.orig_removeFromLoot orig, Mob self, LootType k)
+        {
+            //This is a fix for a bug in dccm 35.9.23. 
+            //The first LootType with a matching Index is removed instead of removing the one with matching values.
+            //Once the bug is resolved in dccm, this hook should be deleted.
+            int i = 0;
+            foreach (LootType loot in self.loots)
+            {
+                if (loot is LootType.Blueprint && ((LootType.Blueprint) loot).Param0.ToString() == ((LootType.Blueprint) k).Param0.ToString())
+                {
+                    ArrayObj ar1 = (ArrayObj) self.loots.splice(0, i);
+                    ArrayObj ar2 = (ArrayObj) self.loots.splice(i+1, self.loots.length-i-1);
+                    self.loots = ar1.concat(ar2);
+                }
+                i++;
             }
         }
     }

@@ -298,7 +298,7 @@ namespace DeadCellsArchipelago
                 ItemSendLogMessage itemMessage = (ItemSendLogMessage) message;
                 if (itemMessage.IsSenderTheActivePlayer && !itemMessage.IsReceiverTheActivePlayer)
                 {
-                    Log.Warning($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
+                    Log.Information($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
                     AddLogToQueue($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
                 }
             }

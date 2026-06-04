@@ -46,6 +46,8 @@ using dc.en.hero;
 using dc.tool.bossRush;
 using dc.hxd.snd;
 using dc.ui.icon;
+using dc.en.mob;
+using dc.level.lore;
 
 
 namespace DeadCellsArchipelago{
@@ -181,6 +183,7 @@ namespace DeadCellsArchipelago{
             Hook__Achievements.setAchievement += OnSetAchievement;
             Hook__ItemTools.getBlueprintLocalizedName += OnGetBlueprintLocalizedName;
             Hook__Icon.createItemIcon += OnCreateItemIcon;
+            dc.en.Hook_Mob.removeFromLoot += TempFixRemoveFromLoot;
             Log.Information("=== Archipelago hooks loaded ! ===");
             //LogManager
             //BrBlueprint

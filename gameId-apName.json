@@ -562,5 +562,7 @@
     "D_GardenerBoss": "Scarecrow Defeat",
     "D_Queen": "Queen Defeat",
     "D_Death": "Death Defeat",
-    "D_DookuBeast": "Dracula Defeat"
+    "D_DookuBeast": "Dracula Defeat",
+    "BossRushUnlock": "BossRushUnlock", 
+    "Taunt": "Taunt"
 }
