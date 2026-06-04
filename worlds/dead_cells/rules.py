@@ -533,9 +533,60 @@ LOCATION_RULES = [
     )),
 
     # Cursed Biome drops
-    ("Anathema", _has_all_any(
-        any_of=["Vine Rune", "Spider Rune", "Castle Outskirts Unlock", ["Teleport Rune", "Dilapidated Arboretum Unlock"]]
-    ))
+    (
+        "Anathema", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Cursed Flask", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Demon Strength", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Misericorde", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Damned Vigor", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
+    (
+        "Indulgence", 
+        lambda world: (
+            lambda state: 
+                state.can_reach("SewerShort", "Region", world.player)
+                or state.can_reach("Greenhouse", "Region", world.player)
+                or state.can_reach("PurpleGarden", "Region", world.player)
+        )
+    ),
 
 
     # ── PrisonCourtyard mid-biome gate (Vine Rune) ────────────────────────────

@@ -1224,7 +1224,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Whip Sword": {
         "id": 0x013F, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "SnakeSwordWeapon",
+        "dlc": "Purple", "min_bc": 0, "item": "SnakeSwordWeapon", "rarity": "Rare",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Harpy'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Harpy'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Harpy'}],
     },
     "Rebound Stone": {
@@ -1339,32 +1339,32 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Bible": {
         "id": 0x0156, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "Bible",
+        "dlc": "Purple", "min_bc": 0, "item": "Bible", "rarity": "Rare",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 2, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'MiniWerewolf'}, {'biome': 'PurpleGarden', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 2, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'MiniWerewolf'}, {'biome': 'DookuCastle', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 0, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'MiniWerewolf'}, {'biome': 'DookuCastleHard', 'min_bc': 1, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}],
     },
     "Hector Outfit": {
         "id": 0x0157, "region": "Checks", "type": "skin",
-        "dlc": "Purple", "min_bc": 1, "item": "Hector",
+        "dlc": "Purple", "min_bc": 1, "item": "Hector", "rarity": "Rare",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastle', 'min_bc': 3, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}, {'biome': 'DookuCastleHard', 'min_bc': 1, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Werewolf'}],
     },
     "Haunted Armor Outfit": {
         "id": 0x0158, "region": "Checks", "type": "skin",
-        "dlc": "Purple", "min_bc": 0, "item": "HauntedArmor",
+        "dlc": "Purple", "min_bc": 0, "item": "HauntedArmor", "rarity": "Rare",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 2, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'LancerPurple'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'HauntedArmor'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'LancerPurple'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'HauntedArmor'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'LancerPurple'}],
     },
     "Holy Water": {
         "id": 0x0159, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "HolyWater",
+        "dlc": "Purple", "min_bc": 0, "item": "HolyWater", "rarity": "Rare",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'Merman'}],
     },
     "Bat Volley": {
         "id": 0x015A, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "BatVolley",
+        "dlc": "Purple", "min_bc": 0, "item": "BatVolley", "rarity": "Rare",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BatDasherPurple'}],
     },
     "Cross": {
         "id": 0x015B, "region": "Checks", "type": "blueprint_enemy",
-        "dlc": "Purple", "min_bc": 0, "item": "Cross",
+        "dlc": "Purple", "min_bc": 0, "item": "Cross", "rarity": "Rare",
         "sources": [{'biome': 'PurpleGarden', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BoneThrower'}, {'biome': 'DookuCastle', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BoneThrower'}, {'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_enemy', 'mob': 'BoneThrower'}],
     },
     "Simon Outfit": {
