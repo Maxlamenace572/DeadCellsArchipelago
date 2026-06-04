@@ -90,7 +90,7 @@ namespace DeadCellsArchipelago {
             {
                 if (itemName == "LadderKey")
                 {
-                    ArrayObj? array = USER.game.curLevel.entitiesByClass?.get(35400); //35400 is the internal id for VineLadder
+                    ArrayObj? array = USER.game.curLevel?.entitiesByClass?.get(35400); //35400 is the internal id for VineLadder
                     if(array != null)
                     {
                         for (int i = 0; i < array.length; i++)
@@ -102,7 +102,7 @@ namespace DeadCellsArchipelago {
                 }
                 else if (itemName == "TeleportKey")
                 {
-                    ArrayObj? array = USER.game.curLevel.entitiesByClass?.get(23651); //23651 is the internal id for RedTeleporter
+                    ArrayObj? array = USER.game.curLevel?.entitiesByClass?.get(23651); //23651 is the internal id for RedTeleporter
                     if(array != null)
                     {
                         for (int i = 0; i < array.length; i++)
@@ -114,7 +114,7 @@ namespace DeadCellsArchipelago {
                 }
                 else if (itemName == "BreakableGroundKey")
                 {
-                    ArrayObj? array = USER.game.curLevel.entitiesByClass?.get(32866); //32866 is the internal id for BreakableGround
+                    ArrayObj? array = USER.game.curLevel?.entitiesByClass?.get(32866); //32866 is the internal id for BreakableGround
                     if(array != null)
                     {
                         for (int i = 0; i < array.length; i++)

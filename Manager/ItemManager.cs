@@ -663,7 +663,6 @@ namespace DeadCellsArchipelago {
         {
             removeCollectorBaseFilterAndLock = true;
             currentFilterFor = data.itemId.ToString();
-            Log.Information($"|{data.itemId}|");
             bool res = orig(self, data);
             removeCollectorBaseFilterAndLock = false;
             currentFilterFor = "";
