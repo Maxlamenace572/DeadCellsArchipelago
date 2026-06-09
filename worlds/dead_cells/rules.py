@@ -539,56 +539,68 @@ LOCATION_RULES = [
     # Cursed Biome drops
     (
         "Anathema", 
-        lambda world: (
-            lambda state: 
-                state.can_reach("SewerShort", "Region", world.player)
-                or state.can_reach("Greenhouse", "Region", world.player)
-                or state.can_reach("PurpleGarden", "Region", world.player)
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Toxic Sewers Enter",
+                "Castle's Outskirts Enter",
+                "Dilapidated Arboretum Enter",
+            ]
         )
     ),
     (
         "Cursed Flask", 
-        lambda world: (
-            lambda state: 
-                state.can_reach("SewerShort", "Region", world.player)
-                or state.can_reach("Greenhouse", "Region", world.player)
-                or state.can_reach("PurpleGarden", "Region", world.player)
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Toxic Sewers Enter",
+                "Castle's Outskirts Enter",
+                "Dilapidated Arboretum Enter",
+            ]
         )
     ),
     (
         "Demon Strength", 
-        lambda world: (
-            lambda state: 
-                state.can_reach("SewerShort", "Region", world.player)
-                or state.can_reach("Greenhouse", "Region", world.player)
-                or state.can_reach("PurpleGarden", "Region", world.player)
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Toxic Sewers Enter",
+                "Castle's Outskirts Enter",
+                "Dilapidated Arboretum Enter",
+            ]
         )
     ),
     (
         "Misericorde", 
-        lambda world: (
-            lambda state: 
-                state.can_reach("SewerShort", "Region", world.player)
-                or state.can_reach("Greenhouse", "Region", world.player)
-                or state.can_reach("PurpleGarden", "Region", world.player)
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Toxic Sewers Enter",
+                "Castle's Outskirts Enter",
+                "Dilapidated Arboretum Enter",
+            ]
         )
     ),
     (
         "Damned Vigor", 
-        lambda world: (
-            lambda state: 
-                state.can_reach("SewerShort", "Region", world.player)
-                or state.can_reach("Greenhouse", "Region", world.player)
-                or state.can_reach("PurpleGarden", "Region", world.player)
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Toxic Sewers Enter",
+                "Castle's Outskirts Enter",
+                "Dilapidated Arboretum Enter",
+            ]
         )
     ),
     (
         "Indulgence", 
-        lambda world: (
-            lambda state: 
-                state.can_reach("SewerShort", "Region", world.player)
-                or state.can_reach("Greenhouse", "Region", world.player)
-                or state.can_reach("PurpleGarden", "Region", world.player)
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Toxic Sewers Enter",
+                "Castle's Outskirts Enter",
+                "Dilapidated Arboretum Enter",
+            ]
         )
     ),
 
