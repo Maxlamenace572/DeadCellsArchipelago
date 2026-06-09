@@ -98,12 +98,7 @@ namespace DeadCellsArchipelago {
             else
             {
                 skill.setItemIcon(itemId.AsHaxeString());
-                string itemNumber = "";
-                if(nb != null)
-                {
-                    itemNumber = $"({nb}) ";
-                }
-                text.set_text($" {itemNumber}{Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString())}".AsHaxeString());
+                SetDisplayText();
             }
             skill.btn.visible = false;
         }
@@ -134,13 +129,33 @@ namespace DeadCellsArchipelago {
             if (SAVED_DATA == null) return;
             nb--;
             SAVED_DATA.AddFillerItemGiven(itemId);
-            text.set_text($" ({nb}) {Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString())}".AsHaxeString());
+            SetDisplayText();
 
             if (nb == 0)
             {
                 text.set_textColor(16711680);
                 canHighlight = false;
             }
+        }
+
+        public void SetDisplayText()
+        {
+                string itemNumber = "";
+                if(nb != null)
+                {
+                    itemNumber = $"({nb}) ";
+                }
+                
+                string itemName = "";
+                if (itemId == "APGold" || itemId == "APCells")
+                {
+                    itemName = Data.Class.item.byId.get(itemId.AsHaxeString()).name;
+                }
+                else
+                {
+                    itemName = Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString());
+                }
+                text.set_text($" {itemNumber}{itemName}".AsHaxeString());
         }
     }
 }

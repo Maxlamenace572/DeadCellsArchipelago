@@ -368,8 +368,29 @@ namespace DeadCellsArchipelago{
                 cellCost = item.cellCost,
                 castCD = item.castCD,
             };
-
             cdb.item.byId.set("APGold".AsHaxeString(), newItem);
+            cdb.item.all.push(newItem);
+
+            item = ((HaxeDynObj) cdb.item.byId.get("DeathCells".AsHaxeString())).ToVirtual<virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_>();
+            newItem = new virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_
+            {
+                group = item.group,
+                id = "APCells".AsHaxeString(),
+                tags = item.tags,
+                synergy = item.synergy,
+                props = item.props,
+                name = "Archipelago Cells Bag".AsHaxeString(),
+                moneyCost = item.moneyCost,
+                legendAffixes = item.legendAffixes,
+                icon = item.icon,
+                gameplayDesc = "It's dangerous to go alone! Take this.".AsHaxeString(),
+                droppable = item.droppable,
+                commonProps = item.commonProps,
+                cellCost = item.cellCost,
+                castCD = item.castCD,
+            };
+            cdb.item.byId.set("APCells".AsHaxeString(), newItem);
+            cdb.item.all.push(newItem);
         }
 
         

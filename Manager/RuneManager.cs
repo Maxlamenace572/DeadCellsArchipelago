@@ -23,38 +23,9 @@ namespace DeadCellsArchipelago {
             //Log.Warning($"=== pick effect on {i._itemData.id} {i._itemData.name} ===");
             bool noStats = false;
             Random rnd = new Random();
-            int msgNumber = 0;
-            if(i._itemData.name.ToString() == "Archipelago Money Bag")
-            {
-                msgNumber = rnd.Next(8192, 131073);
-                self.addMoney(msgNumber, new Ref<bool>(ref noStats));
-                self.popText($"+{msgNumber}{{iconCoin@img}}".AsHaxeString(), dc.ui.Text.Class.COLORS.get("GO".AsHaxeString()));
-                return;
-            }
             if (i._itemData.name.ToString() == "Archipelago Cells Bag")
             {
-                msgNumber = rnd.Next(8, 129);
-                self.addCells(msgNumber, new Ref<bool>(ref noStats));
-                msgNumber *= 4;
-
-                int frame = 0;
-                double XY = 0;
-                Tile cellTile = Assets.Class.gameElements.getTile("cell".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null); //@1233
-
-                var pop = self.popText($"+{msgNumber}".AsHaxeString(), dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
-
-                var addX = 0;
-                if (msgNumber > 99)
-                {
-                    addX = 5;
-                }
-                new Bitmap(cellTile, pop.text)
-                {
-                    x = 30 + addX,
-                    y = 10
-                };
-
-                return;
+                
             }
             switch (i._itemData.id.ToString())
             {
@@ -77,6 +48,33 @@ namespace DeadCellsArchipelago {
                     break;
                 case "ShipwreckKey":
                     SendItemWithoutBlueprintCheck(i._itemData.id.ToString());
+                    break;
+                case "APGold":
+                    int goldNumber = rnd.Next(8192, 131073);
+                    self.addMoney(goldNumber, new Ref<bool>(ref noStats));
+                    self.popText($"+{goldNumber}{{iconCoin@img}}".AsHaxeString(), dc.ui.Text.Class.COLORS.get("GO".AsHaxeString()));
+                    break;
+                case "APCells":
+                    int cellsNumber = rnd.Next(8, 129);
+                    self.addCells(cellsNumber, new Ref<bool>(ref noStats));
+                    cellsNumber *= 4;
+
+                    int frame = 0;
+                    double XY = 0;
+                    Tile cellTile = Assets.Class.gameElements.getTile("cell".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null); //@1233
+
+                    var pop = self.popText($"+{cellsNumber}".AsHaxeString(), dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
+
+                    var addX = 0;
+                    if (cellsNumber > 99)
+                    {
+                        addX = 5;
+                    }
+                    new Bitmap(cellTile, pop.text)
+                    {
+                        x = 30 + addX,
+                        y = 10
+                    };
                     break;
                 default:
                     orig(self, from, i);

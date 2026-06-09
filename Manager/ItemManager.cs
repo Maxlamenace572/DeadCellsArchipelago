@@ -68,6 +68,7 @@ namespace DeadCellsArchipelago {
                 }
             }
             dropableList.Add("APGold");
+            dropableList.Add("APCells");
             cosmeticsList.Remove("Cultist");
         }
 
@@ -96,18 +97,6 @@ namespace DeadCellsArchipelago {
                         itemDrop.init();
                         itemDrop.onDropAsLoot();
                         itemDrop.dx = HERO.dx;
-
-                        if (itemName == "DeathMoney")
-                        {
-                            //itemDrop.item._itemData.name = "Archipelago Money Bag".AsHaxeString();
-                            //itemDrop.item._itemData.gameplayDesc = "No cost too great.".AsHaxeString();
-                            itemName = "APGold";
-                        }
-                        else if (itemName == "DeathCells")
-                        {
-                            itemDrop.item._itemData.name = "Archipelago Cells Bag".AsHaxeString();
-                            itemDrop.item._itemData.gameplayDesc = "It's dangerous to go alone! Take this.".AsHaxeString();
-                        }
                         
                         Log.Information("=== Item Successfully Dropped ! ===");
                     } else
