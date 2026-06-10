@@ -28,7 +28,7 @@ namespace DeadCellsArchipelago {
         public static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
         {
             //the blueprint is comming from the game, so we need to send a archipelago check
-            if(ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
+            if(!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics))
             {
                 SendBlueprintCheck(k.ToString());
                 return true;
@@ -60,7 +60,7 @@ namespace DeadCellsArchipelago {
         //hasRevealedItem allow or not the blueprint to spawn
         public static bool ReallyHasBlueprint(Hook_ItemMetaManager.orig_hasRevealedItem orig, ItemMetaManager self, dc.String k)
         {
-            if(ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics) && !useOriginalHasRevealItem)
+            if((!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)) && !useOriginalHasRevealItem)
             {
                 return SAVED_DATA != null && SAVED_DATA.IsCheckSent(k.ToString()); //Drop the blueprint only when he is not in the saved checklist
             }
@@ -75,7 +75,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                Log.Error("=== Error while sending blueprint check ===");
+                SAVED_DATA?.SaveOfflineCheck(blueprintId, blueprintId);
             }
         }
 

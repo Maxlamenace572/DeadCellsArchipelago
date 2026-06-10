@@ -623,7 +623,7 @@ namespace DeadCellsArchipelago {
         public static bool OnUnlockItem(Hook_ItemMetaManager.orig_unlockItem orig, ItemMetaManager self, dc.String k)//utilisé pour les items comme la poelle 
         {
             //Log.Warning($"||| This method was called for {k} in on unlock |||");//to be removed when all unlocked item with this are found
-            if(!useOriginalUnlockItem && ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
+            if(!useOriginalUnlockItem && (!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)))
             {
                 SendItemWithoutBlueprintCheck(k.ToString());
                 return false;
@@ -633,7 +633,7 @@ namespace DeadCellsArchipelago {
 
         public static bool OnRevealItem(Hook_ItemMetaManager.orig_revealItem orig, ItemMetaManager self, dc.String k, bool showAsNew)
         {
-            if(!useOriginalRevealItem && ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
+            if(!useOriginalRevealItem && (!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)))
             {
                 SendItemWithoutBlueprintCheck(k.ToString());
                 return false;
@@ -676,7 +676,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                Log.Error("=== Error while sending Item check ===");
+                SAVED_DATA?.SaveOfflineCheck(itemId, itemId);
             }
         }
 

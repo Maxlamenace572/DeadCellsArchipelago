@@ -119,7 +119,7 @@ namespace DeadCellsArchipelago
         {
             if (!isConnected || session == null)
             {
-                Log.Warning($"=== Impossible to send check to {locationName}: not connected ===");
+                SAVED_DATA?.SaveOfflineCheck(internalId, locationName);
                 return;
             }
             
@@ -151,7 +151,7 @@ namespace DeadCellsArchipelago
             }
             catch (Exception ex)
             {
-                Log.Error($"=== Error while sending chacke: {ex.Message} ===");
+                Log.Error($"=== Error while sending check: {ex.Message} ===");
             }
         }
 
@@ -160,8 +160,21 @@ namespace DeadCellsArchipelago
             ClearQueues();
             SyncReceivedItems();
             SyncReceivedLocations();
+            SyncOfflineChecks();
         }
-        
+
+        public void SyncOfflineChecks()
+        {
+            if (SAVED_DATA == null) return;
+
+            foreach(KeyValuePair<string, string> check in SAVED_DATA.OfflineChecks)
+            {
+                SendCheck(check.Key, check.Value, "");
+                SAVED_DATA.OfflineChecks.Remove(check.Key);
+                if (USER != null) SAVED_DATA.RemoveFromOfflineChecksJson(check.Key, USER.userId);
+            }
+        }
+
         private void SyncReceivedItems()
         {
             if (session == null) return;

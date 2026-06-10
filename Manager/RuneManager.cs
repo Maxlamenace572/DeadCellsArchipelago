@@ -23,10 +23,6 @@ namespace DeadCellsArchipelago {
             //Log.Warning($"=== pick effect on {i._itemData.id} {i._itemData.name} ===");
             bool noStats = false;
             Random rnd = new Random();
-            if (i._itemData.name.ToString() == "Archipelago Cells Bag")
-            {
-                
-            }
             switch (i._itemData.id.ToString())
             {
                 case "LadderKey":
@@ -133,7 +129,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                Log.Error("=== Error while sending Rune check ===");
+                SAVED_DATA?.SaveOfflineCheck(runeId, runeId);
             }
         }
 
@@ -158,7 +154,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                Log.Error("=== Error while sending BSC check ===");
+                SAVED_DATA?.SaveOfflineCheck(bscId, bscId);
             }
         }
 

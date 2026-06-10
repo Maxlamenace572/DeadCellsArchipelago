@@ -54,7 +54,7 @@ namespace DeadCellsArchipelago
                         if(added)
                         {
                             res["AllT"].Add(entry.Key);
-                            if(SAVED_DATA != null && !SAVED_DATA.SentChecks.Contains(entry.Key)) res["AllR"].Add(entry.Key);
+                            if(SAVED_DATA != null && !SAVED_DATA.IsCheckSent(entry.Key)) res["AllR"].Add(entry.Key);
                         }
                     }
                 }
@@ -116,7 +116,7 @@ namespace DeadCellsArchipelago
                 }
                 res[keyT].Add(check);
 
-                if (SAVED_DATA != null && !SAVED_DATA.SentChecks.Contains(check))
+                if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent(check))
                 {
                     if (!res.ContainsKey(keyR))
                     {

@@ -7,6 +7,7 @@ using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.ModAssetManager;
+using static DeadCellsArchipelago.RoomManager;
 using Newtonsoft.Json;
 
 namespace DeadCellsArchipelago {
@@ -374,6 +375,7 @@ namespace DeadCellsArchipelago {
             fillerItemGivenSinceLaunch = [];
             History = [];
             resetOnNextPrisonStart = false;
+            levelMapChallenge = null;
         }
     }
 }

@@ -5,6 +5,7 @@ namespace DeadCellsArchipelago {
     public class ArchipelagoSaveData
     {
         public HashSet<string> SentChecks { get; set; } = [];
+        public Dictionary<string, string> OfflineChecks { get; set; } = [];
         public HashSet<string> ReceivedItem { get; set; } = [];
         public HashSet<string> BaseItemUnlocked { get; set; } = [];
         public Dictionary<string, int> ReceivedProgressionItem { get; set; } = [];
@@ -18,6 +19,11 @@ namespace DeadCellsArchipelago {
         public void SaveCheckSent(string checkName)
         {
             SentChecks.Add(checkName);
+        }
+
+        public void SaveOfflineCheck(string internalId, string locationName)
+        {
+            OfflineChecks[internalId] = locationName;
         }
 
         public void SaveItemReceived(string itemName)
@@ -68,7 +74,7 @@ namespace DeadCellsArchipelago {
 
         public bool IsCheckSent(string checkName)
         {
-            return SentChecks.Contains(checkName);
+            return SentChecks.Contains(checkName) || OfflineChecks.ContainsKey(checkName);
         }
 
         public bool IsItemReceived(string itemName)
@@ -145,6 +151,22 @@ namespace DeadCellsArchipelago {
             
             if (array != null && !array.Values<string>().Contains(value))
                 array.Add(value);
+
+            File.WriteAllText(savePath, jObject.ToString(Formatting.Indented));
+        }
+
+        public void RemoveFromOfflineChecksJson(string value, int slot)
+        {
+            var savePath = GetSaveFilePath(slot);
+            var json = File.ReadAllText(savePath);
+            var jObject = JObject.Parse(json);
+
+            var dict = (JObject?)jObject["OfflineChecks"];
+
+            if (dict?.Property(value) != null)
+            {
+                dict.Property(value)!.Remove();
+            }
 
             File.WriteAllText(savePath, jObject.ToString(Formatting.Indented));
         }

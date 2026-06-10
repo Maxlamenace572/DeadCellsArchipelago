@@ -129,7 +129,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                Log.Error("=== Error while sending Rune check ===");
+                SAVED_DATA?.SaveOfflineCheck(locationId, locationSaveId);
             }
         }
 

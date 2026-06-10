@@ -44,6 +44,7 @@ namespace DeadCellsArchipelago {
         {
             if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent(bossName)){
                 SendBossCheck(bossName);
+                SendUTBossCheckHelper(bossName);
             }
             switch(bossName)
             {
@@ -79,7 +80,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                Log.Error("=== Error while sending Boss check ===");
+                SAVED_DATA?.SaveOfflineCheck("Boss_" + bossName, bossName);
             }
         }
 
@@ -91,7 +92,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                Log.Error("=== Error while sending Boss check ===");
+                SAVED_DATA?.SaveOfflineCheck("D_" + bossName, bossName);
             }
         }
 
