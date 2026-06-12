@@ -423,14 +423,14 @@ def _boss_rush_trials_1_2():
     at least 1 cleared Tier 1 boss,
     at least 1 cleared Tier 2 boss,
     at least 1 cleared Tier 3 boss,
-    and the BossRushUnlock.
+    and the Boss Rush Opened item.
     """
     return lambda world: (
         lambda state: (
             _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_1) >= 1
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_2) >= 1
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_3) >= 1
-            and _has("BossRushUnlock")
+            and _has("Boss Rush Opened")
         )
     )
 
@@ -441,14 +441,14 @@ def _boss_rush_trials_3_4():
     at least 2 cleared Tier 1 bosses,
     at least 2 cleared Tier 2 bosses,
     at least 1 cleared Tier 3 boss,
-    and the BossRushUnlock.
+    and the Boss Rush Unlock.
     """
     return lambda world: (
         lambda state: (
             _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_1) >= 2
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_2) >= 2
             and _count_cleared_bosses(state, world.player, BOSS_RUSH_TIER_3) >= 1
-            and _has("BossRushUnlock")
+            and _has("Boss Rush Opened")
         )
     )
 

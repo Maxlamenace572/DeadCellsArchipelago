@@ -142,6 +142,7 @@ BOSS_DEFEAT_PAIRS = {
     "Queen Defeated":            "Queen Defeat",
     "Dracula Defeated":          "Dracula Defeat",
     "Collector Defeated":        "Collector Defeat",
+    "Boss Rush Opened":          "Boss Rush Open"
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -508,8 +509,8 @@ class DeadCellsWorld(World):
             "BreakableGroundKey",
             "HomKey",
             "ProgBossRune"
-        ]
-    ]  
+            ]
+        ]  
 
         for item, loc in zip(progression_items, early_locations):
             if not loc.item:
@@ -529,7 +530,7 @@ class DeadCellsWorld(World):
             "include_base_weapons":      bool(self.options.include_base_weapons.value),
             "trap_percentage":           self.options.trap_percentage.value,
             "apworld_version":           version
-        }
+        }    
 
     def get_filler_item_name(self) -> str:
         """
