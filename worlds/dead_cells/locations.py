@@ -2138,7 +2138,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     # end Boss Event Locations
     
     # Boss Rush
-    "Boss Rush Open": {"id": 0x0262, "region": "Checks", "type": "rune", "dlc": "", "item": "BossRushUnlock", 
+    "Boss Rush Unlock": {"id": 0x0262, "region": "Checks", "type": "rune", "dlc": "", "item": "BossRushUnlock", 
         "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'rune'}, {'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'rune'}, {'biome': 'DookuArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'rune'}],},
     "Boss Knight Outfit": {"id": 0x0263, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
 	"Barbarian Boss Knight Outfit": {"id": 0x0264, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor1", "sources": [{'biome': 'PrisonStart', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},

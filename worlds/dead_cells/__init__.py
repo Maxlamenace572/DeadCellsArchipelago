@@ -141,8 +141,7 @@ BOSS_DEFEAT_PAIRS = {
     "Hand of the King Defeated": "Hand of the King Defeat",
     "Queen Defeated":            "Queen Defeat",
     "Dracula Defeated":          "Dracula Defeat",
-    "Collector Defeated":        "Collector Defeat",
-    "Boss Rush Opened":          "Boss Rush Open"
+    "Collector Defeated":        "Collector Defeat"
 }
 
 # ─────────────────────────────────────────────────────────────────────────────

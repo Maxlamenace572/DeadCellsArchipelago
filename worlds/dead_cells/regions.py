@@ -78,7 +78,7 @@ TRANSITIONS = {
     "Menu": [
         {"to": "PrisonStart", "require": None},
         {"to": "Challenge", "require": "Challenger's Rune"},
-        {"to": "BossRush", "require": [["Hand of the King Defeated", "Boss Rush Opened"], ["Queen Defeated", "Boss Rush Opened"], ["Dracula Defeated", "Boss Rush Opened"]]}
+        {"to": "BossRush", "require": "Boss Rush Unlock"}
     ],
     "PrisonStart": [
         {"to": "PrisonCourtyard", "require": None},
