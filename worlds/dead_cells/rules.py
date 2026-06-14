@@ -640,6 +640,9 @@ LOCATION_RULES = [
     # ── Dilapidated Arboretum Entrance ───────────────────────────────────────
     ("The Royal Gardener's Outfit", _has("Teleportation Rune")),
 
+    # Parting Gift Graveyard secret
+    ("Parting Gift", _has("Ram Rune")),
+
     # ── Boss Rush Items ──────────────────────────────────────────────────────
     ("Boss Knight Outfit", _boss_rush_trials_1_2()),
     ("Barbarian Boss Knight Outfit", _boss_rush_trials_3_4() and _bsc(3)),
