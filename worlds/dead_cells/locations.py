@@ -2140,16 +2140,16 @@ LOCATION_TABLE: Dict[str, dict] = {
     # Boss Rush
     "Boss Rush Unlock": {"id": 0x0262, "region": "Checks", "type": "rune", "dlc": "", "item": "BossRushUnlock", 
         "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'rune'}, {'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'rune'}, {'biome': 'DookuArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'rune'}],},
-    "Boss Knight Outfit": {"id": 0x0263, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-	"Barbarian Boss Knight Outfit": {"id": 0x0264, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor1", "sources": [{'biome': 'PrisonStart', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-	"Triumphant Boss Knight Outfit": {"id": 0x0265, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor2", "sources": [{'biome': 'PrisonStart', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-	"Luminous Boss Knight Outfit": {"id": 0x0266, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor3", "sources": [{'biome': 'PrisonStart', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-	"Triumph Outfit": {"id": 0x0267, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-	"Bisonnica Triumph Outfit": {"id": 0x0268, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded1", "sources": [{'biome': 'PrisonStart', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-	"Mentoral Triumph Outfit": {"id": 0x0269, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded2", "sources": [{'biome': 'PrisonStart', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-	"Radiant Triumph Outfit": {"id": 0x026A, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded3", "sources": [{'biome': 'PrisonStart', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-    "Peril Glyphs": {"id": 0x026B, "region": "BossRush", "type": "blueprint_floor", "dlc": "", "item": "HydraSpell", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
-    "Taunt": {"id": 0x026C, "region": "BossRush", "type": "blueprint_floor", "dlc": "", "item": "Taunt", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+    "Boss Knight Outfit": {"id": 0x0263, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor", "sources": [{'biome': 'BossRush', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Barbarian Boss Knight Outfit": {"id": 0x0264, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor1", "sources": [{'biome': 'BossRush', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Triumphant Boss Knight Outfit": {"id": 0x0265, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor2", "sources": [{'biome': 'BossRush', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Luminous Boss Knight Outfit": {"id": 0x0266, "region": "BossRush", "type": "skin", "dlc": "", "item": "Mentor3", "sources": [{'biome': 'BossRush', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Triumph Outfit": {"id": 0x0267, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded", "sources": [{'biome': 'BossRush', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Bisonnica Triumph Outfit": {"id": 0x0268, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded1", "sources": [{'biome': 'BossRush', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Mentoral Triumph Outfit": {"id": 0x0269, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded2", "sources": [{'biome': 'BossRush', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+	"Radiant Triumph Outfit": {"id": 0x026A, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded3", "sources": [{'biome': 'BossRush', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+    "Peril Glyphs": {"id": 0x026B, "region": "BossRush", "type": "blueprint_floor", "dlc": "", "item": "HydraSpell", "sources": [{'biome': 'BossRush', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+    "Taunt": {"id": 0x026C, "region": "BossRush", "type": "blueprint_floor", "dlc": "", "item": "Taunt", "sources": [{'biome': 'BossRush', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
 }
 
 def location_id(name: str) -> int:
