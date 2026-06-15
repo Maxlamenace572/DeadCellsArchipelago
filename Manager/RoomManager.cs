@@ -99,10 +99,10 @@ namespace DeadCellsArchipelago {
             {
                 ResetFrontPokebomb();
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
-                if(SAVED_DATA != null) SAVED_DATA.numberOfPokebombUse ++;
+                if(SAVED_DATA != null && USER != null) SAVED_DATA.numberOfPokebombUse += USER.bossRuneActivated+1;
             }
 
-            if (!user.game.isScoring())
+            if (!user.game.isScoring() && !user.game.isBossRush())
             {
                 var level = Data.Class.level.byId.get("Challenge".AsHaxeString());
                 var levelProxy = ((HashlinkObj)level).AsHaxe();
@@ -169,7 +169,7 @@ namespace DeadCellsArchipelago {
                 else
                 {
                     PrepareBiomeCheck(self.destLevel.ToString(), " Enter", self.destLevel.ToString());
-                    if(SAVED_DATA != null) SAVED_DATA.numberOfPokebombUse ++;
+                    if(SAVED_DATA != null && USER != null) SAVED_DATA.numberOfPokebombUse += USER.bossRuneActivated+1;
                 }
                 orig(self, by, lp);
             }

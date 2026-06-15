@@ -348,7 +348,6 @@ namespace DeadCellsArchipelago{
             {
                 cdb.item.byId.get(itemName.AsHaxeString()).cellCost = 1;
             }
-            Log.Information("=== Archipelago Mod loaded ! ===");
 
             var item = ((HaxeDynObj) cdb.item.byId.get("DeathMoney".AsHaxeString())).ToVirtual<virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_>();
             virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_ newItem = new virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_
@@ -391,8 +390,9 @@ namespace DeadCellsArchipelago{
             };
             cdb.item.byId.set("APCells".AsHaxeString(), newItem);
             cdb.item.all.push(newItem);
-        }
 
-        
+            
+            Log.Information("=== Archipelago Mod loaded ! ===");
+        }
     }
 }

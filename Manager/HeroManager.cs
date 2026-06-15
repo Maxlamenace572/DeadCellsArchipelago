@@ -62,7 +62,7 @@ namespace DeadCellsArchipelago {
             {
                 SAVED_DATA.currentLevelId = "PrisonStart";
                 SAVED_DATA.isDoingChallenge = false;
-                SAVED_DATA.numberOfPokebombUse = 1;
+                if (USER != null) SAVED_DATA.numberOfPokebombUse = USER.bossRuneActivated+1;
                 trapChallenge = false;
                 trapChallengeStartEntered = false;
                 trapChallengeCurseReceived = false;

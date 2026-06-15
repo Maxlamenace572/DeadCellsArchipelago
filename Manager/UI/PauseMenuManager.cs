@@ -28,7 +28,7 @@ namespace DeadCellsArchipelago {
         public static SkillShop skillShopMenu = new SkillShop(50, 150);
         public static Bitmap? cellBitmap = null;
         public static dc.ui.Text? cellsNumber = null;
-        public static int shopPrice = 400;
+        public static int shopPrice = 100;
         public static SkillScroller<ItemLine>? scrollerFiller;
         public static SkillScroller<BiomeLine>? scrollerBiome;
         public static PopUpTracker? popUpTracker;
