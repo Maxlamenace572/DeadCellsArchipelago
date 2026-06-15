@@ -36,6 +36,7 @@ namespace DeadCellsArchipelago
         public bool fatalFalls;
         public bool theQueenAndTheSea;
         public bool returnToCastlevania;
+        public string? version;
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -74,16 +75,19 @@ namespace DeadCellsArchipelago
                     
                     var slotData = success.SlotData;
 
-                    bscOption = Convert.ToInt32(slotData["boss_cells"]);
-                    deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
-                    includeCosmetics = Convert.ToBoolean(slotData["include_cosmetics"]);
-                    disableDeathLinkForAspects = Convert.ToBoolean(slotData["death_link_aspect"]);
-                    respawnUpScroll = Convert.ToBoolean(slotData["respawn_up"]);
-                    riseOfTheGiant = Convert.ToBoolean(slotData["dlc_rise_of_the_giant"]);
-                    theBadSeed = Convert.ToBoolean(slotData["dlc_the_bad_seed"]);
-                    fatalFalls = Convert.ToBoolean(slotData["dlc_fatal_falls"]);
-                    theQueenAndTheSea = Convert.ToBoolean(slotData["dlc_the_queen_and_the_sea"]);
-                    returnToCastlevania = Convert.ToBoolean(slotData["dlc_return_to_castlevania"]);
+                    if (slotData.ContainsKey("boss_cells")) bscOption = Convert.ToInt32(slotData["boss_cells"]);
+                    if (slotData.ContainsKey("death_link")) deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
+                    if (slotData.ContainsKey("include_cosmetics")) includeCosmetics = Convert.ToBoolean(slotData["include_cosmetics"]);
+                    if (slotData.ContainsKey("death_link_aspect")) disableDeathLinkForAspects = Convert.ToBoolean(slotData["death_link_aspect"]);
+                    if (slotData.ContainsKey("respawn_up")) respawnUpScroll = Convert.ToBoolean(slotData["respawn_up"]);
+                    if (slotData.ContainsKey("dlc_rise_of_the_giant")) riseOfTheGiant = Convert.ToBoolean(slotData["dlc_rise_of_the_giant"]);
+                    if (slotData.ContainsKey("dlc_the_bad_seed")) theBadSeed = Convert.ToBoolean(slotData["dlc_the_bad_seed"]);
+                    if (slotData.ContainsKey("dlc_fatal_falls")) fatalFalls = Convert.ToBoolean(slotData["dlc_fatal_falls"]);
+                    if (slotData.ContainsKey("dlc_the_queen_and_the_sea")) theQueenAndTheSea = Convert.ToBoolean(slotData["dlc_the_queen_and_the_sea"]);
+                    if (slotData.ContainsKey("dlc_return_to_castlevania")) returnToCastlevania = Convert.ToBoolean(slotData["dlc_return_to_castlevania"]);
+
+                    if (slotData.ContainsKey("apworld_version")) version = Convert.ToString(slotData["apworld_version"]);
+                    if (version == null) version = "-0.1.1";
 
                     if (deathLinkEnabled >= 0)
                     {

@@ -9,6 +9,7 @@ using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.RoomManager;
 using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace DeadCellsArchipelago {
     public static class MainMenuManager
@@ -21,6 +22,8 @@ namespace DeadCellsArchipelago {
         public static Text? connectButton = null;
         public static int loadDataInPlayMenu = 0;
         public static bool isOnMenu = false;
+        public static Text? apVersion = null;
+        public static string lastCompatibleApworld = "0.1.3";
 
         public static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
@@ -216,7 +219,6 @@ namespace DeadCellsArchipelago {
                     }
                 };
                 index++;
-                password.set_text("test".AsHaxeString());
             }
 
             if (connectButton == null) {
@@ -253,6 +255,7 @@ namespace DeadCellsArchipelago {
                             connectionStatus.set_text("Connected".AsHaxeString());
                             connectionStatus.set_textColor(2883371);
                             ARCHIPELAGO = archipelago;
+                            SetApworldVersion();
                             
                             if (SAVED_DATA != null)
                             {
@@ -310,6 +313,7 @@ namespace DeadCellsArchipelago {
             password = null;
             connectButton = null;
             isOnMenu = false;
+            apVersion = null;
             orig(self, mode, tpause, fadeOutS);
         }
 
@@ -376,6 +380,89 @@ namespace DeadCellsArchipelago {
             History = [];
             resetOnNextPrisonStart = false;
             levelMapChallenge = null;
+        }
+
+        private static void SetApworldVersion()
+        {
+            if (ARCHIPELAGO == null) return;
+            if (apVersion == null) {
+                double scale = 1;
+                apVersion = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
+                {
+                    y = 10
+                };
+            }
+
+            apVersion.set_text($"Apworld: {ARCHIPELAGO.version}".AsHaxeString());
+            apVersion.x = ((113-4)*3) - apVersion.textWidth;
+            apVersion.posChanged = true;
+            if (TooOldApworld())
+                apVersion.set_textColor(16711680);
+
+            else if (FutureApworld())
+                apVersion.set_textColor(16752934);
+
+            else
+                apVersion.set_textColor(2883371);
+        }
+
+        public static int Compare(string a, string b)
+        {
+            var (oldA, partsA) = Parse(a);
+            var (oldB, partsB) = Parse(b);
+
+            if (oldA != oldB)
+                return oldA ? -1 : 1;
+
+            int len = System.Math.Max(partsA.Length, partsB.Length);
+            for (int i = 0; i < len; i++)
+            {
+                int pa = i < partsA.Length ? partsA[i] : 0;
+                int pb = i < partsB.Length ? partsB[i] : 0;
+                if (pa != pb)
+                    return pa.CompareTo(pb);
+            }
+            return 0;
+        }
+
+        private static (bool isOld, int[] parts) Parse(string version)
+        {
+            if (string.IsNullOrWhiteSpace(version))
+                throw new ArgumentException("Version vide ou nulle", nameof(version));
+
+            bool isOld = version.StartsWith("-");
+            string clean = isOld ? version.Substring(1) : version;
+
+            var parts = clean.Split('.')
+                            .Select(p => int.TryParse(p, out var n) ? n : 0)
+                            .ToArray();
+
+            return (isOld, parts);
+        }
+
+        public static bool TooOldApworld()
+        {
+            if (ARCHIPELAGO == null || ARCHIPELAGO.version == null) return true;
+            return Compare(ARCHIPELAGO.version, lastCompatibleApworld) < 0;
+        }
+
+        public static bool FutureApworld()
+        {
+            string? modVersion = GetModVersion();
+            if (ARCHIPELAGO == null || ARCHIPELAGO.version == null || modVersion == null) return true;
+            return Compare(ARCHIPELAGO.version, modVersion) > 0;
+        }
+
+        public static string? GetModVersion()
+        {
+                var json = File.ReadAllText(GetModInfoFilePath());
+                using JsonDocument document = JsonDocument.Parse(json);
+                return document.RootElement.GetProperty("version").GetString();
+        }
+
+        public static string GetModInfoFilePath()
+        {
+            return Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "modinfo.json");
         }
     }
 }
