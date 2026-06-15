@@ -96,6 +96,7 @@ namespace DeadCellsArchipelago {
                 {
                     connectionStatus.set_text("Connected".AsHaxeString());
                     connectionStatus.set_textColor(2883371);
+                    SetApworldVersion();
                 }
 
             }
