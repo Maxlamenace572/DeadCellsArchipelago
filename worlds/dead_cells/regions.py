@@ -22,7 +22,7 @@ ALL_REGIONS = [
     "Bridge", "BeholderPit", "StiltVillage", "AncientTemple",
     "Cemetery", "ClockTower", "Crypt", "TopClockTower",
     "Castle", "Distillery", "Throne",
-    "Bank", "Challenge",
+    "Bank", "Challenge", "BossRush",
     "Cavern", "Giant", "Astrolab", "Observatory",
     "Greenhouse", "Swamp", "SwampHeart",
     "Tumulus", "Cliff", "GardenerStage",
@@ -77,7 +77,8 @@ REGION_DLC = {
 TRANSITIONS = {
     "Menu": [
         {"to": "PrisonStart", "require": None},
-        {"to": "Challenge", "require": None},
+        {"to": "Challenge", "require": "Challenger's Rune"},
+        {"to": "BossRush", "require": "Boss Rush Unlock"}
     ],
     "PrisonStart": [
         {"to": "PrisonCourtyard", "require": None},

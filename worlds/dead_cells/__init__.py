@@ -29,7 +29,7 @@ from .base_classes import DeadCellsItem
 from BaseClasses import LocationProgressType
 
 # version
-version = "0.1.3"
+version = "0.1.4"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Items that are always base-game weapons (no blueprint required)
@@ -141,7 +141,7 @@ BOSS_DEFEAT_PAIRS = {
     "Hand of the King Defeated": "Hand of the King Defeat",
     "Queen Defeated":            "Queen Defeat",
     "Dracula Defeated":          "Dracula Defeat",
-    "Collector Defeated":        "Collector Defeat",
+    "Collector Defeated":        "Collector Defeat"
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -508,8 +508,8 @@ class DeadCellsWorld(World):
             "BreakableGroundKey",
             "HomKey",
             "ProgBossRune"
-        ]
-    ]  
+            ]
+        ]  
 
         for item, loc in zip(progression_items, early_locations):
             if not loc.item:
@@ -529,7 +529,7 @@ class DeadCellsWorld(World):
             "include_base_weapons":      bool(self.options.include_base_weapons.value),
             "trap_percentage":           self.options.trap_percentage.value,
             "apworld_version":           version
-        }
+        }    
 
     def get_filler_item_name(self) -> str:
         """

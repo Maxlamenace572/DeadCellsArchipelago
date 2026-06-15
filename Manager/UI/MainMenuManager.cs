@@ -23,7 +23,7 @@ namespace DeadCellsArchipelago {
         public static int loadDataInPlayMenu = 0;
         public static bool isOnMenu = false;
         public static Text? apVersion = null;
-        public static string lastCompatibleApworld = "0.1.3";
+        public static string lastCompatibleApworld = "0.1.4";
 
         public static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
