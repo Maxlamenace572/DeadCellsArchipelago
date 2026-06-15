@@ -391,6 +391,14 @@ namespace DeadCellsArchipelago{
             cdb.item.byId.set("APCells".AsHaxeString(), newItem);
             cdb.item.all.push(newItem);
 
+            if(!cosmeticsList.Any())
+            {
+                InitLists();
+            }
+            foreach (string skinId in cosmeticsList)
+            {
+                cdb.item.byId.get(skinId.AsHaxeString()).cellCost = 50;
+            }
             
             Log.Information("=== Archipelago Mod loaded ! ===");
         }
