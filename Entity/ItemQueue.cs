@@ -37,7 +37,7 @@ namespace DeadCellsArchipelago
             }
 
             string itemId = itemName;
-            if (itemId.Length >= 7 && itemId[^7..] == " Unlock")
+            if (itemId != "Boss Rush Unlock" && itemId.Length >= 7 && itemId[^7..] == " Unlock")
             {
                 itemId = itemId[..^7];
             }
