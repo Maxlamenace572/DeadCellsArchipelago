@@ -53,6 +53,8 @@ namespace DeadCellsArchipelago {
             Hook_Game.loadMainLevel += OnLoadMainLevel;
             Hook_PrisonStart.buildPrisonHUBZDoor += OnBuildPrisonHUBZDoorPrisonStart;
             Hook_PurpleGarden.buildGardenLoreRooms += OnBuildGardenLoreRooms;
+            Hook_MariaRoom.unlockCatExaminable += OnUnlockCatExaminable;
+            Hook_MariaRoom.onCreateExaminable += OnOnCreateExaminable;
         }
 
         public static void OnDisplayCursePopup(Hook_Beheaded.orig_displayCursePopup orig, Beheaded self, int count, dc.String reason, Ref<bool> hidePopup)
@@ -251,10 +253,25 @@ namespace DeadCellsArchipelago {
         }
 
         private static void OnBuildGardenLoreRooms(Hook_PurpleGarden.orig_buildGardenLoreRooms orig, PurpleGarden self)
-        {//SpawnCat
+        {//SpawnCat (part 1)
             useModdedHasUnlock = true;
             orig(self);
             useModdedHasUnlock = false;
+        }
+
+        private static void OnUnlockCatExaminable(Hook_MariaRoom.orig_unlockCatExaminable orig, MariaRoom self)
+        {//SpawnCat (part 2)
+            useModdedHasUnlock = true;
+            orig(self);
+            useModdedHasUnlock = false;
+        }
+
+        private static bool OnOnCreateExaminable(Hook_MariaRoom.orig_onCreateExaminable orig, MariaRoom self, dc.String custId, Examinable exam)
+        {//SpawnCat (part 3)
+            useModdedHasUnlock = true;
+            var res = orig(self, custId, exam);
+            useModdedHasUnlock = false;
+            return res;
         }
     }
 }
