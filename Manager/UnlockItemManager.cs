@@ -52,6 +52,7 @@ namespace DeadCellsArchipelago {
             Hook_MerchantPan.postUpdate += OnPostUpdateMerchantPan;
             Hook_Game.loadMainLevel += OnLoadMainLevel;
             Hook_PrisonStart.buildPrisonHUBZDoor += OnBuildPrisonHUBZDoorPrisonStart;
+            Hook_PurpleGarden.buildGardenLoreRooms += OnBuildGardenLoreRooms;
         }
 
         public static void OnDisplayCursePopup(Hook_Beheaded.orig_displayCursePopup orig, Beheaded self, int count, dc.String reason, Ref<bool> hidePopup)
@@ -247,6 +248,13 @@ namespace DeadCellsArchipelago {
         {//BossRushUnlock (part 2)
             if (SAVED_DATA != null && SAVED_DATA.IsItemReceived("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
             orig(self);
+        }
+
+        private static void OnBuildGardenLoreRooms(Hook_PurpleGarden.orig_buildGardenLoreRooms orig, PurpleGarden self)
+        {//SpawnCat
+            useModdedHasUnlock = true;
+            orig(self);
+            useModdedHasUnlock = false;
         }
     }
 }
