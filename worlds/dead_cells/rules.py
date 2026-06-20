@@ -539,6 +539,8 @@ LOCATION_RULES = [
     
     ("Abyssal Trident", _has("Ram Rune")),
 
+
+
     # Cursed Biome drops
     (
         "Anathema", 
@@ -604,6 +606,19 @@ LOCATION_RULES = [
                 "Castle's Outskirts Enter",
                 "Dilapidated Arboretum Enter",
             ]
+        )
+    ),
+
+    (
+        "Acceptance",
+        _has_all(
+            "Vine Rune", 
+            "Ram Rune", 
+            "Insufferable Crypt Unlock", 
+            "Graveyard Unlock", 
+            "Spider Rune", 
+            "Teleportation Rune", 
+            "Forgotten Sepulcher Unlock",
         )
     ),
 
