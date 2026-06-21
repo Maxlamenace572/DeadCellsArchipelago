@@ -14,6 +14,7 @@ using System.Text.Json;
 namespace DeadCellsArchipelago {
     public static class MainMenuManager
     {
+        public static dc.h2d.Bitmap? screenBitmap = null;
         public static dc.h2d.Object? apMenuContainer = null;
         public static Text? connectionStatus = null;
         public static dc.h2d.TextInput? serverIp = null;
@@ -24,9 +25,12 @@ namespace DeadCellsArchipelago {
         public static bool isOnMenu = false;
         public static Text? apVersion = null;
         public static string lastCompatibleApworld = "0.1.4";
+        public static int screenScale;
 
         public static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
+            screenScale = dc.libs.Process.Class.CUSTOM_STAGE_WIDTH / 1920;
+
             self.news.hidden = true;
             self.news.updateVisible();
 
@@ -36,12 +40,23 @@ namespace DeadCellsArchipelago {
                 isOnMenu = true;
             }
 
+            if (screenBitmap == null)
+            {
+                dc.h2d.Tile screenTile = VoidBackground1080Tile.clone();
+
+                screenBitmap = new dc.h2d.Bitmap(screenTile, self.root)
+                {
+                    scaleX = screenScale,
+                    scaleY = screenScale
+                };
+            }
+
             int menuScale = 3;
             if (apMenuContainer == null) {
-                apMenuContainer = new dc.h2d.Object(self.root)
+                apMenuContainer = new dc.h2d.Object(screenBitmap)
                 {
-                    x = dc.libs.Process.Class.CUSTOM_STAGE_WIDTH * 0.7,
-                    y = dc.libs.Process.Class.CUSTOM_STAGE_HEIGHT * 0.05,
+                    x = 1920 * 0.7,
+                    y = 1080 * 0.05
                 };
 
                 int frame = 0;
@@ -83,7 +98,9 @@ namespace DeadCellsArchipelago {
                 connectionStatus = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
                     x = 10,
-                    y = 10+40*index
+                    y = 10+40*index,
+                    scaleX = 1,
+                    scaleY = 1
                 };
                 index++;
 
@@ -106,7 +123,9 @@ namespace DeadCellsArchipelago {
                 double scale = 1;
                 Text serverIpTag = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
-                    y = 10+40*index
+                    y = 10+40*index,
+                    scaleX = 1,
+                    scaleY = 1
                 };
                 index++;
 
@@ -116,11 +135,13 @@ namespace DeadCellsArchipelago {
                 serverIpTag.set_textColor(16777215);
 
 
-                UIBox bgServerIp = UIBox.Class.drawBoxMain(270, 1, 4, 3, 0, null);
+                UIBox bgServerIp = UIBox.Class.drawBoxMain(270*screenScale, 1, 4, 3, 0, null);
                 bgServerIp.x = 18;
                 bgServerIp.y = 40*index;
                 bgServerIp.alpha = 0.85;
                 bgServerIp.sg.color = ColorVectorRGBA(17*bgServerIp.alpha, 17*bgServerIp.alpha, 37*bgServerIp.alpha, 1);
+                bgServerIp.scaleX = 3;
+                bgServerIp.scaleY = 3;
 
                 apMenuContainer.addChild(bgServerIp);
 
@@ -146,7 +167,9 @@ namespace DeadCellsArchipelago {
                 double scale = 1;
                 Text slotNameTag = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
-                    y = 10+40*index
+                    y = 10+40*index,
+                    scaleX = 1,
+                    scaleY = 1
                 };
                 index++;
 
@@ -156,11 +179,13 @@ namespace DeadCellsArchipelago {
                 slotNameTag.set_textColor(16777215);
 
 
-                UIBox bgSlotName = UIBox.Class.drawBoxMain(270, 1, 4, 3, 0, null);
+                UIBox bgSlotName = UIBox.Class.drawBoxMain(270*screenScale, 1, 4, 3, 0, null);
                 bgSlotName.x = 18;
                 bgSlotName.y = 40*index;
                 bgSlotName.alpha = 0.85;
                 bgSlotName.sg.color = ColorVectorRGBA(17*bgSlotName.alpha, 17*bgSlotName.alpha, 37*bgSlotName.alpha, 1);
+                bgSlotName.scaleX = 3;
+                bgSlotName.scaleY = 3;
 
                 apMenuContainer.addChild(bgSlotName);
 
@@ -187,7 +212,9 @@ namespace DeadCellsArchipelago {
                 double scale = 1;
                 Text passwordTag = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
-                    y = 10+40*index
+                    y = 10+40*index,
+                    scaleX = 1,
+                    scaleY = 1
                 };
                 index++;
 
@@ -196,12 +223,13 @@ namespace DeadCellsArchipelago {
 
                 passwordTag.set_textColor(16777215);
 
-
-                UIBox bgPassword = UIBox.Class.drawBoxMain(270, 1, 4, 3, 0, null);
+                UIBox bgPassword = UIBox.Class.drawBoxMain(270.0*screenScale, 1.0, 4, 3, 0, null);
                 bgPassword.x = 18;
                 bgPassword.y = 40*index;
                 bgPassword.alpha = 0.85;
                 bgPassword.sg.color = ColorVectorRGBA(17*bgPassword.alpha, 17*bgPassword.alpha, 37*bgPassword.alpha, 1);
+                bgPassword.scaleX = 3;
+                bgPassword.scaleY = 3;
 
                 apMenuContainer.addChild(bgPassword);
 
@@ -226,7 +254,9 @@ namespace DeadCellsArchipelago {
                 double scale = 1;
                 connectButton = new Text(apMenuContainer, false, true, new Ref<double>(ref scale), null, null)
                 {
-                    y = 40*index
+                    y = 40*index,
+                    scaleX = 1,
+                    scaleY = 1
                 };
                 index++;
                 connectButton.set_text("Connect".AsHaxeString());
@@ -291,8 +321,8 @@ namespace DeadCellsArchipelago {
             orig(self);
             if (apMenuContainer != null)
             {
-                apMenuContainer.x = dc.libs.Process.Class.CUSTOM_STAGE_WIDTH * 0.7;
-                apMenuContainer.y = dc.libs.Process.Class.CUSTOM_STAGE_HEIGHT * 0.05;
+                apMenuContainer.x = 1920 * 0.7;
+                apMenuContainer.y = 1080 * 0.05;
             }
         }
 
