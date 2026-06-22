@@ -66,7 +66,11 @@ namespace DeadCellsArchipelago {
             Bounds boundsLevel = bitmap.getSize(new Bounds());
 
             double scaleText = 1;
-            text = new dc.ui.Text(bitmap, true, false, new Ref<double>(ref scaleText), null, null);
+            text = new dc.ui.Text(bitmap, true, false, new Ref<double>(ref scaleText), null, null)
+            {
+                scaleX = 1,
+                scaleY = 1
+            };
 
             string keyT;
             string keyR;

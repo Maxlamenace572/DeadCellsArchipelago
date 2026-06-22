@@ -11,7 +11,6 @@ using dc.hl.types;
 using dc.level;
 using dc;
 using Hashlink.Virtuals;
-using dc.hl;
 using dc.ui;
 using ModCore.Utilities;
 
@@ -19,11 +18,7 @@ using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.EnemyManager;
-using dc.level.lore;
-using dc.tool.mod.script;
-using System.Reflection;
 using Hashlink.Proxy;
-using HaxeProxy.Runtime.Internals;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager

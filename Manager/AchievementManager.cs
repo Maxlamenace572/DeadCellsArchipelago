@@ -5,7 +5,7 @@ using HaxeProxy.Runtime;
 namespace DeadCellsArchipelago {
     public static class AchievementManager
     {
-        public static bool RemoveShouldDisplayInGameNotification(Hook_SteamAchievementManager.orig_shouldDisplayInGameNotification orig, SteamAchievementManager self)
+        /*public static bool RemoveShouldDisplayInGameNotification(Hook_SteamAchievementManager.orig_shouldDisplayInGameNotification orig, SteamAchievementManager self)
         {
             //disable achievement pop up
             return false;
@@ -20,7 +20,7 @@ namespace DeadCellsArchipelago {
         {
             //say that the player doesn't have steam achievements
             return false;
-        }
+        }*/
 
         public static void OnSetAchievement(Hook__Achievements.orig_setAchievement orig, EAchievement id, Ref<bool> showLog)
         {

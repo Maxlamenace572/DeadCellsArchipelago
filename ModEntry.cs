@@ -102,10 +102,10 @@ namespace DeadCellsArchipelago{
             //LevelGen
             Hook_LevelGen.generate += OnGenerate;
 
-            
-            Hook_SteamAchievementManager.isUnlocked += RemoveIsUnlocked;
+            //Hook__Achievements
+            /*Hook_SteamAchievementManager.isUnlocked += RemoveIsUnlocked;
             Hook_SteamAchievementManager.unlock += RemoveUnlock;
-            Hook_SteamAchievementManager.shouldDisplayInGameNotification += RemoveShouldDisplayInGameNotification;
+            Hook_SteamAchievementManager.shouldDisplayInGameNotification += RemoveShouldDisplayInGameNotification;*/
 
             Hook_LogManager.blueprint += BlueprintUILog;
             Hook_LogManager.head += HeadUILog;
@@ -364,8 +364,7 @@ namespace DeadCellsArchipelago{
                 gameplayDesc = "No cost too great.".AsHaxeString(),
                 droppable = item.droppable,
                 commonProps = item.commonProps,
-                cellCost = item.cellCost,
-                castCD = item.castCD,
+                cellCost = item.cellCost
             };
             cdb.item.byId.set("APGold".AsHaxeString(), newItem);
             cdb.item.all.push(newItem);
@@ -385,8 +384,7 @@ namespace DeadCellsArchipelago{
                 gameplayDesc = "It's dangerous to go alone! Take this.".AsHaxeString(),
                 droppable = item.droppable,
                 commonProps = item.commonProps,
-                cellCost = item.cellCost,
-                castCD = item.castCD,
+                cellCost = item.cellCost
             };
             cdb.item.byId.set("APCells".AsHaxeString(), newItem);
             cdb.item.all.push(newItem);

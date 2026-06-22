@@ -337,6 +337,7 @@ namespace DeadCellsArchipelago {
 
         public static void OnLaunchGame(Hook_Main.orig_launchGame orig, Main self, LaunchMode mode, bool? tpause, double? fadeOutS)
         {
+            screenBitmap = null;
             apMenuContainer = null;
             connectionStatus = null;
             serverIp = null;
@@ -420,7 +421,9 @@ namespace DeadCellsArchipelago {
                 double scale = 1;
                 apVersion = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
-                    y = 10
+                    y = 10,
+                    scaleX = 1,
+                    scaleY = 1
                 };
             }
 

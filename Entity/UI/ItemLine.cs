@@ -11,6 +11,7 @@ using Serilog;
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.ItemManager;
+using static DeadCellsArchipelago.PauseMenuManager;
 
 namespace DeadCellsArchipelago {
     public class ItemLine : Line
@@ -26,7 +27,7 @@ namespace DeadCellsArchipelago {
         {
             this.nb = nb;
             bool ctrlShow = false;
-            double scaleSkill = 1.0/3;
+            double scaleSkill = 1.0/(3*screenScale);
             skill = new Skill(0, bgBox, new Ref<bool>(ref ctrlShow), new Ref<bool>(ref ctrlShow))
             {
                 x = 2,
@@ -35,7 +36,7 @@ namespace DeadCellsArchipelago {
                 scaleY = scaleSkill
             };
             this.itemId = itemId;
-            double scaleText = 1.0/3;
+            double scaleText = 1.0/(3*screenScale);
             text = new dc.ui.Text(null, true, false, new Ref<double>(ref scaleText), null, null);
 
             if(itemId.Length >= 5 && (itemId[^5..] == "Enter" || itemId[^5..] == " Exit" || itemId[..5] == "Boss_"))
@@ -47,8 +48,8 @@ namespace DeadCellsArchipelago {
                     Tile doorTile = Assets.Class.gameElements.getTile("minimapExit".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
                     Bitmap doorB = new Bitmap(doorTile, skill)
                     {
-                        scaleX = 3,
-                        scaleY = 3
+                        scaleX = 3*screenScale,
+                        scaleY = 3*screenScale
                     };
                     CenterX(skill, doorB);
                     CenterY(skill, doorB);
@@ -68,8 +69,8 @@ namespace DeadCellsArchipelago {
                     Tile doorTile = Assets.Class.gameElements.getTile("minimapExitVisited2".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
                     Bitmap doorB = new Bitmap(doorTile, skill)
                     {
-                        scaleX = 3,
-                        scaleY = 3
+                        scaleX = 3*screenScale,
+                        scaleY = 3*screenScale
                     };
                     CenterX(skill, doorB);
                     CenterY(skill, doorB);
@@ -90,8 +91,8 @@ namespace DeadCellsArchipelago {
                     double py = 0.5;
                     bossIcon.setCenterRatio(new Ref<double>(ref px), new Ref<double>(ref py));
                     skill.setBmpIcon(bossIcon);
-                    skill.icon.scaleX = 1.5;
-                    skill.icon.scaleY = 1.5;
+                    skill.icon.scaleX = 1.5*screenScale;
+                    skill.icon.scaleY = 1.5*screenScale;
                     text.set_text($" {Lang.Class.t.texts.get((dc.String)Data.Class.mob.byId.get(itemId.AsHaxeString()).name)}".AsHaxeString());
                 }
             }

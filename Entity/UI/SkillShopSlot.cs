@@ -21,16 +21,19 @@ namespace DeadCellsArchipelago {
         public Bitmap? cellBitmap;
         public Interactive? inter;
 
-        public void InitButton(DefaultPause self, double x, double y, Func<InventItem?> getItem, NewItemDesc desc)
+        public void InitButton(dc.h2d.Object parent, double x, double y, Func<InventItem?> getItem, NewItemDesc desc)
         {
             int price = shopPrice;
             if (skill != null) return;
 
             bool ctrlShow = false;
-            skill = new Skill(0, self.bg, new Ref<bool>(ref ctrlShow), new Ref<bool>(ref ctrlShow))
+            double scaleSkill = 1.0/screenScale;
+            skill = new Skill(0, parent, new Ref<bool>(ref ctrlShow), new Ref<bool>(ref ctrlShow))
             {
                 x = x,
-                y = y
+                y = y,
+                scaleX = scaleSkill,
+                scaleY = scaleSkill
             };
 
             InventItem? ii = getItem();
@@ -45,11 +48,11 @@ namespace DeadCellsArchipelago {
 
                 if (!HasAffix(ii, "Colorless"))
                 {
-                    SetPrice(self, price);
+                    SetPrice(parent, price);
 
                     Skill capturedSkill = skill;
                     Bounds boundsSkill = skill.getSize(new Bounds());
-                    inter = new Interactive(boundsSkill.xMax, boundsSkill.yMax, skill, null)
+                    inter = new Interactive(boundsSkill.xMax*screenScale, boundsSkill.yMax*screenScale, skill, null)
                     {
                         onClick = (e) =>
                         {
@@ -74,7 +77,7 @@ namespace DeadCellsArchipelago {
                                 foreach (Bitmap ammoIcon in capturedSkill.ammoIcons)
                                     ammoIcon.visible = false;
 
-                                SetNoPrice(self);
+                                SetNoPrice(parent);
                                 skill.removeChild(inter);
                             }
                             else
@@ -95,12 +98,12 @@ namespace DeadCellsArchipelago {
                 }
                 else
                 {
-                    SetNoPrice(self);
+                    SetNoPrice(parent);
                 }
             }
             else
             {
-                SetNoPrice(self);
+                SetNoPrice(parent);
             }
         }
 
@@ -130,7 +133,7 @@ namespace DeadCellsArchipelago {
             cellBitmap = null;
         }
 
-        internal void SetNoPrice(DefaultPause self)
+        internal void SetNoPrice(dc.h2d.Object parent)
         {
             if(skill == null) return;
             cellBitmap?.remove();
@@ -138,22 +141,28 @@ namespace DeadCellsArchipelago {
 
             Bounds boundsSkill = skill.getSize(new Bounds());
             double scale = 1;
-            label = new dc.ui.Text(self.bg, false, false, new Ref<double>(ref scale), null, null)
+            label = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null)
             {
-                y = boundsSkill.yMax + skill.y
+                y = boundsSkill.yMax + skill.y,
+                    scaleX = 1,
+                    scaleY = 1
             };
             label.set_text("-".AsHaxeString());
             label.x = ((boundsSkill.xMax - label.get_textWidth()) /2) + skill.x;
             label.set_textColor(16777215);
         }
 
-        internal void SetPrice(DefaultPause self, int number)
+        internal void SetPrice(dc.h2d.Object parent, int number)
         {
             if(skill == null) return;
 
             Bounds boundsSkill = skill.getSize(new Bounds());
             double scale = 1;
-            label = new dc.ui.Text(self.bg, false, false, new Ref<double>(ref scale), null, null);
+            label = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null)
+            {
+                scaleX = 1,
+                scaleY = 1
+            };
             label.set_text($" {number}".AsHaxeString());
             label.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
 
@@ -162,7 +171,7 @@ namespace DeadCellsArchipelago {
             double XY = 0;
             var cellTile = Assets.Class.gameElements.getTile("cell".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
 
-            cellBitmap = new Bitmap(cellTile, self.bg)
+            cellBitmap = new Bitmap(cellTile, parent)
             {
                 y = boundsSkill.yMax + skill.y + 10,
                 x = (boundsSkill.xMax -(22 + label.get_textWidth())) /2 + skill.x

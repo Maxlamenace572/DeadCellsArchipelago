@@ -3,6 +3,8 @@ using dc.ui;
 using ModCore.Utilities;
 using Serilog;
 
+using static DeadCellsArchipelago.PauseMenuManager;
+
 namespace DeadCellsArchipelago {
     public class PopUpTracker
     {
@@ -18,17 +20,23 @@ namespace DeadCellsArchipelago {
         {
             this.parent = parent;
 
-            bgBox = new UIBox("boxMain".AsHaxeString(), 720, 610, 0, 0);
+            bgBox = new UIBox("boxMain".AsHaxeString(), 720*screenScale, 610*screenScale, 0, 0)
+            {
+                scaleX = 3,
+                scaleY = 3
+            };
             Bounds boundsBgBox = bgBox.getSize(new Bounds());
-            bgBox.x =  (dc.libs.Process.Class.CUSTOM_STAGE_WIDTH - boundsBgBox.xMax)/2;
-            bgBox.y =  (dc.libs.Process.Class.CUSTOM_STAGE_HEIGHT - boundsBgBox.yMax)/2;
+            bgBox.x =  (1920 - boundsBgBox.xMax)/2;
+            bgBox.y =  (1080 - boundsBgBox.yMax)/2;
             bgBox.posChanged = true;
             bgBox.colorizeSG(660257);
 
-            outerBox = new UIBox("boxInfo".AsHaxeString(), 720, 610, 0, 0)
+            outerBox = new UIBox("boxInfo".AsHaxeString(), 720*screenScale, 610*screenScale, 0, 0)
             {
                 x = bgBox.x,
                 y = bgBox.y,
+                scaleX = 3,
+                scaleY = 3
             };
             
             parent.addChild(bgBox);

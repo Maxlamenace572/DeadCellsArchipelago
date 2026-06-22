@@ -28,10 +28,18 @@ namespace DeadCellsArchipelago {
             };
 
             double scale = 1;
-            label = new Text(bitmap, true, false, new Ref<double>(ref scale), null, null);
+            label = new Text(bitmap, true, false, new Ref<double>(ref scale), null, null)
+            {
+                scaleX = 1,
+                scaleY = 1
+            };
             label.set_text($"{labelS}".AsHaxeString());
 
-            number = new Text(bitmap, true, false, new Ref<double>(ref scale), null, null);
+            number = new Text(bitmap, true, false, new Ref<double>(ref scale), null, null)
+            {
+                scaleX = 1,
+                scaleY = 1
+            };;
             number.set_text($"{max-toChecks.Count}/{max}".AsHaxeString());
             number.y = label.get_textHeight();
             

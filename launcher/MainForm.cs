@@ -26,8 +26,11 @@ namespace DeadCellsInstaller
         private TextBox     txtPath;
         private Button      btnBrowse;
         private Label       lblWarning;
+        private Label       lblWarningDccm;
         private CheckBox    chkNonSteam;
+        private CheckBox    chkGog;
         private Button      btnInstall;
+        private Button      btnUpdateDccm;
         private Button      btnLaunch;
         private ProgressBar progressBar;
         private Label       lblStatus;
@@ -51,14 +54,12 @@ namespace DeadCellsInstaller
                 if (stream != null) this.Icon = new Icon(stream);
             }
             LoadSavedPath();
-            // Calcul du warning au lancement
-            _ = RefreshWarningAsync();
+            _ = RefreshWarningsAsync();
         }
 
         // ════════════════════════════════════════════════════════════════
-        //  CONFIG PERSISTANTE
+        //  CONFIG PERSISTANTE (format "key=value" par ligne)
         // ════════════════════════════════════════════════════════════════
-        // ─── Config helpers (format "key=value" par ligne) ─────────────
         private string ReadConfig(string key)
         {
             try
@@ -110,20 +111,9 @@ namespace DeadCellsInstaller
             catch { txtPath.Text = DEFAULT_PATH; }
         }
 
-        private void SavePath(string path)
-        {
-            WriteConfig("path", path);
-        }
-
-        private bool LoadFallbackMode()
-        {
-            return ReadConfig("fallback") == "true";
-        }
-
-        private void SaveFallbackMode(bool fallback)
-        {
-            WriteConfig("fallback", fallback ? "true" : "false");
-        }
+        private void SavePath(string path)       => WriteConfig("path", path);
+        private bool LoadFallbackMode()           => ReadConfig("fallback") == "true";
+        private void SaveFallbackMode(bool value) => WriteConfig("fallback", value ? "true" : "false");
 
         // ════════════════════════════════════════════════════════════════
         //  UI SETUP
@@ -131,8 +121,8 @@ namespace DeadCellsInstaller
         private void InitializeComponent()
         {
             this.Text          = "Dead Cells Archipelago Installer";
-            this.Size          = new Size(620, 540);
-            this.MinimumSize   = new Size(620, 540);
+            this.Size          = new Size(620, 610);
+            this.MinimumSize   = new Size(620, 610);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor     = Color.FromArgb(22, 22, 30);
             this.ForeColor     = Color.White;
@@ -166,7 +156,7 @@ namespace DeadCellsInstaller
                 ForeColor   = Color.White,
                 BorderStyle = BorderStyle.FixedSingle
             };
-            txtPath.TextChanged += async (s, e) => await RefreshWarningAsync();
+            txtPath.TextChanged += async (s, e) => await RefreshWarningsAsync();
 
             // ── Browse ──
             btnBrowse = new Button
@@ -183,7 +173,7 @@ namespace DeadCellsInstaller
             btnBrowse.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 100);
             btnBrowse.Click += BtnBrowse_Click;
 
-            // ── Warning label ──
+            // ── Warning : path / mod ──
             lblWarning = new Label
             {
                 Text      = "",
@@ -195,22 +185,43 @@ namespace DeadCellsInstaller
                 Font      = new Font("Segoe UI", 9f)
             };
 
-            // ── Non-Steam checkbox ──
+            // ── Warning : DCCM version ──
+            lblWarningDccm = new Label
+            {
+                Text      = "",
+                AutoSize  = false,
+                Location  = new Point(20, 136),
+                Width     = 570,
+                Height    = 20,
+                ForeColor = Color.FromArgb(255, 200, 60),
+                Font      = new Font("Segoe UI", 9f)
+            };
+
+            // ── Checkboxes ──
             chkNonSteam = new CheckBox
             {
                 Text      = "Non-Steam version  (writes coremod/config/modcore.json)",
-                Location  = new Point(20, 142),
-                Width     = 570,
+                Location  = new Point(20, 162),
+                Width     = 400,
                 ForeColor = Color.FromArgb(180, 180, 190),
                 BackColor = Color.Transparent
             };
 
-            // ── Install/Update button ──
+            chkGog = new CheckBox
+            {
+                Text      = "GOG version  (uses deadcells-gog.exe for fallback install)",
+                Location  = new Point(20, 184),
+                Width     = 400,
+                ForeColor = Color.FromArgb(180, 180, 190),
+                BackColor = Color.Transparent
+            };
+
+            // ── Install / Update button ──
             btnInstall = new Button
             {
-                Text      = "Install / Update",
-                Location  = new Point(20, 170),
-                Width     = 375,
+                Text      = "Install / Update mod",
+                Location  = new Point(20, 214),
+                Width     = 280,
                 Height    = 36,
                 BackColor = Color.FromArgb(180, 50, 40),
                 ForeColor = Color.White,
@@ -221,12 +232,28 @@ namespace DeadCellsInstaller
             btnInstall.FlatAppearance.BorderSize = 0;
             btnInstall.Click += BtnInstall_Click;
 
+            // ── Update DCCM button ──
+            btnUpdateDccm = new Button
+            {
+                Text      = "Update DCCM",
+                Location  = new Point(310, 214),
+                Width     = 115,
+                Height    = 36,
+                BackColor = Color.FromArgb(60, 90, 160),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font      = new Font("Segoe UI", 10f, FontStyle.Bold),
+                Cursor    = Cursors.Hand
+            };
+            btnUpdateDccm.FlatAppearance.BorderSize = 0;
+            btnUpdateDccm.Click += BtnUpdateDccm_Click;
+
             // ── Launch button ──
             btnLaunch = new Button
             {
                 Text      = "▶  Launch",
-                Location  = new Point(405, 170),
-                Width     = 185,
+                Location  = new Point(435, 214),
+                Width     = 155,
                 Height    = 36,
                 BackColor = Color.FromArgb(40, 130, 80),
                 ForeColor = Color.White,
@@ -240,7 +267,7 @@ namespace DeadCellsInstaller
             // ── Progress bar ──
             progressBar = new ProgressBar
             {
-                Location = new Point(20, 218),
+                Location = new Point(20, 262),
                 Width    = 570,
                 Height   = 16,
                 Minimum  = 0,
@@ -254,7 +281,7 @@ namespace DeadCellsInstaller
             {
                 Text      = "Waiting…",
                 AutoSize  = false,
-                Location  = new Point(20, 240),
+                Location  = new Point(20, 284),
                 Width     = 570,
                 ForeColor = Color.FromArgb(150, 150, 160)
             };
@@ -262,9 +289,9 @@ namespace DeadCellsInstaller
             // ── Log box ──
             rtbLog = new RichTextBox
             {
-                Location    = new Point(20, 265),
+                Location    = new Point(20, 308),
                 Width       = 570,
-                Height      = 230,
+                Height      = 260,
                 BackColor   = Color.FromArgb(12, 12, 18),
                 ForeColor   = Color.FromArgb(180, 220, 180),
                 ReadOnly    = true,
@@ -275,55 +302,78 @@ namespace DeadCellsInstaller
 
             this.Controls.AddRange(new Control[] {
                 lblTitle, lblPath, txtPath, btnBrowse,
-                lblWarning, chkNonSteam,
-                btnInstall, btnLaunch,
+                lblWarning, lblWarningDccm,
+                chkNonSteam, chkGog,
+                btnInstall, btnUpdateDccm, btnLaunch,
                 progressBar, lblStatus, rtbLog
             });
         }
 
         // ════════════════════════════════════════════════════════════════
-        //  WARNING – calcul asynchrone
+        //  WARNINGS
         // ════════════════════════════════════════════════════════════════
-        private async Task RefreshWarningAsync()
+        private async Task RefreshWarningsAsync()
         {
             string raw = txtPath.Text.Trim();
 
-            // 1. Chemin invalide
+            // ── Warning 1 : chemin / mod ──
             if (string.IsNullOrEmpty(raw)
                 || !Path.GetFileName(raw).Equals("deadcells.exe", StringComparison.OrdinalIgnoreCase)
                 || !File.Exists(raw))
             {
                 SetWarning("⚠  Path is invalid or deadcells.exe not found.");
+                SetWarningDccm("");
                 return;
             }
 
-            // 2. Chemin OK — vérifier si mise à jour disponible
+            // Chemin OK — vérifier mise à jour du mod
             SetWarning("⚠  Checking for mod update…");
+            SetWarningDccm("⚠  Checking for DCCM update…");
             try
             {
                 string dir         = Path.GetDirectoryName(raw);
                 string modInfoPath = Path.Combine(dir, "coremod", "mods",
                     "DeadCellsArchipelago", "modinfo.json");
-                string local  = ReadLocalModVersion(modInfoPath);
-                string remote = await GetRemoteModVersion();
+                string localMod  = ReadLocalModVersion(modInfoPath);
+                string remoteMod = await GetRemoteModVersion();
 
-                if (local == null)
+                if (localMod == null)
                     SetWarning("⚠  Mod not installed yet — run Install / Update.");
-                else if (local != remote)
-                    SetWarning($"⚠  Update available : {local} → {remote}");
+                else if (localMod != remoteMod)
+                    SetWarning($"⚠  Mod update available : {localMod} → {remoteMod}");
                 else
-                    SetWarning("");  // tout est OK
+                    SetWarning("");
             }
-            catch
+            catch { SetWarning(""); }
+
+            // ── Warning 2 : DCCM ──
+            try
             {
-                SetWarning("");  // pas de réseau, pas de warning bloquant
+                string dir            = Path.GetDirectoryName(raw);
+                string dccmVerPath    = Path.Combine(dir, "coremod", "ModCoreVersion.txt");
+                string localDccm      = ReadLocalDccmVersion(dccmVerPath);
+                string remoteDccm     = await GetRemoteDccmVersion();
+
+                if (localDccm == null)
+                    SetWarningDccm("");   // DCCM pas installé, pas pertinent ici
+                else if (localDccm != remoteDccm)
+                    SetWarningDccm($"⚠  DCCM update available : {localDccm} → {remoteDccm}");
+                else
+                    SetWarningDccm("");
             }
+            catch { SetWarningDccm(""); }
         }
 
         private void SetWarning(string text)
         {
             if (InvokeRequired) { Invoke(new Action(() => SetWarning(text))); return; }
             lblWarning.Text = text;
+        }
+
+        private void SetWarningDccm(string text)
+        {
+            if (InvokeRequired) { Invoke(new Action(() => SetWarningDccm(text))); return; }
+            lblWarningDccm.Text = text;
         }
 
         // ════════════════════════════════════════════════════════════════
@@ -343,25 +393,30 @@ namespace DeadCellsInstaller
         private async void BtnInstall_Click(object sender, EventArgs e)
         {
             if (!ValidatePath()) return;
-
             SetUiEnabled(false);
             rtbLog.Clear();
             progressBar.Value = 0;
-
-            try
-            {
-                await RunInstallation();
-            }
-            catch (Exception ex)
-            {
-                LogError("Fatal error : " + ex.Message);
-                SetStatus("Installation failed.");
-            }
+            try   { await RunInstallation(); }
+            catch (Exception ex) { LogError("Fatal error : " + ex.Message); SetStatus("Installation failed."); }
             finally
             {
                 SetUiEnabled(true);
-                // Recalcul du warning après installation
-                await RefreshWarningAsync();
+                await RefreshWarningsAsync();
+            }
+        }
+
+        private async void BtnUpdateDccm_Click(object sender, EventArgs e)
+        {
+            if (!ValidatePath()) return;
+            SetUiEnabled(false);
+            rtbLog.Clear();
+            progressBar.Value = 0;
+            try   { await RunUpdateDccm(); }
+            catch (Exception ex) { LogError("Fatal error : " + ex.Message); SetStatus("DCCM update failed."); }
+            finally
+            {
+                SetUiEnabled(true);
+                await RefreshWarningsAsync();
             }
         }
 
@@ -379,22 +434,13 @@ namespace DeadCellsInstaller
             string raw = txtPath.Text.Trim();
 
             if (string.IsNullOrEmpty(raw))
-            {
-                Error("Enter a path to deadcells.exe.");
-                return false;
-            }
+            { Error("Enter a path to deadcells.exe."); return false; }
 
             if (!Path.GetFileName(raw).Equals("deadcells.exe", StringComparison.OrdinalIgnoreCase))
-            {
-                Error("Path should point to deadcells.exe.");
-                return false;
-            }
+            { Error("Path should point to deadcells.exe."); return false; }
 
             if (!File.Exists(raw))
-            {
-                Error("deadcells.exe not found at this path.");
-                return false;
-            }
+            { Error("deadcells.exe not found at this path."); return false; }
 
             deadCellsDir = Path.GetDirectoryName(raw);
             SavePath(raw);
@@ -402,7 +448,7 @@ namespace DeadCellsInstaller
         }
 
         // ════════════════════════════════════════════════════════════════
-        //  LAUNCH (partagé entre Install et bouton Launch)
+        //  LAUNCH
         // ════════════════════════════════════════════════════════════════
         private void LaunchGame()
         {
@@ -411,33 +457,27 @@ namespace DeadCellsInstaller
             string fallbackExe = Path.Combine(deadCellsDir, "DeadCellsModding.exe");
 
             string exeToLaunch;
-
             if (LoadFallbackMode())
             {
-                // Installation via fallback (sans PS1) : on utilise Dead Cells\DeadCellsModding.exe
                 exeToLaunch = File.Exists(fallbackExe) ? fallbackExe : null;
                 if (exeToLaunch == null)
                     Log("  Warning: fallback exe not found, trying standard path…");
             }
             else
             {
-                // Installation standard (avec PS1) : on utilise le launcher dans coremod
                 exeToLaunch = File.Exists(launcherExe) ? launcherExe : null;
                 if (exeToLaunch == null)
                     Log("  Warning: standard launcher not found, trying fallback path…");
             }
 
-            // Filet de sécurité : si le chemin attendu est absent, on essaie l'autre
+            // Filet de sécurité
             if (exeToLaunch == null)
                 exeToLaunch = File.Exists(launcherExe) ? launcherExe
                             : File.Exists(fallbackExe) ? fallbackExe
                             : null;
 
             if (exeToLaunch == null)
-            {
-                Error("DeadCellsModding.exe not found.\nPlease run Install / Update first.");
-                return;
-            }
+            { Error("DeadCellsModding.exe not found.\nPlease run Install / Update first."); return; }
 
             Log("→ Starting " + exeToLaunch + "…");
             Process.Start(exeToLaunch);
@@ -450,10 +490,10 @@ namespace DeadCellsInstaller
         private async Task RunInstallation()
         {
             bool nonSteam  = chkNonSteam.Checked;
+            bool gog       = chkGog.Checked;
             bool psEnabled = ArePowerShellScriptsEnabled();
             string coremodDir = Path.Combine(deadCellsDir, "coremod");
 
-            // ── Incompatibilité non-Steam + PS désactivé ─────────────────
             if (nonSteam && !psEnabled)
             {
                 LogError("⚠  Incompatible options: the no-PowerShell fallback method");
@@ -463,22 +503,23 @@ namespace DeadCellsInstaller
                 return;
             }
 
-            // ── STEP 1 : Check .NET 10 ──────────────────────────────────
+            // ── STEP 1 : .NET 10 ────────────────────────────────────────
             SetStatus("Checking for .NET SDK 10…");
             Log("→ Checking for .NET 10 SDK…");
-            bool hasDotnet10 = CheckDotnet10();
 
-            if (!hasDotnet10)
+            if (!CheckDotnet10())
             {
                 Log("  .NET 10 SDK not found. Downloading installer…");
                 await InstallDotnet10();
                 SetProgress(10);
 
+                // On vérifie en ciblant aussi l'exe local (pas encore dans PATH)
                 if (!CheckDotnet10())
                 {
                     LogError("  .NET 10 SDK installation failed. Cancelling.");
                     return;
                 }
+                Log("  .NET 10 SDK installed successfully. ✓");
             }
             else
             {
@@ -488,27 +529,22 @@ namespace DeadCellsInstaller
 
             // ── STEP 2 : Core ────────────────────────────────────────────
             if (psEnabled)
-            {
                 await InstallCoreWithPs1(coremodDir);
-            }
             else
             {
-                Log("→ PowerShell scripts disabled — using fallback method (direct exe).");
-                await InstallCoreWithoutPs1();
+                Log($"→ PowerShell scripts disabled — using fallback method ({(gog ? "GOG" : "Steam")}).");
+                await InstallCoreWithoutPs1(gog);
             }
 
             // ── STEP 3 : Non-Steam config ────────────────────────────────
-            if (nonSteam)
-            {
-                WriteNonSteamConfig(coremodDir);
-            }
+            if (nonSteam) WriteNonSteamConfig(coremodDir);
 
-            // ── STEP 4 : Télécharger mods.zip si nécessaire ─────────────
+            // ── STEP 4 : mods.zip ────────────────────────────────────────
             string modInfoPath = Path.Combine(
                 coremodDir, "mods", "DeadCellsArchipelago", "modinfo.json");
-
             string localVersion  = ReadLocalModVersion(modInfoPath);
             string remoteVersion = await GetRemoteModVersion();
+
             Log($"→ Local mod version  : {(localVersion ?? "missing")}");
             Log($"  Latest on GitHub   : {remoteVersion}");
 
@@ -534,11 +570,57 @@ namespace DeadCellsInstaller
                 SetProgress(90);
             }
 
-            // ── STEP 5 : Lancer le jeu ──────────────────────────────────
             SetProgress(100);
             Log("  Installation complete! Launching…");
             SetStatus("Done — launching game…");
             LaunchGame();
+        }
+
+        // ════════════════════════════════════════════════════════════════
+        //  UPDATE DCCM PIPELINE
+        // ════════════════════════════════════════════════════════════════
+        private async Task RunUpdateDccm()
+        {
+            bool psEnabled = ArePowerShellScriptsEnabled();
+            bool gog       = chkGog.Checked;
+            string coremodDir = Path.Combine(deadCellsDir, "coremod");
+
+            string localDccm  = ReadLocalDccmVersion(Path.Combine(coremodDir, "ModCoreVersion.txt"));
+            string remoteDccm = await GetRemoteDccmVersion();
+
+            Log($"→ Local DCCM version  : {(localDccm ?? "missing")}");
+            Log($"  Latest on GitHub    : {remoteDccm}");
+
+            if (localDccm == remoteDccm)
+            {
+                Log("  DCCM already up to date. ✓");
+                SetProgress(100);
+                SetStatus("DCCM is already up to date.");
+                return;
+            }
+
+            if (psEnabled)
+            {
+                // Supprimer l'ancien core et réinstaller
+                Log("→ Removing old coremod/core…");
+                string coreDir = Path.Combine(coremodDir, "core");
+                if (Directory.Exists(coreDir))
+                    Directory.Delete(coreDir, recursive: true);
+
+                await InstallCoreWithPs1(coremodDir);
+            }
+            else
+            {
+                Log($"→ PowerShell disabled — updating DeadCellsModding.exe ({(gog ? "GOG" : "Steam")})…");
+                // Supprimer l'ancien exe fallback pour forcer le re-téléchargement
+                string fallbackExe = Path.Combine(deadCellsDir, "DeadCellsModding.exe");
+                if (File.Exists(fallbackExe)) File.Delete(fallbackExe);
+                await InstallCoreWithoutPs1(gog);
+            }
+
+            SetProgress(100);
+            SetStatus("DCCM updated!");
+            Log("  DCCM update complete. ✓");
         }
 
         // ════════════════════════════════════════════════════════════════
@@ -562,15 +644,15 @@ namespace DeadCellsInstaller
                 string coreZipUrl = await GetAssetUrl(CORE_API, "win-x64.zip");
                 string coreZip    = Path.Combine(Path.GetTempPath(), "dc_core_win-x64.zip");
 
-                await DownloadFile(coreZipUrl, coreZip, 10, 35, "Downloading core…");
+                await DownloadFile(coreZipUrl, coreZip, 10, 35, "Downloading DCCM…");
 
                 SetStatus("Extracting core…");
                 Log("→ Extracting to " + coremodDir + "…");
                 Directory.CreateDirectory(coremodDir);
                 ExtractZip(coreZip, coremodDir);
                 File.Delete(coreZip);
-                Log("  Extraction done. ✓");
                 SaveFallbackMode(false);
+                Log("  Extraction done. ✓");
                 SetProgress(40);
             }
 
@@ -595,12 +677,14 @@ namespace DeadCellsInstaller
 
         // ════════════════════════════════════════════════════════════════
         //  CORE – méthode fallback (sans PS1)
-        //  Télécharge deadcells.exe depuis le release core,
-        //  le renomme DeadCellsModding.exe et le place dans Dead Cells\
+        //  gog=true  → télécharge deadcells-gog.exe
+        //  gog=false → télécharge deadcells.exe
+        //  Dans les deux cas, renommé en DeadCellsModding.exe dans Dead Cells\
         // ════════════════════════════════════════════════════════════════
-        private async Task InstallCoreWithoutPs1()
+        private async Task InstallCoreWithoutPs1(bool gog)
         {
-            string destExe = Path.Combine(deadCellsDir, "DeadCellsModding.exe");
+            string destExe    = Path.Combine(deadCellsDir, "DeadCellsModding.exe");
+            string assetName  = gog ? "deadcells-gog.exe" : "deadcells.exe";
 
             if (File.Exists(destExe))
             {
@@ -609,10 +693,10 @@ namespace DeadCellsInstaller
                 return;
             }
 
-            SetStatus("Downloading DeadCellsModding.exe (fallback)…");
-            Log("→ Fetching deadcells.exe from core release (no-PowerShell fallback)…");
+            SetStatus($"Downloading DeadCellsModding.exe (fallback, {(gog ? "GOG" : "Steam")})…");
+            Log($"→ Fetching {assetName} from core release…");
 
-            string exeUrl  = await GetAssetUrl(CORE_API, "deadcells.exe");
+            string exeUrl  = await GetAssetUrl(CORE_API, assetName);
             string tempExe = Path.Combine(Path.GetTempPath(), "dc_modding_temp.exe");
 
             await DownloadFile(exeUrl, tempExe, 10, 55, "Downloading DeadCellsModding.exe…");
@@ -620,8 +704,8 @@ namespace DeadCellsInstaller
             Log($"→ Renaming and moving to Dead Cells\\DeadCellsModding.exe…");
             if (File.Exists(destExe)) File.Delete(destExe);
             File.Move(tempExe, destExe);
-            Log("  DeadCellsModding.exe placed in Dead Cells\\. ✓");
             SaveFallbackMode(true);
+            Log("  DeadCellsModding.exe placed in Dead Cells\\. ✓");
             SetProgress(55);
         }
 
@@ -632,12 +716,10 @@ namespace DeadCellsInstaller
         {
             string configDir  = Path.Combine(coremodDir, "config");
             string configFile = Path.Combine(configDir, "modcore.json");
-
             Directory.CreateDirectory(configDir);
-
             if (!File.Exists(configFile))
             {
-                File.WriteAllText(configFile, "{\n  \"GeneratePseudocodeAssembly\": true,\n  \"AllowCloseConsole\": false,\n  \"AllowLockCursor\": true,\n  \"EnableGoldberg\": true,\n  \"SkipLogoSplash\": true\n}");
+                File.WriteAllText(configFile, "{\n  \"steam\": false\n}\n");
                 Log("→ modcore.json written (non-Steam mode). ✓");
             }
             else
@@ -647,7 +729,7 @@ namespace DeadCellsInstaller
         }
 
         // ════════════════════════════════════════════════════════════════
-        //  HELPERS – PowerShell scripts activés ?
+        //  HELPERS – PowerShell activé ?
         // ════════════════════════════════════════════════════════════════
         private bool ArePowerShellScriptsEnabled()
         {
@@ -672,14 +754,23 @@ namespace DeadCellsInstaller
 
         // ════════════════════════════════════════════════════════════════
         //  HELPERS – .NET 10
+        //
+        //  BUG CORRIGÉ : on ne se fie plus uniquement au `dotnet` du PATH.
+        //  Après une installation fraîche, le nouvel exe est dans AppData
+        //  mais PAS encore dans PATH pour le process en cours.
+        //  On cherche donc toujours aussi l'exe local en priorité.
         // ════════════════════════════════════════════════════════════════
         private System.Collections.Generic.IEnumerable<string> DotnetCandidates()
         {
-            yield return "dotnet";
+            // L'exe local (installé par dotnet-install.ps1) en PREMIER :
+            // il est à jour même si PATH ne le voit pas encore.
             string local = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Microsoft", "dotnet", "dotnet.exe");
             if (File.Exists(local)) yield return local;
+
+            // Fallback : dotnet du PATH système (peut pointer vers n'importe quelle version)
+            yield return "dotnet";
         }
 
         private bool CheckDotnet10()
@@ -698,6 +789,7 @@ namespace DeadCellsInstaller
                     {
                         string output = p.StandardOutput.ReadToEnd();
                         p.WaitForExit();
+                        // Cherche une ligne commençant par "10." (SDK 10.x.y)
                         if (Regex.IsMatch(output, @"^10\.", RegexOptions.Multiline))
                             return true;
                     }
@@ -719,6 +811,7 @@ namespace DeadCellsInstaller
                 File.WriteAllBytes(scriptPath, data);
             }
 
+            // Chemin résolu en C# — évite que PS reçoive "$env:LocalAppData" non expansé
             string installDir = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Microsoft", "dotnet");
@@ -743,6 +836,7 @@ namespace DeadCellsInstaller
                 p.BeginErrorReadLine();
                 await Task.Run(() => p.WaitForExit());
 
+                // On ne lève une exception que si l'exe local est toujours absent
                 if (p.ExitCode != 0 && !CheckDotnet10())
                     throw new Exception($"dotnet-install.ps1 failed (code {p.ExitCode}).");
             }
@@ -759,8 +853,7 @@ namespace DeadCellsInstaller
                 var obj = JObject.Parse(json);
                 foreach (var asset in obj["assets"])
                 {
-                    string name = asset["name"].ToString();
-                    if (name.Equals(assetName, StringComparison.OrdinalIgnoreCase))
+                    if (asset["name"].ToString().Equals(assetName, StringComparison.OrdinalIgnoreCase))
                         return asset["browser_download_url"].ToString();
                 }
             }
@@ -773,9 +866,39 @@ namespace DeadCellsInstaller
             {
                 string json = await client.GetStringAsync(MOD_API);
                 var obj = JObject.Parse(json);
-                string tag = obj["tag_name"]?.ToString() ?? "";
-                return tag.TrimStart('v');
+                return (obj["tag_name"]?.ToString() ?? "").TrimStart('v');
             }
+        }
+
+        private async Task<string> GetRemoteDccmVersion()
+        {
+            using (var client = NewHttpClient())
+            {
+                string json = await client.GetStringAsync(CORE_API);
+                var obj = JObject.Parse(json);
+                return (obj["tag_name"]?.ToString() ?? "").TrimStart('v');
+            }
+        }
+
+        // ════════════════════════════════════════════════════════════════
+        //  HELPERS – versions locales
+        // ════════════════════════════════════════════════════════════════
+        private string ReadLocalModVersion(string modInfoPath)
+        {
+            if (!File.Exists(modInfoPath)) return null;
+            try
+            {
+                var obj = JObject.Parse(File.ReadAllText(modInfoPath));
+                return obj["version"]?.ToString();
+            }
+            catch { return null; }
+        }
+
+        private string ReadLocalDccmVersion(string versionFilePath)
+        {
+            if (!File.Exists(versionFilePath)) return null;
+            try { return File.ReadAllText(versionFilePath).Trim(); }
+            catch { return null; }
         }
 
         // ════════════════════════════════════════════════════════════════
@@ -801,11 +924,10 @@ namespace DeadCellsInstaller
                     {
                         await file.WriteAsync(buf, 0, bytesRead);
                         read += bytesRead;
-
                         if (total.HasValue)
                         {
-                            double pct = (double)read / total.Value;
-                            int prog = progressFrom + (int)(pct * (progressTo - progressFrom));
+                            double pct  = (double)read / total.Value;
+                            int    prog = progressFrom + (int)(pct * (progressTo - progressFrom));
                             SetProgress(prog);
                             string mb  = (read / 1048576.0).ToString("0.0");
                             string mb2 = (total.Value / 1048576.0).ToString("0.0");
@@ -827,11 +949,8 @@ namespace DeadCellsInstaller
                 foreach (var entry in archive.Entries)
                 {
                     string fullDest = Path.GetFullPath(Path.Combine(destDir, entry.FullName));
-
-                    if (!fullDest.StartsWith(Path.GetFullPath(destDir),
-                        StringComparison.OrdinalIgnoreCase))
+                    if (!fullDest.StartsWith(Path.GetFullPath(destDir), StringComparison.OrdinalIgnoreCase))
                         continue;
-
                     if (string.IsNullOrEmpty(entry.Name))
                         Directory.CreateDirectory(fullDest);
                     else
@@ -844,7 +963,7 @@ namespace DeadCellsInstaller
         }
 
         // ════════════════════════════════════════════════════════════════
-        //  HELPERS – PowerShell
+        //  HELPERS – PowerShell runner
         // ════════════════════════════════════════════════════════════════
         private async Task RunPowerShell(string scriptPath)
         {
@@ -857,36 +976,17 @@ namespace DeadCellsInstaller
                 RedirectStandardError  = true,
                 CreateNoWindow         = true
             };
-
             using (var p = Process.Start(psi))
             {
                 string stdout = await p.StandardOutput.ReadToEndAsync();
                 string stderr = await p.StandardError.ReadToEndAsync();
                 p.WaitForExit();
-
                 if (!string.IsNullOrWhiteSpace(stdout))
                     foreach (var line in stdout.Split('\n'))
-                        if (!string.IsNullOrWhiteSpace(line))
-                            Log("  [ps1] " + line.Trim());
-
+                        if (!string.IsNullOrWhiteSpace(line)) Log("  [ps1] " + line.Trim());
                 if (p.ExitCode != 0)
-                    throw new Exception("install.ps1 returned an error: "
-                        + p.ExitCode + "\n" + stderr);
+                    throw new Exception("install.ps1 returned an error: " + p.ExitCode + "\n" + stderr);
             }
-        }
-
-        // ════════════════════════════════════════════════════════════════
-        //  HELPERS – Mod version
-        // ════════════════════════════════════════════════════════════════
-        private string ReadLocalModVersion(string modInfoPath)
-        {
-            if (!File.Exists(modInfoPath)) return null;
-            try
-            {
-                var obj = JObject.Parse(File.ReadAllText(modInfoPath));
-                return obj["version"]?.ToString();
-            }
-            catch { return null; }
         }
 
         // ════════════════════════════════════════════════════════════════
@@ -917,11 +1017,13 @@ namespace DeadCellsInstaller
         private void SetUiEnabled(bool enabled)
         {
             if (InvokeRequired) { Invoke(new Action(() => SetUiEnabled(enabled))); return; }
-            btnInstall.Enabled  = enabled;
-            btnLaunch.Enabled   = enabled;
-            btnBrowse.Enabled   = enabled;
-            txtPath.Enabled     = enabled;
-            chkNonSteam.Enabled = enabled;
+            btnInstall.Enabled    = enabled;
+            btnUpdateDccm.Enabled = enabled;
+            btnLaunch.Enabled     = enabled;
+            btnBrowse.Enabled     = enabled;
+            txtPath.Enabled       = enabled;
+            chkNonSteam.Enabled   = enabled;
+            chkGog.Enabled        = enabled;
         }
 
         private void Log(string msg)
