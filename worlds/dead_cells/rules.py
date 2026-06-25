@@ -536,6 +536,11 @@ LOCATION_RULES = [
         lambda state: state.can_reach("SewerShort", "Region", world.player)
     )),
 
+    
+    ("Abyssal Trident", _has("Ram Rune")),
+
+
+
     # Cursed Biome drops
     (
         "Anathema", 
@@ -604,6 +609,19 @@ LOCATION_RULES = [
         )
     ),
 
+    (
+        "Acceptance",
+        _has_all(
+            "Vine Rune", 
+            "Ram Rune", 
+            "Insufferable Crypt Unlock", 
+            "Graveyard Unlock", 
+            "Spider Rune", 
+            "Teleportation Rune", 
+            "Forgotten Sepulcher Unlock",
+        )
+    ),
+
 
     # ── PrisonCourtyard mid-biome gate (Vine Rune) ────────────────────────────
     ("Phaser", _has("Vine Rune")),
@@ -642,6 +660,9 @@ LOCATION_RULES = [
 
     # Parting Gift Graveyard secret
     ("Parting Gift", _has("Ram Rune")),
+
+    # Parry Shield Stilt Village secret
+    ("Parry Shield", _has_all("Spider Rune", "Ram Rune")),
 
     # ── Boss Rush Items ──────────────────────────────────────────────────────
     ("Boss Knight Outfit", _boss_rush_trials_1_2()),
