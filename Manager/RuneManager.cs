@@ -180,6 +180,7 @@ namespace DeadCellsArchipelago {
             if (item.id.ToString() == "BossRushUnlock")
             {
                 SendRuneCheck("BossRushUnlock");
+                orig(arg1, item, onValidate, isMetaItem);
             } else
             {
                 orig(arg1, item, onValidate, isMetaItem);
