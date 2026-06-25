@@ -504,26 +504,26 @@ namespace DeadCellsInstaller
             }
 
             // ── STEP 1 : .NET 10 ────────────────────────────────────────
-            SetStatus("Checking for .NET SDK 10…");
-            Log("→ Checking for .NET 10 SDK…");
+            SetStatus("Checking for .NET 10 Runtime…");
+            Log("→ Checking for .NET 10 Runtime…");
 
-            if (!CheckDotnet10())
+            if (!CheckDotnet10Runtime())
             {
-                Log("  .NET 10 SDK not found. Downloading installer…");
+                Log("  .NET 10 Runtime not found. Downloading installer…");
                 await InstallDotnet10();
                 SetProgress(10);
 
                 // On vérifie en ciblant aussi l'exe local (pas encore dans PATH)
-                if (!CheckDotnet10())
+                if (!CheckDotnet10Runtime())
                 {
-                    LogError("  .NET 10 SDK installation failed. Cancelling.");
+                    LogError("  .NET 10 Runtime installation failed. Cancelling.");
                     return;
                 }
-                Log("  .NET 10 SDK installed successfully. ✓");
+                Log("  .NET 10 Runtime installed successfully. ✓");
             }
             else
             {
-                Log("  .NET 10 SDK already present. ✓");
+                Log("  .NET 10 Runtime already present. ✓");
             }
             SetProgress(10);
 
@@ -755,31 +755,37 @@ namespace DeadCellsInstaller
         // ════════════════════════════════════════════════════════════════
         //  HELPERS – .NET 10
         //
-        //  BUG CORRIGÉ : on ne se fie plus uniquement au `dotnet` du PATH.
-        //  Après une installation fraîche, le nouvel exe est dans AppData
-        //  mais PAS encore dans PATH pour le process en cours.
-        //  On cherche donc toujours aussi l'exe local en priorité.
+        //  PROBLÈME : dotnet-install.ps1 installe dans AppData\Local\Microsoft\dotnet
+        //  mais DeadCellsModding.exe cherche le runtime dans C:\Program Files\dotnet\
+        //  (installation système). Ces deux emplacements sont indépendants.
+        //  Solution : télécharger l'installeur officiel .exe Microsoft qui installe
+        //  dans Program Files, visible de tous les exes du système.
         // ════════════════════════════════════════════════════════════════
-        private System.Collections.Generic.IEnumerable<string> DotnetCandidates()
+        private bool CheckDotnet10Runtime()
         {
-            // L'exe local (installé par dotnet-install.ps1) en PREMIER :
-            // il est à jour même si PATH ne le voit pas encore.
-            string local = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Microsoft", "dotnet", "dotnet.exe");
-            if (File.Exists(local)) yield return local;
+            // Vérification directe dans C:\Program Files\dotnet\shared\Microsoft.NETCore.App\
+            string systemRuntimeDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                "dotnet", "shared", "Microsoft.NETCore.App");
 
-            // Fallback : dotnet du PATH système (peut pointer vers n'importe quelle version)
-            yield return "dotnet";
-        }
+            if (Directory.Exists(systemRuntimeDir))
+            {
+                foreach (var dir in Directory.GetDirectories(systemRuntimeDir))
+                {
+                    if (Regex.IsMatch(Path.GetFileName(dir), @"^10\."))
+                        return true;
+                }
+            }
 
-        private bool CheckDotnet10()
-        {
-            foreach (string dotnet in DotnetCandidates())
+            // Fallback : via dotnet --list-runtimes (PATH système ou AppData)
+            foreach (string dotnet in new[] {
+                "dotnet",
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Microsoft", "dotnet", "dotnet.exe") })
             {
                 try
                 {
-                    var psi = new ProcessStartInfo(dotnet, "--list-sdks")
+                    var psi = new ProcessStartInfo(dotnet, "--list-runtimes")
                     {
                         RedirectStandardOutput = true,
                         UseShellExecute        = false,
@@ -789,8 +795,7 @@ namespace DeadCellsInstaller
                     {
                         string output = p.StandardOutput.ReadToEnd();
                         p.WaitForExit();
-                        // Cherche une ligne commençant par "10." (SDK 10.x.y)
-                        if (Regex.IsMatch(output, @"^10\.", RegexOptions.Multiline))
+                        if (Regex.IsMatch(output, @"Microsoft\.NETCore\.App 10\.", RegexOptions.Multiline))
                             return true;
                     }
                 }
@@ -801,45 +806,53 @@ namespace DeadCellsInstaller
 
         private async Task InstallDotnet10()
         {
-            string scriptUrl  = "https://dot.net/v1/dotnet-install.ps1";
-            string scriptPath = Path.Combine(Path.GetTempPath(), "dotnet-install.ps1");
+            // URL stable officielle Microsoft — installe dans C:\Program Files\dotnet\
+            // contrairement à dotnet-install.ps1 qui installe dans AppData
+            const string runtimeInstallerUrl =
+                "https://aka.ms/dotnet/10.0/dotnet-runtime-win-x64.exe";
 
-            Log("  Downloading .NET install script…");
+            string installerPath = Path.Combine(Path.GetTempPath(), "dotnet10-runtime-installer.exe");
+
+            Log("  Downloading .NET 10 Runtime installer…");
             using (var client = NewHttpClient())
+            using (var response = await client.GetAsync(runtimeInstallerUrl, HttpCompletionOption.ResponseHeadersRead))
             {
-                byte[] data = await client.GetByteArrayAsync(scriptUrl);
-                File.WriteAllBytes(scriptPath, data);
+                response.EnsureSuccessStatusCode();
+                long? total = response.Content.Headers.ContentLength;
+                using (var src  = await response.Content.ReadAsStreamAsync())
+                using (var file = File.Create(installerPath))
+                {
+                    byte[] buf = new byte[81920];
+                    long read = 0; int bytesRead;
+                    while ((bytesRead = await src.ReadAsync(buf, 0, buf.Length)) > 0)
+                    {
+                        await file.WriteAsync(buf, 0, bytesRead);
+                        read += bytesRead;
+                        if (total.HasValue)
+                        {
+                            string mb  = (read / 1048576.0).ToString("0.0");
+                            string mb2 = (total.Value / 1048576.0).ToString("0.0");
+                            SetStatus($"Downloading .NET 10 Runtime… ({mb} / {mb2} MB)");
+                        }
+                    }
+                }
             }
+            Log("  Running .NET 10 Runtime installer (a UAC prompt may appear)…");
 
-            // Chemin résolu en C# — évite que PS reçoive "$env:LocalAppData" non expansé
-            string installDir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Microsoft", "dotnet");
-
-            Log("  Install directory : " + installDir);
-            Log("  Running .NET 10 SDK installer…");
-
-            var psi = new ProcessStartInfo("powershell.exe",
-                $"-ExecutionPolicy Bypass -File \"{scriptPath}\" -Channel 10.0 -InstallDir \"{installDir}\"")
+            // /install /quiet /norestart — silencieux, installe dans Program Files
+            var psi = new ProcessStartInfo(installerPath, "/install /quiet /norestart")
             {
-                UseShellExecute        = false,
-                CreateNoWindow         = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError  = true
+                UseShellExecute = true,   // nécessaire pour l'élévation UAC
+                Verb            = "runas"
             };
-
             using (var p = Process.Start(psi))
             {
-                p.OutputDataReceived += (s, e) => { if (e.Data != null) Log("  [dotnet] " + e.Data); };
-                p.ErrorDataReceived  += (s, e) => { if (e.Data != null) LogError("  [dotnet] " + e.Data); };
-                p.BeginOutputReadLine();
-                p.BeginErrorReadLine();
                 await Task.Run(() => p.WaitForExit());
-
-                // On ne lève une exception que si l'exe local est toujours absent
-                if (p.ExitCode != 0 && !CheckDotnet10())
-                    throw new Exception($"dotnet-install.ps1 failed (code {p.ExitCode}).");
+                // Exit code 3010 = succès avec redémarrage requis (acceptable)
+                if (p.ExitCode != 0 && p.ExitCode != 3010 && !CheckDotnet10Runtime())
+                    throw new Exception($".NET 10 Runtime installer failed (code {p.ExitCode}).");
             }
+            try { File.Delete(installerPath); } catch { }
         }
 
         // ════════════════════════════════════════════════════════════════
