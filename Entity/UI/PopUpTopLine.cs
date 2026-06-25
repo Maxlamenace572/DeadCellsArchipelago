@@ -8,6 +8,7 @@ namespace DeadCellsArchipelago {
     public class PopUpTopLine
     {
         public Flow flow;
+        public List<PopUpTopCell> cells;
 
         public PopUpTopLine(double x, double y, dc.h2d.Object parent, int biomeLineIndex, int biomeCellIndex)
         {
@@ -15,13 +16,13 @@ namespace DeadCellsArchipelago {
             {
                 x = x
             };
+            cells = new List<PopUpTopCell>();
 
             if (scrollerBiome == null) return;
             Dictionary<string, HashSet<string>> data = scrollerBiome.lines[biomeLineIndex].GetBiomeData(biomeCellIndex);
             string biomeId = scrollerBiome.lines[biomeLineIndex].GetBiomeId(biomeCellIndex);
 
             double totalCellsWidth = 0;
-            int nbCells = 0;
             if (biomeId != "Other")
             {
                 List<string> start = ["T", "R"];
@@ -46,23 +47,25 @@ namespace DeadCellsArchipelago {
                     }
                     PopUpTopCell cell = new PopUpTopCell(flow, $"BSC {difficulty}", cellR, cellT);
                     totalCellsWidth += cell.interW;
-                    nbCells++;
+                    cells.Add(cell);
                 }
             }
             else
             {
                 PopUpTopCell cell1 = new PopUpTopCell(flow, "ASP", data["RAspect"], data["TAspect"].Count);
                 totalCellsWidth += cell1.interW;
+                cells.Add(cell1);
 
                 PopUpTopCell cell2 = new PopUpTopCell(flow, "Rift", data["RChallengeT"], data["TChallengeT"].Count);
                 totalCellsWidth += cell2.interW;
+                cells.Add(cell2);
 
                 PopUpTopCell cell3 = new PopUpTopCell(flow, "All", data["AllR"], data["AllT"].Count);
                 totalCellsWidth += cell3.interW;
-                nbCells = 3;
+                cells.Add(cell3);
             }
 
-            flow.set_horizontalSpacing((int)((700 -totalCellsWidth) / (nbCells-1)));
+            flow.set_horizontalSpacing((int)((700 -totalCellsWidth) / (cells.Count-1)));
 
             flow.y = y;
             flow.posChanged = true;
@@ -71,6 +74,16 @@ namespace DeadCellsArchipelago {
         public void SetVisible(bool visible)
         {
             flow.visible = visible;
+        }
+
+        public void Highlight(int index)
+        {
+            cells[index].Highlight();
+        }
+
+        public void StopHighlight(int index)
+        {
+            cells[index].StopHighlight();
         }
     }
 }

@@ -104,12 +104,7 @@ namespace DeadCellsArchipelago {
                     {
                         if (typeof(T) == typeof(ItemLine))
                         {
-                            ItemLine iL = (ItemLine)(Line) lines[lastHighlight];
-                            if (iL.nb > 0)
-                            {
-                                iL.DecNumber();
-                                DropItemToPlayer(iL.itemId);
-                            }
+                            ((ItemLine)(Line) lines[lastHighlight]).GiveItem();
                         }
                         else if (lastHighlightCell != -1 && typeof(T) == typeof(BiomeLine))
                         {
@@ -137,7 +132,7 @@ namespace DeadCellsArchipelago {
                     }
                     index ++;
                 }
-                tempHeight += 100 -1;
+                if (tempHeight <  99) tempHeight += 100 -1;
             }
             mask.updateMask();
         }
@@ -208,7 +203,7 @@ namespace DeadCellsArchipelago {
                     }
                     index ++;
                 }
-                tempHeight += 50 -1;
+                tempHeight += 50 -2;
             }
             mask.updateMask();
         }
@@ -294,6 +289,32 @@ namespace DeadCellsArchipelago {
         {
             flow?.y = -(flow.get_outerHeight()-maskHeight);
             flow?.posChanged = true;
+        }
+
+        public void SetScrollAtStart()
+        {
+            flow?.y = 0;
+            flow?.posChanged = true;
+        }
+
+        public void SetScrollDownAtIndex()
+        {
+            if (flow == null) return;
+            if (flow.y + lastHighlight * tempHeight + (tempHeight - flow.verticalSpacing) > maskHeight)
+            {
+                flow.y = -(lastHighlight * tempHeight) + (maskHeight - (tempHeight - flow.verticalSpacing));
+                flow.posChanged = true;
+            }
+        }
+
+        public void SetScrollUpAtIndex()
+        {
+            if (flow == null) return;
+            if (flow.y + lastHighlight * tempHeight < 0)
+            {
+                flow.y = -(lastHighlight * tempHeight);
+                flow.posChanged = true;
+            }
         }
     }
 }

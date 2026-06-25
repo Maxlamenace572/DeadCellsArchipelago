@@ -89,5 +89,50 @@ namespace DeadCellsArchipelago {
             buttonSkill1.SetVisible(visible);
             buttonSkill2.SetVisible(visible);
         }
+
+        public void Highlight(int indexX, int indexY)
+        {
+            switch (indexX)
+            {
+                case 0:
+                    if(indexY == 0) buttonWeapon1.Highlight();
+                    if(indexY == 1) buttonSkill2.Highlight();
+                    break;
+                case 1:
+                    if(indexY == 0) buttonWeapon2.Highlight();
+                    if(indexY == 1) buttonSkill1.Highlight();
+                    break;
+            }
+        }
+
+        public void StopHighlight(int indexX, int indexY)
+        {
+            switch (indexX)
+            {
+                case 0:
+                    if(indexY == 0) buttonWeapon1.StopHighlight();
+                    if(indexY == 1) buttonSkill2.StopHighlight();
+                    break;
+                case 1:
+                    if(indexY == 0) buttonWeapon2.StopHighlight();
+                    if(indexY == 1) buttonSkill1.StopHighlight();
+                    break;
+            }
+        }
+
+        public void BuyColorless(int indexX, int indexY)
+        {
+            switch (indexX)
+            {
+                case 0:
+                    if(indexY == 0) buttonWeapon1.BuyColorless();
+                    if(indexY == 1) buttonSkill2.BuyColorless();
+                    break;
+                case 1:
+                    if(indexY == 0) buttonWeapon2.BuyColorless();
+                    if(indexY == 1) buttonSkill1.BuyColorless();
+                    break;
+            }
+        }
     }
 }

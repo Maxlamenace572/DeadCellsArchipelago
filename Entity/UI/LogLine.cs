@@ -29,5 +29,15 @@ namespace DeadCellsArchipelago {
 
             text.y = (bgBox.sg.height - (text.get_textHeight()*text.scaleX))/2;
         }
+
+        public void Highlight()
+        {
+            text.set_textColor(16776960);
+        }
+
+        public void StopHighlight()
+        {
+            text.set_textColor(16777215);
+        }
     }
 }

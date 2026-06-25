@@ -158,5 +158,14 @@ namespace DeadCellsArchipelago {
                 }
                 text.set_text($" {itemNumber}{itemName}".AsHaxeString());
         }
+
+        public void GiveItem()
+        {
+            if (nb > 0)
+            {
+                DecNumber();
+                DropItemToPlayer(itemId);
+            }
+        }
     }
 }

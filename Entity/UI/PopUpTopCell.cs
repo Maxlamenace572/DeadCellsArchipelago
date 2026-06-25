@@ -75,5 +75,25 @@ namespace DeadCellsArchipelago {
                 }
             };
         }
+
+        public void Highlight()
+        {
+            label.set_textColor(16777087);
+            number.set_textColor(16777087);
+        }
+
+        public void StopHighlight()
+        {
+            if(toChecks.Count == 0)
+            {
+                label.set_textColor(16776960);
+                number.set_textColor(16776960);
+            }
+            else
+            {
+                label.set_textColor(16777215);
+                number.set_textColor(16777215);
+            }
+        }
     }
 }
