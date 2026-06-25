@@ -661,6 +661,9 @@ LOCATION_RULES = [
     # Parting Gift Graveyard secret
     ("Parting Gift", _has("Ram Rune")),
 
+    # Parry Shield Stilt Village secret
+    ("Parry Shield", _has_all("Spider Rune", "Ram Rune")),
+
     # ── Boss Rush Items ──────────────────────────────────────────────────────
     ("Boss Knight Outfit", _boss_rush_trials_1_2()),
     ("Barbarian Boss Knight Outfit", _boss_rush_trials_3_4() and _bsc(3)),
