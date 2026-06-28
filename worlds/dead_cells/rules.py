@@ -664,6 +664,19 @@ LOCATION_RULES = [
     # Parry Shield Stilt Village secret
     ("Parry Shield", _has_all("Spider Rune", "Ram Rune")),
 
+    # Sanguine Vortex head
+    (
+        "Sanguine Vortex", 
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Toxic Sewers Enter",
+                "Castle's Outskirts Enter",
+                "Dilapidated Arboretum Enter",
+            ]
+        )
+    ),
+    
     # ── Boss Rush Items ──────────────────────────────────────────────────────
     ("Boss Knight Outfit", _boss_rush_trials_1_2()),
     ("Barbarian Boss Knight Outfit", _boss_rush_trials_3_4() and _bsc(3)),
