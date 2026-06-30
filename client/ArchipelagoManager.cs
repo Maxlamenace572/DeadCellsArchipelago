@@ -40,6 +40,8 @@ namespace DeadCellsArchipelago
         public bool returnToCastlevania;
         public string? version;
         const long energyPerCell = 1000000;
+        private Queue<long> pendingWithdrawals = new();
+        private object withdrawLock = new();
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -59,6 +61,7 @@ namespace DeadCellsArchipelago
                 session.Socket.ErrorReceived += OnError;
                 session.Socket.SocketClosed += OnDisconnected;
                 session.MessageLog.OnMessageReceived += OnMessageReceived;
+                session.Socket.PacketReceived += OnPacketReceived;
 
                 //session
                 
@@ -67,7 +70,7 @@ namespace DeadCellsArchipelago
                     "Dead Cells",
                     slotName,
                     ItemsHandlingFlags.AllItems,
-                    new Version(6, 7, 0),
+                    new Version(6, 7, 1),
                     password: password
                 );
                 
@@ -324,8 +327,9 @@ namespace DeadCellsArchipelago
             }
         }
 
-        void DepositCells(ArchipelagoSession session, int cellCount)
+        public void DepositCells(int cellCount)
         {
+            if (session == null) return;
             long energyToAdd = cellCount * energyPerCell;
 
             var packet = new SetPacket
@@ -333,8 +337,8 @@ namespace DeadCellsArchipelago
                 Key = "EnergyLink",
                 DefaultValue = 0,
                 WantReply = false,
-                Operations = new[]
-                {
+                Operations =
+                [
                     new OperationSpecification
                     {
                         OperationType = OperationType.Add,
@@ -345,23 +349,29 @@ namespace DeadCellsArchipelago
                         OperationType = OperationType.Max,
                         Value = 0
                     }
-                }
+                ]
             };
 
             session.Socket.SendPacket(packet);
         }
 
-        void WithdrawCells(ArchipelagoSession session, int cellsRequested)
+        public void WithdrawCells(int cellsRequested)
         {
+            if (session == null) return;
             long energyRequested = cellsRequested * energyPerCell;
+
+            lock (withdrawLock)
+            {
+                pendingWithdrawals.Enqueue(energyRequested);
+            }
 
             var packet = new SetPacket
             {
                 Key = "EnergyLink",
                 DefaultValue = 0,
                 WantReply = true,
-                Operations = new[]
-                {
+                Operations =
+                [
                     new OperationSpecification
                     {
                         OperationType = OperationType.Add,
@@ -372,21 +382,27 @@ namespace DeadCellsArchipelago
                         OperationType = OperationType.Max,
                         Value = 0
                     }
-                }
+                ]
             };
 
             session.Socket.SendPacket(packet);
         }
 
-        void OnPacketReceived(ArchipelagoPacketBase packet)
+        private void OnPacketReceived(ArchipelagoPacketBase packet)
         {
             if (packet is SetReplyPacket reply && reply.Key == "EnergyLink")
             {
+                long energyRequested;
+                lock (withdrawLock)
+                {
+                    if (pendingWithdrawals.Count == 0) return;
+                    energyRequested = pendingWithdrawals.Dequeue();
+                }
                 long energyBefore = reply.OriginalValue.ToObject<long>();
-                long energyAfter  = reply.Value.ToObject<long>();
+                long energyAfter = reply.Value.ToObject<long>();
                 long energyConsumed = energyBefore - energyAfter;
 
-                long energyActuallyGot = Math.Min(energyConsumed, energyPerCell);
+                long energyActuallyGot = Math.Min(energyConsumed, energyRequested);
                 int cellsReceived = (int)(energyActuallyGot / energyPerCell);
 
                 GiveCellsToPlayer(cellsReceived);
@@ -395,7 +411,7 @@ namespace DeadCellsArchipelago
 
         private void GiveCellsToPlayer(int cellsReceived)
         {
-            throw new NotImplementedException();
+            Log.Warning($"todo: {cellsReceived}");
         }
     }
 }
