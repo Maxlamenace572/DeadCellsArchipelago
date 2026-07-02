@@ -11,8 +11,6 @@ using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.Translator;
 using System.Collections.ObjectModel;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
-using Newtonsoft.Json.Linq;
-using Archipelago.MultiClient.Net.Models;
 
 namespace DeadCellsArchipelago
 {
@@ -39,9 +37,6 @@ namespace DeadCellsArchipelago
         public bool theQueenAndTheSea;
         public bool returnToCastlevania;
         public string? version;
-        const long energyPerCell = 1000000;
-        private Queue<long> pendingWithdrawals = new();
-        private object withdrawLock = new();
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -61,7 +56,6 @@ namespace DeadCellsArchipelago
                 session.Socket.ErrorReceived += OnError;
                 session.Socket.SocketClosed += OnDisconnected;
                 session.MessageLog.OnMessageReceived += OnMessageReceived;
-                session.Socket.PacketReceived += OnPacketReceived;
 
                 //session
                 
@@ -80,6 +74,7 @@ namespace DeadCellsArchipelago
                     Log.Information($"=== Connected to Archipelago ! Slot #{success.Slot} ===");
                     
                     var slotData = success.SlotData;
+                    //EnergyKey += success.Team;
 
                     if (slotData.ContainsKey("boss_cells")) bscOption = Convert.ToInt32(slotData["boss_cells"]);
                     if (slotData.ContainsKey("death_link")) deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
@@ -325,93 +320,6 @@ namespace DeadCellsArchipelago
                     AddLogToQueue($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
                 }
             }
-        }
-
-        public void DepositCells(int cellCount)
-        {
-            if (session == null) return;
-            long energyToAdd = cellCount * energyPerCell;
-
-            var packet = new SetPacket
-            {
-                Key = "EnergyLink",
-                DefaultValue = 0,
-                WantReply = false,
-                Operations =
-                [
-                    new OperationSpecification
-                    {
-                        OperationType = OperationType.Add,
-                        Value = energyToAdd
-                    },
-                    new OperationSpecification
-                    {
-                        OperationType = OperationType.Max,
-                        Value = 0
-                    }
-                ]
-            };
-
-            session.Socket.SendPacket(packet);
-        }
-
-        public void WithdrawCells(int cellsRequested)
-        {
-            if (session == null) return;
-            long energyRequested = cellsRequested * energyPerCell;
-
-            lock (withdrawLock)
-            {
-                pendingWithdrawals.Enqueue(energyRequested);
-            }
-
-            var packet = new SetPacket
-            {
-                Key = "EnergyLink",
-                DefaultValue = 0,
-                WantReply = true,
-                Operations =
-                [
-                    new OperationSpecification
-                    {
-                        OperationType = OperationType.Add,
-                        Value = -energyRequested
-                    },
-                    new OperationSpecification
-                    {
-                        OperationType = OperationType.Max,
-                        Value = 0
-                    }
-                ]
-            };
-
-            session.Socket.SendPacket(packet);
-        }
-
-        private void OnPacketReceived(ArchipelagoPacketBase packet)
-        {
-            if (packet is SetReplyPacket reply && reply.Key == "EnergyLink")
-            {
-                long energyRequested;
-                lock (withdrawLock)
-                {
-                    if (pendingWithdrawals.Count == 0) return;
-                    energyRequested = pendingWithdrawals.Dequeue();
-                }
-                long energyBefore = reply.OriginalValue.ToObject<long>();
-                long energyAfter = reply.Value.ToObject<long>();
-                long energyConsumed = energyBefore - energyAfter;
-
-                long energyActuallyGot = Math.Min(energyConsumed, energyRequested);
-                int cellsReceived = (int)(energyActuallyGot / energyPerCell);
-
-                GiveCellsToPlayer(cellsReceived);
-            }
-        }
-
-        private void GiveCellsToPlayer(int cellsReceived)
-        {
-            Log.Warning($"todo: {cellsReceived}");
         }
     }
 }
