@@ -20,6 +20,7 @@ using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.EnemyManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.UnlockItemManager;
+using static DeadCellsArchipelago.LinkQueue;
 using dc.pr;
 using dc.level;
 using dc.tool;
@@ -48,6 +49,7 @@ using dc.hxd.snd;
 using dc.ui.icon;
 using dc.en.mob;
 using dc.level.lore;
+using dc.tool.atk;
 
 
 namespace DeadCellsArchipelago{
@@ -184,6 +186,8 @@ namespace DeadCellsArchipelago{
             Hook__ItemTools.getBlueprintLocalizedName += OnGetBlueprintLocalizedName;
             Hook__Icon.createItemIcon += OnCreateItemIcon;
             dc.en.Hook_Mob.removeFromLoot += TempFixRemoveFromLoot;
+            Hook_Hero.heal += OnHeroHeal;
+            Hook_Hero.onDamage += OnHeroOnDamage;
             Log.Information("=== Archipelago hooks loaded ! ===");
             //LogManager
             //BrBlueprint
@@ -197,6 +201,7 @@ namespace DeadCellsArchipelago{
                 GiveItemInQueue();
                 ShowLogInQueue();
                 CheckDeathLink();
+                DoHealthLinkInQueue();
 
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)
                 {

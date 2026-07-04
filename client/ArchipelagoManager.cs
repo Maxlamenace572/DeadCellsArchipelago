@@ -18,6 +18,7 @@ namespace DeadCellsArchipelago
     {
         private ArchipelagoSession? session;
         private DeathLinkService? deathLinkService;
+        public HealthLinkManager? healthLinkManager;
         public bool isConnected;
         
         // Configurate connection
@@ -96,6 +97,8 @@ namespace DeadCellsArchipelago
                         deathLinkService.EnableDeathLink();
                         deathLinkService.OnDeathLinkReceived += OnDeathLinkReceived;
                     }
+
+                    healthLinkManager = new HealthLinkManager(session, "testGroup");
                 }
                 else if (result is LoginFailure failure)
                 {

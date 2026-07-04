@@ -15,10 +15,10 @@ namespace DeadCellsArchipelago
         private Queue<long> pendingWithdrawals = new();
         private object withdrawLock = new();
 
-        public EnergyLinkManager(IArchipelagoSession session, string team)
+        public EnergyLinkManager(IArchipelagoSession session)
         {
             this.session = session;
-            EnergyKey += team;
+            EnergyKey += session.Players.ActivePlayer.Team;
             session.Socket.PacketReceived += OnPacketReceived;
         }
 

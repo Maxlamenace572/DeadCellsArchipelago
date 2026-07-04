@@ -1,5 +1,6 @@
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.PokeManager;
+using static DeadCellsArchipelago.ArchipelagoManager;
 using dc.en;
 using Serilog;
 using ModCore.Utilities;
@@ -9,7 +10,7 @@ using dc.ui.pause;
 using dc.hxd.res;
 using dc.tool;
 using dc.tool._Cooldown;
-using dc.ui.hud;
+using dc.tool.atk;
 
 namespace DeadCellsArchipelago {
     public static class HeroManager
@@ -209,6 +210,31 @@ namespace DeadCellsArchipelago {
         {
             orig(self);
             ResetFrontPokebomb();
+        }
+
+        public static void OnHeroOnDamage(Hook_Hero.orig_onDamage orig, Hero self, AttackData a)
+        {
+            orig(self, a);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
+        }
+
+        public static void OnHeroHeal(Hook_Hero.orig_heal orig, Hero self, int v)
+        {
+            orig(self, v);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
+        }
+
+        public static void UpdateHeroHealthLink(int otherCurrentHealth, int otherMaxHealth)
+        {
+            if (HERO == null) return;
+            double percentage = (double) otherCurrentHealth / otherMaxHealth;
+            HERO.life = Math.Max((int)(percentage * HERO.maxLife), 1);
+        }
+
+        public static void RemovePercentHealth(int percentage)
+        {
+            if (HERO == null) return;
+            HERO.life -= (int)(HERO.maxLife * (percentage / 100.0));
         }
     }
 }
