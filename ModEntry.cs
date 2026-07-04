@@ -188,6 +188,8 @@ namespace DeadCellsArchipelago{
             dc.en.Hook_Mob.removeFromLoot += TempFixRemoveFromLoot;
             Hook_Hero.heal += OnHeroHeal;
             Hook_Hero.onDamage += OnHeroOnDamage;
+            Hook_Hero.curse += OnHeroCurse;
+            Hook_Hero.reduceCurse += OnHeroReduceCurse;
             Log.Information("=== Archipelago hooks loaded ! ===");
             //LogManager
             //BrBlueprint
@@ -201,7 +203,7 @@ namespace DeadCellsArchipelago{
                 GiveItemInQueue();
                 ShowLogInQueue();
                 CheckDeathLink();
-                DoHealthLinkInQueue();
+                DoEveryLinks();
 
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)
                 {
@@ -209,7 +211,7 @@ namespace DeadCellsArchipelago{
                     if (SAVED_DATA.IsItemReceived("ShipwreckKey"))
                     {
                         GiveItemToPlayer("ShipwreckKey");
-                        HERO?.hudInitItems();
+                        HERO.hudInitItems();
                     }
 
                     if (ARCHIPELAGO != null && ARCHIPELAGO.respawnUpScroll)
@@ -219,6 +221,13 @@ namespace DeadCellsArchipelago{
                             SAVED_DATA.GivenFillerItem[itemName] = 0;
                         }
                     }
+                    LoadLinks();
+                }
+
+                if (newConnection)
+                {
+                    LoadLinks();
+                    newConnection = false;
                 }
             }
 

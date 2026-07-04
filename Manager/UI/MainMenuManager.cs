@@ -26,6 +26,7 @@ namespace DeadCellsArchipelago {
         public static Text? apVersion = null;
         public static string lastCompatibleApworld = "0.1.4";
         public static double screenScale;
+        public static bool newConnection = true;
 
         public static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
@@ -412,6 +413,7 @@ namespace DeadCellsArchipelago {
             History = [];
             resetOnNextPrisonStart = false;
             levelMapChallenge = null;
+            newConnection = true;
         }
 
         private static void SetApworldVersion()

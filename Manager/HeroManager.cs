@@ -25,6 +25,7 @@ namespace DeadCellsArchipelago {
         public static bool trapChallengeCurseReceived = false;
         public static bool shouldGiveItemsNewRun = false;
         public static bool isInTraining = false;
+        public static bool originalCurse = true;
 
         public static void OnHeroDie(Hook_Hero.orig_onDie orig, Hero self)
         {
@@ -235,6 +236,37 @@ namespace DeadCellsArchipelago {
         {
             if (HERO == null) return;
             HERO.life -= (int)(HERO.maxLife * (percentage / 100.0));
+        }
+
+        public static void OnHeroReduceCurse(Hook_Hero.orig_reduceCurse orig, Hero self, int n)
+        {
+            bool oneMore = false;
+            if (!originalCurse && HERO!.curseCounter == 0)
+            {
+                bool popUp = true;
+                bool sound = false;
+                HERO.curse(1, null, new Ref<bool>(ref popUp), new Ref<bool>(ref sound));
+                oneMore = true;
+            }
+            orig(self, n);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null && ARCHIPELAGO.healthLinkManager.shareCurses && originalCurse) ARCHIPELAGO.healthLinkManager.UpdateCurseStorage(HERO!.curseCounter);
+            if (oneMore) HERO!.reduceCurse(1);
+        }
+
+        public static void OnHeroCurse(Hook_Hero.orig_curse orig, Hero self, int count, dc.String reason, Ref<bool> hidePopup, Ref<bool> useAltSound)
+        {
+            orig(self, count, reason, hidePopup, useAltSound);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null && ARCHIPELAGO.healthLinkManager.shareCurses && originalCurse) ARCHIPELAGO.healthLinkManager.UpdateCurseStorage(HERO!.curseCounter);
+        }
+
+        public static void UpdateHeroHealthCurseLink(int curseValue)
+        {
+            if (HERO == null) return;
+            originalCurse = false;
+            Log.Warning("av" + HERO.curseCounter);
+            HERO.reduceCurse(HERO.curseCounter - curseValue);
+            Log.Warning("ap" + HERO.curseCounter);
+            originalCurse = true;
         }
     }
 }
