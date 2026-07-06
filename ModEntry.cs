@@ -204,6 +204,7 @@ namespace DeadCellsArchipelago{
                 ShowLogInQueue();
                 CheckDeathLink();
                 DoEveryLinks();
+                if (logError) ShowLogError();
 
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)
                 {

@@ -12,6 +12,7 @@ namespace DeadCellsArchipelago
     {
         private static List<string> pendingItems = [];
         private static List<string> pendingLogs = [];
+        public static bool logError = false;
 
         public static void AddItemToQueue(string itemName)
         {
@@ -73,6 +74,19 @@ namespace DeadCellsArchipelago
             Lang.Class.t.texts.set("Schéma obtenu :".AsHaxeString(), classicTitle);
 
             pendingLogs.RemoveAt(0);
+        }
+
+        public static void ShowLogError()
+        {
+            changeLogIcon = true;
+            changeLogDesc = true;
+
+            dc.String classicTitle = Lang.Class.t.texts.get("Schéma obtenu :".AsHaxeString());
+            Lang.Class.t.texts.set("Schéma obtenu :".AsHaxeString(), "Error:");
+            LogItem("GenericKey");
+            Lang.Class.t.texts.set("Schéma obtenu :".AsHaxeString(), classicTitle);
+
+            logError = false;
         }
 
         public static bool IsItemQueueEmpty()

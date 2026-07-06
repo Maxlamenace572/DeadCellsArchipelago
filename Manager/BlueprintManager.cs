@@ -12,6 +12,7 @@ using Serilog;
 
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ModAssetManager;
+using static DeadCellsArchipelago.ItemQueue;
 using dc.h2d;
 using HaxeProxy.Runtime;
 
@@ -135,13 +136,25 @@ namespace DeadCellsArchipelago {
         {
             if (changeLogIcon)
             {
-                changeLogIcon = false;
-                Tile logoTile = archipelagoLogoTile.clone();
-                Icon res = new Icon(logoTile, parent);
-                res.scaleToSize(40, 40);
-                double center = 0.5;
-                res.setCenterRatio(new Ref<double>(ref center), new Ref<double>(ref center));
-                return res;
+                if (!logError)
+                {
+                    changeLogIcon = false;
+                    Tile logoTile = archipelagoLogoTile.clone();
+                    Icon res = new Icon(logoTile, parent);
+                    res.scaleToSize(40, 40);
+                    double center = 0.5;
+                    res.setCenterRatio(new Ref<double>(ref center), new Ref<double>(ref center));
+                    return res;
+                }
+                else
+                {
+                    int frame = 0;
+                    double XY = 0.5;
+                    Tile errorTile = Assets.Class.gameElements.getTile("affectCross".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
+                    Icon res = new Icon(errorTile, parent);
+                    res.scaleToSize(20, 20);
+                    return res;
+                }
             }
             return orig(itemKind, parent);
         }

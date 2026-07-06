@@ -1,5 +1,4 @@
 using Archipelago.MultiClient.Net;
-using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Packets;
@@ -8,8 +7,10 @@ using Serilog;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ItemQueue;
 using static DeadCellsArchipelago.Translator;
+using static DeadCellsArchipelago.BlueprintManager;
 using System.Collections.ObjectModel;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
+using System.Net.WebSockets;
 
 namespace DeadCellsArchipelago
 {
@@ -251,7 +252,14 @@ namespace DeadCellsArchipelago
         
         private void OnError(Exception ex, string message)
         {
-            Log.Error($"=== Archipelago Error: {message} - {ex.Message} ===");
+            Log.Error($"=== Archipelago Error: {message} ===");
+            if (ex is WebSocketException)
+            {
+                Log.Warning($"=== Disconnecting... ===");
+                isConnected = false;
+                logError = true;
+                logDesc = "Disconnected from server";
+            }
         }
         
         private void OnDisconnected(string reason)
