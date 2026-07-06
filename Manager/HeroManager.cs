@@ -34,9 +34,9 @@ namespace DeadCellsArchipelago {
             orig(self);
             heroJustDead = false;
             aspectsToIter = 0;
-            if(ARCHIPELAGO != null)
+            if(ARCHIPELAGO != null && ARCHIPELAGO.deathLinkManager != null)
             {
-                ARCHIPELAGO.SendDeathLink();
+                ARCHIPELAGO.deathLinkManager.SendDeathLink();
             }
             ResetDataNewRun();
         }
@@ -165,7 +165,7 @@ namespace DeadCellsArchipelago {
                 {
                     bool hidePopup = false;
                     bool useAltSound = false;
-                    HERO.curse(ARCHIPELAGO.deathLinkEnabled, $"{userWithSkillIssue} died !".AsHaxeString(), new HaxeProxy.Runtime.Ref<bool>(ref hidePopup), new HaxeProxy.Runtime.Ref<bool>(ref useAltSound));
+                    HERO.curse(ARCHIPELAGO.deathLinkEnabled, $"{userWithSkillIssue} died !".AsHaxeString(), new Ref<bool>(ref hidePopup), new Ref<bool>(ref useAltSound));
                 }
                 userWithSkillIssue = "";
             }

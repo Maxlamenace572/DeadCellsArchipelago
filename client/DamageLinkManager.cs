@@ -1,6 +1,7 @@
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Packets;
 using Newtonsoft.Json.Linq;
+using static DeadCellsArchipelago.HeroManager;
 
 namespace DeadCellsArchipelago
 {
@@ -13,11 +14,12 @@ namespace DeadCellsArchipelago
         private readonly object damageLock = new object();
         private const int DamagePointsPerHp = 16; //16 pt <=> 1%
 
-        public DamageLinkManager(IArchipelagoSession session, string? group)
+        public DamageLinkManager(IArchipelagoSession session, string group)
         {
-            if (group != null) DamageKey += group;
+            DamageKey += group;
             this.session = session;
             session.Socket.PacketReceived += OnPacketReceived;
+            session.ConnectionInfo.UpdateConnectionOptions([.. session.ConnectionInfo.Tags, DamageKey]);
         }
 
         public void OnPlayerDamaged(float percentHpLost)
@@ -27,17 +29,15 @@ namespace DeadCellsArchipelago
             accumulatedPercentage %= 1;
             if (damagePoints <= 0) return;
 
-            Dictionary<string, JToken> bounceData = new()
-            {
-                ["time"] = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
-                ["source"] = session.Players.ActivePlayer.Name,
-                ["damage_points"] = damagePoints
-            };
-
             BouncePacket packet = new()
             {
                 Tags = [DamageKey],
-                Data = bounceData
+                Data = new Dictionary<string, JToken>
+                {
+                    ["time"] = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                    ["source"] = session.Players.ActivePlayer.Name,
+                    ["damage_points"] = damagePoints
+                }
             };
 
             session.Socket.SendPacket(packet);
@@ -45,10 +45,7 @@ namespace DeadCellsArchipelago
 
         private void OnPacketReceived(ArchipelagoPacketBase packet)
         {
-            if (packet is not BouncedPacket bounced) return;
-            if (!bounced.Tags.Contains(DamageKey)) return;
-            
-            if (!bounced.Data.TryGetValue("damage_points", out var dmgValue)) return;
+            if (packet is not BouncedPacket bounced || !bounced.Tags.Contains(DamageKey) || !bounced.Data.TryGetValue("damage_points", out var dmgValue)) return;
 
             int receivedPoints = Convert.ToInt32(dmgValue);
             lock (damageLock)
@@ -59,15 +56,9 @@ namespace DeadCellsArchipelago
                 {
                     int percentageLost = (int)(accumulatedDamagePoint / DamagePointsPerHp);
                     accumulatedDamagePoint %= DamagePointsPerHp;
-                    ApplyDamageToPlayer(percentageLost);
+                    RemovePercentHealth(percentageLost);
                 }
             }
-        }
-
-        private void ApplyDamageToPlayer(int percentageLost)
-        {
-            // TODO: hook vers Dead Cells pour infliger des dégâts
-            // ex: GameHooks.HurtPlayer(damageAmount);
         }
     }
 }

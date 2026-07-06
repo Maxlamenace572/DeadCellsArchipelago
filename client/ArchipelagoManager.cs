@@ -7,7 +7,6 @@ using Serilog;
 
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ItemQueue;
-using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.Translator;
 using System.Collections.ObjectModel;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
@@ -17,7 +16,7 @@ namespace DeadCellsArchipelago
     public class ArchipelagoManager
     {
         private ArchipelagoSession? session;
-        private DeathLinkService? deathLinkService;
+        public DeathLinkManager? deathLinkManager;
         public HealthLinkManager? healthLinkManager;
         public bool isConnected;
         
@@ -93,12 +92,10 @@ namespace DeadCellsArchipelago
 
                     if (deathLinkEnabled >= 0)
                     {
-                        deathLinkService = session.CreateDeathLinkService();
-                        deathLinkService.EnableDeathLink();
-                        deathLinkService.OnDeathLinkReceived += OnDeathLinkReceived;
+                        deathLinkManager = new DeathLinkManager(session, "testGroup", disableDeathLinkForAspects);
                     }
 
-                    healthLinkManager = new HealthLinkManager(session, "testGroup");
+                    //healthLinkManager = new HealthLinkManager(session, "testGroup");
                 }
                 else if (result is LoginFailure failure)
                 {
@@ -288,26 +285,6 @@ namespace DeadCellsArchipelago
                 Status = ArchipelagoClientState.ClientGoal
             };
             session.Socket.SendPacket(statusUpdate);
-        }
-
-        private void OnDeathLinkReceived(DeathLink deathLink)
-        {
-            userWithSkillIssue = deathLink.Source;
-            if (userWithSkillIssue != slotName) deathLinkReceived = true;
-        }
-
-        public void SendDeathLink(string message = "")
-        {
-            if (!disableDeathLinkForAspects || disableDeathLinkForAspects && SAVED_DATA != null && SAVED_DATA.CountSentAspect() == 13)
-            {
-                if(message == "")
-                {
-                    message = $"{slotName} died in Dead Cells";
-                }
-                if(deathLinkService != null && session != null) {
-                    deathLinkService.SendDeathLink(new DeathLink(slotName, message));
-                }
-            }
         }
 
         private void OnMessageReceived(LogMessage message)
