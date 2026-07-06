@@ -34,7 +34,7 @@ namespace DeadCellsArchipelago {
             orig(self);
             heroJustDead = false;
             aspectsToIter = 0;
-            if(ARCHIPELAGO != null && ARCHIPELAGO.deathLinkManager != null)
+            if(ARCHIPELAGO != null && ARCHIPELAGO.deathLinkManager != null && !deathLinkReceived)
             {
                 ARCHIPELAGO.deathLinkManager.SendDeathLink();
             }
