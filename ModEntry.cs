@@ -190,6 +190,7 @@ namespace DeadCellsArchipelago{
             Hook_Hero.onDamage += OnHeroOnDamage;
             Hook_Hero.curse += OnHeroCurse;
             Hook_Hero.reduceCurse += OnHeroReduceCurse;
+            Hook_Entity.popError += OnPopError;
             Log.Information("=== Archipelago hooks loaded ! ===");
             //LogManager
             //BrBlueprint
