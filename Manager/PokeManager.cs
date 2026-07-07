@@ -22,7 +22,6 @@ namespace DeadCellsArchipelago {
             orig(self);
             if (!enemyDiedWhileExtracting)
             {
-                Serilog.Log.Warning("pokecharge removed");
                 DropItemToPlayer("Pokebomb");
                 if(SAVED_DATA != null) SAVED_DATA.numberOfPokebombUse --;
             }
@@ -134,6 +133,12 @@ namespace DeadCellsArchipelago {
         {
             if (((dc.String) Lang.Class.t.texts.get("Échec".AsHaxeString())).ToString() == str.ToString()) enemyDiedWhileExtracting = true;
             return orig(self, str, col);
+        }
+
+        public static bool IsAnySkillPokebomb()
+        {
+            HeroActiveSkillsManager asm = HERO!.activeSkillsManager;
+            return (asm.hudGetSkillPower(0).ii != null && asm.hudGetSkillPower(0).ii._itemData.id.ToString() == "Pokebomb") || (asm.hudGetSkillPower(1).ii != null && asm.hudGetSkillPower(1).ii._itemData.id.ToString() == "Pokebomb");
         }
     }
 }

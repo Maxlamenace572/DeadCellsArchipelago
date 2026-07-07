@@ -81,6 +81,7 @@ namespace DeadCellsArchipelago{
             Hook_Hero.init += OnHeroInit;
             Hook_Hero.pickBlueprint += OnBlueprintPicked;
             Hook_Hero.applyItemPickEffect += OnApplyItemPickEffect; //used for runes
+            Hook_Hero.pickItem += OnPickItem;
             Hook_Hero.onDie += OnHeroDie;
             Hook_Hero.addCells += OnAddCells;
 

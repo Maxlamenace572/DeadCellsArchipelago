@@ -20,6 +20,7 @@ using static DeadCellsArchipelago.EnemyManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.RoomManager;
 using static DeadCellsArchipelago.BlueprintManager;
+using static DeadCellsArchipelago.PokeManager;
 
 namespace DeadCellsArchipelago {
     public static class ItemManager
@@ -431,6 +432,17 @@ namespace DeadCellsArchipelago {
                 return true;
             }
             return false;
+        }
+
+        public static void OnPickItem(Hook_Hero.orig_pickItem orig, Hero self, Entity from, InventItem i, HlAction<bool> onComplete)
+        {
+            if (i._itemData.id.ToString() == "Pokebomb" && IsAnySkillPokebomb())
+            {
+                SAVED_DATA?.numberOfPokebombUse += 5;
+                from.destroy();
+            }
+                
+            else orig(self, from, i, onComplete);
         }
 
         private static bool ShouldDropItem(string itemName)
