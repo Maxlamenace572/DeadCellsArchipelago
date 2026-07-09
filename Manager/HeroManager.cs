@@ -275,5 +275,12 @@ namespace DeadCellsArchipelago {
             if (!(curseValue == 0 && HERO.curseCounter == 0)) HERO.reduceCurse(HERO.curseCounter - curseValue);
             originalCurse = true;
         }
+
+        public static void AddCells(int cellsValue)
+        {
+            if (HERO == null) return;
+            bool noStats = false;
+            HERO.substractCells(-cellsValue, new Ref<bool>(ref noStats));
+        }
     }
 }

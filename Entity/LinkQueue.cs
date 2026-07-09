@@ -1,5 +1,7 @@
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.HeroManager;
+using static DeadCellsArchipelago.PauseMenuManager;
+using ModCore.Utilities;
 
 namespace DeadCellsArchipelago
 {
@@ -10,6 +12,7 @@ namespace DeadCellsArchipelago
         public static bool healthLinkDeath = false;
         private static List<TrapData> pendingTrapCurseLink = [];
         private static List<int> pendingDamageLink = [];
+        private static List<List<int>> pendingEnergyLink = [];
 
         public static void AddHealthLinkToQueue(List<int> healthLinkValues)
         {
@@ -29,6 +32,11 @@ namespace DeadCellsArchipelago
         public static void AddDamageLinkToQueue(int percentage)
         {
             pendingDamageLink.Add(percentage);
+        }
+
+        public static void AddEnergyLinkToQueue(int cellsReceived, int indexAction)
+        {
+            pendingEnergyLink.Add([cellsReceived, indexAction]);
         }
 
         public static void DoHealthLinkInQueue()
@@ -78,6 +86,24 @@ namespace DeadCellsArchipelago
             pendingDamageLink.RemoveAt(0);
         }
 
+        public static void DoEnergyLinkInQueue()
+        {
+            if(IsEnergyLinkQueueEmpty()) return;
+
+            List<int> energyReceived = pendingEnergyLink[0];
+            if (energyReceived[1] == 0)
+            {
+                AddCells(energyReceived[0]);
+                cellsNumber?.set_text($" {HERO!.cells}".AsHaxeString());
+            }
+            else
+            {
+                energyLink?.UpdateAvailableValue(energyReceived[0]);
+            }
+            
+            pendingEnergyLink.RemoveAt(0);
+        }
+
         public static bool IsHealthLinkQueueEmpty()
         {
             return pendingHealthLink.Count == 0;
@@ -98,6 +124,11 @@ namespace DeadCellsArchipelago
             return pendingDamageLink.Count == 0;
         }
 
+        public static bool IsEnergyLinkQueueEmpty()
+        {
+            return pendingEnergyLink.Count == 0;
+        }
+
         public static void DoEveryLinks()
         {
             DoDeathHealthLink();
@@ -105,6 +136,7 @@ namespace DeadCellsArchipelago
             DoHealthCurseLinkInQueue();
             DoTrapLinkInQueue();
             DoDamageLinkInQueue();
+            DoEnergyLinkInQueue();
         }
 
         public static void LoadLinks()

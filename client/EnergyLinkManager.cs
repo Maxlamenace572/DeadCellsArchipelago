@@ -5,27 +5,34 @@ using Archipelago.MultiClient.Net.Packets;
 using Newtonsoft.Json.Linq;
 using Serilog;
 
+using static DeadCellsArchipelago.LinkQueue;
+
 namespace DeadCellsArchipelago
 {
     public class EnergyLinkManager
     {
-        public string EnergyKey = "EnergyLink";
+        private string EnergyKey = "EnergyLink";
         private readonly IArchipelagoSession session;
-        const long energyPerCell = 100000000;
+        private const long energyPerCell = 100000000;
         private Queue<long> pendingWithdrawals = new();
         private object withdrawLock = new();
+        public const double percentTax = 0.8; //lose 20% on deposit
 
         public EnergyLinkManager(IArchipelagoSession session)
         {
             this.session = session;
             EnergyKey += session.Players.ActivePlayer.Team;
+
+            session.DataStorage[EnergyKey].Initialize(JToken.FromObject(0));
+
             session.Socket.PacketReceived += OnPacketReceived;
+            session.DataStorage[EnergyKey].OnValueChanged += OnEnergyValueChanged;
         }
 
 
         public void DepositCells(int cellCount)
         {
-            long energyToAdd = cellCount * energyPerCell;
+            long energyToAdd = (long)(cellCount * percentTax) * energyPerCell;
 
             var packet = new SetPacket
             {
@@ -100,20 +107,20 @@ namespace DeadCellsArchipelago
                 long energyActuallyGot = Math.Min(energyConsumed, energyRequested);
                 int cellsReceived = (int)(energyActuallyGot / energyPerCell);
 
-                GiveCellsToPlayer(cellsReceived);
+                AddEnergyLinkToQueue(cellsReceived, 0);
             }
         }
 
-        private void GiveCellsToPlayer(int cellsReceived)
+        public int ShowStorageNumberCells()
         {
-            Log.Warning($"todo: {cellsReceived}");
+            if (session == null) return 0;
+            JToken value = session.DataStorage[EnergyKey];
+            return (int)(value.ToObject<long>() / energyPerCell);
         }
 
-        public async void ShowStorageNumberCells()
+        private void OnEnergyValueChanged(JToken originalValue, JToken newValue, Dictionary<string, JToken> additionalArguments)
         {
-            if (session == null) return;
-            JToken value = await session.DataStorage[EnergyKey].GetAsync();
-            Log.Warning($"{value.ToObject<long>() / energyPerCell}");
+            AddEnergyLinkToQueue((int)(newValue.ToObject<long>() / energyPerCell), 1);
         }
     }
 }

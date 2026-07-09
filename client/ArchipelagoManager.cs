@@ -21,6 +21,7 @@ namespace DeadCellsArchipelago
         public DamageLinkManager? damageLinkManager;
         public HealthLinkManager? healthLinkManager;
         public TrapLinkManager? trapLinkManager;
+        public EnergyLinkManager? energyLinkManager;
         public bool isConnected;
         
         // Configurate connection
@@ -91,6 +92,8 @@ namespace DeadCellsArchipelago
 
                     if (slotData.ContainsKey("apworld_version")) version = Convert.ToString(slotData["apworld_version"]);
                     if (version == null) version = "-0.1.1";
+
+                    energyLinkManager = new EnergyLinkManager(session);
 
                     if (deathLinkEnabled >= 0)
                     {
