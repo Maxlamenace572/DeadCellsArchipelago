@@ -434,7 +434,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     "Assault Shield": {
         "id": 0x00A0, "region": "Checks", "type": "blueprint_floor",
         "dlc": "", "min_bc": 0, "item": "DashShield",
-        "sources": [{'biome': 'SewerShort', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],
+        "sources": [{'biome': 'PrisonCourtyard', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],
     },
     "Cleaver": {
         "id": 0x00A1, "region": "Checks", "type": "blueprint_enemy",

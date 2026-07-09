@@ -3217,7 +3217,7 @@
         "dlc": "",
         "sources": [
             {
-                "biome": "SewerShort",
+                "biome": "PrisonCourtyard",
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": ""
