@@ -3,6 +3,7 @@ using Archipelago.MultiClient.Net.Packets;
 using Newtonsoft.Json.Linq;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.HeroManager;
+using static DeadCellsArchipelago.LinkQueue;
 
 namespace DeadCellsArchipelago
 {
@@ -11,12 +12,16 @@ namespace DeadCellsArchipelago
         private readonly IArchipelagoSession session;
         private string DeathKey = "DeathLink";
         private bool disableDeathLinkForAspects;
+        private bool deathTrap;
+        private bool deathTrapTriggerTrapLink;
 
-        public DeathLinkManager(IArchipelagoSession session, string group, bool disableDeathLinkForAspects)
+        public DeathLinkManager(IArchipelagoSession session, string group, bool disableDeathLinkForAspects, bool deathTrap, bool deathTrapTriggerTrapLink)
         {
             DeathKey += group;
             this.session = session;
             this.disableDeathLinkForAspects = disableDeathLinkForAspects;
+            this.deathTrap = deathTrap;
+            this.deathTrapTriggerTrapLink = deathTrapTriggerTrapLink;
             session.Socket.PacketReceived += OnPacketReceived;
             session.ConnectionInfo.UpdateConnectionOptions([.. session.ConnectionInfo.Tags, DeathKey]);
         }
@@ -49,7 +54,11 @@ namespace DeadCellsArchipelago
             if (packet is not BouncedPacket bounced || !bounced.Tags.Contains(DeathKey) || !bounced.Data.TryGetValue("source", out var source)) return;
             
             userWithSkillIssue = Convert.ToString(source)!;
-            if (userWithSkillIssue != session.Players.ActivePlayer.Name) deathLinkReceived = true;
+            if (userWithSkillIssue != session.Players.ActivePlayer.Name)
+            {
+                if (deathTrap) AddTrapLinkToQueue(RandomTrapId(), deathTrapTriggerTrapLink);
+                else deathLinkReceived = true;
+            }
         }
     }
 }

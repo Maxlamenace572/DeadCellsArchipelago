@@ -944,5 +944,18 @@ namespace DeadCellsArchipelago {
             res.Add("CollectorHood", 3);
             return res;
         }
+
+        public static string RandomTrapId()
+        {
+            List<string> trap = [
+                "Trap_Curse",
+                "Trap_SpawnElite",
+                "Trap_RemoveGold",
+                "Trap_BreakWeapon",
+                "Trap_InvertControls",
+                "Trap_FlawlessChallenge"
+            ];
+            return trap[new Random().Next(0, trap.Count)];
+        }
     }
 }

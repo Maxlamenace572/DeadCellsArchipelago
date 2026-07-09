@@ -93,7 +93,7 @@ namespace DeadCellsArchipelago
 
                     if (deathLinkEnabled >= 0)
                     {
-                        deathLinkManager = new DeathLinkManager(session, "", disableDeathLinkForAspects);
+                        deathLinkManager = new DeathLinkManager(session, "", disableDeathLinkForAspects, true, true);
                     }
 
                     trapLinkManager = new TrapLinkManager(session, "");
