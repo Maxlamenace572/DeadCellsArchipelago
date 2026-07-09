@@ -56,6 +56,8 @@ namespace DeadCellsArchipelago {
         public static dc.ui.Text? apMenuLeft = null;
         public static dc.ui.Text? energyTitle = null;
         public static EnergyLink? energyLink = null;
+        public static int topIndex = -1;
+        public static int energyLinkIndex = -1;
 
         public static void OnUpdateDefaultPause(Hook_DefaultPause.orig_update orig, DefaultPause self)
         {
@@ -146,7 +148,7 @@ namespace DeadCellsArchipelago {
                     
                     //continue input up/left/down/right when down
                     FrameWithkeyPressed = 0;
-                    if (i == 10 || i == 11 || i == 12 || i == 13) keyToRepeat = i;
+                    if (i == 10 || i == 11 || i == 12 || i == 13 || i == 0) keyToRepeat = i;
                     else keyToRepeat = -1;
 
                     //on classic menu, up go to 
@@ -166,6 +168,30 @@ namespace DeadCellsArchipelago {
                     {
                         showClassicMenu = !showClassicMenu;
                     }
+                    //on right arrow, validate change modded menu
+                    else if (!showClassicMenu && topIndex == 1 && i == 0)
+                    {
+                        menuIndex++;
+                        if(menuIndex == 1)
+                        {
+                            topIndex = -1;
+                            apMenuRight?.set_textColor(16777215);
+                            apMenuButton?.set_textColor(16776960);
+                            onMenuButton = true;
+                        }
+                    }
+                    //on left arrow, validate change modded menu
+                    else if (!showClassicMenu && topIndex == 0 && i == 0)
+                    {
+                        menuIndex--;
+                        if(menuIndex == 0)
+                        {
+                            topIndex = -1;
+                            apMenuLeft?.set_textColor(16777215);
+                            apMenuButton?.set_textColor(16776960);
+                            onMenuButton = true;
+                        }
+                    }
                     //menu 1
                     else if(menuIndex == 0)
                     {
@@ -174,6 +200,32 @@ namespace DeadCellsArchipelago {
                         {
                             onMenuButton = false;
                             apMenuButton?.set_textColor(16777215);
+                            scrollerBiome?.lastHighlight = 0;
+                            scrollerBiome?.lastHighlightCell = 0;
+                            scrollerBiome?.lines[0].Highlight(0);
+                            scrollerIndex = 2;
+                        }
+                        //on modded menu and menu button, right goes to top right arrow
+                        else if (!showClassicMenu && onMenuButton && i == 13)
+                        {
+                            onMenuButton = false;
+                            apMenuButton?.set_textColor(16777215);
+                            apMenuRight?.set_textColor(16776960);
+                            topIndex = 1;
+                        }
+                        //on modded menu and top right arrow, left goes to menu button
+                        else if (!showClassicMenu && topIndex == 1 && i == 11)
+                        {
+                            topIndex = -1;
+                            apMenuRight?.set_textColor(16777215);
+                            apMenuButton?.set_textColor(16776960);
+                            onMenuButton = true;
+                        }
+                        //on modded menu and top right arrow, down goes to modded menu
+                        else if (!showClassicMenu && topIndex == 1 && i == 12)
+                        {
+                            topIndex = -1;
+                            apMenuRight?.set_textColor(16777215);
                             scrollerBiome?.lastHighlight = 0;
                             scrollerBiome?.lastHighlightCell = 0;
                             scrollerBiome?.lines[0].Highlight(0);
@@ -197,15 +249,7 @@ namespace DeadCellsArchipelago {
                         //on modded menu, return goes to classic menu
                         else if(!showClassicMenu && (i == 8 || i == 1))
                         {
-                            showClassicMenu = true;
-                            scrollerHistory?.SetScrollAtEnd();
-                            scrollerFiller?.SetScrollAtStart();
-                            scrollerBiome?.SetScrollAtStart();
-                            if (scrollerIndex == 0 && scrollerHistory?.lastHighlight != -1) scrollerHistory?.lines[scrollerHistory.lastHighlight].StopHighlight();
-                            else if (scrollerIndex == 1 && scrollerFiller?.lastHighlight != -1) scrollerFiller?.lines[scrollerFiller.lastHighlight].StopHighlight();
-                            else if (scrollerIndex == 2 && scrollerBiome?.lastHighlight != -1 && scrollerBiome?.lastHighlightCell != -1) scrollerBiome?.lines[scrollerBiome.lastHighlight].StopHighlight(scrollerBiome.lastHighlightCell);
-                            else if (scrollerIndex == 4 && shopX != -1 && shopY != -1) skillShopMenu.StopHighlight(shopX, shopY);
-                            scrollerIndex = -1;
+                            ReturnMenuController();
                         }
                         //on modded menu and in a scroller
                         else if (scrollerIndex != -1)
@@ -506,6 +550,80 @@ namespace DeadCellsArchipelago {
                             previousAct.Invoke(i, b);
                         }
                     }
+                    //menu 2
+                    else if(menuIndex == 1)
+                    {
+                        //on modded menu and menu button, down goes to modded menu
+                        if (!showClassicMenu && onMenuButton && i == 12)
+                        {
+                            onMenuButton = false;
+                            apMenuButton?.set_textColor(16777215);
+                            energyLinkIndex = 0;
+                            energyLink?.Highlight(energyLinkIndex);
+                        }
+                        //on modded menu and menu button, left goes to top left arrow
+                        else if (!showClassicMenu && onMenuButton && i == 11)
+                        {
+                            onMenuButton = false;
+                            apMenuButton?.set_textColor(16777215);
+                            apMenuLeft?.set_textColor(16776960);
+                            topIndex = 0;
+                        }
+                        //on modded menu and top left arrow, right goes to menu button
+                        else if (!showClassicMenu && topIndex == 0 && i == 13)
+                        {
+                            topIndex = -1;
+                            apMenuLeft?.set_textColor(16777215);
+                            apMenuButton?.set_textColor(16776960);
+                            onMenuButton = true;
+                        }
+                        //on modded menu and top left arrow, down goes to modded menu
+                        else if (!showClassicMenu && topIndex == 0 && i == 12)
+                        {
+                            topIndex = -1;
+                            apMenuLeft?.set_textColor(16777215);
+                            energyLinkIndex = 0;
+                            energyLink?.Highlight(energyLinkIndex);
+                        }
+                        //on top buttons energy link, up goes to menu button
+                        else if ((energyLinkIndex == 0 || energyLinkIndex == 1) && i == 10)
+                        {
+                            energyLinkIndex = -1;
+                            energyLink?.StopHighlight();
+                            apMenuButton?.set_textColor(16776960);
+                            onMenuButton = true;
+                        }
+                        //on energy link, navigate
+                        else if ((energyLinkIndex == 0 || energyLinkIndex == 2) && i == 13)
+                        {
+                            energyLinkIndex++;
+                            energyLink?.Highlight(energyLinkIndex);
+                        }
+                        else if ((energyLinkIndex == 1 || energyLinkIndex == 3) && i == 11)
+                        {
+                            energyLinkIndex--;
+                            energyLink?.Highlight(energyLinkIndex);
+                        }
+                        else if ((energyLinkIndex == 0 || energyLinkIndex == 1) && i == 12)
+                        {
+                            energyLinkIndex += 2;
+                            energyLink?.Highlight(energyLinkIndex);
+                        }
+                        else if ((energyLinkIndex == 2 || energyLinkIndex == 3) && i == 10)
+                        {
+                            energyLinkIndex -= 2;
+                            energyLink?.Highlight(energyLinkIndex);
+                        }
+                        else if ((energyLinkIndex == 0 || energyLinkIndex == 1 || energyLinkIndex == 2 || energyLinkIndex == 3) && i == 0)
+                        {
+                            energyLink?.Act(energyLinkIndex);
+                        }
+                        //on modded menu, return goes to classic menu
+                        else if(!showClassicMenu && (i == 8 || i == 1))
+                        {
+                            ReturnMenuController();
+                        }
+                    }
                     else
                     {
                         previousAct.Invoke(i, b);
@@ -595,12 +713,10 @@ namespace DeadCellsArchipelago {
                     },
                     onMove = (e) =>
                     {
-                        onMenuButton = true;
                         apMenuLeft.set_textColor(16776960);
                     },
                     onOut = (e) =>
                     {
-                        onMenuButton = false;
                         apMenuLeft.set_textColor(16777215);
                     }
                 };
@@ -636,17 +752,31 @@ namespace DeadCellsArchipelago {
                     },
                     onMove = (e) =>
                     {
-                        onMenuButton = true;
                         apMenuRight.set_textColor(16776960);
                     },
                     onOut = (e) =>
                     {
-                        onMenuButton = false;
                         apMenuRight.set_textColor(16777215);
                     }
                 };
             }
             apMenuRight.set_visible(!showClassicMenu && menuIndex == 0);
+        }
+
+        private static void ReturnMenuController()
+        {
+            showClassicMenu = true;
+            scrollerHistory?.SetScrollAtEnd();
+            scrollerFiller?.SetScrollAtStart();
+            scrollerBiome?.SetScrollAtStart();
+            if (scrollerIndex == 0 && scrollerHistory?.lastHighlight != -1) scrollerHistory?.lines[scrollerHistory.lastHighlight].StopHighlight();
+            else if (scrollerIndex == 1 && scrollerFiller?.lastHighlight != -1) scrollerFiller?.lines[scrollerFiller.lastHighlight].StopHighlight();
+            else if (scrollerIndex == 2 && scrollerBiome?.lastHighlight != -1 && scrollerBiome?.lastHighlightCell != -1) scrollerBiome?.lines[scrollerBiome.lastHighlight].StopHighlight(scrollerBiome.lastHighlightCell);
+            else if (scrollerIndex == 4 && shopX != -1 && shopY != -1) skillShopMenu.StopHighlight(shopX, shopY);
+            scrollerIndex = -1;
+            topIndex = -1;
+            energyLinkIndex = -1;
+            energyLink?.StopHighlight();
         }
 
         private static void AddCellsCount()
@@ -903,13 +1033,19 @@ namespace DeadCellsArchipelago {
         {
             if (keyToRepeat != -1 && self.controller != null && self.controller.isAnyActionDown())
             {
-                FrameWithkeyPressed++;
-                if (FrameWithkeyPressed == 10)
+                if (keyToRepeat != 0)
                 {
-                    FrameWithkeyPressed = 0;
+                    FrameWithkeyPressed++;
+                    if (FrameWithkeyPressed == 10)
+                    {
+                        FrameWithkeyPressed = 0;
+                        modifiedOnActPressed?.Invoke(keyToRepeat, true);
+                    }
+                }
+                else if (energyLinkIndex == 0 || energyLinkIndex == 1)
+                {
                     modifiedOnActPressed?.Invoke(keyToRepeat, true);
                 }
-                
             }
         }
 

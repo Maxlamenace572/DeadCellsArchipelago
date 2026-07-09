@@ -49,16 +49,15 @@ namespace DeadCellsArchipelago {
             {
                 onClick = (e) =>
                 {
-                    cellsToSend = Math.Max(0, GetCellValue()-1);
-                    number?.set_text($"{cellsToSend}".AsHaxeString());
+                    
                 },
                 onMove = (e) =>
                 {
-                    down?.set_textColor(16776960);
+                    Highlight(true);
                 },
                 onOut = (e) =>
                 {
-                    down?.set_textColor(16777215);
+                    StopHighlight(true);
                 }
             };
 
@@ -81,24 +80,25 @@ namespace DeadCellsArchipelago {
             {
                 onClick = (e) =>
                 {
-                    cellsToSend = GetCellValue()+1;
-                    number?.set_text($"{cellsToSend}".AsHaxeString());
+                    Act(false);
                 },
                 onMove = (e) =>
                 {
-                    up?.set_textColor(16776960);
+                    Highlight(false);
                 },
                 onOut = (e) =>
                 {
-                    up?.set_textColor(16777215);
+                    StopHighlight(false);
                 }
             };
 
             numberBg = UIBox.Class.drawBoxMain(150.0*screenScale, 1.0, 4, 3, 0, null);
-            CenterX(250 - down.get_textWidth() - up.get_textWidth(), numberBg);
-            numberBg.x += down.x + down.get_textWidth();
-            CenterY(down, numberBg);
-            numberBg.y += y;
+            //CenterX(250 - down.get_textWidth() - up.get_textWidth(), numberBg);
+            //numberBg.x += down.x + down.get_textWidth();
+            numberBg.x = 88;
+            //CenterY(down, numberBg);
+            //numberBg.y += y;
+            numberBg.y = 205;
             numberBg.alpha = 0.85;
             numberBg.sg.color = ColorVectorRGBA(17*numberBg.alpha, 17*numberBg.alpha, 37*numberBg.alpha, 1);
             numberBg.scaleX = 3;
@@ -121,6 +121,7 @@ namespace DeadCellsArchipelago {
                     number?.set_textColor(16777215);
                 }
             };
+            number.set_text($"0".AsHaxeString());
         }
 
         public void SetVisible(bool visible)
@@ -145,6 +146,32 @@ namespace DeadCellsArchipelago {
                 number?.set_text($"{res}".AsHaxeString());
             }
             return res;
+        }
+
+        public void Highlight(bool isDown)
+        {
+            if (isDown) down?.set_textColor(16776960);
+            else up?.set_textColor(16776960);
+        }
+
+        public void StopHighlight(bool isDown)
+        {
+            if (isDown) down?.set_textColor(16777215);
+            else up?.set_textColor(16777215);
+        }
+
+        public void Act(bool isDown)
+        {
+            if (isDown)
+            {
+                cellsToSend = Math.Max(0, GetCellValue()-1);
+                number?.set_text($"{cellsToSend}".AsHaxeString());
+            }
+            else
+            {
+                cellsToSend = GetCellValue()+1;
+                number?.set_text($"{cellsToSend}".AsHaxeString());
+            }
         }
     }
 }

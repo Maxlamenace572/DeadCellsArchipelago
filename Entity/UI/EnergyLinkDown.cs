@@ -45,19 +45,15 @@ namespace DeadCellsArchipelago {
             {
                 onClick = (e) =>
                 {
-                    if(ARCHIPELAGO == null) return;
-                    int res = Math.Min(energyLink!.GetCellValue(), HERO!.cells);
-                    AddCells(-res);
-                    cellsNumber?.set_text($" {HERO!.cells}".AsHaxeString());
-                    ARCHIPELAGO.energyLinkManager!.DepositCells(res);
+                    Act(true);
                 },
                 onMove = (e) =>
                 {
-                    send?.set_textColor(16776960);
+                    Highlight(true);
                 },
                 onOut = (e) =>
                 {
-                    send?.set_textColor(16777215);
+                    StopHighlight(true);
                 }
             };
 
@@ -80,16 +76,15 @@ namespace DeadCellsArchipelago {
             {
                 onClick = (e) =>
                 {
-                    if(ARCHIPELAGO == null) return;
-                    ARCHIPELAGO.energyLinkManager!.WithdrawCells(energyLink!.GetCellValue());
+                    Act(false);
                 },
                 onMove = (e) =>
                 {
-                    retrieve?.set_textColor(16776960);
+                    Highlight(false);
                 },
                 onOut = (e) =>
                 {
-                    retrieve?.set_textColor(16777215);
+                    StopHighlight(false);
                 }
             };
         }
@@ -98,6 +93,35 @@ namespace DeadCellsArchipelago {
         {
             send?.set_visible(visible);
             retrieve?.set_visible(visible);
+        }
+
+        public void Highlight(bool isSend)
+        {
+            if (isSend) send?.set_textColor(16776960);
+            else retrieve?.set_textColor(16776960);
+        }
+
+        public void StopHighlight(bool isSend)
+        {
+            if (isSend) send?.set_textColor(16777215);
+            else retrieve?.set_textColor(16777215);
+        }
+
+        public void Act(bool isSend)
+        {
+            if (isSend)
+            {
+                if(ARCHIPELAGO == null) return;
+                int res = Math.Min(energyLink!.GetCellValue(), HERO!.cells);
+                AddCells(-res);
+                cellsNumber?.set_text($" {HERO!.cells}".AsHaxeString());
+                ARCHIPELAGO.energyLinkManager!.DepositCells(res);
+            }
+            else
+            {
+                if(ARCHIPELAGO == null) return;
+                ARCHIPELAGO.energyLinkManager!.WithdrawCells(energyLink!.GetCellValue());
+            }
         }
     }
 }
