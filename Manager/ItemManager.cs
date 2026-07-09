@@ -21,6 +21,7 @@ using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.RoomManager;
 using static DeadCellsArchipelago.BlueprintManager;
 using static DeadCellsArchipelago.PokeManager;
+using static DeadCellsArchipelago.TrapLinkManager;
 
 namespace DeadCellsArchipelago {
     public static class ItemManager
@@ -331,54 +332,7 @@ namespace DeadCellsArchipelago {
                 {
                     if(ShouldDropItem(itemName))
                     {
-                        if (!disableTrapOnEndBoss)
-                        {
-                            switch (itemName)
-                            {
-                                case "Trap_Curse":
-                                    if(HERO != null)
-                                    {
-                                        bool hidePopup = false;
-                                        bool useAltSound = false;
-                                        HERO.curse(50, "Archipelago Curse Trap".AsHaxeString(), new Ref<bool>(ref hidePopup), new Ref<bool>(ref useAltSound));
-                                    }
-                                    break;
-                                case "Trap_SpawnElite":
-                                    EliteTrap();
-                                    break;
-                                case "Trap_RemoveGold":
-                                    if(USER != null && HERO != null)
-                                    {
-                                        bool noStats = false;
-                                        HERO.substractMoney(USER.game.data.money, new Ref<bool>(ref noStats));
-                                    }
-                                    break;
-                                case "Trap_BreakWeapon":
-                                    RemoveARandomWeapon();
-                                    break;
-                                case "Trap_InvertControls":
-                                    InitSwitchControls();
-                                    break;
-                                case "Trap_FlawlessChallenge":
-                                    if (levelMapChallenge != null && USER != null && HERO != null)
-                                    {
-                                        trapChallenge = true;
-                                        levelMapNotChallenge = USER.game.curLevel.map;
-                                        try
-                                        {
-                                            LevelTransition.Class.gotoSub.Invoke(levelMapChallenge, null);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Log.Error($"Trap_FlawlessChallenge error : {ex}");
-                                        }
-                                    }
-                                    break;
-                                default:
-                                    Log.Warning("=== Not implemented yet ===");
-                                    break;
-                            }
-                        }
+                        GiveTrapItem(itemName, true);
                         AddToHistory(LogName);
                     }
                     return false;
@@ -432,6 +386,59 @@ namespace DeadCellsArchipelago {
                 return true;
             }
             return false;
+        }
+
+        public static void GiveTrapItem(string itemName, bool canSendTrapLinkFromCall)
+        {
+            if (!disableTrapOnEndBoss)
+            {
+                switch (itemName)
+                {
+                    case "Trap_Curse":
+                        if(HERO != null)
+                        {
+                            bool hidePopup = false;
+                            bool useAltSound = false;
+                            HERO.curse(50, "Archipelago Curse Trap".AsHaxeString(), new Ref<bool>(ref hidePopup), new Ref<bool>(ref useAltSound));
+                        }
+                        break;
+                    case "Trap_SpawnElite":
+                        EliteTrap();
+                        break;
+                    case "Trap_RemoveGold":
+                        if(USER != null && HERO != null)
+                        {
+                            bool noStats = false;
+                            HERO.substractMoney(USER.game.data.money, new Ref<bool>(ref noStats));
+                        }
+                        break;
+                    case "Trap_BreakWeapon":
+                        RemoveARandomWeapon();
+                        break;
+                    case "Trap_InvertControls":
+                        InitSwitchControls();
+                        break;
+                    case "Trap_FlawlessChallenge":
+                        if (levelMapChallenge != null && USER != null && HERO != null)
+                        {
+                            trapChallenge = true;
+                            levelMapNotChallenge = USER.game.curLevel.map;
+                            try
+                            {
+                                LevelTransition.Class.gotoSub.Invoke(levelMapChallenge, null);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error($"Trap_FlawlessChallenge error : {ex}");
+                            }
+                        }
+                        break;
+                    default:
+                        Log.Warning("=== Not implemented yet ===");
+                        break;
+                }
+            }
+            if (canSendTrapLinkFromCall && ARCHIPELAGO != null && ARCHIPELAGO.trapLinkManager != null) ARCHIPELAGO.trapLinkManager.SendTrapLink(itemName);
         }
 
         public static void OnPickItem(Hook_Hero.orig_pickItem orig, Hero self, Entity from, InventItem i, HlAction<bool> onComplete)

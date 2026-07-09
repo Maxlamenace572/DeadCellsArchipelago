@@ -19,6 +19,7 @@ namespace DeadCellsArchipelago
         private ArchipelagoSession? session;
         public DeathLinkManager? deathLinkManager;
         public HealthLinkManager? healthLinkManager;
+        public TrapLinkManager? trapLinkManager;
         public bool isConnected;
         
         // Configurate connection
@@ -75,7 +76,6 @@ namespace DeadCellsArchipelago
                     Log.Information($"=== Connected to Archipelago ! Slot #{success.Slot} ===");
                     
                     var slotData = success.SlotData;
-                    //EnergyKey += success.Team;
 
                     if (slotData.ContainsKey("boss_cells")) bscOption = Convert.ToInt32(slotData["boss_cells"]);
                     if (slotData.ContainsKey("death_link")) deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
@@ -93,8 +93,10 @@ namespace DeadCellsArchipelago
 
                     if (deathLinkEnabled >= 0)
                     {
-                        deathLinkManager = new DeathLinkManager(session, "testGroup", disableDeathLinkForAspects);
+                        deathLinkManager = new DeathLinkManager(session, "", disableDeathLinkForAspects);
                     }
+
+                    trapLinkManager = new TrapLinkManager(session, "");
 
                     //healthLinkManager = new HealthLinkManager(session, "testGroup");
                 }

@@ -1,5 +1,3 @@
-using Serilog;
-
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.HeroManager;
 
@@ -10,17 +8,21 @@ namespace DeadCellsArchipelago
         private static List<List<int>> pendingHealthLink = [];
         private static List<int> pendingHealthCurseLink = [];
         public static bool healthLinkDeath = false;
+        private static List<TrapData> pendingTrapCurseLink = [];
 
         public static void AddHealthLinkToQueue(List<int> healthLinkValues)
         {
-            //Log.Information($"=== Health Link received from Archipelago: {healthLinkValues[0]} {healthLinkValues[1]} ===");
             pendingHealthLink.Add(healthLinkValues);
         }
 
         public static void AddHealthCurseLinkToQueue(int curseValue)
         {
-            //Log.Information($"=== Curse Health Link received from Archipelago: {curseValue} ===");
             pendingHealthCurseLink.Add(curseValue);
+        }
+
+        public static void AddTrapLinkToQueue(string itemName, bool canSendTrapLinkFromCall)
+        {
+            pendingTrapCurseLink.Add(new TrapData(itemName, canSendTrapLinkFromCall));
         }
 
         public static void DoHealthLinkInQueue()
@@ -51,6 +53,15 @@ namespace DeadCellsArchipelago
                 healthLinkDeath = false;
             }
         }
+        
+        public static void DoTrapLinkInQueue()
+        {
+            if(IsTrapLinkQueueEmpty()) return;
+
+            TrapData trap = pendingTrapCurseLink[0];
+            GiveTrapItem(trap.itemName, trap.canSendTrapLinkFromCall);
+            pendingTrapCurseLink.RemoveAt(0);
+        }
 
         public static bool IsHealthLinkQueueEmpty()
         {
@@ -62,11 +73,17 @@ namespace DeadCellsArchipelago
             return pendingHealthCurseLink.Count == 0;
         }
 
+        public static bool IsTrapLinkQueueEmpty()
+        {
+            return pendingTrapCurseLink.Count == 0;
+        }
+
         public static void DoEveryLinks()
         {
             DoDeathHealthLink();
             DoHealthLinkInQueue();
             DoHealthCurseLinkInQueue();
+            DoTrapLinkInQueue();
         }
 
         public static void LoadLinks()
