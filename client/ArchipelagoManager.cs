@@ -41,6 +41,16 @@ namespace DeadCellsArchipelago
         public bool theQueenAndTheSea;
         public bool returnToCastlevania;
         public string? version;
+        public string deathLinkGroup = "";
+        public bool deathTrap;
+        public bool deathTrapLink;
+        public bool damageLink;
+        public string damageLinkGroup = "";
+        public bool healthLink;
+        public string healthLinkGroup = "";
+        public bool healthCurseLink;
+        public bool trapLink;
+        public string trapLinkGroup = "";
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -90,21 +100,24 @@ namespace DeadCellsArchipelago
                     if (slotData.ContainsKey("dlc_the_queen_and_the_sea")) theQueenAndTheSea = Convert.ToBoolean(slotData["dlc_the_queen_and_the_sea"]);
                     if (slotData.ContainsKey("dlc_return_to_castlevania")) returnToCastlevania = Convert.ToBoolean(slotData["dlc_return_to_castlevania"]);
 
-                    if (slotData.ContainsKey("apworld_version")) version = Convert.ToString(slotData["apworld_version"]);
-                    if (version == null) version = "-0.1.1";
+                    if (slotData.ContainsKey("apworld_version")) version = Convert.ToString(slotData["apworld_version"]) ?? "-0.1.1";
+
+                    if (slotData.ContainsKey("death_link_group")) deathLinkGroup = Convert.ToString(slotData["death_link_group"]) ?? "";
+                    if (slotData.ContainsKey("death_trap")) deathTrap = Convert.ToBoolean(slotData["death_trap"]);
+                    if (slotData.ContainsKey("death_trap_link")) deathTrapLink = Convert.ToBoolean(slotData["death_trap_link"]);
+                    if (slotData.ContainsKey("damage_link")) damageLink = Convert.ToBoolean(slotData["damage_link"]);
+                    if (slotData.ContainsKey("damage_link_group")) damageLinkGroup = Convert.ToString(slotData["damage_link_group"]) ?? "";
+                    if (slotData.ContainsKey("health_link")) healthLink = Convert.ToBoolean(slotData["health_link"]);
+                    if (slotData.ContainsKey("health_link_group")) healthLinkGroup = Convert.ToString(slotData["health_link_group"]) ?? "";
+                    if (slotData.ContainsKey("health_curse_link")) healthCurseLink = Convert.ToBoolean(slotData["health_curse_link"]);
+                    if (slotData.ContainsKey("trap_link")) trapLink = Convert.ToBoolean(slotData["trap_link"]);
+                    if (slotData.ContainsKey("trap_link_group")) trapLinkGroup = Convert.ToString(slotData["trap_link_group"]) ?? "";
 
                     energyLinkManager = new EnergyLinkManager(session);
-
-                    if (deathLinkEnabled >= 0)
-                    {
-                        //deathLinkManager = new DeathLinkManager(session, "", disableDeathLinkForAspects, true, true);
-                    }
-
-                    damageLinkManager = new DamageLinkManager(session, "testGroup");
-
-                    //healthLinkManager = new HealthLinkManager(session, "testGroup");
-                    
-                    //trapLinkManager = new TrapLinkManager(session, "");
+                    if (deathLinkEnabled >= 0) deathLinkManager = new DeathLinkManager(session, deathLinkGroup, disableDeathLinkForAspects, deathTrap, deathTrapLink);
+                    if (damageLink) damageLinkManager = new DamageLinkManager(session, damageLinkGroup);
+                    if (healthLink) healthLinkManager = new HealthLinkManager(session, healthLinkGroup, healthCurseLink);
+                    if (trapLink) trapLinkManager = new TrapLinkManager(session, trapLinkGroup);
                 }
                 else if (result is LoginFailure failure)
                 {

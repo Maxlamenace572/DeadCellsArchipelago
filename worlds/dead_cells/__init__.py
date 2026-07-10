@@ -29,7 +29,7 @@ from .base_classes import DeadCellsItem
 from BaseClasses import LocationProgressType
 
 # version
-version = "0.1.5"
+version = "0.1.6"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Items that are always base-game weapons (no blueprint required)
@@ -528,7 +528,17 @@ class DeadCellsWorld(World):
             "include_cosmetics":         bool(self.options.include_cosmetics.value),
             "include_base_weapons":      bool(self.options.include_base_weapons.value),
             "trap_percentage":           self.options.trap_percentage.value,
-            "apworld_version":           version
+            "apworld_version":           version,
+            "death_link_group":          str(self.options.death_link_group.value),
+            "death_trap":                bool(self.options.death_trap.value),
+            "death_trap_link":           bool(self.options.death_trap_link.value),
+            "damage_link":               bool(self.options.damage_link.value),
+            "damage_link_group":         str(self.options.damage_link_group.value),
+            "health_link":               bool(self.options.health_link.value),
+            "health_link_group":         str(self.options.health_link_group.value),
+            "health_curse_link":         bool(self.options.health_curse_link.value),
+            "trap_link":                 bool(self.options.trap_link.value),
+            "trap_link_group":           str(self.options.trap_link_group.value)
         }    
 
     def get_filler_item_name(self) -> str:

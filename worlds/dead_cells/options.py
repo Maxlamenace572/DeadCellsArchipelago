@@ -8,7 +8,7 @@ These appear in the player's YAML configuration file.
 
 from dataclasses import dataclass
 from Options import (
-    Toggle, DeathLink, Range, PerGameCommonOptions,
+    Toggle, DeathLink, Range, PerGameCommonOptions, FreeText
 )
 
 
@@ -155,13 +155,22 @@ class DeadCellsDeathLink(Range):
     When enabled, dying in Dead Cells sends a death signal to all other
     players with Death Link enabled in the multiworld session.
     Receiving a death signal will kill your current run when set to 0.
-    With a positve value, give you that amount in curses instead of killing your run
+    With a positive value, give you that amount in curses instead of killing your run
     Negative values disable this option.
     """
     display_name = "Death/Curses Link"
     range_start = -1
     range_end = 500
     default = -1
+
+
+class DeathLinkGroupName(FreeText):
+    """
+    You join a group, sending and receiving death links only to people in the
+    same group (case sensitive). Leaving it blank will put you in the general group.
+    """
+    display_name = "Death Link Group"
+    default = ""
 
 
 class DisableDeathLinkForAspects(Toggle):
@@ -172,6 +181,90 @@ class DisableDeathLinkForAspects(Toggle):
     """
     display_name = "Disable Death Link for Aspects"
     default = 1
+
+    
+class DeathTrap(Toggle):
+    """
+    Override Death/Curses Link. When enabled, it will send a death link upon death
+    and will give you a random trap upon receiving a death link.
+    """
+    display_name = "Death Trap"
+    default = 0
+
+
+class DeathTrapLinkTrigger(Toggle):
+    """
+    Sub-option for Death Trap. When enabled, it will send a trap link upon
+    receiving a death trap.
+    """
+    display_name = "Death Trap Link Trigger"
+    default = 0
+
+
+class DeadCellsDamageLink(Toggle):
+    """
+    When enabled, taking damage in Dead Cells sends damage points to all
+    other players with Damage Link enabled in the multiworld session.
+    The rate is 16 damage points for 1% health.
+    """
+    display_name = "Damage Link"
+    default = 0
+
+
+class DamageLinkGroupName(FreeText):
+    """
+    You join a group, sending and receiving damage links only to people in the
+    same group (case sensitive). Leaving it blank will put you in the general group.
+    """
+    display_name = "Damage Link Group"
+    default = ""
+
+
+class DeadCellsHealthLink(Toggle):
+    """
+    When enabled, life is shared between all other Dead Cells players with Health
+    Link enabled in the multiworld session. Taking damage, healing, and recovery are
+    shared based on percentage. Dying will kill other players.
+    """
+    display_name = "Health Link"
+    default = 0
+
+
+class HealthLinkGroupName(FreeText):
+    """
+    You join a group, sending and receiving health links only to people in the
+    same group (case sensitive). Leaving it blank will put you in the general group.
+    """
+    display_name = "Health Link Group"
+    default = ""
+
+
+class DeadCellsHealthCurseLink(Toggle):
+    """
+    Sub-option for Health Link. When enabled, curses too are shared between players.
+    """
+    display_name = "Health Curse Link"
+    default = 0
+
+
+class DeadCellsTrapLink(Toggle):
+    """
+    When enabled, traps are shared with all other Dead Cells players who have Trap
+    Link enabled in the multiworld session. The same kind of trap is sent to every
+    other player upon receiving one.
+    """
+    display_name = "Trap Link"
+    default = 0
+
+
+class TrapLinkGroupName(FreeText):
+    """
+    You join a group, sending and receiving trap links only to people in the
+    same group (case sensitive). Leaving it blank will put you in the general group.
+    """
+    display_name = "Trap Link Group"
+    default = ""
+
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -210,7 +303,20 @@ class DeadCellsOptions(PerGameCommonOptions):
 
     # Multiplayer
     death_link: DeadCellsDeathLink
+    death_link_group: DeathLinkGroupName
     death_link_aspect: DisableDeathLinkForAspects
+    death_trap: DeathTrap
+    death_trap_link: DeathTrapLinkTrigger
+    
+    damage_link: DeadCellsDamageLink
+    damage_link_group: DamageLinkGroupName
+    
+    health_link: DeadCellsHealthLink
+    health_link_group: HealthLinkGroupName
+    health_curse_link: DeadCellsHealthCurseLink
+    
+    trap_link: DeadCellsTrapLink
+    trap_link_group: TrapLinkGroupName
     
     # Gameplay
     respawn_up: RespawnUpScroll

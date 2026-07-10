@@ -14,11 +14,11 @@ namespace DeadCellsArchipelago
         private readonly IArchipelagoSession session;
         public bool shareCurses;
 
-        public HealthLinkManager(IArchipelagoSession session, string group)
+        public HealthLinkManager(IArchipelagoSession session, string group, bool shareCurses)
         {
             HealthKey += group;
             this.session = session;
-            shareCurses = true;
+            this.shareCurses = shareCurses;
             
             JObject values = new()
             {
