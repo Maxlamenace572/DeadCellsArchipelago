@@ -100,13 +100,13 @@ namespace DeadCellsArchipelago
 
         public List<int> GetHealthStorage()
         {
-            JToken values = session.DataStorage[Scope.Game, HealthKey];
+            JToken values = session.DataStorage[Scope.Game, HealthKey].GetAsync().Result;
             return [values["currentHealth"]!.Value<int>(), values["maxHealth"]!.Value<int>()];
         }
 
         public int GetHealthCurseStorage()
         {
-            JToken values = session.DataStorage[Scope.Game, HealthKey + "Curses"];
+            JToken values = session.DataStorage[Scope.Game, HealthKey + "Curses"].GetAsync().Result;
             return values["currentCurses"]!.Value<int>();
         }
     }

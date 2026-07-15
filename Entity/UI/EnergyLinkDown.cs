@@ -111,7 +111,7 @@ namespace DeadCellsArchipelago {
         {
             if (isSend)
             {
-                if(ARCHIPELAGO == null) return;
+                if(ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return;
                 int res = Math.Min(energyLink!.GetCellValue(), HERO!.cells);
                 AddCells(-res);
                 cellsNumber?.set_text($" {HERO!.cells}".AsHaxeString());
@@ -119,7 +119,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                if(ARCHIPELAGO == null) return;
+                if(ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return;
                 ARCHIPELAGO.energyLinkManager!.WithdrawCells(energyLink!.GetCellValue());
             }
         }

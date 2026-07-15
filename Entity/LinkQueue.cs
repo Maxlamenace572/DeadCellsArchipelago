@@ -142,7 +142,7 @@ namespace DeadCellsArchipelago
         public static void LoadLinks()
         {
             if (HERO == null) return;
-            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null)
+            if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null)
             {
                 List<int> healthValues = ARCHIPELAGO.healthLinkManager.GetHealthStorage();
                 UpdateHeroHealthLink(healthValues[0], healthValues[1]);

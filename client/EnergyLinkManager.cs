@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using Serilog;
 
 using static DeadCellsArchipelago.LinkQueue;
+using static DeadCellsArchipelago.ItemManager;
 
 namespace DeadCellsArchipelago
 {
@@ -113,8 +114,8 @@ namespace DeadCellsArchipelago
 
         public int ShowStorageNumberCells()
         {
-            if (session == null) return 0;
-            JToken value = session.DataStorage[EnergyKey];
+            if (session == null || ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return 0;
+            JToken value = session.DataStorage[EnergyKey].GetAsync().Result;
             return (int)(value.ToObject<long>() / energyPerCell);
         }
 

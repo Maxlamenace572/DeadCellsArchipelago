@@ -438,7 +438,7 @@ namespace DeadCellsArchipelago {
                         break;
                 }
             }
-            if (canSendTrapLinkFromCall && ARCHIPELAGO != null && ARCHIPELAGO.trapLinkManager != null) ARCHIPELAGO.trapLinkManager.SendTrapLink(itemName);
+            if (canSendTrapLinkFromCall && ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.trapLinkManager != null) ARCHIPELAGO.trapLinkManager.SendTrapLink(itemName);
         }
 
         public static void OnPickItem(Hook_Hero.orig_pickItem orig, Hero self, Entity from, InventItem i, HlAction<bool> onComplete)

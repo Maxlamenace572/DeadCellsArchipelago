@@ -35,7 +35,7 @@ namespace DeadCellsArchipelago {
             orig(self);
             heroJustDead = false;
             aspectsToIter = 0;
-            if(ARCHIPELAGO != null && ARCHIPELAGO.deathLinkManager != null && !deathLinkReceived)
+            if(ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.deathLinkManager != null && !deathLinkReceived)
             {
                 ARCHIPELAGO.deathLinkManager.SendDeathLink();
             }
@@ -219,8 +219,8 @@ namespace DeadCellsArchipelago {
         public static void OnHeroOnDamage(Hook_Hero.orig_onDamage orig, Hero self, AttackData a)
         {
             orig(self, a);
-            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
-            if (ARCHIPELAGO != null && ARCHIPELAGO.damageLinkManager != null)
+            if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.damageLinkManager != null)
             {
                 float percentHpLost = a.finalDmg / (float) HERO!.maxLife * 100f;
                 ARCHIPELAGO.damageLinkManager.OnPlayerDamaged(percentHpLost);
@@ -230,7 +230,7 @@ namespace DeadCellsArchipelago {
         public static void OnHeroHeal(Hook_Hero.orig_heal orig, Hero self, int v)
         {
             orig(self, v);
-            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
         }
 
         public static void UpdateHeroHealthLink(int otherCurrentHealth, int otherMaxHealth)
@@ -258,14 +258,14 @@ namespace DeadCellsArchipelago {
                 oneMore = true;
             }
             orig(self, n);
-            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null && ARCHIPELAGO.healthLinkManager.shareCurses && originalCurse) ARCHIPELAGO.healthLinkManager.UpdateCurseStorage(HERO!.curseCounter);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null && ARCHIPELAGO.healthLinkManager.shareCurses && originalCurse) ARCHIPELAGO.healthLinkManager.UpdateCurseStorage(HERO!.curseCounter);
             if (oneMore) HERO!.reduceCurse(1);
         }
 
         public static void OnHeroCurse(Hook_Hero.orig_curse orig, Hero self, int count, dc.String reason, Ref<bool> hidePopup, Ref<bool> useAltSound)
         {
             orig(self, count, reason, hidePopup, useAltSound);
-            if (ARCHIPELAGO != null && ARCHIPELAGO.healthLinkManager != null && ARCHIPELAGO.healthLinkManager.shareCurses && originalCurse) ARCHIPELAGO.healthLinkManager.UpdateCurseStorage(HERO!.curseCounter);
+            if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null && ARCHIPELAGO.healthLinkManager.shareCurses && originalCurse) ARCHIPELAGO.healthLinkManager.UpdateCurseStorage(HERO!.curseCounter);
         }
 
         public static void UpdateHeroHealthCurseLink(int curseValue)
