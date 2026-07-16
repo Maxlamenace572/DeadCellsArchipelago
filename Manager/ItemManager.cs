@@ -957,5 +957,12 @@ namespace DeadCellsArchipelago {
             ];
             return trap[new Random().Next(0, trap.Count)];
         }
+
+        public static void OnHiddenTrigger(Hook_HiddenTrigger.orig_trigger orig, HiddenTrigger self, Entity by)
+        {
+            if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("ShipwreckKey")) USER?.story.counters.set("seenStaphyCine".AsHaxeString(), 0);
+            orig(self, by);
+            if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("ShipwreckKey")) USER?.story.counters.set("seenStaphyCine".AsHaxeString(), 1);
+        }
     }
 }
