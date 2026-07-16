@@ -294,7 +294,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     "Giant Comb": {
         "id": 0x0084, "region": "Checks", "type": "item_no_blueprint",
         "dlc": "", "min_bc": 0, "item": "Comb",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
     },
     "Berserker": {
         "id": 0x0085, "region": "Checks", "type": "blueprint_enemy",
