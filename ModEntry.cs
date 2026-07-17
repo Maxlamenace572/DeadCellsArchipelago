@@ -21,6 +21,7 @@ using static DeadCellsArchipelago.EnemyManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.UnlockItemManager;
 using static DeadCellsArchipelago.LinkQueue;
+using static DeadCellsArchipelago.ModAssetManager;
 using dc.pr;
 using dc.level;
 using dc.tool;
@@ -50,6 +51,7 @@ using dc.ui.icon;
 using dc.en.mob;
 using dc.level.lore;
 using dc.tool.atk;
+using dc.spine;
 
 
 namespace DeadCellsArchipelago{
@@ -194,6 +196,10 @@ namespace DeadCellsArchipelago{
             Hook_Entity.popError += OnPopError;
             Hook_HiddenTrigger.trigger += OnHiddenTrigger;
             Log.Information("=== Archipelago hooks loaded ! ===");
+            //SaveChoice
+            Save.Class.NUM_SLOTS = 99;
+            //Log.Information($"{Save.Class.NUM_SLOTS}");
+            
             //LogManager
             //BrBlueprint
             //BossRushData
@@ -331,14 +337,6 @@ namespace DeadCellsArchipelago{
             {
                 Log.Error($"=== Erreur sauvegarde : {ex.Message} ===");
             }
-        }
-        
-        private string GetSaveFilePath(int slot)
-        {
-            string saveDir = System.IO.Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "data");
-            
-            Directory.CreateDirectory(saveDir);
-            return System.IO.Path.Combine(saveDir, $"archipelagoUserId_{slot}.json");
         }
 
         private ArrayObj OnLevelGenGenerate(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, Hashlink.Virtuals.virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)

@@ -1,6 +1,8 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using static DeadCellsArchipelago.ModAssetManager;
+
 namespace DeadCellsArchipelago {
     public class ArchipelagoSaveData
     {
@@ -169,14 +171,6 @@ namespace DeadCellsArchipelago {
             }
 
             File.WriteAllText(savePath, jObject.ToString(Formatting.Indented));
-        }
-
-        private string GetSaveFilePath(int slot)
-        {
-            string saveDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "data");
-            
-            Directory.CreateDirectory(saveDir);
-            return Path.Combine(saveDir, $"archipelagoUserId_{slot}.json");
         }
 
         public int NumberOfBossRuneReceived()
