@@ -1,12 +1,7 @@
 using dc;
 using dc.h2d;
 using dc.h2d.col;
-using dc.level.lore;
 using dc.tool;
-using dc.tool.weap.dual;
-using dc.ui;
-using dc.ui.hud;
-using dc.ui.icon;
 using dc.ui.pause;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
@@ -59,7 +54,18 @@ namespace DeadCellsArchipelago {
         public static int topIndex = -1;
         public static int energyLinkIndex = -1;
 
-        public static void OnUpdateDefaultPause(Hook_DefaultPause.orig_update orig, DefaultPause self)
+        public static void InitializePauseHooks()
+        {
+            Log.Information("[AP] Loading Pause Hooks...");
+
+            Hook_DefaultPause.update += OnUpdateDefaultPause;
+            Hook_Inventory.swapWeapons += OnSwapWeaponsApMenu;
+            Hook_Inventory.swapSkills += OnSwapSkillsApMenu;
+
+            Log.Information("[AP] Pause Hooks loaded");
+        }
+
+        private static void OnUpdateDefaultPause(Hook_DefaultPause.orig_update orig, DefaultPause self)
         {
             screenScale = dc.libs.Process.Class.CUSTOM_STAGE_WIDTH / 1920.0;
             defaultPause = self;
@@ -996,12 +1002,12 @@ namespace DeadCellsArchipelago {
             energyLink = null;
         }
 
-        public static void OnSwapWeaponsApMenu(Hook_Inventory.orig_swapWeapons orig, Inventory self)
+        private static void OnSwapWeaponsApMenu(Hook_Inventory.orig_swapWeapons orig, Inventory self)
         {
             skillShopMenu.SwapWeaponsApMenu(orig, self);
         }
 
-        public static void OnSwapSkillsApMenu(Hook_Inventory.orig_swapSkills orig, Inventory self)
+        private static void OnSwapSkillsApMenu(Hook_Inventory.orig_swapSkills orig, Inventory self)
         {
             skillShopMenu.SwapSkillsApMenu(orig, self);
         }

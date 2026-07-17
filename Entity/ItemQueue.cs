@@ -1,5 +1,4 @@
 using Serilog;
-
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.BlueprintManager;
@@ -16,7 +15,7 @@ namespace DeadCellsArchipelago
 
         public static void AddItemToQueue(string itemName)
         {
-            Log.Information($"=== Item received from Archipelago: {itemName} ===");
+            Log.Information($"[AP] Item received from Archipelago: {itemName}");
             pendingItems.Add(itemName);
         }
 

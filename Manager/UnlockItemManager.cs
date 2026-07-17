@@ -25,8 +25,10 @@ namespace DeadCellsArchipelago {
         //here should be every item that decided not to do as the others, and have a hasUnlockedItem on them
         private static bool brGetBiomeVisitCount = false;
 
-        public static void UnlockItemHooks()
+        public static void InitializeUnlockItemHooks()
         {
+            Serilog.Log.Information("[AP] Loading Special Unlock Hooks...");
+            
             Hook_Beheaded.displayCursePopup += OnDisplayCursePopup;
             Hook_Shipwreck.canGenerateThisLoreRoom += OnCanGenerateThisLoreRoomShipwreck;
             Hook_Shipwreck.buildMainRooms += OnBuildMainRoomsShipwreck;
@@ -57,16 +59,18 @@ namespace DeadCellsArchipelago {
             Hook_PurpleGarden.buildGardenLoreRooms += OnBuildGardenLoreRooms;
             Hook_MariaRoom.unlockCatExaminable += OnUnlockCatExaminable;
             Hook_MariaRoom.onCreateExaminable += OnOnCreateExaminable;
+
+            Serilog.Log.Information("[AP] Special Unlock Hooks loaded");
         }
 
-        public static void OnDisplayCursePopup(Hook_Beheaded.orig_displayCursePopup orig, Beheaded self, int count, dc.String reason, Ref<bool> hidePopup)
+        private static void OnDisplayCursePopup(Hook_Beheaded.orig_displayCursePopup orig, Beheaded self, int count, dc.String reason, Ref<bool> hidePopup)
         {//BlackHoleWhite
             useModdedHasUnlock = true;
             orig(self, count, reason, hidePopup);
             useModdedHasUnlock = false;
         }
 
-        public static bool OnCanGenerateThisLoreRoomShipwreck(Hook_Shipwreck.orig_canGenerateThisLoreRoom orig, Shipwreck self, virtual_arc_examinables_fxEmitters_Intention_levels_onlyUseOnce_rarity_requiredLore_requiredMeta_room_roomLoot_sprites_status_structMode_ lore)
+        private static bool OnCanGenerateThisLoreRoomShipwreck(Hook_Shipwreck.orig_canGenerateThisLoreRoom orig, Shipwreck self, virtual_arc_examinables_fxEmitters_Intention_levels_onlyUseOnce_rarity_requiredLore_requiredMeta_room_roomLoot_sprites_status_structMode_ lore)
         {//Trident (part1)
             useModdedHasUnlock = true;
             var res = orig(self, lore);
@@ -253,7 +257,6 @@ namespace DeadCellsArchipelago {
 
             if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
             else self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 0);
-            
         }
 
         private static int? OnGetBiomeVisitCount(Hook_Game.orig_getBiomeVisitCount orig, Game self, dc.String id)

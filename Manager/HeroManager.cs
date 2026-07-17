@@ -1,8 +1,6 @@
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.PokeManager;
-using static DeadCellsArchipelago.ArchipelagoManager;
 using dc.en;
-using Serilog;
 using ModCore.Utilities;
 using HaxeProxy.Runtime;
 using dc.ui;
@@ -11,6 +9,7 @@ using dc.hxd.res;
 using dc.tool;
 using dc.tool._Cooldown;
 using dc.tool.atk;
+using Serilog;
 
 namespace DeadCellsArchipelago {
     public static class HeroManager
@@ -28,10 +27,27 @@ namespace DeadCellsArchipelago {
         public static bool originalCurse = true;
         public static bool controlsInverted = false;
 
-        public static void OnHeroDie(Hook_Hero.orig_onDie orig, Hero self)
+        public static void InitializeHeroHooks()
+        {
+            Log.Information("[AP] Loading Hero Hooks...");
+
+            Hook__Confirmation.__constructor__ += OnRestart;
+            Hook_Hero.init += OnHeroInit;
+            Hook_Hero.onDie += OnHeroDie;
+            Hook_Hero.addCells += OnAddCells;
+            Hook_Controller.bind += OnBind;
+            Hook_Hero.hudInitItems += OnHudInitItems;
+            Hook_Hero.onDamage += OnHeroOnDamage;
+            Hook_Hero.heal += OnHeroHeal;
+            Hook_Hero.reduceCurse += OnHeroReduceCurse;
+            Hook_Hero.curse += OnHeroCurse;
+
+            Log.Information("[AP] Hero Hooks loaded");
+        }
+
+        private static void OnHeroDie(Hook_Hero.orig_onDie orig, Hero self)
         {
             heroJustDead = true;
-            Log.Warning("=== It's a death ==="); //test for reset and complete run (I want to do it on reset but not on complete), and what happend when he quit
             orig(self);
             heroJustDead = false;
             aspectsToIter = 0;
@@ -42,7 +58,7 @@ namespace DeadCellsArchipelago {
             ResetDataNewRun();
         }
 
-        public static void OnRestart(Hook__Confirmation.orig___constructor__ orig, Confirmation arg1, Process from, dc.String str, HlAction onValidate, HlAction onCancel, dc.String validateStr, dc.String cancelStr, Sound validSfx)
+        private static void OnRestart(Hook__Confirmation.orig___constructor__ orig, Confirmation arg1, Process from, dc.String str, HlAction onValidate, HlAction onCancel, dc.String validateStr, dc.String cancelStr, Sound validSfx)
         {
             if(from is DefaultPause)
             {
@@ -73,12 +89,10 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnHeroInit(Hook_Hero.orig_init orig, Hero self)
+        private static void OnHeroInit(Hook_Hero.orig_init orig, Hero self)
         {
             orig(self);
             HERO = self;
-            
-            Log.Information("=== Hero initialized ! ===");
         }
 
         public static void InitSwitchControls()
@@ -183,13 +197,13 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnAddCells(Hook_Hero.orig_addCells orig, Hero self, int v, Ref<bool> noStats)
+        private static void OnAddCells(Hook_Hero.orig_addCells orig, Hero self, int v, Ref<bool> noStats)
         {
             v *= 4;
             orig(self, v, noStats);
         }
 
-        public static void OnBind(Hook_Controller.orig_bind orig, Controller self, int k, int? padKeyA, int? padKeyB, int? padKeyC, int? keyboardKey, int? alternate1, int? alternate2, bool? forceBindings_normal)
+        private static void OnBind(Hook_Controller.orig_bind orig, Controller self, int k, int? padKeyA, int? padKeyB, int? padKeyC, int? keyboardKey, int? alternate1, int? alternate2, bool? forceBindings_normal)
         {
             if (forceBindings_normal == false)
             {
@@ -210,13 +224,13 @@ namespace DeadCellsArchipelago {
             orig(self, k, padKeyA, padKeyB, padKeyC, keyboardKey, alternate1, alternate2, forceBindings_normal);
         }
 
-        public static void OnHudInitItems(Hook_Hero.orig_hudInitItems orig, Hero self)
+        private static void OnHudInitItems(Hook_Hero.orig_hudInitItems orig, Hero self)
         {
             orig(self);
             ResetFrontPokebomb();
         }
 
-        public static void OnHeroOnDamage(Hook_Hero.orig_onDamage orig, Hero self, AttackData a)
+        private static void OnHeroOnDamage(Hook_Hero.orig_onDamage orig, Hero self, AttackData a)
         {
             orig(self, a);
             if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
@@ -227,7 +241,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnHeroHeal(Hook_Hero.orig_heal orig, Hero self, int v)
+        private static void OnHeroHeal(Hook_Hero.orig_heal orig, Hero self, int v)
         {
             orig(self, v);
             if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null) ARCHIPELAGO.healthLinkManager.UpdateHealthStorage(HERO!.life, HERO.maxLife);
@@ -247,7 +261,7 @@ namespace DeadCellsArchipelago {
             else HERO.life -= (int)(HERO.maxLife * (percentage / 100.0));
         }
 
-        public static void OnHeroReduceCurse(Hook_Hero.orig_reduceCurse orig, Hero self, int n)
+        private static void OnHeroReduceCurse(Hook_Hero.orig_reduceCurse orig, Hero self, int n)
         {
             bool oneMore = false;
             if (!originalCurse && HERO!.curseCounter == 0)
@@ -262,7 +276,7 @@ namespace DeadCellsArchipelago {
             if (oneMore) HERO!.reduceCurse(1);
         }
 
-        public static void OnHeroCurse(Hook_Hero.orig_curse orig, Hero self, int count, dc.String reason, Ref<bool> hidePopup, Ref<bool> useAltSound)
+        private static void OnHeroCurse(Hook_Hero.orig_curse orig, Hero self, int count, dc.String reason, Ref<bool> hidePopup, Ref<bool> useAltSound)
         {
             orig(self, count, reason, hidePopup, useAltSound);
             if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.healthLinkManager != null && ARCHIPELAGO.healthLinkManager.shareCurses && originalCurse) ARCHIPELAGO.healthLinkManager.UpdateCurseStorage(HERO!.curseCounter);

@@ -10,6 +10,7 @@ using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.RoomManager;
 using Newtonsoft.Json;
 using System.Text.Json;
+using Serilog;
 
 namespace DeadCellsArchipelago {
     public static class MainMenuManager
@@ -28,7 +29,20 @@ namespace DeadCellsArchipelago {
         public static double screenScale;
         public static bool newConnection = true;
 
-        public static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
+        public static void InitializeMainMenuHooks()
+        {
+            Log.Information("[AP] Loading Main Menu Hooks...");
+            
+            Hook_TitleScreen.mainMenu += OnMainMenu;
+            Hook_TitleScreen.onResize += OnOnResize;
+            Hook_TitleScreen.playMenu += OnPlayMenu;
+            Hook_Main.launchGame += OnLaunchGame;
+            Hook_LeaderboardPanel.set_visible += OnSetVisible;
+
+            Log.Information("[AP] Main Menu Hooks loaded");
+        }
+
+        private static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
             screenScale = dc.libs.Process.Class.CUSTOM_STAGE_WIDTH / 1920.0;
 
@@ -317,7 +331,7 @@ namespace DeadCellsArchipelago {
             orig(self);
         }
 
-        public static void OnOnResize(Hook_TitleScreen.orig_onResize orig, TitleScreen self)
+        private static void OnOnResize(Hook_TitleScreen.orig_onResize orig, TitleScreen self)
         {
             orig(self);
             if (apMenuContainer != null)
@@ -327,7 +341,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnPlayMenu(Hook_TitleScreen.orig_playMenu orig, TitleScreen self)
+        private static void OnPlayMenu(Hook_TitleScreen.orig_playMenu orig, TitleScreen self)
         {
             loadDataInPlayMenu = 1;
             orig(self);
@@ -336,7 +350,7 @@ namespace DeadCellsArchipelago {
             self.news.updateVisible();
         }
 
-        public static void OnLaunchGame(Hook_Main.orig_launchGame orig, Main self, LaunchMode mode, bool? tpause, double? fadeOutS)
+        private static void OnLaunchGame(Hook_Main.orig_launchGame orig, Main self, LaunchMode mode, bool? tpause, double? fadeOutS)
         {
             screenBitmap = null;
             apMenuContainer = null;
@@ -399,7 +413,7 @@ namespace DeadCellsArchipelago {
             File.WriteAllText(GetConfFilePath(), json);
         }
 
-        public static bool OnSetVisible(Hook_LeaderboardPanel.orig_set_visible orig, LeaderboardPanel self, bool v)
+        private static bool OnSetVisible(Hook_LeaderboardPanel.orig_set_visible orig, LeaderboardPanel self, bool v)
         {
             return false;
         }

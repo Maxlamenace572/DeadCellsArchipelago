@@ -1,7 +1,7 @@
-using dc.en;
 using dc.level;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
+using Serilog;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuneManager;
 
@@ -10,6 +10,29 @@ namespace DeadCellsArchipelago {
     {
         public static bool changeNextCallDmgTier = false;
         public static bool changeNextCallLifeTier = false;
+
+        public static void InitializeEnemyHooks()
+        {
+            Log.Information("[AP] Loading Enemy Hooks...");
+
+            dc.en.Hook_Mob.onDie += OnOnDie;
+            Hook_LootGen.generateLootOnMobs += OnGenerateLootOnMobs;
+            Hook_MobsGen.getLifeTier += OnGetLifeTier;
+            Hook_MobsGen.getDmgTier += OnGetDmgTier;
+            
+            Log.Information("[AP] Enemy Hooks loaded");
+        }
+
+        private static void OnOnDie(dc.en.Hook_Mob.orig_onDie orig, dc.en.Mob self)
+        {
+            orig(self);
+
+            int randomNumber = new Random().Next(1, 1001);
+            if (randomNumber == 1)
+            {
+                DropItemToPlayer("TimeDistorsion");
+            }
+        }
 
         public static void SpawnMobOnPlayer(string id, bool elite, bool anger)
         {
@@ -49,7 +72,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnGenerateLootOnMobs(dc.level.Hook_LootGen.orig_generateLootOnMobs orig, dc.level.LootGen self)
+        private static void OnGenerateLootOnMobs(dc.level.Hook_LootGen.orig_generateLootOnMobs orig, dc.level.LootGen self)
         {
             useOriginalHasPermanentItem = false;
             orig(self);
@@ -76,13 +99,13 @@ namespace DeadCellsArchipelago {
             return 10;
         }
 
-        public static int OnGetLifeTier(Hook_MobsGen.orig_getLifeTier orig, MobsGen self, LevelMap map, Room room, int levelMaxDist)
+        private static int OnGetLifeTier(Hook_MobsGen.orig_getLifeTier orig, MobsGen self, LevelMap map, Room room, int levelMaxDist)
         {
             if (changeNextCallLifeTier) return orig(self, map, room, levelMaxDist) + GetDailyLife();
             return orig(self, map, room, levelMaxDist);
         }
 
-        public static int OnGetDmgTier(Hook_MobsGen.orig_getDmgTier orig, MobsGen self, LevelMap map, Room room, int levelMaxDist)
+        private static int OnGetDmgTier(Hook_MobsGen.orig_getDmgTier orig, MobsGen self, LevelMap map, Room room, int levelMaxDist)
         {
             if (changeNextCallDmgTier) return orig(self, map, room, levelMaxDist) + GetDailyDmg();
             return orig(self, map, room, levelMaxDist);

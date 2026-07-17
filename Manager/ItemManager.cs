@@ -4,24 +4,17 @@ using dc;
 using dc.cine;
 using dc.en;
 using dc.en.inter;
-using dc.hl.types;
-using dc.hxd;
-using dc.level;
-using dc.pr;
 using dc.tool;
 using dc.ui;
-using dc.ui.hud;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
 using Serilog;
 using static dc.tool.InventItemKind;
-
 using static DeadCellsArchipelago.EnemyManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.RoomManager;
 using static DeadCellsArchipelago.BlueprintManager;
 using static DeadCellsArchipelago.PokeManager;
-using static DeadCellsArchipelago.TrapLinkManager;
 
 namespace DeadCellsArchipelago {
     public static class ItemManager
@@ -45,6 +38,24 @@ namespace DeadCellsArchipelago {
         public static List<string> History = [];
         public static bool disableTrapOnEndBoss = false;
         public static bool useModdedHasUnlock = false;
+
+        public static void InitializeItemHooks()
+        {
+            Log.Information("[AP] Loading Item Hooks...");
+
+            Hook_ItemMetaManager.revealAllBaseItems += ReallyRevealAllBaseItems;
+            Hook_Hero.pickItem += OnPickItem;
+            Hook_ItemMetaManager.unlockItem += OnUnlockItem;
+            Hook_ItemMetaManager.revealItem += OnRevealItem;
+            Hook_ItemMetaManager.canInvestOnItem += OnCanInvestOnItem;
+            Hook_CollectorPanel.userFilter += OnUserFilter;
+            Hook_ItemMetaManager.countUnlockedItems += OnCountUnlockedItems;
+            Hook_ItemMetaManager.investOnItemProgress += OnInvestOnItemProgress;
+            Hook_ItemMetaManager.hasUnlockedItem += OnHasUnlockedItem;
+            Hook_HiddenTrigger.trigger += OnHiddenTrigger;
+            
+            Log.Information("[AP] Item Hooks loaded");
+        }
 
         public static void InitLists()
         {
@@ -79,70 +90,44 @@ namespace DeadCellsArchipelago {
         //Same for using Weapon or Actives without the said uses implemented.
         public static void DropItemToPlayer(string itemName)
         {
-            if (HERO != null) {
-                try
-                {
-                    InventItem? inventItem = CreateInventItemById(itemName);
+            if (HERO == null) return;
 
-                    if (inventItem != null) {
-                        Log.Information($"=== Item {itemName} Created ===");
-                        bool inArmoryValue = false;
-                        ItemDrop itemDrop = new ItemDrop(
-                            HERO._level,
-                            HERO.cx,
-                            HERO.cy,
-                            inventItem,
-                            true,
-                            new Ref<bool>(ref inArmoryValue)
-                        );
+            InventItem? inventItem = CreateInventItemById(itemName);
 
-                        itemDrop.init();
-                        itemDrop.onDropAsLoot();
-                        itemDrop.dx = HERO.dx;
-                        
-                        Log.Information("=== Item Successfully Dropped ! ===");
-                    } else
-                    {
-                        Log.Error($"=== Item {itemName} could not be created ===");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"=== Error: {ex.Message} ===");
-                    Log.Error($"Stack trace: {ex.StackTrace}");
-                }
-            }
-            else
+            if (inventItem != null)
             {
-                Log.Error("=== Cannot log inventory, hero is null ===");
+                Log.Information($"[AP] Item {itemName} Created");
+                bool inArmoryValue = false;
+                ItemDrop itemDrop = new ItemDrop(
+                    HERO._level,
+                    HERO.cx,
+                    HERO.cy,
+                    inventItem,
+                    true,
+                    new Ref<bool>(ref inArmoryValue)
+                );
+
+                itemDrop.init();
+                itemDrop.onDropAsLoot();
+                itemDrop.dx = HERO.dx;
+                
+                Log.Information("[AP] Item Successfully Dropped !");
             }
+            else Log.Error($"[AP] Item {itemName} could not be created");
         }
 
         public static void GiveItemToPlayer(string itemName)
         {
-            if (HERO != null) {
-                try
-                {
-                    InventItem? inventItem = CreateInventItemById(itemName);
+            if (HERO == null) return;
 
-                    if (inventItem != null) {
-                        Log.Information($"=== Item {itemName} Created ===");
-                        HERO.inventory.add(inventItem);
-                    } else
-                    {
-                        Log.Error($"=== Item {itemName} could not be created ===");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"=== Error: {ex.Message} ===");
-                    Log.Error($"Stack trace: {ex.StackTrace}");
-                }
-            }
-            else
+            InventItem? inventItem = CreateInventItemById(itemName);
+
+            if (inventItem != null)
             {
-                Log.Error("=== Cannot log inventory, hero is null ===");
+                Log.Information($"[AP] Item {itemName} Created");
+                HERO.inventory.add(inventItem);
             }
+            else Log.Error($"[AP] Item {itemName} could not be created"); 
         }
 
         public static int? GetGroupItem(string itemName)
@@ -166,7 +151,7 @@ namespace DeadCellsArchipelago {
             }
             if (group == -1)
             {
-                Log.Error($"=== Item with id : {itemName} doesn't exist ===");
+                Log.Error($"[AP] Item with id : {itemName} doesn't exist");
                 return null;
             }
             return group;
@@ -239,35 +224,32 @@ namespace DeadCellsArchipelago {
             return inventItem;
         }
 
+        //for debug purpose, log player inventory
         public static void LogInventory()
         {
-            if(HERO != null) {
-                Log.Information("=== Read all inventory ===");
-                if (HERO.inventory.items.length > 0)
+            if(HERO == null) return;
+
+            Log.Information("[AP] Read all inventory");
+            if (HERO.inventory.items.length > 0)
+            {
+                var hasNext = true;
+                var i = 0;
+                var item = HERO.inventory.items.getDyn(i);
+                while (hasNext)
                 {
-                    var hasNext = true;
-                    var i = 0;
-                    var item = HERO.inventory.items.getDyn(i);
-                    while (hasNext)
+                    Log.Information($"{i} : {item?.kind}");
+                    i++;
+                    item = HERO.inventory.items.getDyn(i);
+                    if(item == null)
                     {
-                        Log.Information($"{i} : {item?.kind}");
-                        i++;
-                        item = HERO.inventory.items.getDyn(i);
-                        if(item == null)
-                        {
-                            hasNext = false;
-                        }
+                        hasNext = false;
                     }
                 }
-                Log.Information("=== Inventory end ===");
             }
-            else
-            {
-                Log.Error("=== Cannot log inventory, hero is null ===");
-            }
+            Log.Information("[AP] Inventory end");
         }
 
-        public static void ReallyRevealAllBaseItems(Hook_ItemMetaManager.orig_revealAllBaseItems orig, ItemMetaManager self)
+        private static void ReallyRevealAllBaseItems(Hook_ItemMetaManager.orig_revealAllBaseItems orig, ItemMetaManager self)
         {
             //leaving this blank remove base items in collector's shop (upgrade, weapons and skills)
         }
@@ -275,117 +257,113 @@ namespace DeadCellsArchipelago {
         //the boolean returned here is for saving or not the item in local data in item received
         public static bool GiveItemFromArchipelago(string itemName, string LogName)
         {
-            if (SAVED_DATA == null) Log.Error($"--- saved data at null");
-            if (USER == null) {Log.Error($"--- USER at null"); return false;}
-            if (USER.itemMeta == null) Log.Error($"--- item meta at null");
+            if (SAVED_DATA == null) Log.Error($"[AP] saved data at null");
+            if (USER == null) {Log.Error($"[AP] USER at null"); return false;}
+            if (USER.itemMeta == null) {Log.Error($"[AP] item meta at null"); return false;}
 
-            if (USER.itemMeta != null) {
-                if(IsItemProgressive(itemName))
+            if(IsItemProgressive(itemName))
+            {
+                string? unlockedName = HandleProgressive(itemName);
+                if (unlockedName != null)
                 {
-                    string? unlockedName = HandleProgressive(itemName);
-                    if (unlockedName != null)
+                    UnlockBlueprint(unlockedName);
+                    LogItem(unlockedName);
+                    AddToHistory(LogName);
+                }
+                return false;
+            }
+
+            switch (itemName)
+            {
+                case "LadderKey":
+                case "TeleportKey":
+                case "ScoringKey":
+                case "CustomKey":
+                case "BreakableGroundKey":
+                case "WallJumpKey":
+                case "HomKey":
+                case "ExploKey":
+                    USER.itemMeta.addPermanentItem(itemName.AsHaxeString());
+                    GiveItemToPlayer(itemName);
+                    RuneManager.ActivateMinimapTracking(itemName);
+                    LogItem(itemName);
+                    AddToHistory(LogName);
+                    return true;
+                case "BossRune":
+                    string? unlockedName = HandleBossRune();
+                    if(unlockedName != null)
                     {
-                        UnlockBlueprint(unlockedName);
+                        USER.itemMeta.addPermanentItem(unlockedName.AsHaxeString());
                         LogItem(unlockedName);
                         AddToHistory(LogName);
                     }
                     return false;
-                }
-
-                switch (itemName)
-                {
-                    case "LadderKey":
-                    case "TeleportKey":
-                    case "ScoringKey":
-                    case "CustomKey":
-                    case "BreakableGroundKey":
-                    case "WallJumpKey":
-                    case "HomKey":
-                    case "ExploKey":
-                        USER.itemMeta.addPermanentItem(itemName.AsHaxeString());
-                        GiveItemToPlayer(itemName);
-                        RuneManager.ActivateMinimapTracking(itemName);
-                        LogItem(itemName);
-                        AddToHistory(LogName);
-                        return true;
-                    case "BossRune":
-                        string? unlockedName = HandleBossRune();
-                        if(unlockedName != null)
-                        {
-                            USER.itemMeta.addPermanentItem(unlockedName.AsHaxeString());
-                            LogItem(unlockedName);
-                            AddToHistory(LogName);
-                        }
-                        return false;
-                    case "ShipwreckKey":
-                        GiveItemToPlayer(itemName);
-                        HERO?.hudInitItems();
-                        LogItem(itemName);
-                        AddToHistory(LogName);
-                        return true;
-                    case "BossRushUnlock":
-                        LogItem(itemName);
-                        USER?.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
-                        return true;
-                }
-                if (itemName.Length >= 5 && itemName[..5] == "Trap_")
-                {
-                    if(ShouldDropItem(itemName))
-                    {
-                        GiveTrapItem(itemName, true);
-                        AddToHistory(LogName);
-                    }
-                    return false;
-                }
-
-                if(InDropableList(itemName))
-                {
-                    if(ShouldDropItem(itemName))
-                    {
-                        LogItem(itemName);
-                        AddToHistory(LogName);
-                    }
-                    return false;
-                }
-
-                if(IsLevelKey(itemName))
-                {
-                    changeLogDesc = true;
-                    logDesc = LogName;
-                    LogItem("GenericKey");
+                case "ShipwreckKey":
+                    GiveItemToPlayer(itemName);
+                    HERO?.hudInitItems();
+                    LogItem(itemName);
                     AddToHistory(LogName);
                     return true;
+                case "BossRushUnlock":
+                    LogItem(itemName);
+                    USER?.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
+                    return true;
+            }
+            if (itemName.Length >= 5 && itemName[..5] == "Trap_")
+            {
+                if(ShouldDropItem(itemName))
+                {
+                    GiveTrapItem(itemName, true);
+                    AddToHistory(LogName);
                 }
+                return false;
+            }
 
-                if(itemName.Length >= 3 && itemName[..3] == "ASP" || InHeadList(itemName))
+            if(InDropableList(itemName))
+            {
+                if(ShouldDropItem(itemName))
                 {
-                    var progress = new ItemProgress(itemName.AsHaxeString());
-                    USER.itemMeta.itemProgress.push(progress);
-                    UnlockItem(itemName);
-                    USER.itemMeta.getItemProgress(itemName.AsHaxeString()).unlocked = true;
-                    if (IsUnlockedByDefault(itemName) && SAVED_DATA != null)
-                    {
-                        SAVED_DATA.AddBaseItemUnlocked(itemName);
-                    }
-                }
-                else
-                {
-                    UnlockBlueprint(itemName);
-                }
-                
-                try {
                     LogItem(itemName);
                     AddToHistory(LogName);
                 }
-                catch (Exception ex)
-                {
-                    Log.Error($"=== Item {itemName} doesn't exist {ex} ===");
-                    return false;
-                }
-                
+                return false;
+            }
+
+            if(IsLevelKey(itemName))
+            {
+                changeLogDesc = true;
+                logDesc = LogName;
+                LogItem("GenericKey");
+                AddToHistory(LogName);
                 return true;
             }
-            return false;
+
+            if(itemName.Length >= 3 && itemName[..3] == "ASP" || InHeadList(itemName))
+            {
+                var progress = new ItemProgress(itemName.AsHaxeString());
+                USER.itemMeta.itemProgress.push(progress);
+                UnlockItem(itemName);
+                USER.itemMeta.getItemProgress(itemName.AsHaxeString()).unlocked = true;
+                if (IsUnlockedByDefault(itemName) && SAVED_DATA != null)
+                {
+                    SAVED_DATA.AddBaseItemUnlocked(itemName);
+                }
+            }
+            else
+            {
+                UnlockBlueprint(itemName);
+            }
+            
+            try {
+                LogItem(itemName);
+                AddToHistory(LogName);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[AP] Item {itemName} doesn't exist {ex}");
+                return false;
+            }
+            return true;
         }
 
         public static void GiveTrapItem(string itemName, bool canSendTrapLinkFromCall)
@@ -429,19 +407,19 @@ namespace DeadCellsArchipelago {
                             }
                             catch (Exception ex)
                             {
-                                Log.Error($"Trap_FlawlessChallenge error : {ex}");
+                                Log.Error($"[AP] Trap_FlawlessChallenge error : {ex}");
                             }
                         }
                         break;
                     default:
-                        Log.Warning("=== Not implemented yet ===");
+                        Log.Warning("[AP] Not implemented yet");
                         break;
                 }
             }
             if (canSendTrapLinkFromCall && ARCHIPELAGO != null && ARCHIPELAGO.isConnected && ARCHIPELAGO.trapLinkManager != null) ARCHIPELAGO.trapLinkManager.SendTrapLink(itemName);
         }
 
-        public static void OnPickItem(Hook_Hero.orig_pickItem orig, Hero self, Entity from, InventItem i, HlAction<bool> onComplete)
+        private static void OnPickItem(Hook_Hero.orig_pickItem orig, Hero self, Entity from, InventItem i, HlAction<bool> onComplete)
         {
             if (i._itemData.id.ToString() == "Pokebomb" && IsAnySkillPokebomb())
             {
@@ -621,7 +599,7 @@ namespace DeadCellsArchipelago {
         {
             if(USER != null && USER.game != null)
             {
-                if(USER.game.log == null) Log.Error($"game's log at null");
+                if(USER.game.log == null) Log.Error($"[AP] game's log at null");
 
                 showBlueprintLog = true;
                 USER.game.log?.blueprint(itemId.AsHaxeString(), "Always".AsHaxeString(), false, false);
@@ -639,7 +617,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static bool OnUnlockItem(Hook_ItemMetaManager.orig_unlockItem orig, ItemMetaManager self, dc.String k)//utilisé pour les items comme la poelle 
+        private static bool OnUnlockItem(Hook_ItemMetaManager.orig_unlockItem orig, ItemMetaManager self, dc.String k)
         {
             //Log.Warning($"||| This method was called for {k} in on unlock |||");//to be removed when all unlocked item with this are found
             if(!useOriginalUnlockItem && (!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)))
@@ -650,7 +628,7 @@ namespace DeadCellsArchipelago {
             return orig(self, k);
         }
 
-        public static bool OnRevealItem(Hook_ItemMetaManager.orig_revealItem orig, ItemMetaManager self, dc.String k, bool showAsNew)
+        private static bool OnRevealItem(Hook_ItemMetaManager.orig_revealItem orig, ItemMetaManager self, dc.String k, bool showAsNew)
         {
             if(!useOriginalRevealItem && (!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)))
             {
@@ -660,7 +638,7 @@ namespace DeadCellsArchipelago {
             return orig(self, k, showAsNew);
         }
 
-        public static bool OnCanInvestOnItem(Hook_ItemMetaManager.orig_canInvestOnItem orig, ItemMetaManager self, dc.String k)
+        private static bool OnCanInvestOnItem(Hook_ItemMetaManager.orig_canInvestOnItem orig, ItemMetaManager self, dc.String k)
         {
             removeCollectorBaseFilterAndLock = true;
             bool res = orig(self, k);
@@ -668,7 +646,7 @@ namespace DeadCellsArchipelago {
             return res;
         }
 
-        public static bool OnUserFilter(Hook_CollectorPanel.orig_userFilter orig, CollectorPanel self, ItemProgress data)
+        private static bool OnUserFilter(Hook_CollectorPanel.orig_userFilter orig, CollectorPanel self, ItemProgress data)
         {
             removeCollectorBaseFilterAndLock = true;
             currentFilterFor = data.itemId.ToString();
@@ -678,7 +656,7 @@ namespace DeadCellsArchipelago {
             return res;
         }
 
-        public static int OnCountUnlockedItems(Hook_ItemMetaManager.orig_countUnlockedItems orig, ItemMetaManager self)
+        private static int OnCountUnlockedItems(Hook_ItemMetaManager.orig_countUnlockedItems orig, ItemMetaManager self)
         {
             if(removeCollectorBaseFilterAndLock)
             {
@@ -699,7 +677,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static bool OnInvestOnItemProgress(Hook_ItemMetaManager.orig_investOnItemProgress orig, ItemMetaManager self, dc.String k)
+        private static bool OnInvestOnItemProgress(Hook_ItemMetaManager.orig_investOnItemProgress orig, ItemMetaManager self, dc.String k)
         {
             var isUnlocked = orig(self, k);
             if(isUnlocked && IsUnlockedByDefault(k.ToString()) && SAVED_DATA != null)
@@ -709,7 +687,7 @@ namespace DeadCellsArchipelago {
             return isUnlocked;
         }
 
-        public static bool OnHasUnlockedItem(Hook_ItemMetaManager.orig_hasUnlockedItem orig, ItemMetaManager self, dc.String k)
+        private static bool OnHasUnlockedItem(Hook_ItemMetaManager.orig_hasUnlockedItem orig, ItemMetaManager self, dc.String k)
         {
             if (SAVED_DATA != null)
             {
@@ -958,7 +936,7 @@ namespace DeadCellsArchipelago {
             return trap[new Random().Next(0, trap.Count)];
         }
 
-        public static void OnHiddenTrigger(Hook_HiddenTrigger.orig_trigger orig, HiddenTrigger self, Entity by)
+        private static void OnHiddenTrigger(Hook_HiddenTrigger.orig_trigger orig, HiddenTrigger self, Entity by)
         {
             if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("ShipwreckKey")) USER?.story.counters.set("seenStaphyCine".AsHaxeString(), 0);
             orig(self, by);

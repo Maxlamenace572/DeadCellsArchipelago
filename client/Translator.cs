@@ -1,7 +1,5 @@
 using System.Text.Json;
 
-using Serilog;
-
 namespace DeadCellsArchipelago
 {
     public static class Translator

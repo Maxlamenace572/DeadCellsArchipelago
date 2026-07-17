@@ -1,9 +1,6 @@
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
-using Archipelago.MultiClient.Net.Packets;
-using dc.haxe;
 using Newtonsoft.Json.Linq;
-
 using static DeadCellsArchipelago.LinkQueue;
 
 namespace DeadCellsArchipelago

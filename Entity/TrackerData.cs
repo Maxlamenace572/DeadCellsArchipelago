@@ -1,6 +1,5 @@
 using System.Text.Json;
 using static DeadCellsArchipelago.ItemManager;
-using Serilog;
 
 namespace DeadCellsArchipelago
 {

@@ -9,7 +9,6 @@ using Hashlink.Marshaling;
 using Hashlink.Virtuals;
 using ModCore.Utilities;
 using Serilog;
-
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.ItemQueue;
@@ -25,8 +24,24 @@ namespace DeadCellsArchipelago {
         public static string logDesc = "";
         public static bool changeLogIcon = false;
 
+        public static void InitializeBlueprintHooks()
+        {
+            Log.Information("[AP] Loading Blueprint Hooks...");
+            
+            Hook_Hero.pickBlueprint += OnBlueprintPicked;
+            Hook_ItemMetaManager.hasRevealedItem += ReallyHasBlueprint;
+            Hook_LogManager.blueprint += BlueprintUILog;
+            Hook_LogManager.head += HeadUILog;
+            Hook_LootGen.addBlueprintAt += FixNotSpawningBlueprint;
+            Hook_User.getDailyRewards += OnGetDailyRewards;
+            Hook__ItemTools.getBlueprintLocalizedName += OnGetBlueprintLocalizedName;
+            Hook__Icon.createItemIcon += OnCreateItemIcon;
+
+            Log.Information("[AP] Blueprint Hooks loaded");
+        }
+
         //Called when the hero get a blueprint, picked in game or by UnlockBlueprint.
-        public static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
+        private static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
         {
             //the blueprint is comming from the game, so we need to send a archipelago check
             if(!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics))
@@ -40,7 +55,7 @@ namespace DeadCellsArchipelago {
         //Instantly unlock the blueprint
         public static void UnlockBlueprint(string blueprintId)
         {
-            //Log.Information($" {HERO == null}  {ITEM_META_MANAGER == null} ===");
+            //Log.Information($" {HERO == null}  {ITEM_META_MANAGER == null} ");
             if (HERO != null && USER != null)
             {
                 try
@@ -48,18 +63,18 @@ namespace DeadCellsArchipelago {
                     useOriginalHasRevealItem = true;
                     USER.itemMeta.revealItem(blueprintId.AsHaxeString(), true);
                     useOriginalHasRevealItem = false;
-                    Log.Information($"=== Blueprint unlocked:  {blueprintId} ===");
+                    Log.Information($"[AP] Blueprint unlocked:  {blueprintId}");
 
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"=== Error while giving blueprint: {ex.Message} ===");
+                    Log.Error($"[AP] Error while giving blueprint: {ex.Message}");
                 }
             }
         }
 
         //hasRevealedItem allow or not the blueprint to spawn
-        public static bool ReallyHasBlueprint(Hook_ItemMetaManager.orig_hasRevealedItem orig, ItemMetaManager self, dc.String k)
+        private static bool ReallyHasBlueprint(Hook_ItemMetaManager.orig_hasRevealedItem orig, ItemMetaManager self, dc.String k)
         {
             if((!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)) && !useOriginalHasRevealItem)
             {
@@ -80,7 +95,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void BlueprintUILog(Hook_LogManager.orig_blueprint orig, LogManager self, dc.String k, dc.String baseRarity, bool isRevealed, bool isScoring)
+        private static void BlueprintUILog(Hook_LogManager.orig_blueprint orig, LogManager self, dc.String k, dc.String baseRarity, bool isRevealed, bool isScoring)
         {
             if (showBlueprintLog)
             {
@@ -92,7 +107,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void HeadUILog(Hook_LogManager.orig_head orig, LogManager self, dc.String headKind)
+        private static void HeadUILog(Hook_LogManager.orig_head orig, LogManager self, dc.String headKind)
         {
             if (ARCHIPELAGO != null && !ARCHIPELAGO.includeCosmetics)
             {
@@ -100,13 +115,13 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void FixNotSpawningBlueprint(Hook_LootGen.orig_addBlueprintAt orig, LootGen self, LevelMap map, int cx, int cy, dc.String k, bool freeItemAsAlt, bool noAlt)
+        private static void FixNotSpawningBlueprint(Hook_LootGen.orig_addBlueprintAt orig, LootGen self, LevelMap map, int cx, int cy, dc.String k, bool freeItemAsAlt, bool noAlt)
         {
             //I don't know why but without this hook, blueprints like the two in half life lore room won't spawn without DualBow
             orig(self, map, cx, cy, k, freeItemAsAlt, noAlt);
         }
 
-        public static ArrayObj OnGetDailyRewards(Hook_User.orig_getDailyRewards orig, User self)
+        private static ArrayObj OnGetDailyRewards(Hook_User.orig_getDailyRewards orig, User self)
         {
             ArrayObj res = new ArrayObj()
             {
@@ -121,7 +136,7 @@ namespace DeadCellsArchipelago {
             return res;
         }
         
-        public static dc.String OnGetBlueprintLocalizedName(Hook__ItemTools.orig_getBlueprintLocalizedName orig, virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_ item)
+        private static dc.String OnGetBlueprintLocalizedName(Hook__ItemTools.orig_getBlueprintLocalizedName orig, virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_ item)
         {
             //Change log description
             if (changeLogDesc)
@@ -132,7 +147,7 @@ namespace DeadCellsArchipelago {
             return orig(item);
         }
 
-        public static Icon OnCreateItemIcon(Hook__Icon.orig_createItemIcon orig, dc.String itemKind, dc.h2d.Object parent)
+        private static Icon OnCreateItemIcon(Hook__Icon.orig_createItemIcon orig, dc.String itemKind, dc.h2d.Object parent)
         {
             if (changeLogIcon)
             {

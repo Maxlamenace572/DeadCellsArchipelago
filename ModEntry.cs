@@ -1,9 +1,7 @@
 ﻿using dc.en;
-using dc.en.loot;
 using ModCore.Mods;
 using ModCore.Utilities;
 using Serilog;
-
 using static DeadCellsArchipelago.BossManager;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.BlueprintManager;
@@ -22,7 +20,6 @@ using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.UnlockItemManager;
 using static DeadCellsArchipelago.LinkQueue;
 using static DeadCellsArchipelago.ModAssetManager;
-using dc.pr;
 using dc.level;
 using dc.tool;
 using ModCore.Events.Interfaces.Game.Save;
@@ -30,29 +27,15 @@ using Newtonsoft.Json;
 using dc;
 using dc.hl.types;
 using dc.cine;
-using dc.hxd;
 using dc.tool.hero;
 using HaxeProxy.Runtime;
 using dc.en.inter;
-using dc.level.@struct;
-using dc.en.inter.door;
 using dc.ui;
 using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
-using dc.achievements;
-using dc.en.inter.npc;
 using ModCore.Events.Interfaces.Game;
-using dc.pow;
 using dc.ui.pause;
-using dc.en.hero;
-using dc.tool.bossRush;
-using dc.hxd.snd;
 using dc.ui.icon;
-using dc.en.mob;
-using dc.level.lore;
-using dc.tool.atk;
-using dc.spine;
-
 
 namespace DeadCellsArchipelago{
     //E:\SteamLibrary\steamapps\common\Dead Cells\coremod\core\host\startup -> path to launch DeadCellsModding.exe
@@ -66,141 +49,31 @@ namespace DeadCellsArchipelago{
 
         public override void Initialize()
         {
-            Log.Information("=== Archipelago Mod is loading... ===");
+            Log.Information("[AP] Archipelago Mod is loading...");
 
-            //TitleScreen
-
-            Hook_TitleScreen.mainMenu += OnMainMenu;
-            Hook_TitleScreen.onResize += OnOnResize;
-            Hook_TitleScreen.playMenu += OnPlayMenu;
-            Hook_Main.launchGame += OnLaunchGame;
-
-            Hook_Pixels.convert += OnConvert;
-            //UIDlc
-
-            InitializeBossHooks();
-
-            Hook_Hero.init += OnHeroInit;
-            Hook_Hero.pickBlueprint += OnBlueprintPicked;
-            Hook_Hero.applyItemPickEffect += OnApplyItemPickEffect; //used for runes
-            Hook_Hero.pickItem += OnPickItem;
-            Hook_Hero.onDie += OnHeroDie;
-            Hook_Hero.addCells += OnAddCells;
-
-            Hook_ItemMetaManager.hasRevealedItem += ReallyHasBlueprint; //might check rune
-            Hook_ItemMetaManager.revealItem += OnRevealItem;
-            Hook_ItemMetaManager.revealAllBaseItems += ReallyRevealAllBaseItems;
-            Hook_ItemMetaManager.unlockItem += OnUnlockItem;
-            //hasPermanentItem (5559) is used on too many things. should check on what call it later for bsc
-            Hook_ItemMetaManager.hasPermanentItem += ReallyHasPermanentItem;
-            Hook_ItemMetaManager.addPermanentItem += OnAddPermanentItem;
-            Hook_LevelGen.generate += OnLevelGenGenerate;
-            dc.en.inter.Hook_Throne.nextScene += OnNextScene;
-            
-            InitializeRoomHooks();
-
-            //PerkSelect;
-            //TriggeredDoor;
-            Hook_TriggeredDoor.onActivate += OnTriggeredDoorActivate;
-            Hook_Door.closeFast += OnDoorCloseFast;
-
-            //LevelGen
-            Hook_LevelGen.generate += OnGenerate;
-
-            //Hook__Achievements
-            /*Hook_SteamAchievementManager.isUnlocked += RemoveIsUnlocked;
-            Hook_SteamAchievementManager.unlock += RemoveUnlock;
-            Hook_SteamAchievementManager.shouldDisplayInGameNotification += RemoveShouldDisplayInGameNotification;*/
-
-            Hook_LogManager.blueprint += BlueprintUILog;
-            Hook_LogManager.head += HeadUILog;
-            Hook_ItemMetaManager.hasUnlockedItem += OnHasUnlockedItem;
-            Hook_ItemMetaManager.investOnItemProgress += OnInvestOnItemProgress;
-            Hook_ItemMetaManager.canInvestOnItem += OnCanInvestOnItem;
-            Hook_AspectMaster.onActivate += NoAspectActivate;
-            //AspectMaster
-            //ItemMetaManager
-            //InventItemKind
-            //archipelago.EnableMockMode();
-            // TODO: Get infos from ui
-            //var confData = GetConfData();
-
+            Save.Class.NUM_SLOTS = 99;
             IdToApName = LoadModApTranslation();
             ApNameToId = Invert(IdToApName);
-/*            archipelago.Connect(confData.serverIp, confData.slotName, confData.password);
-            ARCHIPELAGO = archipelago;*/
-
-            //dc.level.@struct.Throne
-
-            //Exit
-            //dc.pr.Game
-            Hook_Exit.onActivate += OnActiviteExit;
-
-            TextInput.Class.MAX_LENGTH = 50;
-
-            Hook_LootGen.addBlueprintAt += FixNotSpawningBlueprint;
-
-            Hook_Pokecharge.removeItem += OnRemoveItemPokecharge;
-            //DefaultPause
-            //dc.h2d.Interactive
-            //botMenu
-            //dc.pr.Game
-
-            //Hook_ControllerAccess.onActPressed += OnActPressed;
-
-            Hook__Confirmation.__constructor__ += OnRestart;
-            Hook_Portal.onActivate += OnActivatePortal;
-            Hook_Portal.close += OnClosePortal;
-
-            Hook_HeroActiveSkillsManager.onActiveSkill += OnOnActiveSkill;
-            Hook_HeroActiveSkillsManager.canUseActiveSkill += OnCanUseActiveSkill;
-            Hook_HeroActiveSkillsManager.updateSkills += OnUpdateSkills;
-            Hook_Inventory.swapSkills += OnSwapSkills;
-            Hook_TreasureChest.onActivate += OnActivateTreasureChest;
-
-            Hook_Controller.bind += OnBind;
-            //Controller
-            //HeroMainSkill
-            //Challenge
-            //LevelGen
-            //ModCore.Utilities.ArrayUtils
-            //dc.haxe.ds.
-            Hook_LeaderboardPanel.set_visible += OnSetVisible;
-            Hook_CollectorPanel.userFilter += OnUserFilter;
-            Hook_ItemMetaManager.countUnlockedItems += OnCountUnlockedItems;
-            Hook_LootGen.generateLootOnMobs += OnGenerateLootOnMobs;
-            Hook_Hero.hudInitItems += OnHudInitItems;
-
-            //DefaultPause
-            //dc.h2d.Layers
-            Hook_DefaultPause.update += OnUpdateDefaultPause;
-            Hook_Inventory.swapSkills += OnSwapSkillsApMenu;
-            Hook_Inventory.swapWeapons += OnSwapWeaponsApMenu;
-            Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
-            Hook_User.getPokebombBlueprintFor += OnGetPokebombBlueprintFor;
-            Hook_ItemMetaManager.hasRevealedItemOrInCollector += OnHasRevealedItemOrInCollector;
-            Hook_User.getDailyRewards += OnGetDailyRewards;
-            Hook_MobsGen.getDmgTier += OnGetDmgTier;
-            Hook_MobsGen.getLifeTier += OnGetLifeTier;
-            UnlockItemHooks();
-            Hook__RewardPopup.__constructor__ += OnRewardPopup;
-            Hook__Achievements.hasAchievement += OnHasAchievement;
-            Hook__Achievements.setAchievement += OnSetAchievement;
-            Hook__ItemTools.getBlueprintLocalizedName += OnGetBlueprintLocalizedName;
-            Hook__Icon.createItemIcon += OnCreateItemIcon;
-            dc.en.Hook_Mob.removeFromLoot += TempFixRemoveFromLoot;
-            Hook_Hero.heal += OnHeroHeal;
-            Hook_Hero.onDamage += OnHeroOnDamage;
-            Hook_Hero.curse += OnHeroCurse;
-            Hook_Hero.reduceCurse += OnHeroReduceCurse;
-            Hook_Entity.popError += OnPopError;
-            Hook_HiddenTrigger.trigger += OnHiddenTrigger;
-            Log.Information("=== Archipelago hooks loaded ! ===");
-            //SaveChoice
-            Save.Class.NUM_SLOTS = 99;
-            //Log.Information($"{Save.Class.NUM_SLOTS}");
             
-            //LogManager
+            InitializeBossHooks();
+            InitializeItemHooks();
+            InitializeHeroHooks();
+            InitializeBlueprintHooks();
+            InitializeRuneHooks();
+            InitializeRoomHooks();
+            InitializeNpcHooks();
+            InitializeAchievementHooks();
+            InitializeEnemyHooks();
+            InitializeMainMenuHooks();
+            InitializeImageHooks();
+            InitializePokeHooks();
+            InitializeUnlockItemHooks();
+            InitializePauseHooks();
+            
+            Hook_LevelGen.generate += OnLevelGenGenerate;
+
+            Log.Information("[AP] Archipelago hooks loaded");
+            //SaveChoice
             //BrBlueprint
             //BossRushData
         }
@@ -281,7 +154,7 @@ namespace DeadCellsArchipelago{
             {
                 USER = data;
 
-                Log.Information($"=== Chargement de la save slot {data.userId} ===");
+                Log.Information($"[AP] Loading save slot {data.userId}");
                 
                 // Load Archipelago data for this game
                 var savePath = GetSaveFilePath(data.userId);
@@ -292,7 +165,7 @@ namespace DeadCellsArchipelago{
                         var json = System.IO.File.ReadAllText(savePath);
                         SAVED_DATA = JsonConvert.DeserializeObject<ArchipelagoSaveData>(json) ?? new();
                         
-                        Log.Information($"=== Données chargées : {SAVED_DATA.SentChecks.Count} checks envoyés ===");
+                        Log.Information($"[AP] loaded with {SAVED_DATA.SentChecks.Count} checks send");
 
                         if (ARCHIPELAGO != null && loadDataInPlayMenu == 1)
                         {
@@ -302,13 +175,13 @@ namespace DeadCellsArchipelago{
                     }
                     catch (Exception ex)
                     {
-                        Log.Error($"=== Erreur chargement save : {ex.Message} ===");
+                        Log.Error($"[AP] Error loading save : {ex.Message}");
                     }
                 }
             }
             else
             {
-                Log.Information($"=== New Save ===");
+                Log.Information($"[AP] New Save");
                 if (ARCHIPELAGO != null && loadDataInPlayMenu == 2)
                 {
                     ARCHIPELAGO.SyncAll();
@@ -323,7 +196,7 @@ namespace DeadCellsArchipelago{
         
         public void OnBeforeSavingSave(IOnBeforeSavingSave.EventData data)
         {
-            Log.Information($"=== Sauvegarde slot {data.Data.userId} ===");
+            Log.Information($"[AP] Saving slot {data.Data.userId}");
             
             var savePath = GetSaveFilePath(data.Data.userId);
             try
@@ -331,11 +204,11 @@ namespace DeadCellsArchipelago{
                 var json = JsonConvert.SerializeObject(SAVED_DATA, Formatting.Indented);
                 System.IO.File.WriteAllText(savePath, json);
                 
-                Log.Information($"=== Sauvegarde réussie : {SAVED_DATA?.SentChecks.Count} checks ===");
+                Log.Information($"[AP] Save ended with {SAVED_DATA?.SentChecks.Count} checks");
             }
             catch (Exception ex)
             {
-                Log.Error($"=== Erreur sauvegarde : {ex.Message} ===");
+                Log.Error($"[AP] Error saving : {ex.Message}");
             }
         }
 
@@ -414,7 +287,7 @@ namespace DeadCellsArchipelago{
                 cdb.item.byId.get(skinId.AsHaxeString()).cellCost = 50;
             }
             
-            Log.Information("=== Archipelago Mod loaded ! ===");
+            Log.Information("[AP] CDB Changed");
         }
     }
 }

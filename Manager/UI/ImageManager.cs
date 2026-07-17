@@ -11,6 +11,15 @@ namespace DeadCellsArchipelago {
     {
         public static bool stopTryingToConvertRgbaToRgba = false;
 
+        public static void InitializeImageHooks()
+        {
+            Log.Information("[AP] Loading Image Hooks...");
+            
+            Hook_Pixels.convert += OnConvert;
+
+            Log.Information("[AP] Image Hooks loaded");
+        }
+
         public static dc.h2d.Tile LoadTileFromPng(string path)
         {
             using var image = Image.Load<Rgba32>(path);
@@ -39,7 +48,7 @@ namespace DeadCellsArchipelago {
             return hxBytes;
         }
 
-        public static void OnConvert(Hook_Pixels.orig_convert orig, Pixels self, PixelFormat target)
+        private static void OnConvert(Hook_Pixels.orig_convert orig, Pixels self, PixelFormat target)
         {
             if(stopTryingToConvertRgbaToRgba)
             {

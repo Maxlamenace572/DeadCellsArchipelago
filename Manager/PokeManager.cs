@@ -9,6 +9,7 @@ using ModCore.Utilities;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ImageManager;
 using dc.hl.types;
+using Serilog;
 
 namespace DeadCellsArchipelago {
     public static class PokeManager
@@ -17,7 +18,23 @@ namespace DeadCellsArchipelago {
         public static Text? nb = null;
         private static bool enemyDiedWhileExtracting = false;
 
-        public static void OnRemoveItemPokecharge(Hook_Pokecharge.orig_removeItem orig, Pokecharge self)
+        public static void InitializePokeHooks()
+        {
+            Log.Information("[AP] Loading Poke Hooks...");
+            
+            Hook_Pokecharge.removeItem += OnRemoveItemPokecharge;
+            Hook_HeroActiveSkillsManager.updateSkills += OnUpdateSkills;
+            Hook_HeroActiveSkillsManager.canUseActiveSkill += OnCanUseActiveSkill;
+            Hook_HeroActiveSkillsManager.onActiveSkill += OnOnActiveSkill;
+            Hook_Inventory.swapSkills += OnSwapSkills;
+            Hook_User.getPokebombBlueprintFor += OnGetPokebombBlueprintFor;
+            Hook_ItemMetaManager.hasRevealedItemOrInCollector += OnHasRevealedItemOrInCollector;
+            Hook_Entity.popError += OnPopError;
+
+            Log.Information("[AP] Poke Hooks loaded");
+        }
+
+        private static void OnRemoveItemPokecharge(Hook_Pokecharge.orig_removeItem orig, Pokecharge self)
         {
             orig(self);
             if (!enemyDiedWhileExtracting)
@@ -28,7 +45,7 @@ namespace DeadCellsArchipelago {
             else enemyDiedWhileExtracting = false;
         }
         
-        public static void OnUpdateSkills(Hook_HeroActiveSkillsManager.orig_updateSkills orig, HeroActiveSkillsManager self)
+        private static void OnUpdateSkills(Hook_HeroActiveSkillsManager.orig_updateSkills orig, HeroActiveSkillsManager self)
         {
             if(self.hudGetSkillPower(0).ii != null && self.hudGetSkillPower(0).ii._itemData.id.ToString() == "Pokebomb")
             {
@@ -75,7 +92,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static bool OnCanUseActiveSkill(Hook_HeroActiveSkillsManager.orig_canUseActiveSkill orig, HeroActiveSkillsManager self, int id)
+        private static bool OnCanUseActiveSkill(Hook_HeroActiveSkillsManager.orig_canUseActiveSkill orig, HeroActiveSkillsManager self, int id)
         {
             Skill hudSkill = self.hudGetSkillPower(id);
             if (hudSkill.ii != null && hudSkill.ii._itemData.id.ToString() == "Pokebomb")
@@ -88,7 +105,7 @@ namespace DeadCellsArchipelago {
             return orig(self, id);
         }
 
-        public static void OnOnActiveSkill(Hook_HeroActiveSkillsManager.orig_onActiveSkill orig, HeroActiveSkillsManager self, int id, double ratio)
+        private static void OnOnActiveSkill(Hook_HeroActiveSkillsManager.orig_onActiveSkill orig, HeroActiveSkillsManager self, int id, double ratio)
         {
             Skill hudSkill = self.hudGetSkillPower(id);
             if (hudSkill.ii._itemData.id.ToString() == "Pokebomb")
@@ -106,13 +123,13 @@ namespace DeadCellsArchipelago {
             nb = null;
         }
 
-        public static void OnSwapSkills(Hook_Inventory.orig_swapSkills orig, Inventory self)
+        private static void OnSwapSkills(Hook_Inventory.orig_swapSkills orig, Inventory self)
         {
             ResetFrontPokebomb();
             orig(self);
         }
 
-        public static dc.String OnGetPokebombBlueprintFor(Hook_User.orig_getPokebombBlueprintFor orig, User self, dc.String k, ArrayObj invBlueprints)
+        private static dc.String OnGetPokebombBlueprintFor(Hook_User.orig_getPokebombBlueprintFor orig, User self, dc.String k, ArrayObj invBlueprints)
         {
             useModdedHasUnlock = true;
             var res = orig(self, k, invBlueprints);
@@ -120,7 +137,7 @@ namespace DeadCellsArchipelago {
             return res;
         }
 
-        public static bool OnHasRevealedItemOrInCollector(Hook_ItemMetaManager.orig_hasRevealedItemOrInCollector orig, ItemMetaManager self, dc.String k)
+        private static bool OnHasRevealedItemOrInCollector(Hook_ItemMetaManager.orig_hasRevealedItemOrInCollector orig, ItemMetaManager self, dc.String k)
         {
             if (useModdedHasUnlock && SAVED_DATA != null)
             {
@@ -129,7 +146,7 @@ namespace DeadCellsArchipelago {
             return orig(self, k);
         }
 
-        public static bool OnPopError(Hook_Entity.orig_popError orig, Entity self, dc.String str, int? col)
+        private static bool OnPopError(Hook_Entity.orig_popError orig, Entity self, dc.String str, int? col)
         {
             if (((dc.String) Lang.Class.t.texts.get("Échec".AsHaxeString())).ToString() == str.ToString()) enemyDiedWhileExtracting = true;
             return orig(self, str, col);

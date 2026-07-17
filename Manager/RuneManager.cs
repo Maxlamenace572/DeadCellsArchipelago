@@ -3,7 +3,6 @@ using dc.en;
 using dc.en.inter;
 using dc.h2d;
 using dc.hl.types;
-using dc.libs.heaps.slib;
 using dc.tool;
 using dc.ui;
 using Hashlink.Virtuals;
@@ -18,7 +17,20 @@ namespace DeadCellsArchipelago {
     {
         public static bool useOriginalHasPermanentItem { get; set;} = true;
 
-        public static void OnApplyItemPickEffect(Hook_Hero.orig_applyItemPickEffect orig, Hero self, Entity from, InventItem i)
+        public static void InitializeRuneHooks()
+        {
+            Log.Information("[AP] Loading Rune Hooks...");
+            
+            Hook_Hero.applyItemPickEffect += OnApplyItemPickEffect;
+            Hook_ItemMetaManager.hasPermanentItem += ReallyHasPermanentItem;
+            Hook_Throne.nextScene += OnNextScene;
+            Hook_ItemMetaManager.addPermanentItem += OnAddPermanentItem;
+            Hook__RewardPopup.__constructor__ += OnRewardPopup;
+
+            Log.Information("[AP] Rune Hooks loaded");
+        }
+
+        private static void OnApplyItemPickEffect(Hook_Hero.orig_applyItemPickEffect orig, Hero self, Entity from, InventItem i)
         {   //called each time the player take any item not blueprint
             //Log.Warning($"=== pick effect on {i._itemData.id} {i._itemData.name} ===");
             bool noStats = false;
@@ -85,7 +97,7 @@ namespace DeadCellsArchipelago {
                 if (itemName == "LadderKey")
                 {
                     ArrayObj? array = USER.game.curLevel?.entitiesByClass?.get(35400); //35400 is the internal id for VineLadder
-                    if(array != null)
+                    if (array != null)
                     {
                         for (int i = 0; i < array.length; i++)
                         {
@@ -97,7 +109,7 @@ namespace DeadCellsArchipelago {
                 else if (itemName == "TeleportKey")
                 {
                     ArrayObj? array = USER.game.curLevel?.entitiesByClass?.get(23651); //23651 is the internal id for RedTeleporter
-                    if(array != null)
+                    if (array != null)
                     {
                         for (int i = 0; i < array.length; i++)
                         {
@@ -109,7 +121,7 @@ namespace DeadCellsArchipelago {
                 else if (itemName == "BreakableGroundKey")
                 {
                     ArrayObj? array = USER.game.curLevel?.entitiesByClass?.get(32866); //32866 is the internal id for BreakableGround
-                    if(array != null)
+                    if (array != null)
                     {
                         for (int i = 0; i < array.length; i++)
                         {
@@ -133,7 +145,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static bool ReallyHasPermanentItem(Hook_ItemMetaManager.orig_hasPermanentItem orig, ItemMetaManager self, dc.String k)
+        private static bool ReallyHasPermanentItem(Hook_ItemMetaManager.orig_hasPermanentItem orig, ItemMetaManager self, dc.String k)
         {
             /*if(k.ToString() != "WallJumpKey" && k.ToString() != "BackpackUnlock" && k.ToString() != "ExploKey")
             {
@@ -158,16 +170,16 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnNextScene(Hook_Throne.orig_nextScene orig, Throne self, Hero by)
+        private static void OnNextScene(Hook_Throne.orig_nextScene orig, Throne self, Hero by)
         { //for HomKey
             useOriginalHasPermanentItem = false;
             orig(self, by);
             useOriginalHasPermanentItem = true;
         }
 
-        public static bool OnAddPermanentItem(Hook_ItemMetaManager.orig_addPermanentItem orig, ItemMetaManager self, dc.String k)
+        private static bool OnAddPermanentItem(Hook_ItemMetaManager.orig_addPermanentItem orig, ItemMetaManager self, dc.String k)
         { //for HomKey
-            if(useOriginalHasPermanentItem)
+            if (useOriginalHasPermanentItem)
             {
                 return orig(self, k);
             }
@@ -175,13 +187,14 @@ namespace DeadCellsArchipelago {
             return false;
         }
 
-        public static void OnRewardPopup(Hook__RewardPopup.orig___constructor__ orig, RewardPopup arg1, virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_ item, HlAction onValidate, Ref<bool> isMetaItem)
+        private static void OnRewardPopup(Hook__RewardPopup.orig___constructor__ orig, RewardPopup arg1, virtual_ambiantDesc_castCD_cellCost_commonProps_dlc_droppable_gameplayDesc_group_icon_id_legendAffixes_moneyCost_name_props_synergy_tags_tier1_tier2_ item, HlAction onValidate, Ref<bool> isMetaItem)
         {
             if (item.id.ToString() == "BossRushUnlock")
             {
                 SendRuneCheck("BossRushUnlock");
                 orig(arg1, item, onValidate, isMetaItem);
-            } else
+            }
+            else
             {
                 orig(arg1, item, onValidate, isMetaItem);
             }

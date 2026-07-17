@@ -1,6 +1,5 @@
 using dc.level.@struct;
 using static DeadCellsArchipelago.RuneManager;
-
 using static DeadCellsArchipelago.ItemManager;
 using dc.en.inter.door;
 using dc.en;
@@ -13,7 +12,6 @@ using dc;
 using Hashlink.Virtuals;
 using dc.ui;
 using ModCore.Utilities;
-
 using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.HeroManager;
@@ -28,6 +26,8 @@ namespace DeadCellsArchipelago {
 
         public static void InitializeRoomHooks()
         {
+            Log.Information("[AP] Loading Room Hooks...");
+            
             Hook_PrisonCourtyard.buildMainRooms += (orig, self) => { useOriginalHasPermanentItem=false; var res=orig(self); useOriginalHasPermanentItem=true; return res;};
             Hook_PrisonRoof.buildMainRooms += (orig, self) => { useOriginalHasPermanentItem=false; var res=orig(self); useOriginalHasPermanentItem=true; return res;};
             Hook_Crypt.finalize += (orig, self) => { useOriginalHasPermanentItem=false;orig(self); useOriginalHasPermanentItem=true; };
@@ -38,13 +38,24 @@ namespace DeadCellsArchipelago {
             dc.level.@struct.Hook_Throne.buildMainRooms += (orig, self) => { useOriginalHasPermanentItem=false; var res=orig(self); useOriginalHasPermanentItem=true; return res; };
             Hook_QueenArena.buildMainRooms += (orig, self) => { useOriginalHasPermanentItem=false; var res=orig(self); useOriginalHasPermanentItem=true; return res;};
             Hook_DookuArena.buildMainRooms += (orig, self) => { useOriginalHasPermanentItem=false; var res=orig(self); useOriginalHasPermanentItem=true; return res;};
+            Hook_TriggeredDoor.onActivate += OnTriggeredDoorActivate;
+            Hook_Door.closeFast += OnDoorCloseFast;
+            Hook_LevelGen.generate += OnGenerate;
+            Hook_Exit.onActivate += OnActiviteExit;
+            Hook_Portal.onActivate += OnActivatePortal;
+            Hook_TreasureChest.onActivate += OnActivateTreasureChest;
+            Hook_Portal.close += OnClosePortal;
+            Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
+
+
+            Log.Information("[AP] Room Hooks loaded");
         }
 
-        public static void OnTriggeredDoorActivate(Hook_TriggeredDoor.orig_onActivate orig, TriggeredDoor self, Hero by, bool lp)
+        private static void OnTriggeredDoorActivate(Hook_TriggeredDoor.orig_onActivate orig, TriggeredDoor self, Hero by, bool lp)
         {
             if(USER != null && USER.game.curLevel.map.getRoomAt(self.cx, self.cy) != null)
             {   //allow the player to open the mutation door in collector's transition
-                Log.Warning($"=== porte en {USER.game.curLevel.map.getRoomAt(self.cx, self.cy).rTemplate} ===");
+                //Log.Warning($"=== porte en {USER.game.curLevel.map.getRoomAt(self.cx, self.cy).rTemplate} ===");
                 if (USER.game.curLevel.map.getRoomAt(self.cx, self.cy).rTemplate.ToString() == "PerkShop" || USER.game.curLevel.map.getRoomAt(self.cx, self.cy).rTemplate.ToString() == "DookuArenaPerkShop")
                 {
                     self.openFast(self.cx - by.cx >= 0 ? 1 : -1, null);
@@ -59,7 +70,7 @@ namespace DeadCellsArchipelago {
             orig(self, by, lp);
         }
 
-        public static void OnDoorCloseFast(Hook_Door.orig_closeFast orig, Door self, HlAction cb)
+        private static void OnDoorCloseFast(Hook_Door.orig_closeFast orig, Door self, HlAction cb)
         {   //without this, the mutation door in collector's transition will close automatically
             if(USER != null && USER.game.curLevel != null)
             {
@@ -72,7 +83,7 @@ namespace DeadCellsArchipelago {
         }
 
         //when the level is generating, we do the checks biomes and add a void challenge for the trap
-        public static ArrayObj OnGenerate(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
+        private static ArrayObj OnGenerate(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
         {
             changeNextCallDmgTier = false;
             changeNextCallLifeTier = false;
@@ -128,7 +139,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnActiviteExit(Hook_Exit.orig_onActivate orig, Exit self, Hero by, bool lp)
+        private static void OnActiviteExit(Hook_Exit.orig_onActivate orig, Exit self, Hero by, bool lp)
         {
             ResetFrontPokebomb();
 
@@ -170,7 +181,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        public static void OnActivatePortal(Hook_Portal.orig_onActivate orig, Portal self, Hero by, bool lp)
+        private static void OnActivatePortal(Hook_Portal.orig_onActivate orig, Portal self, Hero by, bool lp)
         {
             if (SAVED_DATA != null)
             {
@@ -191,7 +202,7 @@ namespace DeadCellsArchipelago {
             orig(self, by, lp);
         }
 
-        public static void OnActivateTreasureChest(Hook_TreasureChest.orig_onActivate orig, TreasureChest self, Hero by, bool lp)
+        private static void OnActivateTreasureChest(Hook_TreasureChest.orig_onActivate orig, TreasureChest self, Hero by, bool lp)
         {
             if(trapChallenge)
             {
@@ -201,7 +212,7 @@ namespace DeadCellsArchipelago {
             orig(self, by, lp);
         }
 
-        public static void OnClosePortal(Hook_Portal.orig_close orig, Portal self)
+        private static void OnClosePortal(Hook_Portal.orig_close orig, Portal self)
         {
             if(SAVED_DATA != null)
             {
@@ -210,7 +221,7 @@ namespace DeadCellsArchipelago {
             orig(self);
         }
 
-        public static void OnActivateTrainingDoor(Hook_TrainingDoor.orig_onActivate orig, TrainingDoor self, Hero by, bool longPress)
+        private static void OnActivateTrainingDoor(Hook_TrainingDoor.orig_onActivate orig, TrainingDoor self, Hero by, bool longPress)
         {
             isInTraining = !isInTraining;
             orig(self, by, longPress);

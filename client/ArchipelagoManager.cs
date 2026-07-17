@@ -3,7 +3,6 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Packets;
 using Serilog;
-
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ItemQueue;
 using static DeadCellsArchipelago.Translator;
@@ -60,7 +59,7 @@ namespace DeadCellsArchipelago
             
             try
             {
-                Log.Information($"=== Connecting to Archipelago: {serverUrl} (slot: {slotName}) ===");
+                Log.Information($"[AP] Connecting to Archipelago: {serverUrl} (slot: {slotName})");
                 
                 session = ArchipelagoSessionFactory.CreateSession(serverUrl);
                 
@@ -85,7 +84,7 @@ namespace DeadCellsArchipelago
                 if (result is LoginSuccessful success)
                 {
                     isConnected = true;
-                    Log.Information($"=== Connected to Archipelago ! Slot #{success.Slot} ===");
+                    Log.Information($"[AP] Connected to Archipelago ! Slot {success.Slot}");
                     
                     var slotData = success.SlotData;
 
@@ -122,13 +121,13 @@ namespace DeadCellsArchipelago
                 else if (result is LoginFailure failure)
                 {
                     isConnected = false;
-                    Log.Error($"=== Failed to connect to Archipelago: {string.Join(", ", failure.Errors)} ===");
+                    Log.Error($"[AP] Failed to connect to Archipelago: {string.Join(", ", failure.Errors)}");
                 }
             }
             catch (Exception ex)
             {
                 isConnected = false;
-                Log.Error($"=== Error connecting to Archipelago: {ex.Message} ===");
+                Log.Error($"[AP] Error connecting to Archipelago: {ex.Message}");
             }
         }
 
@@ -138,7 +137,7 @@ namespace DeadCellsArchipelago
             {
                 session.Socket.DisconnectAsync();
                 isConnected = false;
-                Log.Information("=== Disconnecting from Archipelago ===");
+                Log.Information("[AP] Disconnecting from Archipelago");
             }
         }
         
@@ -162,23 +161,23 @@ namespace DeadCellsArchipelago
                 
                 if (locationId == -1)
                 {
-                    Log.Error($"=== Location not found: {locationName} ===");
+                    Log.Error($"[AP] Location not found: {locationName}");
                     return;
                 }
 
                 if (session.Locations.AllLocationsChecked.Contains(locationId))
                 {
-                    Log.Error($"=== Location already sent: {locationName} ===");
+                    Log.Error($"[AP] Location already sent: {locationName}");
                     return;
                 }
 
                 session.Locations.CompleteLocationChecks(locationId);
-                Log.Information($"=== Location sent: {locationName} (ID: {locationId}) ===");
+                Log.Information($"[AP] Location sent: {locationName} (ID: {locationId})");
                 SaveChecks(internalId);
             }
             catch (Exception ex)
             {
-                Log.Error($"=== Error while sending check: {ex.Message} ===");
+                Log.Error($"[AP] Error while sending check: {ex.Message}");
             }
         }
 
@@ -208,7 +207,7 @@ namespace DeadCellsArchipelago
             
             var receivedItems = session.Items.AllItemsReceived;
             
-            Log.Information($"=== Synchronisation: {receivedItems.Count} items on server ===");
+            Log.Information($"[AP] Synchronisation: {receivedItems.Count} items on server");
             
             var countDifferent = 0;
             foreach (var item in receivedItems)
@@ -220,7 +219,7 @@ namespace DeadCellsArchipelago
                 AddItemToQueue(item.ItemName);
                 countDifferent++;
             }
-            Log.Information($"=== Synchronisation ended with {countDifferent} new items ===");
+            Log.Information($"[AP] Synchronisation ended with {countDifferent} new items");
         }
         
         private void OnItemReceived(ReceivedItemsHelper helper)
@@ -236,7 +235,7 @@ namespace DeadCellsArchipelago
             
             var checkedLocations = session.Locations.AllLocationsChecked;
             
-            Log.Information($"=== Synchronisation: {checkedLocations.Count} locations on server ===");
+            Log.Information($"[AP] Synchronisation: {checkedLocations.Count} locations on server");
             
             var countDifferent = 0;
             foreach (var locationId in checkedLocations)
@@ -255,7 +254,7 @@ namespace DeadCellsArchipelago
                     countDifferent++;
                 }
             }
-            Log.Information($"=== Synchronisation ended with {countDifferent} new location ===");
+            Log.Information($"[AP] Synchronisation ended with {countDifferent} new location");
         }
 
         private void OnLocationsChecked(ReadOnlyCollection<long> newCheckedLocations)
@@ -273,10 +272,10 @@ namespace DeadCellsArchipelago
         
         private void OnError(Exception ex, string message)
         {
-            Log.Error($"=== Archipelago Error: {message} ===");
+            Log.Error($"[AP] Archipelago Error: {message}");
             if (ex is WebSocketException)
             {
-                Log.Warning($"=== Disconnecting... ===");
+                Log.Warning($"[AP] Disconnecting...");
                 isConnected = false;
                 logError = true;
                 logDesc = "Disconnected from server";
@@ -286,22 +285,17 @@ namespace DeadCellsArchipelago
         private void OnDisconnected(string reason)
         {
             isConnected = false;
-            Log.Warning($"=== Disconnected from Archipelago: {reason} ===");
+            Log.Warning($"[AP] Disconnected from Archipelago: {reason}");
         }
 
         private void SaveChecks(string internalId)
         {
-            if (SAVED_DATA != null)
+            if (SAVED_DATA == null) return;
+
+            SAVED_DATA.SaveCheckSent(internalId);
+            if(USER != null)
             {
-                SAVED_DATA.SaveCheckSent(internalId);
-                if(USER != null)
-                {
-                    SAVED_DATA.AppendToSentChecksJson(internalId, USER.userId);
-                }
-            }
-            else
-            {
-                Log.Error("=== Couldn't save check ===");
+                SAVED_DATA.AppendToSentChecksJson(internalId, USER.userId);
             }
         }
 
@@ -325,7 +319,6 @@ namespace DeadCellsArchipelago
                 ItemSendLogMessage itemMessage = (ItemSendLogMessage) message;
                 if (itemMessage.IsSenderTheActivePlayer && !itemMessage.IsReceiverTheActivePlayer)
                 {
-                    Log.Information($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
                     AddLogToQueue($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
                 }
             }

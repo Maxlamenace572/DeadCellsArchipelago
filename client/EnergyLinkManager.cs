@@ -3,8 +3,6 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
 using Newtonsoft.Json.Linq;
-using Serilog;
-
 using static DeadCellsArchipelago.LinkQueue;
 using static DeadCellsArchipelago.ItemManager;
 
