@@ -7,6 +7,7 @@ using dc.en.inter;
 using dc.en.inter.npc;
 using dc.en.mob;
 using dc.en.mob.boss;
+using dc.haxe;
 using dc.level;
 using dc.level.lore;
 using dc.level.@struct;
@@ -22,6 +23,7 @@ namespace DeadCellsArchipelago {
     public static class UnlockItemManager
     {
         //here should be every item that decided not to do as the others, and have a hasUnlockedItem on them
+        private static bool brGetBiomeVisitCount = false;
 
         public static void UnlockItemHooks()
         {
@@ -50,8 +52,8 @@ namespace DeadCellsArchipelago {
             Hook_Merchant.onActivate += onActivateMerchant;
             Hook_MerchantPan.canBeActivated += OnCanBeActivatedMerchantPan;
             Hook_MerchantPan.postUpdate += OnPostUpdateMerchantPan;
-            Hook_Game.loadMainLevel += OnLoadMainLevel;
             Hook_PrisonStart.buildPrisonHUBZDoor += OnBuildPrisonHUBZDoorPrisonStart;
+            Hook_Game.getBiomeVisitCount += OnGetBiomeVisitCount;
             Hook_PurpleGarden.buildGardenLoreRooms += OnBuildGardenLoreRooms;
             Hook_MariaRoom.unlockCatExaminable += OnUnlockCatExaminable;
             Hook_MariaRoom.onCreateExaminable += OnOnCreateExaminable;
@@ -240,16 +242,24 @@ namespace DeadCellsArchipelago {
             useModdedHasUnlock = false;
         }
 
-        private static void OnLoadMainLevel(Hook_Game.orig_loadMainLevel orig, Game self, LevelTransition cine, dc.String id, Ref<bool> activate, int? forcedSeed)
+        private static void OnBuildPrisonHUBZDoorPrisonStart(Hook_PrisonStart.orig_buildPrisonHUBZDoor orig, PrisonStart self)
         {//BossRushUnlock (part 1)
-            if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 0);
-            orig(self, cine, id, activate, forcedSeed);
+            if (SAVED_DATA != null && SAVED_DATA.IsItemReceived("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
+            else self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 0);
+
+            brGetBiomeVisitCount = true;
+            orig(self);
+            brGetBiomeVisitCount = false;
+
+            if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
+            else self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 0);
+            
         }
 
-        private static void OnBuildPrisonHUBZDoorPrisonStart(Hook_PrisonStart.orig_buildPrisonHUBZDoor orig, PrisonStart self)
+        private static int? OnGetBiomeVisitCount(Hook_Game.orig_getBiomeVisitCount orig, Game self, dc.String id)
         {//BossRushUnlock (part 2)
-            if (SAVED_DATA != null && SAVED_DATA.IsItemReceived("BossRushUnlock")) self.user.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
-            orig(self);
+            if (brGetBiomeVisitCount) return 0;
+            return orig(self, id);
         }
 
         private static void OnBuildGardenLoreRooms(Hook_PurpleGarden.orig_buildGardenLoreRooms orig, PurpleGarden self)
