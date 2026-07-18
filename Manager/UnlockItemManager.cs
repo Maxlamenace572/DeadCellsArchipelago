@@ -36,6 +36,7 @@ namespace DeadCellsArchipelago {
             Hook_CarmillaMask.onActivate += OnActivateCarmillaMask;
             Hook_Gardener.onActivate += OnActivateGardener;
             Hook_AmazonBase.onDie += OnDieAmazonBase;
+            Hook_LootGen.initPools += OnInitPools;
             Hook_ShopMimic.dropBlueprint += OnDropBlueprint;
             Hook_Maria.onEndCine += OnEndCineMaria;
             Hook_LoreManager.onCustomEvent += OnCustomEventLoreManager;
@@ -51,7 +52,7 @@ namespace DeadCellsArchipelago {
             Hook__AlucardDooku.__constructor__ += OnConstructorAlucardDooku;
             Hook__Credits.__constructor__ += OnConstructorCredits;
             Hook__Merchant.__constructor__ += OnConstructorMerchant;
-            Hook_Merchant.onActivate += onActivateMerchant;
+            Hook_Merchant.onActivate += OnActivateMerchant;
             Hook_MerchantPan.canBeActivated += OnCanBeActivatedMerchantPan;
             Hook_MerchantPan.postUpdate += OnPostUpdateMerchantPan;
             Hook_PrisonStart.buildPrisonHUBZDoor += OnBuildPrisonHUBZDoorPrisonStart;
@@ -115,6 +116,14 @@ namespace DeadCellsArchipelago {
             useModdedHasUnlock = false;
         }
 
+        private static void OnInitPools(Hook_LootGen.orig_initPools orig, LootGen self)
+        {//Amazon item loot generator
+            bool stateBefore = useModdedHasUnlock;
+            useModdedHasUnlock = false;
+            orig(self);
+            useModdedHasUnlock = stateBefore;
+        }
+
         private static void OnDropBlueprint(Hook_ShopMimic.orig_dropBlueprint orig, ShopMimic self)
         {//2 ShopMimic
             useModdedHasUnlock = true;
@@ -160,9 +169,10 @@ namespace DeadCellsArchipelago {
 
         private static bool OnCheckUnlocked(Hook__HeadCheckHelper.orig_checkUnlocked orig, dc.String itemKind)
         {//at least 13 heads
+            bool stateBefore = useModdedHasUnlock;
             useModdedHasUnlock = true;
             var res = orig(itemKind);
-            useModdedHasUnlock = false;
+            useModdedHasUnlock = stateBefore;
             return res;
         }
 
@@ -224,7 +234,7 @@ namespace DeadCellsArchipelago {
             useModdedHasUnlock = false;
         }
 
-        private static void onActivateMerchant(Hook_Merchant.orig_onActivate orig, Merchant self, Hero by, bool lp)
+        private static void OnActivateMerchant(Hook_Merchant.orig_onActivate orig, Merchant self, Hero by, bool lp)
         {//Pan (part2)
             useModdedHasUnlock = true;
             orig(self, by, lp);

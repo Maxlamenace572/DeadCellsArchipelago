@@ -1,5 +1,4 @@
-﻿using dc.en;
-using ModCore.Mods;
+﻿using ModCore.Mods;
 using ModCore.Utilities;
 using Serilog;
 using static DeadCellsArchipelago.BossManager;
@@ -27,18 +26,12 @@ using Newtonsoft.Json;
 using dc;
 using dc.hl.types;
 using dc.cine;
-using dc.tool.hero;
 using HaxeProxy.Runtime;
-using dc.en.inter;
-using dc.ui;
 using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
 using ModCore.Events.Interfaces.Game;
-using dc.ui.pause;
-using dc.ui.icon;
 
 namespace DeadCellsArchipelago{
-    //E:\SteamLibrary\steamapps\common\Dead Cells\coremod\core\host\startup -> path to launch DeadCellsModding.exe
     public class ModEntry(ModInfo info) : ModBase(info), 
         IOnAfterLoadingSave,
         IOnBeforeSavingSave,
@@ -76,6 +69,7 @@ namespace DeadCellsArchipelago{
             //SaveChoice
             //BrBlueprint
             //BossRushData
+            //for biome rando: LevelTransition.Class.@goto("Lighthouse".AsHaxeString());
         }
 
         public void OnHeroUpdate(double dt)
