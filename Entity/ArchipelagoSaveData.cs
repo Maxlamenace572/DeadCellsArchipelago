@@ -17,6 +17,14 @@ namespace DeadCellsArchipelago {
         public int bscLevelToWin = 4;
         public int numberOfPokebombUse = 1;
         public string currentLevelId = "PrisonStart";
+        public string archipelagoSeed = "";
+
+        public void InitValues(int bsc, string seed)
+        {
+            if (archipelagoSeed != "") return;
+            bscLevelToWin = bsc;
+            archipelagoSeed = seed;
+        }
 
         public void SaveCheckSent(string checkName)
         {

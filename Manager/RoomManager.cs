@@ -47,7 +47,6 @@ namespace DeadCellsArchipelago {
             Hook_Portal.close += OnClosePortal;
             Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
 
-
             Log.Information("[AP] Room Hooks loaded");
         }
 
@@ -93,7 +92,7 @@ namespace DeadCellsArchipelago {
                 if(SAVED_DATA != null && SAVED_DATA.currentLevelId != "PrisonStart" && !resetOnNextPrisonStart)
                 {
                     PrepareBiomeCheck(SAVED_DATA.currentLevelId, " Exit", ldat.id.ToString());
-                    if (USER != null) SAVED_DATA.numberOfPokebombUse = USER.bossRuneActivated+1;
+                    if (USER != null) SAVED_DATA.numberOfPokebombUse += USER.bossRuneActivated+1;
                     shouldGiveItemsNewRun = true;
                 }
                 if (resetOnNextPrisonStart)

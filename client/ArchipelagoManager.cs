@@ -10,12 +10,13 @@ using static DeadCellsArchipelago.BlueprintManager;
 using System.Collections.ObjectModel;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using System.Net.WebSockets;
+using dc;
 
 namespace DeadCellsArchipelago
 {
     public class ArchipelagoManager
     {
-        private ArchipelagoSession? session;
+        public ArchipelagoSession? session;
         public DeathLinkManager? deathLinkManager;
         public DamageLinkManager? damageLinkManager;
         public HealthLinkManager? healthLinkManager;
@@ -197,7 +198,7 @@ namespace DeadCellsArchipelago
             {
                 SendCheck(check.Key, check.Value, "");
                 SAVED_DATA.OfflineChecks.Remove(check.Key);
-                if (USER != null) SAVED_DATA.RemoveFromOfflineChecksJson(check.Key, USER.userId);
+                if (USER != null) SAVED_DATA.RemoveFromOfflineChecksJson(check.Key, (int) Main.Class.ME.options.curSlot!);
             }
         }
 
@@ -295,7 +296,7 @@ namespace DeadCellsArchipelago
             SAVED_DATA.SaveCheckSent(internalId);
             if(USER != null)
             {
-                SAVED_DATA.AppendToSentChecksJson(internalId, USER.userId);
+                SAVED_DATA.AppendToSentChecksJson(internalId, (int) Main.Class.ME.options.curSlot!);
             }
         }
 

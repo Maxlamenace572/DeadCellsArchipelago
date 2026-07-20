@@ -33,8 +33,6 @@ namespace DeadCellsArchipelago {
             Hook_Queen.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_DookuBeast.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
             Hook_Collector.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-
-            
             
             Log.Information("[AP] Boss Hooks loaded");
         }

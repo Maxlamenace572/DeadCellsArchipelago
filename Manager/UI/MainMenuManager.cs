@@ -11,6 +11,7 @@ using static DeadCellsArchipelago.RoomManager;
 using Newtonsoft.Json;
 using System.Text.Json;
 using Serilog;
+using Hashlink.Virtuals;
 
 namespace DeadCellsArchipelago {
     public static class MainMenuManager
@@ -302,10 +303,11 @@ namespace DeadCellsArchipelago {
                             connectionStatus.set_textColor(2883371);
                             ARCHIPELAGO = archipelago;
                             SetApworldVersion();
-                            
+
                             if (SAVED_DATA != null)
                             {
                                 ARCHIPELAGO.SyncAll();
+                                SAVED_DATA.InitValues(ARCHIPELAGO.bscOption, ARCHIPELAGO.session!.RoomState.Seed);
                             }
                         }
                         else
@@ -314,6 +316,7 @@ namespace DeadCellsArchipelago {
                             connectionStatus.set_textColor(16711680);
                             archipelago.Disconnect();
                         }
+                        CalculatePlayButton(self);
                     },
                     onMove = (e) =>
                     {
@@ -329,6 +332,8 @@ namespace DeadCellsArchipelago {
             SetValueFields();
 
             orig(self);
+
+            CalculatePlayButton(self);
         }
 
         private static void OnOnResize(Hook_TitleScreen.orig_onResize orig, TitleScreen self)
@@ -506,13 +511,41 @@ namespace DeadCellsArchipelago {
         public static string? GetModVersion()
         {
                 var json = File.ReadAllText(GetModInfoFilePath());
-                using JsonDocument document = JsonDocument.Parse(json);
+                JsonDocument document = JsonDocument.Parse(json);
                 return document.RootElement.GetProperty("version").GetString();
         }
 
         public static string GetModInfoFilePath()
         {
             return Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "modinfo.json");
+        }
+
+        public static bool CanPlay()
+        {
+            if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return true;
+            
+            var savePath = GetSaveFilePath((int) Main.Class.ME.options.curSlot!);
+            if (!File.Exists(savePath)) return true;
+
+            JsonDocument document = JsonDocument.Parse(File.ReadAllText(savePath));
+            return document.RootElement.GetProperty("archipelagoSeed").GetString() == ARCHIPELAGO.session!.RoomState.Seed;
+        }
+
+        public static void CalculatePlayButton(TitleScreen self)
+        {
+            virtual_cb_help_inter_isEnable_t_<bool> menuItem = self.menuItems.getDyn(0).ToVirtual<virtual_cb_help_inter_isEnable_t_<bool>>();
+            if (CanPlay())
+            {
+                menuItem.t.set_textColor(16777215);
+                menuItem.isEnable = true;
+            }
+            else
+            {
+                string oldText = menuItem.t.text.ToString();
+                menuItem.t.set_text($"{oldText} (seed not matching)".AsHaxeString());
+                menuItem.t.set_textColor(9868950);
+                menuItem.isEnable = false;
+            }
         }
     }
 }

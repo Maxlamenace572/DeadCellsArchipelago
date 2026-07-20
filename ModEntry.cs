@@ -62,11 +62,11 @@ namespace DeadCellsArchipelago{
             InitializePokeHooks();
             InitializeUnlockItemHooks();
             InitializePauseHooks();
+            InitializeModAssetHooks();
             
             Hook_LevelGen.generate += OnLevelGenGenerate;
 
             Log.Information("[AP] Archipelago hooks loaded");
-            //SaveChoice
             //BrBlueprint
             //BossRushData
             //for biome rando: LevelTransition.Class.@goto("Lighthouse".AsHaxeString());
@@ -148,10 +148,10 @@ namespace DeadCellsArchipelago{
             {
                 USER = data;
 
-                Log.Information($"[AP] Loading save slot {data.userId}");
+                Log.Information($"[AP] Loading save slot {Main.Class.ME.options.curSlot}");
                 
                 // Load Archipelago data for this game
-                var savePath = GetSaveFilePath(data.userId);
+                var savePath = GetSaveFilePath((int) Main.Class.ME.options.curSlot!);
                 if (System.IO.File.Exists(savePath))
                 {
                     try
@@ -184,15 +184,15 @@ namespace DeadCellsArchipelago{
             }
             if(ARCHIPELAGO != null)
             {
-                SAVED_DATA.bscLevelToWin = ARCHIPELAGO.bscOption;
+                SAVED_DATA.InitValues(ARCHIPELAGO.bscOption, ARCHIPELAGO.session!.RoomState.Seed);
             }
         }
         
         public void OnBeforeSavingSave(IOnBeforeSavingSave.EventData data)
         {
-            Log.Information($"[AP] Saving slot {data.Data.userId}");
+            Log.Information($"[AP] Saving slot {Main.Class.ME.options.curSlot}");
             
-            var savePath = GetSaveFilePath(data.Data.userId);
+            var savePath = GetSaveFilePath((int) Main.Class.ME.options.curSlot!);
             try
             {
                 var json = JsonConvert.SerializeObject(SAVED_DATA, Formatting.Indented);
