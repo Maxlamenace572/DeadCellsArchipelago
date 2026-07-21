@@ -29,6 +29,7 @@ namespace DeadCellsArchipelago {
         public static string lastCompatibleApworld = "0.1.4";
         public static double screenScale;
         public static bool newConnection = true;
+        public static string? oldText = null;
 
         public static void InitializeMainMenuHooks()
         {
@@ -522,9 +523,9 @@ namespace DeadCellsArchipelago {
 
         public static bool CanPlay()
         {
-            if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return true;
-            
             var savePath = GetSaveFilePath((int) Main.Class.ME.options.curSlot!);
+            if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return File.Exists(savePath);
+            
             if (!File.Exists(savePath)) return true;
 
             JsonDocument document = JsonDocument.Parse(File.ReadAllText(savePath));
@@ -536,13 +537,15 @@ namespace DeadCellsArchipelago {
             virtual_cb_help_inter_isEnable_t_<bool> menuItem = self.menuItems.getDyn(0).ToVirtual<virtual_cb_help_inter_isEnable_t_<bool>>();
             if (CanPlay())
             {
+                if (oldText != null) menuItem.t.set_text(oldText.AsHaxeString());
                 menuItem.t.set_textColor(16777215);
                 menuItem.isEnable = true;
             }
             else
             {
-                string oldText = menuItem.t.text.ToString();
-                menuItem.t.set_text($"{oldText} (seed not matching)".AsHaxeString());
+                oldText ??= menuItem.t.text.ToString();
+                if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) menuItem.t.set_text($"{oldText} (not connected)".AsHaxeString());
+                else menuItem.t.set_text($"{oldText} (seed not matching)".AsHaxeString());
                 menuItem.t.set_textColor(9868950);
                 menuItem.isEnable = false;
             }
