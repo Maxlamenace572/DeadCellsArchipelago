@@ -184,8 +184,9 @@ namespace DeadCellsArchipelago{
             }
             if(ARCHIPELAGO != null)
             {
-                SAVED_DATA.InitValues(ARCHIPELAGO.bscOption, ARCHIPELAGO.session!.RoomState.Seed);
+                SAVED_DATA.InitValues(ARCHIPELAGO.session!.RoomState.Seed);
             }
+            LoadGlobalData();
         }
         
         public void OnBeforeSavingSave(IOnBeforeSavingSave.EventData data)

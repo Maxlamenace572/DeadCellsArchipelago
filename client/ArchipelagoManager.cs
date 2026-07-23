@@ -294,10 +294,7 @@ namespace DeadCellsArchipelago
             if (SAVED_DATA == null) return;
 
             SAVED_DATA.SaveCheckSent(internalId);
-            if(USER != null)
-            {
-                SAVED_DATA.AppendToSentChecksJson(internalId, (int) Main.Class.ME.options.curSlot!);
-            }
+            SAVED_DATA.AppendToSentChecksJson(internalId, (int) Main.Class.ME.options.curSlot!);
         }
 
         public void SendVictory()

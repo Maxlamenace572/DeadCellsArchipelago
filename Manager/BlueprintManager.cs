@@ -44,7 +44,7 @@ namespace DeadCellsArchipelago {
         private static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
         {
             //the blueprint is comming from the game, so we need to send a archipelago check
-            if(!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics))
+            if(!InCosmeticList(k.ToString()) || GLOBAL_DATA!.includeCosmetics)
             {
                 SendBlueprintCheck(k.ToString());
                 return true;
@@ -76,7 +76,7 @@ namespace DeadCellsArchipelago {
         //hasRevealedItem allow or not the blueprint to spawn
         private static bool ReallyHasBlueprint(Hook_ItemMetaManager.orig_hasRevealedItem orig, ItemMetaManager self, dc.String k)
         {
-            if((!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)) && !useOriginalHasRevealItem)
+            if((!InCosmeticList(k.ToString()) || GLOBAL_DATA!.includeCosmetics) && !useOriginalHasRevealItem)
             {
                 return SAVED_DATA != null && SAVED_DATA.IsCheckSent(k.ToString()); //Drop the blueprint only when he is not in the saved checklist
             }
@@ -101,7 +101,7 @@ namespace DeadCellsArchipelago {
             {
                 orig(self, k, baseRarity, isRevealed, false);
             }
-            if (ARCHIPELAGO != null && !ARCHIPELAGO.includeCosmetics && InCosmeticList(k.ToString()))
+            if (!GLOBAL_DATA!.includeCosmetics && InCosmeticList(k.ToString()))
             {
                 orig(self, k, baseRarity, isRevealed, false);
             }
@@ -109,7 +109,7 @@ namespace DeadCellsArchipelago {
 
         private static void HeadUILog(Hook_LogManager.orig_head orig, LogManager self, dc.String headKind)
         {
-            if (ARCHIPELAGO != null && !ARCHIPELAGO.includeCosmetics)
+            if (!GLOBAL_DATA!.includeCosmetics)
             {
                 orig(self, headKind);
             }

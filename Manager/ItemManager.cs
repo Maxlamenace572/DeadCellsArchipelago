@@ -21,6 +21,7 @@ namespace DeadCellsArchipelago {
     {
         public static Hero? HERO { get; set; }
         public static ArchipelagoSaveData? SAVED_DATA { get; set; } = null;
+        public static GlobalData? GLOBAL_DATA { get; set; } = null;
         public static ArchipelagoManager? ARCHIPELAGO { get; set; }
         public static User? USER { get; set; }
         public static bool useOriginalUnlockItem { get; set; } = false;
@@ -599,7 +600,11 @@ namespace DeadCellsArchipelago {
         {
             if(USER != null && USER.game != null)
             {
-                if(USER.game.log == null) Log.Error($"[AP] game's log at null");
+                if(USER.game.log == null)
+                {
+                    Log.Error($"[AP] game's log at null");
+                    USER.game.log = new LogManager(Main.Class.ME);
+                }
 
                 showBlueprintLog = true;
                 USER.game.log?.blueprint(itemId.AsHaxeString(), "Always".AsHaxeString(), false, false);
@@ -620,7 +625,7 @@ namespace DeadCellsArchipelago {
         private static bool OnUnlockItem(Hook_ItemMetaManager.orig_unlockItem orig, ItemMetaManager self, dc.String k)
         {
             //Log.Warning($"||| This method was called for {k} in on unlock |||");//to be removed when all unlocked item with this are found
-            if(!useOriginalUnlockItem && (!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)))
+            if(!useOriginalUnlockItem && (!InCosmeticList(k.ToString()) || GLOBAL_DATA!.includeCosmetics))
             {
                 SendItemWithoutBlueprintCheck(k.ToString());
                 return false;
@@ -630,7 +635,7 @@ namespace DeadCellsArchipelago {
 
         private static bool OnRevealItem(Hook_ItemMetaManager.orig_revealItem orig, ItemMetaManager self, dc.String k, bool showAsNew)
         {
-            if(!useOriginalRevealItem && (!InCosmeticList(k.ToString()) || (ARCHIPELAGO != null && ARCHIPELAGO.includeCosmetics)))
+            if(!useOriginalRevealItem && (!InCosmeticList(k.ToString()) || GLOBAL_DATA!.includeCosmetics))
             {
                 SendItemWithoutBlueprintCheck(k.ToString());
                 return false;
@@ -697,7 +702,7 @@ namespace DeadCellsArchipelago {
                     return SAVED_DATA.IsCheckSent(k.ToString());
                 }
 
-                if (useModdedHasUnlock && ARCHIPELAGO != null && (!InCosmeticList(k.ToString()) || ARCHIPELAGO.includeCosmetics))
+                if (useModdedHasUnlock && (!InCosmeticList(k.ToString()) || GLOBAL_DATA!.includeCosmetics))
                 {
                     return SAVED_DATA.IsCheckSent(k.ToString());
                 }

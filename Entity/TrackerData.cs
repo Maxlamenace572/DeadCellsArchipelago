@@ -39,9 +39,9 @@ namespace DeadCellsArchipelago
                         {
                             foreach (Source source in entry.Value.sources)
                             {
-                                if(CanGoDLC(source.dlc) && SAVED_DATA != null)
+                                if(CanGoDLC(source.dlc) && GLOBAL_DATA != null)
                                 {
-                                    for (int i = source.min_bc; i <= Math.Min(source.max_bc, SAVED_DATA.bscLevelToWin); i++)
+                                    for (int i = source.min_bc; i <= Math.Min(source.max_bc, GLOBAL_DATA.bscLevelToWin); i++)
                                     {
                                         key = source.biome + i;
                                         IncToDict(ref res, key, entry.Key);
@@ -79,29 +79,29 @@ namespace DeadCellsArchipelago
 
             public static bool CanGoDLC(string dlc)
             {
-                if (ARCHIPELAGO == null) return false;
+                if (GLOBAL_DATA == null) return false;
                 switch (dlc)
                 {
                     case "":
                         return true;
                     case "RiseOfTheGiant":
-                        return ARCHIPELAGO.riseOfTheGiant;
+                        return GLOBAL_DATA.riseOfTheGiant;
                     case "TheBadSeed":
-                        return ARCHIPELAGO.theBadSeed;
+                        return GLOBAL_DATA.theBadSeed;
                     case "FatalFalls":
-                        return ARCHIPELAGO.fatalFalls;
+                        return GLOBAL_DATA.fatalFalls;
                     case "TheQueenAndTheSea":
-                        return ARCHIPELAGO.theQueenAndTheSea;
+                        return GLOBAL_DATA.theQueenAndTheSea;
                     case "Purple":
-                        return ARCHIPELAGO.returnToCastlevania;
+                        return GLOBAL_DATA.returnToCastlevania;
                 }
                 return false;
             }
 
             public static bool CanCosmetics(string type)
             {
-                if (ARCHIPELAGO == null) return false;
-                if (type == "skin" || type == "head") return ARCHIPELAGO.includeCosmetics;
+                if (GLOBAL_DATA == null) return false;
+                if (type == "skin" || type == "head") return GLOBAL_DATA.includeCosmetics;
                 return true;
             }
 

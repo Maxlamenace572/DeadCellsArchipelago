@@ -8,6 +8,7 @@ using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.RoomManager;
+using static DeadCellsArchipelago.ItemQueue;
 using Newtonsoft.Json;
 using System.Text.Json;
 using Serilog;
@@ -46,6 +47,7 @@ namespace DeadCellsArchipelago {
 
         private static void OnMainMenu(Hook_TitleScreen.orig_mainMenu orig, TitleScreen self)
         {
+            oldText = null;
             screenScale = dc.libs.Process.Class.CUSTOM_STAGE_WIDTH / 1920.0;
 
             self.news.hidden = true;
@@ -307,15 +309,29 @@ namespace DeadCellsArchipelago {
 
                             if (SAVED_DATA != null)
                             {
-                                ARCHIPELAGO.SyncAll();
-                                SAVED_DATA.InitValues(ARCHIPELAGO.bscOption, ARCHIPELAGO.session!.RoomState.Seed);
+                                if (SAVED_DATA.archipelagoSeed == "" || SAVED_DATA.archipelagoSeed == ARCHIPELAGO.session!.RoomState.Seed)
+                                {
+                                    ARCHIPELAGO.SyncAll();
+                                    SAVED_DATA.InitValues(ARCHIPELAGO.session!.RoomState.Seed);
+                                    LoadGlobalData();
+                                }
+                                else
+                                {
+                                    ClearQueues();
+                                    connectionStatus.set_text("Seed not Matching".AsHaxeString());
+                                    connectionStatus.set_textColor(16711680);
+                                    archipelago.Disconnect();
+                                    apVersion?.set_visible(false);
+                                }
                             }
                         }
                         else
                         {
+                            ClearQueues();
                             connectionStatus.set_text("Failed to Connect".AsHaxeString());
                             connectionStatus.set_textColor(16711680);
                             archipelago.Disconnect();
+                            apVersion?.set_visible(false);
                         }
                         CalculatePlayButton(self);
                     },
@@ -349,6 +365,7 @@ namespace DeadCellsArchipelago {
 
         private static void OnPlayMenu(Hook_TitleScreen.orig_playMenu orig, TitleScreen self)
         {
+            oldText = null;
             loadDataInPlayMenu = 1;
             orig(self);
             if(loadDataInPlayMenu != 0) loadDataInPlayMenu = 2;
@@ -460,6 +477,8 @@ namespace DeadCellsArchipelago {
 
             else
                 apVersion.set_textColor(2883371);
+
+            apVersion.set_visible(true);
         }
 
         public static int Compare(string a, string b)

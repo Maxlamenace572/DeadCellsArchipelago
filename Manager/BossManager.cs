@@ -50,8 +50,8 @@ namespace DeadCellsArchipelago {
                 case "Queen":
                 case "DookuBeast":
                     disableTrapOnEndBoss = true;
-                    if (ARCHIPELAGO != null && SAVED_DATA != null && USER != null &&
-                        SAVED_DATA.bscLevelToWin == USER.bossRuneActivated)
+                    if (ARCHIPELAGO != null && GLOBAL_DATA != null && USER != null &&
+                        GLOBAL_DATA.bscLevelToWin == USER.bossRuneActivated)
                     {
                         ARCHIPELAGO.SendVictory();
                     }

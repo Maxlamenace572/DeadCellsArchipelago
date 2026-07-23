@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using static DeadCellsArchipelago.ModAssetManager;
+using static DeadCellsArchipelago.ItemManager;
 
 namespace DeadCellsArchipelago {
     public class ArchipelagoSaveData
@@ -14,15 +15,13 @@ namespace DeadCellsArchipelago {
         public Dictionary<string, int> ReceivedFillerItem { get; set; } = [];
         public Dictionary<string, int> GivenFillerItem { get; set; } = [];
         public bool isDoingChallenge = false;
-        public int bscLevelToWin = 4;
         public int numberOfPokebombUse = 1;
         public string currentLevelId = "PrisonStart";
         public string archipelagoSeed = "";
 
-        public void InitValues(int bsc, string seed)
+        public void InitValues(string seed)
         {
             if (archipelagoSeed != "") return;
-            bscLevelToWin = bsc;
             archipelagoSeed = seed;
         }
 
@@ -154,6 +153,11 @@ namespace DeadCellsArchipelago {
         public void AppendToSentChecksJson(string value, int slot)
         {
             var savePath = GetSaveFilePath(slot);
+            if (!File.Exists(savePath))
+            {
+                var saveJson = JsonConvert.SerializeObject(SAVED_DATA, Formatting.Indented);
+                File.WriteAllText(savePath, saveJson);
+            }
             var json = File.ReadAllText(savePath);
             var jObject = JObject.Parse(json);
 
