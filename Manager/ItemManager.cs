@@ -307,6 +307,7 @@ namespace DeadCellsArchipelago {
                     return true;
                 case "BossRushUnlock":
                     LogItem(itemName);
+                    AddToHistory(LogName);
                     USER?.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
                     return true;
             }
