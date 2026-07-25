@@ -18,7 +18,7 @@ namespace DeadCellsArchipelago {
         public static DefaultPause? defaultPause;
         public static bool showClassicMenu { get; set; } = true;
         public static Bitmap? logoBitmap = null;
-        public static bool changedMethodCall = false;
+        public static HlAction? modifiedUponClosing;
         public static bool changedMethodCallController = false;
         public static dc.ui.Text? apMenuButton = null;
         public static SkillShop skillShopMenu = new SkillShop(50, 150);
@@ -133,16 +133,16 @@ namespace DeadCellsArchipelago {
 
         private static void AddMenuButton(DefaultPause self)
         {
-            if (!changedMethodCall)
+            if (modifiedUponClosing == null)
             {
-                changedMethodCall = true;
                 HlAction previousAction = self.uponClosing;
-                self.uponClosing = () =>
+                modifiedUponClosing = () =>
                 {
                     previousAction.Invoke();
                     ResetUI();
                 };
             }
+            self.uponClosing = modifiedUponClosing;
 
             if (!changedMethodCallController)
             {
@@ -979,7 +979,6 @@ namespace DeadCellsArchipelago {
         {
             screenBitmap = null;
             logoBitmap = null;
-            changedMethodCall = false;
             apMenuButton = null;
             skillShopMenu.Reset();
             cellBitmap = null;
