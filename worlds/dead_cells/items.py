@@ -80,7 +80,8 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Progressive Stem Cell":(0x0008, PROG, DLC_BASE),
     
     "Crowned Key":          (0x0010, PROG, DLC_BASE),
-    "Boss Rush Unlock":       (0x0011, PROG, DLC_BASE),
+    "Boss Rush Unlock":     (0x0011, PROG, DLC_BASE),
+    "Bank Unlock":          (0x0012, PROG, DLC_BASE),
   
 
     # ── Meta Upgrades (Useful) ────────────────────────────────────────

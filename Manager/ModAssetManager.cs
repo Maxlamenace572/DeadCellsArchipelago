@@ -2,6 +2,7 @@
 using dc;
 using dc.h2d;
 using dc.tool;
+using dc.ui;
 using Newtonsoft.Json;
 using Serilog;
 using static DeadCellsArchipelago.ImageManager;
@@ -19,6 +20,7 @@ namespace DeadCellsArchipelago {
 
             Hook__Save.copy += OnCopy;
             Hook__Save.delete += OnDelete;
+            Hook_HUD.postUpdate += OnPostUpdateHUD;
 
             Log.Information("[AP] Mod Asset Hooks loaded");
         }
@@ -83,6 +85,12 @@ namespace DeadCellsArchipelago {
                 var json = JsonConvert.SerializeObject(GLOBAL_DATA, Formatting.Indented);
                 System.IO.File.WriteAllText(savePath, json);
             }
+        }
+
+        private static void OnPostUpdateHUD(Hook_HUD.orig_postUpdate orig, HUD self)
+        {
+            orig(self);
+            self.bmpMod.set_visible(false);
         }
     }
 }

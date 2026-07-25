@@ -17,6 +17,7 @@ using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.EnemyManager;
 using Hashlink.Proxy;
+using dc.cine;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager
@@ -46,6 +47,8 @@ namespace DeadCellsArchipelago {
             Hook_TreasureChest.onActivate += OnActivateTreasureChest;
             Hook_Portal.close += OnClosePortal;
             Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
+            Hook_Transition.checkForBank += OnCheckForBank;
+            Hook_BankEntering.enterBank += OnEnterBank;
 
             Log.Information("[AP] Room Hooks loaded");
         }
@@ -94,6 +97,7 @@ namespace DeadCellsArchipelago {
                     PrepareBiomeCheck(SAVED_DATA.currentLevelId, " Exit", ldat.id.ToString());
                     if (USER != null) SAVED_DATA.numberOfPokebombUse += USER.bossRuneActivated+1;
                     shouldGiveItemsNewRun = true;
+                    SAVED_DATA.hasDoneBank = false;
                 }
                 if (resetOnNextPrisonStart)
                 {
@@ -220,6 +224,37 @@ namespace DeadCellsArchipelago {
                 SAVED_DATA.isDoingChallenge = !SAVED_DATA.isDoingChallenge;
             }
             orig(self);
+        }
+
+        
+
+        private static void OnEnterBank(Hook_BankEntering.orig_enterBank orig, BankEntering self)
+        {
+            SAVED_DATA!.hasDoneBank = true;
+            orig(self);
+        }
+
+        private static bool OnCheckForBank(Hook_Transition.orig_checkForBank orig, Transition self)
+        {
+            if(SAVED_DATA == null || !SAVED_DATA.IsItemReceived("BankUnlock") || SAVED_DATA.hasDoneBank) return false;
+
+            if (new [] {"T_Bridge", "T_BeholderPit", "T_SwampHeart", "T_TopClockTower", "T_Giant", "T_Throne",
+                "T_ThroneAfterDistillery", "T_ThroneAfterGiant", "T_Observatory", "T_GardenerStage", "T_Queen", "T_Lighthouse",
+                "T_DeathArena", "T_DookuArena"}.Any(self.lInfos.id.ToString().Contains)) return false;
+
+            foreach (var nextLevel in self.lInfos.nextLevels)
+            {
+                foreach (var lvl in Data.Class.level.all)
+                {
+                    if (lvl.worldDepth == Data.Class.level.byId.get((dc.String) nextLevel.level).worldDepth
+                        && lvl.group == 0 && self.user.userStats.hasSeenLevel((dc.String) lvl.id))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private static void OnActivateTrainingDoor(Hook_TrainingDoor.orig_onActivate orig, TrainingDoor self, Hero by, bool longPress)

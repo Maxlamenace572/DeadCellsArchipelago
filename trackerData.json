@@ -9383,5 +9383,29 @@
                 "type": "blueprint_floor"
             }
         ]
+    },
+    "BankUnlock": {
+        "type": "rune",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "Throne",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": ""
+            },
+            {
+                "biome": "QueenArena",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "TheQueenAndTheSea"
+            },
+            {
+                "biome": "DookuArena",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "Purple"
+            }
+        ]
     }
 }

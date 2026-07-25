@@ -2150,6 +2150,9 @@ LOCATION_TABLE: Dict[str, dict] = {
 	"Radiant Triumph Outfit": {"id": 0x026A, "region": "BossRush", "type": "skin", "dlc": "", "item": "VictoriusBeheaded3", "sources": [{'biome': 'BossRush', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
     "Peril Glyphs": {"id": 0x026B, "region": "BossRush", "type": "blueprint_floor", "dlc": "", "item": "HydraSpell", "sources": [{'biome': 'BossRush', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
     "Taunt": {"id": 0x026C, "region": "BossRush", "type": "blueprint_floor", "dlc": "", "item": "Taunt", "sources": [{'biome': 'BossRush', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+    
+    "Bank Unlock": {"id": 0x026D, "region": "Checks", "type": "rune", "dlc": "", "item": "BankUnlock", 
+        "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'rune'}, {'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'rune'}, {'biome': 'DookuArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'rune'}],},
 }
 
 def location_id(name: str) -> int:

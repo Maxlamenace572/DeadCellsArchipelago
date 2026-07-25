@@ -310,6 +310,10 @@ namespace DeadCellsArchipelago {
                     AddToHistory(LogName);
                     USER?.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
                     return true;
+                case "BankUnlock":
+                    LogItem(itemName);
+                    AddToHistory(LogName);
+                    return true;
             }
             if (itemName.Length >= 5 && itemName[..5] == "Trap_")
             {

@@ -462,6 +462,27 @@ def _head_count(count: int):
             if state.has(head, world.player)
         ) >= count
     )
+    
+def _can_reach_depth(depth: int):
+    """Rule: player can enter any biome of this depth."""
+    biomesDepth = [
+        ["Prisoners' Quarters Enter"],
+        ["Promenade of the Condemned Enter", "Toxic Sewers Enter", "Prison Depths Enter", "Corrupted Prison Enter",
+            "Dilapidated Arboretum Enter", "Castle Outskirts Enter"],
+        ["Ramparts Enter", "Ossuary Enter", "Ancient Sewers Enter", "Morass of the Banished Enter", "Dracula's Castle Enter"],
+        ["Black Bridge Enter", "Insufferable Crypt Enter", "Nest Enter", "Defiled Necropolis Enter"],
+        ["Stilt Village Enter", "Slumbering Sanctuary Enter", "Graveyard Enter", "Fractured Shrines Enter"],
+        ["Clock Tower Enter", "Forgotten Sepulcher Enter", "Cavern Enter", "Undying Shores Enter"],
+        ["Clock Room Enter", "Guardian's Haven Enter", "Mausoleum Enter"],
+        ["High Peak Castle Enter", "Derelict Distillery Enter", "Infested Shipwreck Enter", "2nd Dracula's Castle Enter"],
+        ["Throne Room Enter", "Lighthouse Enter", "Master's Keep Enter"],
+        ["Astrolab Enter"],
+        ["Observatory Enter", "Crown Enter"]
+    ]
+    return lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in biomesDepth[depth]
+        )
 
 def _can_reach_location_if_exists(state, world, loc_name: str) -> bool:
     try:
@@ -691,6 +712,53 @@ LOCATION_RULES = [
     ("Peril Glyphs", _boss_rush_trials_1_2()),
     ("Taunt", _boss_rush_trials_1_2()), 
     ("Wish", _boss_rush_trials_3_4()),
+    
+    
+    # ── Bank Items with depth ────────────────────────────────────────────────
+    ("Spite Sword", _can_reach_depth(2)),
+    ("Frostbite", _can_reach_depth(2)),
+    ("Cluster Grenade", _can_reach_depth(2)),
+    ("Heavy Turret", _can_reach_depth(2)),
+    ("Demon Outfit", _can_reach_depth(2)),
+    ("No Mercy", _can_reach_depth(2)),
+    ("Barbed Tips", _can_reach_depth(2)),
+    ("Hattori's Katana", _can_reach_depth(2)),
+    ("Blade Master's Outfit", _can_reach_depth(2)),
+    ("Spiked Boots", _can_reach_depth(2)),
+    ("Barnacle", _can_reach_depth(2)),
+    ("Armadillopack", _can_reach_depth(2)),
+    ("Seismic Strike", _can_reach_depth(2)),
+    ("A Thousand and One Nights Outfit", _can_reach_depth(2)),
+    ("Lightning Bolt", _can_reach_depth(4)),
+    ("Vampirism", _can_reach_depth(4)),
+    ("Wrenching Whip", _can_reach_depth(4)),
+    ("Heart of Ice", _can_reach_depth(4)),
+    ("Scavenged Bombard", _can_reach_depth(4)),
+    ("Ranger's Gear", _can_reach_depth(4)),
+    ("Hokuto's Bow", _can_reach_depth(4)),
+    ("Dictator Outfit", _can_reach_depth(4)),
+    ("Grappling Hook", _can_reach_depth(4)),
+    ("Knockback Shield", _can_reach_depth(4)),
+    ("Robin Hood Outfit", _can_reach_depth(4)),
+    ("Hayabusa Boots", _can_reach_depth(5)),
+    ("Repeater Crossbow", _can_reach_depth(5)),
+    ("Shrapnel Axes", _can_reach_depth(5)),
+    ("Drifter Outfit", _can_reach_depth(5)),
+    ("Point Blank", _can_reach_depth(5)),
+    ("Death Orb", _can_reach_depth(5)),
+    ("Spiked Shield", _can_reach_depth(5)),
+    ("Magic Missiles", _can_reach_depth(5)),
+    ("Shaman Outfit", _can_reach_depth(5)),
+    ("Wave of Denial", _can_reach_depth(7)),
+    ("Powerful Grenade", _can_reach_depth(7)),
+    ("Crusher", _can_reach_depth(7)),
+    ("Open Wounds", _can_reach_depth(7)),
+    ("Carduus Outfit", _can_reach_depth(7)),
+    ("Tornado", _can_reach_depth(7)),
+    ("Soldier's Resistance", _can_reach_depth(7)),
+    ("Hayabusa Gauntlets", _can_reach_depth(7)),
+    ("Dead Inside", _can_reach_depth(7)),
+    ("Barrel Launcher", _can_reach_depth(7)),
 
 
     # ── Half life lore room ──────────────────────────────────────────────────

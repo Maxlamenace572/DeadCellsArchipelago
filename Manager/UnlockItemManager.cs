@@ -7,7 +7,6 @@ using dc.en.inter;
 using dc.en.inter.npc;
 using dc.en.mob;
 using dc.en.mob.boss;
-using dc.haxe;
 using dc.level;
 using dc.level.lore;
 using dc.level.@struct;
