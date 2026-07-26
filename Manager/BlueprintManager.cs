@@ -87,11 +87,11 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck(blueprintId, blueprintId, "Blueprint:");
+                ARCHIPELAGO.SendCheck(blueprintId);
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(blueprintId, blueprintId);
+                SAVED_DATA?.SaveOfflineCheck(blueprintId);
             }
         }
 

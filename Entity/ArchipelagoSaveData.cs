@@ -3,12 +3,13 @@ using Newtonsoft.Json.Linq;
 
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.ItemManager;
+using dc.haxe;
 
 namespace DeadCellsArchipelago {
     public class ArchipelagoSaveData
     {
         public HashSet<string> SentChecks { get; set; } = [];
-        public Dictionary<string, string> OfflineChecks { get; set; } = [];
+        public HashSet<string> OfflineChecks { get; set; } = [];
         public HashSet<string> ReceivedItem { get; set; } = [];
         public HashSet<string> BaseItemUnlocked { get; set; } = [];
         public Dictionary<string, int> ReceivedProgressionItem { get; set; } = [];
@@ -31,9 +32,9 @@ namespace DeadCellsArchipelago {
             SentChecks.Add(checkName);
         }
 
-        public void SaveOfflineCheck(string internalId, string locationName)
+        public void SaveOfflineCheck(string internalId)
         {
-            OfflineChecks[internalId] = locationName;
+            OfflineChecks.Add(internalId);
         }
 
         public void SaveItemReceived(string itemName)
@@ -84,7 +85,7 @@ namespace DeadCellsArchipelago {
 
         public bool IsCheckSent(string checkName)
         {
-            return SentChecks.Contains(checkName) || OfflineChecks.ContainsKey(checkName);
+            return SentChecks.Contains(checkName) || OfflineChecks.Contains(checkName);
         }
 
         public bool IsItemReceived(string itemName)
@@ -176,12 +177,10 @@ namespace DeadCellsArchipelago {
             var json = File.ReadAllText(savePath);
             var jObject = JObject.Parse(json);
 
-            var dict = (JObject?)jObject["OfflineChecks"];
+            var array = (JArray?)jObject["OfflineChecks"];
+            var token = array?.FirstOrDefault(t => t.Value<string>() == value);
 
-            if (dict?.Property(value) != null)
-            {
-                dict.Property(value)!.Remove();
-            }
+            token?.Remove();
 
             File.WriteAllText(savePath, jObject.ToString(Formatting.Indented));
         }

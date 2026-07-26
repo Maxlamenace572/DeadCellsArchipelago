@@ -39,7 +39,7 @@ namespace DeadCellsArchipelago {
 
         private static void OnBossKilled(string bossName)
         {
-            if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent(bossName)){
+            if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent("Boss_" + bossName)){
                 SendBossCheck(bossName);
                 SendUTBossCheckHelper(bossName);
             }
@@ -73,23 +73,25 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck("Boss_" + bossName, bossName, "Boss:");
+                ARCHIPELAGO.SendCheck("Boss_" + bossName);
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck("Boss_" + bossName, bossName);
+                SAVED_DATA?.SaveOfflineCheck("Boss_" + bossName);
             }
         }
 
         public static void SendUTBossCheckHelper(string bossName)
         {
+            if (bossName.ToString().Length >= 6 && bossName.ToString()[..6] == "Amazon") return;
+
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck("D_" + bossName, bossName, "Boss:");
+                ARCHIPELAGO.SendCheck("D_" + bossName);
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck("D_" + bossName, bossName);
+                SAVED_DATA?.SaveOfflineCheck("D_" + bossName);
             }
         }
     }

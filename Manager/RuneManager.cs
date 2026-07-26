@@ -137,11 +137,11 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck(runeId, runeId, "Rune:");
+                ARCHIPELAGO.SendCheck(runeId);
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(runeId, runeId);
+                SAVED_DATA?.SaveOfflineCheck(runeId);
             }
         }
 
@@ -162,11 +162,11 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck(bscId, bscId, "BSC:");
+                ARCHIPELAGO.SendCheck(bscId);
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(bscId, bscId);
+                SAVED_DATA?.SaveOfflineCheck(bscId);
             }
         }
 

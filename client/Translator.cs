@@ -36,16 +36,46 @@ namespace DeadCellsArchipelago
 
         public static bool IdToNameKeyExist(string id)
         {
+            if (id.Length >= 6)
+            {
+                if (id[^6..] == " Enter")
+                {
+                    return IdToApName.ContainsKey(id[..^6]);
+                } else if (id[^5..] == " Exit")
+                {
+                    return IdToApName.ContainsKey(id[..^5]);
+                }
+            }
             return IdToApName.ContainsKey(id);
         }
 
         public static bool NameToIdKeyExist(string name)
         {
+            if (name.Length >= 6)
+            {
+                if (name[^6..] == " Enter")
+                {
+                    return ApNameToId.ContainsKey(name[..^6]);
+                } else if (name[^5..] == " Exit")
+                {
+                    return ApNameToId.ContainsKey(name[..^5]);
+                }
+            }
             return ApNameToId.ContainsKey(name);
         }
 
         public static string GetName(string id)
         {
+            if (id.Length >= 6)
+            {
+                if (id[^6..] == " Enter")
+                {
+                    return $"{IdToApName[id[..^6]]} Enter";
+                } else if (id[^5..] == " Exit")
+                {
+                    return $"{IdToApName[id[..^5]]} Exit";
+                }
+            }
             return IdToApName[id];
         }
 

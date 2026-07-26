@@ -142,16 +142,17 @@ namespace DeadCellsArchipelago
             }
         }
         
-        public void SendCheck(string locationName, string internalId, string message)
+        public void SendCheck(string internalId)
         {
             if (!isConnected || session == null)
             {
-                SAVED_DATA?.SaveOfflineCheck(internalId, locationName);
+                SAVED_DATA?.SaveOfflineCheck(internalId);
                 return;
             }
             
             try
             {
+                string locationName = internalId;
                 if (IdToNameKeyExist(locationName))
                 {
                     locationName = GetName(locationName);
@@ -194,11 +195,11 @@ namespace DeadCellsArchipelago
         {
             if (SAVED_DATA == null) return;
 
-            foreach(KeyValuePair<string, string> check in SAVED_DATA.OfflineChecks)
+            foreach(string check in SAVED_DATA.OfflineChecks)
             {
-                SendCheck(check.Key, check.Value, "");
-                SAVED_DATA.OfflineChecks.Remove(check.Key);
-                if (USER != null) SAVED_DATA.RemoveFromOfflineChecksJson(check.Key, (int) Main.Class.ME.options.curSlot!);
+                SendCheck(check);
+                SAVED_DATA.OfflineChecks.Remove(check);
+                SAVED_DATA.RemoveFromOfflineChecksJson(check, (int) Main.Class.ME.options.curSlot!);
             }
         }
 

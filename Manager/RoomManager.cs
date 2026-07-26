@@ -132,15 +132,15 @@ namespace DeadCellsArchipelago {
             return orig(self, user, seed, ldat, resetCount);
         }
 
-        public static void SendBiomeCheck(string locationId, string locationSaveId)
+        public static void SendBiomeCheck(string locationId)
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck(locationId, locationSaveId, "Biome:");
+                ARCHIPELAGO.SendCheck(locationId);
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(locationId, locationSaveId);
+                SAVED_DATA?.SaveOfflineCheck(locationId);
             }
         }
 
@@ -177,7 +177,7 @@ namespace DeadCellsArchipelago {
                     by.addCells(10, new Ref<bool>(ref noStats));
                     if(SAVED_DATA != null) SAVED_DATA.currentLevelId = self.destLevel.ToString();
                 }
-                else
+                else if (self.destLevel.ToString() != "BossRushHUB")
                 {
                     PrepareBiomeCheck(self.destLevel.ToString(), " Enter", self.destLevel.ToString());
                     if(SAVED_DATA != null && USER != null) SAVED_DATA.numberOfPokebombUse += USER.bossRuneActivated+1;
@@ -275,7 +275,7 @@ namespace DeadCellsArchipelago {
 
                 if(!SAVED_DATA.IsCheckSent(locationId + kind))
                 {
-                    SendBiomeCheck(locationName + kind, locationId + kind);
+                    SendBiomeCheck(locationId + kind);
                 }
                 SAVED_DATA.currentLevelId = destinationId;
             }

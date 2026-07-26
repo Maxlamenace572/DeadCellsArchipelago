@@ -679,16 +679,17 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO != null)
             {
-                ARCHIPELAGO.SendCheck(itemId, itemId, "Item:");
+                ARCHIPELAGO.SendCheck(itemId);
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(itemId, itemId);
+                SAVED_DATA?.SaveOfflineCheck(itemId);
             }
         }
 
         private static bool OnInvestOnItemProgress(Hook_ItemMetaManager.orig_investOnItemProgress orig, ItemMetaManager self, dc.String k)
-        {
+        {//
+        //ItemProgress
             var isUnlocked = orig(self, k);
             if(isUnlocked && IsUnlockedByDefault(k.ToString()) && SAVED_DATA != null)
             {
@@ -952,5 +953,10 @@ namespace DeadCellsArchipelago {
             orig(self, by);
             if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("ShipwreckKey")) USER?.story.counters.set("seenStaphyCine".AsHaxeString(), 1);
         }
+/*
+        private static void SetItemProgression(ItemMetaManager self, dc.String itemId, int number)
+        {
+            
+        }*/
     }
 }
