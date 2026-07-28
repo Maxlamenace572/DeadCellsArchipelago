@@ -1,9 +1,12 @@
+using dc;
 using dc.level;
+using dc.tool;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
 using Serilog;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuneManager;
+using static DeadCellsArchipelago.BossManager;
 
 namespace DeadCellsArchipelago {
     public static class EnemyManager
@@ -19,6 +22,7 @@ namespace DeadCellsArchipelago {
             Hook_LootGen.generateLootOnMobs += OnGenerateLootOnMobs;
             Hook_MobsGen.getLifeTier += OnGetLifeTier;
             Hook_MobsGen.getDmgTier += OnGetDmgTier;
+            Hook_UserStats.getKilledMobCount += OnGetKilledMobCount;
             
             Log.Information("[AP] Enemy Hooks loaded");
         }
@@ -109,6 +113,14 @@ namespace DeadCellsArchipelago {
         {
             if (changeNextCallDmgTier) return orig(self, map, room, levelMaxDist) + GetDailyDmg();
             return orig(self, map, room, levelMaxDist);
+        }
+
+        private static int OnGetKilledMobCount(Hook_UserStats.orig_getKilledMobCount orig, UserStats self, dc.String mk)
+        {
+            if (IsBossHead(mk.ToString()) && GLOBAL_DATA != null)
+                return GLOBAL_DATA.BossHeadKilled[mk.ToString()];
+
+            return orig(self, mk);
         }
     }
 }

@@ -3,8 +3,6 @@ using dc.en;
 using dc.en.mob;
 using dc.en.mob.boss;
 using dc.en.mob.boss.death;
-using dc.hl.types;
-using ModCore.Utilities;
 using Serilog;
 using static DeadCellsArchipelago.ItemManager;
 
@@ -15,30 +13,37 @@ namespace DeadCellsArchipelago {
         {
             Log.Information("[AP] Loading Boss Hooks...");
             
-            Hook_Behemoth.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_Beholder.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_MamaTick.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_Death.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+            Hook_Behemoth.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_Beholder.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_MamaTick.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_Death.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
 
-            Hook_TimeKeeper.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_Giant.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_GardenerBoss.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+            Hook_TimeKeeper.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_Giant.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_GardenerBoss.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
 
-            Hook_KingsHand.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+            Hook_KingsHand.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
 
-            Hook_AmazonBrutal.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_AmazonTactic.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_AmazonSurvival.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+            Hook_AmazonBrutal.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_AmazonTactic.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_AmazonSurvival.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
 
-            Hook_Queen.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_DookuBeast.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
-            Hook_Collector.onDie += (orig, self) => { orig(self); OnBossKilled(self._infos.id.ToString()); };
+            Hook_Queen.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_DookuBeast.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
+            Hook_Collector.onDie += (orig, self) => { OnBossKilled(self._infos.id.ToString()); orig(self); };
             
             Log.Information("[AP] Boss Hooks loaded");
         }
 
         private static void OnBossKilled(string bossName)
         {
+            if (IsBossHead(bossName) && GLOBAL_DATA != null)
+            {
+                if (!GLOBAL_DATA.BossHeadKilled.ContainsKey(bossName)) GLOBAL_DATA.BossHeadKilled[bossName] = 0;
+                GLOBAL_DATA.BossHeadKilled[bossName]++;
+                GLOBAL_DATA.SaveGlobalSaveJson();
+            }
+
             if (SAVED_DATA != null && !SAVED_DATA.IsCheckSent("Boss_" + bossName)){
                 SendBossCheck(bossName);
                 SendUTBossCheckHelper(bossName);
@@ -93,6 +98,12 @@ namespace DeadCellsArchipelago {
             {
                 SAVED_DATA?.SaveOfflineCheck("D_" + bossName);
             }
+        }
+
+        public static bool IsBossHead(string mob)
+        {
+            return new [] {"Behemoth", "Beholder", "MamaTick", "TimeKeeper", "Giant", "GardenerBoss", "KingsHand", "Queen",
+                "Collector", "AmazonBrutal", "AmazonTactic", "AmazonSurvival"}.Any(mob.Contains);
         }
     }
 }

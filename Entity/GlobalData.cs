@@ -14,6 +14,7 @@ namespace DeadCellsArchipelago {
         public bool theQueenAndTheSea = false;
         public bool returnToCastlevania = false;
         public Dictionary<string, int> ProgressionItem { get; set; } = [];
+        public Dictionary<string, int> BossHeadKilled { get; set; } = [];
         public Dictionary<int, int> ProgressionForge { get; set; } = [];
         public int currentCells = 0;
 
