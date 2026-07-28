@@ -52,6 +52,7 @@ namespace DeadCellsArchipelago {
             Hook_CollectorPanel.userFilter += OnUserFilter;
             Hook_ItemMetaManager.countUnlockedItems += OnCountUnlockedItems;
             Hook_ItemMetaManager.investOnItemProgress += OnInvestOnItemProgress;
+            Hook_ItemMetaManager.f_investOn += OnF_investOn;
             Hook_ItemMetaManager.hasUnlockedItem += OnHasUnlockedItem;
             Hook_HiddenTrigger.trigger += OnHiddenTrigger;
             
@@ -688,14 +689,21 @@ namespace DeadCellsArchipelago {
         }
 
         private static bool OnInvestOnItemProgress(Hook_ItemMetaManager.orig_investOnItemProgress orig, ItemMetaManager self, dc.String k)
-        {//
-        //ItemProgress
+        {
             var isUnlocked = orig(self, k);
+            SetItemProgression(self, k, isUnlocked);
             if(isUnlocked && IsUnlockedByDefault(k.ToString()) && SAVED_DATA != null)
             {
                 SAVED_DATA.AddBaseItemUnlocked(k.ToString());
             }
             return isUnlocked;
+        }
+
+        private static bool OnF_investOn(Hook_ItemMetaManager.orig_f_investOn orig, ItemMetaManager self, int upLevel)
+        {
+            bool res = orig(self, upLevel);
+            SetForgeProgression(self, upLevel);
+            return res;
         }
 
         private static bool OnHasUnlockedItem(Hook_ItemMetaManager.orig_hasUnlockedItem orig, ItemMetaManager self, dc.String k)
@@ -953,10 +961,22 @@ namespace DeadCellsArchipelago {
             orig(self, by);
             if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("ShipwreckKey")) USER?.story.counters.set("seenStaphyCine".AsHaxeString(), 1);
         }
-/*
-        private static void SetItemProgression(ItemMetaManager self, dc.String itemId, int number)
+
+        private static void SetItemProgression(ItemMetaManager self, dc.String itemId, bool isUnlocked)
         {
-            
-        }*/
+            if (GLOBAL_DATA == null) return;
+            ItemProgress ip = self.getItemProgress(itemId);
+            if (isUnlocked) GLOBAL_DATA.ProgressionItem[itemId.ToString()] = -1;
+            else GLOBAL_DATA.ProgressionItem[itemId.ToString()] = ip.investedCells;
+            GLOBAL_DATA.SaveGlobalSaveJson();
+        }
+
+        private static void SetForgeProgression(ItemMetaManager self, int upLevel)
+        {
+            if (GLOBAL_DATA == null) return;
+            int cells = self.forgeInvestedCells.get(upLevel);
+            GLOBAL_DATA.ProgressionForge[upLevel] = cells;
+            GLOBAL_DATA.SaveGlobalSaveJson();
+        }
     }
 }

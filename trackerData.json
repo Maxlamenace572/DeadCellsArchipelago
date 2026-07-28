@@ -1589,7 +1589,7 @@
         "sources": [
             {
                 "biome": "PrisonStart",
-                "min_bc": 5,
+                "min_bc": 0,
                 "max_bc": 5,
                 "dlc": ""
             }

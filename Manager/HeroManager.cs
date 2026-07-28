@@ -35,6 +35,7 @@ namespace DeadCellsArchipelago {
             Hook_Hero.init += OnHeroInit;
             Hook_Hero.onDie += OnHeroDie;
             Hook_Hero.addCells += OnAddCells;
+            Hook_Hero.substractCells += OnSubstractCells;
             Hook_Controller.bind += OnBind;
             Hook_Hero.hudInitItems += OnHudInitItems;
             Hook_Hero.onDamage += OnHeroOnDamage;
@@ -202,6 +203,15 @@ namespace DeadCellsArchipelago {
         {
             v *= 4;
             orig(self, v, noStats);
+            GLOBAL_DATA?.currentCells = self.cells;
+            GLOBAL_DATA?.SaveGlobalSaveJson();
+        }
+
+        private static void OnSubstractCells(Hook_Hero.orig_substractCells orig, Hero self, int v, Ref<bool> noStats)
+        {
+            orig(self, v, noStats);
+            GLOBAL_DATA?.currentCells = self.cells;
+            GLOBAL_DATA?.SaveGlobalSaveJson();
         }
 
         private static void OnBind(Hook_Controller.orig_bind orig, Controller self, int k, int? padKeyA, int? padKeyB, int? padKeyC, int? keyboardKey, int? alternate1, int? alternate2, bool? forceBindings_normal)

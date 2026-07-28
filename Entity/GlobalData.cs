@@ -1,3 +1,8 @@
+using static DeadCellsArchipelago.ModAssetManager;
+using static DeadCellsArchipelago.ItemManager;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace DeadCellsArchipelago {
     public class GlobalData
     {
@@ -8,6 +13,9 @@ namespace DeadCellsArchipelago {
         public bool fatalFalls = false;
         public bool theQueenAndTheSea = false;
         public bool returnToCastlevania = false;
+        public Dictionary<string, int> ProgressionItem { get; set; } = [];
+        public Dictionary<int, int> ProgressionForge { get; set; } = [];
+        public int currentCells = 0;
 
         public void InitValues(int bsc, bool cosmetics, bool rotg, bool tbs, bool ff, bool tqats, bool rtc)
         {
@@ -18,6 +26,14 @@ namespace DeadCellsArchipelago {
             fatalFalls = ff;
             theQueenAndTheSea = tqats;
             returnToCastlevania = rtc;
+        }
+
+        public void SaveGlobalSaveJson()
+        {
+            if (SAVED_DATA == null) return;
+            var savePath = GetGlobalSaveFilePath(SAVED_DATA.archipelagoSeed);
+            var saveJson = JsonConvert.SerializeObject(GLOBAL_DATA, Formatting.Indented);
+            File.WriteAllText(savePath, saveJson);
         }
     }
 }
