@@ -846,6 +846,18 @@ LOCATION_RULES = [
     ("Golden Outfit", _has("The Specialist's Showroom")),
 
     # ── Heads ────────────────────────────────────────────────────────────────
+    ("Flawless Torch",
+        _can_reach_location_if_exists("Kleio"),
+        _can_reach_location_if_exists("The Concierge"),
+        _can_reach_location_if_exists("Conjunctivius"),
+        _can_reach_location_if_exists("The Collector"),
+        _can_reach_location_if_exists("Scarecrow"),
+        _can_reach_location_if_exists("The Giant"),
+        _can_reach_location_if_exists("The Hand of the King"),
+        _can_reach_location_if_exists("Mama Tick"),
+        _can_reach_location_if_exists("The Queen"),
+        _can_reach_location_if_exists("The Time Keeper")),
+    
     ("Leghugger Head", _has("Leghugger")),
 
     ("Mushroom Boi Cap", _has("Mushroom Boi!")),
