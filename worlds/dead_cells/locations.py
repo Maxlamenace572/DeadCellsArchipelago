@@ -2027,10 +2027,10 @@ LOCATION_TABLE: Dict[str, dict] = {
         "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "StaphyHead",
         "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'item_no_blueprint'}],
     },
-    "Flawless Torch": { #todo might need DLCs
+    "Flawless Torch": {
         "id": 0x0244, "region": "Checks", "type": "head",
-        "dlc": "", "min_bc": 0, "item": "Flawless",
-        "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "dlc": "RiseOfTheGiant", "min_bc": 5, "item": "Flawless",
+        "sources": [{'biome': 'Observatory', 'min_bc': 5, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'item_no_blueprint'}],
     },
     "Cell Head": {
         "id": 0x0245, "region": "Checks", "type": "head",

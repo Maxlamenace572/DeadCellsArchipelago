@@ -8990,13 +8990,13 @@
     },
     "Flawless": {
         "type": "head",
-        "dlc": "",
+        "dlc": "RiseOfTheGiant",
         "sources": [
             {
-                "biome": "Throne",
-                "min_bc": 0,
+                "biome": "Observatory",
+                "min_bc": 5,
                 "max_bc": 5,
-                "dlc": ""
+                "dlc": "RiseOfTheGiant"
             }
         ]
     },

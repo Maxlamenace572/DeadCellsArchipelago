@@ -361,14 +361,11 @@ def _has_and_bsc(item: str, level: int):
     )
 
 
-def _skin_count(count: int):
+def _reach_skin_count(count: int):
     """Rule: player has received at least `count` skin items."""
-    return lambda world: (
-        lambda state: sum(
-            1 for skin in SKIN_ITEMS
-            if state.has(skin, world.player)
+    return lambda world:  lambda state: sum(
+            1 for skin in SKIN_ITEMS if _can_reach_location_if_exists(state, world, skin)
         ) >= count
-    )
 
 
 def _boss_killed(location: str):
@@ -817,21 +814,14 @@ LOCATION_RULES = [
     (
         "Sewing Scissors",
         lambda world: lambda state:
-            _skin_count(16)(world)(state)
-            or state.can_reach("Throne", "Region", world.player)
+            _reach_skin_count(16)(world)(state)
     ),
 
     (
-    "Giant Comb",
-    lambda world: (
-        lambda state:
-            _skin_count(51)(world)(state)
-            or (
-                state.can_reach("Throne", "Region", world.player)
-                and get_bc_level(state, world.player) >= 5
-            )
-    )
-),
+        "Giant Comb",
+        lambda world: lambda state:
+            _reach_skin_count(51)(world)(state)
+    ),
 
     # ── King outfit chain ────────────────────────────────────────────────────
     ("King Outfit", _boss_killed("The Collector")),
@@ -847,16 +837,17 @@ LOCATION_RULES = [
 
     # ── Heads ────────────────────────────────────────────────────────────────
     ("Flawless Torch",
-        _can_reach_location_if_exists("Kleio"),
-        _can_reach_location_if_exists("The Concierge"),
-        _can_reach_location_if_exists("Conjunctivius"),
-        _can_reach_location_if_exists("The Collector"),
-        _can_reach_location_if_exists("Scarecrow"),
-        _can_reach_location_if_exists("The Giant"),
-        _can_reach_location_if_exists("The Hand of the King"),
-        _can_reach_location_if_exists("Mama Tick"),
-        _can_reach_location_if_exists("The Queen"),
-        _can_reach_location_if_exists("The Time Keeper")),
+        lambda world: lambda state:
+            _can_reach_location_if_exists(state, world, "Kleio") and
+            _can_reach_location_if_exists(state, world, "The Concierge") and
+            _can_reach_location_if_exists(state, world, "Conjunctivius") and
+            _can_reach_location_if_exists(state, world, "The Collector") and
+            _can_reach_location_if_exists(state, world, "Scarecrow") and
+            _can_reach_location_if_exists(state, world, "The Giant") and
+            _can_reach_location_if_exists(state, world, "The Hand of the King") and
+            _can_reach_location_if_exists(state, world, "Mama Tick") and
+            _can_reach_location_if_exists(state, world, "The Queen") and
+            _can_reach_location_if_exists(state, world, "The Time Keeper")),
     
     ("Leghugger Head", _has("Leghugger")),
 
