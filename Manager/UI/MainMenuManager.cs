@@ -30,6 +30,7 @@ namespace DeadCellsArchipelago {
         public static string lastCompatibleApworld = "0.1.4";
         public static double screenScale;
         public static bool newConnection = true;
+        public static bool syncGlobalData = true;
         public static string? oldText = null;
 
         public static void InitializeMainMenuHooks()
@@ -451,6 +452,7 @@ namespace DeadCellsArchipelago {
             resetOnNextPrisonStart = false;
             levelMapChallenge = null;
             newConnection = true;
+            syncGlobalData = true;
         }
 
         private static void SetApworldVersion()

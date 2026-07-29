@@ -30,6 +30,8 @@ using HaxeProxy.Runtime;
 using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
 using ModCore.Events.Interfaces.Game;
+using dc.en;
+using dc.pr;
 
 namespace DeadCellsArchipelago{
     public class ModEntry(ModInfo info) : ModBase(info), 
@@ -105,6 +107,12 @@ namespace DeadCellsArchipelago{
                 {
                     LoadLinks();
                     newConnection = false;
+                }
+
+                if (IsItemQueueEmpty() && syncGlobalData)
+                {
+                    SyncGlobalDataToGame();
+                    syncGlobalData = false;
                 }
             }
 

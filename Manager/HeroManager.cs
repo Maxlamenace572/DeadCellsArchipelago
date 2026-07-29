@@ -78,7 +78,7 @@ namespace DeadCellsArchipelago {
 
         public static void ResetDataNewRun()
         {
-            if(SAVED_DATA != null)
+            if(SAVED_DATA != null && GLOBAL_DATA != null)
             {
                 SAVED_DATA.currentLevelId = "PrisonStart";
                 SAVED_DATA.isDoingChallenge = false;
@@ -88,6 +88,8 @@ namespace DeadCellsArchipelago {
                 trapChallengeStartEntered = false;
                 trapChallengeCurseReceived = false;
                 shouldGiveItemsNewRun = true;
+                GLOBAL_DATA.currentCells = 0;
+                GLOBAL_DATA.SaveGlobalSaveJson();
             }
         }
 

@@ -76,7 +76,7 @@ namespace DeadCellsArchipelago {
             }
         }
 
-        private static void OnGenerateLootOnMobs(dc.level.Hook_LootGen.orig_generateLootOnMobs orig, dc.level.LootGen self)
+        private static void OnGenerateLootOnMobs(Hook_LootGen.orig_generateLootOnMobs orig, LootGen self)
         {
             useOriginalHasPermanentItem = false;
             orig(self);

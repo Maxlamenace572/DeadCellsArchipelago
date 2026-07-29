@@ -15,6 +15,7 @@ using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.RoomManager;
 using static DeadCellsArchipelago.BlueprintManager;
 using static DeadCellsArchipelago.PokeManager;
+using dc.pr;
 
 namespace DeadCellsArchipelago {
     public static class ItemManager
@@ -977,6 +978,26 @@ namespace DeadCellsArchipelago {
             int cells = self.forgeInvestedCells.get(upLevel);
             GLOBAL_DATA.ProgressionForge[upLevel] = cells;
             GLOBAL_DATA.SaveGlobalSaveJson();
+        }
+
+        public static void SyncGlobalDataToGame()
+        {
+            if (GLOBAL_DATA == null || HERO == null) return;
+
+            AddCells(GLOBAL_DATA.currentCells - HERO.cells);
+
+            ItemMetaManager itemMeta = Game.Class.ME.user.itemMeta;
+            foreach(KeyValuePair<int, int> pf in GLOBAL_DATA.ProgressionForge)
+            {
+                itemMeta.forgeInvestedCells.set(pf.Key, pf.Value);
+            }
+
+            foreach(KeyValuePair<string, int> pi in GLOBAL_DATA.ProgressionItem)
+            {
+                ItemProgress ip = itemMeta.getItemProgress(pi.Key.AsHaxeString());
+                if (pi.Value == -1) ip.unlocked = true;
+                else ip.investedCells = pi.Value;
+            }
         }
     }
 }
