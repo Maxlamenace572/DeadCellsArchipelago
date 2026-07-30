@@ -8862,7 +8862,7 @@
         "sources": [
             {
                 "biome": "PrisonStart",
-                "min_bc": 2,
+                "min_bc": 0,
                 "max_bc": 5,
                 "dlc": ""
             }
@@ -8970,7 +8970,7 @@
         "sources": [
             {
                 "biome": "PrisonStart",
-                "min_bc": 0,
+                "min_bc": 5,
                 "max_bc": 5,
                 "dlc": ""
             }

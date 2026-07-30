@@ -343,7 +343,7 @@ ITEM_TABLE: Dict[str, tuple] = {
 	"Get Rich Quick":                (0x0832, USFL, DLC_BASE),
 	"Midas' Blood":                  (0x0833, USFL, DLC_BASE),
 	"Wish":                          (0x0834, USFL, DLC_BASE),
-	"Cursed Flask":                  (0x0835, USFL, DLC_BASE),
+	"Cursed Flask":                  (0x0835, PROG, DLC_BASE),
 	"Damned Vigor":                  (0x0836, USFL, DLC_BASE),
 	"Demon Strength":                (0x0837, USFL, DLC_BASE),
 

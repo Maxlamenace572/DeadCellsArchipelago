@@ -24,6 +24,7 @@ Adding new rules:
 
 from typing import TYPE_CHECKING, List
 from worlds.dead_cells.items import ITEM_TABLE
+from worlds.dead_cells.locations import LOCATION_TABLE
 from worlds.generic.Rules import add_rule
 
 if TYPE_CHECKING:
@@ -240,42 +241,42 @@ HEAD_ITEMS = [
     # black hole variants
     "Black Hole",
     "White Hole",
-    "Violet Hole",
-    "Red Hole",
+##    "Violet Hole", already unlocked
+#    "Red Hole", #to avoid recursion error on head count rule, thoses are removed too
     "Green Hole",
     "Blue Hole",
 
     # vortex heads
-    "Vortex",
+##    "Vortex",
     "Sanguine Vortex",
     "Abyssal Vortex",
-    "Dark Vortex",
+#    "Dark Vortex",
 
     # misc
     "Guillain Head",
-    "Pecheur Head",
-    "Staphy Head",
+#    "Fisherman Hood",
+    "Leghugger Head",
     "Flawless Torch",
     "Cell Head",
     "Evil Minion Head",
 
     # blob heads
     "Toxic Blob",
-    "Magma Flame",
-    "Shadow Flame",
+    "Magma Blob",
+    "Shadow Blob",
     "Sweet Blob",
 
     # glitch heads
     "Glitch Head",
-    "Spacial Anomaly",
+#    "Spatial Anomaly",
     "Menacing Anomaly",
 
     # mushroom
-    "Mushroom Boi Head",
+    "Mushroom Boi Cap",
 
     # torch heads
     "Dark Blowtorch",
-    "Blowtorch",
+##    "Blowtorch",
     "Golden Blowtorch",
     "Bright Red Blowtorch",
 
@@ -449,16 +450,13 @@ def _boss_rush_trials_3_4():
         )
     )
 
-def _head_count(count: int):
+def _reach_head_count(count: int):
     """
     Rule: player has received at least `count` head cosmetics.
     """
-    return lambda world: (
-        lambda state: sum(
-            1 for head in HEAD_ITEMS
-            if state.has(head, world.player)
+    return lambda world:  lambda state: sum(
+            1 for head in HEAD_ITEMS if _can_reach_location_if_exists(state, world, head)
         ) >= count
-    )
     
 def _can_reach_depth(depth: int):
     """Rule: player can enter any biome of this depth."""
@@ -487,6 +485,13 @@ def _can_reach_location_if_exists(state, world, loc_name: str) -> bool:
     except KeyError:
         return False
     return state.can_reach_location(loc_name, world.player)
+
+def _can_reach_nb_item_locations(nb: int):
+    return lambda world:  lambda state: sum(
+            1 for loc_name, loc_data in LOCATION_TABLE.items()
+                if loc_data["type"] in ("skin", "item_no_blueprint", "blueprint_floor", "blueprint_enemy") and
+                    _can_reach_location_if_exists(state, world, loc_name)
+        ) >= nb
 
 def set_rules(world):
     """
@@ -874,31 +879,19 @@ LOCATION_RULES = [
 
     ("Spatial Anomaly",
      lambda world: lambda state:
-        _head_count(35)(world)(state) 
-        or (state.can_reach("Throne", "Region", world.player)
-        and get_bc_level(state, world.player) >= 5)),
+        _reach_head_count(31)(world)(state)),
 
     ("Red Hole",
     lambda world: lambda state: 
-        _head_count(7)(world)(state)
-        or state.can_reach("Throne", "Region", world.player)
-    ),
+        _reach_head_count(7)(world)(state)),
 
     ("Fisherman Hood",
     lambda world: lambda state: 
-        _head_count(40)(world)(state)
-        or (
-                state.can_reach("Throne", "Region", world.player)
-                and get_bc_level(state, world.player) >= 5
-    )),
+        _reach_head_count(35)(world)(state)),
     
     ("Dark Vortex",
     lambda world: lambda state: 
-        _head_count(15)(world)(state)
-        or (
-                state.can_reach("Throne", "Region", world.player)
-                and get_bc_level(state, world.player) >= 5
-    )),
+        _reach_head_count(14)(world)(state)),
 
     ("Blue Hole",
     lambda world: (
@@ -923,15 +916,8 @@ LOCATION_RULES = [
             and state.count("Progressive Gold Reserves", world.player) >= 5
     )),
     
-    ("Green Hole",
-    lambda world: (
-        lambda state:
-            sum(
-                state.count(item, world.player)
-                for item, data in ITEM_TABLE.items()
-                if 0x0200 <= data[0] <= 0x07FF
-            ) >= 75
-    )),
+    ("Green Hole", _can_reach_nb_item_locations(75)),
+    ("White Hole", _has("Cursed Flask"))
 ]
 
 

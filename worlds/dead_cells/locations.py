@@ -1974,8 +1974,8 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "White Hole": {
         "id": 0x0239, "region": "Checks", "type": "head",
-        "dlc": "", "min_bc": 2, "item": "BlackHoleWhite",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "dlc": "", "min_bc": 0, "item": "BlackHoleWhite",
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
     },
     "Red Hole": {
         "id": 0x023A, "region": "Checks", "type": "head",
@@ -2019,8 +2019,8 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Fisherman Hood": {
         "id": 0x0242, "region": "Checks", "type": "head",
-        "dlc": "", "min_bc": 0, "item": "Pecheur",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "dlc": "", "min_bc": 5, "item": "Pecheur",
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 5, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
     },
     "Leghugger Head": {
         "id": 0x0243, "region": "Checks", "type": "head",
