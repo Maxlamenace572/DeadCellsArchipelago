@@ -396,10 +396,10 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Blue Sapphire":                        (0x1102, FILR, DLC_BASE),
     "Amethyst":                             (0x1103, FILR, DLC_BASE),
     "Malachite":                            (0x1104, FILR, DLC_BASE),
-    "Ingot":                                (0x1105, FILR, DLC_BASE),
-    "Shiny Rock":                           (0x1106, FILR, DLC_BASE),
+    "Shiny Pebble":                         (0x1105, FILR, DLC_BASE),
+    "Ingot":                           (0x1106, FILR, DLC_BASE),
     "Gold Tooth":                           (0x1107, FILR, DLC_BASE),
-    "Gold Cell":                          (0x1108, FILR, DLC_BASE),
+    "Gold Cell":                            (0x1108, FILR, DLC_BASE),
     "Golden Arrow":                         (0x1109, FILR, DLC_BASE),
     "Corrupted Artifact":                   (0x110A, FILR, DLC_BASE),
 
