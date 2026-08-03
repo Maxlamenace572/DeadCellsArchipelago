@@ -13,6 +13,7 @@ using Serilog;
 
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.PokeManager;
 
 namespace DeadCellsArchipelago {
     public class SkillShopSlot
@@ -280,6 +281,7 @@ namespace DeadCellsArchipelago {
                 if (cellsNumber != null)
                     cellsNumber.set_text($" {HERO.cells}".AsHaxeString());
 
+                ResetFrontPokebomb();
                 SAVED_DATA?.numberOfPokebombUse += USER.bossRuneActivated+1;
             }
             else
