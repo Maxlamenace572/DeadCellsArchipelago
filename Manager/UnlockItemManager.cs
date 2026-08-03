@@ -19,6 +19,7 @@ using Hashlink.Virtuals;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
 using static DeadCellsArchipelago.ItemManager;
+using static DeadCellsArchipelago.RuneManager;
 
 namespace DeadCellsArchipelago {
     public static class UnlockItemManager
@@ -66,6 +67,7 @@ namespace DeadCellsArchipelago {
             Hook_User.countUnlockedSkin += OnCountUnlockedSkin;
             Hook__HeadCheckHelper.checkGlitch += OnCheckGlitch;
             Hook_TailorDaughter.checkHeads += OnCheckHeads;
+            Hook_Knight.onFocus += OnFocusKnight;
 
             Serilog.Log.Information("[AP] Special Unlock Hooks loaded");
         }
@@ -337,6 +339,13 @@ namespace DeadCellsArchipelago {
             bool res = orig(self);
             useModdedHasUnlock = false;
             return res;
+        }
+
+        private static void OnFocusKnight(Hook_Knight.orig_onFocus orig, Knight self)
+        {//TrainingUnlock
+            useOriginalHasPermanentItem = false;
+            orig(self);
+            useOriginalHasPermanentItem = true;
         }
     }
 }

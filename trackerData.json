@@ -935,6 +935,30 @@
             }
         ]
     },
+    "RichterCastle Enter": {
+        "type": "biome_enter",
+        "dlc": "Purple",
+        "sources": [
+            {
+                "biome": "DookuCastleHard",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "Purple"
+            }
+        ]
+    },
+    "RichterCastle Exit": {
+        "type": "biome_exit",
+        "dlc": "Purple",
+        "sources": [
+            {
+                "biome": "DookuCastleHard",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "Purple"
+            }
+        ]
+    },
     "LadderKey": {
         "type": "rune",
         "dlc": "",
@@ -7519,13 +7543,13 @@
     },
     "ShipwreckKey": {
         "type": "item_no_blueprint",
-        "dlc": "",
+        "dlc": "TheQueenAndTheSea",
         "sources": [
             {
                 "biome": "StiltVillage",
                 "min_bc": 0,
                 "max_bc": 5,
-                "dlc": ""
+                "dlc": "TheQueenAndTheSea"
             }
         ]
     },
@@ -9402,6 +9426,78 @@
             },
             {
                 "biome": "DookuArena",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "Purple"
+            }
+        ]
+    },
+    "BossRushStatue": {
+        "type": "blueprint_floor",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "CavernKey": {
+        "type": "item_no_blueprint",
+        "dlc": "RiseOfTheGiant",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "RiseOfTheGiant"
+            }
+        ]
+    },
+    "TrainingUnlock": {
+        "type": "item_no_blueprint",
+        "dlc": "",
+        "sources": [
+            {
+                "biome": "PrisonStart",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": ""
+            }
+        ]
+    },
+    "RichterDashKey": {
+        "type": "rune",
+        "dlc": "Purple",
+        "sources": [
+            {
+                "biome": "DookuCastleHard",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "Purple"
+            }
+        ]
+    },
+    "RichterUppercutKey": {
+        "type": "rune",
+        "dlc": "Purple",
+        "sources": [
+            {
+                "biome": "DookuCastleHard",
+                "min_bc": 0,
+                "max_bc": 5,
+                "dlc": "Purple"
+            }
+        ]
+    },
+    "TPSword": {
+        "type": "blueprint_floor",
+        "dlc": "Purple",
+        "sources": [
+            {
+                "biome": "DookuCastleHard",
                 "min_bc": 0,
                 "max_bc": 5,
                 "dlc": "Purple"

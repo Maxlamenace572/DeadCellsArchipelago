@@ -864,7 +864,7 @@ LOCATION_RULES = [
 
     ("Boss Cell Head", _bsc(5)),
 
-    ("Guillain Head", _boss_rush_trials_1_2()),
+    ("Guillain Head", _has("Boss Rush Unlock") and _has("Boss Rush Statue")),
 
     ("Concierge Flame", _boss_rush_trials_1_2()),
     ("Conjunctivius Tentacles", _boss_rush_trials_1_2()),
@@ -917,7 +917,13 @@ LOCATION_RULES = [
     )),
     
     ("Green Hole", _can_reach_nb_item_locations(75)),
-    ("White Hole", _has("Cursed Flask"))
+    ("White Hole", _has("Cursed Flask")),
+    
+    ("Boss Rush Statue", _boss_rush_trials_1_2()),
+    ("Cavern Key", _has("Homunculus Rune") and _has("Hand of the King Defeated")),
+    ("High Jump", _has("Dash") or _has("High Jump")),
+    ("Alucard's Sword", _has("High Jump")),
+    ("Richter Mode Exit", _has("High Jump"))
 ]
 
 

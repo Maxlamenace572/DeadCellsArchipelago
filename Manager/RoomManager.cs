@@ -18,6 +18,7 @@ using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.EnemyManager;
 using Hashlink.Proxy;
 using dc.cine;
+using dc.en.inter.exit;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager
@@ -49,6 +50,8 @@ namespace DeadCellsArchipelago {
             Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
             Hook_Transition.checkForBank += OnCheckForBank;
             Hook_BankEntering.enterBank += OnEnterBank;
+            Hook_ExitToRichterCastle.onActivate += OnActivateToRichterCastle;
+            Hook_RichterCastleExit.startExitCinematic += OnStartExitCinematic;
 
             Log.Information("[AP] Room Hooks loaded");
         }
@@ -324,11 +327,23 @@ namespace DeadCellsArchipelago {
                 case "SewerShort":
                 case "PrisonRoof":
                 case "Bridge":
-                case "DookuCastleHard":
                 case "Bank":
                     return true;
             }
             return false;
+        }
+
+        private static void OnActivateToRichterCastle(Hook_ExitToRichterCastle.orig_onActivate orig, ExitToRichterCastle self, Hero by, bool lp)
+        {
+            PrepareBiomeCheck("RichterCastle", " Enter", SAVED_DATA!.currentLevelId);
+            orig(self, by, lp);
+            giveItemStartRichterMode = true;
+        }
+
+        private static void OnStartExitCinematic(Hook_RichterCastleExit.orig_startExitCinematic orig, RichterCastleExit self, Hero hero)
+        {
+            PrepareBiomeCheck("RichterCastle", " Exit", SAVED_DATA!.currentLevelId);
+            orig(self, hero);
         }
     }
 }

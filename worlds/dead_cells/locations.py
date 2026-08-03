@@ -1448,8 +1448,8 @@ LOCATION_TABLE: Dict[str, dict] = {
     },
     "Crowned Key": {
         "id": 0x016B, "region": "Checks", "type": "item_no_blueprint",
-        "dlc": "", "min_bc": 0, "item": "LighthouseKey",
-        "sources": [{'biome': 'StiltVillage', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "dlc": "TheQueenAndTheSea", "min_bc": 0, "item": "ShipwreckKey",
+        "sources": [{'biome': 'StiltVillage', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'item_no_blueprint'}],
     },
     "Collector's Syringe": {
         "id": 0x016C, "region": "Checks", "type": "item_no_blueprint",
@@ -2153,6 +2153,15 @@ LOCATION_TABLE: Dict[str, dict] = {
     
     "Bank Unlock": {"id": 0x026D, "region": "Checks", "type": "rune", "dlc": "", "item": "BankUnlock", 
         "sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'rune'}, {'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'TheQueenAndTheSea', 'type': 'rune'}, {'biome': 'DookuArena', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'rune'}],},
+    
+    "Boss Rush Statue": {"id": 0x026E, "region": "BossRush", "type": "blueprint_floor", "dlc": "", "item": "BossRushStatue", "sources": [{'biome': 'BossRush', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],},
+    "Cavern Key": {"id": 0x026F, "region": "Checks", "type": "item_no_blueprint", "dlc": "RiseOfTheGiant", "min_bc": 0, "item": "CavernKey", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'item_no_blueprint'}],},
+    "Training Room Key": {"id": 0x0270, "region": "Checks", "type": "item_no_blueprint", "dlc": "", "min_bc": 0, "item": "TrainingUnlock", "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],},
+    "Dash": {"id": 0x0271, "region": "Checks", "type": "rune", "dlc": "Purple", "min_bc": 0, "item": "RichterDashKey", "sources": [{'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'rune'}],},
+    "High Jump": {"id": 0x0272, "region": "Checks", "type": "rune", "dlc": "Purple", "min_bc": 0, "item": "RichterUppercutKey", "sources": [{'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'rune'}],},
+    "Alucard's Sword": {"id": 0x0273, "region": "Checks", "type": "blueprint_floor", "dlc": "Purple", "min_bc": 0, "item": "TPSword", "sources": [{'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'blueprint_floor'}],},
+    "Richter Mode Enter": {"id": 0x0274, "region": "Checks", "type": "biome_enter", "dlc": "Purple", "item": None, "sources": [{'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'biome_enter'}],},
+    "Richter Mode Exit": {"id": 0x0275, "region": "Checks", "type": "biome_exit", "dlc": "Purple", "item": None, "sources": [{'biome': 'DookuCastleHard', 'min_bc': 0, 'max_bc': 255, 'dlc': 'Purple', 'type': 'biome_exit'}],},
 }
 
 def location_id(name: str) -> int:

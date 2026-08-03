@@ -30,8 +30,6 @@ using HaxeProxy.Runtime;
 using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
 using ModCore.Events.Interfaces.Game;
-using dc.en;
-using dc.pr;
 
 namespace DeadCellsArchipelago{
     public class ModEntry(ModInfo info) : ModBase(info), 
@@ -93,7 +91,13 @@ namespace DeadCellsArchipelago{
                         HERO.hudInitItems();
                     }
 
-                    if (ARCHIPELAGO != null && ARCHIPELAGO.respawnUpScroll)
+                    if (SAVED_DATA.IsItemReceived("CavernKey"))
+                    {
+                        GiveItemToPlayer("CavernKey");
+                        HERO.hudInitItems();
+                    }
+
+                    if (GLOBAL_DATA != null && GLOBAL_DATA.respawnUpScroll)
                     {
                         foreach (string itemName in GetUpScrolls())
                         {
@@ -101,6 +105,14 @@ namespace DeadCellsArchipelago{
                         }
                     }
                     LoadLinks();
+                }
+
+                if (giveItemStartRichterMode && SAVED_DATA != null && newHeroInit)
+                {
+                    if (SAVED_DATA.IsItemReceived("RichterDashKey")) GiveItemToPlayer("RichterDashKey");
+                    if (SAVED_DATA.IsItemReceived("RichterUppercutKey")) GiveItemToPlayer("RichterUppercutKey");
+
+                    giveItemStartRichterMode = false;
                 }
 
                 if (newConnection)
@@ -147,6 +159,8 @@ namespace DeadCellsArchipelago{
                     }
                 }
             }
+
+            newHeroInit = false;
         }
 
         public void OnAfterLoadingSave(User data)

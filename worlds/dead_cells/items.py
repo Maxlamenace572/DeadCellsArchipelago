@@ -82,6 +82,11 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Crowned Key":          (0x0010, PROG, DLC_BASE),
     "Boss Rush Unlock":     (0x0011, PROG, DLC_BASE),
     "Bank Unlock":          (0x0012, PROG, DLC_BASE),
+    "Boss Rush Statue":     (0x0013, PROG, DLC_BASE),
+    "Cavern Key":           (0x0014, PROG, DLC_RISE_OF_GIANT),
+    "Training Room Key":    (0x0015, USFL, DLC_BASE),
+    "Dash":                 (0x0016, PROG, DLC_PURPLE),
+    "High Jump":            (0x0017, PROG, DLC_PURPLE),
   
 
     # ── Meta Upgrades (Useful) ────────────────────────────────────────
@@ -640,7 +645,8 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Castle Outskirts Unlock":        (0x161B, PROG, DLC_PURPLE),
     "Dracula's Castle Unlock":        (0x161C, PROG, DLC_PURPLE),
     "Defiled Necropolis Unlock":      (0x161D, PROG, DLC_PURPLE),
-    "Master's Keep Unlock":           (0x161E, PROG, DLC_PURPLE),
+    "2nd Dracula's Castle Unlock":    (0x161E, PROG, DLC_PURPLE),
+    "Master's Keep Unlock":           (0x161F, PROG, DLC_PURPLE),
 
     # Boss Visit Set Items
     # These should be exclusively set to their corresponding "Boss Defeat" location and are used in region logic
@@ -1063,7 +1069,8 @@ deadcells_item_groups = {
         "Crown Unlock",                  
         "Castle Outskirts Unlock",       
         "Dracula's Castle Unlock",       
-        "Defiled Necropolis Unlock",     
+        "Defiled Necropolis Unlock",
+        "2nd Dracula's Castle Unlock",
         "Master's Keep Unlock"
     },
     "Outfits": {

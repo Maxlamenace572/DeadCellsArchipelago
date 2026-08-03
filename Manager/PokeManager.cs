@@ -51,7 +51,7 @@ namespace DeadCellsArchipelago {
             {
                 PokebombUI(self, 0);
             }
-            else if(self.hudGetSkillPower(1).ii != null && self.hudGetSkillPower(1).ii._itemData.id.ToString() == "Pokebomb")
+            else if(self.hudGetSkillPower(1) != null && self.hudGetSkillPower(1).ii != null && self.hudGetSkillPower(1).ii._itemData.id.ToString() == "Pokebomb")
             {
                PokebombUI(self, 1);
             }

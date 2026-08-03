@@ -26,6 +26,8 @@ namespace DeadCellsArchipelago {
         public static bool isInTraining = false;
         public static bool originalCurse = true;
         public static bool controlsInverted = false;
+        public static bool giveItemStartRichterMode = false;
+        public static bool newHeroInit = false;
 
         public static void InitializeHeroHooks()
         {
@@ -97,6 +99,7 @@ namespace DeadCellsArchipelago {
         {
             orig(self);
             HERO = self;
+            newHeroInit = true;
         }
 
         public static void InitSwitchControls()

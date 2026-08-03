@@ -45,6 +45,9 @@ namespace DeadCellsArchipelago {
                 case "WallJumpKey":
                 case "HomKey":
                 case "ExploKey":
+                case "TrainingUnlock":
+                case "RichterDashKey":
+                case "RichterUppercutKey":
                     SendRuneCheck(i._itemData.id.ToString());
                     break;
                 case "BossRune1":
@@ -55,6 +58,7 @@ namespace DeadCellsArchipelago {
                     SendBscCheck(i._itemData.id.ToString());
                     break;
                 case "ShipwreckKey":
+                case "CavernKey":
                     SendItemWithoutBlueprintCheck(i._itemData.id.ToString());
                     break;
                 case "APGold":

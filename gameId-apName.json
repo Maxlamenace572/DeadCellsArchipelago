@@ -38,6 +38,7 @@
     "Astrolab": "Astrolab",
     "Bank": "Bank",
     "Challenge": "Challenge",
+    "RichterCastle": "Richter Mode",
     "Boss_Behemoth": "The Concierge",
     "Boss_Beholder": "Conjunctivius",
     "Boss_TimeKeeper": "The Time Keeper",
@@ -565,5 +566,10 @@
     "D_DookuBeast": "Dracula Defeat",
     "BossRushUnlock": "Boss Rush Unlock",
     "Taunt": "Taunt",
-    "BankUnlock": "Bank Unlock"
+    "BankUnlock": "Bank Unlock",
+    "BossRushStatue": "Boss Rush Statue",
+    "CavernKey": "Cavern Key",
+    "TrainingUnlock": "Training Room Key",
+    "RichterDashKey": "Dash",
+    "RichterUppercutKey": "High Jump"
 }

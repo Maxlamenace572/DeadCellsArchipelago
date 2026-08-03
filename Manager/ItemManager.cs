@@ -252,7 +252,7 @@ namespace DeadCellsArchipelago {
                 var item = HERO.inventory.items.getDyn(i);
                 while (hasNext)
                 {
-                    Log.Information($"{i} : {item?.kind}");
+                    Log.Information($"{i} : {item?.kind} {item?._itemData.id}");
                     i++;
                     item = HERO.inventory.items.getDyn(i);
                     if(item == null)
@@ -298,6 +298,7 @@ namespace DeadCellsArchipelago {
                 case "WallJumpKey":
                 case "HomKey":
                 case "ExploKey":
+                case "TrainingUnlock":
                     USER.itemMeta.addPermanentItem(itemName.AsHaxeString());
                     GiveItemToPlayer(itemName);
                     RuneManager.ActivateMinimapTracking(itemName);
@@ -314,6 +315,9 @@ namespace DeadCellsArchipelago {
                     }
                     return false;
                 case "ShipwreckKey":
+                case "CavernKey":
+                case "RichterDashKey":
+                case "RichterUppercutKey":
                     GiveItemToPlayer(itemName);
                     HERO?.hudInitItems();
                     LogItem(itemName);
@@ -323,6 +327,11 @@ namespace DeadCellsArchipelago {
                     LogItem(itemName);
                     AddToHistory(LogName);
                     USER?.story.counters.set("BRUnlockPopUp".AsHaxeString(), 1);
+                    return true;
+                case "BossRushStatue":
+                    LogItem(itemName);
+                    AddToHistory(LogName);
+                    UnlockItem(itemName);
                     return true;
                 case "BankUnlock":
                     LogItem(itemName);
