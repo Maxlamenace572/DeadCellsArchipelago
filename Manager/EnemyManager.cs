@@ -118,7 +118,10 @@ namespace DeadCellsArchipelago {
         private static int OnGetKilledMobCount(Hook_UserStats.orig_getKilledMobCount orig, UserStats self, dc.String mk)
         {
             if (IsBossHead(mk.ToString()) && GLOBAL_DATA != null)
+            {
+                if (!GLOBAL_DATA.BossHeadKilled.ContainsKey(mk.ToString())) GLOBAL_DATA.BossHeadKilled[mk.ToString()] = 0;
                 return GLOBAL_DATA.BossHeadKilled[mk.ToString()];
+            }
 
             return orig(self, mk);
         }

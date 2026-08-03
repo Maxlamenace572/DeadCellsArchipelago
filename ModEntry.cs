@@ -227,7 +227,7 @@ namespace DeadCellsArchipelago{
 
         public void OnAfterLoadingCDB(_Data_ cdb)
         {
-            Dictionary<string, int> newHeadsCount = BossHeadsCount();
+            Dictionary<string, int> newHeadsCount = NewHeadsCount();
             foreach (KeyValuePair<string, int> head in newHeadsCount)
             {
                 var itemPropsDyn = (HaxeDynObj) cdb.item.byId.get(head.Key.AsHaxeString()).props;

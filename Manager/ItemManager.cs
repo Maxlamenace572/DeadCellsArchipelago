@@ -28,11 +28,14 @@ namespace DeadCellsArchipelago {
         public static bool useOriginalUnlockItem { get; set; } = false;
         public static bool useOriginalRevealItem { get; set; } = false;
         public static bool removeCollectorBaseFilterAndLock { get; set; } = false;
+        public static bool countGreenHoleHead = false;
         public static string currentFilterFor { get; set; } = "";
         public static bool heroJustDead = false;
         public static int aspectsToIter = 0;
+        public static List<string> itemList = [];
         public static List<string> dropableList = [];
         public static List<string> cosmeticsList = [];
+        public static List<string> outfitList = [];
         public static List<string> headList = [];
         public static int bossRuneGivenSinceLaunch = 0;
         public static Dictionary<string, int> ProgressionItemGivenSinceLaunch { get; set; } = [];
@@ -40,6 +43,7 @@ namespace DeadCellsArchipelago {
         public static List<string> History = [];
         public static bool disableTrapOnEndBoss = false;
         public static bool useModdedHasUnlock = false;
+        public static int headsForHeads = -1;
 
         public static void InitializeItemHooks()
         {
@@ -70,6 +74,10 @@ namespace DeadCellsArchipelago {
                 {
                     group = int.Parse(match.Groups[1].Value);
                 }
+                if(group == 0 || group == 1 || group == 3 || group == 4 || group == 5 || group == 6)
+                {
+                    itemList.Add(item.id.ToString());
+                }
                 if(group == 10 || group == 11)
                 {
                     dropableList.Add(item.id.ToString());
@@ -77,6 +85,10 @@ namespace DeadCellsArchipelago {
                 if(group == 13 || group == 14)
                 {
                     cosmeticsList.Add(item.id.ToString());
+                }
+                if(group == 13)
+                {
+                    outfitList.Add(item.id.ToString());
                 }
                 if(group == 14)
                 {
@@ -670,10 +682,8 @@ namespace DeadCellsArchipelago {
 
         private static int OnCountUnlockedItems(Hook_ItemMetaManager.orig_countUnlockedItems orig, ItemMetaManager self)
         {
-            if(removeCollectorBaseFilterAndLock)
-            {
-                return 100;
-            }
+            if(removeCollectorBaseFilterAndLock) return 100;
+            if (countGreenHoleHead && GLOBAL_DATA!.includeCosmetics) return SAVED_DATA!.CountItemSend();
             return orig(self);
         }
 
@@ -711,6 +721,13 @@ namespace DeadCellsArchipelago {
         {
             if (SAVED_DATA != null)
             {
+                if (headsForHeads != -1)
+                {
+                    headsForHeads++;
+                    if (headsForHeads == headList.Count()) headsForHeads = -1;
+                    return SAVED_DATA.IsCheckSent(k.ToString());
+                }
+
                 if (heroJustDead && k.ToString().Length >= 3 && k.ToString()[..3] == "ASP" && aspectsToIter <= 12)//the game use hasUnlockedItem to add aspects in its random give pool
                 {
                     aspectsToIter++;
@@ -927,7 +944,7 @@ namespace DeadCellsArchipelago {
             return ["AnyUp", "BTUp", "BSUp", "TSUp", "AllUp"];
         }
 
-        public static Dictionary<string, int> BossHeadsCount()
+        public static Dictionary<string, int> NewHeadsCount()
         {
             Dictionary<string, int> res = [];
             res.Add("ConciergeFlame", 8);
@@ -940,6 +957,8 @@ namespace DeadCellsArchipelago {
             res.Add("ServantsMask", 4);
             res.Add("QueenFlame", 2);
             res.Add("CollectorHood", 3);
+            res.Add("GlitchyHeadDeepSpace", 33);
+            res.Add("Pecheur", 38);
             return res;
         }
 

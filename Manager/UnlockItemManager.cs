@@ -1,3 +1,4 @@
+using dc;
 using dc.cine;
 using dc.cine.coll;
 using dc.cine.dlcp;
@@ -7,6 +8,7 @@ using dc.en.inter;
 using dc.en.inter.npc;
 using dc.en.mob;
 using dc.en.mob.boss;
+using dc.hl.types;
 using dc.level;
 using dc.level.lore;
 using dc.level.@struct;
@@ -59,6 +61,11 @@ namespace DeadCellsArchipelago {
             Hook_PurpleGarden.buildGardenLoreRooms += OnBuildGardenLoreRooms;
             Hook_MariaRoom.unlockCatExaminable += OnUnlockCatExaminable;
             Hook_MariaRoom.onCreateExaminable += OnOnCreateExaminable;
+            Hook__HeadCheckHelper.checkItemsUnlockedHeads += OnCheckItemsUnlockedHeads;
+            Hook_Tailor.onActivate += OnActivateTailor;
+            Hook_User.countUnlockedSkin += OnCountUnlockedSkin;
+            Hook__HeadCheckHelper.checkGlitch += OnCheckGlitch;
+            Hook_TailorDaughter.checkHeads += OnCheckHeads;
 
             Serilog.Log.Information("[AP] Special Unlock Hooks loaded");
         }
@@ -292,6 +299,42 @@ namespace DeadCellsArchipelago {
         {//SpawnCat (part 3)
             useModdedHasUnlock = true;
             var res = orig(self, custId, exam);
+            useModdedHasUnlock = false;
+            return res;
+        }
+
+        private static bool OnCheckItemsUnlockedHeads(Hook__HeadCheckHelper.orig_checkItemsUnlockedHeads orig, ArrayObj array)
+        {//BlackHoleGreen
+            countGreenHoleHead = true;
+            var res = orig(array);
+            countGreenHoleHead = false;
+            return res;
+        }
+
+        private static void OnActivateTailor(Hook_Tailor.orig_onActivate orig, Tailor self, Hero by, bool lp)
+        {//Comb & Scissor (part 1)
+            useModdedHasUnlock = true;
+            orig(self, by, lp);
+            useModdedHasUnlock = false;
+        }
+
+        private static int OnCountUnlockedSkin(Hook_User.orig_countUnlockedSkin orig, User self)
+        {//Comb & Scissor (part 2)
+            if (GLOBAL_DATA!.includeCosmetics) return SAVED_DATA!.CountOutfitSend();
+            return orig(self);
+        }
+
+        private static bool OnCheckGlitch(Hook__HeadCheckHelper.orig_checkGlitch orig, ArrayObj array)
+        {//4 heads count (part 1)
+            bool res = orig(array);
+            if (GLOBAL_DATA!.includeCosmetics) headsForHeads = 0;
+            useModdedHasUnlock = true;
+            return res;
+        }
+
+        private static bool OnCheckHeads(Hook_TailorDaughter.orig_checkHeads orig, TailorDaughter self)
+        {//4 heads count (part 2)
+            bool res = orig(self);
             useModdedHasUnlock = false;
             return res;
         }
