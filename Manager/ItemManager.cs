@@ -941,6 +941,7 @@ namespace DeadCellsArchipelago {
                 case "QueenArena":
                 case "PurpleGarden":
                 case "DookuCastle":
+                case "DookuCastleHard":
                 case "DeathArena":
                 case "DookuArena":
                     return true;

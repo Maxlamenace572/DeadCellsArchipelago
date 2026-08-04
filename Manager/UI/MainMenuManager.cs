@@ -27,7 +27,7 @@ namespace DeadCellsArchipelago {
         public static int loadDataInPlayMenu = 0;
         public static bool isOnMenu = false;
         public static Text? apVersion = null;
-        public static string lastCompatibleApworld = "0.1.4";
+        public static string lastCompatibleApworld = "0.1.7";
         public static double screenScale;
         public static bool newConnection = true;
         public static bool syncGlobalData = true;
