@@ -37,6 +37,11 @@ namespace DeadCellsArchipelago {
 
         private static void OnBossKilled(string bossName)
         {
+            if (HERO!.noDamageDuringBossBattle == true)
+            {
+                GLOBAL_DATA!.FlawlessBoss.Add(bossName);
+            }
+
             if (IsBossHead(bossName) && GLOBAL_DATA != null)
             {
                 if (!GLOBAL_DATA.BossHeadKilled.ContainsKey(bossName)) GLOBAL_DATA.BossHeadKilled[bossName] = 0;

@@ -691,7 +691,7 @@ LOCATION_RULES = [
     ("Extended Healing", _has("Teleportation Rune")),
 
     # War Javelin Cavern secret
-    ("War Javelin", _has("Spider Rune", "Homunculus Rune")),
+    ("War Javelin", _has("Spider Rune") and _has("Homunculus Rune")),
 
     # Sanguine Vortex head
     (

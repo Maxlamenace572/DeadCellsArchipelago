@@ -14,12 +14,14 @@ namespace DeadCellsArchipelago {
         public bool fatalFalls = false;
         public bool theQueenAndTheSea = false;
         public bool returnToCastlevania = false;
+        public bool flawlessScrolls = false;
         public Dictionary<string, int> ProgressionItem { get; set; } = [];
         public Dictionary<string, int> BossHeadKilled { get; set; } = [];
         public Dictionary<int, int> ProgressionForge { get; set; } = [];
+        public HashSet<string> FlawlessBoss { get; set; } = [];
         public int currentCells = 0;
 
-        public void InitValues(int bsc, bool cosmetics, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc)
+        public void InitValues(int bsc, bool cosmetics, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs)
         {
             bscLevelToWin = bsc;
             includeCosmetics = cosmetics;
@@ -29,6 +31,7 @@ namespace DeadCellsArchipelago {
             fatalFalls = ff;
             theQueenAndTheSea = tqats;
             returnToCastlevania = rtc;
+            flawlessScrolls = fs;
         }
 
         public void SaveGlobalSaveJson()

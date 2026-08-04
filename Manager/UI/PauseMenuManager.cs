@@ -1028,6 +1028,13 @@ namespace DeadCellsArchipelago {
                     {
                         res[item.Key] = item.Value;
                     }
+
+                    if (GLOBAL_DATA!.flawlessScrolls && item.Key == "AllUp" && GLOBAL_DATA!.FlawlessBoss.Any())
+                    {
+                        if (!res.ContainsKey(item.Key)) res[item.Key] = 0;
+                        res[item.Key] += GLOBAL_DATA!.FlawlessBoss.Count();
+                        if (res[item.Key] == 0) res.Remove(item.Key);
+                    }
                 }
             }
 

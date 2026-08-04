@@ -538,7 +538,8 @@ class DeadCellsWorld(World):
             "health_link_group":         str(self.options.health_link_group.value),
             "health_curse_link":         bool(self.options.health_curse_link.value),
             "trap_link":                 bool(self.options.trap_link.value),
-            "trap_link_group":           str(self.options.trap_link_group.value)
+            "trap_link_group":           str(self.options.trap_link_group.value),
+            "flawless_scroll":           bool(self.options.flawless_scroll.value)
         }    
 
     def get_filler_item_name(self) -> str:

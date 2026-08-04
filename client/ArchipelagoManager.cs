@@ -51,6 +51,7 @@ namespace DeadCellsArchipelago
         public bool healthCurseLink;
         public bool trapLink;
         public string trapLinkGroup = "";
+        public bool flawlessScroll;
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -99,6 +100,7 @@ namespace DeadCellsArchipelago
                     if (slotData.ContainsKey("dlc_fatal_falls")) fatalFalls = Convert.ToBoolean(slotData["dlc_fatal_falls"]);
                     if (slotData.ContainsKey("dlc_the_queen_and_the_sea")) theQueenAndTheSea = Convert.ToBoolean(slotData["dlc_the_queen_and_the_sea"]);
                     if (slotData.ContainsKey("dlc_return_to_castlevania")) returnToCastlevania = Convert.ToBoolean(slotData["dlc_return_to_castlevania"]);
+                    if (slotData.ContainsKey("flawless_scroll")) flawlessScroll = Convert.ToBoolean(slotData["flawless_scroll"]);
 
                     if (slotData.ContainsKey("apworld_version")) version = Convert.ToString(slotData["apworld_version"]) ?? "-0.1.1";
 

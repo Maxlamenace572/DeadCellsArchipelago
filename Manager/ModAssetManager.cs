@@ -81,7 +81,8 @@ namespace DeadCellsArchipelago {
                     ARCHIPELAGO.theBadSeed,
                     ARCHIPELAGO.fatalFalls,
                     ARCHIPELAGO.theQueenAndTheSea,
-                    ARCHIPELAGO.returnToCastlevania);
+                    ARCHIPELAGO.returnToCastlevania,
+                    ARCHIPELAGO.flawlessScroll);
 
                 var json = JsonConvert.SerializeObject(GLOBAL_DATA, Formatting.Indented);
                 System.IO.File.WriteAllText(savePath, json);

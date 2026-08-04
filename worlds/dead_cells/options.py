@@ -277,7 +277,14 @@ class RespawnUpScroll(Toggle):
     """
     display_name = "Respawn Stat Up Scroll"
     default = 0
-
+    
+class GiveScrollOnFlawlessBoss(Toggle):
+    """
+    Gives you Epic Scrolls of Power the first time you beat a boss without taking
+    a hit. It's best to use it with the Respawn Stat Up Scroll option enabled.
+    """
+    display_name = "Flawless Boss Scroll"
+    default = 0
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Option set — referenced in __init__.py as DeadCellsWorld.options_dataclass
@@ -320,3 +327,4 @@ class DeadCellsOptions(PerGameCommonOptions):
     
     # Gameplay
     respawn_up: RespawnUpScroll
+    flawless_scroll: GiveScrollOnFlawlessBoss

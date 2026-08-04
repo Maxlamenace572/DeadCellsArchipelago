@@ -25,6 +25,12 @@ namespace DeadCellsArchipelago {
         {
             if (archipelagoSeed != "") return;
             archipelagoSeed = seed;
+
+            foreach(string scroll in GetUpScrolls())
+            {
+                ReceivedFillerItem[scroll] = 0;
+                GivenFillerItem[scroll] = 0;
+            }
         }
 
         public void SaveCheckSent(string checkName)

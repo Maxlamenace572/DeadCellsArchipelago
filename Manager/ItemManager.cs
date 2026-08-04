@@ -950,7 +950,7 @@ namespace DeadCellsArchipelago {
 
         public static List<string> GetUpScrolls()
         {
-            return ["AnyUp", "BTUp", "BSUp", "TSUp", "AllUp"];
+            return ["AllUp", "AnyUp", "BTUp", "BSUp", "TSUp"];
         }
 
         public static Dictionary<string, int> NewHeadsCount()
