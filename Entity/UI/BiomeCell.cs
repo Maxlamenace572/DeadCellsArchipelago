@@ -7,6 +7,7 @@ using Serilog;
 
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.MainMenuManager;
 
 namespace DeadCellsArchipelago {
     public class BiomeCell
@@ -65,11 +66,11 @@ namespace DeadCellsArchipelago {
 
             Bounds boundsLevel = bitmap.getSize(new Bounds());
 
-            double scaleText = 1;
+            double scaleText = 3/textPixelScale;
             text = new dc.ui.Text(bitmap, true, false, new Ref<double>(ref scaleText), null, null)
             {
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scaleText,
+                scaleY = textBaseScale * scaleText
             };
 
             string keyT;
@@ -88,7 +89,8 @@ namespace DeadCellsArchipelago {
 
             text.set_text($"{data[keyT].Count-data[keyR].Count}/{data[keyT].Count} ".AsHaxeString());
             if(data[keyR].Count == 0) text.set_textColor(16776960);
-            text.x = boundsLevel.xMax - text.get_textWidth() -10;
+            Right((int) boundsLevel.xMax, text);
+            text.x -= 10;
             text.y = 10;
             int frame = 0;
             double XY = 0;

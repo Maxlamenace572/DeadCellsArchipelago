@@ -32,6 +32,8 @@ namespace DeadCellsArchipelago {
         public static bool newConnection = true;
         public static bool syncGlobalData = true;
         public static string? oldText = null;
+        public static double textPixelScale = -1;
+        public static double textBaseScale;
 
         public static void InitializeMainMenuHooks()
         {
@@ -53,6 +55,14 @@ namespace DeadCellsArchipelago {
 
             self.news.hidden = true;
             self.news.updateVisible();
+
+            if (textPixelScale == -1)
+            {
+                double scale = 1;
+                Text temp = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null);
+                textPixelScale = temp.get_pixelScale();
+                textBaseScale = temp.scaleX;
+            }
 
             if (!isOnMenu)
             {
@@ -114,13 +124,13 @@ namespace DeadCellsArchipelago {
 
             int index = 0;
             if (connectionStatus == null) {
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 connectionStatus = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
                     x = 10,
                     y = 10+40*index,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 index++;
 
@@ -140,17 +150,17 @@ namespace DeadCellsArchipelago {
 
 
             if (serverIp == null) {
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 Text serverIpTag = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
                     y = 10+40*index,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 index++;
 
                 serverIpTag.set_text("Address:".AsHaxeString());
-                serverIpTag.x = ((113-4)*menuScale - serverIpTag.textWidth) /2;
+                CenterX((113-4)*menuScale, serverIpTag);
 
                 serverIpTag.set_textColor(16777215);
 
@@ -170,6 +180,8 @@ namespace DeadCellsArchipelago {
                     x = 18+6,
                     y = 2+40*index,
                     inputWidth = 284,
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale,
                     onMove = (e) =>
                     {
                         serverIp?.set_textColor(16776960);
@@ -184,17 +196,17 @@ namespace DeadCellsArchipelago {
 
 
             if (slotName == null) {
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 Text slotNameTag = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
                     y = 10+40*index,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 index++;
 
                 slotNameTag.set_text("Slot:".AsHaxeString());
-                slotNameTag.x = ((113-4)*menuScale - slotNameTag.textWidth) /2;
+                CenterX((113-4)*menuScale, slotNameTag);
 
                 slotNameTag.set_textColor(16777215);
 
@@ -214,6 +226,8 @@ namespace DeadCellsArchipelago {
                     x = 18+6,
                     y = 2+40*index,
                     inputWidth = 284,
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale,
                     onMove = (e) =>
                     {
                         slotName?.set_textColor(16776960);
@@ -229,17 +243,17 @@ namespace DeadCellsArchipelago {
 
 
             if (password == null) {
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 Text passwordTag = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
                     y = 10+40*index,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 index++;
 
                 passwordTag.set_text("Password:".AsHaxeString());
-                passwordTag.x = ((113-4)*menuScale - passwordTag.textWidth) /2;
+                CenterX((113-4)*menuScale, passwordTag);
 
                 passwordTag.set_textColor(16777215);
 
@@ -258,6 +272,8 @@ namespace DeadCellsArchipelago {
                     x = 18+6,
                     y = 2+40*index,
                     inputWidth = 284,
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale,
                     onMove = (e) =>
                     {
                         password?.set_textColor(16776960);
@@ -271,16 +287,16 @@ namespace DeadCellsArchipelago {
             }
 
             if (connectButton == null) {
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 connectButton = new Text(apMenuContainer, false, true, new Ref<double>(ref scale), null, null)
                 {
                     y = 40*index,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 index++;
                 connectButton.set_text("Connect".AsHaxeString());
-                connectButton.x = ((113-4)*menuScale - connectButton.textWidth) /2;
+                CenterX((113-4)*menuScale, connectButton);
                 connectButton.set_textColor(16777215);
                 var inter = new dc.h2d.Interactive(
                     connectButton.get_textWidth(),
@@ -459,18 +475,17 @@ namespace DeadCellsArchipelago {
         {
             if (ARCHIPELAGO == null) return;
             if (apVersion == null) {
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 apVersion = new Text(apMenuContainer, false, false, new Ref<double>(ref scale), null, null)
                 {
                     y = 10,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
             }
 
             apVersion.set_text($"Apworld: {ARCHIPELAGO.version}".AsHaxeString());
-            apVersion.x = ((113-4)*3) - apVersion.textWidth;
-            apVersion.posChanged = true;
+            Right((113-4)*3, apVersion);
             if (TooOldApworld())
                 apVersion.set_textColor(16711680);
 

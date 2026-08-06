@@ -6,6 +6,7 @@ using ModCore.Utilities;
 
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ImageManager;
+using static DeadCellsArchipelago.MainMenuManager;
 
 namespace DeadCellsArchipelago {
     public class EnergyLinkTopText
@@ -27,13 +28,13 @@ namespace DeadCellsArchipelago {
 
         public void SetTexts()
         {
-            double scale = 1;
+            double scale = 3/textPixelScale;
             title = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null)
             {
                 x = x,
                 y = y,
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             title.set_text("Available:".AsHaxeString());
             Bounds boundsText = title.getSize(new Bounds());
@@ -52,13 +53,13 @@ namespace DeadCellsArchipelago {
             cellsNumber = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null)
             {
                 y = y,
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             int bankValue = 0;
             if (ARCHIPELAGO != null && ARCHIPELAGO.energyLinkManager != null) bankValue = ARCHIPELAGO.energyLinkManager.ShowStorageNumberCells();
             cellsNumber.set_text($"{bankValue}".AsHaxeString());
-            CenterX((int)(250 - (boundsLogo.xMax - boundsLogo.xMin) - title.textWidth), cellsNumber);
+            CenterX((int)(250 - (boundsLogo.xMax - boundsLogo.xMin) - boundsText.xMax), cellsNumber);
             cellsNumber.x += boundsText.xMax + 50;
             cellsNumber.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
         }

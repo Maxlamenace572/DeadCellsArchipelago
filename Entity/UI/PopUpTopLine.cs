@@ -46,22 +46,22 @@ namespace DeadCellsArchipelago {
                         }
                     }
                     PopUpTopCell cell = new PopUpTopCell(flow, $"BSC {difficulty}", cellR, cellT);
-                    totalCellsWidth += cell.interW;
+                    totalCellsWidth += cell.width;
                     cells.Add(cell);
                 }
             }
             else
             {
                 PopUpTopCell cell1 = new PopUpTopCell(flow, "ASP", data["RAspect"], data["TAspect"].Count);
-                totalCellsWidth += cell1.interW;
+                totalCellsWidth += cell1.width;
                 cells.Add(cell1);
 
                 PopUpTopCell cell2 = new PopUpTopCell(flow, "Rift", data["RChallengeT"], data["TChallengeT"].Count);
-                totalCellsWidth += cell2.interW;
+                totalCellsWidth += cell2.width;
                 cells.Add(cell2);
 
                 PopUpTopCell cell3 = new PopUpTopCell(flow, "All", data["AllR"], data["AllT"].Count);
-                totalCellsWidth += cell3.interW;
+                totalCellsWidth += cell3.width;
                 cells.Add(cell3);
             }
 

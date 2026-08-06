@@ -79,7 +79,7 @@ namespace DeadCellsArchipelago {
             useModdedHasUnlock = false;
         }
 
-        private static bool OnCanGenerateThisLoreRoomShipwreck(Hook_Shipwreck.orig_canGenerateThisLoreRoom orig, Shipwreck self, virtual_arc_examinables_fxEmitters_Intention_levels_onlyUseOnce_rarity_requiredLore_requiredMeta_room_roomLoot_sprites_status_structMode_ lore)
+        private static bool OnCanGenerateThisLoreRoomShipwreck(Hook_Shipwreck.orig_canGenerateThisLoreRoom orig, Shipwreck self, virtual_Intention_arc_examinables_fxEmitters_levels_onlyUseOnce_rarity_requiredLore_requiredMeta_room_roomLoot_sprites_status_structMode_ lore)
         {//Trident (part1)
             useModdedHasUnlock = true;
             var res = orig(self, lore);

@@ -5,6 +5,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using Serilog;
 using dc.ui.hud;
+using dc.ui;
 
 namespace DeadCellsArchipelago {
     public static class ImageManager
@@ -88,6 +89,13 @@ namespace DeadCellsArchipelago {
             child.posChanged = true;
         }
 
+        public static void Right(int widthParent, dc.h2d.Object child)
+        {
+            Bounds boundsChild = child.getSize(new Bounds());
+            child.x = widthParent - boundsChild.xMax;
+            child.posChanged = true;
+        }
+
         public static void CenterY(dc.h2d.Object parent, dc.h2d.Object child)
         {
             Bounds boundsParent = parent.getSize(new Bounds());
@@ -95,6 +103,13 @@ namespace DeadCellsArchipelago {
             if (parent is Skill) child.y = ((boundsParent.yMax*((Skill) parent).get_pixelScale()) - boundsChild.yMax) /2;
             else child.y = (boundsParent.yMax - boundsChild.yMax) /2;
             child.posChanged = true;
+        }
+
+        public static void CenterYTextTo(dc.h2d.Object parent, Text text, int textHeight)
+        {
+            Bounds boundsParent = parent.getSize(new Bounds());
+            text.y = parent.y + ((boundsParent.yMax - textHeight) /2);
+            text.posChanged = true;
         }
     }
 }

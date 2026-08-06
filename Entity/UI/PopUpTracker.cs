@@ -3,7 +3,7 @@ using dc.ui;
 using ModCore.Utilities;
 using Serilog;
 
-using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.MainMenuManager;
 
 namespace DeadCellsArchipelago {
     public class PopUpTracker

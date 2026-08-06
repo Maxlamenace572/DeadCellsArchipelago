@@ -11,7 +11,7 @@ using Serilog;
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.ItemManager;
-using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.MainMenuManager;
 
 namespace DeadCellsArchipelago {
     public class ItemLine : Line

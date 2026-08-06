@@ -1,7 +1,7 @@
 using dc.ui;
 using ModCore.Utilities;
 
-using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.MainMenuManager;
 
 namespace DeadCellsArchipelago {
     public class Line

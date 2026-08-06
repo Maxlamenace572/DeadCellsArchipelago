@@ -4,6 +4,7 @@ using ModCore.Utilities;
 
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.MainMenuManager;
 using static DeadCellsArchipelago.HeroManager;
 
 namespace DeadCellsArchipelago {
@@ -25,13 +26,13 @@ namespace DeadCellsArchipelago {
 
         public void SetButtons()
         {
-            double scale = 1;
+            double scale = 3/textPixelScale;
             send = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null)
             {
                 x = x,
                 y = y,
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             send.set_text("Send (-20%)".AsHaxeString());
             send.set_textColor(16777215);
@@ -61,8 +62,8 @@ namespace DeadCellsArchipelago {
             {
                 x = x+250,
                 y = y,
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             retrieve.set_text("Retrieve".AsHaxeString());
             retrieve.x -= retrieve.get_textWidth();

@@ -5,6 +5,8 @@ using ModCore.Utilities;
 using Serilog;
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.MainMenuManager;
+using dc.h2d.col;
 
 namespace DeadCellsArchipelago {
     public class PopUpTopCell
@@ -13,6 +15,7 @@ namespace DeadCellsArchipelago {
         public Text number;
         public dc.h2d.Bitmap bitmap;
         public HashSet<string> toChecks;
+        public double width;
         public double interW;
         public double interX;
 
@@ -27,31 +30,35 @@ namespace DeadCellsArchipelago {
                 color = ColorVectorRGBA(0, 0, 0, 0)
             };
 
-            double scale = 1;
+            double scale = 3/textPixelScale;
             label = new Text(bitmap, true, false, new Ref<double>(ref scale), null, null)
             {
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             label.set_text($"{labelS}".AsHaxeString());
 
             number = new Text(bitmap, true, false, new Ref<double>(ref scale), null, null)
             {
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };;
             number.set_text($"{max-toChecks.Count}/{max}".AsHaxeString());
-            number.y = label.get_textHeight();
-            
-            if(number.get_textWidth() < label.get_textWidth())
+            number.y = 46;
+
+            Bounds boundsL = label.getSize(new Bounds());
+            Bounds boundsN = number.getSize(new Bounds());
+            if(boundsN.xMax < boundsL.xMax)
             {
-                number.x = (label.get_textWidth() - number.get_textWidth())/2;
+                CenterX(label, number);
                 interW = label.get_textWidth();
+                width = boundsL.xMax;
             }
             else
             {
-                label.x = (number.get_textWidth() - label.get_textWidth())/2;
+                CenterX(number, label);
                 interW = number.get_textWidth();
+                width = boundsN.xMax;
                 interX = -label.x;
             }
 

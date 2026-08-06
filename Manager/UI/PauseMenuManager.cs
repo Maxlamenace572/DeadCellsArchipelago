@@ -10,6 +10,7 @@ using Serilog;
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ModAssetManager;
+using static DeadCellsArchipelago.MainMenuManager;
 
 namespace DeadCellsArchipelago {
     public static class PauseMenuManager
@@ -37,7 +38,6 @@ namespace DeadCellsArchipelago {
         public static dc.ui.Text? biomeTitle = null;
         public static dc.ui.Text? fillerTitle = null;
         public static dc.ui.Text? menuTitle = null;
-        public static double screenScale;
         public static bool onMenuButton = false;
         public static int scrollerIndex = -1;
         public static int shopX = -1;
@@ -67,7 +67,6 @@ namespace DeadCellsArchipelago {
 
         private static void OnUpdateDefaultPause(Hook_DefaultPause.orig_update orig, DefaultPause self)
         {
-            screenScale = dc.libs.Process.Class.CUSTOM_STAGE_WIDTH / 1920.0;
             defaultPause = self;
             orig(self);
 
@@ -654,15 +653,16 @@ namespace DeadCellsArchipelago {
             if (apMenuButton == null)
             {
                 Bounds boundsLogo = logoBitmap.getSize(new Bounds());
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 apMenuButton = new dc.ui.Text(screenBitmap, true, false, new Ref<double>(ref scale), null, null)
                 {
                     x = logoBitmap.x + boundsLogo.xMax,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 apMenuButton.set_text("Switch Menu".AsHaxeString());
-                apMenuButton.y = logoBitmap.y + ((boundsLogo.yMax - apMenuButton.textHeight) /2);
+                //apMenuButton.y = logoBitmap.y + ((boundsLogo.yMax - apMenuButton.textHeight) /2);
+                CenterYTextTo(logoBitmap, apMenuButton, 46);
                 apMenuButton.set_textColor(16777215);
                 var inter = new Interactive(
                     boundsLogo.xMax + apMenuButton.get_textWidth(),
@@ -694,12 +694,12 @@ namespace DeadCellsArchipelago {
             if (apMenuLeft == null)
             {
                 Bounds boundsLogo = logoBitmap.getSize(new Bounds());
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 apMenuLeft = new dc.ui.Text(screenBitmap, true, false, new Ref<double>(ref scale), null, null)
                 {
                     y = apMenuButton.y,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 apMenuLeft.set_text(" < ".AsHaxeString());
                 apMenuLeft.x = logoBitmap.x - apMenuLeft.textWidth;
@@ -733,13 +733,13 @@ namespace DeadCellsArchipelago {
             {
                 Bounds boundsMenuButton = apMenuButton.getSize(new Bounds());
                 Bounds boundsLogo = logoBitmap.getSize(new Bounds());
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 apMenuRight = new dc.ui.Text(screenBitmap, true, false, new Ref<double>(ref scale), null, null)
                 {
                     x = apMenuButton.x + boundsMenuButton.xMax,
                     y = apMenuButton.y,
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 apMenuRight.set_text(" > ".AsHaxeString());
                 apMenuRight.set_textColor(16777215);
@@ -805,15 +805,15 @@ namespace DeadCellsArchipelago {
                 if (cellsNumber == null)
                 {
                     Bounds boundsLogo = cellBitmap.getSize(new Bounds());
-                    double scale = 1;
+                    double scale = 3/textPixelScale;
                     cellsNumber = new dc.ui.Text(screenBitmap, true, false, new Ref<double>(ref scale), null, null)
                     {
                         x = cellBitmap.x + boundsLogo.xMax,
-                        scaleX = 1,
-                        scaleY = 1
+                        scaleX = textBaseScale * scale,
+                        scaleY = textBaseScale * scale
                     };
                     cellsNumber.set_text($" {HERO.cells}".AsHaxeString());
-                    cellsNumber.y = cellBitmap.y + ((boundsLogo.yMax - cellsNumber.textHeight) /2);
+                    CenterYTextTo(cellBitmap, cellsNumber, 46);
                     cellsNumber.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
                 }
             }
@@ -885,11 +885,11 @@ namespace DeadCellsArchipelago {
             if(screenBitmap == null) return;
             if (shopTitle == null)
             {
-                double scale = 1;
+                double scale = 3/textPixelScale;
                 shopTitle = new dc.ui.Text(screenBitmap, false, true, new Ref<double>(ref scale), null, null)
                 {
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 shopTitle.set_text("Special Shop".AsHaxeString());
                 CenterX(250, shopTitle);
@@ -898,8 +898,8 @@ namespace DeadCellsArchipelago {
 
                 energyTitle = new dc.ui.Text(screenBitmap, false, true, new Ref<double>(ref scale), null, null)
                 {
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 energyTitle.set_text("Energy Link".AsHaxeString());
                 CenterX(250, energyTitle);
@@ -908,8 +908,8 @@ namespace DeadCellsArchipelago {
 
                 historyTitle = new dc.ui.Text(screenBitmap, false, true, new Ref<double>(ref scale), null, null)
                 {
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 historyTitle.set_text("History".AsHaxeString());
                 if (scrollerHistory != null && scrollerHistory.mask != null)
@@ -921,8 +921,8 @@ namespace DeadCellsArchipelago {
 
                 biomeTitle = new dc.ui.Text(screenBitmap, false, true, new Ref<double>(ref scale), null, null)
                 {
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 biomeTitle.set_text("Biomes".AsHaxeString());
                 if (scrollerBiome != null && scrollerBiome.mask != null)
@@ -934,8 +934,8 @@ namespace DeadCellsArchipelago {
 
                 fillerTitle = new dc.ui.Text(screenBitmap, false, true, new Ref<double>(ref scale), null, null)
                 {
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 fillerTitle.set_text("Filler Inventory".AsHaxeString());
                 if (scrollerFiller != null && scrollerFiller.mask != null)
@@ -947,8 +947,8 @@ namespace DeadCellsArchipelago {
 
                 menuTitle = new dc.ui.Text(screenBitmap, false, true, new Ref<double>(ref scale), null, null)
                 {
-                    scaleX = 1,
-                    scaleY = 1
+                    scaleX = textBaseScale * scale,
+                    scaleY = textBaseScale * scale
                 };
                 menuTitle.set_text("ARCHIPELAGO MENU".AsHaxeString());
                 CenterX(1920, menuTitle);

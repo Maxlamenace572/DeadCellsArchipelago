@@ -3,7 +3,7 @@ using HaxeProxy.Runtime;
 using ModCore.Utilities;
 
 using static DeadCellsArchipelago.ImageManager;
-using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.MainMenuManager;
 using static DeadCellsArchipelago.ItemManager;
 using dc.ui;
 
@@ -29,13 +29,13 @@ namespace DeadCellsArchipelago {
 
         public void SetButtons()
         {
-            double scale = 1;
+            double scale = 3/textPixelScale;
             down = new dc.ui.Text(parent, true, false, new Ref<double>(ref scale), null, null)
             {
                 x = x,
                 y = y,
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             down.set_text(" < ".AsHaxeString());
             down.set_textColor(16777215);
@@ -49,7 +49,7 @@ namespace DeadCellsArchipelago {
             {
                 onClick = (e) =>
                 {
-                    
+                    Act(true);
                 },
                 onMove = (e) =>
                 {
@@ -65,8 +65,8 @@ namespace DeadCellsArchipelago {
             {
                 x = x+250,
                 y = y,
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             up.set_text(" > ".AsHaxeString());
             up.x -= up.get_textWidth();
@@ -112,6 +112,8 @@ namespace DeadCellsArchipelago {
                 x = numberBg.x+6,
                 y = numberBg.y+2,
                 inputWidth = 164,
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale,
                 onMove = (e) =>
                 {
                     number?.set_textColor(16776960);

@@ -1,11 +1,9 @@
 using dc;
 using dc.h2d;
 using dc.h2d.col;
-using dc.haxe;
 using dc.tool;
 using dc.ui;
 using dc.ui.hud;
-using dc.ui.pause;
 using Hashlink.Virtuals;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
@@ -14,6 +12,8 @@ using Serilog;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.PokeManager;
+using static DeadCellsArchipelago.MainMenuManager;
+
 
 namespace DeadCellsArchipelago {
     public class SkillShopSlot
@@ -176,12 +176,12 @@ namespace DeadCellsArchipelago {
             label?.remove();
 
             Bounds boundsSkill = skill.getSize(new Bounds());
-            double scale = 1;
+            double scale = 3/textPixelScale;
             label = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null)
             {
                 y = boundsSkill.yMax + skill.y,
-                    scaleX = 1,
-                    scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             label.set_text("-".AsHaxeString());
             label.x = ((boundsSkill.xMax - label.get_textWidth()) /2) + skill.x;
@@ -196,11 +196,11 @@ namespace DeadCellsArchipelago {
             label?.remove();
 
             Bounds boundsSkill = skill.getSize(new Bounds());
-            double scale = 1;
+            double scale = 3/textPixelScale;
             label = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null)
             {
-                scaleX = 1,
-                scaleY = 1
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
             };
             label.set_text($" {number}".AsHaxeString());
             label.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
