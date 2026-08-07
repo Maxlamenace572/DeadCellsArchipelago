@@ -126,9 +126,9 @@ namespace DeadCellsArchipelago {
                 foreach (string id in newList) {
                     lines.Add((T)(Line) new ItemLine(0, 0, id, null, color));
                     lines[index].AddParent(flow);
-                    if(mask.width < lines[index].bgBox.wid)
+                    if(mask.width < lines[index].w)
                     {
-                        mask.width = lines[index].bgBox.wid;
+                        mask.width = (int) lines[index].w;
                     }
                     index ++;
                 }
@@ -146,9 +146,9 @@ namespace DeadCellsArchipelago {
                 foreach (KeyValuePair<string, int> id in rest) {
                     lines.Add((T)(Line) new ItemLine(0, 0, id.Key, id.Value, color));
                     lines[index].AddParent(flow);
-                    if(mask.width < lines[index].bgBox.wid)
+                    if(mask.width < lines[index].w)
                     {
-                        mask.width = lines[index].bgBox.wid;
+                        mask.width = (int) lines[index].w;
                     }
                     index ++;
                 }
@@ -197,9 +197,9 @@ namespace DeadCellsArchipelago {
                 foreach (string log in logs) {
                     lines.Add((T)(Line) new LogLine(0, 0, log, color));
                     lines[index].AddParent(flow);
-                    if(mask.width < lines[index].bgBox.wid)
+                    if(mask.width < lines[index].w)
                     {
-                        mask.width = lines[index].bgBox.wid;
+                        mask.width = (int) lines[index].w;
                     }
                     index ++;
                 }

@@ -59,7 +59,7 @@ namespace DeadCellsArchipelago {
                 CenterX(number, label);
                 interW = number.get_textWidth();
                 width = boundsN.xMax;
-                interX = -label.x;
+                interX = -label.x/label.scaleX;
             }
 
             if(toChecks.Count == 0)

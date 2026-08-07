@@ -665,13 +665,13 @@ namespace DeadCellsArchipelago {
                 CenterYTextTo(logoBitmap, apMenuButton, 46);
                 apMenuButton.set_textColor(16777215);
                 var inter = new Interactive(
-                    boundsLogo.xMax + apMenuButton.get_textWidth(),
+                    (boundsLogo.xMax/apMenuButton.scaleX) + apMenuButton.get_textWidth(),
                     boundsLogo.yMax,
                     apMenuButton,
                     null
                 )
                 {
-                    x = -boundsLogo.xMax,
+                    x = -boundsLogo.xMax/apMenuButton.scaleX,
                     y = -(boundsLogo.yMax - apMenuButton.textHeight) /2,
 
                     onClick = (e) =>
