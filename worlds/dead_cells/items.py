@@ -368,11 +368,11 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Damned":           (0x090C, USFL, DLC_BASE),
 
     # ── Consumables / Fillers ─────────────────────────────────────────
-    "Scroll of Power":       (0x1000, FILR, DLC_BASE),
-    "Assassin's Scroll":     (0x1001, FILR, DLC_BASE),
-    "Minotaur's Scroll":     (0x1002, FILR, DLC_BASE),
-    "Guardian's Scroll":     (0x1003, FILR, DLC_BASE),
-    "Epic Scrolls of Power": (0x1004, FILR, DLC_BASE),
+    "Scroll of Power":       (0x1000, USFL, DLC_BASE),
+    "Assassin's Scroll":     (0x1001, USFL, DLC_BASE),
+    "Minotaur's Scroll":     (0x1002, USFL, DLC_BASE),
+    "Guardian's Scroll":     (0x1003, USFL, DLC_BASE),
+    "Epic Scrolls of Power": (0x1004, USFL, DLC_BASE),
     "Dead Man's Bag":        (0x1005, FILR, DLC_BASE),
     "Residual Cells":        (0x1006, FILR, DLC_BASE),
     "Kebab":                 (0x1007, FILR, DLC_BASE),
