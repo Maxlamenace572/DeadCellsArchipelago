@@ -2290,10 +2290,4 @@ deadcells_location_groups = {
         "Bright Red Blowtorch",
         "Boss Cell Head"
     },
-    "Problem Heads": {
-        "Green Hole", 
-        "Dark Vortex", 
-        "Fisherman Hood",
-        "Spatial Anomaly"
-    }
 }

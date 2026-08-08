@@ -8,7 +8,7 @@ These appear in the player's YAML configuration file.
 
 from dataclasses import dataclass
 from Options import (
-    Toggle, DeathLink, Range, PerGameCommonOptions, FreeText
+    Toggle, DeathLink, Range, PerGameCommonOptions, FreeText, StartInventoryPool, OptionGroup
 )
 
 
@@ -292,6 +292,8 @@ class GiveScrollOnFlawlessBoss(Toggle):
 
 @dataclass
 class DeadCellsOptions(PerGameCommonOptions):
+    start_inventory_from_pool: StartInventoryPool
+
     # DLC toggles
     dlc_rise_of_the_giant:    DLCRiseOfTheGiant
     dlc_the_bad_seed:         DLCTheBadSeed
@@ -328,3 +330,40 @@ class DeadCellsOptions(PerGameCommonOptions):
     # Gameplay
     respawn_up: RespawnUpScroll
     flawless_scroll: GiveScrollOnFlawlessBoss
+
+dead_cells_option_groups = [
+    OptionGroup(
+        "DLC Settings",
+        [DLCRiseOfTheGiant, DLCTheBadSeed, DLCFatalFalls, DLCTheQueenAndTheSea, DLCReturnToCastlevania]
+    ),
+    OptionGroup(
+        "Goal Settings",
+        [BossCells]
+    ),
+    OptionGroup(
+        "Item Pool Settings",
+        [IncludeCosmetics, IncludeBaseWeapons, IncludeBaseMutations, TrapPercentage]
+    ),
+    OptionGroup(
+        "Multiplayer Link Settings",
+        [
+            DeadCellsDeathLink, 
+            DeathLinkGroupName, 
+            DisableDeathLinkForAspects, 
+            DeathTrap, 
+            DeathTrapLinkTrigger, 
+            DeadCellsDamageLink, 
+            DamageLinkGroupName,
+            DeadCellsHealthLink,
+            HealthLinkGroupName,
+            DeadCellsHealthCurseLink,
+            DeadCellsTrapLink,
+            TrapLinkGroupName,
+         ]
+    ),
+    OptionGroup(
+        "Gameplay Settings",
+        [RespawnUpScroll, GiveScrollOnFlawlessBoss]
+    )
+    
+]
