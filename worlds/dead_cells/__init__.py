@@ -547,5 +547,44 @@ class DeadCellsWorld(World):
         Called by AP when it needs an extra filler item (e.g. for item links).
         Returns a random filler item name valid for this world's DLC set.
         """
-        fillers = list(get_filler_items(self.enabled_dlcs).keys())
+        fillers = [
+            "Scroll of Power",
+            "Assassin's Scroll",
+            "Minotaur's Scroll",
+            "Guardian's Scroll",
+            "Epic Scrolls of Power",
+            "Dead Man's Bag",
+            "Residual Cells",
+            "Kebab",
+            "Drumstick",
+            "Carrot",
+            "Big ol' raddish",
+            "Guts",
+            "Monster's Eye",
+            "Cherries",
+            "Watermelon",
+            "Pastry",
+            "Turkey",
+            "Le Croissant",
+            "La Baguette",
+            "Small Medkit",
+            "Large Medkit",
+            "Gruyère",
+            "Camembert",
+            "Flask Recharge",
+            "Cough Syrup",
+            "Small Cough Syrup",
+            "Liposuction",
+            "Fragment of the Philosopher's Stone",
+            "Ruby",
+            "Blue Sapphire",
+            "Amethyst",
+            "Malachite",
+            "Shiny Pebble",
+            "Ingot",
+            "Gold Tooth",
+            "Gold Cell",
+            "Golden Arrow",
+            "Corrupted Artifact"
+        ]
         return self.random.choice(fillers)
