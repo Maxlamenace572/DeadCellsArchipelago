@@ -883,6 +883,18 @@ LOCATION_RULES = [
     ("Queen Flame", _boss_rush_trials_1_2()),
     ("Collector Hood", _boss_rush_trials_1_2()),
 
+    ("Horde Zero Hood", _has_any_of(
+        "Double Crossb-o-matic",
+        "Sinew Slicer",
+        "Heavy Turret",
+        "Barnacle",
+        "Cleaver",
+        "Crusher",
+        "Explosive Decoy",
+        "Tesla Coil",
+        "Scavenged Bombard"
+    )), 
+
     ("Spatial Anomaly",
      lambda world: lambda state:
         _reach_head_count(31)(world)(state)),
