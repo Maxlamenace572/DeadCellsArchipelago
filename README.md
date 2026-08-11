@@ -2,13 +2,15 @@
 
 This is an [Archipelago](https://github.com/ArchipelagoMW/Archipelago) mod for Dead Cells, using [Dead Cells Core Modding](https://github.com/dead-cells-core-modding/core).
 
+In its current state, this implementation is best suited for long sync or async games, as there are multiple situations where you can become blocked. For short sync, you should use advanced YAML parameters such as `start_inventory`, `exclude_locations`, etc.
+
 ## Setup
 
 ### Installer
 
-For windows users, you can download the DeadCellsArchipelagoInstaller.zip from the latest release and launch the DeadCellsInstaller.exe. It will download dependencies (.net 10, DCCM), update the mod if needed and launch the game in modded.
+For windows users, you can download the DeadCellsArchipelagoInstaller.zip from the latest release and launch the DeadCellsInstaller.exe. It will download dependencies (.net 10, DCCM), install the mod and launch the game in modded. You can update the mod or DCCM from the launcher, or launch without updating. If you have an ongoing game, you should check at the end of the release log if the new version is still compatible with your current apworld.
 
-Note: It can work for some non-Steam versions, but the GOG version is known to be incompatible.
+Note: This mod can be played with the Steam and GOG versions, and on the Goldberg emulator.
 
 ### Manual install
 
@@ -27,7 +29,7 @@ To do that, you'll need to put `dead_cells.apworld` in `Archipelago\custom_world
 
 The DLCs aren't mandatory, and you can select which ones are active in the yaml.
 
-You should start your game from a new save.
+You should start your game from a new save, and you can duplicate your save and play on multiple slots at the same time, as some data is shared between them.
 
 Achievements are disabled by this mod.
 
@@ -37,9 +39,15 @@ Picking up blueprints, runes, aspects, killing bosses, and entering/exiting a bi
 
 Except for Promenade of the Condemned, Ramparts, Toxic Sewers, Black Bridge and Bank, you'll need the key's biome to enter it.
 
+Receiving the bank unlock item will make the biome appear at each transition until you enter it.
+
+Scissor, Comb, Green Hole, Red Hole, Dark Vortex, Spatial Anomaly and Fisherman Hood have requirements based on the locations checked, not items received and unlocked.
+
 A rework of the Hunter's Grenade makes it reusable and stacks active BSC+1 charges per biome completed.
 
-An integrated menu allows you to see the history of items received, buy colorless affixes, gives you filler items and allows you to use a progression tracker. The menu button is in the equipment menu.
+An integrated menu allows you to see the history of items received, buy colorless affixes, gives you filler items and allows you to use a progression tracker. The menu button is at the top right of the equipment menu.
+
+In the ap shop, you can buy colorless or legendary affixes, or Hunter's Grenade charges if you have one.
 
 The number of kills you need for boss heads is reduced.
 
@@ -53,17 +61,19 @@ Items in the Collector's shop aren't locked anymore if you don't have enough ite
 
 You can open the door of the mutation shop (because I never liked this door...).
 
-You can use Death Link with this mod, including a variant that curses you instead of directly killing you.
+On the second page of the ap menu, there is an Energy Link, allowing you to save or share your cells with other players.
+
+You can use Death Link with this mod, including two variants, one that curses you instead of directly killing you, and the other that gives you a trap.
+
+Damage Link, Health Link, and Trap Link are available, with the last two only compatible with other Dead Cells players.
 
 ## Known issues
 
-Responsiveness issues for the mod's UI on resolutions higher than 1920*1080.
-
-If you have another version of .NET other than 10, the installer will skip the .NET download even though the game won't launch.
+Responsiveness issues for the mod's UI on resolutions other than 1920*1080 or 3840x2160.
 
 Dying with assist mode will send the biome's end check.
 
-Killing an enemy while using the blueprint extractor will lose you a charge.
+There are currently issues with the king outfit. Once bought in the collector shop, the giants event will play and the king will disappear, making the Homunculus Rune and Symmetrical Lance disappear.
 
 ## Contributors
 
@@ -74,3 +84,8 @@ Thanks to Libellule57, who drew the Dead Cells Archipelago logo.
 ## Contact
 
 If you encounter any issues or just want to find a community to talk with, you can join us in the [Archipelago discord server](https://discord.gg/archipelago), in the [Dead Cells post](https://discord.com/channels/731205301247803413).
+
+## Support the Project
+
+If you enjoy this mod and would like to support my work, you can leave a donation on [Ko-fi](https://ko-fi.com/maxlamenace572). Donations are completely optional and are not required to download or use the mod.
+
