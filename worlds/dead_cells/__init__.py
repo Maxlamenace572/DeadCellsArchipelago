@@ -547,7 +547,9 @@ class DeadCellsWorld(World):
         Called by AP when it needs an extra filler item (e.g. for item links).
         Returns a random filler item name valid for this world's DLC set.
         """
-        fillers = [
+        #Manually listing fillers here so both it only chooses among these and 
+        #not the greater "Filler" tag, and doesnt include the now "Filler" cosmetics
+        fillers = [ 
             "Scroll of Power",
             "Assassin's Scroll",
             "Minotaur's Scroll",
