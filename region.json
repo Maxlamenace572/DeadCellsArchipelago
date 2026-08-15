@@ -1,0 +1,631 @@
+{
+    "PrisonStart": [
+        {
+            "to": "PrisonCourtyard",
+            "require": [[]]
+        },
+        {
+            "to": "SewerShort",
+            "require": [
+                [
+                    "LadderKey"
+                ],
+                [
+                    "WallJumpKey"
+                ]
+            ]
+        },
+        {
+            "to": "Greenhouse",
+            "require": [
+                [
+                    "TeleportKey",
+                    "Greenhouse"
+                ]
+            ]
+        },
+        {
+            "to": "PurpleGarden",
+            "require": [
+                [
+                    "PurpleGarden"
+                ]
+            ]
+        },
+        {
+            "to": "Bank",
+            "require": [
+                [
+                    "BankUnlock"
+                ]
+            ]
+        }
+    ],
+    "Bank": [],
+    "PrisonCourtyard": [
+        {
+            "to": "Ossuary",
+            "require": [
+                [
+                    "LadderKey",
+                    "TeleportKey",
+                    "Ossuary"
+                ]
+            ]
+        },
+        {
+            "to": "PrisonRoof",
+            "require": [
+                [
+                    "LadderKey"
+                ]
+            ]
+        },
+        {
+            "to": "PrisonDepths",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "LadderKey",
+                    "PrisonDepths"
+                ]
+            ]
+        }
+    ],
+    "SewerShort": [
+        {
+            "to": "PrisonCorrupt",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "PrisonCorrupt"
+                ]
+            ]
+        },
+        {
+            "to": "PrisonRoof",
+            "require": [[]]
+        },
+        {
+            "to": "SewerDepths",
+            "require": [
+                [
+                    "BreakableGroundKey",
+                    "SewerDepths"
+                ]
+            ]
+        }
+    ],
+    "Greenhouse": [
+        {
+            "to": "PrisonDepths",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "PrisonDepths"
+                ]
+            ]
+        },
+        {
+            "to": "Swamp",
+            "require": [
+                [
+                    "Swamp"
+                ]
+            ]
+        },
+        {
+            "to": "PrisonRoof",
+            "require": [[]]
+        }
+    ],
+    "PurpleGarden": [
+        {
+            "to": "DookuCastle",
+            "require": [
+                [
+                    "DookuCastle"
+                ]
+            ]
+        },
+        {
+            "to": "Ossuary",
+            "require": [
+                [
+                    "TeleportKey",
+                    "Ossuary",
+                    "Boss_DookuBeast"
+                ]
+            ]
+        }
+    ],
+    "PrisonDepths": [
+        {
+            "to": "Ossuary",
+            "require": [
+                [
+                    "Ossuary"
+                ]
+            ]
+        },
+        {
+            "to": "SewerDepths",
+            "require": [
+                [
+                    "Progressive Stem Cell",
+                    "SewerDepths"
+                ]
+            ]
+        }
+    ],
+    "PrisonCorrupt": [
+        {
+            "to": "SewerDepths",
+            "require": [
+                [
+                    "SewerDepths"
+                ]
+            ]
+        },
+        {
+            "to": "PrisonRoof",
+            "require": [
+                [
+                    "Progressive Stem Cell"
+                ]
+            ]
+        }
+    ],
+    "PrisonRoof": [
+        {
+            "to": "Bridge",
+            "require": [[]]
+        },
+        {
+            "to": "BeholderPit",
+            "require": [
+                [
+                    "Progressive Stem Cell:3",
+                    "BeholderPit"
+                ]
+            ]
+        }
+    ],
+    "Ossuary": [
+        {
+            "to": "Bridge",
+            "require": [[]]
+        }
+    ],
+    "SewerDepths": [
+        {
+            "to": "BeholderPit",
+            "require": [
+                [
+                    "BeholderPit"
+                ]
+            ]
+        }
+    ],
+    "Swamp": [
+        {
+            "to": "SwampHeart",
+            "require": [
+                [
+                    "SwampHeart"
+                ]
+            ]
+        }
+    ],
+    "DookuCastle": [
+        {
+            "to": "Bridge",
+            "require": [
+                [
+                    "Boss_DookuBeast"
+                ]
+            ]
+        },
+        {
+            "to": "DeathArena",
+            "require": [
+                [
+                    "DeathArena"
+                ]
+            ]
+        }
+    ],
+    "Bridge": [
+        {
+            "to": "Tumulus",
+            "require": [
+                [
+                    "Tumulus"
+                ]
+            ]
+        },
+        {
+            "to": "StiltVillage",
+            "require": [
+                [
+                    "StiltVillage"
+                ]
+            ]
+        },
+        {
+            "to": "AncientTemple",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "AncientTemple"
+                ]
+            ]
+        }
+    ],
+    "BeholderPit": [
+        {
+            "to": "AncientTemple",
+            "require": [
+                [
+                    "AncientTemple"
+                ]
+            ]
+        },
+        {
+            "to": "Cemetery",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "Cemetery"
+                ]
+            ]
+        }
+    ],
+    "SwampHeart": [
+        {
+            "to": "StiltVillage",
+            "require": [
+                [
+                    "StiltVillage"
+                ]
+            ]
+        },
+        {
+            "to": "Cemetery",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "Cemetery"
+                ]
+            ]
+        },
+        {
+            "to": "Tumulus",
+            "require": [
+                [
+                    "Tumulus"
+                ]
+            ]
+        }
+    ],
+    "DeathArena": [
+        {
+            "to": "Cemetery",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "Cemetery"
+                ]
+            ]
+        },
+        {
+            "to": "StiltVillage",
+            "require": [
+                [
+                    "StiltVillage"
+                ]
+            ]
+        },
+        {
+            "to": "AncientTemple",
+            "require": [
+                [
+                    "WallJumpKey",
+                    "AncientTemple"
+                ]
+            ]
+        }
+    ],
+    "StiltVillage": [
+        {
+            "to": "ClockTower",
+            "require": [
+                [
+                    "ClockTower"
+                ]
+            ]
+        },
+        {
+            "to": "Crypt",
+            "require": [
+                [
+                    "TeleportKey",
+                    "Crypt"
+                ]
+            ]
+        }
+    ],
+    "AncientTemple": [
+        {
+            "to": "ClockTower",
+            "require": [
+                [
+                    "ClockTower"
+                ]
+            ]
+        },
+        {
+            "to": "Crypt",
+            "require": [
+                [
+                    "TeleportKey",
+                    "Crypt"
+                ]
+            ]
+        }
+    ],
+    "Cemetery": [
+        {
+            "to": "Crypt",
+            "require": [
+                [
+                    "TeleportKey",
+                    "Crypt"
+                ]
+            ]
+        },
+        {
+            "to": "Cavern",
+            "require": [
+                [
+                    "CavernKey",
+                    "Cavern"
+                ]
+            ]
+        }
+    ],
+    "Tumulus": [
+        {
+            "to": "ClockTower",
+            "require": [
+                [
+                    "ClockTower"
+                ]
+            ]
+        },
+        {
+            "to": "Crypt",
+            "require": [
+                [
+                    "TeleportKey",
+                    "Crypt"
+                ]
+            ]
+        },
+        {
+            "to": "Cliff",
+            "require": [
+                [
+                    "Cultist",
+                    "Cliff"
+                ],
+                [
+                    "Cliff",
+                    "HomKey"
+                ]
+            ]
+        }
+    ],
+    "ClockTower": [
+        {
+            "to": "TopClockTower",
+            "require": [
+                [
+                    "TopClockTower"
+                ]
+            ]
+        }
+    ],
+    "Crypt": [
+        {
+            "to": "TopClockTower",
+            "require": [
+                [
+                    "TopClockTower"
+                ]
+            ]
+        }
+    ],
+    "Cavern": [
+        {
+            "to": "Giant",
+            "require": [
+                [
+                    "Giant"
+                ]
+            ]
+        }
+    ],
+    "Cliff": [
+        {
+            "to": "GardenerStage",
+            "require": [
+                [
+                    "GardenerStage"
+                ]
+            ]
+        }
+    ],
+    "TopClockTower": [
+        {
+            "to": "Shipwreck",
+            "require": [
+                [
+                    "ShipwreckKey",
+                    "Shipwreck"
+                ]
+            ]
+        },
+        {
+            "to": "Castle",
+            "require": [
+                [
+                    "Castle"
+                ]
+            ]
+        },
+        {
+            "to": "DookuCastleHard",
+            "require": [
+                [
+                    "Boss_Death",
+                    "LadderKey",
+                    "DookuCastleHard"
+                ],
+                [
+                    "Boss_Death",
+                    "B_Greenhouse",
+                    "DookuCastleHard"
+                ]
+            ]
+        }
+    ],
+    "Giant": [
+        {
+            "to": "Shipwreck",
+            "require": [
+                [
+                    "ShipwreckKey",
+                    "Shipwreck"
+                ]
+            ]
+        },
+        {
+            "to": "Castle",
+            "require": [
+                [
+                    "Castle"
+                ]
+            ]
+        },
+        {
+            "to": "Throne",
+            "require": [
+                [
+                    "Throne"
+                ]
+            ]
+        }
+    ],
+    "GardenerStage": [
+        {
+            "to": "Shipwreck",
+            "require": [
+                [
+                    "ShipwreckKey",
+                    "Shipwreck"
+                ]
+            ]
+        },
+        {
+            "to": "Castle",
+            "require": [
+                [
+                    "Castle"
+                ]
+            ]
+        }
+    ],
+    "Castle": [
+        {
+            "to": "Throne",
+            "require": [
+                [
+                    "Throne"
+                ]
+            ]
+        }
+    ],
+    "Distillery": [
+        {
+            "to": "Throne",
+            "require": [
+                [
+                    "Throne"
+                ]
+            ]
+        }
+    ],
+    "Shipwreck": [
+        {
+            "to": "Lighthouse",
+            "require": [
+                [
+                    "Lighthouse"
+                ]
+            ]
+        }
+    ],
+    "DookuCastleHard": [
+        {
+            "to": "DookuArena",
+            "require": [
+                [
+                    "DookuArena"
+                ]
+            ]
+        }
+    ],
+    "Throne": [
+        {
+            "to": "Astrolab",
+            "require": [
+                [
+                    "Progressive Stem Cell:5",
+                    "Astrolab"
+                ]
+            ]
+        },
+        {
+            "to": "Distillery",
+            "require": [
+                [
+                    "Distillery"
+                ]
+            ]
+        }
+    ],
+    "Lighthouse": [
+        {
+            "to": "QueenArena",
+            "require": [
+                [
+                    "QueenArena"
+                ]
+            ]
+        }
+    ],
+    "DookuArena": [],
+    "Astrolab": [
+        {
+            "to": "Observatory",
+            "require": [
+                [
+                    "Observatory"
+                ]
+            ]
+        }
+    ],
+    "QueenArena": [],
+    "Observatory": []
+}

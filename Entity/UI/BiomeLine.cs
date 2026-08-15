@@ -154,5 +154,21 @@ namespace DeadCellsArchipelago {
             }
             return res;
         }
+
+        public void SetIcons(int index, List<List<string>> lines)
+        {
+            switch (index)
+            {
+                case 0:
+                    cell1.SetIcons(lines);
+                    break;
+                case 1:
+                    cell2.SetIcons(lines);
+                    break;
+                case 2:
+                    cell3.SetIcons(lines);
+                    break;
+            }
+        }
     }
 }

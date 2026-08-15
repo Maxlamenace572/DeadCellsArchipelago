@@ -228,5 +228,19 @@ namespace DeadCellsArchipelago {
             }
             return count;
         }
+
+        public int CountReceivedStemCell()
+        {
+            int res = 0;
+            foreach (string item in ReceivedItem)
+            {
+                if (item.Length >= 8 && "BossRune" == item[..8])
+                {
+                    res++;
+                }
+            }
+
+            return res;
+        }
     }
 }

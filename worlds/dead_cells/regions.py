@@ -168,7 +168,6 @@ TRANSITIONS = {
     ],
     "Throne": [
         {"to": "Astrolab", "require": ["Progressive Stem Cell:5", "Astrolab Unlock"]},
-        {"to": "Bank", "require": None},
         {"to": "End", "require": "Homunculus Rune"},
         {"to": "Distillery", "require": "Derelict Distillery Unlock"},
     ],
@@ -206,7 +205,6 @@ TRANSITIONS = {
     ],
     "QueenArena": [
         {"to": "End", "require": None},
-        {"to": "Bank", "require": None},
     ],
     "PurpleGarden": [
         {"to": "DookuCastle", "require": "Dracula's Castle Unlock"},

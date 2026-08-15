@@ -165,6 +165,7 @@ namespace DeadCellsArchipelago {
                 List<string> allBiomesIds = GetBiomesId();
                 int index = 0;
                 Dictionary<string, HashSet<string>> data = StartCalculate();
+                Dictionary<string, Biome> biomes = CalculateRegionData();
                 for(int i = 0; i < allBiomesIds.Count; i+=3) {
                     lines.Add((T)(Line) new BiomeLine(0, 0, allBiomesIds[i], allBiomesIds[i+1], allBiomesIds[i+2], data));
                     lines[index].AddParent(flow);
@@ -173,6 +174,10 @@ namespace DeadCellsArchipelago {
                         if (!CanTakeExit(allBiomesIds[i+u]))
                         {
                             ((BiomeLine)(Line)lines[index]).Locked(u);
+                        }
+                        if (allBiomesIds[i + u] != "Other" && !biomes[allBiomesIds[i + u]].accessible)
+                        {
+                            ((BiomeLine)(Line)lines[index]).SetIcons(u, biomes[allBiomesIds[i + u]].RemainingRequirements);
                         }
                     }
 

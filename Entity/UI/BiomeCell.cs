@@ -3,11 +3,13 @@ using dc.h2d;
 using dc.h2d.col;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
+using dc.ui.icon;
 using Serilog;
 
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.MainMenuManager;
+using static DeadCellsArchipelago.TrackerData;
 
 namespace DeadCellsArchipelago {
     public class BiomeCell
@@ -109,12 +111,11 @@ namespace DeadCellsArchipelago {
             {
                 visible = false,
                 scaleX = 2,
-                scaleY = 2
+                scaleY = 2,
+                x = 10,
+                y = 10,
+                posChanged = true
             };
-            Bounds boundsLock = bLock.getSize(new Bounds());
-            bLock.x = (boundsLevel.xMax - boundsLock.xMax)/2;
-            bLock.y = (boundsLevel.yMax - boundsLock.yMax)/2;
-            bLock.posChanged = true;
             
             
             Tile highlightTile = Assets.Class.ui.getTile("worldMapFrameDefault".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
@@ -126,8 +127,6 @@ namespace DeadCellsArchipelago {
                 scaleX = 3.81,
                 scaleY = 3.6
             };
-
-            
         }
 
         public void Highlight()
@@ -159,6 +158,44 @@ namespace DeadCellsArchipelago {
             popUpTracker.scrollerItems?.RemoveAllContent();
             popUpTracker.scrollerItems?.flow?.y = 0;
             popUpTracker.scrollerItems?.flow?.posChanged = true;
+        }
+
+        public void SetIcons(List<List<string>> lines)
+        {
+            Bounds boundsLevel = bitmap.getSize(new Bounds());
+
+            Flow globalFlow = new Flow(bitmap);
+            globalFlow.set_isVertical(true);
+            globalFlow.set_multiline(true);
+            globalFlow.set_verticalSpacing(12);
+            globalFlow.set_horizontalAlign(new FlowAlign.Middle());
+
+            foreach(List<string> line in lines)
+            {
+                Flow flow = new Flow(globalFlow);
+                flow.set_horizontalSpacing(4);
+                flow.set_verticalAlign(new FlowAlign.Middle());
+                
+                foreach(string item in line)
+                {
+                    if(GetBiomesId().Contains(item)) continue;
+
+                    if (item[..2] == "B_") _ = new Bitmap(Assets.Class.levelLogos.getLevelLogo(item[2..].AsHaxeString()), flow) {scaleX=0.2, scaleY=0.2};
+                    else if (item[..5] == "Boss_")
+                    {
+                        Icon icon = Icon.Class.createMobIcon(item[5..].AsHaxeString(), flow);
+                        icon.scaleX=0.5;
+                        icon.scaleY=0.5;
+                    }
+                    else if (item == "Progressive Stem Cell") _ = Icon.Class.createItemIcon("BossRune1".AsHaxeString(), flow);
+                    else _ = Icon.Class.createItemIcon(item.AsHaxeString(), flow);
+                }
+            }
+
+            Bounds boundsGlobalFlow = globalFlow.getSize(new Bounds());
+            globalFlow.x = (boundsLevel.xMax - boundsGlobalFlow.xMax)/2;
+            globalFlow.y = (boundsLevel.yMax - boundsGlobalFlow.yMax)/2;
+            fade.visible = true;
         }
     }
 }
