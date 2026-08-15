@@ -19,6 +19,7 @@ using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.UnlockItemManager;
 using static DeadCellsArchipelago.LinkQueue;
 using static DeadCellsArchipelago.ModAssetManager;
+using static DeadCellsArchipelago.WorldMapManager;
 using dc.level;
 using dc.tool;
 using ModCore.Events.Interfaces.Game.Save;
@@ -63,6 +64,7 @@ namespace DeadCellsArchipelago{
             InitializeUnlockItemHooks();
             InitializePauseHooks();
             InitializeModAssetHooks();
+            InitializeWorldMapHooks();
             
             Hook_LevelGen.generate += OnLevelGenGenerate;
 

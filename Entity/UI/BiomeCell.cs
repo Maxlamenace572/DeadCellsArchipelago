@@ -162,6 +162,11 @@ namespace DeadCellsArchipelago {
 
         public void SetIcons(List<List<string>> lines)
         {
+            foreach(List<string> line in lines)
+            {
+                if(line.Count == 1 && GetBiomesId().Contains(line[0])) return;
+            }
+
             Bounds boundsLevel = bitmap.getSize(new Bounds());
 
             Flow globalFlow = new Flow(bitmap);
