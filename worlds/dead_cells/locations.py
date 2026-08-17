@@ -264,7 +264,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     "Luchador's Outfit": {
         "id": 0x007E, "region": "Checks", "type": "skin",
         "dlc": "", "min_bc": 0, "item": "Guacamelee",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'Crypt', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}, {'biome': 'Bank', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
     },
     "The Magician's Outfit": {
         "id": 0x007F, "region": "Checks", "type": "skin",
@@ -1506,10 +1506,10 @@ LOCATION_TABLE: Dict[str, dict] = {
         "dlc": "", "min_bc": 0, "item": "ASP_Damned",
         "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
     },
-    "Boss Stem Cell 1": {"id": 0x0177, "region": "Throne", "type": "rune", "dlc": "", "min_bc": 0, "item": "BossRune1","sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
-    "Boss Stem Cell 2": {"id": 0x0178, "region": "Throne", "type": "rune", "dlc": "", "min_bc": 1, "item": "BossRune2","sources": [{'biome': 'Throne', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
-    "Boss Stem Cell 3": {"id": 0x0179, "region": "Throne", "type": "rune", "dlc": "", "min_bc": 2, "item": "BossRune3","sources": [{'biome': 'Throne', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
-    "Boss Stem Cell 4": {"id": 0x017A, "region": "Throne", "type": "rune", "dlc": "", "min_bc": 3, "item": "BossRune4","sources": [{'biome': 'Throne', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
+    "Boss Stem Cell 1": {"id": 0x0177, "region": "Checks", "type": "rune", "dlc": "", "min_bc": 0, "item": "BossRune1","sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'QueenArena', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'DookuArena', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
+    "Boss Stem Cell 2": {"id": 0x0178, "region": "Checks", "type": "rune", "dlc": "", "min_bc": 1, "item": "BossRune2","sources": [{'biome': 'Throne', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'QueenArena', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'DookuArena', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
+    "Boss Stem Cell 3": {"id": 0x0179, "region": "Checks", "type": "rune", "dlc": "", "min_bc": 2, "item": "BossRune3","sources": [{'biome': 'Throne', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'QueenArena', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'DookuArena', 'min_bc': 2, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
+    "Boss Stem Cell 4": {"id": 0x017A, "region": "Checks", "type": "rune", "dlc": "", "min_bc": 3, "item": "BossRune4","sources": [{'biome': 'Throne', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'QueenArena', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}, {'biome': 'DookuArena', 'min_bc': 3, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
     "Boss Stem Cell 5": {"id": 0x017B, "region": "Giant", "type": "rune", "dlc": "RiseOfTheGiant", "min_bc": 4, "item": "BossRune5","sources": [{'biome': 'Giant', 'min_bc': 4, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'BossCell'}],},
     "Symmetrical Lance": {
         "id": 0x017C, "region": "Checks", "type": "item_no_blueprint",

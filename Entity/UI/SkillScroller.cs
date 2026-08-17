@@ -164,8 +164,8 @@ namespace DeadCellsArchipelago {
             {
                 List<string> allBiomesIds = GetBiomesId();
                 int index = 0;
-                Dictionary<string, HashSet<string>> data = StartCalculate();
                 Dictionary<string, Biome> biomes = CalculateRegionData();
+                Dictionary<string, HashSet<string>> data = StartCalculate(biomes);
                 for(int i = 0; i < allBiomesIds.Count; i+=3) {
                     lines.Add((T)(Line) new BiomeLine(0, 0, allBiomesIds[i], allBiomesIds[i+1], allBiomesIds[i+2], data));
                     lines[index].AddParent(flow);

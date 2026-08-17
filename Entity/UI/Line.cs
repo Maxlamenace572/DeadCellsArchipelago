@@ -8,6 +8,7 @@ namespace DeadCellsArchipelago {
     {
         public UIBox bgBox;
         public double w;
+        public double h;
 
         public Line(double width, double height, double x, double y, int color)
         {
@@ -18,6 +19,7 @@ namespace DeadCellsArchipelago {
             bgBox.scaleX = 3;
             bgBox.scaleY = 3;
             w=width;
+            h=height;
         }
 
         public virtual void AddParent(dc.h2d.Object parent)

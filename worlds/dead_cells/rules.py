@@ -781,7 +781,7 @@ LOCATION_RULES = [
     "Luchador's Outfit",
     lambda world: (
         lambda state:
-            state.can_reach("Crypt", "Region", world.player)
+            _can_reach_depth(5)
             and _has_any_of(
                 "Spartan Sandals",
                 "Spiked Boots",
@@ -870,7 +870,7 @@ LOCATION_RULES = [
 
     ("Boss Cell Head", _bsc(5)),
 
-    ("Guillain Head", _has("Boss Rush Unlock") and _has("Boss Rush Statue")),
+    ("Guillain Head", _has("Boss Rush Unlock") and _has("Boss Rush Statue") and _has("Bank Unlock")),
 
     ("Concierge Flame", _boss_rush_trials_1_2()),
     ("Conjunctivius Tentacles", _boss_rush_trials_1_2()),
@@ -917,10 +917,15 @@ LOCATION_RULES = [
             and state.has("The Specialist's Showroom", world.player)
             and state.has("Restock", world.player)
             and state.has("Merchandise Categories", world.player)
+            and state.has("Random Starter Bow", world.player)
+            and state.has("Random Starter Shield", world.player)
+            and state.has("Random Melee Weapon", world.player)
             and state.count("Progressive Flask", world.player) >= 4
             and state.count("Progressive Recycling", world.player) >= 2
             and state.count("Progressive Gold Reserves", world.player) >= 5
     )),
+    
+    ("Biter Head", _has("Swarm")),
     
     ("Green Hole", _can_reach_nb_item_locations(75)),
     ("White Hole", _has("Cursed Flask")),

@@ -5,16 +5,19 @@ namespace DeadCellsArchipelago
 {
     public static class TrackerData
     {
-        public static Dictionary<string, HashSet<string>> StartCalculate()
+        private static Dictionary<string, ItemData> ItemsData = [];
+
+        public static Dictionary<string, HashSet<string>> StartCalculate(Dictionary<string, Biome> biomes)
         {
             var json = File.ReadAllText(GetTrackerDataFilePath());
             Dictionary<string, Entry>? data = JsonSerializer.Deserialize<Dictionary<string, Entry>>(json);
-            return CalculateTraker(data);
+            return CalculateTraker(data, biomes);
         }
 
-        public static Dictionary<string, HashSet<string>> CalculateTraker(Dictionary<string, Entry>? data)
+        public static Dictionary<string, HashSet<string>> CalculateTraker(Dictionary<string, Entry>? data, Dictionary<string, Biome> biomes)
         {
             Dictionary<string, HashSet<string>> res = [];
+            ItemsData = [];
 
             if (SAVED_DATA == null || data == null) return res;
 
@@ -53,7 +56,20 @@ namespace DeadCellsArchipelago
                     if(added)
                     {
                         res["AllT"].Add(entry.Key);
-                        if(SAVED_DATA != null && !SAVED_DATA.IsCheckSent(entry.Key)) res["AllR"].Add(entry.Key);
+                        if(SAVED_DATA != null && !SAVED_DATA.IsCheckSent(entry.Key))
+                        {
+                            res["AllR"].Add(entry.Key);
+
+                            ItemData itD = new();
+                            foreach (Source source in entry.Value.sources)
+                            {
+                                itD.min_bc = Math.Min(source.min_bc, itD.min_bc);
+                                if (source.mob != null) itD.mobs.Add(source.mob);
+                                if (source.biome == "Challenge" || (biomes[source.biome].accessible && source.min_bc <= SAVED_DATA.CountReceivedStemCell())) itD.accessible = true;
+                            }
+
+                            ItemsData[entry.Key] = itD;
+                        }
                     }
                 }
             }
@@ -182,6 +198,11 @@ namespace DeadCellsArchipelago
         {
             return Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "region.json");
         }
+
+        public static bool IsItemAccessible(string itemId)
+        {
+            return ItemsData[itemId].accessible;
+        }
     }
 
     public class Source
@@ -249,5 +270,14 @@ namespace DeadCellsArchipelago
                 }
             }
         }
+    }
+
+    public class ItemData
+    {
+        public bool accessible = false;
+        public int min_bc = 6;
+        public HashSet<string> mobs = [];
+        public List<List<string>> requirements = [];
+        public string? description;
     }
 }

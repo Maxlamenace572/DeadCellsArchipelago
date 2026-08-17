@@ -12,10 +12,12 @@ using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.MainMenuManager;
+using static DeadCellsArchipelago.TrackerData;
 
 namespace DeadCellsArchipelago {
     public class ItemLine : Line
     {
+        public UIBox? fade;
         public Skill skill;
         public dc.ui.Text text;
         public string itemId;
@@ -102,6 +104,7 @@ namespace DeadCellsArchipelago {
                 SetDisplayText();
             }
             skill.btn.visible = false;
+            if (nb == null) SetFadeNotAccessible();
         }
 
         public override void AddParent(dc.h2d.Object parent)
@@ -109,6 +112,7 @@ namespace DeadCellsArchipelago {
             base.AddParent(parent);
             bgBox.addChildAt(skill, bgBox.layerCount);
             bgBox.addChildAt(text, bgBox.layerCount-1);
+            if (fade != null) bgBox.addChildAt(fade, bgBox.layerCount-1);
 
             Bounds boundsSkill = skill.getSize(new Bounds());
             text.x = boundsSkill.xMax + skill.x;
@@ -141,22 +145,22 @@ namespace DeadCellsArchipelago {
 
         public void SetDisplayText()
         {
-                string itemNumber = "";
-                if(nb != null)
-                {
-                    itemNumber = $"({nb}) ";
-                }
-                
-                string itemName = "";
-                if (itemId == "APGold" || itemId == "APCells")
-                {
-                    itemName = Data.Class.item.byId.get(itemId.AsHaxeString()).name;
-                }
-                else
-                {
-                    itemName = Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString());
-                }
-                text.set_text($" {itemNumber}{itemName}".AsHaxeString());
+            string itemNumber = "";
+            if(nb != null)
+            {
+                itemNumber = $"({nb}) ";
+            }
+            
+            string itemName = "";
+            if (itemId == "APGold" || itemId == "APCells")
+            {
+                itemName = Data.Class.item.byId.get(itemId.AsHaxeString()).name;
+            }
+            else
+            {
+                itemName = Lang.Class.t.texts.get(((dc.String) Data.Class.item.byId.get(itemId.AsHaxeString()).name).ToString().Trim().AsHaxeString());
+            }
+            text.set_text($" {itemNumber}{itemName}".AsHaxeString());
         }
 
         public void GiveItem()
@@ -166,6 +170,18 @@ namespace DeadCellsArchipelago {
                 DecNumber();
                 DropItemToPlayer(itemId);
             }
+        }
+
+        public void SetFadeNotAccessible()
+        {
+            if (IsItemAccessible(itemId)) return;
+            fade = new UIBox("boxMain".AsHaxeString(), w*screenScale, h*screenScale, 0, 0);
+            double alpha = 0.75;
+            fade.sg.setDefaultColor(0, new Ref<double> (ref alpha));
+            fade.x = bgBox.x;
+            fade.y = bgBox.y;
+            fade.scaleX = 1;
+            fade.scaleY = 1;
         }
     }
 }
