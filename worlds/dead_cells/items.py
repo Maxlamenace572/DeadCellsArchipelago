@@ -713,7 +713,7 @@ def get_progression_items(enabled_dlcs: Set[str]) -> Dict[str, tuple]:
     return {
         name: data
         for name, data in get_items_for_dlcs(enabled_dlcs).items()
-        if data[1] == PROG
+        if data[1] == PROG | PRSB | PRNO | PRDE
     }
 
 def is_cosmetic(item_name: str) -> bool:
