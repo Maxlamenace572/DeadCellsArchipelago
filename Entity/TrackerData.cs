@@ -1,11 +1,12 @@
 using System.Text.Json;
 using static DeadCellsArchipelago.ItemManager;
+using static DeadCellsArchipelago.RuleItemTracker;
 
 namespace DeadCellsArchipelago
 {
     public static class TrackerData
     {
-        private static Dictionary<string, ItemData> ItemsData = [];
+        public static Dictionary<string, ItemData> ItemsData = [];
 
         public static Dictionary<string, HashSet<string>> StartCalculate(Dictionary<string, Biome> biomes)
         {
@@ -67,12 +68,17 @@ namespace DeadCellsArchipelago
                                 if (source.mob != null) itD.mobs.Add(source.mob);
                                 if (source.biome == "Challenge" || (biomes[source.biome].accessible && source.min_bc <= SAVED_DATA.CountReceivedStemCell())) itD.accessible = true;
                             }
-
+                            if (itD.accessible && entry.Value.rarity != null && new[] {"Legendary", "Rare", "Uncommon" }.Any(entry.Value.rarity.Contains))
+                            {
+                                itD.accessible = SAVED_DATA.IsItemReceived("PokebombUnlock");
+                                itD.requirements.Add(["PokebombUnlock"]);
+                            }
                             ItemsData[entry.Key] = itD;
                         }
                     }
                 }
             }
+            AddSpecialRules();
             foreach (string biomeId in GetBiomesId())
             {
                 List<string> start = ["T", "R"];

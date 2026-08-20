@@ -541,12 +541,12 @@ namespace DeadCellsArchipelago {
         {
             if (SAVED_DATA != null)
             {
-                if (bossRuneGivenSinceLaunch < SAVED_DATA.NumberOfBossRuneReceived())
+                if (bossRuneGivenSinceLaunch < SAVED_DATA.CountReceivedStemCell())
                 {
                     bossRuneGivenSinceLaunch++;
                     return null;
                 }
-                else if (SAVED_DATA.NumberOfBossRuneReceived() < 5)
+                else if (SAVED_DATA.CountReceivedStemCell() < 5)
                 {
                     string? res = null;
                     if (SAVED_DATA.IsItemReceived("BossRune4"))

@@ -191,20 +191,6 @@ namespace DeadCellsArchipelago {
             File.WriteAllText(savePath, jObject.ToString(Formatting.Indented));
         }
 
-        public int NumberOfBossRuneReceived()
-        {
-            int res = 0;
-            foreach (string item in ReceivedItem)
-            {
-                if (item.Length >= 8 && "BossRune" == item[..8])
-                {
-                    res ++;
-                }
-            }
-
-            return res;
-        }
-
         public int CountItemSend()
         {
             if(!itemList.Any()) InitLists();

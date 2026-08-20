@@ -10,9 +10,7 @@
     "RichterDashKey": "First Rune available in Richter Mode.",
     "RichterUppercutKey": "Second Rune available in Richter Mode.",
 
-    "ASP": "Restart or die to get a random aspect.",
     "FastBow": "To the left of where you spawn in the Prisoners' Quarters.",
-    "PQLoreRoom": "Inside one of the lore rooms of the Prisoners' Quarters.",
     "P_Disengage": "On top of where you spawn in the Prisoners' Quarters.",
     "RoyalGardener": "After the teleportation monolith leading to the Dilapidated Arboretum.",
     "BroadSword": "Found on the Tutorial Knight's corpse next to the exit leading to the Promenade. The corpse appears on the fourth run.",
@@ -34,7 +32,7 @@
     "PreciseBow": "At the end on the right side of the level, if the last tower isn't the exit to Black Bridge and Stun Grenade hasn't generated, Nerves of Steel might spawn. It is located farther right, after an invisible platform.",
     "StunningGrenade": "At the end on the right side of the level, if the last tower isn't the exit to Black Bridge and Nerves of Steel hasn't generated, Stun Grenade might spawn. It is located below, on the right side of the tower.",
 
-    "LongBow": "Behind the 8-minute timed door in the transition before the Ossuary, from the Promenade or the Dilapidated Arboretum.",
+    "LongBow": "Behind the 8-minute timed door in the transition before the Ossuary, from the Promenade or the Castle Outskirts after beating Death.",
     "P_Hot": "In a secret area after a teleportation monolith.",
 
     "AlchemicGun": "In a secret area not guaranteed to spawn, after a passage with leaves leading to a pool of poisonous water.",
@@ -73,7 +71,6 @@
 
     "Trident": "In a lore room locked by the Forked Key. Enemies in this level can randomly drop a map part, and with four of them an X symbol appears on the map. The Forked Key is in the breakable floor marked by the X.",
     "BlueErinaceus": "Complete the level in less than five minutes. The timer starts at the end of the cutscene and ends when the last servant is killed.",
-    "AmazonLoot": "The corresponding servant needs to be killed last.",
 
     "WiggleWhip": "Do the Konami Code (up, up, down, down, left, right, left, right, B, A). On a controller, B is roll and A is jump. On a keyboard, use the arrow, B, and A keys.",
     "Maria": "Catch the cat wandering in the level to gain the Ribboned Key, and open Maria's cell. In there, talk to Maria.",
@@ -86,8 +83,6 @@
     "Trevor": "In a secret area on top of the room before Dracula. An invisible platform on the right side of the room leads to the secret area. The outfit is given upon examining Trevor's equipment.",
 
     "Banker": "Complete the platform challenge at the end of the green floor.",
-
-    "BossFlawless": "The boss should be killed without taking a hit.",
 
     "RiskOfRain": "Kill the two shadow imps that spawn from the imp altar. The imps will flee as soon as they spawn and disappear after some time. The altar will randomly spawn in biomes.",
     "Terraria": "Drop an item into lava.",
@@ -146,5 +141,11 @@
     "VictoriusBeheaded1": "Complete the fourth Boss Rush trial on 3 or 4 BSC.",
     "VictoriusBeheaded2": "Complete the third Boss Rush trial on 5 BSC without being hit.",
     "VictoriusBeheaded3": "Complete the fourth Boss Rush trial on 5 BSC without being hit.",
-    "BossRushStatue": "Found in the first chest opened at the end of any Boss Rush trial."
+    "BossRushStatue": "Found in the first chest opened at the end of any Boss Rush trial.",
+
+    "ASP": "Restart or die to get a random aspect.",
+    "PQLoreRoom": "Inside one of the lore rooms of the Prisoners' Quarters.",
+    "BossFlawless": "The boss should be killed without taking a hit.",
+    "AmazonLoot": "The corresponding servant needs to be killed last.",
+    "CursedBiome": "This item is found in a cursed biome."
 }

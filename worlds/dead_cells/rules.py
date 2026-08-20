@@ -571,7 +571,7 @@ LOCATION_RULES = [
             _can_reach_location_if_exists(state, world, loc)
             for loc in [
                 "Toxic Sewers Enter",
-                "Castle's Outskirts Enter",
+                "Castle Outskirts Enter",
                 "Dilapidated Arboretum Enter",
             ]
         )
@@ -582,7 +582,7 @@ LOCATION_RULES = [
             _can_reach_location_if_exists(state, world, loc)
             for loc in [
                 "Toxic Sewers Enter",
-                "Castle's Outskirts Enter",
+                "Castle Outskirts Enter",
                 "Dilapidated Arboretum Enter",
             ]
         )
@@ -593,7 +593,7 @@ LOCATION_RULES = [
             _can_reach_location_if_exists(state, world, loc)
             for loc in [
                 "Toxic Sewers Enter",
-                "Castle's Outskirts Enter",
+                "Castle Outskirts Enter",
                 "Dilapidated Arboretum Enter",
             ]
         )
@@ -604,7 +604,7 @@ LOCATION_RULES = [
             _can_reach_location_if_exists(state, world, loc)
             for loc in [
                 "Toxic Sewers Enter",
-                "Castle's Outskirts Enter",
+                "Castle Outskirts Enter",
                 "Dilapidated Arboretum Enter",
             ]
         )
@@ -615,7 +615,7 @@ LOCATION_RULES = [
             _can_reach_location_if_exists(state, world, loc)
             for loc in [
                 "Toxic Sewers Enter",
-                "Castle's Outskirts Enter",
+                "Castle Outskirts Enter",
                 "Dilapidated Arboretum Enter",
             ]
         )
@@ -626,7 +626,7 @@ LOCATION_RULES = [
             _can_reach_location_if_exists(state, world, loc)
             for loc in [
                 "Toxic Sewers Enter",
-                "Castle's Outskirts Enter",
+                "Castle Outskirts Enter",
                 "Dilapidated Arboretum Enter",
             ]
         )
@@ -642,30 +642,27 @@ LOCATION_RULES = [
             "Spider Rune", 
             "Teleportation Rune", 
             "Forgotten Sepulcher Unlock",
+        ) or
+        _has_all(
+            "Vine Rune", 
+            "Ram Rune", 
+            "Insufferable Crypt Unlock", 
+            "Graveyard Unlock", 
+            "Homunculus Rune", 
+            "Teleportation Rune", 
+            "Forgotten Sepulcher Unlock",
         )
     ),
 
 
     # ── PrisonCourtyard mid-biome gate (Vine Rune) ────────────────────────────
-    ("Phaser", _has("Vine Rune")),
     ("Spartan Sandals", _has("Vine Rune")),
-    ("Corrupted Power", _has("Vine Rune")),
-    ("Explosive Decoy", _has("Vine Rune")),
     ("Powerful Grenade", _has("Vine Rune")),
-    ("Cleaver", _has("Vine Rune")),
-    ("Knife Dance", _has("Vine Rune")),
-    ("Execution", _has("Vine Rune")),
-    ("Repeater Crossbow", _has("Vine Rune")),
-    ("Hayabusa Boots", _has("Vine Rune")),
-    ("Oiled Sword", _has("Vine Rune")),
-    ("Berserker", _has("Vine Rune")),
-    ("Aphrodite Outfit", _has("Vine Rune")),
-    ("Ninja Outfit", _has("Vine Rune")),
-    ("Kamikaze Outfit", _has("Vine Rune")),
-    ("Neon Outfit", _has("Vine Rune")),
-    ("Warrior Outfit", _has("Vine Rune")),
-    ("Wave of Denial", _has("Vine Rune")),
-    ("Marksman's Bow", _has("Vine Rune")),
+    
+    ("Marksman's Bow", _has("Teleportation Rune") and (
+        _has("Vine Rune") or 
+        (lambda world: lambda state: _can_reach_location_if_exists(state, world, "Death")))
+    ),
 
     (
         "Explosive Crossbow",
@@ -708,14 +705,14 @@ LOCATION_RULES = [
 
     # ── Boss Rush Items ──────────────────────────────────────────────────────
     ("Boss Knight Outfit", _boss_rush_trials_1_2()),
-    ("Barbarian Boss Knight Outfit", _boss_rush_trials_3_4() and _bsc(3)),
-    ("Triumphant Boss Knight Outfit", _boss_rush_trials_1_2() and _bsc(3)),
-    ("Luminous Boss Knight Outfit", _boss_rush_trials_1_2() and _bsc(5)),
+    ("Barbarian Boss Knight Outfit", _boss_rush_trials_3_4()),
+    ("Triumphant Boss Knight Outfit", _boss_rush_trials_1_2()),
+    ("Luminous Boss Knight Outfit", _boss_rush_trials_1_2()),
     
     ("Triumph Outfit", _boss_rush_trials_3_4()),
-    ("Bisonnica Triumph Outfit", _boss_rush_trials_3_4() and _bsc(3)),
-    ("Mentoral Triumph Outfit", _boss_rush_trials_3_4() and _bsc(5)),
-    ("Radiant Triumph Outfit", _boss_rush_trials_3_4() and _bsc(5)),
+    ("Bisonnica Triumph Outfit", _boss_rush_trials_3_4()),
+    ("Mentoral Triumph Outfit", _boss_rush_trials_3_4()),
+    ("Radiant Triumph Outfit", _boss_rush_trials_3_4()),
     
     ("Peril Glyphs", _boss_rush_trials_1_2()),
     ("Taunt", _boss_rush_trials_1_2()), 
@@ -812,7 +809,8 @@ LOCATION_RULES = [
         lambda world: (
             lambda state:
                 state.has("Backpack", world.player)
-                and state.can_reach_location("The Hand of the King", world.player)
+                and (state.can_reach_location("The Hand of the King", world.player)
+                     or _can_reach_location_if_exists(state, world, "Graveyard Enter"))
         )
     ),
 
@@ -835,7 +833,6 @@ LOCATION_RULES = [
     ),
 
     # ── King outfit chain ────────────────────────────────────────────────────
-    ("King Outfit", _boss_killed("The Collector")),
     ("White King Outfit", _has("King Outfit")),
 
 
@@ -868,20 +865,7 @@ LOCATION_RULES = [
 
     ("Bright Red Blowtorch", _has("Fire Blast")),
 
-    ("Boss Cell Head", _bsc(5)),
-
     ("Guillain Head", _has("Boss Rush Unlock") and _has("Boss Rush Statue") and _has("Bank Unlock")),
-
-    ("Concierge Flame", _boss_rush_trials_1_2()),
-    ("Conjunctivius Tentacles", _boss_rush_trials_1_2()),
-    ("Mama Tick Eye", _boss_rush_trials_1_2()),
-    ("Time Keeper Mask", _boss_rush_trials_1_2()),
-    ("Giant Flame", _boss_rush_trials_1_2()),
-    ("Scarecrow Hat", _boss_rush_trials_1_2()),
-    ("Hand of the King Flame", _boss_rush_trials_1_2()),
-    ("Servant Mask", _boss_rush_trials_1_2()),
-    ("Queen Flame", _boss_rush_trials_1_2()),
-    ("Collector Hood", _boss_rush_trials_1_2()),
 
     ("Spatial Anomaly",
      lambda world: lambda state:
@@ -934,7 +918,8 @@ LOCATION_RULES = [
     ("Cavern Key", _has("Homunculus Rune") and _has("Hand of the King Defeated")),
     ("High Jump", _has("Dash") or _has("High Jump")),
     ("Alucard's Sword", _has("High Jump")),
-    ("Richter Mode Exit", _has("High Jump"))
+    ("Richter Mode Exit", _has("High Jump")),
+    ("Richter Outfit", _has("High Jump"))
 ]
 
 
