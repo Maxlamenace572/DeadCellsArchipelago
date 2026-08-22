@@ -213,8 +213,6 @@ class DeadCellsWorld(World):
         data = ITEM_TABLE[item_name]
         _, classification, dlc = data
 
-    
-
     # DLC filter
         if dlc and dlc not in self.enabled_dlcs:
             return False

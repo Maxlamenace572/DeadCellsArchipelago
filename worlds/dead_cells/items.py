@@ -262,7 +262,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Cocoon":                   (0x0517, USFL, DLC_FATAL_FALLS),
     "Face Flask":               (0x0518, PROG, DLC_BASE),
     "Pollo Power":              (0x0519, USFL, DLC_BASE),
-    "Leghugger":                (0x051A, PRSB, DLC_QUEEN_AND_SEA),
+    "Leghugger":                (0x051A, PROG, DLC_QUEEN_AND_SEA),
     "Diverse Deck":             (0x051B, USFL, DLC_BASE),
     "Taunt":                    (0x051C, USFL, DLC_BASE),
     "Rebound Stone":            (0x051D, USFL, DLC_PURPLE),
