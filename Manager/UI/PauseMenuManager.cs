@@ -32,6 +32,8 @@ namespace DeadCellsArchipelago {
         public static SkillScroller<BiomeLine>? scrollerBiome;
         public static PopUpTracker? popUpTracker;
         public static bool showPopUp;
+        public static PopUpItemDesc? popUpItemDesc;
+        public static bool showDescPopUp;
         public static SkillScroller<LogLine>? scrollerHistory;
         public static dc.ui.Text? shopTitle = null;
         public static dc.ui.Text? historyTitle = null;
@@ -83,6 +85,7 @@ namespace DeadCellsArchipelago {
             AddTitles(self);
 
             AddPopUpMenu();
+            AddDescriptionMenu();
             AddEnergyLinkMenu();
             MoveCursor(self);
         }
@@ -240,6 +243,7 @@ namespace DeadCellsArchipelago {
                         else if(showPopUp && (i == 8 || i == 1))
                         {
                             showPopUp = false;
+                            showDescPopUp = false;
                             scrollerIndex = 2;
                             popUpTopIndex = -1;
                             popUpTracker?.scrollerItems?.lastHighlight = -1;
@@ -868,6 +872,16 @@ namespace DeadCellsArchipelago {
             popUpTracker.SetVisible(showPopUp && !showClassicMenu && menuIndex == 0);
         }
 
+        private static void AddDescriptionMenu() {
+            if(screenBitmap == null) return;
+            if (popUpItemDesc == null)
+            {
+                popUpItemDesc = new PopUpItemDesc(screenBitmap);
+                showDescPopUp = false;
+            }
+            popUpItemDesc.SetVisible(showPopUp && showDescPopUp && !showClassicMenu && menuIndex == 0);
+        }
+
         private static void AddHistoryMenu() {
             if(screenBitmap == null) return;
             if (scrollerHistory == null)
@@ -987,6 +1001,8 @@ namespace DeadCellsArchipelago {
             scrollerBiome = null;
             popUpTracker = null;
             showPopUp = false;
+            popUpItemDesc = null;
+            showDescPopUp = false;
             scrollerHistory = null;
             shopTitle = null;
             historyTitle = null;

@@ -104,7 +104,16 @@ namespace DeadCellsArchipelago {
                     {
                         if (typeof(T) == typeof(ItemLine))
                         {
-                            ((ItemLine)(Line) lines[lastHighlight]).GiveItem();
+                            ItemLine iL = (ItemLine)(Line) lines[lastHighlight];
+                            if (iL.nb != null)
+                            {
+                                iL.GiveItem();
+                            }
+                            else
+                            {
+                                showDescPopUp = true;
+                                popUpItemDesc!.AddContentMenu(ItemsData[iL.itemId]);
+                            }
                         }
                         else if (lastHighlightCell != -1 && typeof(T) == typeof(BiomeLine))
                         {

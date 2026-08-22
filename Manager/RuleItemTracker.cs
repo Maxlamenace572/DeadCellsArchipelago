@@ -1,3 +1,4 @@
+using System.Text.Json;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.TrackerData;
 
@@ -39,7 +40,7 @@ namespace DeadCellsArchipelago {
                 ["LadderKey", "BreakableGroundKey", "HomKey", "TeleportKey", "BeholderPit Unlock", "Cemetery Unlock", "Crypt Unlock"]
             ];
 
-            hasRules["RichterUppercutKey"] = [["RichterDashKey", "RichterUppercutKey"]];
+            hasRules["RichterUppercutKey"] = [["RichterDashKey"], ["RichterUppercutKey"]];
             hasRules["TPSword"] = [["RichterUppercutKey"]];
             hasRules["RichterCastle Exit"] = [["RichterUppercutKey"]];
             hasRules["RichterROB"] = [["RichterUppercutKey"]];
@@ -86,8 +87,8 @@ namespace DeadCellsArchipelago {
 
             if (ItemsData.ContainsKey("Terraria") && ItemsData["Terraria"].accessible)
             {
-                ItemsData["Terraria"].accessible = HasItems([["Backpack"]]) && CanReachLocations([["Boss_KingsHand"], ["Cemetery Enter"]]) ;
-                ItemsData["Terraria"].requirements = [["Backpack"]];
+                ItemsData["Terraria"].accessible = HasItems([["BackpackUnlock"]]) && CanReachLocations([["Boss_KingsHand"], ["Cemetery Enter"]]) ;
+                ItemsData["Terraria"].requirements = [["BackpackUnlock"]];
             }
 
             if (ItemsData.ContainsKey("CavernKey") && ItemsData["CavernKey"].accessible)
@@ -99,7 +100,7 @@ namespace DeadCellsArchipelago {
             if (ItemsData.ContainsKey("LongBow") && ItemsData["LongBow"].accessible)
             {
                 ItemsData["LongBow"].accessible = HasItems([["TeleportKey", "LadderKey"]]) || (HasItems([["TeleportKey"]]) && CanReachLocations([["Boss_Death"]])) ;
-                ItemsData["LongBow"].requirements = [["TeleportKey", "LadderKey"], ["TeleportKey", "Death"]];
+                ItemsData["LongBow"].requirements = [["TeleportKey", "LadderKey"], ["TeleportKey", "Boss_Death"]];
             }
 
 
@@ -194,6 +195,8 @@ namespace DeadCellsArchipelago {
             headsRules["Pecheur"] = 35;
 
             BuildHeadRules(headsRules);
+
+            AddDescriptions();
         }
 
         //For items received. sub lists are AND condition, an OR condition is applied between sub lists.
@@ -317,9 +320,9 @@ namespace DeadCellsArchipelago {
         {
             foreach (KeyValuePair<string, List<List<string>>> rule in rules)
             {
-                if (ItemsData.ContainsKey(rule.Key) && ItemsData[rule.Key].accessible)
+                if (ItemsData.ContainsKey(rule.Key))
                 {
-                    ItemsData[rule.Key].accessible = HasItems(rule.Value);
+                    if (ItemsData[rule.Key].accessible) ItemsData[rule.Key].accessible = HasItems(rule.Value);
                     ItemsData[rule.Key].requirements = rule.Value;
                 }
             }
@@ -399,6 +402,71 @@ namespace DeadCellsArchipelago {
                 {
                     ItemsData[rule.Key].accessible = heads >= rule.Value;
                 }
+            }
+        }
+
+        public static string GetItemDescriptionFilePath()
+        {
+            return Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "itemDescription.json");
+        }
+
+        private static void AddDescriptions()
+        {
+            var json = File.ReadAllText(GetItemDescriptionFilePath());
+            Dictionary<string, string> descriptions = 
+                JsonSerializer.Deserialize<Dictionary<string, string>>(json)!;
+
+            foreach (KeyValuePair<string, string> desc in descriptions)
+            {
+                List<string> items = [];
+
+                switch (desc.Key)
+                {
+                    case "ASP":
+                        items = [
+                            "ASP_BloodDrinker", "ASP_Stomper", "ASP_Berzerker", "ASP_GottaGoFast", "ASP_Tinker", "ASP_Menagerie", "ASP_Grenadier", "ASP_Superconductor",
+                            "ASP_Assassin", "ASP_Damned", "ASP_Shatter", "ASP_ToxinLover", "ASP_Firestarter"
+                        ];
+                        break;
+                    case "PQLoreRoom":
+                        items = [
+                            "MagicBow", "SoulKnight", "FreemanSkin", "Crowbar", "MachetePistol", "HardLightSword", "PureNail", "SkulBone", "NunchuckPan", "BaseballBat", "KingScepter",
+                            "Starfury", "ThrowableStuff", "LaserGlaive", "DiverseDeckJuggernaut", "FaceFlask", "PolloPower", "Bobby", "BobbyFlame"
+                        ];
+                        break;
+                    case "BossFlawless":
+                        items = [
+                            "FlawlessBehemoth", "FlawlessBeholder", "FlawlessAssassin", "FlawlessGiant", "FlawlessHotk", "FlawlessTick", "FlawlessGardener", "FlawlessServante",
+                            "FlawlessQueen", "FlawlessAdele", "FlawlessDooku", "KingWhite"
+                        ];
+                        break;
+                    case "AmazonLoot":
+                        items = [
+                            "HeavyBow", "ElbowBlades", "WreckingBall"
+                        ];
+                        break;
+                    case "CursedBiome":
+                        items = [
+                            "Anathema", "P_CursedFlask", "P_DemonicForce", "Misericord", "P_DamnedVigor", "Indulgence"
+                        ];
+                        break;
+                    default:
+                        items = [desc.Key];
+                        break;
+                }
+
+                foreach (string item in items)
+                {
+                    AddDescToItem(item, desc.Value);
+                }
+            }
+        }
+        
+        private static void AddDescToItem(string item, string desc)
+        {
+            if (ItemsData.ContainsKey(item))
+            {
+                ItemsData[item].description = desc;
             }
         }
     }

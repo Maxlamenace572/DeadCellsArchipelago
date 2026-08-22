@@ -53,7 +53,7 @@ namespace DeadCellsArchipelago {
 
         public void AddFillerMenu()
         {
-            scrollerItems = new SkillScroller<ItemLine>(bgBox.x+10, bgBox.y+100, parent, 500, false);
+            scrollerItems = new SkillScroller<ItemLine>(bgBox.x+10, bgBox.y+100, parent, 500, true);
             scrollerItems.Refresh(10);
 
             topLine = new PopUpTopLine(bgBox.x+10, bgBox.y+5, parent, biomeLineIndex, biomeCellIndex);
