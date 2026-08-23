@@ -111,8 +111,7 @@ namespace DeadCellsArchipelago {
                             }
                             else
                             {
-                                showDescPopUp = true;
-                                popUpItemDesc!.AddContentMenu(ItemsData[iL.itemId]);
+                                iL.ShowItemDescription();
                             }
                         }
                         else if (lastHighlightCell != -1 && typeof(T) == typeof(BiomeLine))

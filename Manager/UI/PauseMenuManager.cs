@@ -484,6 +484,10 @@ namespace DeadCellsArchipelago {
                                         popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].Highlight();
                                         popUpTracker.scrollerItems.SetScrollUpAtIndex();
                                     }
+                                    else if (i == 0)
+                                    {
+                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].ShowItemDescription();
+                                    }
                                     break;
 
                                 case 4:

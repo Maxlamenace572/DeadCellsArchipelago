@@ -13,6 +13,7 @@ using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.MainMenuManager;
 using static DeadCellsArchipelago.TrackerData;
+using static DeadCellsArchipelago.PauseMenuManager;
 
 namespace DeadCellsArchipelago {
     public class ItemLine : Line
@@ -170,6 +171,12 @@ namespace DeadCellsArchipelago {
                 DecNumber();
                 DropItemToPlayer(itemId);
             }
+        }
+
+        public void ShowItemDescription()
+        {
+            showDescPopUp = true;
+            popUpItemDesc!.AddContentMenu(ItemsData[itemId]);
         }
 
         public void SetFadeNotAccessible()
