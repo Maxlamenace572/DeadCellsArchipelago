@@ -228,5 +228,20 @@ namespace DeadCellsArchipelago {
 
             return res;
         }
+
+        public List<string> RemainingAspects()
+        {
+            List<string> all = [
+                "ASP_BloodDrinker", "ASP_Stomper", "ASP_Berzerker", "ASP_GottaGoFast", "ASP_Tinker", "ASP_Menagerie", "ASP_Grenadier", "ASP_Superconductor",
+                "ASP_Assassin", "ASP_Damned", "ASP_Shatter", "ASP_ToxinLover", "ASP_Firestarter"
+            ];
+            List<string> res = [];
+            foreach (string aspect in all)
+            {
+                if (!IsCheckSent(aspect)) res.Add(aspect);
+            }
+
+            return res;
+        }
     }
 }

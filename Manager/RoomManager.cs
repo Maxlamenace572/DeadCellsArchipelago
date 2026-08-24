@@ -105,6 +105,7 @@ namespace DeadCellsArchipelago {
                 if (resetOnNextPrisonStart)
                 {
                     ResetDataNewRun();
+                    SendNewAspect();
                     resetOnNextPrisonStart = false;
                 }
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());

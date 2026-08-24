@@ -312,5 +312,14 @@ namespace DeadCellsArchipelago {
             bool noStats = false;
             HERO.substractCells(-cellsValue, new Ref<bool>(ref noStats));
         }
+
+        public static void SendNewAspect()
+        {
+            if (SAVED_DATA!.CountSentAspect() < 13)
+            {
+                List<string> aspects = SAVED_DATA!.RemainingAspects();
+                SendItemWithoutBlueprintCheck(aspects[new Random().Next(0, aspects.Count)]);
+            }
+        }
     }
 }
