@@ -46,7 +46,8 @@ namespace DeadCellsArchipelago {
         public static int shopY = -1;
         public static int popUpTopIndex = -1;
         public static int keyToRepeat = -1;
-        public static int FrameWithkeyPressed = 0;
+        private const long RepeatIntervalMs = 166; //around 10 frames at 60 fps
+        private static long lastRepeatTimestamp = 0;
         public static HlAction<int, bool>? modifiedOnActPressed;
         public static int menuIndex = 0;
         public static dc.ui.Text? apMenuRight = null;
@@ -155,7 +156,7 @@ namespace DeadCellsArchipelago {
                     //controller logic in pause menu
                     
                     //continue input up/left/down/right when down
-                    FrameWithkeyPressed = 0;
+                    lastRepeatTimestamp = Environment.TickCount64;
                     if (i == 10 || i == 11 || i == 12 || i == 13 || i == 0) keyToRepeat = i;
                     else keyToRepeat = -1;
 
@@ -1067,10 +1068,10 @@ namespace DeadCellsArchipelago {
             {
                 if (keyToRepeat != 0)
                 {
-                    FrameWithkeyPressed++;
-                    if (FrameWithkeyPressed == 10)
+                    long now = Environment.TickCount64;
+                    if (now - lastRepeatTimestamp >= RepeatIntervalMs)
                     {
-                        FrameWithkeyPressed = 0;
+                        lastRepeatTimestamp = now;
                         modifiedOnActPressed?.Invoke(keyToRepeat, true);
                     }
                 }
