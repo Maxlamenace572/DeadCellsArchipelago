@@ -84,11 +84,11 @@ namespace DeadCellsArchipelago {
                 },
                 onMove = (e) =>
                 {
-                    if (!disabled) buttonText.set_textColor(highlightColor);
+                    if (!disabled) Highlight();
                 },
                 onOut = (e) =>
                 {
-                    if (!disabled) buttonText.set_textColor(color);
+                    if (!disabled) StopHighlight();
                 },
                 visible = !disabled
             };
@@ -133,6 +133,16 @@ namespace DeadCellsArchipelago {
         public double GetHeight()
         {
             return outerBox.hei / screenScale;
+        }
+
+        public void Highlight()
+        {
+            buttonText.set_textColor(highlightColor);
+        }
+
+        public void StopHighlight()
+        {
+            buttonText.set_textColor(color);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace DeadCellsArchipelago {
         public int biomeCellIndex;
         public TextButton? popUpWarpButton = null;
         public TextButton? cancelWarpButton = null;
-        private bool showButton;
+        public bool showButton;
 
         public PopUpTracker(dc.h2d.Object parent)
         {

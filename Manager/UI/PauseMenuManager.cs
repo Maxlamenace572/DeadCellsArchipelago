@@ -47,6 +47,7 @@ namespace DeadCellsArchipelago {
         public static int shopX = -1;
         public static int shopY = -1;
         public static int popUpTopIndex = -1;
+        public static int warpButtonIndex = -1;
         public static int keyToRepeat = -1;
         private const long RepeatIntervalMs = 166; //around 10 frames at 60 fps
         private static long lastRepeatTimestamp = 0;
@@ -156,6 +157,7 @@ namespace DeadCellsArchipelago {
                 HlAction<int, bool> previousAct = self.controller.onActPressed;
                 self.controller.onActPressed = (int i, bool b) =>
                 {
+                    //TODO: a good controller logic
                     //controller logic in pause menu
                     
                     //continue input up/left/down/right when down
@@ -250,6 +252,8 @@ namespace DeadCellsArchipelago {
                             showDescPopUp = false;
                             scrollerIndex = 2;
                             popUpTopIndex = -1;
+                            warpButtonIndex = -1;
+                            popUpTracker?.cancelWarpButton!.StopHighlight();
                             popUpTracker?.scrollerItems?.lastHighlight = -1;
                             if (scrollerBiome?.lastHighlight == -1 || scrollerBiome?.lastHighlightCell == -1)
                             {
@@ -467,7 +471,7 @@ namespace DeadCellsArchipelago {
                                         popUpTracker.scrollerItems.lastHighlight = 0;
                                         popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].Highlight();
                                     }
-                                    else if (i == 12 && popUpTracker.scrollerItems.lastHighlight+1 < popUpTracker.scrollerItems.lines.Count)
+                                    else if (i == 12 && popUpTracker.scrollerItems.lastHighlight+1 < popUpTracker.scrollerItems.lines.Count && warpButtonIndex == -1)
                                     {
                                         popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].StopHighlight();
                                         popUpTracker.scrollerItems.lastHighlight++;
@@ -481,12 +485,70 @@ namespace DeadCellsArchipelago {
                                         popUpTracker.scrollerItems.lastHighlight = -1;
                                         popUpTracker.topLine.Highlight(popUpTopIndex);
                                     }
-                                    else if (i == 10 && popUpTopIndex == -1)
+                                    else if (i == 10 && popUpTopIndex == -1 && warpButtonIndex == -1)
                                     {
                                         popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].StopHighlight();
                                         popUpTracker.scrollerItems.lastHighlight--;
                                         popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].Highlight();
                                         popUpTracker.scrollerItems.SetScrollUpAtIndex();
+                                    }
+                                    else if (i == 10 && warpButtonIndex == -1 && popUpTracker.showButton)
+                                    {
+                                        if (!popUpTracker.popUpWarpButton!.disabled)
+                                        {
+                                            popUpTracker.topLine.StopHighlight(popUpTopIndex);
+                                            popUpTopIndex = -1;
+                                            warpButtonIndex = 0;
+                                            popUpTracker.popUpWarpButton.Highlight();
+                                        }
+                                        else if (warpToBiome != null)
+                                        {
+                                            popUpTracker.topLine.StopHighlight(popUpTopIndex);
+                                            popUpTopIndex = -1;
+                                            warpButtonIndex = 1;
+                                            popUpTracker.cancelWarpButton!.Highlight();
+                                        }
+                                    }
+                                    else if (i == 12 && warpButtonIndex != -1)
+                                    {
+                                        if (warpButtonIndex == 0)
+                                        {
+                                            warpButtonIndex = -1;
+                                            popUpTracker.popUpWarpButton!.StopHighlight();
+                                            popUpTopIndex = 0;
+                                            popUpTracker.topLine.Highlight(popUpTopIndex);
+                                        }
+                                        else if (warpButtonIndex == 1)
+                                        {
+                                            warpButtonIndex = -1;
+                                            popUpTracker.cancelWarpButton!.StopHighlight();
+                                            popUpTopIndex = 0;
+                                            popUpTracker.topLine.Highlight(popUpTopIndex);
+                                        }
+                                    }
+                                    else if (i == 13 && warpButtonIndex == 0)
+                                    {
+                                        warpButtonIndex = 1;
+                                        popUpTracker.popUpWarpButton!.StopHighlight();
+                                        popUpTracker.cancelWarpButton!.Highlight();
+                                    }
+                                    else if (i == 11 && warpButtonIndex == 1)
+                                    {
+                                        warpButtonIndex = 0;
+                                        popUpTracker.cancelWarpButton!.StopHighlight();
+                                        popUpTracker.popUpWarpButton!.Highlight();
+                                    }
+                                    else if (i == 0 && warpButtonIndex != -1)
+                                    {
+                                        if (warpButtonIndex == 0) popUpTracker.popUpWarpButton!.act.Invoke();
+                                        if (warpButtonIndex == 1)
+                                        {
+                                            popUpTracker.cancelWarpButton!.act.Invoke();
+                                            popUpTracker.cancelWarpButton!.StopHighlight();
+                                            warpButtonIndex = -1;
+                                            popUpTopIndex = 0;
+                                            popUpTracker.topLine.Highlight(popUpTopIndex);
+                                        }
                                     }
                                     else if (i == 0)
                                     {
