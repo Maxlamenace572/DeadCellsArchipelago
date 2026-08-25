@@ -19,6 +19,7 @@
     "PrisonerGold": "In the Specialist Shop, pay 10,000 golds or get 50 curses.",
     "CavernKey": "Found at the start of the level, behind the giant door. To opened it, you need to kill the Hand of the King.",
 
+    "Challenge Enter": "Has a 20% chance to spawn in any non-boss biome.",
     "P_Caltrops": "Found in the chest at the entrance of a Rift Challenge.",
 
     "DashShield": "Behind the 2-minute timed door in the transition before the Promenade.",
@@ -77,6 +78,7 @@
     "SpawnCat": "Catch the cat wandering in the level to gain the Ribboned Key, and open Maria's cell. In there, interact with the cat.",
     "AlucardShield": "In a secret area, to the right of your first encounter with Alucard.",
     "Simon": "In the lore room with Camilla's mask. Given after examining the mask.",
+    "RichterCastle Enter": "This entrance is in the upside down lore room. The first time you go into this lore room you will deliver Richter, and after that, you can enter Richter mode once per run by examining the empty cage.",
     "RichterROB": "Given after completing Richter Mode.",
     "TPSword": "In a secret area, to the right of the Richter Mode's castle.",
     "Alucard": "Talk to Alucard in the room before Dracula.",
