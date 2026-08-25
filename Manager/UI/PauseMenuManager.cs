@@ -167,13 +167,13 @@ namespace DeadCellsArchipelago {
                     if (showClassicMenu && i == 10)
                     {
                         onMenuButton = true;
-                        apMenuButton?.set_textColor(16776960);
+                        apMenuButton?.set_textColor((int) APColor.Yellow);
                     }
                     //on classic menu and menu button, down or return go to options
                     else if (showClassicMenu && onMenuButton && (i == 1 || i == 8 || i == 12))
                     {
                         onMenuButton = false;
-                        apMenuButton?.set_textColor(16777215);
+                        apMenuButton?.set_textColor((int) APColor.White);
                     }
                     //on classic menu and menu button, validate goes to modded menu
                     else if (onMenuButton && i == 0)
@@ -187,8 +187,8 @@ namespace DeadCellsArchipelago {
                         if(menuIndex == 1)
                         {
                             topIndex = -1;
-                            apMenuRight?.set_textColor(16777215);
-                            apMenuButton?.set_textColor(16776960);
+                            apMenuRight?.set_textColor((int) APColor.White);
+                            apMenuButton?.set_textColor((int) APColor.Yellow);
                             onMenuButton = true;
                         }
                     }
@@ -199,8 +199,8 @@ namespace DeadCellsArchipelago {
                         if(menuIndex == 0)
                         {
                             topIndex = -1;
-                            apMenuLeft?.set_textColor(16777215);
-                            apMenuButton?.set_textColor(16776960);
+                            apMenuLeft?.set_textColor((int) APColor.White);
+                            apMenuButton?.set_textColor((int) APColor.Yellow);
                             onMenuButton = true;
                         }
                     }
@@ -211,7 +211,7 @@ namespace DeadCellsArchipelago {
                         if (!showClassicMenu && onMenuButton && i == 12)
                         {
                             onMenuButton = false;
-                            apMenuButton?.set_textColor(16777215);
+                            apMenuButton?.set_textColor((int) APColor.White);
                             scrollerBiome?.lastHighlight = 0;
                             scrollerBiome?.lastHighlightCell = 0;
                             scrollerBiome?.lines[0].Highlight(0);
@@ -221,23 +221,23 @@ namespace DeadCellsArchipelago {
                         else if (!showClassicMenu && onMenuButton && i == 13)
                         {
                             onMenuButton = false;
-                            apMenuButton?.set_textColor(16777215);
-                            apMenuRight?.set_textColor(16776960);
+                            apMenuButton?.set_textColor((int) APColor.White);
+                            apMenuRight?.set_textColor((int) APColor.Yellow);
                             topIndex = 1;
                         }
                         //on modded menu and top right arrow, left goes to menu button
                         else if (!showClassicMenu && topIndex == 1 && i == 11)
                         {
                             topIndex = -1;
-                            apMenuRight?.set_textColor(16777215);
-                            apMenuButton?.set_textColor(16776960);
+                            apMenuRight?.set_textColor((int) APColor.White);
+                            apMenuButton?.set_textColor((int) APColor.Yellow);
                             onMenuButton = true;
                         }
                         //on modded menu and top right arrow, down goes to modded menu
                         else if (!showClassicMenu && topIndex == 1 && i == 12)
                         {
                             topIndex = -1;
-                            apMenuRight?.set_textColor(16777215);
+                            apMenuRight?.set_textColor((int) APColor.White);
                             scrollerBiome?.lastHighlight = 0;
                             scrollerBiome?.lastHighlightCell = 0;
                             scrollerBiome?.lines[0].Highlight(0);
@@ -371,7 +371,7 @@ namespace DeadCellsArchipelago {
                                     if (scrollerBiome.lastHighlight == 0 && i == 10)
                                     {
                                         onMenuButton = true;
-                                        apMenuButton?.set_textColor(16776960);
+                                        apMenuButton?.set_textColor((int) APColor.Yellow);
                                         scrollerBiome.lines[0].StopHighlight(scrollerBiome.lastHighlightCell);
                                         scrollerBiome.lastHighlight = -1;
                                         scrollerBiome.lastHighlightCell = -1;
@@ -574,7 +574,7 @@ namespace DeadCellsArchipelago {
                         if (!showClassicMenu && onMenuButton && i == 12)
                         {
                             onMenuButton = false;
-                            apMenuButton?.set_textColor(16777215);
+                            apMenuButton?.set_textColor((int) APColor.White);
                             energyLinkIndex = 0;
                             energyLink?.Highlight(energyLinkIndex);
                         }
@@ -582,23 +582,23 @@ namespace DeadCellsArchipelago {
                         else if (!showClassicMenu && onMenuButton && i == 11)
                         {
                             onMenuButton = false;
-                            apMenuButton?.set_textColor(16777215);
-                            apMenuLeft?.set_textColor(16776960);
+                            apMenuButton?.set_textColor((int) APColor.White);
+                            apMenuLeft?.set_textColor((int) APColor.Yellow);
                             topIndex = 0;
                         }
                         //on modded menu and top left arrow, right goes to menu button
                         else if (!showClassicMenu && topIndex == 0 && i == 13)
                         {
                             topIndex = -1;
-                            apMenuLeft?.set_textColor(16777215);
-                            apMenuButton?.set_textColor(16776960);
+                            apMenuLeft?.set_textColor((int) APColor.White);
+                            apMenuButton?.set_textColor((int) APColor.Yellow);
                             onMenuButton = true;
                         }
                         //on modded menu and top left arrow, down goes to modded menu
                         else if (!showClassicMenu && topIndex == 0 && i == 12)
                         {
                             topIndex = -1;
-                            apMenuLeft?.set_textColor(16777215);
+                            apMenuLeft?.set_textColor((int) APColor.White);
                             energyLinkIndex = 0;
                             energyLink?.Highlight(energyLinkIndex);
                         }
@@ -607,7 +607,7 @@ namespace DeadCellsArchipelago {
                         {
                             energyLinkIndex = -1;
                             energyLink?.StopHighlight();
-                            apMenuButton?.set_textColor(16776960);
+                            apMenuButton?.set_textColor((int) APColor.Yellow);
                             onMenuButton = true;
                         }
                         //on energy link, navigate
@@ -675,7 +675,7 @@ namespace DeadCellsArchipelago {
                 apMenuButton.set_text("Switch Menu".AsHaxeString());
                 //apMenuButton.y = logoBitmap.y + ((boundsLogo.yMax - apMenuButton.textHeight) /2);
                 CenterYTextTo(logoBitmap, apMenuButton, 46);
-                apMenuButton.set_textColor(16777215);
+                apMenuButton.set_textColor((int) APColor.White);
                 var inter = new Interactive(
                     (boundsLogo.xMax/apMenuButton.scaleX) + apMenuButton.get_textWidth(),
                     boundsLogo.yMax,
@@ -693,12 +693,12 @@ namespace DeadCellsArchipelago {
                     onMove = (e) =>
                     {
                         onMenuButton = true;
-                        apMenuButton.set_textColor(16776960);
+                        apMenuButton.set_textColor((int) APColor.Yellow);
                     },
                     onOut = (e) =>
                     {
                         onMenuButton = false;
-                        apMenuButton.set_textColor(16777215);
+                        apMenuButton.set_textColor((int) APColor.White);
                     }
                 };
             }
@@ -715,7 +715,7 @@ namespace DeadCellsArchipelago {
                 };
                 apMenuLeft.set_text(" < ".AsHaxeString());
                 apMenuLeft.x = logoBitmap.x - apMenuLeft.textWidth;
-                apMenuLeft.set_textColor(16777215);
+                apMenuLeft.set_textColor((int) APColor.White);
                 var inter = new Interactive(
                     apMenuLeft.get_textWidth(),
                     boundsLogo.yMax,
@@ -731,11 +731,11 @@ namespace DeadCellsArchipelago {
                     },
                     onMove = (e) =>
                     {
-                        apMenuLeft.set_textColor(16776960);
+                        apMenuLeft.set_textColor((int) APColor.Yellow);
                     },
                     onOut = (e) =>
                     {
-                        apMenuLeft.set_textColor(16777215);
+                        apMenuLeft.set_textColor((int) APColor.White);
                     }
                 };
             }
@@ -754,7 +754,7 @@ namespace DeadCellsArchipelago {
                     scaleY = textBaseScale * scale
                 };
                 apMenuRight.set_text(" > ".AsHaxeString());
-                apMenuRight.set_textColor(16777215);
+                apMenuRight.set_textColor((int) APColor.White);
                 var inter = new Interactive(
                     apMenuRight.get_textWidth(),
                     boundsLogo.yMax,
@@ -770,11 +770,11 @@ namespace DeadCellsArchipelago {
                     },
                     onMove = (e) =>
                     {
-                        apMenuRight.set_textColor(16776960);
+                        apMenuRight.set_textColor((int) APColor.Yellow);
                     },
                     onOut = (e) =>
                     {
-                        apMenuRight.set_textColor(16777215);
+                        apMenuRight.set_textColor((int) APColor.White);
                     }
                 };
             }
@@ -853,7 +853,7 @@ namespace DeadCellsArchipelago {
 
                 Dictionary<string, int> ids = CalculateDiffFiller();
 
-                scrollerFiller.SetContentItemLine(ids, 660257);
+                scrollerFiller.SetContentItemLine(ids, (int) APColor.DeepBlue);
             }
             scrollerFiller.SetVisible(!showClassicMenu && menuIndex == 0);
         }
@@ -897,7 +897,7 @@ namespace DeadCellsArchipelago {
                 scrollerHistory = new SkillScroller<LogLine>(350, 150, screenBitmap, 265, false);
                 scrollerHistory.Refresh(10);
 
-                scrollerHistory.SetContentLogLine(History, 660257);
+                scrollerHistory.SetContentLogLine(History, (int) APColor.DeepBlue);
                 scrollerHistory.SetScrollAtEnd();
             }
             scrollerHistory.SetVisible(!showClassicMenu && menuIndex == 0);

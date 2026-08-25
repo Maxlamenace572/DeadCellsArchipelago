@@ -19,6 +19,7 @@ namespace DeadCellsArchipelago {
         public int biomeLineIndex;
         public int biomeCellIndex;
         public TextButton? popUpWarpButton = null;
+        public TextButton? cancelWarpButton = null;
         private bool showButton;
 
         public PopUpTracker(dc.h2d.Object parent)
@@ -34,7 +35,7 @@ namespace DeadCellsArchipelago {
             bgBox.x =  (1920 - boundsBgBox.xMax)/2;
             bgBox.y =  (1080 - boundsBgBox.yMax)/2;
             bgBox.posChanged = true;
-            bgBox.colorizeSG(660257);
+            bgBox.colorizeSG((int) APColor.DeepBlue);
 
             outerBox = new UIBox("boxInfo".AsHaxeString(), 720*screenScale, 610*screenScale, 0, 0)
             {
@@ -48,6 +49,11 @@ namespace DeadCellsArchipelago {
             parent.addChild(outerBox);
 
             popUpWarpButton = new TextButton(parent, bgBox.x, bgBox.y-70, false, false, "Warp", true);
+            cancelWarpButton = new TextButton(parent, popUpWarpButton.x+popUpWarpButton.GetWidth()+10, popUpWarpButton.y, false, false, "Cancel", false)
+            {
+                act = () => {warpToBiome = null;}
+            };
+            cancelWarpButton.SetColors((int) APColor.Red, (int) APColor.LightRed, null);
         }
 
         public void SetVisible(bool visible)
@@ -57,6 +63,7 @@ namespace DeadCellsArchipelago {
             scrollerItems?.SetVisible(visible);
             topLine?.SetVisible(visible);
             popUpWarpButton?.SetVisible(visible && showButton);
+            cancelWarpButton?.SetVisible(visible && showButton && warpToBiome != null);
         }
 
         public void AddFillerMenu()

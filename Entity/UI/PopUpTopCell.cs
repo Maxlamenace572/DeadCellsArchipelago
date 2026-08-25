@@ -64,8 +64,8 @@ namespace DeadCellsArchipelago {
 
             if(toChecks.Count == 0)
             {
-                label.set_textColor(16776960);
-                number.set_textColor(16776960);
+                label.set_textColor((int) APColor.Yellow);
+                number.set_textColor((int) APColor.Yellow);
             }
 
             var inter = new dc.h2d.Interactive(
@@ -85,21 +85,21 @@ namespace DeadCellsArchipelago {
 
         public void Highlight()
         {
-            label.set_textColor(16777087);
-            number.set_textColor(16777087);
+            label.set_textColor((int) APColor.LightYellow);
+            number.set_textColor((int) APColor.LightYellow);
         }
 
         public void StopHighlight()
         {
             if(toChecks.Count == 0)
             {
-                label.set_textColor(16776960);
-                number.set_textColor(16776960);
+                label.set_textColor((int) APColor.Yellow);
+                number.set_textColor((int) APColor.Yellow);
             }
             else
             {
-                label.set_textColor(16777215);
-                number.set_textColor(16777215);
+                label.set_textColor((int) APColor.White);
+                number.set_textColor((int) APColor.White);
             }
         }
     }

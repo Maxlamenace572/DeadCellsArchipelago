@@ -32,12 +32,12 @@ namespace DeadCellsArchipelago {
 
         public void Highlight()
         {
-            text.set_textColor(16776960);
+            text.set_textColor((int) APColor.Yellow);
         }
 
         public void StopHighlight()
         {
-            text.set_textColor(16777215);
+            text.set_textColor((int) APColor.White);
         }
     }
 }

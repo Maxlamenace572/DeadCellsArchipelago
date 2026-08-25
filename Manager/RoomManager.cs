@@ -200,7 +200,7 @@ namespace DeadCellsArchipelago {
                     if(SAVED_DATA.isDoingChallenge) PrepareBiomeCheck("Challenge", " Exit", SAVED_DATA.currentLevelId);
                     if(trapChallenge)
                     {
-                        self.popText($"It's a trap, I can't escape through there.".AsHaxeString(), 16777215);
+                        self.popText($"It's a trap, I can't escape through there.".AsHaxeString(), (int) APColor.White);
                         return;
                     }
                 }
@@ -216,7 +216,7 @@ namespace DeadCellsArchipelago {
         {
             if(trapChallenge)
             {
-                self.popText($"It's a trap, I can't open this chest.".AsHaxeString(), 16777215);
+                self.popText($"It's a trap, I can't open this chest.".AsHaxeString(), (int) APColor.White);
                 return;
             }
             orig(self, by, lp);

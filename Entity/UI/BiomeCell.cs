@@ -90,7 +90,7 @@ namespace DeadCellsArchipelago {
             }
 
             text.set_text($"{data[keyT].Count-data[keyR].Count}/{data[keyT].Count} ".AsHaxeString());
-            if(data[keyR].Count == 0) text.set_textColor(16776960);
+            if(data[keyR].Count == 0) text.set_textColor((int) APColor.Yellow);
             Right((int) boundsLevel.xMax, text);
             text.x -= 10;
             text.y = 10;

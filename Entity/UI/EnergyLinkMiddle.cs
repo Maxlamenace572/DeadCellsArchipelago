@@ -38,7 +38,7 @@ namespace DeadCellsArchipelago {
                 scaleY = textBaseScale * scale
             };
             down.set_text(" < ".AsHaxeString());
-            down.set_textColor(16777215);
+            down.set_textColor((int) APColor.White);
 
             var inter = new Interactive(
                 down.get_textWidth(),
@@ -70,7 +70,7 @@ namespace DeadCellsArchipelago {
             };
             up.set_text(" > ".AsHaxeString());
             up.x -= up.get_textWidth();
-            up.set_textColor(16777215);
+            up.set_textColor((int) APColor.White);
             inter = new Interactive(
                 up.get_textWidth(),
                 up.get_textHeight(),
@@ -116,11 +116,11 @@ namespace DeadCellsArchipelago {
                 scaleY = textBaseScale * scale,
                 onMove = (e) =>
                 {
-                    number?.set_textColor(16776960);
+                    number?.set_textColor((int) APColor.Yellow);
                 },
                 onOut = (e) =>
                 {
-                    number?.set_textColor(16777215);
+                    number?.set_textColor((int) APColor.White);
                 }
             };
             number.set_text($"0".AsHaxeString());
@@ -152,14 +152,14 @@ namespace DeadCellsArchipelago {
 
         public void Highlight(bool isDown)
         {
-            if (isDown) down?.set_textColor(16776960);
-            else up?.set_textColor(16776960);
+            if (isDown) down?.set_textColor((int) APColor.Yellow);
+            else up?.set_textColor((int) APColor.Yellow);
         }
 
         public void StopHighlight(bool isDown)
         {
-            if (isDown) down?.set_textColor(16777215);
-            else up?.set_textColor(16777215);
+            if (isDown) down?.set_textColor((int) APColor.White);
+            else up?.set_textColor((int) APColor.White);
         }
 
         public void Act(bool isDown)

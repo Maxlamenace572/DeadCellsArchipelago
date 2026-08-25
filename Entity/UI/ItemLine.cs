@@ -122,12 +122,12 @@ namespace DeadCellsArchipelago {
 
         public void Highlight()
         {
-            if(canHighlight) text.set_textColor(16776960);
+            if(canHighlight) text.set_textColor((int) APColor.Yellow);
         }
 
         public void StopHighlight()
         {
-            if(canHighlight) text.set_textColor(16777215);
+            if(canHighlight) text.set_textColor((int) APColor.White);
         }
 
         public void DecNumber()
@@ -139,7 +139,7 @@ namespace DeadCellsArchipelago {
 
             if (nb == 0)
             {
-                text.set_textColor(16711680);
+                text.set_textColor((int) APColor.Red);
                 canHighlight = false;
             }
         }

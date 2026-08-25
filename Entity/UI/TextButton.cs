@@ -10,12 +10,17 @@ namespace DeadCellsArchipelago {
     public class TextButton
     {
         public dc.h2d.Object parent;
+        public double x;
+        public double y;
         private UIBox bgBox;
         private UIBox outerBox;
         public dc.ui.Text buttonText;
         public Action act;
         private Interactive inter;
         public bool disabled;
+        public int color = (int) APColor.White;
+        public int highlightColor = (int) APColor.Yellow;
+        public int disabledColor = (int) APColor.Gray;
 
         public TextButton(dc.h2d.Object parent, double x, double y, bool centerX, bool centerY, string text, bool disable)
         {
@@ -43,7 +48,10 @@ namespace DeadCellsArchipelago {
             else bgBox.y = y;
             bgBox.posChanged = true;
 
-            bgBox.colorizeSG(660257);
+            bgBox.colorizeSG((int) APColor.DeepBlue);
+
+            this.x = bgBox.x;
+            this.y = bgBox.y;
 
             outerBox = new UIBox("boxInfo".AsHaxeString(), bgBox.wid, bgBox.hei, 0, 0)
             {
@@ -61,13 +69,11 @@ namespace DeadCellsArchipelago {
             buttonText.posChanged = true;
             parent.removeChild(buttonText);
             parent.addChild(buttonText);
-            if (disabled) buttonText.set_textColor(9868950);
+            if (disabled) buttonText.set_textColor(disabledColor);
 
             inter = new Interactive(
                 outerBox.wid /(3*screenScale),
                 outerBox.hei /(3*screenScale),
-                /*(buttonText.get_textWidth()/3) +10,
-                (buttonText.get_textHeight()/3) +10,*/
                 outerBox,
                 null
             )
@@ -78,11 +84,11 @@ namespace DeadCellsArchipelago {
                 },
                 onMove = (e) =>
                 {
-                    if (!disabled) buttonText.set_textColor(16776960);
+                    if (!disabled) buttonText.set_textColor(highlightColor);
                 },
                 onOut = (e) =>
                 {
-                    if (!disabled) buttonText.set_textColor(16777215);
+                    if (!disabled) buttonText.set_textColor(color);
                 },
                 visible = !disabled
             };
@@ -98,9 +104,35 @@ namespace DeadCellsArchipelago {
         public void SetEnabled(bool enabled)
         {
             disabled = !enabled;
-            if (disabled) buttonText.set_textColor(9868950);
-            else buttonText.set_textColor(268435455);
+            if (disabled) buttonText.set_textColor(disabledColor);
+            else buttonText.set_textColor(color);
             inter.visible = enabled;
+        }
+
+        public void SetColors(int? color, int? highlightColor, int? disabledColor)
+        {
+            if (color != null)
+            {
+                this.color = (int) color;
+                if (!disabled) buttonText.set_textColor(this.color);
+
+            }
+            if (highlightColor != null) this.highlightColor = (int) highlightColor;
+            if (disabledColor != null)
+            {
+                this.disabledColor = (int) disabledColor;
+                if (disabled) buttonText.set_textColor(this.disabledColor);
+            }
+        }
+
+        public double GetWidth()
+        {
+            return outerBox.wid / screenScale;
+        }
+
+        public double GetHeight()
+        {
+            return outerBox.hei / screenScale;
         }
     }
 }

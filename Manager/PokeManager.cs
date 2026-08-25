@@ -84,7 +84,7 @@ namespace DeadCellsArchipelago {
                 if (nb == null)
                 {
                     nb = new Text(heroActiveSkillsManager.hudGetSkillPower(id).icon, true, false, new Ref<double>(ref scaleT), null, null);
-                    nb.set_textColor(16777215);
+                    nb.set_textColor((int) APColor.White);
                 }
                 nb.set_text(SAVED_DATA.numberOfPokebombUse.ToString().AsHaxeString());
                 nb.x = -(nb.get_textWidth()*(1.0/3))/2;

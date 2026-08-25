@@ -35,7 +35,7 @@ namespace DeadCellsArchipelago {
                 scaleY = textBaseScale * scale
             };
             send.set_text("Send (-20%)".AsHaxeString());
-            send.set_textColor(16777215);
+            send.set_textColor((int) APColor.White);
 
             var inter = new Interactive(
                 send.get_textWidth(),
@@ -67,7 +67,7 @@ namespace DeadCellsArchipelago {
             };
             retrieve.set_text("Retrieve".AsHaxeString());
             retrieve.x -= retrieve.get_textWidth();
-            retrieve.set_textColor(16777215);
+            retrieve.set_textColor((int) APColor.White);
             inter = new Interactive(
                 retrieve.get_textWidth(),
                 retrieve.get_textHeight(),
@@ -98,14 +98,14 @@ namespace DeadCellsArchipelago {
 
         public void Highlight(bool isSend)
         {
-            if (isSend) send?.set_textColor(16776960);
-            else retrieve?.set_textColor(16776960);
+            if (isSend) send?.set_textColor((int) APColor.Yellow);
+            else retrieve?.set_textColor((int) APColor.Yellow);
         }
 
         public void StopHighlight(bool isSend)
         {
-            if (isSend) send?.set_textColor(16777215);
-            else retrieve?.set_textColor(16777215);
+            if (isSend) send?.set_textColor((int) APColor.White);
+            else retrieve?.set_textColor((int) APColor.White);
         }
 
         public void Act(bool isSend)

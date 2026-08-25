@@ -185,7 +185,7 @@ namespace DeadCellsArchipelago {
             };
             label.set_text("-".AsHaxeString());
             label.x = ((boundsSkill.xMax - label.get_textWidth()) /2) + skill.x;
-            label.set_textColor(16777215);
+            label.set_textColor((int) APColor.White);
         }
 
         internal void SetPrice(dc.h2d.Object parent, int number)
@@ -225,14 +225,14 @@ namespace DeadCellsArchipelago {
         public void Highlight()
         {
             if (label == null) return;
-            if (label.text.ToString() == "-") label.set_textColor(16776960);
-            else if (label.textColor != 16711680) label.set_textColor(47103);
+            if (label.text.ToString() == "-") label.set_textColor((int) APColor.Yellow);
+            else if (label.textColor != (int) APColor.Red) label.set_textColor((int) APColor.Blue);
         }
 
         public void StopHighlight()
         {
             if (label == null) return;
-            if (label.text.ToString() == "-") label.set_textColor(16777215);
+            if (label.text.ToString() == "-") label.set_textColor((int) APColor.White);
             else label?.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
         }
 
@@ -266,7 +266,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                label?.set_textColor(16711680);
+                label?.set_textColor((int) APColor.Red);
             }
         }
 
@@ -286,7 +286,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                label?.set_textColor(16711680);
+                label?.set_textColor((int) APColor.Red);
             }
         }
 
@@ -325,7 +325,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                label?.set_textColor(16711680);
+                label?.set_textColor((int) APColor.Red);
             }
         }
     }

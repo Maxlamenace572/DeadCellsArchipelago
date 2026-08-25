@@ -137,12 +137,12 @@ namespace DeadCellsArchipelago {
                 if (ARCHIPELAGO == null || ARCHIPELAGO.isConnected == false)
                 {
                     connectionStatus.set_text("Not Connected".AsHaxeString());
-                    connectionStatus.set_textColor(16711680);
+                    connectionStatus.set_textColor((int) APColor.Red);
                 }
                 else
                 {
                     connectionStatus.set_text("Connected".AsHaxeString());
-                    connectionStatus.set_textColor(2883371);
+                    connectionStatus.set_textColor((int) APColor.Green);
                     SetApworldVersion();
                 }
 
@@ -162,7 +162,7 @@ namespace DeadCellsArchipelago {
                 serverIpTag.set_text("Address:".AsHaxeString());
                 CenterX((113-4)*menuScale, serverIpTag);
 
-                serverIpTag.set_textColor(16777215);
+                serverIpTag.set_textColor((int) APColor.White);
 
 
                 UIBox bgServerIp = UIBox.Class.drawBoxMain(270*screenScale, 1, 4, 3, 0, null);
@@ -184,11 +184,11 @@ namespace DeadCellsArchipelago {
                     scaleY = textBaseScale * scale,
                     onMove = (e) =>
                     {
-                        serverIp?.set_textColor(16776960);
+                        serverIp?.set_textColor((int) APColor.Yellow);
                     },
                     onOut = (e) =>
                     {
-                        serverIp?.set_textColor(16777215);
+                        serverIp?.set_textColor((int) APColor.White);
                     }
                 };
                 index++;
@@ -208,7 +208,7 @@ namespace DeadCellsArchipelago {
                 slotNameTag.set_text("Slot:".AsHaxeString());
                 CenterX((113-4)*menuScale, slotNameTag);
 
-                slotNameTag.set_textColor(16777215);
+                slotNameTag.set_textColor((int) APColor.White);
 
 
                 UIBox bgSlotName = UIBox.Class.drawBoxMain(270*screenScale, 1, 4, 3, 0, null);
@@ -230,11 +230,11 @@ namespace DeadCellsArchipelago {
                     scaleY = textBaseScale * scale,
                     onMove = (e) =>
                     {
-                        slotName?.set_textColor(16776960);
+                        slotName?.set_textColor((int) APColor.Yellow);
                     },
                     onOut = (e) =>
                     {
-                        slotName?.set_textColor(16777215);
+                        slotName?.set_textColor((int) APColor.White);
                     }
                 };
                 index++;
@@ -255,7 +255,7 @@ namespace DeadCellsArchipelago {
                 passwordTag.set_text("Password:".AsHaxeString());
                 CenterX((113-4)*menuScale, passwordTag);
 
-                passwordTag.set_textColor(16777215);
+                passwordTag.set_textColor((int) APColor.White);
 
                 UIBox bgPassword = UIBox.Class.drawBoxMain(270.0*screenScale, 1.0, 4, 3, 0, null);
                 bgPassword.x = 18;
@@ -276,11 +276,11 @@ namespace DeadCellsArchipelago {
                     scaleY = textBaseScale * scale,
                     onMove = (e) =>
                     {
-                        password?.set_textColor(16776960);
+                        password?.set_textColor((int) APColor.Yellow);
                     },
                     onOut = (e) =>
                     {
-                        password?.set_textColor(16777215);
+                        password?.set_textColor((int) APColor.White);
                     }
                 };
                 index++;
@@ -297,7 +297,7 @@ namespace DeadCellsArchipelago {
                 index++;
                 connectButton.set_text("Connect".AsHaxeString());
                 CenterX((113-4)*menuScale, connectButton);
-                connectButton.set_textColor(16777215);
+                connectButton.set_textColor((int) APColor.White);
                 var inter = new dc.h2d.Interactive(
                     connectButton.get_textWidth(),
                     connectButton.get_textHeight(),
@@ -320,7 +320,7 @@ namespace DeadCellsArchipelago {
                         if (archipelago.isConnected)
                         {
                             connectionStatus.set_text("Connected".AsHaxeString());
-                            connectionStatus.set_textColor(2883371);
+                            connectionStatus.set_textColor((int) APColor.Green);
                             ARCHIPELAGO = archipelago;
                             SetApworldVersion();
 
@@ -336,7 +336,7 @@ namespace DeadCellsArchipelago {
                                 {
                                     ClearQueues();
                                     connectionStatus.set_text("Seed not Matching".AsHaxeString());
-                                    connectionStatus.set_textColor(16711680);
+                                    connectionStatus.set_textColor((int) APColor.Red);
                                     archipelago.Disconnect();
                                     apVersion?.set_visible(false);
                                 }
@@ -346,7 +346,7 @@ namespace DeadCellsArchipelago {
                         {
                             ClearQueues();
                             connectionStatus.set_text("Failed to Connect".AsHaxeString());
-                            connectionStatus.set_textColor(16711680);
+                            connectionStatus.set_textColor((int) APColor.Red);
                             archipelago.Disconnect();
                             apVersion?.set_visible(false);
                         }
@@ -354,11 +354,11 @@ namespace DeadCellsArchipelago {
                     },
                     onMove = (e) =>
                     {
-                        connectButton.set_textColor(16776960);
+                        connectButton.set_textColor((int) APColor.Yellow);
                     },
                     onOut = (e) =>
                     {
-                        connectButton.set_textColor(16777215);
+                        connectButton.set_textColor((int) APColor.White);
                     }
                 };
             }
@@ -487,13 +487,13 @@ namespace DeadCellsArchipelago {
             apVersion.set_text($"Apworld: {ARCHIPELAGO.version}".AsHaxeString());
             Right((113-4)*3, apVersion);
             if (TooOldApworld())
-                apVersion.set_textColor(16711680);
+                apVersion.set_textColor((int) APColor.Red);
 
             else if (FutureApworld())
-                apVersion.set_textColor(16752934);
+                apVersion.set_textColor((int) APColor.Orange);
 
             else
-                apVersion.set_textColor(2883371);
+                apVersion.set_textColor((int) APColor.Green);
 
             apVersion.set_visible(true);
         }
@@ -574,7 +574,7 @@ namespace DeadCellsArchipelago {
             if (CanPlay())
             {
                 if (oldText != null) menuItem.t.set_text(oldText.AsHaxeString());
-                menuItem.t.set_textColor(16777215);
+                menuItem.t.set_textColor((int) APColor.White);
                 menuItem.isEnable = true;
             }
             else
@@ -582,7 +582,7 @@ namespace DeadCellsArchipelago {
                 oldText ??= menuItem.t.text.ToString();
                 if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) menuItem.t.set_text($"{oldText} (not connected)".AsHaxeString());
                 else menuItem.t.set_text($"{oldText} (seed not matching)".AsHaxeString());
-                menuItem.t.set_textColor(9868950);
+                menuItem.t.set_textColor((int) APColor.Gray);
                 menuItem.isEnable = false;
             }
         }

@@ -33,7 +33,7 @@ namespace DeadCellsArchipelago {
             };
             Bounds boundsBgBox = bgBox.getSize(new Bounds());
             bgBox.y = (1080 - boundsBgBox.yMax)/2;
-            bgBox.colorizeSG(660257);
+            bgBox.colorizeSG((int) APColor.DeepBlue);
 
             outerBox = new UIBox("boxInfo".AsHaxeString(), 500*screenScale, 610*screenScale, 0, 0)
             {
