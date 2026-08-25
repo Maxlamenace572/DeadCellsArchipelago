@@ -31,6 +31,7 @@ using HaxeProxy.Runtime;
 using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
 using ModCore.Events.Interfaces.Game;
+using dc.pr;
 
 namespace DeadCellsArchipelago{
     public class ModEntry(ModInfo info) : ModBase(info), 
@@ -76,8 +77,9 @@ namespace DeadCellsArchipelago{
 
         public void OnHeroUpdate(double dt)
         {
-            if (HERO != null && HERO.awake)
-            {    
+            if (HERO != null && HERO.awake && !Game.Class.ME.paused)
+            {
+                WarpSelected();
                 GiveItemInQueue();
                 ShowLogInQueue();
                 CheckDeathLink();

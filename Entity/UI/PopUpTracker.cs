@@ -4,6 +4,9 @@ using ModCore.Utilities;
 using Serilog;
 
 using static DeadCellsArchipelago.MainMenuManager;
+using static DeadCellsArchipelago.ItemManager;
+using static DeadCellsArchipelago.PauseMenuManager;
+using static DeadCellsArchipelago.WorldMapManager;
 
 namespace DeadCellsArchipelago {
     public class PopUpTracker
@@ -15,6 +18,8 @@ namespace DeadCellsArchipelago {
         public PopUpTopLine? topLine;
         public int biomeLineIndex;
         public int biomeCellIndex;
+        public TextButton? popUpWarpButton = null;
+        private bool showButton;
 
         public PopUpTracker(dc.h2d.Object parent)
         {
@@ -41,6 +46,8 @@ namespace DeadCellsArchipelago {
             
             parent.addChild(bgBox);
             parent.addChild(outerBox);
+
+            popUpWarpButton = new TextButton(parent, bgBox.x, bgBox.y-70, false, false, "Warp", true);
         }
 
         public void SetVisible(bool visible)
@@ -49,6 +56,7 @@ namespace DeadCellsArchipelago {
             outerBox.visible = visible;
             scrollerItems?.SetVisible(visible);
             topLine?.SetVisible(visible);
+            popUpWarpButton?.SetVisible(visible && showButton);
         }
 
         public void AddFillerMenu()
@@ -64,6 +72,22 @@ namespace DeadCellsArchipelago {
         {
             topLine?.flow.remove();
             topLine = new PopUpTopLine(bgBox.x+10, bgBox.y+5, parent, biomeLineIndex, biomeCellIndex);
+        }
+
+        public void UpdateWarpButton()
+        {
+            if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains)) showButton = false;
+            else if (SAVED_DATA!.IsCheckSent($"{topLine!.biomeId} Enter") && IsLevelAfterCurrent(topLine!.biomeId))
+            {
+                showButton = true;
+                popUpWarpButton!.act = () => {warpToBiome = topLine!.biomeId;};
+                popUpWarpButton!.SetEnabled(true);
+            }
+            else 
+            {
+                showButton = true;
+                popUpWarpButton!.SetEnabled(false);
+            }
         }
 
         public void UpdateScrollContent(HashSet<string> itemIds)

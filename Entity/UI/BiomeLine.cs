@@ -6,9 +6,7 @@ using static DeadCellsArchipelago.PauseMenuManager;
 namespace DeadCellsArchipelago {
     public class BiomeLine : Line
     {
-        public BiomeCell cell1;
-        public BiomeCell cell2;
-        public BiomeCell cell3;
+        public List<BiomeCell> cells = [];
         public Flow flow;
 
         public BiomeLine(double x, double y, string level1, string level2, string level3, Dictionary<string, HashSet<string>> data)
@@ -21,9 +19,9 @@ namespace DeadCellsArchipelago {
             };
             flow.set_horizontalSpacing(50);
 
-            cell1 = new BiomeCell(0, 0, flow, level1, GetRelatedData(data, level1));
-            cell2 = new BiomeCell(0, 0, flow, level2, GetRelatedData(data, level2));
-            cell3 = new BiomeCell(0, 0, flow, level3, GetRelatedData(data, level3));
+            cells.Add(new BiomeCell(0, 0, flow, level1, GetRelatedData(data, level1)));
+            cells.Add(new BiomeCell(0, 0, flow, level2, GetRelatedData(data, level2)));
+            cells.Add(new BiomeCell(0, 0, flow, level3, GetRelatedData(data, level3)));
         }
 
         public override void AddParent(dc.h2d.Object parent)
@@ -33,95 +31,33 @@ namespace DeadCellsArchipelago {
 
         public void Highlight(int index)
         {
-            switch (index)
-            {
-                case 0:
-                    cell1.Highlight();
-                    break;
-                case 1:
-                    cell2.Highlight();
-                    break;
-                case 2:
-                    cell3.Highlight();
-                    break;
-            }
+            cells[index].Highlight();
         }
 
         public void StopHighlight(int index)
         {
-            switch (index)
-            {
-                case 0:
-                    cell1.StopHighlight();
-                    break;
-                case 1:
-                    cell2.StopHighlight();
-                    break;
-                case 2:
-                    cell3.StopHighlight();
-                    break;
-            }
+            cells[index].StopHighlight();
         }
 
         public void Locked(int index)
         {
-            switch (index)
-            {
-                case 0:
-                    cell1.Locked();
-                    break;
-                case 1:
-                    cell2.Locked();
-                    break;
-                case 2:
-                    cell3.Locked();
-                    break;
-            }
+            cells[index].Locked();
         }
 
         public void SetPopUpTracker(int index)
         {
-            switch (index)
-            {
-                case 0:
-                    cell1.SetPopUpTracker();
-                    break;
-                case 1:
-                    cell2.SetPopUpTracker();
-                    break;
-                case 2:
-                    cell3.SetPopUpTracker();
-                    break;
-            }
+            cells[index].SetPopUpTracker();
             popUpTracker?.biomeCellIndex = index;
         }
 
         public Dictionary<string, HashSet<string>> GetBiomeData(int index)
         {
-            switch (index)
-            {
-                case 0:
-                    return cell1.data;
-                case 1:
-                    return cell2.data;
-                case 2:
-                    return cell3.data;
-            }
-            return [];
+            return cells[index].data;
         }
 
         public string GetBiomeId(int index)
         {
-            switch (index)
-            {
-                case 0:
-                    return cell1.biomeId;
-                case 1:
-                    return cell2.biomeId;
-                case 2:
-                    return cell3.biomeId;
-            }
-            return "";
+            return cells[index].biomeId;
         }
 
         public Dictionary<string, HashSet<string>> GetRelatedData(Dictionary<string, HashSet<string>> data, string biomeId)
@@ -157,18 +93,7 @@ namespace DeadCellsArchipelago {
 
         public void SetIcons(int index, List<List<string>> lines)
         {
-            switch (index)
-            {
-                case 0:
-                    cell1.SetIcons(lines);
-                    break;
-                case 1:
-                    cell2.SetIcons(lines);
-                    break;
-                case 2:
-                    cell3.SetIcons(lines);
-                    break;
-            }
+            cells[index].SetIcons(lines);
         }
     }
 }

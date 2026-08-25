@@ -18,6 +18,7 @@ namespace DeadCellsArchipelago {
         public bool isDoingChallenge = false;
         public int numberOfPokebombUse = 1;
         public string currentLevelId = "PrisonStart";
+        public int lastLevelDepthSeen = 0;
         public string archipelagoSeed = "";
         public bool hasDoneBank = false;
 

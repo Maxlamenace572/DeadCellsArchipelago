@@ -111,5 +111,23 @@ namespace DeadCellsArchipelago {
             text.y = parent.y + ((boundsParent.yMax - textHeight) /2);
             text.posChanged = true;
         }
+
+        public static void FullCenterX(dc.h2d.Object parent, dc.h2d.Object child)
+        {
+            Bounds boundsParent = parent.getSize(new Bounds());
+            Bounds boundsChild = child.getSize(new Bounds());
+
+            child.x = parent.x + ((boundsParent.xMax - boundsChild.xMax) /2);
+            child.posChanged = true;
+        }
+
+        public static void FullCenterY(dc.h2d.Object parent, dc.h2d.Object child)
+        {
+            Bounds boundsParent = parent.getSize(new Bounds());
+            Bounds boundsChild = child.getSize(new Bounds());
+
+            child.y = parent.y + ((boundsParent.yMax - boundsChild.yMax) /2);
+            child.posChanged = true;
+        }
     }
 }

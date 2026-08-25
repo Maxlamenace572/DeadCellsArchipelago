@@ -9,6 +9,7 @@ namespace DeadCellsArchipelago {
     {
         public Flow flow;
         public List<PopUpTopCell> cells;
+        public string biomeId = "Other";
 
         public PopUpTopLine(double x, double y, dc.h2d.Object parent, int biomeLineIndex, int biomeCellIndex)
         {
@@ -20,7 +21,7 @@ namespace DeadCellsArchipelago {
 
             if (scrollerBiome == null) return;
             Dictionary<string, HashSet<string>> data = scrollerBiome.lines[biomeLineIndex].GetBiomeData(biomeCellIndex);
-            string biomeId = scrollerBiome.lines[biomeLineIndex].GetBiomeId(biomeCellIndex);
+            biomeId = scrollerBiome.lines[biomeLineIndex].GetBiomeId(biomeCellIndex);
 
             double totalCellsWidth = 0;
             if (biomeId != "Other")

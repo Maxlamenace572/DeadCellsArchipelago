@@ -6,11 +6,13 @@ using dc.ui.pause;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
 using Serilog;
+using dc.cine;
 
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.MainMenuManager;
+using static DeadCellsArchipelago.WorldMapManager;
 
 namespace DeadCellsArchipelago {
     public static class PauseMenuManager
@@ -56,6 +58,7 @@ namespace DeadCellsArchipelago {
         public static EnergyLink? energyLink = null;
         public static int topIndex = -1;
         public static int energyLinkIndex = -1;
+        public static string? warpToBiome = null;
 
         public static void InitializePauseHooks()
         {
@@ -985,6 +988,7 @@ namespace DeadCellsArchipelago {
             if (popUpTracker != null)
             {
                 popUpTracker.UpdateTopContent();
+                popUpTracker.UpdateWarpButton();
             }
         }
         public static void UpdateScrollContent(HashSet<string> itemIds) {
@@ -1089,6 +1093,15 @@ namespace DeadCellsArchipelago {
                 energyLink = new EnergyLink(screenBitmap);
             }
             energyLink.SetVisible(!showClassicMenu && menuIndex == 1);
+        }
+
+        public static void WarpSelected()
+        {
+            if (warpToBiome == null) return;
+            LevelTransition.Class.@goto(warpToBiome.AsHaxeString());
+            SAVED_DATA!.currentLevelId = warpToBiome;
+            SAVED_DATA!.lastLevelDepthSeen = GetLevelDepth(warpToBiome);
+            warpToBiome = null;
         }
     }
 }

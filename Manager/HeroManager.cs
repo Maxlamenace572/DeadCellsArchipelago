@@ -83,6 +83,7 @@ namespace DeadCellsArchipelago {
             if(SAVED_DATA != null && GLOBAL_DATA != null)
             {
                 SAVED_DATA.currentLevelId = "PrisonStart";
+                SAVED_DATA.lastLevelDepthSeen = 0;
                 SAVED_DATA.isDoingChallenge = false;
                 if (USER != null) SAVED_DATA.numberOfPokebombUse = USER.bossRuneActivated+1;
                 SAVED_DATA.hasDoneBank = false;

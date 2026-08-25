@@ -16,6 +16,7 @@ using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.EnemyManager;
+using static DeadCellsArchipelago.WorldMapManager;
 using Hashlink.Proxy;
 using dc.cine;
 using dc.en.inter.exit;
@@ -271,17 +272,15 @@ namespace DeadCellsArchipelago {
         {
             if(SAVED_DATA != null)
             {
-                string locationName = locationId;
-                if (IdToNameKeyExist(locationId))
-                {
-                    locationName = GetName(locationId);
-                }
-
                 if(!SAVED_DATA.IsCheckSent(locationId + kind))
                 {
                     SendBiomeCheck(locationId + kind);
                 }
                 SAVED_DATA.currentLevelId = destinationId;
+                if (destinationId.ToString()[..2] != "T_")
+                {
+                    SAVED_DATA!.lastLevelDepthSeen = GetLevelDepth(destinationId);
+                }
             }
         }
 
