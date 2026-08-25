@@ -1,7 +1,6 @@
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.ItemManager;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace DeadCellsArchipelago {
     public class GlobalData
@@ -20,6 +19,7 @@ namespace DeadCellsArchipelago {
         public Dictionary<int, int> ProgressionForge { get; set; } = [];
         public HashSet<string> FlawlessBoss { get; set; } = [];
         public int currentCells = 0;
+        public bool debugWarp = false;
 
         public void InitValues(int bsc, bool cosmetics, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs)
         {

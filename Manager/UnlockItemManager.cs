@@ -12,6 +12,7 @@ using dc.hl.types;
 using dc.level;
 using dc.level.lore;
 using dc.level.@struct;
+using dc.pow;
 using dc.pr;
 using dc.tool;
 using dc.tool.atk;
@@ -68,6 +69,8 @@ namespace DeadCellsArchipelago {
             Hook__HeadCheckHelper.checkGlitch += OnCheckGlitch;
             Hook_TailorDaughter.checkHeads += OnCheckHeads;
             Hook_Knight.onFocus += OnFocusKnight;
+            dc.en.inter.Hook_Throne.initGfx += OnInitGfxInterThrone;
+            Hook_StoryManager.onNewGame += OnNewGame;
 
             Serilog.Log.Information("[AP] Special Unlock Hooks loaded");
         }
@@ -346,6 +349,20 @@ namespace DeadCellsArchipelago {
             useOriginalHasPermanentItem = false;
             orig(self);
             useOriginalHasPermanentItem = true;
+        }
+
+        private static void OnInitGfxInterThrone(dc.en.inter.Hook_Throne.orig_initGfx orig, dc.en.inter.Throne self)
+        {//KingDefault (part 1)
+            useModdedHasUnlock = true;
+            orig(self);
+            useModdedHasUnlock = false;
+        }
+
+        private static void OnNewGame(Hook_StoryManager.orig_onNewGame orig, StoryManager self, int gameSeed)
+        {//KingDefault (part 2)
+            useModdedHasUnlock = true;
+            orig(self, gameSeed);
+            useModdedHasUnlock = false;
         }
     }
 }

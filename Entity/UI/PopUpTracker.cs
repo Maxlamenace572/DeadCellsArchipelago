@@ -84,7 +84,7 @@ namespace DeadCellsArchipelago {
         public void UpdateWarpButton()
         {
             if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains)) showButton = false;
-            else if (SAVED_DATA!.IsCheckSent($"{topLine!.biomeId} Enter") && IsLevelAfterCurrent(topLine!.biomeId))
+            else if ((SAVED_DATA!.IsCheckSent($"{topLine!.biomeId} Enter") && IsLevelAfterCurrent(topLine!.biomeId)) || GLOBAL_DATA!.debugWarp)
             {
                 showButton = true;
                 popUpWarpButton!.act = () => {warpToBiome = topLine!.biomeId;};
