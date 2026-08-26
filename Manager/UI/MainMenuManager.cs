@@ -461,6 +461,7 @@ namespace DeadCellsArchipelago {
         private static void ResetGameData()
         {
             SAVED_DATA = null;
+            USER = null;
             bossRuneGivenSinceLaunch = 0;
             ProgressionItemGivenSinceLaunch = [];
             fillerItemGivenSinceLaunch = [];
