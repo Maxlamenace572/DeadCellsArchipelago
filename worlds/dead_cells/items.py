@@ -79,7 +79,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Ram Rune":             (0x0004, PROG, DLC_BASE),
     "Spider Rune":          (0x0005, PROG, DLC_BASE),
     "Homunculus Rune":      (0x0006, PROG, DLC_BASE),
-    "Explorer's Rune":      (0x0007, PRSB, DLC_BASE),
+    "Explorer's Rune":      (0x0007, PROG, DLC_BASE),
     "Progressive Stem Cell":(0x0008, PROG, DLC_BASE),
     
     "Crowned Key":          (0x0010, PROG, DLC_BASE),
@@ -93,11 +93,11 @@ ITEM_TABLE: Dict[str, tuple] = {
   
 
     # ── Meta Upgrades (Useful) ────────────────────────────────────────
-    "Progressive Flask":          (0x0100, PRSB, DLC_BASE),
+    "Progressive Flask":          (0x0100, PROG, DLC_BASE),
     "Backpack":                   (0x0104, PRSB, DLC_BASE),
     "Advanced Forge 1":           (0x0105, PRSB, DLC_BASE),
     "Recycling Tubes":            (0x0106, PRSB, DLC_BASE),
-    "Hunter's Mirror":            (0x0107, PRNO, DLC_BASE),
+    "Hunter's Mirror":            (0x0107, PRDE, DLC_BASE),
     "The Specialist's Showroom":  (0x0108, PROG, DLC_BASE),
     "Restock":                    (0x0109, PRSB, DLC_BASE),
     "Merchandise Categories":     (0x010A, PRSB, DLC_BASE),
@@ -114,7 +114,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Blood Sword":              (0x0203, USFL, DLC_BASE),
     "Twin Daggers":             (0x0204, USFL, DLC_BASE),
     "Broadsword":               (0x0205, USFL, DLC_BASE),
-    "Shovel":                   (0x0206, PRSB, DLC_BASE),
+    "Shovel":                   (0x0206, PROG, DLC_BASE),
     "Cursed Sword":             (0x0207, USFL, DLC_BASE),
     "Sadist's Stiletto":        (0x0208, USFL, DLC_BASE),
     "Swift Sword":              (0x0209, USFL, DLC_BASE),
@@ -713,7 +713,7 @@ def get_progression_items(enabled_dlcs: Set[str]) -> Dict[str, tuple]:
     return {
         name: data
         for name, data in get_items_for_dlcs(enabled_dlcs).items()
-        if data[1] == PROG | PRSB | PRNO | PRDE
+        if data[1] == PROG
     }
 
 def is_cosmetic(item_name: str) -> bool:
