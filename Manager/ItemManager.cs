@@ -43,6 +43,7 @@ namespace DeadCellsArchipelago {
         public static List<string> History = [];
         public static bool disableTrapOnEndBoss = false;
         public static bool useModdedHasUnlock = false;
+        public static bool useModdedHasUnlockKingDefault = false;
         public static int headsForHeads = -1;
 
         public static void InitializeItemHooks()
@@ -730,6 +731,10 @@ namespace DeadCellsArchipelago {
         {
             if (SAVED_DATA != null)
             {
+                if (useModdedHasUnlockKingDefault && k.ToString() == "KingDefault" && GLOBAL_DATA!.includeCosmetics)
+                {
+                    return SAVED_DATA.IsCheckSent(k.ToString());
+                }
                 if (headsForHeads != -1)
                 {
                     headsForHeads++;
@@ -988,7 +993,9 @@ namespace DeadCellsArchipelago {
         private static void OnHiddenTrigger(Hook_HiddenTrigger.orig_trigger orig, HiddenTrigger self, Entity by)
         {
             if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("ShipwreckKey")) USER?.story.counters.set("seenStaphyCine".AsHaxeString(), 0);
+            useModdedHasUnlockKingDefault = true;
             orig(self, by);
+            useModdedHasUnlockKingDefault = false;
             if (SAVED_DATA != null && SAVED_DATA.IsCheckSent("ShipwreckKey")) USER?.story.counters.set("seenStaphyCine".AsHaxeString(), 1);
         }
 
