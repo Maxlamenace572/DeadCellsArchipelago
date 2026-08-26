@@ -168,7 +168,7 @@ TRANSITIONS = {
     ],
     "Throne": [
         {"to": "Astrolab", "require": ["Progressive Stem Cell:5", "Astrolab Unlock"]},
-        {"to": "End", "require": "Homunculus Rune"},
+        {"to": "End", "require": None},
         {"to": "Distillery", "require": "Derelict Distillery Unlock"},
     ],
     "Astrolab": [
@@ -422,6 +422,12 @@ def create_regions(world: "DeadCellsWorld") -> None:
 
         set_rule(loc, make_rule(valid_sources, extra_rule))
 
+    # On BSC 5, only the true ending (through Observatory) should count as "End".
+    # The alternative endings reachable from these biomes are cut so the
+    # only way to reach the "End" is via the collector.
+    NOT_TRUE_ENDING_SOURCES = {"QueenArena", "DookuArena", "Throne"}
+    pruneOtherEndings = max_seed_bc == 5
+
     for from_region, exits in TRANSITIONS.items():
         if from_region not in regions:
             continue
@@ -431,6 +437,9 @@ def create_regions(world: "DeadCellsWorld") -> None:
             requirement = exit_data.get("require")
 
             if to_region not in regions:
+                continue
+
+            if pruneOtherEndings and to_region == "End" and from_region in NOT_TRUE_ENDING_SOURCES:
                 continue
 
             entrance = Entrance(player, f"{from_region} -> {to_region}", regions[from_region])
