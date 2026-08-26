@@ -58,11 +58,13 @@ namespace DeadCellsArchipelago {
             hasRules["BlowTorchRed"] = [["FlameThrower"]];
             hasRules["StaphyHead"] = [["SpawnLilStaphy"]];
             hasRules["MushroomBoi"] = [["SpawnFriendlyHardy"]];
-            hasRules["KingWhite"] = [["KingDefault"]];
+            hasRules["KingDefault"] = [["HomKey"]];
+            hasRules["KingWhite"] = [["HomKey"], ["KingDefault"]];
             hasRules["TickSacrifice"] = [["SpawnFriendlyHardy"]];
             hasRules["PrisonerGold"] = [["PokebombUnlock"]];
             hasRules["BlackHoleBlue"] = [["LadderKey", "TeleportKey", "ScoringKey", "CustomKey", "BreakableGroundKey", "WallJumpKey", "HomKey", "ExploKey", "BackpackUnlock", "Recycling2",
                 "ForgeRefine1", "ArmoryUnlock", "MirrorUnlock", "PokebombUnlock", "ShopRerolls", "ShopCategories", "RandomBow", "RandomShield", "RandomCC", "Flask4", "Money5"]];
+            hasRules["SonicCrossbow"] = [["WallJumpKey"]];
 
             BuildHasRules(hasRules);
 
@@ -85,21 +87,24 @@ namespace DeadCellsArchipelago {
             BuildReachRules(canReachRules);
 
 
-            if (ItemsData.ContainsKey("Terraria") && ItemsData["Terraria"].accessible)
+            if (ItemsData.ContainsKey("Terraria"))
             {
-                ItemsData["Terraria"].accessible = HasItems([["BackpackUnlock"]]) && CanReachLocations([["Boss_KingsHand"], ["Cemetery Enter"]]) ;
+                if (ItemsData["Terraria"].accessible)
+                    ItemsData["Terraria"].accessible = HasItems([["BackpackUnlock"]]) && CanReachLocations([["Boss_KingsHand"], ["Cemetery Enter"]]);
                 ItemsData["Terraria"].requirements = [["BackpackUnlock"]];
             }
 
-            if (ItemsData.ContainsKey("CavernKey") && ItemsData["CavernKey"].accessible)
+            if (ItemsData.ContainsKey("CavernKey"))
             {
-                ItemsData["CavernKey"].accessible = HasItems([["HomKey"]]) && CanReachLocations([["Boss_KingsHand"]]) ;
+                if (ItemsData["CavernKey"].accessible)
+                    ItemsData["CavernKey"].accessible = HasItems([["HomKey"]]) && CanReachLocations([["Boss_KingsHand"]]);
                 ItemsData["CavernKey"].requirements = [["HomKey"]];
             }
 
-            if (ItemsData.ContainsKey("LongBow") && ItemsData["LongBow"].accessible)
+            if (ItemsData.ContainsKey("LongBow"))
             {
-                ItemsData["LongBow"].accessible = HasItems([["TeleportKey", "LadderKey"]]) || (HasItems([["TeleportKey"]]) && CanReachLocations([["Boss_Death"]])) ;
+                if (ItemsData["LongBow"].accessible)
+                    ItemsData["LongBow"].accessible = HasItems([["TeleportKey", "LadderKey"]]) || (HasItems([["TeleportKey"]]) && CanReachLocations([["Boss_Death"]]));
                 ItemsData["LongBow"].requirements = [["TeleportKey", "LadderKey"], ["TeleportKey", "Boss_Death"]];
             }
 

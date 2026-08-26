@@ -172,7 +172,7 @@ TRANSITIONS = {
         {"to": "Distillery", "require": "Derelict Distillery Unlock"},
     ],
     "Astrolab": [
-        {"to": "Observatory", "require": "Observatory Unlock"},
+        {"to": "Observatory", "require": ["Observatory Unlock", "Spider Rune"]},
     ],
     "Observatory": [
         {"to": "End", "require": None},

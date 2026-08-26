@@ -833,7 +833,11 @@ LOCATION_RULES = [
     ),
 
     # ── King outfit chain ────────────────────────────────────────────────────
-    ("White King Outfit", _has("King Outfit")),
+    ("King Outfit", _has("Homunculus Rune")),
+    ("White King Outfit", _has("Homunculus Rune") or _has("King Outfit")),
+    
+    # ── Astrolab Parkour ─────────────────────────────────────────────────────
+    ("Sonic Carbine", _has("Spider Rune")),
 
 
     # ── TickSacrifice ─────────────────────────────────────────────────────────

@@ -621,7 +621,8 @@
             "to": "Observatory",
             "require": [
                 [
-                    "Observatory"
+                    "Observatory",
+                    "WallJumpKey"
                 ]
             ]
         }
