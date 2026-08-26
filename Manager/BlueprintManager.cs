@@ -118,7 +118,7 @@ namespace DeadCellsArchipelago {
         private static void FixNotSpawningBlueprint(Hook_LootGen.orig_addBlueprintAt orig, LootGen self, LevelMap map, int cx, int cy, dc.String k, bool freeItemAsAlt, bool noAlt)
         {
             //I don't know why but without this hook, blueprints like the two in half life lore room won't spawn without DualBow
-            orig(self, map, cx, cy, k, freeItemAsAlt, noAlt);
+            orig(self, map, cx, cy, k, false, noAlt);
         }
 
         private static ArrayObj OnGetDailyRewards(Hook_User.orig_getDailyRewards orig, User self)
