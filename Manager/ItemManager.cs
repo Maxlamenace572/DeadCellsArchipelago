@@ -1031,7 +1031,11 @@ namespace DeadCellsArchipelago {
             foreach(KeyValuePair<string, int> pi in GLOBAL_DATA.ProgressionItem)
             {
                 ItemProgress ip = itemMeta.getItemProgress(pi.Key.AsHaxeString());
-                if (pi.Value == -1) ip.unlocked = true;
+                if (pi.Value == -1)
+                {
+                    ip.unlocked = true;
+                    if (IsUnlockedByDefault(pi.Key)) SAVED_DATA!.AddBaseItemUnlocked(pi.Key);
+                }
                 else ip.investedCells = pi.Value;
             }
         }
