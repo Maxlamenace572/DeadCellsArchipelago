@@ -378,6 +378,13 @@ class DeadCellsWorld(World):
         ):
             itempool.remove("Observatory Unlock")
 
+    # Remove Distillery Unlock from the pool if over 0 BSC
+        if (
+            "Derelict Distillery Unlock" in itempool
+            and self.options.boss_cells.value == 0
+        ):
+            itempool.remove("Derelict Distillery Unlock")
+
     # Calculate remaining slots
         remaining_slots = total_locations - len(itempool)
 

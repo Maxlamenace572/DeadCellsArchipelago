@@ -95,7 +95,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     # ── Meta Upgrades (Useful) ────────────────────────────────────────
     "Progressive Flask":          (0x0100, PROG, DLC_BASE),
     "Backpack":                   (0x0104, PRSB, DLC_BASE),
-    "Advanced Forge 1":           (0x0105, PRSB, DLC_BASE),
+    "Advanced Forge 1":           (0x0105, PRDE, DLC_BASE),
     "Recycling Tubes":            (0x0106, PRSB, DLC_BASE),
     "Hunter's Mirror":            (0x0107, PRDE, DLC_BASE),
     "The Specialist's Showroom":  (0x0108, PROG, DLC_BASE),
@@ -105,7 +105,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Random Starter Bow":         (0x010D, PRSB, DLC_BASE),
     "Random Starter Shield":      (0x010E, PRSB, DLC_BASE),
     "Random Melee Weapon":        (0x010F, PRSB, DLC_BASE),
-    "Progressive Gold Reserves":  (0x0110, PRSB, DLC_BASE),
+    "Progressive Gold Reserves":  (0x0110, PROG, DLC_BASE),
 
     # ── Melee Weapons (Useful) ────────────────────────────────────────
     "Balanced Blade":           (0x0200, USFL, DLC_BASE),
@@ -254,7 +254,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Telluric Shock":           (0x050F, USFL, DLC_BASE),
     "Collector's Syringe":      (0x0510, USFL, DLC_BASE),
     "Smoke Bomb":               (0x0511, USFL, DLC_BAD_SEED),
-    "Mushroom Boi!":            (0x0512, PRSB, DLC_BAD_SEED),
+    "Mushroom Boi!":            (0x0512, PROG, DLC_BAD_SEED),
     "Ice Armor":                (0x0513, USFL, DLC_BASE),
     "Lightning Rods":           (0x0514, USFL, DLC_FATAL_FALLS),
     "Scarecrow's Sickles":      (0x0515, USFL, DLC_FATAL_FALLS),
@@ -351,7 +351,7 @@ ITEM_TABLE: Dict[str, tuple] = {
 	"Get Rich Quick":                (0x0832, USFL, DLC_BASE),
 	"Midas' Blood":                  (0x0833, USFL, DLC_BASE),
 	"Wish":                          (0x0834, USFL, DLC_BASE),
-	"Cursed Flask":                  (0x0835, PRSB, DLC_BASE),
+	"Cursed Flask":                  (0x0835, PROG, DLC_BASE),
 	"Damned Vigor":                  (0x0836, USFL, DLC_BASE),
 	"Demon Strength":                (0x0837, USFL, DLC_BASE),
 
@@ -425,7 +425,7 @@ ITEM_TABLE: Dict[str, tuple] = {
 	"Aphrodite Outfit":                       (0x1209, FILR, DLC_BASE),
 	"Shaman Outfit":                          (0x120A, FILR, DLC_BASE),
 	"Cloud Outfit":                           (0x120B, FILR, DLC_BASE),
-	"Drifter Outfit":                         (0x120C, PRNO, DLC_BASE),
+	"Drifter Outfit":                         (0x120C, PRDE, DLC_BASE),
 	"A Thousand and One Nights Outfit":       (0x120D, FILR, DLC_BASE),
 	"Dictator Outfit":                        (0x120E, FILR, DLC_BASE),
 	"Warrior Outfit":                         (0x120F, FILR, DLC_BASE),
@@ -453,7 +453,7 @@ ITEM_TABLE: Dict[str, tuple] = {
 	"Kamikaze Outfit":                        (0x1225, FILR, DLC_BASE),
 	"Arbalester's Outfit":                    (0x1226, FILR, DLC_BASE),
 	"Blade Master's Outfit":                  (0x1227, FILR, DLC_BASE),
-	"King Outfit":                            (0x1228, PRNO, DLC_BASE),
+	"King Outfit":                            (0x1228, PRDE, DLC_BASE),
 	"White King Outfit":                      (0x1229, FILR, DLC_BASE),
 	"Classic Concierge Outfit":               (0x122A, FILR, DLC_BASE),
 	"Piccolo Concierge Outfit":               (0x122B, FILR, DLC_BASE),

@@ -332,6 +332,7 @@ def create_regions(world: "DeadCellsWorld") -> None:
     bc_gated_regions = {
         "Astrolab": 5,
         "Observatory": 5,
+        "Distillery": 1,
     }
 
     regions = {}

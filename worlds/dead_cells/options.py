@@ -89,6 +89,13 @@ class BossCells(Range):
     range_end = 5
     default = 2
 
+class ScrewDistillery(Toggle):
+    """
+    Remove all "Derelict Distillery"-exclusive Locations from the pool, as well 
+    as its "Unlock" item (if your BSC goal is 0BSC this will be happen by default)
+    """
+    display_name = "Exclude Distillery"
+    default = 0
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Item pool options
@@ -301,6 +308,9 @@ class DeadCellsOptions(PerGameCommonOptions):
     dlc_the_queen_and_the_sea: DLCTheQueenAndTheSea
     dlc_return_to_castlevania: DLCReturnToCastlevania
 
+    # Misc Randomization
+    exclude_distillery:        ScrewDistillery
+
     # Goal
     boss_cells: BossCells
 
@@ -343,6 +353,10 @@ dead_cells_option_groups = [
     OptionGroup(
         "Item Pool Settings",
         [IncludeCosmetics, IncludeBaseWeapons, IncludeBaseMutations, TrapPercentage]
+    ),
+    OptionGroup(
+        "Miscelaneous Randomization",
+        [ScrewDistillery]
     ),
     OptionGroup(
         "Multiplayer Link Settings",
