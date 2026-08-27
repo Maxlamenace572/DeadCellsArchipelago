@@ -309,7 +309,6 @@ class DeadCellsOptions(PerGameCommonOptions):
     dlc_return_to_castlevania: DLCReturnToCastlevania
 
     # Misc Randomization
-    exclude_distillery:        ScrewDistillery
 
     # Goal
     boss_cells: BossCells
@@ -353,10 +352,6 @@ dead_cells_option_groups = [
     OptionGroup(
         "Item Pool Settings",
         [IncludeCosmetics, IncludeBaseWeapons, IncludeBaseMutations, TrapPercentage]
-    ),
-    OptionGroup(
-        "Miscelaneous Randomization",
-        [ScrewDistillery]
     ),
     OptionGroup(
         "Multiplayer Link Settings",
