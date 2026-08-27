@@ -10,7 +10,7 @@ import os
 from typing import Dict, List, Set, Any
 from BaseClasses import Tutorial, ItemClassification
 from worlds.AutoWorld import World, WebWorld
-from .options import DeadCellsOptions
+from .options import DeadCellsOptions, dead_cells_option_groups
 from .items import (
     ITEM_TABLE, BASE_ID as ITEM_BASE_ID,
     DLC_RISE_OF_GIANT, DLC_BAD_SEED, DLC_FATAL_FALLS,
@@ -159,6 +159,8 @@ class DeadCellsWebWorld(WebWorld):
             authors=["You"],
         )
     ]
+    
+    option_groups = dead_cells_option_groups
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -212,8 +214,6 @@ class DeadCellsWorld(World):
     def _item_enabled(self, item_name: str) -> bool:
         data = ITEM_TABLE[item_name]
         _, classification, dlc = data
-
-    
 
     # DLC filter
         if dlc and dlc not in self.enabled_dlcs:
@@ -379,6 +379,13 @@ class DeadCellsWorld(World):
             and self.options.boss_cells.value != 5
         ):
             itempool.remove("Observatory Unlock")
+
+    # Remove Distillery Unlock from the pool if over 0 BSC
+        if (
+            "Derelict Distillery Unlock" in itempool
+            and self.options.boss_cells.value == 0
+        ):
+            itempool.remove("Derelict Distillery Unlock")
 
     # Calculate remaining slots
         remaining_slots = total_locations - len(itempool)
@@ -547,5 +554,46 @@ class DeadCellsWorld(World):
         Called by AP when it needs an extra filler item (e.g. for item links).
         Returns a random filler item name valid for this world's DLC set.
         """
-        fillers = list(get_filler_items(self.enabled_dlcs).keys())
+        #Manually listing fillers here so both it only chooses among these and 
+        #not the greater "Filler" tag, and doesnt include the now "Filler" cosmetics
+        fillers = [ 
+            "Scroll of Power",
+            "Assassin's Scroll",
+            "Minotaur's Scroll",
+            "Guardian's Scroll",
+            "Epic Scrolls of Power",
+            "Dead Man's Bag",
+            "Residual Cells",
+            "Kebab",
+            "Drumstick",
+            "Carrot",
+            "Big ol' raddish",
+            "Guts",
+            "Monster's Eye",
+            "Cherries",
+            "Watermelon",
+            "Pastry",
+            "Turkey",
+            "Le Croissant",
+            "La Baguette",
+            "Small Medkit",
+            "Large Medkit",
+            "Gruyère",
+            "Camembert",
+            "Flask Recharge",
+            "Cough Syrup",
+            "Small Cough Syrup",
+            "Liposuction",
+            "Fragment of the Philosopher's Stone",
+            "Ruby",
+            "Blue Sapphire",
+            "Amethyst",
+            "Malachite",
+            "Shiny Pebble",
+            "Ingot",
+            "Gold Tooth",
+            "Gold Cell",
+            "Golden Arrow",
+            "Corrupted Artifact"
+        ]
         return self.random.choice(fillers)

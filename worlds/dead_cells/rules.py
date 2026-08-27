@@ -703,6 +703,18 @@ LOCATION_RULES = [
         )
     ),
 
+    (
+        "Magma Blob", 
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+            for loc in [
+                "Cavern Key",
+                "Cavern Enter",
+                "Graveyard Enter"
+            ]
+        )
+    ),
+
     # ── Boss Rush Items ──────────────────────────────────────────────────────
     ("Boss Knight Outfit", _boss_rush_trials_1_2()),
     ("Barbarian Boss Knight Outfit", _boss_rush_trials_3_4()),
@@ -865,11 +877,21 @@ LOCATION_RULES = [
 
     ("Mushroom Boi Cap", _has("Mushroom Boi!")),
 
-    ("Magma Blob", _boss_killed("The Hand of the King")),
-
     ("Bright Red Blowtorch", _has("Fire Blast")),
 
     ("Guillain Head", _has("Boss Rush Unlock") and _has("Boss Rush Statue") and _has("Bank Unlock")),
+
+    ("Horde Zero Hood", _has_any_of(
+        "Double Crossb-o-matic",
+        "Sinew Slicer",
+        "Heavy Turret",
+        "Barnacle",
+        "Cleaver",
+        "Crusher",
+        "Explosive Decoy",
+        "Tesla Coil",
+        "Scavenged Bombard"
+    )), 
 
     ("Spatial Anomaly",
      lambda world: lambda state:

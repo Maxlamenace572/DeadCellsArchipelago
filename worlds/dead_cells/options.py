@@ -8,7 +8,7 @@ These appear in the player's YAML configuration file.
 
 from dataclasses import dataclass
 from Options import (
-    Toggle, DeathLink, Range, PerGameCommonOptions, FreeText
+    Toggle, DeathLink, Range, PerGameCommonOptions, FreeText, StartInventoryPool, OptionGroup
 )
 
 
@@ -89,6 +89,13 @@ class BossCells(Range):
     range_end = 5
     default = 2
 
+class ScrewDistillery(Toggle):
+    """
+    Remove all "Derelict Distillery"-exclusive Locations from the pool, as well 
+    as its "Unlock" item (if your BSC goal is 0BSC this will be happen by default)
+    """
+    display_name = "Exclude Distillery"
+    default = 0
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Item pool options
@@ -292,12 +299,16 @@ class GiveScrollOnFlawlessBoss(Toggle):
 
 @dataclass
 class DeadCellsOptions(PerGameCommonOptions):
+    start_inventory_from_pool: StartInventoryPool
+
     # DLC toggles
     dlc_rise_of_the_giant:    DLCRiseOfTheGiant
     dlc_the_bad_seed:         DLCTheBadSeed
     dlc_fatal_falls:          DLCFatalFalls
     dlc_the_queen_and_the_sea: DLCTheQueenAndTheSea
     dlc_return_to_castlevania: DLCReturnToCastlevania
+
+    # Misc Randomization
 
     # Goal
     boss_cells: BossCells
@@ -328,3 +339,40 @@ class DeadCellsOptions(PerGameCommonOptions):
     # Gameplay
     respawn_up: RespawnUpScroll
     flawless_scroll: GiveScrollOnFlawlessBoss
+
+dead_cells_option_groups = [
+    OptionGroup(
+        "DLC Settings",
+        [DLCRiseOfTheGiant, DLCTheBadSeed, DLCFatalFalls, DLCTheQueenAndTheSea, DLCReturnToCastlevania]
+    ),
+    OptionGroup(
+        "Goal Settings",
+        [BossCells]
+    ),
+    OptionGroup(
+        "Item Pool Settings",
+        [IncludeCosmetics, IncludeBaseWeapons, IncludeBaseMutations, TrapPercentage]
+    ),
+    OptionGroup(
+        "Multiplayer Link Settings",
+        [
+            DeadCellsDeathLink, 
+            DeathLinkGroupName, 
+            DisableDeathLinkForAspects, 
+            DeathTrap, 
+            DeathTrapLinkTrigger, 
+            DeadCellsDamageLink, 
+            DamageLinkGroupName,
+            DeadCellsHealthLink,
+            HealthLinkGroupName,
+            DeadCellsHealthCurseLink,
+            DeadCellsTrapLink,
+            TrapLinkGroupName,
+         ]
+    ),
+    OptionGroup(
+        "Gameplay Settings",
+        [RespawnUpScroll, GiveScrollOnFlawlessBoss]
+    )
+    
+]

@@ -65,6 +65,7 @@ namespace DeadCellsArchipelago {
             hasRules["BlackHoleBlue"] = [["LadderKey", "TeleportKey", "ScoringKey", "CustomKey", "BreakableGroundKey", "WallJumpKey", "HomKey", "ExploKey", "BackpackUnlock", "Recycling2",
                 "ForgeRefine1", "ArmoryUnlock", "MirrorUnlock", "PokebombUnlock", "ShopRerolls", "ShopCategories", "RandomBow", "RandomShield", "RandomCC", "Flask4", "Money5"]];
             hasRules["SonicCrossbow"] = [["WallJumpKey"]];
+            hasRules["HordesZeroHood"] = [["HorizontalTurret"], ["StandardTurret"], ["HeavyTurret"], ["CeilTurret"], ["GroundSaw"], ["Crusher"], ["Decoy"], ["TeslaCoil"], ["Cannon"]];
 
             BuildHasRules(hasRules);
 
