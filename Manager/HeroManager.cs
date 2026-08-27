@@ -23,7 +23,6 @@ namespace DeadCellsArchipelago {
         public static bool trapChallengeStartEntered = false;
         public static bool trapChallengeCurseReceived = false;
         public static bool shouldGiveItemsNewRun = false;
-        public static bool isInTraining = false;
         public static bool originalCurse = true;
         public static bool controlsInverted = false;
         public static bool giveItemStartRichterMode = false;
@@ -70,7 +69,6 @@ namespace DeadCellsArchipelago {
                 var originalOnValidate = onValidate;
 
                 onValidate = () => {
-                    isInTraining = false;
                     resetOnNextPrisonStart = true;
                     originalOnValidate.Invoke();
                 };

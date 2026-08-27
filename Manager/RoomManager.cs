@@ -48,7 +48,6 @@ namespace DeadCellsArchipelago {
             Hook_Portal.onActivate += OnActivatePortal;
             Hook_TreasureChest.onActivate += OnActivateTreasureChest;
             Hook_Portal.close += OnClosePortal;
-            Hook_TrainingDoor.onActivate += OnActivateTrainingDoor;
             Hook_Transition.checkForBank += OnCheckForBank;
             Hook_BankEntering.enterBank += OnEnterBank;
             Hook_ExitToRichterCastle.onActivate += OnActivateToRichterCastle;
@@ -111,7 +110,7 @@ namespace DeadCellsArchipelago {
                 }
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
             }
-            if(new[] {"Ossuary", "QueenArena", "Bank", "DeathArena", "DookuArena"}.Any(ldat.id.ToString().Contains) && !isInTraining)
+            if(new[] {"Ossuary", "QueenArena", "Bank", "DeathArena", "DookuArena"}.Any(ldat.id.ToString().Contains) && !USER!.game.isTraining())
             {
                 ResetFrontPokebomb();
                 PrepareBiomeCheck(ldat.id.ToString(), " Enter", ldat.id.ToString());
@@ -153,7 +152,7 @@ namespace DeadCellsArchipelago {
         {
             ResetFrontPokebomb();
 
-            if (isInTraining)
+            if (USER!.game.isTraining())
             {
                 orig(self, by, lp);
                 return;
@@ -260,12 +259,6 @@ namespace DeadCellsArchipelago {
             }
 
             return false;
-        }
-
-        private static void OnActivateTrainingDoor(Hook_TrainingDoor.orig_onActivate orig, TrainingDoor self, Hero by, bool longPress)
-        {
-            isInTraining = !isInTraining;
-            orig(self, by, longPress);
         }
 
         private static void PrepareBiomeCheck(string locationId, string kind, string destinationId)
