@@ -117,8 +117,10 @@ namespace DeadCellsArchipelago {
 
         private static void FixNotSpawningBlueprint(Hook_LootGen.orig_addBlueprintAt orig, LootGen self, LevelMap map, int cx, int cy, dc.String k, bool freeItemAsAlt, bool noAlt)
         {
-            //I don't know why but without this hook, blueprints like the two in half life lore room won't spawn without DualBow
-            orig(self, map, cx, cy, k, false, noAlt);
+            //I don't know why but without this hook, blueprints like the two in half life lore room or golden outfit won't spawn without DualBow
+            //if noAlt is not set at false, gems instead of blueprint wont spawn
+            //and since 35.13.1, freeItemAsAlt should be set at false, otherwise the blueprint will also not spawn
+            orig(self, map, cx, cy, k, false, false);
         }
 
         private static ArrayObj OnGetDailyRewards(Hook_User.orig_getDailyRewards orig, User self)
