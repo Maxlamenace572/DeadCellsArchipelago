@@ -29,7 +29,7 @@ from .base_classes import DeadCellsItem
 from BaseClasses import LocationProgressType
 
 # version
-version = "0.1.7"
+version = "0.1.8"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Items that are always base-game weapons (no blueprint required)
