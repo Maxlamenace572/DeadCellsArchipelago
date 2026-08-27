@@ -6818,13 +6818,6 @@
                 "max_bc": 5,
                 "dlc": "FatalFalls",
                 "mob": "JavelinSnake"
-            },
-            {
-                "biome": "Cliff",
-                "min_bc": 0,
-                "max_bc": 5,
-                "dlc": "FatalFalls",
-                "mob": "JavelinSnake"
             }
         ]
     },

@@ -1194,7 +1194,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     "Lizard Outfit": {
         "id": 0x0138, "region": "Checks", "type": "skin",
         "dlc": "FatalFalls", "min_bc": 0, "item": "PrisonerJavelinSnake", "rarity": "Uncommon",
-        "sources": [{'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'JavelinSnake'}, {'biome': 'Cliff', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'JavelinSnake'}],
+        "sources": [{'biome': 'Tumulus', 'min_bc': 0, 'max_bc': 255, 'dlc': 'FatalFalls', 'type': 'blueprint_enemy', 'mob': 'JavelinSnake'}],
     },
     "Ferryman's Lantern": {
         "id": 0x0139, "region": "Checks", "type": "blueprint_enemy",
