@@ -10,7 +10,7 @@ import os
 from typing import Dict, List, Set, Any
 from BaseClasses import Tutorial, ItemClassification
 from worlds.AutoWorld import World, WebWorld
-from .options import DeadCellsOptions
+from .options import DeadCellsOptions, dead_cells_option_groups
 from .items import (
     ITEM_TABLE, BASE_ID as ITEM_BASE_ID,
     DLC_RISE_OF_GIANT, DLC_BAD_SEED, DLC_FATAL_FALLS,
@@ -159,6 +159,8 @@ class DeadCellsWebWorld(WebWorld):
             authors=["You"],
         )
     ]
+    
+    option_groups = dead_cells_option_groups
 
 
 # ─────────────────────────────────────────────────────────────────────────────
