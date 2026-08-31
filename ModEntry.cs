@@ -77,13 +77,18 @@ namespace DeadCellsArchipelago{
 
         public void OnHeroUpdate(double dt)
         {
+            if (HERO != null && HERO.awake)
+            {
+                DoEveryMenuLinks();
+            }
+
             if (HERO != null && HERO.awake && !Game.Class.ME.paused)
             {
                 WarpSelected();
                 GiveItemInQueue();
                 ShowLogInQueue();
                 CheckDeathLink();
-                DoEveryLinks();
+                DoEveryGameLinks();
                 if (logError) ShowLogError();
 
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)

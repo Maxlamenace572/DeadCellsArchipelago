@@ -129,13 +129,17 @@ namespace DeadCellsArchipelago
             return pendingEnergyLink.Count == 0;
         }
 
-        public static void DoEveryLinks()
+        public static void DoEveryGameLinks()
         {
             DoDeathHealthLink();
             DoHealthLinkInQueue();
             DoHealthCurseLinkInQueue();
             DoTrapLinkInQueue();
             DoDamageLinkInQueue();
+        }
+
+        public static void DoEveryMenuLinks()
+        {
             DoEnergyLinkInQueue();
         }
 
