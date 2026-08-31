@@ -332,6 +332,8 @@ namespace DeadCellsArchipelago {
                 case "BossRushStatue":
                     LogItem(itemName);
                     AddToHistory(LogName);
+                    var progress = new ItemProgress(itemName.AsHaxeString());
+                    USER.itemMeta.itemProgress.push(progress);
                     UnlockItem(itemName);
                     return true;
                 case "BankUnlock":
