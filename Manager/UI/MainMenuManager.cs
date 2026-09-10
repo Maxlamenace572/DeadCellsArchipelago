@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using System.Text.Json;
 using Serilog;
 using Hashlink.Virtuals;
+using ModCore.Storage;
 
 namespace DeadCellsArchipelago {
     public static class MainMenuManager
@@ -428,7 +429,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetConfFilePath()
         {
-            return Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "data", "conf.json");
+            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "data", "conf.json");
         }
 
         public static ConfData GetConfData()
@@ -555,7 +556,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetModInfoFilePath()
         {
-            return Path.Combine(AppContext.BaseDirectory, "..", "..", "mods", "DeadCellsArchipelago", "modinfo.json");
+            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "modinfo.json");
         }
 
         public static bool CanPlay()
