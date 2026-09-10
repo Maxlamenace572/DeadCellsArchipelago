@@ -1,5 +1,5 @@
 using System.Text.Json;
-using ModCore.Storage;
+using static DeadCellsArchipelago.ModAssetManager;
 
 namespace DeadCellsArchipelago
 {
@@ -32,7 +32,7 @@ namespace DeadCellsArchipelago
 
         public static string GetModApTradFilePath()
         {
-            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "gameId-apName.json");
+            return Path.Combine(GetBaseFolder(), "gameId-apName.json");
         }
 
         public static bool IdToNameKeyExist(string id)

@@ -1,7 +1,7 @@
 using System.Text.Json;
-using ModCore.Storage;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuleItemTracker;
+using static DeadCellsArchipelago.ModAssetManager;
 
 namespace DeadCellsArchipelago
 {
@@ -150,7 +150,7 @@ namespace DeadCellsArchipelago
 
         public static string GetTrackerDataFilePath()
         {
-            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "trackerData.json");
+            return Path.Combine(GetBaseFolder(), "trackerData.json");
         }
 
         public static List<string> GetBiomesId()
@@ -203,7 +203,7 @@ namespace DeadCellsArchipelago
 
         public static string GetRegionDataFilePath()
         {
-            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "region.json");
+            return Path.Combine(GetBaseFolder(), "region.json");
         }
 
         public static bool IsItemAccessible(string itemId)

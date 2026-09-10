@@ -6,7 +6,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using Serilog;
 using dc.ui.hud;
 using dc.ui;
-using ModCore.Storage;
+using static DeadCellsArchipelago.ModAssetManager;
 
 namespace DeadCellsArchipelago {
     public static class ImageManager
@@ -62,7 +62,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetResPath(string name)
         {
-            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "res", name);
+            return Path.Combine(GetBaseFolder(), "res", name);
         }
 
         public static dc.h3d.Vector ColorVectorRGBA(double r, double g, double b, double A)

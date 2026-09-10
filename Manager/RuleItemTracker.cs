@@ -1,7 +1,7 @@
 using System.Text.Json;
-using ModCore.Storage;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.TrackerData;
+using static DeadCellsArchipelago.ModAssetManager;
 
 namespace DeadCellsArchipelago {
     public static class RuleItemTracker
@@ -414,7 +414,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetItemDescriptionFilePath()
         {
-            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "itemDescription.json");
+            return Path.Combine(GetBaseFolder(), "itemDescription.json");
         }
 
         private static void AddDescriptions()

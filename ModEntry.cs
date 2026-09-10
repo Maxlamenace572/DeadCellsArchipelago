@@ -40,10 +40,12 @@ namespace DeadCellsArchipelago{
         IOnHeroUpdate,
         IOnAfterLoadingCDB
     {
+        public static ModInfo? ModInfos;
         private ArchipelagoManager archipelago = new();
 
         public override void Initialize()
         {
+            ModInfos = Info;
             Log.Information("[AP] Archipelago Mod is loading...");
 
             Save.Class.NUM_SLOTS = 99;

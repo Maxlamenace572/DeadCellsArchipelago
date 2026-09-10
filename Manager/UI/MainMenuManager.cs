@@ -429,7 +429,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetConfFilePath()
         {
-            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "data", "conf.json");
+            return Path.Combine(GetBaseFolder(), "data", "conf.json");
         }
 
         public static ConfData GetConfData()
@@ -556,7 +556,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetModInfoFilePath()
         {
-            return Path.Combine(FolderInfo.Mods.FullPath, "DeadCellsArchipelago", "modinfo.json");
+            return Path.Combine(GetBaseFolder(), "modinfo.json");
         }
 
         public static bool CanPlay()
