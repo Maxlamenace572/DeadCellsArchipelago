@@ -95,16 +95,16 @@ ITEM_TABLE: Dict[str, tuple] = {
     # ── Meta Upgrades (Useful) ────────────────────────────────────────
     "Progressive Flask":          (0x0100, PROG, DLC_BASE),
     "Backpack":                   (0x0104, PROG, DLC_BASE),
-    "Advanced Forge 1":           (0x0105, PRDE, DLC_BASE),
-    "Recycling Tubes":            (0x0106, PRSB, DLC_BASE),
-    "Hunter's Mirror":            (0x0107, PRDE, DLC_BASE),
+    "Advanced Forge 1":           (0x0105, PROG, DLC_BASE),
+    "Recycling Tubes":            (0x0106, PROG, DLC_BASE),
+    "Hunter's Mirror":            (0x0107, PROG, DLC_BASE),
     "The Specialist's Showroom":  (0x0108, PROG, DLC_BASE),
-    "Restock":                    (0x0109, PRSB, DLC_BASE),
-    "Merchandise Categories":     (0x010A, PRSB, DLC_BASE),
-    "Progressive Recycling":      (0x010B, PRSB, DLC_BASE),
-    "Random Starter Bow":         (0x010D, PRSB, DLC_BASE),
-    "Random Starter Shield":      (0x010E, PRSB, DLC_BASE),
-    "Random Melee Weapon":        (0x010F, PRSB, DLC_BASE),
+    "Restock":                    (0x0109, PROG, DLC_BASE),
+    "Merchandise Categories":     (0x010A, PROG, DLC_BASE),
+    "Progressive Recycling":      (0x010B, PROG, DLC_BASE),
+    "Random Starter Bow":         (0x010D, PROG, DLC_BASE),
+    "Random Starter Shield":      (0x010E, PROG, DLC_BASE),
+    "Random Melee Weapon":        (0x010F, PROG, DLC_BASE),
     "Progressive Gold Reserves":  (0x0110, PROG, DLC_BASE),
 
     # ── Melee Weapons (Useful) ────────────────────────────────────────
@@ -280,7 +280,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Fire Grenade":             (0x0606, USFL, DLC_BASE),
     "Root Grenade":             (0x0607, USFL, DLC_BASE),
     "Oil Grenade":              (0x0608, USFL, DLC_BASE),
-    "Swarm":                    (0x0609, USFL, DLC_BASE),
+    "Swarm":                    (0x0609, PROG, DLC_BASE),
     "Holy Water":               (0x060A, USFL, DLC_PURPLE),
 
     # ── Deployed Traps (Useful) ───────────────────────────────────────
