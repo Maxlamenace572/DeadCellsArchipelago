@@ -429,7 +429,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetConfFilePath()
         {
-            return Path.Combine(GetBaseFolder(), "data", "conf.json");
+            return Path.Combine(GetSaveFolder(), "conf.json");
         }
 
         public static ConfData GetConfData()

@@ -29,17 +29,13 @@ namespace DeadCellsArchipelago {
 
         public static string GetSaveFilePath(int slot)
         {
-            string saveDir = System.IO.Path.Combine(GetBaseFolder(), "data");
-            
-            Directory.CreateDirectory(saveDir);
+            string saveDir = System.IO.Path.Combine(GetSaveFolder());
             return System.IO.Path.Combine(saveDir, $"APSlot_{slot}.json");
         }
 
         public static string GetGlobalSaveFilePath(string seed)
         {
-            string saveDir = System.IO.Path.Combine(GetBaseFolder(), "data");
-            
-            Directory.CreateDirectory(saveDir);
+            string saveDir = System.IO.Path.Combine(GetSaveFolder());
             return System.IO.Path.Combine(saveDir, $"APSeed_{seed}.json");
         }
 
@@ -100,6 +96,11 @@ namespace DeadCellsArchipelago {
         public static string GetBaseFolder()
         {
             return ModEntry.ModInfos!.ModRoot.FullPath;
+        }
+
+        public static string GetSaveFolder()
+        {
+            return ModEntry.ModInfos!.ModDataRoot.FullPath;
         }
     }
 }
