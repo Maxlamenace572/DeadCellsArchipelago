@@ -94,7 +94,7 @@ ITEM_TABLE: Dict[str, tuple] = {
 
     # ── Meta Upgrades (Useful) ────────────────────────────────────────
     "Progressive Flask":          (0x0100, PROG, DLC_BASE),
-    "Backpack":                   (0x0104, PRSB, DLC_BASE),
+    "Backpack":                   (0x0104, PROG, DLC_BASE),
     "Advanced Forge 1":           (0x0105, PRDE, DLC_BASE),
     "Recycling Tubes":            (0x0106, PRSB, DLC_BASE),
     "Hunter's Mirror":            (0x0107, PRDE, DLC_BASE),
@@ -425,7 +425,7 @@ ITEM_TABLE: Dict[str, tuple] = {
 	"Aphrodite Outfit":                       (0x1209, FILR, DLC_BASE),
 	"Shaman Outfit":                          (0x120A, FILR, DLC_BASE),
 	"Cloud Outfit":                           (0x120B, FILR, DLC_BASE),
-	"Drifter Outfit":                         (0x120C, PRDE, DLC_BASE),
+	"Drifter Outfit":                         (0x120C, PROG, DLC_BASE),
 	"A Thousand and One Nights Outfit":       (0x120D, FILR, DLC_BASE),
 	"Dictator Outfit":                        (0x120E, FILR, DLC_BASE),
 	"Warrior Outfit":                         (0x120F, FILR, DLC_BASE),

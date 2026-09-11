@@ -691,7 +691,7 @@ LOCATION_RULES = [
     ("Extended Healing", _has("Teleportation Rune")),
 
     # War Javelin Cavern secret
-    ("War Javelin", _has("Spider Rune") and _has("Homunculus Rune")),
+    ("War Javelin", _has_all("Spider Rune","Homunculus Rune")),
 
     # Sanguine Vortex head
     (
@@ -717,6 +717,8 @@ LOCATION_RULES = [
             ]
         )
     ),
+
+    ("Biter Head", _has ("Swarm")),
 
     # ── Boss Rush Items ──────────────────────────────────────────────────────
     ("Boss Knight Outfit", _boss_rush_trials_1_2()),
@@ -824,7 +826,7 @@ LOCATION_RULES = [
         lambda world: (
             lambda state:
                 state.has("Backpack", world.player)
-                and state.can_reach_location("The Hand of the King", world.player)
+                and state.can_reach_location("Cavern Key", world.player)
         )
     ),
 
