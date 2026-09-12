@@ -12,9 +12,13 @@ For windows users, you can download the DeadCellsArchipelagoInstaller.zip from t
 
 Note: This mod can be played with the Steam and GOG versions, and on the Goldberg emulator.
 
+### Steam Workshop
+
+For Steam players, you can subscribe to [Dead Cells Archipelago](https://steamcommunity.com/sharedfiles/filedetails/?id=3799334420). If you haven't used DCCM on Steam before, you'll need to also subscribe to it; a pop-up will ask you directly if you want to subscribe to dependencies, so you don't have to search for it. A small manual step is required the first time; you can find more details about it in [this guide](https://dead-cells-core-modding.github.io/docs/docs/tutorial/install-workshop/). 
+
 ### Manual install
 
-To set up this mod, you'll first need to follow the Core Modding installation guide. You’ll also need the [.net SDK 10](https://dotnet.microsoft.com/fr-fr/download/dotnet/10.0).
+To set up this mod, you'll first need to follow the [Core Modding installation guide](https://dead-cells-core-modding.github.io/docs/docs/tutorial/install-core/). You’ll also need the [.net SDK 10](https://dotnet.microsoft.com/fr-fr/download/dotnet/10.0).
 
 Then in the coremod directory you'll need to put the mods directory from the .zip of the latest release of DeadCellsArchipelago. In the end, the path should look like `Dead Cells\coremod\mods\DeadCellsArchipelago`.
 
@@ -52,6 +56,8 @@ In the ap shop, you can buy colorless or legendary affixes, or Hunter's Grenade 
 The number of kills you need for boss heads is reduced.
 
 Blueprints in the daily challenge are given at each completion. The difficulty increases four times, and when you have every blueprint, you gain a Hunter's Grenade upon completion.
+
+There is a biome warp that allows you to quickly go back to biomes you have already visited, as long as they are further than your current biome.
 
 There is a x4 multiplier on cells, and completing a biome grants you 40 cells.
 
