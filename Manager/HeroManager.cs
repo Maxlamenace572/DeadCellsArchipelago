@@ -90,6 +90,7 @@ namespace DeadCellsArchipelago {
                 trapChallengeStartEntered = false;
                 trapChallengeCurseReceived = false;
                 shouldGiveItemsNewRun = true;
+                ARCHIPELAGO?.energyLinkManager?.DepositCells(GLOBAL_DATA.currentCells);
                 GLOBAL_DATA.currentCells = 0;
                 GLOBAL_DATA.SaveGlobalSaveJson();
             }
