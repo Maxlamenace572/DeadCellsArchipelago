@@ -26,6 +26,9 @@ namespace DeadCellsArchipelago {
     {
         public static LevelMap? levelMapNotChallenge = null;
         public static LevelMap? levelMapChallenge = null;
+        private static List<int> tempUps = [];
+        private static dc.String tempString = "".AsHaxeString();
+        private static bool ldatChanged = false;
 
         public static void InitializeRoomHooks()
         {
@@ -43,7 +46,7 @@ namespace DeadCellsArchipelago {
             Hook_DookuArena.buildMainRooms += (orig, self) => { useOriginalHasPermanentItem=false; var res=orig(self); useOriginalHasPermanentItem=true; return res;};
             Hook_TriggeredDoor.onActivate += OnTriggeredDoorActivate;
             Hook_Door.closeFast += OnDoorCloseFast;
-            Hook_LevelGen.generate += OnGenerate;
+            Hook_LevelGen.generate += OnGenerateLevel;
             Hook_Exit.onActivate += OnActiviteExit;
             Hook_Portal.onActivate += OnActivatePortal;
             Hook_TreasureChest.onActivate += OnActivateTreasureChest;
@@ -52,6 +55,7 @@ namespace DeadCellsArchipelago {
             Hook_BankEntering.enterBank += OnEnterBank;
             Hook_ExitToRichterCastle.onActivate += OnActivateToRichterCastle;
             Hook_RichterCastleExit.startExitCinematic += OnStartExitCinematic;
+            Hook_LootGen.generate += OnGenerateLoot;
 
             Log.Information("[AP] Room Hooks loaded");
         }
@@ -88,7 +92,7 @@ namespace DeadCellsArchipelago {
         }
 
         //when the level is generating, we do the checks biomes and add a void challenge for the trap
-        private static ArrayObj OnGenerate(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
+        private static ArrayObj OnGenerateLevel(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
         {
             changeNextCallDmgTier = false;
             changeNextCallLifeTier = false;
@@ -128,12 +132,40 @@ namespace DeadCellsArchipelago {
                     levelMapChallenge = item;
                     break;
                 }
+
+                tempUps = [ldat.doubleUps, ldat.tripleUps, ldat.quarterUpsBC3, ldat.quarterUpsBC4];
+                tempString = ldat.bonusTripleScrollAfterBC;
+                ldat.doubleUps -= SAVED_DATA!.doubleUpsTaken;
+                if (ldat.tripleUps - SAVED_DATA!.tripleUpsTaken < 0) ldat.bonusTripleScrollAfterBC = "".AsHaxeString();
+                ldat.tripleUps = System.Math.Max(ldat.tripleUps - SAVED_DATA!.tripleUpsTaken, 0);
+                ldat.quarterUpsBC3 -= SAVED_DATA!.quarterUpsBC3Taken;
+                ldat.quarterUpsBC4 -= SAVED_DATA!.quarterUpsBC4Taken;
+
+                ldatChanged = true;
+
                 return orig(self, user, seed, ldat, resetCount).concat(levelMaps);
             }
             changeNextCallDmgTier = true;
             changeNextCallLifeTier = true;
             levelMapChallenge = null;
             return orig(self, user, seed, ldat, resetCount);
+        }
+
+        private static void OnGenerateLoot(Hook_LootGen.orig_generate orig, LootGen self)
+        {
+            orig(self);
+
+            if (ldatChanged)
+            {
+                var ldat = self.getLevelInfos();
+            
+                ldat.doubleUps = tempUps[0];
+                ldat.bonusTripleScrollAfterBC = tempString;
+                ldat.tripleUps = tempUps[1];
+                ldat.quarterUpsBC3 = tempUps[2];
+                ldat.quarterUpsBC4 = tempUps[3];
+                ldatChanged = false;
+            }
         }
 
         public static void SendBiomeCheck(string locationId)
@@ -177,9 +209,7 @@ namespace DeadCellsArchipelago {
             {
                 if (self.destLevel.ToString()[..2] == "T_")
                 {
-                    bool noStats = false;
-                    by.addCells(10, new Ref<bool>(ref noStats));
-                    if(SAVED_DATA != null) SAVED_DATA.currentLevelId = self.destLevel.ToString();
+                    EnteringTransition(self.destLevel.ToString());
                 }
                 else if (self.destLevel.ToString() != "BossRushHUB")
                 {
@@ -337,6 +367,14 @@ namespace DeadCellsArchipelago {
         {
             PrepareBiomeCheck("RichterCastle", " Exit", SAVED_DATA!.currentLevelId);
             orig(self, hero);
+        }
+
+        private static void EnteringTransition(string transitionId)
+        {
+            bool noStats = false;
+            HERO!.addCells(10, new Ref<bool>(ref noStats));
+            SAVED_DATA!.currentLevelId = transitionId;
+            SAVED_DATA!.ResetUps();
         }
     }
 }

@@ -32,6 +32,8 @@ using Hashlink.Virtuals;
 using ModCore.Events.Interfaces.Game.Hero;
 using ModCore.Events.Interfaces.Game;
 using dc.pr;
+using dc.en.inter;
+using dc.en;
 
 namespace DeadCellsArchipelago{
     public class ModEntry(ModInfo info) : ModBase(info), 
@@ -75,6 +77,37 @@ namespace DeadCellsArchipelago{
             //BrBlueprint
             //BossRushData
             //for biome rando: LevelTransition.Class.@goto("Lighthouse".AsHaxeString());
+            //RunicShrine
+            //UpgradeShrine
+            Hook_UpgradeShrine.onActivate += OnOnActivateUpgradeShrine;
+            Hook_RunicShrine.onActivate += OnOnActivateRunicShrine;
+        }
+
+        private void OnOnActivateUpgradeShrine(Hook_UpgradeShrine.orig_onActivate orig, UpgradeShrine self, Hero by, bool lp)
+        {
+            switch (self.item._itemData.id.ToString())
+            {
+                case "AnyUp":
+                    SAVED_DATA!.tripleUpsTaken++;
+                    break;
+                case "BTUp":
+                case "BSUp":
+                case "TSUp":
+                    SAVED_DATA!.doubleUpsTaken++;
+                    break;
+            }
+            
+            orig(self, by, lp);
+        }
+
+        private void OnOnActivateRunicShrine(Hook_RunicShrine.orig_onActivate orig, RunicShrine self, Hero by, bool lp)
+        {
+            if (self.item._itemData.id.ToString() == "QuarterUp")
+            {
+                if (self.neededRunes == 3) SAVED_DATA!.quarterUpsBC3Taken++;
+                else if (self.neededRunes == 4) SAVED_DATA!.quarterUpsBC4Taken++;
+            }
+            orig(self, by, lp);
         }
 
         public void OnHeroUpdate(double dt)

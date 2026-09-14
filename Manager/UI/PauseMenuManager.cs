@@ -60,6 +60,7 @@ namespace DeadCellsArchipelago {
         public static int topIndex = -1;
         public static int energyLinkIndex = -1;
         public static string? warpToBiome = null;
+        public static bool isReload = false;
 
         public static void InitializePauseHooks()
         {
@@ -1160,6 +1161,11 @@ namespace DeadCellsArchipelago {
         public static void WarpSelected()
         {
             if (warpToBiome == null) return;
+            if (!isReload)
+            {
+                SAVED_DATA!.ResetUps();
+                isReload = false;
+            }
             LevelTransition.Class.@goto(warpToBiome.AsHaxeString());
             SAVED_DATA!.currentLevelId = warpToBiome;
             SAVED_DATA!.lastLevelDepthSeen = GetLevelDepth(warpToBiome);

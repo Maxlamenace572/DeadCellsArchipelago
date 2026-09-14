@@ -12,86 +12,32 @@ namespace DeadCellsArchipelago {
         public dc.h2d.Object parent;
         public double x;
         public double y;
-        private UIBox bgBox;
-        private UIBox outerBox;
-        public dc.ui.Text buttonText;
+        private UIBox bgBox = null!;
+        private UIBox outerBox = null!;
+        public dc.ui.Text buttonText = null!;
         public Action act;
-        private Interactive inter;
+        private Interactive inter = null!;
         public bool disabled;
         public int color = (int) APColor.White;
         public int highlightColor = (int) APColor.Yellow;
         public int disabledColor = (int) APColor.Gray;
+        private bool centerX;
+        private bool centerY;
+        private string text;
 
         public TextButton(dc.h2d.Object parent, double x, double y, bool centerX, bool centerY, string text, bool disable)
         {
             this.parent = parent;
+            this.centerX = centerX;
+            this.centerY = centerY;
+            this.text = text;
+            this.x = x;
+            this.y = y;
             disabled = disable;
 
             act = () => {};
 
-            double scale = 3/textPixelScale;
-            buttonText = new dc.ui.Text(parent, true, false, new Ref<double>(ref scale), null, null)
-            {
-                scaleX = textBaseScale * scale,
-                scaleY = textBaseScale * scale
-            };
-            buttonText.set_text(text.AsHaxeString());
-
-            bgBox = new UIBox("boxMain".AsHaxeString(), ((buttonText.get_textWidth() * textBaseScale * scale)+10)*screenScale, ((buttonText.get_textHeight() * textBaseScale * scale)+10)*screenScale, 0, 0)
-            {
-                scaleX = 3,
-                scaleY = 3
-            };
-            if (centerX) FullCenterX(parent, bgBox);
-            else bgBox.x = x;
-            if (centerY) FullCenterY(parent, bgBox);
-            else bgBox.y = y;
-            bgBox.posChanged = true;
-
-            bgBox.colorizeSG((int) APColor.DeepBlue);
-
-            this.x = bgBox.x;
-            this.y = bgBox.y;
-
-            outerBox = new UIBox("boxInfo".AsHaxeString(), bgBox.wid, bgBox.hei, 0, 0)
-            {
-                x = bgBox.x,
-                y = bgBox.y,
-                scaleX = 3,
-                scaleY = 3
-            };
-
-            parent.addChild(bgBox);
-            parent.addChild(outerBox);
-
-            buttonText.x = bgBox.x+5;
-            buttonText.y = bgBox.y+5;
-            buttonText.posChanged = true;
-            parent.removeChild(buttonText);
-            parent.addChild(buttonText);
-            if (disabled) buttonText.set_textColor(disabledColor);
-
-            inter = new Interactive(
-                outerBox.wid /(3*screenScale),
-                outerBox.hei /(3*screenScale),
-                outerBox,
-                null
-            )
-            {
-                onClick = (e) =>
-                {
-                    if (!disabled) act.Invoke();
-                },
-                onMove = (e) =>
-                {
-                    if (!disabled) Highlight();
-                },
-                onOut = (e) =>
-                {
-                    if (!disabled) StopHighlight();
-                },
-                visible = !disabled
-            };
+            BuildButton();
         }
 
         public void SetVisible(bool visible)
@@ -143,6 +89,97 @@ namespace DeadCellsArchipelago {
         public void StopHighlight()
         {
             buttonText.set_textColor(color);
+        }
+
+        public void ChangeText(string newText)
+        {
+            text = newText;
+            DeleteOld();
+            BuildButton();
+        }
+
+        public void ChangePos(double? newX, double? newY)
+        {
+            if (newX != null) x = (double) newX;
+            if (newY != null) y = (double) newY;
+            DeleteOld();
+            BuildButton();
+        }
+
+        private void DeleteOld()
+        {
+            bgBox.destroy();
+            outerBox.destroy();
+            buttonText.remove();
+            inter.remove();
+        }
+
+        private void BuildButton()
+        {
+            double scale = 3/textPixelScale;
+            buttonText = new dc.ui.Text(parent, true, false, new Ref<double>(ref scale), null, null)
+            {
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
+            };
+            buttonText.set_text(text.AsHaxeString());
+
+            bgBox = new UIBox("boxMain".AsHaxeString(), ((buttonText.get_textWidth() * textBaseScale * scale)+10)*screenScale, ((buttonText.get_textHeight() * textBaseScale * scale)+10)*screenScale, 0, 0)
+            {
+                scaleX = 3,
+                scaleY = 3
+            };
+            if (centerX) FullCenterX(parent, bgBox);
+            else bgBox.x = x;
+            if (centerY) FullCenterY(parent, bgBox);
+            else bgBox.y = y;
+            bgBox.posChanged = true;
+
+            bgBox.colorizeSG((int) APColor.DeepBlue);
+
+            this.x = bgBox.x;
+            this.y = bgBox.y;
+
+            outerBox = new UIBox("boxInfo".AsHaxeString(), bgBox.wid, bgBox.hei, 0, 0)
+            {
+                x = bgBox.x,
+                y = bgBox.y,
+                scaleX = 3,
+                scaleY = 3
+            };
+
+            parent.addChild(bgBox);
+            parent.addChild(outerBox);
+
+            buttonText.x = bgBox.x+5;
+            buttonText.y = bgBox.y+5;
+            buttonText.posChanged = true;
+            parent.removeChild(buttonText);
+            parent.addChild(buttonText);
+            if (disabled) buttonText.set_textColor(disabledColor);
+            else buttonText.set_textColor(color);
+
+            inter = new Interactive(
+                outerBox.wid /(3*screenScale),
+                outerBox.hei /(3*screenScale),
+                outerBox,
+                null
+            )
+            {
+                onClick = (e) =>
+                {
+                    if (!disabled) act.Invoke();
+                },
+                onMove = (e) =>
+                {
+                    if (!disabled) Highlight();
+                },
+                onOut = (e) =>
+                {
+                    if (!disabled) StopHighlight();
+                },
+                visible = !disabled
+            };
         }
     }
 }

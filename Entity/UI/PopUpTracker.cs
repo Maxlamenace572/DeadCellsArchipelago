@@ -83,16 +83,31 @@ namespace DeadCellsArchipelago {
 
         public void UpdateWarpButton()
         {
-            if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains)) showButton = false;
+            if (topLine!.biomeId == SAVED_DATA!.currentLevelId && topLine!.biomeId != "PrisonStart")
+            {
+                showButton = true;
+                popUpWarpButton!.ChangeText("Reload");
+                cancelWarpButton!.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
+                popUpWarpButton!.act = () => {
+                    warpToBiome = topLine!.biomeId;
+                    isReload = true;
+                };
+                popUpWarpButton!.SetEnabled(true);
+            }
+            else if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains)) showButton = false;
             else if ((SAVED_DATA!.IsCheckSent($"{topLine!.biomeId} Enter") && IsLevelAfterCurrent(topLine!.biomeId)) || GLOBAL_DATA!.debugWarp)
             {
                 showButton = true;
+                popUpWarpButton!.ChangeText("Warp");
+                cancelWarpButton!.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
                 popUpWarpButton!.act = () => {warpToBiome = topLine!.biomeId;};
                 popUpWarpButton!.SetEnabled(true);
             }
             else 
             {
                 showButton = true;
+                popUpWarpButton!.ChangeText("Warp");
+                cancelWarpButton!.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
                 popUpWarpButton!.SetEnabled(false);
             }
         }

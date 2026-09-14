@@ -21,6 +21,10 @@ namespace DeadCellsArchipelago {
         public int lastLevelDepthSeen = 0;
         public string archipelagoSeed = "";
         public bool hasDoneBank = false;
+        public int doubleUpsTaken = 0;
+        public int tripleUpsTaken = 0;
+        public int quarterUpsBC3Taken = 0;
+        public int quarterUpsBC4Taken = 0;
 
         public void InitValues(string seed)
         {
@@ -243,6 +247,14 @@ namespace DeadCellsArchipelago {
             }
 
             return res;
+        }
+
+        public void ResetUps()
+        {
+            doubleUpsTaken = 0;
+            tripleUpsTaken = 0;
+            quarterUpsBC3Taken = 0;
+            quarterUpsBC4Taken = 0;
         }
     }
 }
