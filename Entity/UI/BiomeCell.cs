@@ -91,6 +91,7 @@ namespace DeadCellsArchipelago {
 
             text.set_text($"{data[keyT].Count-data[keyR].Count}/{data[keyT].Count} ".AsHaxeString());
             if(data[keyR].Count == 0) text.set_textColor((int) APColor.Yellow);
+            else if(!HasCheckAvailable()) text.set_textColor((int) APColor.Gray);
             Right((int) boundsLevel.xMax, text);
             text.x -= 10;
             text.y = 10;
@@ -201,6 +202,21 @@ namespace DeadCellsArchipelago {
             globalFlow.x = (boundsLevel.xMax - boundsGlobalFlow.xMax)/2;
             globalFlow.y = (boundsLevel.yMax - boundsGlobalFlow.yMax)/2;
             fade.visible = true;
+        }
+
+        public bool HasCheckAvailable()
+        {
+            foreach(KeyValuePair<string, HashSet<string>> toChecks in data)
+            {
+                if (toChecks.Key[0] == 'T' || toChecks.Key == "AllT") continue;
+                Log.Error(toChecks.Key);
+                foreach(string toCheck in toChecks.Value)
+                {
+                    if (ItemsData[toCheck].accessible) return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -6,6 +6,7 @@ using Serilog;
 using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.MainMenuManager;
+using static DeadCellsArchipelago.TrackerData;
 using dc.h2d.col;
 
 namespace DeadCellsArchipelago {
@@ -18,10 +19,12 @@ namespace DeadCellsArchipelago {
         public double width;
         public double interW;
         public double interX;
+        private bool hasCheckAvailable;
 
         public PopUpTopCell(dc.h2d.Object parent, string labelS, HashSet<string> toChecks, int max)
         {
             this.toChecks = toChecks;
+            hasCheckAvailable = HasCheckAvailable();
             int frame = 0;
             double XY = 0;
             dc.h2d.Tile tile = Assets.Class.ui.getTile("walterWhite".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
@@ -67,6 +70,11 @@ namespace DeadCellsArchipelago {
                 label.set_textColor((int) APColor.Yellow);
                 number.set_textColor((int) APColor.Yellow);
             }
+            else if (!hasCheckAvailable)
+            {
+                label.set_textColor((int) APColor.Gray);
+                number.set_textColor((int) APColor.Gray);
+            }
 
             var inter = new dc.h2d.Interactive(
                 interW,
@@ -96,11 +104,29 @@ namespace DeadCellsArchipelago {
                 label.set_textColor((int) APColor.Yellow);
                 number.set_textColor((int) APColor.Yellow);
             }
-            else
+            else if (hasCheckAvailable)
             {
                 label.set_textColor((int) APColor.White);
                 number.set_textColor((int) APColor.White);
             }
+            else
+            {
+                label.set_textColor((int) APColor.Gray);
+                number.set_textColor((int) APColor.Gray);
+            }
+        }
+
+        public bool HasCheckAvailable()
+        {
+            foreach(string toCheck in toChecks)
+            {
+                if (ItemsData[toCheck].accessible)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
