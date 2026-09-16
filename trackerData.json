@@ -3814,7 +3814,7 @@
         "sources": [
             {
                 "biome": "PrisonCourtyard",
-                "min_bc": 3,
+                "min_bc": 2,
                 "max_bc": 3,
                 "dlc": "",
                 "mob": "Ninja"
@@ -3828,35 +3828,35 @@
             },
             {
                 "biome": "ClockTower",
-                "min_bc": 3,
+                "min_bc": 2,
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "Ninja"
             },
             {
                 "biome": "Crypt",
-                "min_bc": 3,
+                "min_bc": 2,
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "Ninja"
             },
             {
                 "biome": "Swamp",
-                "min_bc": 3,
+                "min_bc": 2,
                 "max_bc": 2,
                 "dlc": "TheBadSeed",
                 "mob": "Ninja"
             },
             {
                 "biome": "Bank",
-                "min_bc": 3,
+                "min_bc": 2,
                 "max_bc": 5,
                 "dlc": "",
                 "mob": "Ninja"
             },
             {
                 "biome": "PurpleGarden",
-                "min_bc": 3,
+                "min_bc": 2,
                 "max_bc": 5,
                 "dlc": "Purple",
                 "mob": "Ninja"

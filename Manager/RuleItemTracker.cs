@@ -457,6 +457,17 @@ namespace DeadCellsArchipelago {
                             "Anathema", "P_CursedFlask", "P_DemonicForce", "Misericord", "P_DamnedVigor", "Indulgence"
                         ];
                         break;
+                    case "BankDepth":
+                        AddBankDepthDesc(descriptions);
+                        continue;
+                    case "Depth1":
+                    case "Depth2":
+                    case "Depth4":
+                    case "Depth5":
+                    case "Depth7":
+                    case "DepthSpecialCase":
+                        // done with the BankDepth
+                        continue;
                     default:
                         items = [desc.Key];
                         break;
@@ -474,6 +485,113 @@ namespace DeadCellsArchipelago {
             if (ItemsData.ContainsKey(item))
             {
                 ItemsData[item].description = desc;
+            }
+        }
+
+        private static void AddBankDepthDesc(Dictionary<string, string> descriptions)
+        {
+            Dictionary<string, List<int>> worldDepthDescs = [];
+
+            worldDepthDescs["GroundSaw"] = [1];
+            worldDepthDescs["BumpBoots"] = [1];
+            worldDepthDescs["BackBlink"] = [1];
+            worldDepthDescs["HorizontalTurret"] = [1];
+            worldDepthDescs["Bleeder"] = [1];
+            worldDepthDescs["PrisonerBobby"] = [1];
+            worldDepthDescs["CloseCombatBow"] = [1];
+            worldDepthDescs["FrostBow"] = [1];
+            worldDepthDescs["InfiniteBow"] = [1];
+            worldDepthDescs["PrisonerSkeleton"] = [1];
+            worldDepthDescs["Rapier"] = [1];
+            worldDepthDescs["PrisonerSewers"] = [1];
+            worldDepthDescs["P_Backpack_Ranged"] = [1];
+            worldDepthDescs["PrisonerCrossbowMan"] = [1];
+
+            worldDepthDescs["FireBomb"] = [1, 2];
+            worldDepthDescs["MagnetGrenade"] = [1, 2];
+            worldDepthDescs["P_HealOnParry"] = [1, 2];
+            worldDepthDescs["SideBomb"] = [1, 2];
+            worldDepthDescs["Whip"] = [1, 2];
+            worldDepthDescs["P_AttackSpeed_Combo"] = [1, 2];
+            worldDepthDescs["HeavyAxe"] = [1, 2];
+
+            worldDepthDescs["P_Backpack_Melee"] = [1, 2, 4];
+
+            worldDepthDescs["RevengeSword"] = [2];
+            worldDepthDescs["P_ColdDmg"] = [2];
+            worldDepthDescs["ClusterBomb"] = [2];
+            worldDepthDescs["HeavyTurret"] = [2];
+            worldDepthDescs["PrisonerDemon"] = [2];
+            worldDepthDescs["P_Execute_LowHealth"] = [2];
+            worldDepthDescs["P_DmgPlantedArrow"] = [2];
+            worldDepthDescs["Katana"] = [2];
+            worldDepthDescs["PrisonerKillBill"] = [2];
+            worldDepthDescs["SpikedBoots"] = [2];
+            worldDepthDescs["CeilTurret"] = [2];
+            worldDepthDescs["P_Backpack_Shield"] = [2];
+            worldDepthDescs["SismicBlade"] = [2];
+            worldDepthDescs["PrisonerAladdin"] = [2];
+
+            worldDepthDescs["HookWhip"] = [4];
+            worldDepthDescs["P_CDR_locked"] = [4];
+            worldDepthDescs["Cannon"] = [4];
+            worldDepthDescs["P_DmgSkillRanged"] = [4];
+            worldDepthDescs["MarkBow"] = [4];
+            worldDepthDescs["PrisonerBison"] = [4];
+            worldDepthDescs["Hook"] = [4];
+            worldDepthDescs["BumpShield"] = [4];
+            worldDepthDescs["PrisonerSylvanian"] = [4];
+
+            worldDepthDescs["Lightning"] = [4, 5];
+            worldDepthDescs["LeechBuff"] = [4, 5];
+            worldDepthDescs["PrisonerMage"] = [4, 5];
+
+            worldDepthDescs["MultiKickBoots"] = [5];
+            worldDepthDescs["MultiCrossBow"] = [5];
+            worldDepthDescs["PrisonerBlack"] = [5];
+            worldDepthDescs["BulletBlade"] = [5];
+            worldDepthDescs["PrisonerHyperlight"] = [5];
+            worldDepthDescs["P_DmgNearRanged"] = [5];
+            worldDepthDescs["SlowOrb"] = [5];
+            worldDepthDescs["SpikeShield"] = [5];
+            worldDepthDescs["MagicSalve"] = [5];
+            worldDepthDescs["PrisonerShaman"] = [5];
+            worldDepthDescs["Guacamelee"] = [5];
+
+            worldDepthDescs["PrisonerAphrodite"] = [5, 7];
+            worldDepthDescs["Shockwave"] = [-1];//7, and 5 from 3bsc
+            worldDepthDescs["ExplosiveGrenade"] = [-1];//7, and 5 from 3bsc
+
+            worldDepthDescs["Crusher"] = [7];
+            worldDepthDescs["P_Bleed"] = [7];
+            worldDepthDescs["PrisonerCarduus"] = [7];
+            worldDepthDescs["Tornado"] = [7];
+            worldDepthDescs["P_ScaledHealth"] = [7];
+            worldDepthDescs["QuickFists"] = [7];
+            worldDepthDescs["P_Health"] = [7];
+            worldDepthDescs["BarrelLauncher"] = [7];
+
+            foreach (KeyValuePair<string, List<int>> worldDepthDesc in worldDepthDescs)
+            {
+                string desc = descriptions["BankDepth"];
+                string biomes = "";
+
+                for (int i=0; i < worldDepthDesc.Value.Count; i++)
+                {
+                    if (worldDepthDesc.Value[i] == -1)
+                    {
+                        biomes = string.Format(descriptions["DepthSpecialCase"], descriptions["Depth7"], descriptions["Depth5"]);
+                    }
+                    else
+                    {
+                        biomes += descriptions[$"Depth{worldDepthDesc.Value[i]}"];
+                        if (i != worldDepthDesc.Value.Count-1) biomes += "; ";
+                    }
+                }
+
+                desc = string.Format(desc, biomes);
+
+                AddDescToItem(worldDepthDesc.Key, desc);
             }
         }
     }

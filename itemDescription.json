@@ -150,5 +150,13 @@
     "PQLoreRoom": "Inside one of the lore rooms of the Prisoners' Quarters.",
     "BossFlawless": "The boss should be killed without taking a hit.",
     "AmazonLoot": "The corresponding servant needs to be killed last.",
-    "CursedBiome": "This item is found in a cursed biome."
+    "CursedBiome": "This item is found in a cursed biome.",
+
+    "BankDepth": "This item can be found in the Bank when entered from world depth: {0}.",
+    "Depth1": "1-Promenade of the Condemned or Prison Depths",
+    "Depth2": "2-Ramparts",
+    "Depth4": "4-Stilt Village",
+    "Depth5": "5-Clock Tower",
+    "Depth7": "7-High Peak Castle",
+    "DepthSpecialCase": "{0}; {1} at 3 BSC and more"
 }
