@@ -264,7 +264,7 @@ LOCATION_TABLE: Dict[str, dict] = {
     "Luchador's Outfit": {
         "id": 0x007E, "region": "Checks", "type": "skin",
         "dlc": "", "min_bc": 0, "item": "Guacamelee",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'Crypt', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
     },
     "The Magician's Outfit": {
         "id": 0x007F, "region": "Checks", "type": "skin",

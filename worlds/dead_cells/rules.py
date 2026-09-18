@@ -791,19 +791,12 @@ LOCATION_RULES = [
     ("Vessel's Outfit", _has("Pure Nail")),
     ("Pentinent's Outfit", _has("Face Flask")),
 
-    (
-    "Luchador's Outfit",
-    lambda world: (
-        lambda state:
-            state.can_reach("Crypt", "Region", world.player)
-            and _has_any_of(
-                "Spartan Sandals",
-                "Spiked Boots",
-                "Hayabusa Boots",
-                "Hayabusa Gauntlets",
-            )(world)(state)
-    )
-),
+    ("Luchador's Outfit", _has_any_of(
+        "Spartan Sandals",
+        "Spiked Boots",
+        "Hayabusa Boots",
+        "Hayabusa Gauntlets"
+    )),
     (
         "The Magician's Outfit",
         _has_all("Hard Light Sword", "Drifter Outfit")
