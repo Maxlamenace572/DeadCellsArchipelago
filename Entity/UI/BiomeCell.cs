@@ -209,7 +209,6 @@ namespace DeadCellsArchipelago {
             foreach(KeyValuePair<string, HashSet<string>> toChecks in data)
             {
                 if (toChecks.Key[0] == 'T' || toChecks.Key == "AllT") continue;
-                Log.Error(toChecks.Key);
                 foreach(string toCheck in toChecks.Value)
                 {
                     if (ItemsData[toCheck].accessible) return true;

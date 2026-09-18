@@ -23,19 +23,18 @@ namespace DeadCellsArchipelago {
         {
             this.parent = parent;
 
-            bgBox = new UIBox("boxMain".AsHaxeString(), 500 * screenScale, 610 * screenScale, 0, 0)
+            bgBox = new UIBox("boxMain".AsHaxeString(), 500*screenScale, 700*screenScale, 0, 0)
             {
                 scaleX = 3,
                 scaleY = 3,
                 x = 50,
-                y = 50,
                 posChanged = true
             };
             Bounds boundsBgBox = bgBox.getSize(new Bounds());
             bgBox.y = (1080 - boundsBgBox.yMax)/2;
             bgBox.colorizeSG((int) APColor.DeepBlue);
 
-            outerBox = new UIBox("boxInfo".AsHaxeString(), 500*screenScale, 610*screenScale, 0, 0)
+            outerBox = new UIBox("boxInfo".AsHaxeString(), 500*screenScale, 700*screenScale, 0, 0)
             {
                 x = bgBox.x,
                 y = bgBox.y,
@@ -70,7 +69,7 @@ namespace DeadCellsArchipelago {
             globalDescFlow = new Flow(parent)
             {
                 x = bgBox.x + 10,
-                y = bgBox.y + 10,
+                y = bgBox.y + 5,
                 posChanged = true
             };
             globalDescFlow.set_isVertical(true);
@@ -87,12 +86,78 @@ namespace DeadCellsArchipelago {
             centerDescFlow.set_verticalSpacing(30);
             centerDescFlow.set_horizontalAlign(new FlowAlign.Middle());
 
+            Flow flow0 = new Flow(globalDescFlow);
+            flow0.set_horizontalSpacing(4);
+            flow0.set_verticalSpacing(4);
+            flow0.set_verticalAlign(new FlowAlign.Middle());
+            flow0.set_isVertical(true);
+            
+            Flow biomeFlow = new Flow(flow0);
+            biomeFlow.set_verticalAlign(new FlowAlign.Middle());
+            double scale = 3/textPixelScale;
+            Text biomeText = new Text(biomeFlow, false, false, new Ref<double>(ref scale), null, null)
+            {
+                scaleX = textBaseScale * scale,
+                scaleY = textBaseScale * scale
+            };
+            biomeText.set_text("Biomes: ".AsHaxeString());
+
+            Flow centerFlow0 = new Flow(centerDescFlow);
+            centerFlow0.set_horizontalSpacing(4);
+            centerFlow0.set_verticalSpacing(4);
+            centerFlow0.set_verticalAlign(new FlowAlign.Middle());
+            centerFlow0.set_horizontalAlign(new FlowAlign.Middle());
+            centerFlow0.set_isVertical(true);
+
+            new Bitmap(Assets.Class.levelLogos.getLevelLogo("PrisonStart".AsHaxeString()), centerFlow0)
+            {
+                scaleX=0.2,
+                scaleY=0.2,
+                alpha=0
+            };
+
+            Flow lineBiomeFlow = new Flow(centerFlow0);
+
+            int u = 0;
+            foreach (string biome in itD.biomes)
+            {
+                if (u%7 == 0)
+                {
+                    lineBiomeFlow = new Flow(centerFlow0);
+                    lineBiomeFlow.set_horizontalSpacing(4);
+                    lineBiomeFlow.set_verticalAlign(new FlowAlign.Middle());
+                }
+
+                if (biome == "Challenge") continue;
+                new Bitmap(Assets.Class.levelLogos.getLevelLogo(biome.AsHaxeString()), lineBiomeFlow)
+                {
+                    scaleX=0.2,
+                    scaleY=0.2
+                };
+                u++;
+            }
+
+            new Bitmap(Assets.Class.levelLogos.getLevelLogo("PrisonStart".AsHaxeString()), biomeFlow)
+            {
+                scaleX=0.2,
+                scaleY=0.2,
+                alpha=0
+            };
+            for (int i=0; i <= (u-1)/7; i++)
+            {
+                new Bitmap(Assets.Class.levelLogos.getLevelLogo("PrisonStart".AsHaxeString()), flow0)
+                {
+                    scaleX=0.2,
+                    scaleY=0.2,
+                    alpha=0
+                };
+            }
+
 
             Flow flow1 = new Flow(globalDescFlow);
             flow1.set_horizontalSpacing(4);
             flow1.set_verticalAlign(new FlowAlign.Middle());
 
-            double scale = 3/textPixelScale;
             Text minBsc = new Text(flow1, false, false, new Ref<double>(ref scale), null, null)
             {
                 scaleX = textBaseScale * scale,
@@ -105,6 +170,11 @@ namespace DeadCellsArchipelago {
             centerFlow1.set_verticalAlign(new FlowAlign.Middle());
 
             for (int i = 0; i < itD.min_bc; i++) Icon.Class.createItemIcon("BossRune1".AsHaxeString(), centerFlow1);
+            if (itD.min_bc == 0)
+            {
+                Icon bri = Icon.Class.createItemIcon("BossRune1".AsHaxeString(), centerFlow1);
+                bri.alpha=0;
+            }
 
 
             Flow flow2 = new Flow(globalDescFlow);

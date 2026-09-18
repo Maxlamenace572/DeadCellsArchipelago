@@ -67,6 +67,7 @@ namespace DeadCellsArchipelago
                             {
                                 itD.min_bc = Math.Min(source.min_bc, itD.min_bc);
                                 if (source.mob != null) itD.mobs.Add(source.mob);
+                                itD.biomes.Add(source.biome);
                                 if (source.biome == "Challenge" || (biomes[source.biome].accessible && source.min_bc <= SAVED_DATA.CountReceivedStemCell())) itD.accessible = true;
                             }
                             if (itD.accessible && entry.Value.rarity != null && new[] {"Legendary", "Rare", "Uncommon" }.Any(entry.Value.rarity.Contains))
@@ -284,6 +285,7 @@ namespace DeadCellsArchipelago
         public bool accessible = false;
         public int min_bc = 6;
         public HashSet<string> mobs = [];
+        public HashSet<string> biomes = [];
         public List<List<string>> requirements = [];
         public string? description;
     }
