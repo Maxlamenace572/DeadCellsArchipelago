@@ -168,6 +168,10 @@ namespace DeadCellsArchipelago {
                 if(line.Count == 1 && GetBiomesId().Contains(line[0])) return;
             }
 
+            lines = lines.Where((list, i)
+                => !lines.Where((other, j) => i != j)
+                    .Any(other => IsSubset(other, list))).ToList();
+
             Bounds boundsLevel = bitmap.getSize(new Bounds());
 
             Flow globalFlow = new Flow(bitmap);
@@ -216,6 +220,24 @@ namespace DeadCellsArchipelago {
             }
 
             return false;
+        }
+
+        public static bool IsSubset(List<string> smaller, List<string> bigger)
+        {
+            var counts = bigger
+                .GroupBy(x => x)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            foreach (var item in smaller.GroupBy(x => x))
+            {
+                if (!counts.TryGetValue(item.Key, out var count) ||
+                    count < item.Count())
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
