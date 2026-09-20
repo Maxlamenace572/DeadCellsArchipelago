@@ -380,7 +380,7 @@ class DeadCellsWorld(World):
         ):
             itempool.remove("Observatory Unlock")
 
-    # Remove Distillery Unlock from the pool if over 0 BSC
+    # Remove Distillery Unlock from the pool if 0 BSC
         if (
             "Derelict Distillery Unlock" in itempool
             and self.options.boss_cells.value == 0
@@ -437,27 +437,32 @@ class DeadCellsWorld(World):
                 print("[DC DEBUG] No filler items available; leaving remaining slots empty.")
 
     # ─────────────────────────────────────
-    # 8. Safety trim if pool overflowed
-    # ─────────────────────────────────────
-        if len(itempool) > total_locations:
-            overflow = len(itempool) - total_locations
-            print(f"[DC DEBUG] Trimming {overflow} excess items.")
+    # 8. Safety trim if pool overflowed     
 
-            for _ in range(overflow):
-                # Prefer removing filler first
-                for i in range(len(itempool) - 1, -1, -1):
-                    if itempool[i] in filler_items:
-                        itempool.pop(i)
-                        break
-                else:
-                    # Then remove useful
-                    for i in range(len(itempool) - 1, -1, -1):
-                        if itempool[i] in useful_items:
-                            itempool.pop(i)
-                            break
-                    else:
-                    # Last resort: remove last non-progression duplicate
-                        itempool.pop()
+
+    # [Im pretty sure this is unnecessary at this point and is actively 
+    # causing errors anymore, id rather let AP handle the overfills and 
+    # fix them from there]
+    # ─────────────────────────────────────
+    #    if len(itempool) > total_locations:
+    #        overflow = len(itempool) - total_locations
+    #        print(f"[DC DEBUG] Trimming {overflow} excess items.")
+
+    #        for _ in range(overflow):
+    #            # Prefer removing filler first
+    #            for i in range(len(itempool) - 1, -1, -1):
+    #                if itempool[i] in filler_items:
+    #                    itempool.pop(i)
+    #                    break
+    #            else:
+    #                # Then remove useful
+    #                for i in range(len(itempool) - 1, -1, -1):
+    #                    if itempool[i] in useful_items:
+    #                        itempool.pop(i)
+    #                        break
+    #                else:
+    #                # Last resort: remove last non-progression duplicate
+    #                    itempool.pop()
 
     # ─────────────────────────────────────
     # 9. Convert to AP items
