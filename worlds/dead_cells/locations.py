@@ -2189,7 +2189,7 @@ def get_valid_locations(enabled_dlcs, disabled_types, bc_level, created_location
         # is effectively a post-goal area, so may as well cull it
         if bc_level == 0:   
             del valid_locations["Cavern Key", "Tesla Coil", "Barrel Launcher", "Derelict Distillery Enter", "Derelict Distillery Exit"]
-       
+
         valid_locations[loc_name] = loc_data
         return valid_locations
 

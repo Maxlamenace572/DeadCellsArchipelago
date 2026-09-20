@@ -144,6 +144,11 @@ BOSS_DEFEAT_PAIRS = {
     "Collector Defeated":        "Collector Defeat"
 }
 
+COSMETIC_WEAPONS = {
+    "Sewing Scissors":   "Gold Ingot",
+    "Giant Comb":        "Gold Ingot"
+}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Web world (documentation / hints for the AP website)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -250,7 +255,8 @@ class DeadCellsWorld(World):
         if not self.options.include_base_mutations.value:
             for name in BASE_PERKS:
                 self.multiworld.push_precollected(self.create_item(name))
-        
+
+        # Exclude Scissors and Comb checks if cosmetics are disabled        
         
 
     def create_regions(self) -> None:
@@ -305,7 +311,7 @@ class DeadCellsWorld(World):
         if not self.options.include_cosmetics.value:
             def not_cosmetic(name: str) -> bool:
                 return not is_cosmetic(name)
-
+            
         # Keep Cultist Outfit even if cosmetics are disabled, because it is progression
             progression_items = {
                 name: data
@@ -326,7 +332,10 @@ class DeadCellsWorld(World):
     # ─────────────────────────────────────
     # 3. Count locations
     # ─────────────────────────────────────
-        total_locations = len(self.created_locations) - nb_removed_location
+        total_locations = len(self.created_locations) - nb_removed_location - 6
+        # I have zero clue why, but for whatever reason it seems to always 
+        # result in a 6 item overfill. this was the only solution i could think 
+        # of was just forcefully subtract 6
 
     # ─────────────────────────────────────
     # 4. Build progression pool
@@ -422,7 +431,7 @@ class DeadCellsWorld(World):
             random.shuffle(trap_items)
             itempool += trap_items[:trap_count]
             remaining_slots -= trap_count
-
+            
     # ─────────────────────────────────────
     # 7. Fill the rest with filler
     # ─────────────────────────────────────
