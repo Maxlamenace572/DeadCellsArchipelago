@@ -2,7 +2,8 @@ namespace DeadCellsArchipelago {
     public enum APColor
     {
         Green = 2883371,
-        Blue = 47103,
+        BlueSky = 47103,
+        Blue = 2237002,
         DeepBlue = 660257,
         Red = 16711680,
         LightRed = 16744319,

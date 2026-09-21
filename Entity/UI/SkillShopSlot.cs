@@ -226,7 +226,7 @@ namespace DeadCellsArchipelago {
         {
             if (label == null) return;
             if (label.text.ToString() == "-") label.set_textColor((int) APColor.Yellow);
-            else if (label.textColor != (int) APColor.Red) label.set_textColor((int) APColor.Blue);
+            else if (label.textColor != (int) APColor.Red) label.set_textColor((int) APColor.BlueSky);
         }
 
         public void StopHighlight()
