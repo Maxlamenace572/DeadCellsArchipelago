@@ -148,7 +148,7 @@ namespace DeadCellsArchipelago
         {
             if (!isConnected || session == null)
             {
-                SAVED_DATA?.SaveOfflineCheck(internalId);
+                SAVED_DATA?.SaveCheckSent(internalId);
                 return;
             }
             
@@ -195,13 +195,17 @@ namespace DeadCellsArchipelago
 
         public void SyncOfflineChecks()
         {
-            if (SAVED_DATA == null) return;
+            if (SAVED_DATA == null || session == null) return;
 
-            foreach(string check in SAVED_DATA.OfflineChecks)
+            foreach(string check in SAVED_DATA.SentChecks)
             {
-                SendCheck(check);
-                SAVED_DATA.OfflineChecks.Remove(check);
-                SAVED_DATA.RemoveFromOfflineChecksJson(check, (int) Main.Class.ME.options.curSlot!);
+                string locationName = check;
+                if (IdToNameKeyExist(locationName))
+                {
+                    locationName = GetName(locationName);
+                }
+                if (!session.Locations.AllLocationsChecked.Contains(session.Locations.GetLocationIdFromName("Dead Cells", locationName)))
+                    SendCheck(check);
             }
         }
 

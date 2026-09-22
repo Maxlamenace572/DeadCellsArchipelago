@@ -707,7 +707,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(itemId);
+                SAVED_DATA?.SaveCheckSent(itemId);
             }
         }
 

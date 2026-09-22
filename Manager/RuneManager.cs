@@ -145,7 +145,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(runeId);
+                SAVED_DATA?.SaveCheckSent(runeId);
             }
         }
 
@@ -170,7 +170,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(bscId);
+                SAVED_DATA?.SaveCheckSent(bscId);
             }
         }
 

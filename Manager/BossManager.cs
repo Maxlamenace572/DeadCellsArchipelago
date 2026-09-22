@@ -95,7 +95,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck("Boss_" + bossName);
+                SAVED_DATA?.SaveCheckSent("Boss_" + bossName);
             }
         }
 
@@ -109,7 +109,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck("D_" + bossName);
+                SAVED_DATA?.SaveCheckSent("D_" + bossName);
             }
         }
 

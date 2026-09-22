@@ -91,7 +91,7 @@ namespace DeadCellsArchipelago {
             }
             else
             {
-                SAVED_DATA?.SaveOfflineCheck(blueprintId);
+                SAVED_DATA?.SaveCheckSent(blueprintId);
             }
         }
 
