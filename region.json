@@ -556,16 +556,6 @@
             ]
         }
     ],
-    "Distillery": [
-        {
-            "to": "Throne",
-            "require": [
-                [
-                    "Throne"
-                ]
-            ]
-        }
-    ],
     "Shipwreck": [
         {
             "to": "Lighthouse",
@@ -605,6 +595,7 @@
             ]
         }
     ],
+    "Distillery": [{}],
     "Lighthouse": [
         {
             "to": "QueenArena",
