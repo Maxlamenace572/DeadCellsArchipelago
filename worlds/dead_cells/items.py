@@ -280,7 +280,7 @@ ITEM_TABLE: Dict[str, tuple] = {
     "Fire Grenade":             (0x0606, USFL, DLC_BASE),
     "Root Grenade":             (0x0607, USFL, DLC_BASE),
     "Oil Grenade":              (0x0608, USFL, DLC_BASE),
-    "Swarm":                    (0x0609, USFL, DLC_BASE),
+    "Swarm":                    (0x0609, PROG, DLC_BASE),
     "Holy Water":               (0x060A, USFL, DLC_PURPLE),
 
     # ── Deployed Traps (Useful) ───────────────────────────────────────
