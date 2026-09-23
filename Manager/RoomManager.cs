@@ -20,6 +20,7 @@ using static DeadCellsArchipelago.WorldMapManager;
 using Hashlink.Proxy;
 using dc.cine;
 using dc.en.inter.exit;
+using dc.pr;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager
@@ -205,6 +206,13 @@ namespace DeadCellsArchipelago {
                 USER.game.modalPause(new Ref<bool>(ref sound));
                 new Confirmation(null, msg.AsHaxeString(), () => CloseModal(), () => CloseModal(), "Close".AsHaxeString(), "".AsHaxeString(), null);
             }
+            else if (!IsMultipleExitsTransition(self.destLevel.ToString()) && self.destLevel.ToString() == "Cliff"
+                && SAVED_DATA!.currentLevelId == "Tumulus" && Game.Class.ME.getBiomeVisitCount("Cliff".AsHaxeString()) == 0
+                && !by.hasSkin(null, "Cultist".AsHaxeString()))
+            {
+                orig(self, by, lp);
+                return;
+            }
             else
             {
                 if (self.destLevel.ToString()[..2] == "T_")
@@ -299,9 +307,9 @@ namespace DeadCellsArchipelago {
                 {
                     SendBiomeCheck(locationId + kind);
                 }
-                SAVED_DATA.currentLevelId = destinationId;
                 if (destinationId.ToString()[..2] != "T_")
                 {
+                    SAVED_DATA.currentLevelId = destinationId;
                     SAVED_DATA!.lastLevelDepthSeen = GetLevelDepth(destinationId);
                 }
             }
