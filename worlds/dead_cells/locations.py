@@ -16,6 +16,7 @@ class CheckType:
     BOSS                 = "boss"
     HEAD                 = "head"
     SKIN                 = "skin"
+    ASPECT               = "aspect"
     EVENT                = "event"
 
 LOCATION_TABLE: Dict[str, dict] = {
@@ -287,14 +288,14 @@ LOCATION_TABLE: Dict[str, dict] = {
         "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
     },
     "Sewing Scissors": {
-        "id": 0x0083, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0083, "region": "Checks", "type": "cos_dependant",
         "dlc": "", "min_bc": 0, "item": "Scissor",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'cos_dependant'}],
     },
     "Giant Comb": {
-        "id": 0x0084, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0084, "region": "Checks", "type": "cos_dependant",
         "dlc": "", "min_bc": 0, "item": "Comb",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'cos_dependant'}],
     },
     "Berserker": {
         "id": 0x0085, "region": "Checks", "type": "blueprint_enemy",
@@ -1457,54 +1458,54 @@ LOCATION_TABLE: Dict[str, dict] = {
         "sources": [{'biome': 'Observatory', 'min_bc': 5, 'max_bc': 255, 'dlc': 'RiseOfTheGiant', 'type': 'item_no_blueprint'}],
     },
     "Blood Drinker": {
-        "id": 0x016D, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x016D, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_BloodDrinker",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Stomper": {
-        "id": 0x016E, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x016E, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Stomper",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Relentless": {
-        "id": 0x016F, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x016F, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Berzerker",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Gotta Go Fast": {
-        "id": 0x0170, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0170, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_GottaGoFast",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Tinker": {
-        "id": 0x0171, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0171, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Tinker",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Menagerie": {
-        "id": 0x0172, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0172, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Menagerie",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Grenadier": {
-        "id": 0x0173, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0173, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Grenadier",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Superconductor": {
-        "id": 0x0174, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0174, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Superconductor",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Assassin": {
-        "id": 0x0175, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0175, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Assassin",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Damned": {
-        "id": 0x0176, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0176, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Damned",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Boss Stem Cell 1": {"id": 0x0177, "region": "Throne", "type": "rune", "dlc": "", "min_bc": 0, "item": "BossRune1","sources": [{'biome': 'Throne', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
     "Boss Stem Cell 2": {"id": 0x0178, "region": "Throne", "type": "rune", "dlc": "", "min_bc": 1, "item": "BossRune2","sources": [{'biome': 'Throne', 'min_bc': 1, 'max_bc': 255, 'dlc': '', 'type': 'BossCell'}],},
@@ -2108,19 +2109,19 @@ LOCATION_TABLE: Dict[str, dict] = {
         "sources": [{'biome': 'Cemetery', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'blueprint_floor'}],
     },
     "Shatter": {
-        "id": 0x0254, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0254, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Shatter",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Toxin Lover": {
-        "id": 0x0255, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0255, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_ToxinLover",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     "Firestarter": {
-        "id": 0x0256, "region": "Checks", "type": "item_no_blueprint",
+        "id": 0x0256, "region": "Checks", "type": "aspect",
         "dlc": "", "min_bc": 0, "item": "ASP_Firestarter",
-        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'item_no_blueprint'}],
+        "sources": [{'biome': 'PrisonStart', 'min_bc': 0, 'max_bc': 255, 'dlc': '', 'type': 'aspect'}],
     },
     # Boss Event Locations
     # These should send along with the proper boss checks, and exclusively hold their coresponding "Defeated" item

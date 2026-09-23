@@ -100,6 +100,25 @@ BASE_PERKS = {
     "Instinct of the Master of Arms",
 }
 
+# ─────────────────────────────────────
+# ASPECTS
+# ─────────────────────────────────────
+
+ASPECTS = {
+    "Blood Drinker",
+    "Stomper",
+    "Shatter",
+    "Toxin Lover",
+    "Relentless",
+    "Gotta Go Fast",
+    "Tinker",
+    "Firestarter",
+    "Menagerie",
+    "Grenadier",
+    "Superconductor",
+    "Assassin",
+    "Damned"
+}
 
 # ─────────────────────────────────────
 # BASE OUTFITS
@@ -234,10 +253,14 @@ class DeadCellsWorld(World):
         if not self.options.include_base_weapons.value:
             if item_name in BASE_WEAPONS:
                 return False
+
+        if not self.options.include_aspects.value:
+            for item_name in ASPECTS:
+                return False
             
     # Base mutation filter
         if not self.options.include_base_mutations.value:
-            if item_name in BASE_PERKS:
+            for item_name in BASE_PERKS:
                 return False
 
         return True
@@ -248,6 +271,10 @@ class DeadCellsWorld(World):
     def generate_early(self) -> None:
         self.enabled_dlcs = self._build_enabled_dlcs()
 
+        if not self.options.include_aspects.value:
+            for name in ASPECTS:
+                self.multiworld.push_precollected(self.create_item(name))
+
         if not self.options.include_base_weapons.value:
             for name in BASE_WEAPONS:
                 self.multiworld.push_precollected(self.create_item(name))
@@ -256,7 +283,7 @@ class DeadCellsWorld(World):
             for name in BASE_PERKS:
                 self.multiworld.push_precollected(self.create_item(name))
 
-        # Exclude Scissors and Comb checks if cosmetics are disabled        
+           
         
 
     def create_regions(self) -> None:
