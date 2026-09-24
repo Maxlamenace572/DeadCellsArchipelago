@@ -574,6 +574,7 @@ class DeadCellsWorld(World):
             "dlc_the_queen_and_the_sea": bool(self.options.dlc_the_queen_and_the_sea.value),
             "dlc_return_to_castlevania": bool(self.options.dlc_return_to_castlevania.value),
             "include_cosmetics":         bool(self.options.include_cosmetics.value),
+            "include_aspects":           bool(self.options.include_aspects.value),
             "include_base_weapons":      bool(self.options.include_base_weapons.value),
             "trap_percentage":           self.options.trap_percentage.value,
             "apworld_version":           version,

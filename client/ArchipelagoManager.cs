@@ -33,6 +33,7 @@ namespace DeadCellsArchipelago
         public int bscOption;
         public int deathLinkEnabled;
         public bool includeCosmetics;
+        public bool includeAspects;
         public bool disableDeathLinkForAspects;
         public bool respawnUpScroll;
         public bool riseOfTheGiant;
@@ -93,6 +94,7 @@ namespace DeadCellsArchipelago
                     if (slotData.ContainsKey("boss_cells")) bscOption = Convert.ToInt32(slotData["boss_cells"]);
                     if (slotData.ContainsKey("death_link")) deathLinkEnabled = Convert.ToInt32(slotData["death_link"]);
                     if (slotData.ContainsKey("include_cosmetics")) includeCosmetics = Convert.ToBoolean(slotData["include_cosmetics"]);
+                    if (slotData.ContainsKey("include_aspects")) includeAspects = Convert.ToBoolean(slotData["include_aspects"]);
                     if (slotData.ContainsKey("death_link_aspect")) disableDeathLinkForAspects = Convert.ToBoolean(slotData["death_link_aspect"]);
                     if (slotData.ContainsKey("respawn_up")) respawnUpScroll = Convert.ToBoolean(slotData["respawn_up"]);
                     if (slotData.ContainsKey("dlc_rise_of_the_giant")) riseOfTheGiant = Convert.ToBoolean(slotData["dlc_rise_of_the_giant"]);

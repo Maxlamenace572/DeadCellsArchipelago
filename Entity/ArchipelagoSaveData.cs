@@ -216,10 +216,7 @@ namespace DeadCellsArchipelago {
 
         public List<string> RemainingAspects()
         {
-            List<string> all = [
-                "ASP_BloodDrinker", "ASP_Stomper", "ASP_Berzerker", "ASP_GottaGoFast", "ASP_Tinker", "ASP_Menagerie", "ASP_Grenadier", "ASP_Superconductor",
-                "ASP_Assassin", "ASP_Damned", "ASP_Shatter", "ASP_ToxinLover", "ASP_Firestarter"
-            ];
+            List<string> all = Aspects();
             List<string> res = [];
             foreach (string aspect in all)
             {
@@ -235,6 +232,23 @@ namespace DeadCellsArchipelago {
             tripleUpsTaken = 0;
             quarterUpsBC3Taken = 0;
             quarterUpsBC4Taken = 0;
+        }
+
+        public void GiveAspectsCheck()
+        {
+            List<string> all = Aspects();
+            foreach (string aspect in all)
+            {
+                SaveCheckSent(aspect);
+            }
+        }
+
+        private List<string> Aspects()
+        {
+            return [
+                "ASP_BloodDrinker", "ASP_Stomper", "ASP_Berzerker", "ASP_GottaGoFast", "ASP_Tinker", "ASP_Menagerie", "ASP_Grenadier", "ASP_Superconductor",
+                "ASP_Assassin", "ASP_Damned", "ASP_Shatter", "ASP_ToxinLover", "ASP_Firestarter"
+            ];
         }
     }
 }

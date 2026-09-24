@@ -7,6 +7,7 @@ namespace DeadCellsArchipelago {
     {
         public int bscLevelToWin = 4;
         public bool includeCosmetics = false;
+        public bool includeAspects = false;
         public bool respawnUpScroll = false;
         public bool riseOfTheGiant = false;
         public bool theBadSeed = false;
@@ -21,10 +22,11 @@ namespace DeadCellsArchipelago {
         public int currentCells = 0;
         public bool debugWarp = false;
 
-        public void InitValues(int bsc, bool cosmetics, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs)
+        public void InitValues(int bsc, bool cosmetics, bool asp, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs)
         {
             bscLevelToWin = bsc;
             includeCosmetics = cosmetics;
+            includeAspects = asp;
             respawnUpScroll = rus;
             riseOfTheGiant = rotg;
             theBadSeed = tbs;
@@ -32,6 +34,8 @@ namespace DeadCellsArchipelago {
             theQueenAndTheSea = tqats;
             returnToCastlevania = rtc;
             flawlessScrolls = fs;
+
+            if (!includeAspects) SAVED_DATA!.GiveAspectsCheck();
         }
 
         public void SaveGlobalSaveJson()

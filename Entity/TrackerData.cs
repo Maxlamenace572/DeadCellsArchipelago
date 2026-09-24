@@ -34,7 +34,7 @@ namespace DeadCellsArchipelago
                 
                 if(CanGoDLC(entry.Value.dlc) && CanCosmetics(entry.Value.type))
                 {
-                    if (entry.Value.type == "aspect")
+                    if (entry.Value.type == "aspect" && GLOBAL_DATA!.includeAspects)
                     {
                         key = "Aspect";
                         IncToDict(ref res, key, entry.Key);

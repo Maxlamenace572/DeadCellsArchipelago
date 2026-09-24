@@ -74,6 +74,7 @@ namespace DeadCellsArchipelago {
                 GLOBAL_DATA.InitValues(
                     ARCHIPELAGO.bscOption,
                     ARCHIPELAGO.includeCosmetics,
+                    ARCHIPELAGO.includeAspects,
                     ARCHIPELAGO.respawnUpScroll,
                     ARCHIPELAGO.riseOfTheGiant,
                     ARCHIPELAGO.theBadSeed,
