@@ -358,7 +358,10 @@ def create_regions(world: "DeadCellsWorld") -> None:
         if loc_dlc and loc_dlc not in enabled_dlcs:
             continue
 
-        if loc_data["type"] in ("skin", "head") and not world.options.include_cosmetics.value:
+        if loc_data["type"] in ("aspect") and not world.options.include_aspects.value:
+            continue
+
+        if loc_data["type"] in ("skin", "head", "cos_dependant") and not world.options.include_cosmetics.value:
             continue
 
         loc_id = location_id(loc_name)

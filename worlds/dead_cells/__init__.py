@@ -100,6 +100,25 @@ BASE_PERKS = {
     "Instinct of the Master of Arms",
 }
 
+# ─────────────────────────────────────
+# ASPECTS
+# ─────────────────────────────────────
+
+ASPECTS = {
+    "Blood Drinker",
+    "Stomper",
+    "Shatter",
+    "Toxin Lover",
+    "Relentless",
+    "Gotta Go Fast",
+    "Tinker",
+    "Firestarter",
+    "Menagerie",
+    "Grenadier",
+    "Superconductor",
+    "Assassin",
+    "Damned"
+}
 
 # ─────────────────────────────────────
 # BASE OUTFITS
@@ -142,6 +161,11 @@ BOSS_DEFEAT_PAIRS = {
     "Queen Defeated":            "Queen Defeat",
     "Dracula Defeated":          "Dracula Defeat",
     "Collector Defeated":        "Collector Defeat"
+}
+
+COSMETIC_WEAPONS = {
+    "Sewing Scissors":   "Gold Ingot",
+    "Giant Comb":        "Gold Ingot"
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -229,10 +253,14 @@ class DeadCellsWorld(World):
         if not self.options.include_base_weapons.value:
             if item_name in BASE_WEAPONS:
                 return False
+
+        if not self.options.include_aspects.value:
+            for item_name in ASPECTS:
+                return False
             
     # Base mutation filter
         if not self.options.include_base_mutations.value:
-            if item_name in BASE_PERKS:
+            for item_name in BASE_PERKS:
                 return False
 
         return True
@@ -243,6 +271,10 @@ class DeadCellsWorld(World):
     def generate_early(self) -> None:
         self.enabled_dlcs = self._build_enabled_dlcs()
 
+        if not self.options.include_aspects.value:
+            for name in ASPECTS:
+                self.multiworld.push_precollected(self.create_item(name))
+
         if not self.options.include_base_weapons.value:
             for name in BASE_WEAPONS:
                 self.multiworld.push_precollected(self.create_item(name))
@@ -250,7 +282,8 @@ class DeadCellsWorld(World):
         if not self.options.include_base_mutations.value:
             for name in BASE_PERKS:
                 self.multiworld.push_precollected(self.create_item(name))
-        
+
+           
         
 
     def create_regions(self) -> None:
@@ -305,7 +338,7 @@ class DeadCellsWorld(World):
         if not self.options.include_cosmetics.value:
             def not_cosmetic(name: str) -> bool:
                 return not is_cosmetic(name)
-
+            
         # Keep Cultist Outfit even if cosmetics are disabled, because it is progression
             progression_items = {
                 name: data
@@ -326,7 +359,10 @@ class DeadCellsWorld(World):
     # ─────────────────────────────────────
     # 3. Count locations
     # ─────────────────────────────────────
-        total_locations = len(self.created_locations) - nb_removed_location
+        total_locations = len(self.created_locations) - nb_removed_location - 6
+        # I have zero clue why, but for whatever reason it seems to always 
+        # result in a 6 item overfill. this was the only solution i could think 
+        # of was just forcefully subtract 6
 
     # ─────────────────────────────────────
     # 4. Build progression pool
@@ -380,7 +416,7 @@ class DeadCellsWorld(World):
         ):
             itempool.remove("Observatory Unlock")
 
-    # Remove Distillery Unlock from the pool if over 0 BSC
+    # Remove Distillery Unlock from the pool if 0 BSC
         if (
             "Derelict Distillery Unlock" in itempool
             and self.options.boss_cells.value == 0
@@ -422,7 +458,7 @@ class DeadCellsWorld(World):
             random.shuffle(trap_items)
             itempool += trap_items[:trap_count]
             remaining_slots -= trap_count
-
+            
     # ─────────────────────────────────────
     # 7. Fill the rest with filler
     # ─────────────────────────────────────
@@ -437,27 +473,32 @@ class DeadCellsWorld(World):
                 print("[DC DEBUG] No filler items available; leaving remaining slots empty.")
 
     # ─────────────────────────────────────
-    # 8. Safety trim if pool overflowed
-    # ─────────────────────────────────────
-        if len(itempool) > total_locations:
-            overflow = len(itempool) - total_locations
-            print(f"[DC DEBUG] Trimming {overflow} excess items.")
+    # 8. Safety trim if pool overflowed     
 
-            for _ in range(overflow):
-                # Prefer removing filler first
-                for i in range(len(itempool) - 1, -1, -1):
-                    if itempool[i] in filler_items:
-                        itempool.pop(i)
-                        break
-                else:
-                    # Then remove useful
-                    for i in range(len(itempool) - 1, -1, -1):
-                        if itempool[i] in useful_items:
-                            itempool.pop(i)
-                            break
-                    else:
-                    # Last resort: remove last non-progression duplicate
-                        itempool.pop()
+
+    # [Im pretty sure this is unnecessary at this point and is actively 
+    # causing errors anymore, id rather let AP handle the overfills and 
+    # fix them from there]
+    # ─────────────────────────────────────
+    #    if len(itempool) > total_locations:
+    #        overflow = len(itempool) - total_locations
+    #        print(f"[DC DEBUG] Trimming {overflow} excess items.")
+
+    #        for _ in range(overflow):
+    #            # Prefer removing filler first
+    #            for i in range(len(itempool) - 1, -1, -1):
+    #                if itempool[i] in filler_items:
+    #                    itempool.pop(i)
+    #                    break
+    #            else:
+    #                # Then remove useful
+    #                for i in range(len(itempool) - 1, -1, -1):
+    #                    if itempool[i] in useful_items:
+    #                        itempool.pop(i)
+    #                        break
+    #                else:
+    #                # Last resort: remove last non-progression duplicate
+    #                    itempool.pop()
 
     # ─────────────────────────────────────
     # 9. Convert to AP items

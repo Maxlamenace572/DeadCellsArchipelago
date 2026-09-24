@@ -124,8 +124,23 @@ class IncludeCosmetics(Toggle):
     appear in other players' worlds.
     When disabled, only gameplay-relevant items are in the pool, and
     extra filler slots are filled with consumables and gems.
+    
+    Noteably, disabling this will also disable the "Giant Comb" and 
+    "Sewing Scissors" locations as they depend on cosmetic checks sent, but 
+    they will still be in the item pool
     """
     display_name = "Include Cosmetics in Pool"
+    default = 1
+
+
+class IncludeAspects(Toggle):
+    """
+    Include the 13 Aspects as locations and items in the pool. 
+    When enabled, your first 13 deaths will send an AP Item. 
+    When disabled, you will start with all Aspects as items, and no 
+    locations will exist for unlocking them.
+    """
+    display_name = "Include Aspects in Pool"
     default = 1
 
 
@@ -283,7 +298,7 @@ class RespawnUpScroll(Toggle):
     At the start of each run, every filler stat up scroll will be given again.
     """
     display_name = "Respawn Stat Up Scroll"
-    default = 0
+    default = 1
     
 class GiveScrollOnFlawlessBoss(Toggle):
     """
@@ -316,6 +331,7 @@ class DeadCellsOptions(PerGameCommonOptions):
     # Item pool
     trap_percentage:       TrapPercentage
     include_cosmetics:     IncludeCosmetics
+    include_aspects:       IncludeAspects
     include_base_weapons:  IncludeBaseWeapons
     include_base_mutations: IncludeBaseMutations
 
@@ -351,7 +367,7 @@ dead_cells_option_groups = [
     ),
     OptionGroup(
         "Item Pool Settings",
-        [IncludeCosmetics, IncludeBaseWeapons, IncludeBaseMutations, TrapPercentage]
+        [IncludeCosmetics, IncludeAspects, IncludeBaseWeapons, IncludeBaseMutations, TrapPercentage]
     ),
     OptionGroup(
         "Multiplayer Link Settings",

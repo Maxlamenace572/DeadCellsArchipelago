@@ -688,7 +688,7 @@ LOCATION_RULES = [
     ("Extended Healing", _has("Teleportation Rune")),
 
     # War Javelin Cavern secret
-    ("War Javelin", _has("Spider Rune") and _has("Homunculus Rune")),
+    ("War Javelin", _has_all("Spider Rune","Homunculus Rune")),
 
     # Sanguine Vortex head
     (
@@ -707,11 +707,10 @@ LOCATION_RULES = [
         "Magma Blob", 
         lambda world: lambda state: any(
             _can_reach_location_if_exists(state, world, loc)
-            for loc in [
-                "Cavern Key",
-                "Cavern Enter",
-                "Graveyard Enter"
-            ]
+                        for loc in [
+                            "Cavern Key",
+                            "Graveyard Enter"
+                        ]
         )
     ),
 
@@ -816,14 +815,15 @@ LOCATION_RULES = [
         )
     ),
 
-    (
-        "Familiar Outfit",
-        lambda world: (
-            lambda state:
-                state.has("Backpack", world.player)
-                and (state.can_reach_location("The Hand of the King", world.player)
-                     or _can_reach_location_if_exists(state, world, "Graveyard Enter"))
+    ("Familiar Outfit", 
+        lambda world: lambda state: any(
+            _can_reach_location_if_exists(state, world, loc)
+                        for loc in [
+                            "Cavern Key",
+                            "Graveyard Enter"
+                        ]
         )
+        and _has("Backpack")
     ),
 
     ("Modernized Bomber Outfit", _has("Baseball Bat")),
