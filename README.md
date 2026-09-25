@@ -33,9 +33,8 @@ To do that, you'll need to put `dead_cells.apworld` in `Archipelago\custom_world
 
 The DLCs aren't mandatory, and you can select which ones are active in the yaml.
 
-You should start your game from a new save, and you can duplicate your save and play on multiple slots at the same time, as some data is shared between them.
-
-Achievements are disabled by this mod.
+You should start your game from a new save.
+- You can duplicate your AP save and play on multiple slots at the same time, as some data is shared between them.
 
 You define the goal in BSC in the yaml. This is the number of active BSC you should have when beating one of the final bosses to complete the archipelago.
 
@@ -58,6 +57,7 @@ The number of kills you need for boss heads is reduced.
 Blueprints in the daily challenge are given at each completion. The difficulty increases four times, and when you have every blueprint, you gain a Hunter's Grenade upon completion.
 
 There is a biome warp that allows you to quickly go back to biomes you have already visited, as long as they are further than your current biome.
+- You can also reload your current biome, allowing easier farming for blueprints.
 
 There is a x4 multiplier on cells, and completing a biome grants you 40 cells.
 
@@ -73,13 +73,27 @@ You can use Death Link with this mod, including two variants, one that curses yo
 
 Damage Link, Health Link, and Trap Link are available, with the last two only compatible with other Dead Cells players.
 
+For now, the following traps can be found in the item pool:
+- Curse Trap: Gives you a 50-stack of curses.
+- Elite Trap: Spawns a team of two or three elite mobs on you. They are stunned for one second.
+- Gold Trap: Deletes all your hard-earned gold.
+- Weapon Break Trap: Randomly deletes one of your two weapons, or one of your two skills
+- Reverse Trap: Swap every controls for one minute.
+- Challenge Trap: Warps you into a challenge rift and gives you one curse (the curse is removed if you complete the challenge). 
+
 ## Known issues
 
-Responsiveness issues for the mod's UI on resolutions other than 1920*1080 or 3840x2160.
+A lot of improvements were done for the responsiveness issues on the mod's UI, but there are still some:
+- The game needs to be played on fullscreen.
+- Most new UI features have a tendency to have responsiveness issues. If you encounter any, you can post a screenshot with your resolution settings.
 
-Dying with assist mode will send the biome's end check.
+Dying with assist mode will send the biome's end check, and doesn’t send an aspect check. This is mostly due to the fact that the game itself doesn't recognize those as deaths, as you continue the same run. 
 
-There are currently issues with the king outfit. Once bought in the collector shop, the giants event will play and the king will disappear, making the Homunculus Rune and Symmetrical Lance disappear.
+The reverse control trap seems to reset custom keybinds. They are set back to what they should be when entering the options menu.
+
+The flawless challenge trap has some save stability issues. So when you encounter one, you should complete it before exiting the game.
+
+The game wasn't originally made to handle multiple Hunter's Grenade uses. So the icons on the mobs aren't perfectly updated and can sometimes falsely indicate a mob as having a blueprint, even though you just took it.
 
 ## Contributors
 
@@ -89,7 +103,7 @@ Thanks to Libellule57, who drew the Dead Cells Archipelago logo.
 
 ## Contact
 
-If you encounter any issues or just want to find a community to talk with, you can join us in the [Archipelago discord server](https://discord.gg/archipelago), in the [Dead Cells post](https://discord.com/channels/731205301247803413).
+If you encounter any issues or just want to find a community to talk with, you can join us in the [Archipelago discord server](https://discord.gg/archipelago), in the [Dead Cells post](https://discord.com/channels/731205301247803413/1552826784544850041).
 
 ## Support the Project
 
