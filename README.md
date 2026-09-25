@@ -91,7 +91,7 @@ Dying with assist mode will send the biome's end check, and doesn’t send an as
 
 The reverse control trap seems to reset custom keybinds. They are set back to what they should be when entering the options menu.
 
-The flawless challenge trap has some save stability issues. So when you encounter one, you should complete it before exiting the game.
+The flawless challenge trap has some save stability issues. So when you encounter one, you should complete it and not exit the game while inside.
 
 The game wasn't originally made to handle multiple Hunter's Grenade uses. So the icons on the mobs aren't perfectly updated and can sometimes falsely indicate a mob as having a blueprint, even though you just took it.
 
