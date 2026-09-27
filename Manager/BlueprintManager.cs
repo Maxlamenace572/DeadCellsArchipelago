@@ -153,7 +153,27 @@ namespace DeadCellsArchipelago {
         {
             if (changeLogIcon)
             {
-                if (!logError)
+                if (logError)
+                {
+                    changeLogIcon = false;
+                    int frame = 0;
+                    double XY = 0.5;
+                    Tile errorTile = Assets.Class.gameElements.getTile("affectCross".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
+                    Icon res = new Icon(errorTile, parent);
+                    res.scaleToSize(20, 20);
+                    return res;
+                }
+                else if (logNbBlueprints)
+                {
+                    changeLogIcon = false;
+                    int frame = 0;
+                    double XY = 0;
+                    Tile scrollTile = Assets.Class.gameElements.getTile("scroll".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
+                    Icon res = new Icon(scrollTile, parent);
+                    res.scaleToSize(20, 20);
+                    return res;
+                }
+                else
                 {
                     changeLogIcon = false;
                     Tile logoTile = archipelagoLogoTile.clone();
@@ -161,15 +181,6 @@ namespace DeadCellsArchipelago {
                     res.scaleToSize(40, 40);
                     double center = 0.5;
                     res.setCenterRatio(new Ref<double>(ref center), new Ref<double>(ref center));
-                    return res;
-                }
-                else
-                {
-                    int frame = 0;
-                    double XY = 0.5;
-                    Tile errorTile = Assets.Class.gameElements.getTile("affectCross".AsHaxeString(), new Ref<int>(ref frame), new Ref<double>(ref XY), new Ref<double>(ref XY), null);
-                    Icon res = new Icon(errorTile, parent);
-                    res.scaleToSize(20, 20);
                     return res;
                 }
             }

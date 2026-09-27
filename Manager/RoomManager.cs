@@ -21,6 +21,7 @@ using Hashlink.Proxy;
 using dc.cine;
 using dc.en.inter.exit;
 using dc.pr;
+using dc.tool;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager
@@ -30,6 +31,7 @@ namespace DeadCellsArchipelago {
         private static List<int> tempUps = [];
         private static dc.String tempString = "".AsHaxeString();
         private static bool ldatChanged = false;
+        public static bool addBackLoreRooms = false;
 
         public static void InitializeRoomHooks()
         {
@@ -57,6 +59,8 @@ namespace DeadCellsArchipelago {
             Hook_ExitToRichterCastle.onActivate += OnActivateToRichterCastle;
             Hook_RichterCastleExit.startExitCinematic += OnStartExitCinematic;
             Hook_LootGen.generate += OnGenerateLoot;
+            Hook_StoryManager.levelRequiresLoreRoom += OnLevelRequiresLoreRoom;
+            Hook_StoryManager.wasLoreRoomGeneratedRecently += OnWasLoreRoomGeneratedRecently;
 
             Log.Information("[AP] Room Hooks loaded");
         }
@@ -137,14 +141,18 @@ namespace DeadCellsArchipelago {
                 tempUps = [ldat.doubleUps, ldat.tripleUps, ldat.quarterUpsBC3, ldat.quarterUpsBC4];
                 tempString = ldat.bonusTripleScrollAfterBC;
                 ldat.doubleUps -= SAVED_DATA!.doubleUpsTaken;
-                if (ldat.tripleUps - SAVED_DATA!.tripleUpsTaken < 0) ldat.bonusTripleScrollAfterBC = "".AsHaxeString();
+                if (ldat.tripleUps - SAVED_DATA!.tripleUpsTaken < 0) ldat.bonusTripleScrollAfterBC = null;
                 ldat.tripleUps = System.Math.Max(ldat.tripleUps - SAVED_DATA!.tripleUpsTaken, 0);
                 ldat.quarterUpsBC3 -= SAVED_DATA!.quarterUpsBC3Taken;
                 ldat.quarterUpsBC4 -= SAVED_DATA!.quarterUpsBC4Taken;
 
                 ldatChanged = true;
+                
+                var res = orig(self, user, Std.Class.random(1000000), ldat, resetCount).concat(levelMaps);
 
-                return orig(self, user, seed, ldat, resetCount).concat(levelMaps);
+                addBackLoreRooms = false;
+
+                return res;
             }
             changeNextCallDmgTier = true;
             changeNextCallLifeTier = true;
@@ -310,7 +318,7 @@ namespace DeadCellsArchipelago {
                 if (destinationId.ToString()[..2] != "T_")
                 {
                     SAVED_DATA.currentLevelId = destinationId;
-                    SAVED_DATA!.lastLevelDepthSeen = GetLevelDepth(destinationId);
+                    SAVED_DATA!.lastLevelDepthSeen = GetMapLevelDepth(destinationId);
                 }
             }
         }
@@ -383,6 +391,27 @@ namespace DeadCellsArchipelago {
             HERO!.addCells(10, new Ref<bool>(ref noStats));
             SAVED_DATA!.currentLevelId = transitionId;
             SAVED_DATA!.ResetUps();
+        }
+
+        private static bool OnLevelRequiresLoreRoom(Hook_StoryManager.orig_levelRequiresLoreRoom orig, StoryManager self, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldata)
+        {
+            if(addBackLoreRooms)
+            {
+                int currentDepth = GetLevelDepth(SAVED_DATA!.currentLevelId);
+                bool addBack = currentDepth!=3 && currentDepth!=6 && currentDepth!=8;
+                foreach (int pl in self.plannedLores)
+                {
+                    if (pl == currentDepth) addBack = false;
+                }
+                if (addBack) self.plannedLores.push(GetLevelDepth(SAVED_DATA!.currentLevelId));
+            }
+            return orig(self, ldata);
+        }
+
+        private static bool OnWasLoreRoomGeneratedRecently(Hook_StoryManager.orig_wasLoreRoomGeneratedRecently orig, StoryManager self, dc.String r)
+        {
+            if (addBackLoreRooms) return false;
+            return orig(self, r);
         }
     }
 }

@@ -13,6 +13,7 @@ using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.MainMenuManager;
 using static DeadCellsArchipelago.WorldMapManager;
+using static DeadCellsArchipelago.RoomManager;
 
 namespace DeadCellsArchipelago {
     public static class PauseMenuManager
@@ -1164,11 +1165,15 @@ namespace DeadCellsArchipelago {
             if (!isReload)
             {
                 SAVED_DATA!.ResetUps();
+            }
+            else
+            {
+                addBackLoreRooms = true;
                 isReload = false;
             }
             LevelTransition.Class.@goto(warpToBiome.AsHaxeString());
             SAVED_DATA!.currentLevelId = warpToBiome;
-            SAVED_DATA!.lastLevelDepthSeen = GetLevelDepth(warpToBiome);
+            SAVED_DATA!.lastLevelDepthSeen = GetMapLevelDepth(warpToBiome);
             warpToBiome = null;
         }
     }

@@ -33,7 +33,8 @@ using ModCore.Events.Interfaces.Game.Hero;
 using ModCore.Events.Interfaces.Game;
 using dc.pr;
 
-namespace DeadCellsArchipelago{
+namespace DeadCellsArchipelago
+{
     public class ModEntry(ModInfo info) : ModBase(info), 
         IOnAfterLoadingSave,
         IOnBeforeSavingSave,
@@ -87,11 +88,12 @@ namespace DeadCellsArchipelago{
             if (HERO != null && HERO.awake && !Game.Class.ME.paused)
             {
                 WarpSelected();
+                if (logError) ShowLogError();
                 GiveItemInQueue();
+                ShowLogNbBlueprints();
                 ShowLogInQueue();
                 CheckDeathLink();
                 DoEveryGameLinks();
-                if (logError) ShowLogError();
 
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)
                 {

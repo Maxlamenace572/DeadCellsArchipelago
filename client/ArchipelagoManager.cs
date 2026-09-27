@@ -87,6 +87,7 @@ namespace DeadCellsArchipelago
                 if (result is LoginSuccessful success)
                 {
                     isConnected = true;
+                    logError = false;
                     Log.Information($"[AP] Connected to Archipelago ! Slot {success.Slot}");
                     
                     var slotData = success.SlotData;

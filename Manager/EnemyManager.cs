@@ -13,6 +13,7 @@ namespace DeadCellsArchipelago {
     {
         public static bool changeNextCallDmgTier = false;
         public static bool changeNextCallLifeTier = false;
+        public static int blueprintsGenerated;
 
         public static void InitializeEnemyHooks()
         {
@@ -23,6 +24,7 @@ namespace DeadCellsArchipelago {
             Hook_MobsGen.getLifeTier += OnGetLifeTier;
             Hook_MobsGen.getDmgTier += OnGetDmgTier;
             Hook_UserStats.getKilledMobCount += OnGetKilledMobCount;
+            dc.en.Hook_Mob.addToLoot += OnAddToLoot;
             
             Log.Information("[AP] Enemy Hooks loaded");
         }
@@ -124,6 +126,12 @@ namespace DeadCellsArchipelago {
             }
 
             return orig(self, mk);
+        }
+
+        private static void OnAddToLoot(dc.en.Hook_Mob.orig_addToLoot orig, dc.en.Mob self, LootType k, Ref<bool> isFlawlessLoot)
+        {
+            if (k is LootType.Blueprint) blueprintsGenerated++;
+            orig(self, k, isFlawlessLoot);
         }
     }
 }

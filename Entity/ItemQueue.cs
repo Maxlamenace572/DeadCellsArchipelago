@@ -2,6 +2,7 @@ using Serilog;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.Translator;
 using static DeadCellsArchipelago.BlueprintManager;
+using static DeadCellsArchipelago.EnemyManager;
 using dc;
 using ModCore.Utilities;
 
@@ -12,6 +13,7 @@ namespace DeadCellsArchipelago
         private static List<string> pendingItems = [];
         private static List<string> pendingLogs = [];
         public static bool logError = false;
+        public static bool logNbBlueprints = false;
 
         public static void AddItemToQueue(string itemName)
         {
@@ -86,6 +88,24 @@ namespace DeadCellsArchipelago
             Lang.Class.t.texts.set("Schéma obtenu :".AsHaxeString(), classicTitle);
 
             logError = false;
+        }
+
+        public static void ShowLogNbBlueprints()
+        {
+            if (blueprintsGenerated == 0) return;
+            logDesc = $"{blueprintsGenerated} on mobs";
+            blueprintsGenerated = 0;
+            
+            logNbBlueprints = true;
+            changeLogIcon = true;
+            changeLogDesc = true;
+
+            dc.String classicTitle = Lang.Class.t.texts.get("Schéma obtenu :".AsHaxeString());
+            Lang.Class.t.texts.set("Schéma obtenu :".AsHaxeString(), "Blueprints generated:");
+            LogItem("GenericKey");
+            Lang.Class.t.texts.set("Schéma obtenu :".AsHaxeString(), classicTitle);
+
+            logNbBlueprints = false;
         }
 
         public static bool IsItemQueueEmpty()
