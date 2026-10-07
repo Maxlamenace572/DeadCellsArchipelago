@@ -183,7 +183,7 @@ namespace DeadCellsArchipelago {
             int count = 0;
             foreach (string check in SentChecks)
             {
-                if (itemList.Contains(check) || outfitList.Contains(check)) count ++;
+                if (itemList.Contains(check) || perkList.Contains(check) || outfitList.Contains(check)) count ++;
             }
             return count;
         }

@@ -35,6 +35,7 @@ namespace DeadCellsArchipelago {
         public static List<string> itemList = [];
         public static List<string> dropableList = [];
         public static List<string> cosmeticsList = [];
+        public static List<string> perkList = [];
         public static List<string> outfitList = [];
         public static List<string> headList = [];
         public static int bossRuneGivenSinceLaunch = 0;
@@ -82,6 +83,10 @@ namespace DeadCellsArchipelago {
                 if(group == 10 || group == 11)
                 {
                     dropableList.Add(item.id.ToString());
+                }
+                if(group == 12)
+                {
+                    perkList.Add(item.id.ToString());
                 }
                 if(group == 13 || group == 14)
                 {
