@@ -50,6 +50,7 @@ namespace DeadCellsArchipelago {
                 if (cumulativeProba >= chosen)
                 {
                     GLOBAL_DATA!.currentMirrorEnemy = enemy;
+                    GLOBAL_DATA.SaveGlobalSaveJson();
                     res.push(enemy.AsHaxeString());
                     return res;
                 }
@@ -67,16 +68,16 @@ namespace DeadCellsArchipelago {
 
             GLOBAL_DATA.MirrorEnemies[GLOBAL_DATA!.currentMirrorEnemy]++;
             GLOBAL_DATA.currentMirrorEnemy = null;
-            GLOBAL_DATA.SaveGlobalSaveJson();
 
             string? locationToHint = GetRandomAccessibleCheck();
             if (locationToHint == null)
-                IncreaseShopSales(6);
+                IncreaseShopSales(4);
             else
             {
                 IncreaseShopSales(2);
                 ARCHIPELAGO!.HintLocation(locationToHint);
             }
+            GLOBAL_DATA.SaveGlobalSaveJson();
         }
 
         public static string? GetRandomAccessibleCheck()

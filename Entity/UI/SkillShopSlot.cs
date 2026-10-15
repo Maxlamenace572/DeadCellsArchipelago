@@ -202,7 +202,7 @@ namespace DeadCellsArchipelago {
                 scaleX = textBaseScale * scale,
                 scaleY = textBaseScale * scale
             };
-            label.set_text($" {number}".AsHaxeString());
+            label.set_text($" {RealShopPrice(number)}".AsHaxeString());
             label.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
 
 
@@ -241,10 +241,10 @@ namespace DeadCellsArchipelago {
             if (HERO == null || skill == null || internII == null || parent == null || desc == null) return;
             if (HasAffix(internII, "Colorless")) return;
 
-            if (HERO.cells >= colorlessShopPrice)
+            if (HERO.cells >= RealShopPrice(colorlessShopPrice))
             {
                 bool noStats = false;
-                HERO.substractCells(colorlessShopPrice, new Ref<bool>(ref noStats));
+                HERO.substractCells(RealShopPrice(colorlessShopPrice), new Ref<bool>(ref noStats));
                 if (cellsNumber != null)
                     cellsNumber.set_text($" {HERO.cells}".AsHaxeString());
 
@@ -274,10 +274,10 @@ namespace DeadCellsArchipelago {
         {
             if (HERO == null || SAVED_DATA == null || USER == null) return;
 
-            if (HERO.cells >= pokebombShopPrice)
+            if (HERO.cells >= RealShopPrice(pokebombShopPrice))
             {
                 bool noStats = false;
-                HERO.substractCells(pokebombShopPrice, new Ref<bool>(ref noStats));
+                HERO.substractCells(RealShopPrice(pokebombShopPrice), new Ref<bool>(ref noStats));
                 if (cellsNumber != null)
                     cellsNumber.set_text($" {HERO.cells}".AsHaxeString());
 
@@ -295,10 +295,10 @@ namespace DeadCellsArchipelago {
             if (HERO == null || skill == null || internII == null || parent == null || desc == null) return;
             if (HasAffix(internII, "Legendary")) return;
 
-            if (HERO.cells >= legendaryShopPrice)
+            if (HERO.cells >= RealShopPrice(legendaryShopPrice))
             {
                 bool noStats = false;
-                HERO.substractCells(legendaryShopPrice, new Ref<bool>(ref noStats));
+                HERO.substractCells(RealShopPrice(legendaryShopPrice), new Ref<bool>(ref noStats));
                 if (cellsNumber != null)
                     cellsNumber.set_text($" {HERO.cells}".AsHaxeString());
 
@@ -327,6 +327,11 @@ namespace DeadCellsArchipelago {
             {
                 label?.set_textColor((int) APColor.Red);
             }
+        }
+
+        private int RealShopPrice(int basicPrice)
+        {
+            return (int) (basicPrice*((100-GLOBAL_DATA!.reducedPercentageShop)/100.0));
         }
     }
 }
