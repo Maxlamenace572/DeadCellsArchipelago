@@ -54,6 +54,7 @@ namespace DeadCellsArchipelago
         public bool trapLink;
         public string trapLinkGroup = "";
         public bool flawlessScroll;
+        private List<Hint> Hints = [];
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -354,6 +355,12 @@ namespace DeadCellsArchipelago
             session.Hints.CreateHints(HintStatus.Unspecified, [locationId]);
         }
 
+        public void UpdateRevealedHints()
+        {
+            if (session == null) return;
+            Hints = session.Hints.GetHints(session.Players.ActivePlayer.Slot, session.Players.ActivePlayer.Team).ToList();
+        }
+
         public bool IsLocationHinted(string internalId)
         {
             if (session == null) return false;
@@ -370,10 +377,8 @@ namespace DeadCellsArchipelago
                 Log.Error($"[AP] Location not found to check hint: {locationName}");
                 return false;
             }
-
-            List<Hint> hints = session.Hints.GetHints(session.Players.ActivePlayer.Slot, session.Players.ActivePlayer.Team).ToList();
             
-            foreach (Hint hint in hints)
+            foreach (Hint hint in Hints)
             {
                 if (hint.LocationId == locationId) return true;
             }

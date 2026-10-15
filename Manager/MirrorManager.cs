@@ -85,6 +85,7 @@ namespace DeadCellsArchipelago {
 
             HashSet<string> remainingItems = StartCalculate(CalculateRegionData())["AllR"];
             List<string> accessibleItems = [];
+            ARCHIPELAGO.UpdateRevealedHints();
             foreach (string item in remainingItems)
             {
                 if (ItemsData[item].accessible && !ARCHIPELAGO.IsLocationHinted(item))
@@ -99,7 +100,6 @@ namespace DeadCellsArchipelago {
         private static void IncreaseShopSales(int nb)
         {
             GLOBAL_DATA!.reducedPercentageShop = System.Math.Min(90, GLOBAL_DATA.reducedPercentageShop+nb);
-
         }
     }
 }
