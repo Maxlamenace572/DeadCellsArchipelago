@@ -19,6 +19,9 @@ namespace DeadCellsArchipelago {
         public Dictionary<string, int> BossHeadKilled { get; set; } = [];
         public Dictionary<int, int> ProgressionForge { get; set; } = [];
         public HashSet<string> FlawlessBoss { get; set; } = [];
+        public Dictionary<string, int> MirrorEnemies { get; set; } = [];
+        public string? currentMirrorEnemy = null;
+        public int reducedPercentageShop = 0;
         public int currentCells = 0;
         public bool debugWarp = false;
 
@@ -44,6 +47,15 @@ namespace DeadCellsArchipelago {
             var savePath = GetGlobalSaveFilePath(SAVED_DATA.archipelagoSeed);
             var saveJson = JsonConvert.SerializeObject(GLOBAL_DATA, Formatting.Indented);
             File.WriteAllText(savePath, saveJson);
+        }
+
+        public int GetMirrorEnemyWeight(string mobId)
+        {
+            if (!MirrorEnemies.ContainsKey(mobId))
+            {
+                MirrorEnemies[mobId] = 1;
+            }
+            return MirrorEnemies[mobId];
         }
     }
 }

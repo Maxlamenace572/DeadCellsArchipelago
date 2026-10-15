@@ -2,6 +2,7 @@ using System.Text.Json;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuleItemTracker;
 using static DeadCellsArchipelago.ModAssetManager;
+using dc.en;
 
 namespace DeadCellsArchipelago
 {
@@ -211,6 +212,33 @@ namespace DeadCellsArchipelago
         {
             return ItemsData[itemId].accessible;
         }
+
+        public static HashSet<string> GetAccessibleMobsInBSC(int bsc)
+        {
+            var json = File.ReadAllText(GetMobBiomeDataFilePath());
+            Dictionary<string, BiomeMobs> biomeMobs = 
+                JsonSerializer.Deserialize<Dictionary<string, BiomeMobs>>(json)!;
+
+            HashSet<string> accessibleMobs = [];
+            
+            Dictionary<string, Biome> biomes = CalculateRegionData();
+            
+            foreach(KeyValuePair<string, Biome> biome in biomes)
+            {
+                if (!biome.Value.accessible) continue;
+                foreach (MobInBiome mob in biomeMobs[biome.Key].mobs)
+                {
+                    if (mob.min_bc <= bsc && mob.max_bc >= bsc) accessibleMobs.Add(mob.name);
+                }
+            }
+
+            return accessibleMobs;
+        }
+
+        public static string GetMobBiomeDataFilePath()
+        {
+            return Path.Combine(GetBaseFolder(), "mobBiome.json");
+        }
     }
 
     public class Source
@@ -288,5 +316,18 @@ namespace DeadCellsArchipelago
         public HashSet<string> biomes = [];
         public List<List<string>> requirements = [];
         public string? description;
+    }
+
+    public class BiomeMobs
+    {
+        public List<MobInBiome> mobs { get; set; } = [];
+    }
+
+    public class MobInBiome
+    {
+        public int min_bc { get; set; } = 0;
+        public int max_bc { get; set; } = 5;
+        public string name { get; set; } = "";
+        public List<int>? depth { get; set; } = [];
     }
 }

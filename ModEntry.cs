@@ -20,6 +20,7 @@ using static DeadCellsArchipelago.UnlockItemManager;
 using static DeadCellsArchipelago.LinkQueue;
 using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.WorldMapManager;
+using static DeadCellsArchipelago.MirrorManager;
 using dc.level;
 using dc.tool;
 using ModCore.Events.Interfaces.Game.Save;
@@ -69,6 +70,7 @@ namespace DeadCellsArchipelago
             InitializePauseHooks();
             InitializeModAssetHooks();
             InitializeWorldMapHooks();
+            InitializeMirrorHooks();
             
             Hook_LevelGen.generate += OnLevelGenGenerate;
 

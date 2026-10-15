@@ -7,6 +7,7 @@ using Serilog;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuneManager;
 using static DeadCellsArchipelago.BossManager;
+using static DeadCellsArchipelago.MirrorManager;
 
 namespace DeadCellsArchipelago {
     public static class EnemyManager
@@ -38,6 +39,8 @@ namespace DeadCellsArchipelago {
             {
                 DropItemToPlayer("TimeDistorsion");
             }
+
+            EnemyKilled(self._infos.id.ToString());
         }
 
         public static void SpawnMobOnPlayer(string id, bool elite, bool anger)

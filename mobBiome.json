@@ -1,0 +1,1555 @@
+{
+  "AncientTemple": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "ClusterGrenader"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "Demon"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Duelist"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Fogger"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Golem"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "OrbLauncher"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Shielder"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Spinner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "Astrolab": {
+    "mobs": [
+      {
+        "min_bc": 5,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 5,
+        "max_bc": 5,
+        "name": "Bomber"
+      },
+      {
+        "min_bc": 5,
+        "max_bc": 5,
+        "name": "DeathMage"
+      },
+      {
+        "min_bc": 5,
+        "max_bc": 5,
+        "name": "Defender"
+      },
+      {
+        "min_bc": 5,
+        "max_bc": 5,
+        "name": "Stomper"
+      }
+    ]
+  },
+  "Bank": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Arbiter",
+        "depth": [5]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Archer",
+        "depth": [1]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AxeThrower",
+        "depth": [5]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Blobby",
+        "depth": [2]
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Bomber",
+        "depth": [2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "CastleKnight",
+        "depth": [7]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "ClusterGrenader",
+        "depth": [5]
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "ClusterGrenader",
+        "depth": [7]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Comboter",
+        "depth": [2]
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "CrossbowMan",
+        "depth": [1]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Demon",
+        "depth": [5]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Duelist",
+        "depth": [4]
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Enforcer",
+        "depth": [1, 2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "FatZombie",
+        "depth": [5]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Fly",
+        "depth": [2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "GoldenBatKamikaze"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Grenader",
+        "depth": [1, 2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Hooker",
+        "depth": [4]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Hurler",
+        "depth": [7]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Lancer",
+        "depth": [7]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "LeapingDuelyst",
+        "depth": [4]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Mage360",
+        "depth": [4, 5]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Ninja",
+        "depth": [5]
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "Ninja"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "PirateChief",
+        "depth": [4]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Rat",
+        "depth": [1, 2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Runner",
+        "depth": [1]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Samurai",
+        "depth": [2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Scorpio",
+        "depth": [1]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "ShopMimic"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "SpikedSatyr",
+        "depth": [2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Spinner",
+        "depth": [7]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "U28_Steal"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "U28_VacuumCleaner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Worm",
+        "depth": [1, 2]
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Zombie",
+        "depth": [1]
+      }
+    ]
+  },
+  "BeholderPit": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Beholder"
+      }
+    ]
+  },
+  "Bridge": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Behemoth"
+      }
+    ]
+  },
+  "Castle": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Archer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "CastleKnight"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "ClusterGrenader"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "Demon"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "KingsFinger"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 3,
+        "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Lancer"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      }
+    ]
+  },
+  "Cavern": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Arbiter"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Demon"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Earthquaker"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Enforcer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Stomper"
+      }
+    ]
+  },
+  "Cemetery": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "BatDasher"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Comboter"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "FlyZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Fogger"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Hooker"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "LeapingDuelyst"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Rat"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 3,
+        "name": "Spinner"
+      }
+    ]
+  },
+  "Cliff": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "BatDasher"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BootlegHomunculus"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Necromant"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Stomper"
+      }
+    ]
+  },
+  "ClockTower": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 3,
+        "name": "Archer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "ClusterGrenader"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "CrossbowMan"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Enforcer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "LeapingDuelyst"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Ninja"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "TimeKeeperBot"
+      }
+    ]
+  },
+  "Crypt": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AxeThrower"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "FatZombie"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Ninja"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Samurai"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Shocker"
+      }
+    ]
+  },
+  "DeathArena": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Death"
+      }
+    ]
+  },
+  "Distillery": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "CrossbowMan"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Enforcer"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Hammer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Hurler"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Mimic"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Rat"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Shield"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Spawner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Spinner"
+      }
+    ]
+  },
+  "DookuArena": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "DookuBeast"
+      }
+    ]
+  },
+  "DookuCastle": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BoneThrower"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Buer"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "CastleKnight"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Harpy"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "HauntedArmor"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 2,
+        "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "MiniWerewolf"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Werewolf"
+      }
+    ]
+  },
+  "DookuCastleHard": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BoneThrower"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Buer"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "Demon"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Harpy"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "HauntedArmor"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 2,
+        "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Medusa"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "MiniWerewolf"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "Werewolf"
+      }
+    ]
+  },
+  "GardenerStage": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "GardenerBoss"
+      }
+    ]
+  },
+  "Giant": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Giant"
+      }
+    ]
+  },
+  "Greenhouse": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 3,
+        "name": "BatDasher"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "Fly"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Pitcher"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "SpikedSatyr"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "Spiker"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "ThrowableMushroom"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "Lighthouse": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AmazonBrutal"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AmazonSurvival"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AmazonTactic"
+      }
+    ]
+  },
+  "Observatory": {
+    "mobs": [
+      {
+        "min_bc": 5,
+        "max_bc": 5,
+        "name": "Collector"
+      }
+    ]
+  },
+  "Ossuary": {
+    "mobs": [
+      {
+        "min_bc": 2,
+        "max_bc": 3,
+        "name": "Bomber"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "ClusterGrenader"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Comboter"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Ninja"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Shocker"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Spawner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "SpikedSatyr"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "PrisonCorrupt": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Blobby"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Rat"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Samurai"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "Shielder"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Shocker"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Stomper"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "PrisonCourtyard": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatDasher"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "ClusterGrenader"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 3,
+        "name": "Ninja"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Runner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Shielder"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "PrisonDepths": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Archer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Comboter"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Fogger"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Hammer"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Spinner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "PrisonRoof": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Archer"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Comboter"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "CrossbowMan"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "Enforcer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Fly"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Minimoth"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Shield"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "PrisonStart": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Archer"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "CrossbowMan"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Curser"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "DoomBringer"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Enforcer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 1,
+        "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "Rat"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Shield"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "SoreLooser"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 3,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "PurpleGarden": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatDasherPurple"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BoneThrower"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "CrossbowMan"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Harpy"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Merman"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "MiniWerewolf"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Ninja"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Werewolf"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "QueenArena": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Queen"
+      }
+    ]
+  },
+  "SewerDepths": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Shield"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Spiker"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Worm"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "WormZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 3,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "SewerShort": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 0,
+        "name": "Archer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "Fly"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 3,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Rat"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Scorpio"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Worm"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "WormZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "Shipwreck": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AnchorGuy"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BoilerRoom"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "ClusterGrenader"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "PirateChief"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Rat"
+      }
+    ]
+  },
+  "StiltVillage": {
+    "mobs": [
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "AggressiveZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BatKamikaze"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "CrossbowMan"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "PirateChief"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Samurai"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "WormZombie"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  },
+  "Swamp": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AxeThrower"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Blowgunner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Comboter"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "Fogger"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Fugitive"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 2,
+        "name": "Ninja"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Tick"
+      }
+    ]
+  },
+  "SwampHeart": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "MamaTick"
+      }
+    ]
+  },
+  "Throne": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "KingsHand"
+      }
+    ]
+  },
+  "TopClockTower": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "TimeKeeper"
+      }
+    ]
+  },
+  "Tumulus": {
+    "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 3,
+        "name": "Archer"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "AxeStatue"
+      },
+      {
+        "min_bc": 3,
+        "max_bc": 5,
+        "name": "Bomber"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "ClusterGrenader"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Comboter"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 1,
+        "name": "Grenader"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "Hooker"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "JavelinSnake"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "Mage360"
+      },
+      {
+        "min_bc": 1,
+        "max_bc": 5,
+        "name": "Shocker"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 2,
+        "name": "Zombie"
+      }
+    ]
+  }
+}

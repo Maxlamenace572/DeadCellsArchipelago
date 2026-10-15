@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using System.Net.WebSockets;
 using dc;
+using Archipelago.MultiClient.Net.Models;
 
 namespace DeadCellsArchipelago
 {
@@ -106,6 +107,7 @@ namespace DeadCellsArchipelago
                     if (slotData.ContainsKey("flawless_scroll")) flawlessScroll = Convert.ToBoolean(slotData["flawless_scroll"]);
 
                     if (slotData.ContainsKey("apworld_version")) version = Convert.ToString(slotData["apworld_version"]) ?? "-0.1.1";
+                    Log.Information($"[AP] Apworld version {version}");
 
                     if (slotData.ContainsKey("death_link_group")) deathLinkGroup = Convert.ToString(slotData["death_link_group"]) ?? "";
                     if (slotData.ContainsKey("death_trap")) deathTrap = Convert.ToBoolean(slotData["death_trap"]);
@@ -330,6 +332,53 @@ namespace DeadCellsArchipelago
                     AddLogToQueue($"{itemMessage.Item.ItemName} to {itemMessage.Receiver}");
                 }
             }
+        }
+
+        public void HintLocation(string internalId)
+        {
+            if (session == null) return;
+
+            string locationName = internalId;
+            if (IdToNameKeyExist(locationName))
+            {
+                locationName = GetName(locationName);
+            }
+
+            var locationId = session.Locations.GetLocationIdFromName("Dead Cells", locationName);
+            if (locationId == -1)
+            {
+                Log.Error($"[AP] Location not found for hint: {locationName}");
+                return;
+            }
+
+            session.Hints.CreateHints(HintStatus.Unspecified, [locationId]);
+        }
+
+        public bool IsLocationHinted(string internalId)
+        {
+            if (session == null) return false;
+
+            string locationName = internalId;
+            if (IdToNameKeyExist(locationName))
+            {
+                locationName = GetName(locationName);
+            }
+
+            var locationId = session.Locations.GetLocationIdFromName("Dead Cells", locationName);
+            if (locationId == -1)
+            {
+                Log.Error($"[AP] Location not found to check hint: {locationName}");
+                return false;
+            }
+
+            List<Hint> hints = session.Hints.GetHints(session.Players.ActivePlayer.Slot, session.Players.ActivePlayer.Team).ToList();
+            
+            foreach (Hint hint in hints)
+            {
+                if (hint.LocationId == locationId) return true;
+            }
+            
+            return false;
         }
     }
 }

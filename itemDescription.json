@@ -152,7 +152,7 @@
     "AmazonLoot": "The corresponding servant needs to be killed last.",
     "CursedBiome": "This item is found in a cursed biome.",
 
-    "BankDepth": "This item can be found in the Bank when entered from world depth: {0}.",
+    "BankDepth": "This item can be found in the Bank when entered at world depth: {0}.",
     "Depth1": "1-Promenade of the Condemned or Prison Depths",
     "Depth2": "2-Ramparts",
     "Depth4": "4-Stilt Village",
