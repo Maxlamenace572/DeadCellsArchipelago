@@ -1,8 +1,7 @@
 using dc.h2d.col;
 using dc.hxd;
 using HaxeProxy.Runtime;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using StbImageSharp;
 using Serilog;
 using dc.ui.hud;
 using dc.ui;
@@ -24,11 +23,10 @@ namespace DeadCellsArchipelago {
 
         public static dc.h2d.Tile LoadTileFromPng(string path)
         {
-            using var image = Image.Load<Rgba32>(path);
+            using var stream = System.IO.File.OpenRead(path);
+            var image = ImageResult.FromStream(stream, ColorComponents.RedGreenBlueAlpha);
             int w = image.Width, h = image.Height;
-
-            byte[] pixelBytes = new byte[w * h * 4];
-            image.CopyPixelDataTo(pixelBytes);
+            byte[] pixelBytes = image.Data;
 
             var hxPixelBytes = ToHaxeBytes(pixelBytes);
 

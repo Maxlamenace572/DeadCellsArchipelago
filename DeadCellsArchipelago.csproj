@@ -16,7 +16,7 @@
     <Compile Remove="launcher\**" />
     <PackageReference Include="DeadCellsCoreModding.MDK" Version="1.0.1" />
     <PackageReference Include="Archipelago.MultiClient.Net" Version="6.7.1" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="StbImageSharp" Version="2.30.16" />
     <ModTag Include="Gameplay" />
   </ItemGroup>
 </Project>
