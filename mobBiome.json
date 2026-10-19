@@ -410,6 +410,11 @@
         "min_bc": 0,
         "max_bc": 5,
         "name": "Stomper"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "StompSkeleton"
       }
     ]
   },
@@ -701,6 +706,11 @@
       {
         "min_bc": 0,
         "max_bc": 5,
+        "name": "LancerPurple"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
         "name": "HauntedArmor"
       },
       {
@@ -751,6 +761,11 @@
         "min_bc": 1,
         "max_bc": 2,
         "name": "KunaiMaster"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "LancerPurple"
       },
       {
         "min_bc": 0,
@@ -1209,6 +1224,11 @@
         "min_bc": 0,
         "max_bc": 5,
         "name": "Harpy"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "LancerPurple"
       },
       {
         "min_bc": 0,

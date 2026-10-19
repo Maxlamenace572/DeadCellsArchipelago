@@ -62,6 +62,7 @@ namespace DeadCellsArchipelago {
             Hook_ItemMetaManager.f_investOn += OnF_investOn;
             Hook_ItemMetaManager.hasUnlockedItem += OnHasUnlockedItem;
             Hook_HiddenTrigger.trigger += OnHiddenTrigger;
+            Hook_ForgeLegendary.onDispose += OnOnDisposeForgeLegendary;
             
             Log.Information("[AP] Item Hooks loaded");
         }
@@ -1020,7 +1021,12 @@ namespace DeadCellsArchipelago {
             if (GLOBAL_DATA == null) return;
             int cells = self.forgeInvestedCells.get(upLevel);
             GLOBAL_DATA.ProgressionForge[upLevel] = cells;
-            GLOBAL_DATA.SaveGlobalSaveJson();
+        }
+
+        private static void OnOnDisposeForgeLegendary(Hook_ForgeLegendary.orig_onDispose orig, ForgeLegendary self)
+        {
+            orig(self);
+            GLOBAL_DATA!.SaveGlobalSaveJson();
         }
 
         public static void SyncGlobalDataToGame()
