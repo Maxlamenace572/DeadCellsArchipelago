@@ -20,11 +20,10 @@ namespace DeadCellsArchipelago {
     {
         public static Bitmap? screenBitmap = null;
         public static DefaultPause? defaultPause;
-        public static bool showClassicMenu { get; set; } = true;
-        public static Bitmap? logoBitmap = null;
+        public static FocusManager? focusManager = null;
+        public static TopApMenu? topMenu = null;
         public static HlAction? modifiedUponClosing;
         public static bool changedMethodCallController = false;
-        public static dc.ui.Text? apMenuButton = null;
         public static SkillShop skillShopMenu = new SkillShop(50, 150);
         public static Bitmap? cellBitmap = null;
         public static dc.ui.Text? cellsNumber = null;
@@ -34,32 +33,19 @@ namespace DeadCellsArchipelago {
         public static SkillScroller<ItemLine>? scrollerFiller;
         public static SkillScroller<BiomeLine>? scrollerBiome;
         public static PopUpTracker? popUpTracker;
-        public static bool showPopUp;
         public static PopUpItemDesc? popUpItemDesc;
-        public static bool showDescPopUp;
         public static SkillScroller<LogLine>? scrollerHistory;
         public static dc.ui.Text? shopTitle = null;
         public static dc.ui.Text? historyTitle = null;
         public static dc.ui.Text? biomeTitle = null;
         public static dc.ui.Text? fillerTitle = null;
         public static dc.ui.Text? menuTitle = null;
-        public static bool onMenuButton = false;
-        public static int scrollerIndex = -1;
-        public static int shopX = -1;
-        public static int shopY = -1;
-        public static int popUpTopIndex = -1;
-        public static int warpButtonIndex = -1;
         public static int keyToRepeat = -1;
         private const long RepeatIntervalMs = 166; //around 10 frames at 60 fps
         private static long lastRepeatTimestamp = 0;
         public static HlAction<int, bool>? modifiedOnActPressed;
-        public static int menuIndex = 0;
-        public static dc.ui.Text? apMenuRight = null;
-        public static dc.ui.Text? apMenuLeft = null;
         public static dc.ui.Text? energyTitle = null;
         public static EnergyLink? energyLink = null;
-        public static int topIndex = -1;
-        public static int energyLinkIndex = -1;
         public static string? warpToBiome = null;
         public static bool isReload = false;
 
@@ -79,6 +65,7 @@ namespace DeadCellsArchipelago {
             defaultPause = self;
             orig(self);
 
+            AddFocusManager();
             ActualiseVanillaMenu(self);
             DefineScreenSize(self);
             AddMenuButton(self);
@@ -94,36 +81,44 @@ namespace DeadCellsArchipelago {
             AddPopUpMenu();
             AddDescriptionMenu();
             AddEnergyLinkMenu();
+
+            AddMenuInterractions();
+
             MoveCursor(self);
         }
 
         public static void ActualiseVanillaMenu(DefaultPause self)
         {
-            self.title.visible = showClassicMenu;
+            self.title.visible = ShowClassicMenu();
 
-            self.weaLeft.visible = showClassicMenu;
-            self.arrowTopWea.visible = showClassicMenu;
-            self.ciSwapWea.visible = showClassicMenu;
-            self.arrowBotWea.visible = showClassicMenu;
-            self.weaRight.visible = showClassicMenu;
+            self.weaLeft.visible = ShowClassicMenu();
+            self.arrowTopWea.visible = ShowClassicMenu();
+            self.ciSwapWea.visible = ShowClassicMenu();
+            self.arrowBotWea.visible = ShowClassicMenu();
+            self.weaRight.visible = ShowClassicMenu();
 
-            self.skillLeft.visible = showClassicMenu;
-            self.arrowTopSki.visible = showClassicMenu;
-            self.ciSwapSki.visible = showClassicMenu;
-            self.arrowBotSki.visible = showClassicMenu;
-            self.skillRight.visible = showClassicMenu;
+            self.skillLeft.visible = ShowClassicMenu();
+            self.arrowTopSki.visible = ShowClassicMenu();
+            self.ciSwapSki.visible = ShowClassicMenu();
+            self.arrowBotSki.visible = ShowClassicMenu();
+            self.skillRight.visible = ShowClassicMenu();
 
-            self.amulet.visible = showClassicMenu;
-            self.backpackBox?.visible = showClassicMenu;
-            self.backpackFlow?.visible = showClassicMenu;
-            self.fbPerks.visible = showClassicMenu;
-            self.flowPerks.visible = showClassicMenu;
+            self.amulet.visible = ShowClassicMenu();
+            self.backpackBox?.visible = ShowClassicMenu();
+            self.backpackFlow?.visible = ShowClassicMenu();
+            self.fbPerks.visible = ShowClassicMenu();
+            self.flowPerks.visible = ShowClassicMenu();
             
-            self.botMenu.visible = showClassicMenu;
-            self.bg.botGradient.visible = showClassicMenu;
-            self.selection.visible = showClassicMenu && !onMenuButton;
+            self.botMenu.visible = ShowClassicMenu();
+            self.bg.botGradient.visible = ShowClassicMenu();
+            self.selection.visible = ShowClassicMenu() && !focusManager!.focusModEnabled;
 
-            self.locked = !showClassicMenu || onMenuButton;
+            self.locked = !ShowClassicMenu() || focusManager!.focusModEnabled;
+        }
+
+        private static bool ShowClassicMenu()
+        {
+            return focusManager!.page == 0;
         }
 
         private static void DefineScreenSize(DefaultPause self)
@@ -137,6 +132,14 @@ namespace DeadCellsArchipelago {
                     scaleX = screenScale,
                     scaleY = screenScale
                 };
+            }
+        }
+
+        private static void AddFocusManager()
+        {
+            if (focusManager == null)
+            {
+                focusManager = new FocusManager(new FocusItem());
             }
         }
 
@@ -159,706 +162,24 @@ namespace DeadCellsArchipelago {
                 HlAction<int, bool> previousAct = self.controller.onActPressed;
                 self.controller.onActPressed = (int i, bool b) =>
                 {
-                    //TODO: a good controller logic
-                    //controller logic in pause menu
-                    
                     //continue input up/left/down/right when down
                     lastRepeatTimestamp = Environment.TickCount64;
                     if (i == 10 || i == 11 || i == 12 || i == 13 || i == 0) keyToRepeat = i;
                     else keyToRepeat = -1;
 
-                    //on classic menu, up go to 
-                    if (showClassicMenu && i == 10)
-                    {
-                        onMenuButton = true;
-                        apMenuButton?.set_textColor((int) APColor.Yellow);
-                    }
-                    //on classic menu and menu button, down or return go to options
-                    else if (showClassicMenu && onMenuButton && (i == 1 || i == 8 || i == 12))
-                    {
-                        onMenuButton = false;
-                        apMenuButton?.set_textColor((int) APColor.White);
-                    }
-                    //on classic menu and menu button, validate goes to modded menu
-                    else if (onMenuButton && i == 0)
-                    {
-                        showClassicMenu = !showClassicMenu;
-                    }
-                    //on right arrow, validate change modded menu
-                    else if (!showClassicMenu && topIndex == 1 && i == 0)
-                    {
-                        menuIndex++;
-                        if(menuIndex == 1)
-                        {
-                            topIndex = -1;
-                            apMenuRight?.set_textColor((int) APColor.White);
-                            apMenuButton?.set_textColor((int) APColor.Yellow);
-                            onMenuButton = true;
-                        }
-                    }
-                    //on left arrow, validate change modded menu
-                    else if (!showClassicMenu && topIndex == 0 && i == 0)
-                    {
-                        menuIndex--;
-                        if(menuIndex == 0)
-                        {
-                            topIndex = -1;
-                            apMenuLeft?.set_textColor((int) APColor.White);
-                            apMenuButton?.set_textColor((int) APColor.Yellow);
-                            onMenuButton = true;
-                        }
-                    }
-                    //menu 1
-                    else if(menuIndex == 0)
-                    {
-                        //on modded menu and menu button, down goes to modded menu
-                        if (!showClassicMenu && onMenuButton && i == 12)
-                        {
-                            onMenuButton = false;
-                            apMenuButton?.set_textColor((int) APColor.White);
-                            scrollerBiome?.lastHighlight = 0;
-                            scrollerBiome?.lastHighlightCell = 0;
-                            scrollerBiome?.lines[0].Highlight(0);
-                            scrollerIndex = 2;
-                        }
-                        //on modded menu and menu button, right goes to top right arrow
-                        else if (!showClassicMenu && onMenuButton && i == 13)
-                        {
-                            onMenuButton = false;
-                            apMenuButton?.set_textColor((int) APColor.White);
-                            apMenuRight?.set_textColor((int) APColor.Yellow);
-                            topIndex = 1;
-                        }
-                        //on modded menu and top right arrow, left goes to menu button
-                        else if (!showClassicMenu && topIndex == 1 && i == 11)
-                        {
-                            topIndex = -1;
-                            apMenuRight?.set_textColor((int) APColor.White);
-                            apMenuButton?.set_textColor((int) APColor.Yellow);
-                            onMenuButton = true;
-                        }
-                        //on modded menu and top right arrow, down goes to modded menu
-                        else if (!showClassicMenu && topIndex == 1 && i == 12)
-                        {
-                            topIndex = -1;
-                            apMenuRight?.set_textColor((int) APColor.White);
-                            scrollerBiome?.lastHighlight = 0;
-                            scrollerBiome?.lastHighlightCell = 0;
-                            scrollerBiome?.lines[0].Highlight(0);
-                            scrollerIndex = 2;
-                        }
-                        //on pop up, return close pop up
-                        else if(showPopUp && (i == 8 || i == 1))
-                        {
-                            showPopUp = false;
-                            showDescPopUp = false;
-                            scrollerIndex = 2;
-                            popUpTopIndex = -1;
-                            warpButtonIndex = -1;
-                            popUpTracker?.cancelWarpButton!.StopHighlight();
-                            popUpTracker?.scrollerItems?.lastHighlight = -1;
-                            if (scrollerBiome?.lastHighlight == -1 || scrollerBiome?.lastHighlightCell == -1)
-                            {
-                                scrollerBiome?.lastHighlight = 0;
-                                scrollerBiome?.lastHighlightCell = 0;
-                                scrollerBiome?.SetScrollAtStart();
-                            }
-                            scrollerBiome?.lines[scrollerBiome.lastHighlight].Highlight(scrollerBiome.lastHighlightCell);
-                        }
-                        //on modded menu, return goes to classic menu
-                        else if(!showClassicMenu && (i == 8 || i == 1))
-                        {
-                            ReturnMenuController();
-                        }
-                        //on modded menu and in a scroller
-                        else if (scrollerIndex != -1)
-                        {
-                            switch (scrollerIndex)
-                            {
-                                case 0:
-                                    if(scrollerHistory == null || scrollerHistory.lastHighlight == -1) return;
-                                    if (i == 13)
-                                    {
-                                        scrollerHistory.lines[scrollerHistory.lastHighlight].StopHighlight();
-                                        scrollerHistory.lastHighlight = -1;
-                                        scrollerBiome?.lastHighlight = 0;
-                                        scrollerBiome?.lastHighlightCell = 0;
-                                        scrollerBiome?.lines[0].Highlight(0);
-                                        scrollerIndex = 2;
-                                        scrollerBiome?.SetScrollAtStart();
-                                    }
-                                    else if (i == 10 && scrollerHistory.lastHighlight > 0)
-                                    {
-                                        scrollerHistory.lines[scrollerHistory.lastHighlight].StopHighlight();
-                                        scrollerHistory.lastHighlight--;
-                                        scrollerHistory.lines[scrollerHistory.lastHighlight].Highlight();
-                                        scrollerHistory.SetScrollUpAtIndex();
-                                    }
-                                    else if (i == 12 && scrollerHistory.lastHighlight == scrollerHistory.lines.Count - 1 && scrollerFiller?.lines.Count != 0)
-                                    {
-                                        scrollerHistory.lines[scrollerHistory.lastHighlight].StopHighlight();
-                                        scrollerIndex = 1;
-                                        scrollerHistory.lastHighlight = -1;
-                                        scrollerFiller?.lastHighlight = 0;
-                                        scrollerFiller?.lines[scrollerFiller.lastHighlight].Highlight();
-                                        scrollerFiller?.SetScrollAtStart();
-                                    }
-                                    else if (i == 12 && scrollerHistory.lastHighlight != scrollerHistory.lines.Count - 1 )
-                                    {
-                                        scrollerHistory.lines[scrollerHistory.lastHighlight].StopHighlight();
-                                        scrollerHistory.lastHighlight++;
-                                        scrollerHistory.lines[scrollerHistory.lastHighlight].Highlight();
-                                        scrollerHistory.SetScrollDownAtIndex();
-                                    }
-                                    else if (i == 11)
-                                    {
-                                        scrollerHistory.lines[scrollerHistory.lastHighlight].StopHighlight();
-                                        scrollerHistory.lastHighlight = -1;
-                                        scrollerIndex = 4;
-                                        shopX = 1;
-                                        shopY = 1;
-                                        skillShopMenu.Highlight(shopX, shopY);
-                                    }
-                                    break;
-
-                                case 1:
-                                    if(scrollerFiller == null || scrollerFiller.lastHighlight == -1) return;
-                                    if (i == 10 && scrollerFiller.lastHighlight == 0)
-                                    {
-                                        scrollerFiller.lines[scrollerFiller.lastHighlight].StopHighlight();
-                                        scrollerFiller.lastHighlight = -1;
-                                        if (scrollerHistory?.lines.Count != 0)
-                                        {
-                                            scrollerIndex = 0;
-                                            scrollerHistory?.lastHighlight = scrollerHistory.lines.Count - 1;;
-                                            scrollerHistory?.lines[scrollerHistory.lastHighlight].Highlight();
-                                            scrollerHistory?.SetScrollAtEnd();
-                                        }
-                                        else
-                                        {
-                                            scrollerIndex = 4;
-                                            shopX = 1;
-                                            shopY = 1;
-                                            skillShopMenu.Highlight(shopX, shopY);
-                                        }
-                                    }
-                                    else if (i == 10)
-                                    {
-                                        scrollerFiller.lines[scrollerFiller.lastHighlight].StopHighlight();
-                                        scrollerFiller.lastHighlight--;
-                                        scrollerFiller.lines[scrollerFiller.lastHighlight].Highlight();
-                                        scrollerFiller.SetScrollUpAtIndex();
-                                    }
-                                    else if (i == 12 && scrollerFiller.lastHighlight < scrollerFiller.lines.Count - 1)
-                                    {
-                                        scrollerFiller.lines[scrollerFiller.lastHighlight].StopHighlight();
-                                        scrollerFiller.lastHighlight++;
-                                        scrollerFiller.lines[scrollerFiller.lastHighlight].Highlight();
-                                        scrollerFiller.SetScrollDownAtIndex();
-                                    }
-                                    else if (i == 13)
-                                    {
-                                        scrollerFiller.lines[scrollerFiller.lastHighlight].StopHighlight();
-                                        scrollerFiller.lastHighlight = -1;
-                                        scrollerBiome?.lastHighlight = 0;
-                                        scrollerBiome?.lastHighlightCell = 0;
-                                        scrollerBiome?.lines[0].Highlight(0);
-                                        scrollerIndex = 2;
-                                        scrollerBiome?.SetScrollAtStart();
-                                    }
-                                    else if (i == 0)
-                                    {
-                                        scrollerFiller.lines[scrollerFiller.lastHighlight].GiveItem();
-                                    }
-                                    break;
-
-                                case 2:
-                                    if(scrollerBiome == null || scrollerBiome.lastHighlight == -1 || scrollerBiome.lastHighlightCell == -1) return;
-                                    if (scrollerBiome.lastHighlight == 0 && i == 10)
-                                    {
-                                        onMenuButton = true;
-                                        apMenuButton?.set_textColor((int) APColor.Yellow);
-                                        scrollerBiome.lines[0].StopHighlight(scrollerBiome.lastHighlightCell);
-                                        scrollerBiome.lastHighlight = -1;
-                                        scrollerBiome.lastHighlightCell = -1;
-                                        scrollerIndex = -1;
-                                    }
-                                    else if (i == 10)
-                                    {
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].StopHighlight(scrollerBiome.lastHighlightCell);
-                                        scrollerBiome.lastHighlight--;
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].Highlight(scrollerBiome.lastHighlightCell);
-                                        scrollerBiome.SetScrollUpAtIndex();
-                                    }
-                                    else if (i == 13 && scrollerBiome.lastHighlightCell+1 < 3)
-                                    {
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].StopHighlight(scrollerBiome.lastHighlightCell);
-                                        scrollerBiome.lastHighlightCell++;
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].Highlight(scrollerBiome.lastHighlightCell);
-                                    }
-                                    else if (i == 11 && scrollerBiome.lastHighlightCell == 0)
-                                    {
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].StopHighlight(0);
-                                        scrollerBiome.lastHighlight = -1;
-                                        scrollerBiome.lastHighlightCell = -1;
-                                        
-                                        if (scrollerHistory != null && scrollerHistory.lines.Count != 0)
-                                        {
-                                            scrollerIndex = 0;
-                                            scrollerHistory.lastHighlight = scrollerHistory.lines.Count - 1;
-                                            scrollerHistory.SetScrollAtEnd();
-                                            scrollerHistory.lines[scrollerHistory.lastHighlight].Highlight();
-                                        }
-                                        else if (scrollerFiller != null && scrollerFiller.lines.Count != 0)
-                                        {
-                                            scrollerIndex = 1;
-                                            scrollerFiller.lastHighlight = 0;
-                                            scrollerFiller.SetScrollAtStart();
-                                            scrollerFiller.lines[scrollerFiller.lastHighlight].Highlight();
-                                        }
-                                        else
-                                        {
-                                            scrollerIndex = 4;
-                                            shopX = 1;
-                                            shopY = 1;
-                                            skillShopMenu.Highlight(shopX, shopY);
-                                        }
-                                    }
-                                    else if (i == 11)
-                                    {
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].StopHighlight(scrollerBiome.lastHighlightCell);
-                                        scrollerBiome.lastHighlightCell--;
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].Highlight(scrollerBiome.lastHighlightCell);
-                                    }
-                                    else if (i == 12 && scrollerBiome.lastHighlight+1 < scrollerBiome.lines.Count)
-                                    {
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].StopHighlight(scrollerBiome.lastHighlightCell);
-                                        scrollerBiome.lastHighlight++;
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].Highlight(scrollerBiome.lastHighlightCell);
-                                        scrollerBiome.SetScrollDownAtIndex();
-                                    }
-                                    else if (i == 0)
-                                    {
-                                        popUpTracker?.biomeLineIndex = scrollerBiome.lastHighlight;
-                                        popUpTracker?.biomeCellIndex = scrollerBiome.lastHighlightCell;
-                                        scrollerBiome.lines[scrollerBiome.lastHighlight].SetPopUpTracker(scrollerBiome.lastHighlightCell);
-                                        scrollerIndex = 3;
-                                        popUpTopIndex = 0;
-                                        popUpTracker?.topLine?.Highlight(popUpTopIndex);
-                                    }
-                                    break;
-
-                                case 3:
-                                    if(popUpTracker == null || popUpTracker.topLine == null || popUpTracker.scrollerItems == null) return;
-                                    if (i == 13 && popUpTopIndex + 1 < popUpTracker.topLine.cells.Count && popUpTopIndex != -1)
-                                    {
-                                        popUpTracker.topLine.StopHighlight(popUpTopIndex);
-                                        popUpTopIndex++;
-                                        popUpTracker.topLine.Highlight(popUpTopIndex);
-                                    }
-                                    else if (i == 11 && popUpTopIndex > 0 && popUpTopIndex != -1)
-                                    {
-                                        popUpTracker.topLine.StopHighlight(popUpTopIndex);
-                                        popUpTopIndex--;
-                                        popUpTracker.topLine.Highlight(popUpTopIndex);
-                                    }
-                                    else if (i == 0 && popUpTopIndex != -1)
-                                    {
-                                        UpdateScrollContent(popUpTracker.topLine.cells[popUpTopIndex].toChecks);
-                                    }
-                                    else if (i == 12 && popUpTopIndex != -1 && popUpTracker.scrollerItems.lines.Count != 0)
-                                    {
-                                        popUpTracker.topLine.StopHighlight(popUpTopIndex);
-                                        popUpTopIndex = -1;
-                                        popUpTracker.scrollerItems.lastHighlight = 0;
-                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].Highlight();
-                                    }
-                                    else if (i == 12 && popUpTracker.scrollerItems.lastHighlight+1 < popUpTracker.scrollerItems.lines.Count && warpButtonIndex == -1)
-                                    {
-                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].StopHighlight();
-                                        popUpTracker.scrollerItems.lastHighlight++;
-                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].Highlight();
-                                        popUpTracker.scrollerItems.SetScrollDownAtIndex();
-                                    }
-                                    else if (i == 10 && popUpTracker.scrollerItems.lastHighlight == 0)
-                                    {
-                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].StopHighlight();
-                                        popUpTopIndex = 0;
-                                        popUpTracker.scrollerItems.lastHighlight = -1;
-                                        popUpTracker.topLine.Highlight(popUpTopIndex);
-                                    }
-                                    else if (i == 10 && popUpTopIndex == -1 && warpButtonIndex == -1)
-                                    {
-                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].StopHighlight();
-                                        popUpTracker.scrollerItems.lastHighlight--;
-                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].Highlight();
-                                        popUpTracker.scrollerItems.SetScrollUpAtIndex();
-                                    }
-                                    else if (i == 10 && warpButtonIndex == -1 && popUpTracker.showButton)
-                                    {
-                                        if (!popUpTracker.popUpWarpButton!.disabled)
-                                        {
-                                            popUpTracker.topLine.StopHighlight(popUpTopIndex);
-                                            popUpTopIndex = -1;
-                                            warpButtonIndex = 0;
-                                            popUpTracker.popUpWarpButton.Highlight();
-                                        }
-                                        else if (warpToBiome != null)
-                                        {
-                                            popUpTracker.topLine.StopHighlight(popUpTopIndex);
-                                            popUpTopIndex = -1;
-                                            warpButtonIndex = 1;
-                                            popUpTracker.cancelWarpButton!.Highlight();
-                                        }
-                                    }
-                                    else if (i == 12 && warpButtonIndex != -1)
-                                    {
-                                        if (warpButtonIndex == 0)
-                                        {
-                                            warpButtonIndex = -1;
-                                            popUpTracker.popUpWarpButton!.StopHighlight();
-                                            popUpTopIndex = 0;
-                                            popUpTracker.topLine.Highlight(popUpTopIndex);
-                                        }
-                                        else if (warpButtonIndex == 1)
-                                        {
-                                            warpButtonIndex = -1;
-                                            popUpTracker.cancelWarpButton!.StopHighlight();
-                                            popUpTopIndex = 0;
-                                            popUpTracker.topLine.Highlight(popUpTopIndex);
-                                        }
-                                    }
-                                    else if (i == 13 && warpButtonIndex == 0)
-                                    {
-                                        warpButtonIndex = 1;
-                                        popUpTracker.popUpWarpButton!.StopHighlight();
-                                        popUpTracker.cancelWarpButton!.Highlight();
-                                    }
-                                    else if (i == 11 && warpButtonIndex == 1)
-                                    {
-                                        warpButtonIndex = 0;
-                                        popUpTracker.cancelWarpButton!.StopHighlight();
-                                        popUpTracker.popUpWarpButton!.Highlight();
-                                    }
-                                    else if (i == 0 && warpButtonIndex != -1)
-                                    {
-                                        if (warpButtonIndex == 0) popUpTracker.popUpWarpButton!.act.Invoke();
-                                        if (warpButtonIndex == 1)
-                                        {
-                                            popUpTracker.cancelWarpButton!.act.Invoke();
-                                            popUpTracker.cancelWarpButton!.StopHighlight();
-                                            warpButtonIndex = -1;
-                                            popUpTopIndex = 0;
-                                            popUpTracker.topLine.Highlight(popUpTopIndex);
-                                        }
-                                    }
-                                    else if (i == 0)
-                                    {
-                                        popUpTracker.scrollerItems.lines[popUpTracker.scrollerItems.lastHighlight].ShowItemDescription();
-                                    }
-                                    break;
-
-                                case 4:
-                                    if(shopX == -1 || shopY == -1) return;
-                                    if (i == 10 && shopY != 0)
-                                    {
-                                        skillShopMenu.StopHighlight(shopX, shopY);
-                                        shopY--;
-                                        skillShopMenu.Highlight(shopX, shopY);
-                                    }
-                                    else if (i == 12 && shopY != 1)
-                                    {
-                                        skillShopMenu.StopHighlight(shopX, shopY);
-                                        shopY++;
-                                        skillShopMenu.Highlight(shopX, shopY);
-                                    }
-                                    else if (i == 12 && scrollerFiller?.lines.Count != 0)
-                                    {
-                                        skillShopMenu.StopHighlight(shopX, shopY);
-                                        shopX = -1;
-                                        shopY = -1;
-                                        scrollerIndex = 1;
-                                        scrollerFiller?.lastHighlight = 0;
-                                        scrollerFiller?.lines[scrollerFiller.lastHighlight].Highlight();
-                                        scrollerFiller?.SetScrollAtStart();
-                                    }
-                                    if (i == 11 && shopX != 0)
-                                    {
-                                        skillShopMenu.StopHighlight(shopX, shopY);
-                                        shopX--;
-                                        skillShopMenu.Highlight(shopX, shopY);
-                                    }
-                                    else if (i == 13 && shopX != 1)
-                                    {
-                                        skillShopMenu.StopHighlight(shopX, shopY);
-                                        shopX++;
-                                        skillShopMenu.Highlight(shopX, shopY);
-                                    }
-                                    else if (i == 13)
-                                    {
-                                        if(scrollerHistory?.lines.Count != 0)
-                                        {
-                                            skillShopMenu.StopHighlight(shopX, shopY);
-                                            shopX = -1;
-                                            shopY = -1;
-                                            scrollerIndex = 0;
-                                            scrollerHistory?.lastHighlight = scrollerHistory.lines.Count - 1;
-                                            scrollerHistory?.lines[scrollerHistory.lastHighlight].Highlight();
-                                            scrollerHistory?.SetScrollAtEnd();
-                                        }
-                                        else
-                                        {
-                                            skillShopMenu.StopHighlight(shopX, shopY);
-                                            shopX = -1;
-                                            shopY = -1;
-                                            scrollerIndex = 2;
-                                            scrollerBiome?.lastHighlight = 0;
-                                            scrollerBiome?.lastHighlightCell = 0;
-                                            scrollerBiome?.lines[scrollerBiome.lastHighlight].Highlight(scrollerBiome.lastHighlightCell);
-                                            scrollerBiome?.SetScrollAtStart();
-                                        }
-                                    }
-                                    else if (i == 0)
-                                    {
-                                        skillShopMenu.Buy(shopX, shopY);
-                                    }
-                                    break;
-                                
-                            }
-                        }
-                        else
-                        {
-                            previousAct.Invoke(i, b);
-                        }
-                    }
-                    //menu 2
-                    else if(menuIndex == 1)
-                    {
-                        //on modded menu and menu button, down goes to modded menu
-                        if (!showClassicMenu && onMenuButton && i == 12)
-                        {
-                            onMenuButton = false;
-                            apMenuButton?.set_textColor((int) APColor.White);
-                            energyLinkIndex = 0;
-                            energyLink?.Highlight(energyLinkIndex);
-                        }
-                        //on modded menu and menu button, left goes to top left arrow
-                        else if (!showClassicMenu && onMenuButton && i == 11)
-                        {
-                            onMenuButton = false;
-                            apMenuButton?.set_textColor((int) APColor.White);
-                            apMenuLeft?.set_textColor((int) APColor.Yellow);
-                            topIndex = 0;
-                        }
-                        //on modded menu and top left arrow, right goes to menu button
-                        else if (!showClassicMenu && topIndex == 0 && i == 13)
-                        {
-                            topIndex = -1;
-                            apMenuLeft?.set_textColor((int) APColor.White);
-                            apMenuButton?.set_textColor((int) APColor.Yellow);
-                            onMenuButton = true;
-                        }
-                        //on modded menu and top left arrow, down goes to modded menu
-                        else if (!showClassicMenu && topIndex == 0 && i == 12)
-                        {
-                            topIndex = -1;
-                            apMenuLeft?.set_textColor((int) APColor.White);
-                            energyLinkIndex = 0;
-                            energyLink?.Highlight(energyLinkIndex);
-                        }
-                        //on top buttons energy link, up goes to menu button
-                        else if ((energyLinkIndex == 0 || energyLinkIndex == 1) && i == 10)
-                        {
-                            energyLinkIndex = -1;
-                            energyLink?.StopHighlight();
-                            apMenuButton?.set_textColor((int) APColor.Yellow);
-                            onMenuButton = true;
-                        }
-                        //on energy link, navigate
-                        else if ((energyLinkIndex == 0 || energyLinkIndex == 2) && i == 13)
-                        {
-                            energyLinkIndex++;
-                            energyLink?.Highlight(energyLinkIndex);
-                        }
-                        else if ((energyLinkIndex == 1 || energyLinkIndex == 3) && i == 11)
-                        {
-                            energyLinkIndex--;
-                            energyLink?.Highlight(energyLinkIndex);
-                        }
-                        else if ((energyLinkIndex == 0 || energyLinkIndex == 1) && i == 12)
-                        {
-                            energyLinkIndex += 2;
-                            energyLink?.Highlight(energyLinkIndex);
-                        }
-                        else if ((energyLinkIndex == 2 || energyLinkIndex == 3) && i == 10)
-                        {
-                            energyLinkIndex -= 2;
-                            energyLink?.Highlight(energyLinkIndex);
-                        }
-                        else if ((energyLinkIndex == 0 || energyLinkIndex == 1 || energyLinkIndex == 2 || energyLinkIndex == 3) && i == 0)
-                        {
-                            energyLink?.Act(energyLinkIndex);
-                        }
-                        //on modded menu, return goes to classic menu
-                        else if(!showClassicMenu && (i == 8 || i == 1))
-                        {
-                            ReturnMenuController();
-                        }
-                    }
+                    if (focusManager != null && ((!focusManager.focusModEnabled && i == 10) || focusManager.focusModEnabled))
+                        focusManager.Controller(i);
                     else
-                    {
                         previousAct.Invoke(i, b);
-                    }
                 };
                 modifiedOnActPressed = self.controller.onActPressed;
             }
 
-            if (logoBitmap == null)
+            if (topMenu == null)
             {
-                var logoTile = archipelagoLogoTile.clone();
-
-                logoBitmap = new Bitmap(logoTile, screenBitmap)
-                {
-                    x = 1400,
-                    y = 10,
-                    scaleX = 0.015,
-                    scaleY = 0.015,
-                };
+                topMenu = new TopApMenu(screenBitmap!, focusManager!);
             }
-            
-            if (apMenuButton == null)
-            {
-                Bounds boundsLogo = logoBitmap.getSize(new Bounds());
-                double scale = 3/textPixelScale;
-                apMenuButton = new dc.ui.Text(screenBitmap, true, false, new Ref<double>(ref scale), null, null)
-                {
-                    x = logoBitmap.x + boundsLogo.xMax,
-                    scaleX = textBaseScale * scale,
-                    scaleY = textBaseScale * scale
-                };
-                apMenuButton.set_text("Switch Menu".AsHaxeString());
-                //apMenuButton.y = logoBitmap.y + ((boundsLogo.yMax - apMenuButton.textHeight) /2);
-                CenterYTextTo(logoBitmap, apMenuButton, 46);
-                apMenuButton.set_textColor((int) APColor.White);
-                var inter = new Interactive(
-                    (boundsLogo.xMax/apMenuButton.scaleX) + apMenuButton.get_textWidth(),
-                    boundsLogo.yMax,
-                    apMenuButton,
-                    null
-                )
-                {
-                    x = -boundsLogo.xMax/apMenuButton.scaleX,
-                    y = -(boundsLogo.yMax - apMenuButton.textHeight) /2,
-
-                    onClick = (e) =>
-                    {
-                        showClassicMenu = !showClassicMenu;
-                    },
-                    onMove = (e) =>
-                    {
-                        onMenuButton = true;
-                        apMenuButton.set_textColor((int) APColor.Yellow);
-                    },
-                    onOut = (e) =>
-                    {
-                        onMenuButton = false;
-                        apMenuButton.set_textColor((int) APColor.White);
-                    }
-                };
-            }
-
-            if (apMenuLeft == null)
-            {
-                Bounds boundsLogo = logoBitmap.getSize(new Bounds());
-                double scale = 3/textPixelScale;
-                apMenuLeft = new dc.ui.Text(screenBitmap, true, false, new Ref<double>(ref scale), null, null)
-                {
-                    y = apMenuButton.y,
-                    scaleX = textBaseScale * scale,
-                    scaleY = textBaseScale * scale
-                };
-                apMenuLeft.set_text(" < ".AsHaxeString());
-                apMenuLeft.x = logoBitmap.x - apMenuLeft.textWidth;
-                apMenuLeft.set_textColor((int) APColor.White);
-                var inter = new Interactive(
-                    apMenuLeft.get_textWidth(),
-                    boundsLogo.yMax,
-                    apMenuLeft,
-                    null
-                )
-                {
-                    y = -(boundsLogo.yMax - apMenuButton.textHeight) /2,
-
-                    onClick = (e) =>
-                    {
-                        menuIndex--;
-                    },
-                    onMove = (e) =>
-                    {
-                        apMenuLeft.set_textColor((int) APColor.Yellow);
-                    },
-                    onOut = (e) =>
-                    {
-                        apMenuLeft.set_textColor((int) APColor.White);
-                    }
-                };
-            }
-            apMenuLeft.set_visible(!showClassicMenu && menuIndex == 1);
-
-            if (apMenuRight == null)
-            {
-                Bounds boundsMenuButton = apMenuButton.getSize(new Bounds());
-                Bounds boundsLogo = logoBitmap.getSize(new Bounds());
-                double scale = 3/textPixelScale;
-                apMenuRight = new dc.ui.Text(screenBitmap, true, false, new Ref<double>(ref scale), null, null)
-                {
-                    x = apMenuButton.x + boundsMenuButton.xMax,
-                    y = apMenuButton.y,
-                    scaleX = textBaseScale * scale,
-                    scaleY = textBaseScale * scale
-                };
-                apMenuRight.set_text(" > ".AsHaxeString());
-                apMenuRight.set_textColor((int) APColor.White);
-                var inter = new Interactive(
-                    apMenuRight.get_textWidth(),
-                    boundsLogo.yMax,
-                    apMenuRight,
-                    null
-                )
-                {
-                    y = -(boundsLogo.yMax - apMenuButton.textHeight) /2,
-
-                    onClick = (e) =>
-                    {
-                        menuIndex++;
-                    },
-                    onMove = (e) =>
-                    {
-                        apMenuRight.set_textColor((int) APColor.Yellow);
-                    },
-                    onOut = (e) =>
-                    {
-                        apMenuRight.set_textColor((int) APColor.White);
-                    }
-                };
-            }
-            apMenuRight.set_visible(!showClassicMenu && menuIndex == 0);
-        }
-
-        private static void ReturnMenuController()
-        {
-            showClassicMenu = true;
-            scrollerHistory?.SetScrollAtEnd();
-            scrollerFiller?.SetScrollAtStart();
-            scrollerBiome?.SetScrollAtStart();
-            if (scrollerIndex == 0 && scrollerHistory?.lastHighlight != -1) scrollerHistory?.lines[scrollerHistory.lastHighlight].StopHighlight();
-            else if (scrollerIndex == 1 && scrollerFiller?.lastHighlight != -1) scrollerFiller?.lines[scrollerFiller.lastHighlight].StopHighlight();
-            else if (scrollerIndex == 2 && scrollerBiome?.lastHighlight != -1 && scrollerBiome?.lastHighlightCell != -1) scrollerBiome?.lines[scrollerBiome.lastHighlight].StopHighlight(scrollerBiome.lastHighlightCell);
-            else if (scrollerIndex == 4 && shopX != -1 && shopY != -1) skillShopMenu.StopHighlight(shopX, shopY);
-            scrollerIndex = -1;
-            topIndex = -1;
-            energyLinkIndex = -1;
-            energyLink?.StopHighlight();
+            topMenu.ActualiseTopMenu();
         }
 
         private static void AddCellsCount()
@@ -894,8 +215,8 @@ namespace DeadCellsArchipelago {
                 }
             }
 
-            cellBitmap?.visible = !showClassicMenu;
-            cellsNumber?.visible = !showClassicMenu;
+            cellBitmap?.visible = !ShowClassicMenu();
+            cellsNumber?.visible = !ShowClassicMenu();
         }
 
         private static void AddIncolorMenu(DefaultPause self)
@@ -904,7 +225,7 @@ namespace DeadCellsArchipelago {
             skillShopMenu.AddIncolorWeapons(screenBitmap, self, false);
             skillShopMenu.AddIncolorSkills(screenBitmap, self, false);
 
-            skillShopMenu.SetVisible(!showClassicMenu && menuIndex == 0);
+            skillShopMenu.SetVisible(focusManager!.page == 1);
             
         }
 
@@ -912,25 +233,25 @@ namespace DeadCellsArchipelago {
             if(screenBitmap == null) return;
             if (scrollerFiller == null)
             {
-                scrollerFiller = new SkillScroller<ItemLine>(50, 550, screenBitmap, 500, true);
+                scrollerFiller = new SkillScroller<ItemLine>(50, 550, screenBitmap, 500, true, true, false);
                 scrollerFiller.Refresh(10);
 
                 Dictionary<string, int> ids = CalculateDiffFiller();
 
                 scrollerFiller.SetContentItemLine(ids, (int) APColor.DeepBlue);
             }
-            scrollerFiller.SetVisible(!showClassicMenu && menuIndex == 0);
+            scrollerFiller.SetVisible(focusManager!.page == 1);
         }
 
         private static void AddBiomeMenu() {
             if(screenBitmap == null) return;
             if (scrollerBiome == null)
             {
-                scrollerBiome = new SkillScroller<BiomeLine>(800, 150, screenBitmap, 900, true);
+                scrollerBiome = new SkillScroller<BiomeLine>(800, 150, screenBitmap, 900, true, true, true);
                 scrollerBiome.Refresh(25);
                 scrollerBiome.SetContentBiomeLine();
             }
-            scrollerBiome.SetVisible(!showClassicMenu && menuIndex == 0);
+            scrollerBiome.SetVisible(focusManager!.page == 1);
         }
 
         private static void AddPopUpMenu() {
@@ -938,10 +259,9 @@ namespace DeadCellsArchipelago {
             if (popUpTracker == null)
             {
                 popUpTracker = new PopUpTracker(screenBitmap);
-                showPopUp = false;
                 popUpTracker.AddFillerMenu();
             }
-            popUpTracker.SetVisible(showPopUp && !showClassicMenu && menuIndex == 0);
+            popUpTracker.SetVisible(focusManager!.page == 1 && (focusManager!.popUp == 1 || focusManager!.popUp == 2));
         }
 
         private static void AddDescriptionMenu() {
@@ -949,22 +269,21 @@ namespace DeadCellsArchipelago {
             if (popUpItemDesc == null)
             {
                 popUpItemDesc = new PopUpItemDesc(screenBitmap);
-                showDescPopUp = false;
             }
-            popUpItemDesc.SetVisible(showPopUp && showDescPopUp && !showClassicMenu && menuIndex == 0);
+            popUpItemDesc.SetVisible(focusManager!.page == 1 && focusManager!.popUp == 2);
         }
 
         private static void AddHistoryMenu() {
             if(screenBitmap == null) return;
             if (scrollerHistory == null)
             {
-                scrollerHistory = new SkillScroller<LogLine>(350, 150, screenBitmap, 265, false);
+                scrollerHistory = new SkillScroller<LogLine>(350, 150, screenBitmap, 265, false, true, false);
                 scrollerHistory.Refresh(10);
 
                 scrollerHistory.SetContentLogLine(History, (int) APColor.DeepBlue);
                 scrollerHistory.SetScrollAtEnd();
             }
-            scrollerHistory.SetVisible(!showClassicMenu && menuIndex == 0);
+            scrollerHistory.SetVisible(focusManager!.page == 1);
         }
 
         private static void AddTitles(DefaultPause self) {
@@ -1040,12 +359,13 @@ namespace DeadCellsArchipelago {
                 CenterX(1920, menuTitle);
                 menuTitle.y = self.title.y / screenScale;
             }
-            shopTitle?.visible = !showClassicMenu && menuIndex == 0;
-            historyTitle?.visible = !showClassicMenu && menuIndex == 0;
-            biomeTitle?.visible = !showClassicMenu && menuIndex == 0;
-            fillerTitle?.visible = !showClassicMenu && menuIndex == 0;
-            menuTitle?.visible = !showClassicMenu;
-            energyTitle?.visible = !showClassicMenu && menuIndex == 1;
+            shopTitle?.visible = focusManager!.page == 1;
+            historyTitle?.visible = focusManager!.page == 1;
+            biomeTitle?.visible = focusManager!.page == 1;
+            fillerTitle?.visible = focusManager!.page == 1;
+            menuTitle?.visible = focusManager!.page == 1;
+
+            energyTitle?.visible = focusManager!.page == 2;
         }
 
         public static void UpdateTopPopUp() {
@@ -1055,6 +375,7 @@ namespace DeadCellsArchipelago {
                 popUpTracker.UpdateWarpButton();
             }
         }
+
         public static void UpdateScrollContent(HashSet<string> itemIds) {
             if (popUpTracker != null)
             {
@@ -1065,27 +386,21 @@ namespace DeadCellsArchipelago {
         public static void ResetUI()
         {
             screenBitmap = null;
-            logoBitmap = null;
-            apMenuButton = null;
+            focusManager = null;
+            topMenu = null;
             skillShopMenu.Reset();
             cellBitmap = null;
             cellsNumber = null;
             scrollerFiller = null;
             scrollerBiome = null;
             popUpTracker = null;
-            showPopUp = false;
             popUpItemDesc = null;
-            showDescPopUp = false;
             scrollerHistory = null;
             shopTitle = null;
             historyTitle = null;
             biomeTitle = null;
             fillerTitle = null;
             menuTitle = null;
-            onMenuButton = false;
-            menuIndex = 0;
-            apMenuRight = null;
-            apMenuLeft = null;
             energyTitle = null;
             energyLink = null;
         }
@@ -1134,7 +449,7 @@ namespace DeadCellsArchipelago {
         {
             if (keyToRepeat != -1 && self.controller != null && self.controller.isAnyActionDown())
             {
-                if (keyToRepeat != 0)
+                if (keyToRepeat != 0 || focusManager!.currentFocus.canRepeatAct)
                 {
                     long now = Environment.TickCount64;
                     if (now - lastRepeatTimestamp >= RepeatIntervalMs)
@@ -1142,10 +457,6 @@ namespace DeadCellsArchipelago {
                         lastRepeatTimestamp = now;
                         modifiedOnActPressed?.Invoke(keyToRepeat, true);
                     }
-                }
-                else if (energyLinkIndex == 0 || energyLinkIndex == 1)
-                {
-                    modifiedOnActPressed?.Invoke(keyToRepeat, true);
                 }
             }
         }
@@ -1156,7 +467,7 @@ namespace DeadCellsArchipelago {
             {
                 energyLink = new EnergyLink(screenBitmap);
             }
-            energyLink.SetVisible(!showClassicMenu && menuIndex == 1);
+            energyLink.SetVisible(focusManager!.page == 2);
         }
 
         public static void WarpSelected()
@@ -1175,6 +486,19 @@ namespace DeadCellsArchipelago {
             SAVED_DATA!.currentLevelId = warpToBiome;
             SAVED_DATA!.lastLevelDepthSeen = GetMapLevelDepth(warpToBiome);
             warpToBiome = null;
+        }
+
+        private static void AddMenuInterractions()
+        {
+            skillShopMenu.SetRight(scrollerHistory!);
+            skillShopMenu.SetDown(scrollerFiller!);
+            FocusItem.SetLeftRight(scrollerHistory!, scrollerBiome!);
+            scrollerHistory!.down = scrollerFiller;
+            scrollerFiller!.right = scrollerBiome;
+            scrollerBiome!.up = topMenu!.menuButton;
+
+            energyLink!.energyLinkMiddle.upButton.up = topMenu!.menuButton;
+            energyLink!.energyLinkMiddle.downButton.up = topMenu!.menuButton;
         }
     }
 }

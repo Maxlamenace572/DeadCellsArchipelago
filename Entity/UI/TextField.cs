@@ -16,6 +16,8 @@ namespace DeadCellsArchipelago {
         public UIBox bgField;
         public dc.h2d.TextInput textInput;
         public Action textChanged;
+        public Action onFocus;
+        public Action onQuitFocus;
         public int bgColor = (int) APColor.DeepBlue;
         public int textColor = (int) APColor.White;
         public int highlightColor = (int) APColor.Yellow;
@@ -28,7 +30,8 @@ namespace DeadCellsArchipelago {
             if (bgColor != null) this.bgColor = (int) bgColor;
 
             textChanged = () => {};
-
+            onFocus = () => {};
+            onQuitFocus = () => {};
 
             bgField = UIBox.Class.drawBoxMain(width*screenScale, 1.0, 4, 3, 0, null);
 
@@ -64,8 +67,17 @@ namespace DeadCellsArchipelago {
                 {
                     StopHighlight();
                 },
-                onChange = () => {
+                onChange = () =>
+                {
                     textChanged.Invoke();
+                },
+                onFocus = (e) =>
+                {
+                    onFocus.Invoke();
+                },
+                onFocusLost = (e) =>
+                {
+                    onQuitFocus.Invoke();
                 }
             };
             textInput.set_text(text.AsHaxeString());

@@ -1,15 +1,12 @@
 using dc.h2d;
-using HaxeProxy.Runtime;
-using ModCore.Utilities;
 using Serilog;
 
-using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RoomManager;
 using static DeadCellsArchipelago.TrackerData;
 using static DeadCellsArchipelago.PauseMenuManager;
 
 namespace DeadCellsArchipelago {
-    public class SkillScroller<T> where T : Line
+    public class SkillScroller<T> : FocusList where T : Line
     {
         public dc.h2d.Object parent;
         public double posX;
@@ -21,14 +18,11 @@ namespace DeadCellsArchipelago {
         public int tempWidth;
         public double lastMousePosY;
         public double lastMousePosX;
-        public int lastHighlight = -1;
-        public int lastHighlightCell = -1;
-        public bool empty = true;
         public int maskHeight;
         public bool interactiveLines;
 
 
-        public SkillScroller(double x, double y, dc.h2d.Object parent, int maskHeight, bool interactiveLines)
+        public SkillScroller(double x, double y, dc.h2d.Object parent, int maskHeight, bool interactiveLines, bool vert, bool hori)
         {
             posX = x;
             posY = y;
@@ -36,6 +30,8 @@ namespace DeadCellsArchipelago {
             this.interactiveLines = interactiveLines;
             lines = new List<T>();
             this.maskHeight = maskHeight;
+            IsVertical = vert;
+            IsHorizontal = hori;
         }
 
         public void Refresh(int verticalSpacing)
@@ -76,7 +72,7 @@ namespace DeadCellsArchipelago {
                     if(interactiveLines)
                     {
                         lastMousePosY += flow.y - res;
-                        UpdateHighlight(false);
+                        UpdateCursorFocusScroller();
                     }
 
                     flow.y = res;
@@ -88,40 +84,30 @@ namespace DeadCellsArchipelago {
                     {
                         lastMousePosY = e.relY;
                         lastMousePosX = e.relX;
-                        UpdateHighlight(false);
-                    }
-                };
-                flow.interactive.onOut = (e) =>
-                {
-                    if(interactiveLines)
-                    {
-                        UpdateHighlight(true);
+                        UpdateCursorFocusScroller();
                     }
                 };
                 flow.interactive.onClick = (e) =>
                 {
-                    if (lastHighlight != -1 && interactiveLines)
-                    {
-                        if (typeof(T) == typeof(ItemLine))
-                        {
-                            ItemLine iL = (ItemLine)(Line) lines[lastHighlight];
-                            if (iL.nb != null)
-                            {
-                                iL.GiveItem();
-                            }
-                            else
-                            {
-                                iL.ShowItemDescription();
-                            }
-                        }
-                        else if (lastHighlightCell != -1 && typeof(T) == typeof(BiomeLine))
-                        {
-                            popUpTracker?.biomeLineIndex = lastHighlight;
-                            popUpTracker?.biomeCellIndex = lastHighlightCell;
-                            ((BiomeLine)(Line) lines[lastHighlight]).SetPopUpTracker(lastHighlightCell);
-                        }
-                    }
+                    Act();
                 };
+            }
+        }
+
+        public void UpdateCursorFocusScroller()
+        {
+            if (typeof(T) == typeof(ItemLine))
+            {
+                previousIndex[1] = currentIndex[1];
+                currentIndex[1] = (int) lastMousePosY / tempHeight;
+                focusManager!.ChangeFocusCursor(this);
+            }
+            else if (typeof(T) == typeof(BiomeLine))
+            {
+                previousIndex = (int[]) currentIndex.Clone();
+                currentIndex[0] = (int) lastMousePosX / tempWidth;
+                currentIndex[1] = (int) lastMousePosY / tempHeight;
+                focusManager!.ChangeFocusCursor(this);
             }
         }
 
@@ -140,6 +126,7 @@ namespace DeadCellsArchipelago {
                     }
                     index ++;
                 }
+                listSizes = [0, lines.Count];
                 if (tempHeight <  99) tempHeight += 100 -1;
             }
             mask.updateMask();
@@ -160,6 +147,7 @@ namespace DeadCellsArchipelago {
                     }
                     index ++;
                 }
+                listSizes = [0, lines.Count];
                 tempHeight += 100 -1;
             }
             mask.updateMask();
@@ -195,6 +183,7 @@ namespace DeadCellsArchipelago {
                     }
                     index ++;
                 }
+                listSizes = [3, lines.Count];
                 tempHeight += 180;
                 tempWidth += 320;
             }
@@ -221,51 +210,55 @@ namespace DeadCellsArchipelago {
             mask.updateMask();
         }
 
-        public void UpdateHighlight(bool onOut)
+        public override void Highlight()
         {
             if (typeof(T) == typeof(ItemLine))
             {
-                if (!onOut)
-                {
-                    if (lastHighlight != -1)
-                    {
-                        ((ItemLine)(Line) lines[lastHighlight]).StopHighlight();
-                    }
-                    if (((int) lastMousePosY / tempHeight) >= 0 && ((int) lastMousePosY / tempHeight) < lines.Count)
-                    {
-                        ((ItemLine)(Line) lines[(int) lastMousePosY / tempHeight]).Highlight();
-                        lastHighlight = (int) lastMousePosY / tempHeight;
-                    }
-                }
-                else
-                {
-                    if (lastHighlight != -1)
-                    {
-                        ((ItemLine)(Line) lines[lastHighlight]).StopHighlight();
-                        lastHighlight = -1;
-                    }
-                }
+                ((ItemLine)(Line) lines[currentIndex[1]]).Highlight();
             }
             else if (typeof(T) == typeof(BiomeLine))
             {
-                if (!onOut)
+                ((BiomeLine)(Line) lines[currentIndex[1]]).Highlight(currentIndex[0]);
+            }
+
+            if (previousIndex[1] < currentIndex[1])
+                SetScrollDownAtIndex();
+            else if (previousIndex[1] > currentIndex[1])
+                SetScrollUpAtIndex();
+        }
+
+        public override void StopHighlight()
+        {
+            if (typeof(T) == typeof(ItemLine) && previousIndex[1] < lines.Count)
+            {
+                ((ItemLine)(Line) lines[previousIndex[1]]).StopHighlight();
+            }
+            else if (typeof(T) == typeof(BiomeLine))
+            {
+                ((BiomeLine)(Line) lines[previousIndex[1]]).StopHighlight(previousIndex[0]);
+            }
+        }
+
+        public override void Act()
+        {
+            if (interactiveLines)
+            {
+                if (typeof(T) == typeof(ItemLine))
                 {
-                    if(lastHighlight != -1)
-                    {
-                        ((BiomeLine)(Line) lines[lastHighlight]).StopHighlight(lastHighlightCell);
-                    }
-                    ((BiomeLine)(Line) lines[(int) lastMousePosY / tempHeight]).Highlight((int) lastMousePosX / tempWidth);
-                    lastHighlight = (int) lastMousePosY / tempHeight;
-                    lastHighlightCell = (int) lastMousePosX / tempWidth;
+                    ItemLine iL = (ItemLine)(Line) lines[currentIndex[1]];
+                    if (iL.nb != null)
+                        iL.GiveItem();
+                    else
+                        iL.ShowItemDescription();
                 }
-                else
+                else if (typeof(T) == typeof(BiomeLine))
                 {
-                    if (lastHighlight != -1)
-                    {
-                        ((BiomeLine)(Line) lines[lastHighlight]).StopHighlight(lastHighlightCell);
-                        lastHighlight = -1;
-                        lastHighlightCell = -1;
-                    }
+                    popUpTracker?.biomeLineIndex = currentIndex[1];
+                    popUpTracker?.biomeCellIndex = currentIndex[0];
+                    ((BiomeLine)(Line) lines[currentIndex[1]]).SetPopUpTracker(currentIndex[0]);
+                    focusManager!.popUp = 1;
+                    previousIndex = (int[]) currentIndex.Clone();
+                    focusManager!.ChangePopUpFocus(popUpTracker!.topLine!);
                 }
             }
         }
@@ -283,6 +276,8 @@ namespace DeadCellsArchipelago {
                 line.bgBox.remove();
             }
             lines = new List<T>();
+            listSizes = [0, 0];
+            currentIndex = [0, 0];
         }
 
         public List<string> GetBiomesId()
@@ -313,9 +308,9 @@ namespace DeadCellsArchipelago {
         public void SetScrollDownAtIndex()
         {
             if (flow == null) return;
-            if (flow.y + lastHighlight * tempHeight + (tempHeight - flow.verticalSpacing) > maskHeight)
+            if (flow.y + currentIndex[1] * tempHeight + (tempHeight - flow.verticalSpacing) > maskHeight)
             {
-                flow.y = -(lastHighlight * tempHeight) + (maskHeight - (tempHeight - flow.verticalSpacing));
+                flow.y = -(currentIndex[1] * tempHeight) + (maskHeight - (tempHeight - flow.verticalSpacing));
                 flow.posChanged = true;
             }
         }
@@ -323,9 +318,9 @@ namespace DeadCellsArchipelago {
         public void SetScrollUpAtIndex()
         {
             if (flow == null) return;
-            if (flow.y + lastHighlight * tempHeight < 0)
+            if (flow.y + currentIndex[1] * tempHeight < 0)
             {
-                flow.y = -(lastHighlight * tempHeight);
+                flow.y = -(currentIndex[1] * tempHeight);
                 flow.posChanged = true;
             }
         }

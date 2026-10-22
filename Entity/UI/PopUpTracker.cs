@@ -19,8 +19,8 @@ namespace DeadCellsArchipelago {
         public PopUpTopLine? topLine;
         public int biomeLineIndex;
         public int biomeCellIndex;
-        public TextButton? popUpWarpButton = null;
-        public TextButton? cancelWarpButton = null;
+        public TextButton popUpWarpButton;
+        public TextButton cancelWarpButton;
         public TextField researchBar;
         public bool showButton;
         HashSet<string> itemIds = [];
@@ -56,13 +56,32 @@ namespace DeadCellsArchipelago {
                 textChanged = () =>
                 {
                     ResearchScrollContent(researchBar!.GetFieldValue());
-                }
+                },
+                onFocus = () =>
+                {
+                    focusManager!.textFieldFocused = true;
+                },
+                onQuitFocus = () =>
+                {
+                    focusManager!.textFieldFocused = false;
+                },
             };
 
-            popUpWarpButton = new TextButton(parent, bgBox.x, bgBox.y-70, false, false, "Warp", true);
-            cancelWarpButton = new TextButton(parent, popUpWarpButton.x+popUpWarpButton.GetWidth()+10, popUpWarpButton.y, false, false, "Cancel", false)
+            popUpWarpButton = new TextButton(parent, true, bgBox.x, bgBox.y-70, false, false, "Warp", true){
+                onMove = () =>
+                {
+                    focusManager!.ChangeFocusCursor(popUpWarpButton!);
+                },
+                onOut = () => {},
+            };
+            cancelWarpButton = new TextButton(parent, true, popUpWarpButton.x+popUpWarpButton.GetWidth()+10, popUpWarpButton.y, false, false, "Cancel", false)
             {
-                act = () => {warpToBiome = null;}
+                act = () => {warpToBiome = null;},
+                onMove = () =>
+                {
+                    focusManager!.ChangeFocusCursor(cancelWarpButton!);
+                },
+                onOut = () => {},
             };
             cancelWarpButton.SetColors((int) APColor.Red, (int) APColor.LightRed, null);
         }
@@ -74,24 +93,30 @@ namespace DeadCellsArchipelago {
             scrollerItems?.SetVisible(visible);
             topLine?.SetVisible(visible);
             researchBar.SetVisible(visible);
-            popUpWarpButton?.SetVisible(visible && showButton);
-            cancelWarpButton?.SetVisible(visible && showButton && warpToBiome != null);
+            popUpWarpButton.SetVisible(visible && showButton);
+            popUpWarpButton.focusDisabled = !(visible && showButton);
+            cancelWarpButton.SetVisible(visible && showButton && warpToBiome != null);
+            cancelWarpButton.focusDisabled = !(visible && showButton && warpToBiome != null);
+            if (!(visible && showButton && warpToBiome != null) && focusManager!.currentFocus == cancelWarpButton)
+                focusManager.ChangeFocus(popUpTracker!.topLine!);
             if (!visible) ResetResearch();
         }
 
         public void AddFillerMenu()
         {
-            scrollerItems = new SkillScroller<ItemLine>(bgBox.x+10, bgBox.y+150, parent, 500, true);
+            scrollerItems = new SkillScroller<ItemLine>(bgBox.x+10, bgBox.y+150, parent, 500, true, true, false);
             scrollerItems.Refresh(10);
 
             topLine = new PopUpTopLine(bgBox.x+10, bgBox.y+5, parent, biomeLineIndex, biomeCellIndex);
             scrollerItems.SetVisible(true);
+            SetPopUpMenuInterractions();
         }
 
         public void UpdateTopContent()
         {
             topLine?.flow.remove();
             topLine = new PopUpTopLine(bgBox.x+10, bgBox.y+5, parent, biomeLineIndex, biomeCellIndex);
+            SetPopUpMenuInterractions();
         }
 
         public void UpdateWarpButton()
@@ -99,29 +124,29 @@ namespace DeadCellsArchipelago {
             if (topLine!.biomeId == SAVED_DATA!.currentLevelId && topLine!.biomeId != "PrisonStart")
             {
                 showButton = true;
-                popUpWarpButton!.ChangeText("Reload");
-                cancelWarpButton!.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
-                popUpWarpButton!.act = () => {
+                popUpWarpButton.ChangeText("Reload");
+                cancelWarpButton.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
+                popUpWarpButton.act = () => {
                     warpToBiome = topLine!.biomeId;
                     isReload = true;
                 };
-                popUpWarpButton!.SetEnabled(true);
+                popUpWarpButton.SetEnabled(true);
             }
             else if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains)) showButton = false;
             else if ((SAVED_DATA!.IsCheckSent($"{topLine!.biomeId} Enter") && IsLevelAfterCurrent(topLine!.biomeId)) || GLOBAL_DATA!.debugWarp)
             {
                 showButton = true;
-                popUpWarpButton!.ChangeText("Warp");
-                cancelWarpButton!.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
-                popUpWarpButton!.act = () => {warpToBiome = topLine!.biomeId;};
-                popUpWarpButton!.SetEnabled(true);
+                popUpWarpButton.ChangeText("Warp");
+                cancelWarpButton.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
+                popUpWarpButton.act = () => {warpToBiome = topLine!.biomeId;};
+                popUpWarpButton.SetEnabled(true);
             }
             else 
             {
                 showButton = true;
-                popUpWarpButton!.ChangeText("Warp");
-                cancelWarpButton!.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
-                popUpWarpButton!.SetEnabled(false);
+                popUpWarpButton.ChangeText("Warp");
+                cancelWarpButton.ChangePos(popUpWarpButton.x+popUpWarpButton.GetWidth()+10, null);
+                popUpWarpButton.SetEnabled(false);
             }
         }
 
@@ -166,12 +191,21 @@ namespace DeadCellsArchipelago {
             scrollerItems.SetContentItemLine(matchingIds.ToList(), (int) APColor.Blue);
             scrollerItems.flow?.y = 0;
             scrollerItems.flow?.posChanged = true;
+            focusManager!.ChangeFocus(topLine);
         }
 
         public void ResetResearch()
         {
             researchBar.SetFieldValue("");
             itemIds = [];
+        }
+
+        private void SetPopUpMenuInterractions()
+        {
+            FocusItem.SetLeftRight(popUpWarpButton, cancelWarpButton);
+            FocusItem.SetUpDown(popUpWarpButton, topLine!);
+            cancelWarpButton.down = topLine!;
+            FocusItem.SetUpDown(topLine!, scrollerItems!);
         }
     }
 }

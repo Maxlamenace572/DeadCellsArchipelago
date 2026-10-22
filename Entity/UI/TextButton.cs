@@ -7,7 +7,7 @@ using static DeadCellsArchipelago.MainMenuManager;
 using static DeadCellsArchipelago.ImageManager;
 
 namespace DeadCellsArchipelago {
-    public class TextButton
+    public class TextButton : FocusItem
     {
         public dc.h2d.Object parent;
         public double x;
@@ -16,6 +16,8 @@ namespace DeadCellsArchipelago {
         private UIBox outerBox = null!;
         public dc.ui.Text buttonText = null!;
         public Action act;
+        public Action onMove;
+        public Action onOut;
         private Interactive inter = null!;
         public bool disabled;
         public int color = (int) APColor.White;
@@ -24,8 +26,9 @@ namespace DeadCellsArchipelago {
         private bool centerX;
         private bool centerY;
         private string text;
+        bool bigText;
 
-        public TextButton(dc.h2d.Object parent, double x, double y, bool centerX, bool centerY, string text, bool disable)
+        public TextButton(dc.h2d.Object parent, bool bigText, double x, double y, bool centerX, bool centerY, string text, bool disable)
         {
             this.parent = parent;
             this.centerX = centerX;
@@ -34,8 +37,11 @@ namespace DeadCellsArchipelago {
             this.x = x;
             this.y = y;
             disabled = disable;
+            this.bigText = bigText;
 
             act = () => {};
+            onMove = Highlight;
+            onOut = StopHighlight;
 
             BuildButton();
         }
@@ -81,14 +87,22 @@ namespace DeadCellsArchipelago {
             return outerBox.hei / screenScale;
         }
 
-        public void Highlight()
+        public override void Highlight()
         {
             buttonText.set_textColor(highlightColor);
         }
 
-        public void StopHighlight()
+        public override void StopHighlight()
         {
-            buttonText.set_textColor(color);
+            if (disabled)
+                buttonText.set_textColor(disabledColor);
+            else
+                buttonText.set_textColor(color);
+        }
+
+        public override void Act()
+        {
+            if (!disabled) act.Invoke();
         }
 
         public void ChangeText(string newText)
@@ -117,7 +131,7 @@ namespace DeadCellsArchipelago {
         private void BuildButton()
         {
             double scale = 3/textPixelScale;
-            buttonText = new dc.ui.Text(parent, true, false, new Ref<double>(ref scale), null, null)
+            buttonText = new dc.ui.Text(parent, bigText, false, new Ref<double>(ref scale), null, null)
             {
                 scaleX = textBaseScale * scale,
                 scaleY = textBaseScale * scale
@@ -168,15 +182,15 @@ namespace DeadCellsArchipelago {
             {
                 onClick = (e) =>
                 {
-                    if (!disabled) act.Invoke();
+                    Act();
                 },
                 onMove = (e) =>
                 {
-                    if (!disabled) Highlight();
+                    if (!disabled) onMove.Invoke();
                 },
                 onOut = (e) =>
                 {
-                    if (!disabled) StopHighlight();
+                    if (!disabled) onOut.Invoke();
                 },
                 visible = !disabled
             };

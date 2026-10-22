@@ -1,13 +1,5 @@
-using dc;
-using dc.h2d;
-using dc.h2d.col;
-using dc.haxe;
 using dc.tool;
-using dc.ui;
-using dc.ui.hud;
 using dc.ui.pause;
-using HaxeProxy.Runtime;
-using ModCore.Utilities;
 using Serilog;
 
 using static DeadCellsArchipelago.ItemManager;
@@ -27,6 +19,10 @@ namespace DeadCellsArchipelago {
         {
             this.x = x;
             this.y = y;
+            FocusItem.SetLeftRight(buttonWeapon1, buttonWeapon2);
+            FocusItem.SetLeftRight(buttonSkill2, buttonSkill1);
+            FocusItem.SetUpDown(buttonWeapon1, buttonSkill2);
+            FocusItem.SetUpDown(buttonWeapon2, buttonSkill1);
         }
 
         public void AddIncolorWeapons(dc.h2d.Object parent, DefaultPause self, bool invert)
@@ -90,49 +86,18 @@ namespace DeadCellsArchipelago {
             buttonSkill2.SetVisible(visible);
         }
 
-        public void Highlight(int indexX, int indexY)
+        public void SetRight(FocusItem fiRight)
         {
-            switch (indexX)
-            {
-                case 0:
-                    if(indexY == 0) buttonWeapon1.Highlight();
-                    if(indexY == 1) buttonSkill2.Highlight();
-                    break;
-                case 1:
-                    if(indexY == 0) buttonWeapon2.Highlight();
-                    if(indexY == 1) buttonSkill1.Highlight();
-                    break;
-            }
+            buttonWeapon2.right = fiRight;
+            buttonSkill1.right = fiRight;
+            fiRight.left = buttonSkill1;
         }
 
-        public void StopHighlight(int indexX, int indexY)
+        public void SetDown(FocusItem fiDown)
         {
-            switch (indexX)
-            {
-                case 0:
-                    if(indexY == 0) buttonWeapon1.StopHighlight();
-                    if(indexY == 1) buttonSkill2.StopHighlight();
-                    break;
-                case 1:
-                    if(indexY == 0) buttonWeapon2.StopHighlight();
-                    if(indexY == 1) buttonSkill1.StopHighlight();
-                    break;
-            }
-        }
-
-        public void Buy(int indexX, int indexY)
-        {
-            switch (indexX)
-            {
-                case 0:
-                    if(indexY == 0) buttonWeapon1.Buy();
-                    if(indexY == 1) buttonSkill2.Buy();
-                    break;
-                case 1:
-                    if(indexY == 0) buttonWeapon2.Buy();
-                    if(indexY == 1) buttonSkill1.Buy();
-                    break;
-            }
+            buttonSkill1.down = fiDown;
+            buttonSkill2.down = fiDown;
+            fiDown.up = buttonSkill1;
         }
     }
 }

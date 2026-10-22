@@ -175,7 +175,7 @@ namespace DeadCellsArchipelago {
 
         public void ShowItemDescription()
         {
-            showDescPopUp = true;
+            focusManager!.popUp = 2;
             popUpItemDesc!.AddContentMenu(ItemsData[itemId]);
         }
 

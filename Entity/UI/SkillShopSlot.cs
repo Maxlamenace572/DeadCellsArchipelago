@@ -16,7 +16,7 @@ using static DeadCellsArchipelago.MainMenuManager;
 
 
 namespace DeadCellsArchipelago {
-    public class SkillShopSlot
+    public class SkillShopSlot : FocusItem
     {
         public Skill? skill;
         public dc.ui.Text? label;
@@ -57,55 +57,24 @@ namespace DeadCellsArchipelago {
                 {
                     Buy = BuyPokebombCharges;
                     SetPrice(parent, pokebombShopPrice);
-
-                    Skill capturedSkill = skill;
-                    internII = ii;
-                    Bounds boundsSkill = skill.getSize(new Bounds());
-                    inter = new Interactive(boundsSkill.xMax*screenScale, boundsSkill.yMax*screenScale, skill, null)
-                    {
-                        onClick = (e) =>
-                        {
-                            BuyPokebombCharges();
-                        },
-                        onMove = (e) =>
-                        {
-                            Highlight();
-                        },
-                        onOut = (e) =>
-                        {
-                            StopHighlight();
-                        }
-                    };
                 }
                 else if (!HasAffix(ii, "Colorless"))
                 {
                     Buy = BuyColorless;
                     SetPrice(parent, colorlessShopPrice);
-
-                    Skill capturedSkill = skill;
-                    internII = ii;
-                    Bounds boundsSkill = skill.getSize(new Bounds());
-                    inter = new Interactive(boundsSkill.xMax*screenScale, boundsSkill.yMax*screenScale, skill, null)
-                    {
-                        onClick = (e) =>
-                        {
-                            BuyColorless();
-                        },
-                        onMove = (e) =>
-                        {
-                            Highlight();
-                        },
-                        onOut = (e) =>
-                        {
-                            StopHighlight();
-                        }
-                    };
                 }
                 else if (!HasAffix(ii, "Legendary"))
                 {
                     Buy = BuyLegendary;
                     SetPrice(parent, legendaryShopPrice);
+                }
+                else
+                {
+                    SetNoPrice(parent);
+                }
 
+                if (label!.text.ToString() != "-")
+                {
                     Skill capturedSkill = skill;
                     internII = ii;
                     Bounds boundsSkill = skill.getSize(new Bounds());
@@ -113,21 +82,13 @@ namespace DeadCellsArchipelago {
                     {
                         onClick = (e) =>
                         {
-                            BuyLegendary();
+                            Act();
                         },
                         onMove = (e) =>
                         {
-                            Highlight();
-                        },
-                        onOut = (e) =>
-                        {
-                            StopHighlight();
+                            focusManager!.ChangeFocusCursor(this);
                         }
                     };
-                }
-                else
-                {
-                    SetNoPrice(parent);
                 }
             }
             else
@@ -222,18 +183,23 @@ namespace DeadCellsArchipelago {
             label.x = boundsCell.xMax + cellBitmap.x;
         }
 
-        public void Highlight()
+        public override void Highlight()
         {
             if (label == null) return;
             if (label.text.ToString() == "-") label.set_textColor((int) APColor.Yellow);
             else if (label.textColor != (int) APColor.Red) label.set_textColor((int) APColor.BlueSky);
         }
 
-        public void StopHighlight()
+        public override void StopHighlight()
         {
             if (label == null) return;
             if (label.text.ToString() == "-") label.set_textColor((int) APColor.White);
             else label?.set_textColor(dc.ui.Text.Class.COLORS.get("CE".AsHaxeString()));
+        }
+
+        public override void Act()
+        {
+            Buy();
         }
 
         public void BuyColorless()

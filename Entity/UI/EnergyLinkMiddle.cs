@@ -1,11 +1,5 @@
-using dc.h2d;
-using HaxeProxy.Runtime;
-using ModCore.Utilities;
-
-using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.MainMenuManager;
-using static DeadCellsArchipelago.ItemManager;
-using dc.ui;
+using static DeadCellsArchipelago.PauseMenuManager;
 
 namespace DeadCellsArchipelago {
     public class EnergyLinkMiddle
@@ -13,10 +7,9 @@ namespace DeadCellsArchipelago {
         public double x;
         public double y;
         public dc.h2d.Object parent;
-        public static dc.ui.Text? up = null;
-        public static dc.ui.Text? down = null;
-        public static dc.h2d.TextInput? number = null;
-        public static UIBox? numberBg = null;
+        public TextButton upButton;
+        public TextButton downButton;
+        public TextField number;
         public int cellsToSend = 0;
 
         public EnergyLinkMiddle(dc.h2d.Object parent, double x, double y)
@@ -24,156 +17,71 @@ namespace DeadCellsArchipelago {
             this.x = x;
             this.y = y;
             this.parent = parent;
-            SetButtons();
-        }
 
-        public void SetButtons()
-        {
-            double scale = 3/textPixelScale;
-            down = new dc.ui.Text(parent, true, false, new Ref<double>(ref scale), null, null)
+            downButton = new TextButton(parent, false, x,  y, false, false, " < ", false)
             {
-                x = x,
-                y = y,
-                scaleX = textBaseScale * scale,
-                scaleY = textBaseScale * scale
-            };
-            down.set_text(" < ".AsHaxeString());
-            down.set_textColor((int) APColor.White);
-
-            var inter = new Interactive(
-                down.get_textWidth(),
-                down.get_textHeight(),
-                down,
-                null
-            )
-            {
-                onClick = (e) =>
+                act = () =>
                 {
-                    Act(true);
+                    cellsToSend = Math.Max(0, GetCellValue()-10);
+                    number?.SetFieldValue($"{cellsToSend}");
                 },
-                onMove = (e) =>
+                onMove = () =>
                 {
-                    Highlight(true);
+                    focusManager!.ChangeFocusCursor(downButton!);
                 },
-                onOut = (e) =>
-                {
-                    StopHighlight(true);
-                }
+                onOut = () => {},
+                canRepeatAct = true
             };
 
-            up = new dc.ui.Text(parent, true, false, new Ref<double>(ref scale), null, null)
+            number = new TextField(parent, 94, y+2, false, false, "", (int)APColor.DeepBlue, 140)
             {
-                x = x+250,
-                y = y,
-                scaleX = textBaseScale * scale,
-                scaleY = textBaseScale * scale
+                onFocus = () =>
+                {
+                    focusManager!.textFieldFocused = true;
+                },
+                onQuitFocus = () =>
+                {
+                    focusManager!.textFieldFocused = false;
+                },
             };
-            up.set_text(" > ".AsHaxeString());
-            up.x -= up.get_textWidth();
-            up.set_textColor((int) APColor.White);
-            inter = new Interactive(
-                up.get_textWidth(),
-                up.get_textHeight(),
-                up,
-                null
-            )
+            number.SetFieldValue("0");
+
+            upButton = new TextButton(parent, false, x+220,  y, false, false, " > ", false)
             {
-                onClick = (e) =>
+                act = () =>
                 {
-                    Act(false);
+                    cellsToSend = GetCellValue()+10;
+                    number?.SetFieldValue($"{cellsToSend}");
                 },
-                onMove = (e) =>
+                onMove = () =>
                 {
-                    Highlight(false);
+                    focusManager!.ChangeFocusCursor(upButton!);
                 },
-                onOut = (e) =>
-                {
-                    StopHighlight(false);
-                }
+                onOut = () => {},
+                canRepeatAct = true
             };
-
-            numberBg = UIBox.Class.drawBoxMain(150.0*screenScale, 1.0, 4, 3, 0, null);
-            //CenterX(250 - down.get_textWidth() - up.get_textWidth(), numberBg);
-            //numberBg.x += down.x + down.get_textWidth();
-            numberBg.x = 88;
-            //CenterY(down, numberBg);
-            //numberBg.y += y;
-            numberBg.y = 205;
-            numberBg.alpha = 0.85;
-            numberBg.sg.color = ColorVectorRGBA(17*numberBg.alpha, 17*numberBg.alpha, 37*numberBg.alpha, 1);
-            numberBg.scaleX = 3;
-            numberBg.scaleY = 3;
-
-            parent.addChild(numberBg);
-
-            dc.ui.Text frontInput = new dc.ui.Text(parent, false, false, new Ref<double>(ref scale), null, null);
-            number = new dc.h2d.TextInput(frontInput.font, parent)
-            {
-                x = numberBg.x+6,
-                y = numberBg.y+2,
-                inputWidth = 164,
-                scaleX = textBaseScale * scale,
-                scaleY = textBaseScale * scale,
-                onMove = (e) =>
-                {
-                    number?.set_textColor((int) APColor.Yellow);
-                },
-                onOut = (e) =>
-                {
-                    number?.set_textColor((int) APColor.White);
-                }
-            };
-            number.set_text($"0".AsHaxeString());
         }
 
         public void SetVisible(bool visible)
         {
-            up?.set_visible(visible);
-            down?.set_visible(visible);
-            number?.set_visible(visible);
-            number?.set_visible(visible);
-            numberBg?.set_visible(visible);
+            upButton.SetVisible(visible);
+            downButton.SetVisible(visible);
+            number.SetVisible(visible);
         }
 
         public int GetCellValue()
         {
             int res;
-            if (int.TryParse(number?.text.ToString(), out int valeur))
+            if (int.TryParse(number.GetFieldValue().ToString(), out int valeur))
             {
                 res = valeur;
             }
             else
             {
                 res = cellsToSend;
-                number?.set_text($"{res}".AsHaxeString());
+                number.SetFieldValue($"{res}");
             }
             return res;
-        }
-
-        public void Highlight(bool isDown)
-        {
-            if (isDown) down?.set_textColor((int) APColor.Yellow);
-            else up?.set_textColor((int) APColor.Yellow);
-        }
-
-        public void StopHighlight(bool isDown)
-        {
-            if (isDown) down?.set_textColor((int) APColor.White);
-            else up?.set_textColor((int) APColor.White);
-        }
-
-        public void Act(bool isDown)
-        {
-            if (isDown)
-            {
-                cellsToSend = Math.Max(0, GetCellValue()-1);
-                number?.set_text($"{cellsToSend}".AsHaxeString());
-            }
-            else
-            {
-                cellsToSend = GetCellValue()+1;
-                number?.set_text($"{cellsToSend}".AsHaxeString());
-            }
         }
     }
 }

@@ -152,7 +152,6 @@ namespace DeadCellsArchipelago {
         public void SetPopUpTracker()
         {
             if(popUpTracker == null) return;
-            showPopUp = true;
             
             UpdateTopPopUp();
 

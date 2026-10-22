@@ -20,9 +20,11 @@ namespace DeadCellsArchipelago {
         public double interW;
         public double interX;
         private bool hasCheckAvailable;
+        public int index;
 
-        public PopUpTopCell(dc.h2d.Object parent, string labelS, HashSet<string> toChecks, int max)
+        public PopUpTopCell(dc.h2d.Object parent, string labelS, HashSet<string> toChecks, int max, int index)
         {
+            this.index = index;
             this.toChecks = toChecks;
             hasCheckAvailable = HasCheckAvailable();
             int frame = 0;
@@ -86,8 +88,14 @@ namespace DeadCellsArchipelago {
                 x = interX,
                 onClick = (e) =>
                 {
-                    UpdateScrollContent(toChecks);
-                }
+                    Act();
+                },
+                onMove = (e) =>
+                {
+                    popUpTracker!.topLine!.previousIndex[0] = popUpTracker!.topLine!.currentIndex[0];
+                    popUpTracker!.topLine!.currentIndex[0] = index;
+                    focusManager!.ChangeFocusCursor(popUpTracker!.topLine!);
+                },
             };
         }
 
@@ -114,6 +122,11 @@ namespace DeadCellsArchipelago {
                 label.set_textColor((int) APColor.Gray);
                 number.set_textColor((int) APColor.Gray);
             }
+        }
+
+        public void Act()
+        {
+            UpdateScrollContent(toChecks);
         }
 
         public bool HasCheckAvailable()
