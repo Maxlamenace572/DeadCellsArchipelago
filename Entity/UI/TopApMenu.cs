@@ -86,7 +86,11 @@ namespace DeadCellsArchipelago {
                 },
                 onMove = (e) =>
                 {
-                    focusManager!.ChangeFocusCursor(this);
+                    focusManager.InitializeModFocus();
+                },
+                onOut = (e) =>
+                {
+                    if (focusManager.page == 0) focusManager.EndModFocus();
                 }
             };
         }

@@ -95,14 +95,14 @@ namespace DeadCellsArchipelago {
             currentFocus = newFocus;
         }
 
-        private void InitializeModFocus()
+        public void InitializeModFocus()
         {
             currentFocus = topMenu!.menuButton;
             currentFocus.Highlight();
             focusModEnabled = true;
         }
 
-        private void EndModFocus()
+        public void EndModFocus()
         {
             currentFocus.StopHighlight();
             focusModEnabled = false;
