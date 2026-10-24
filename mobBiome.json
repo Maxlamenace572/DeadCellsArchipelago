@@ -93,6 +93,16 @@
       {
         "min_bc": 5,
         "max_bc": 5,
+        "name": "Librarian"
+      },
+      {
+        "min_bc": 5,
+        "max_bc": 5,
+        "name": "Skull"
+      },
+      {
+        "min_bc": 5,
+        "max_bc": 5,
         "name": "Stomper"
       }
     ]
@@ -469,6 +479,11 @@
         "min_bc": 1,
         "max_bc": 3,
         "name": "Spinner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "S_ZombieFly"
       }
     ]
   },
@@ -487,7 +502,22 @@
       {
         "min_bc": 0,
         "max_bc": 5,
+        "name": "BootlegBowman"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
         "name": "BootlegHomunculus"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BootlegShovelman"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BootlegSwordsman"
       },
       {
         "min_bc": 0,
@@ -668,7 +698,17 @@
       {
         "min_bc": 0,
         "max_bc": 5,
+        "name": "Spawnling"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
         "name": "Spinner"
+      },
+      {
+        "min_bc": 2,
+        "max_bc": 5,
+        "name": "S_Fly"
       }
     ]
   },
@@ -732,6 +772,11 @@
   },
   "DookuCastleHard": {
     "mobs": [
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "BonePillar"
+      },
       {
         "min_bc": 0,
         "max_bc": 5,
@@ -919,6 +964,11 @@
       {
         "min_bc": 0,
         "max_bc": 5,
+        "name": "Spawnling"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
         "name": "SpikedSatyr"
       },
       {
@@ -1067,6 +1117,11 @@
         "min_bc": 0,
         "max_bc": 5,
         "name": "Spinner"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "S_Fly"
       },
       {
         "min_bc": 0,
@@ -1281,12 +1336,22 @@
       {
         "min_bc": 0,
         "max_bc": 5,
+        "name": "SewerTtcl"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
         "name": "Shield"
       },
       {
         "min_bc": 0,
         "max_bc": 5,
         "name": "Spiker"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "S_Worm"
       },
       {
         "min_bc": 0,
@@ -1341,6 +1406,11 @@
         "min_bc": 0,
         "max_bc": 5,
         "name": "Scorpio"
+      },
+      {
+        "min_bc": 4,
+        "max_bc": 5,
+        "name": "S_Worm"
       },
       {
         "min_bc": 0,
@@ -1433,6 +1503,16 @@
       {
         "min_bc": 0,
         "max_bc": 5,
+        "name": "S_WallEggWorm"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "S_Worm"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
         "name": "WormZombie"
       },
       {
@@ -1478,6 +1558,11 @@
         "min_bc": 3,
         "max_bc": 5,
         "name": "Rampager"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "S_WallEggWorm"
       },
       {
         "min_bc": 0,
@@ -1539,6 +1624,11 @@
         "min_bc": 0,
         "max_bc": 5,
         "name": "Comboter"
+      },
+      {
+        "min_bc": 0,
+        "max_bc": 5,
+        "name": "FlyingCrow"
       },
       {
         "min_bc": 0,
