@@ -1052,5 +1052,16 @@ namespace DeadCellsArchipelago {
                 else ip.investedCells = pi.Value;
             }
         }
+
+        public static bool IsBankDepthItem(string itemId)
+        {
+            return new[] {
+                "RevengeSword", "P_ColdDmg", "ClusterBomb", "HeavyTurret", "PrisonerDemon", "P_Execute_LowHealth", "P_DmgPlantedArrow", "Katana", "PrisonerKillBill", "SpikedBoots",
+                "CeilTurret", "P_Backpack_Shield", "SismicBlade", "PrisonerAladdin", "Lightning", "LeechBuff", "HookWhip", "P_CDR_locked", "Cannon", "P_DmgSkillRanged", "MarkBow",
+                "PrisonerBison", "Hook", "BumpShield", "PrisonerSylvanian", "MultiKickBoots", "MultiCrossBow", "BulletBlade", "PrisonerHyperlight", "P_DmgNearRanged", "SlowOrb",
+                "SpikeShield", "MagicSalve", "PrisonerShaman", "Guacamelee", "Shockwave", "ExplosiveGrenade", "Crusher", "P_Bleed", "PrisonerCarduus", "Tornado", "P_ScaledHealth",
+                "QuickFists", "P_Health", "BarrelLauncher"
+            }.Any(itemId.Contains);
+        }
     }
 }

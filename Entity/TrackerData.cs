@@ -2,7 +2,6 @@ using System.Text.Json;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuleItemTracker;
 using static DeadCellsArchipelago.ModAssetManager;
-using dc.en;
 
 namespace DeadCellsArchipelago
 {
@@ -69,7 +68,9 @@ namespace DeadCellsArchipelago
                                 itD.min_bc = Math.Min(source.min_bc, itD.min_bc);
                                 if (source.mob != null) itD.mobs.Add(source.mob);
                                 itD.biomes.Add(source.biome);
-                                if (source.biome == "Challenge" || (biomes[source.biome].accessible && source.min_bc <= SAVED_DATA.CountReceivedStemCell())) itD.accessible = true;
+                                if (source.biome == "Challenge" || (!(source.biome == "Bank" && IsBankDepthItem(entry.Key)) && 
+                                    biomes[source.biome].accessible && source.min_bc <= SAVED_DATA.CountReceivedStemCell()))
+                                    itD.accessible = true;
                             }
                             if (itD.accessible && entry.Value.rarity != null && new[] {"Legendary", "Rare", "Uncommon" }.Any(entry.Value.rarity.Contains))
                             {
@@ -81,7 +82,7 @@ namespace DeadCellsArchipelago
                     }
                 }
             }
-            AddSpecialRules();
+            AddSpecialRules(biomes);
             foreach (string biomeId in GetBiomesId())
             {
                 List<string> start = ["T", "R"];
@@ -220,15 +221,15 @@ namespace DeadCellsArchipelago
                 JsonSerializer.Deserialize<Dictionary<string, BiomeMobs>>(json)!;
 
             HashSet<string> accessibleMobs = [];
-            
             Dictionary<string, Biome> biomes = CalculateRegionData();
+            int maxDepth = GetMaxWorldDepth();
             
             foreach(KeyValuePair<string, Biome> biome in biomes)
             {
                 if (!biome.Value.accessible) continue;
                 foreach (MobInBiome mob in biomeMobs[biome.Key].mobs)
                 {
-                    if (mob.min_bc <= bsc && mob.max_bc >= bsc) accessibleMobs.Add(mob.name);
+                    if (mob.min_bc <= bsc && mob.max_bc >= bsc && (mob.depth == null || mob.depth.Any(d => d <= maxDepth))) accessibleMobs.Add(mob.name);
                 }
             }
 

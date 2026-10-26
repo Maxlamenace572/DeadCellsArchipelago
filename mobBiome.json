@@ -151,13 +151,13 @@
         "depth": [7]
       },
       {
-        "min_bc": 0,
+        "min_bc": 3,
         "max_bc": 5,
         "name": "ClusterGrenader",
         "depth": [5]
       },
       {
-        "min_bc": 3,
+        "min_bc": 0,
         "max_bc": 5,
         "name": "ClusterGrenader",
         "depth": [7]

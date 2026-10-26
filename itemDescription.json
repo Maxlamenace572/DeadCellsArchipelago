@@ -101,7 +101,7 @@
     "BlobbyFlameGum": "Spawn 100 biters in the same run.",
     "EvilEmpire": "Watch the end credits for some time.",
     "BlackHole": "Complete a run without ever getting hit.",
-    "BlackHoleWhite": "Have a stack of 200 curses.",
+    "BlackHoleWhite": "Have a stack of 200 curses. This can be done by drinking the cursed flask multiple times, or by borrowing 40,000 gold in the Bank (using the biome reload) and breaking the door leading to the exit.",
     "BlackHoleRed": "Send 7 head checks.",
     "BlackHoleBlue": "Unlock all required items.",
     "BlackHoleGreen": "Send 75 item checks.",
@@ -122,7 +122,7 @@
     "GlitchyHeadDeepSpace": "Send 33 head checks.",
     "GlitchyHeadRed": "Complete a run while still being cursed. Having the Cursed Sword counts for this.",
     "BlowTorchBlack": "Defeat a boss with less than 5% HP remaining.",
-    "BlowTorchGold": "Have 200,000 gold at the same time.",
+    "BlowTorchGold": "Have 200,000 gold at the same time. The easiest way to do it is to borrow at the first ATM at the Bank's entrance and reload the biome.",
     "BlowTorchRed": "Defeat a boss with the Fire Blast.",
     "BossCellHead": "Unlock all five BSCs.",
 

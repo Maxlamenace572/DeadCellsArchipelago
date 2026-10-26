@@ -6,8 +6,11 @@ using static DeadCellsArchipelago.ModAssetManager;
 namespace DeadCellsArchipelago {
     public static class RuleItemTracker
     {
-        public static void AddSpecialRules()
+        private static Dictionary<string, Biome> biomes = [];
+
+        public static void AddSpecialRules(Dictionary<string, Biome> b)
         {
+            biomes = b;
             Dictionary<string, List<List<string>>> hasRules = [];
             hasRules["BumpBoots"] = [["LadderKey"]];
             hasRules["ExplosiveGrenade"] = [["LadderKey"]];
@@ -47,7 +50,7 @@ namespace DeadCellsArchipelago {
             hasRules["RichterROB"] = [["RichterUppercutKey"]];
 
             hasRules["Bitter"] = [["SideBomb"]];
-            hasRules["BlackHoleWhite"] = [["P_CursedFlask"]];
+            hasRules["BlackHoleWhite"] = [["Flask1", "P_CursedFlask", "P_CorruptedHealing"], ["BankUnlock"]];
             hasRules["HotlineMiamiChicken"] = [["BaseballBat"]];
             hasRules["KatanaZero"] = [["Katana"]];
             hasRules["ShovelKnight"] = [["Shovel"]];
@@ -72,19 +75,19 @@ namespace DeadCellsArchipelago {
 
 
             Dictionary<string, List<List<string>>> canReachRules = [];
-            canReachRules["Anathema"] = [["SewerShort Enter"], ["PurpleGarden Enter"], ["Greenhouse Enter"]];
-            canReachRules["P_CursedFlask"] = [["SewerShort Enter"], ["PurpleGarden Enter"], ["Greenhouse Enter"]];
-            canReachRules["P_DemonicForce"] = [["SewerShort Enter"], ["PurpleGarden Enter"], ["Greenhouse Enter"]];
-            canReachRules["Misericord"] = [["SewerShort Enter"], ["PurpleGarden Enter"], ["Greenhouse Enter"]];
-            canReachRules["P_DamnedVigor"] = [["SewerShort Enter"], ["PurpleGarden Enter"], ["Greenhouse Enter"]];
-            canReachRules["Indulgence"] = [["SewerShort Enter"], ["PurpleGarden Enter"], ["Greenhouse Enter"]];
+            canReachRules["Anathema"] = [["SewerShort"], ["PurpleGarden"], ["Greenhouse"]];
+            canReachRules["P_CursedFlask"] = [["SewerShort"], ["PurpleGarden"], ["Greenhouse"]];
+            canReachRules["P_DemonicForce"] = [["SewerShort"], ["PurpleGarden"], ["Greenhouse"]];
+            canReachRules["Misericord"] = [["SewerShort"], ["PurpleGarden"], ["Greenhouse"]];
+            canReachRules["P_DamnedVigor"] = [["SewerShort"], ["PurpleGarden"], ["Greenhouse"]];
+            canReachRules["Indulgence"] = [["SewerShort"], ["PurpleGarden"], ["Greenhouse"]];
 
-            canReachRules["ShipwreckKey"] = [["SewerShort Enter"]];
-            canReachRules["VortexBadSeed"] = [["SewerShort Enter"], ["DookuCastle Enter"], ["Greenhouse Enter"]];
-            canReachRules["CurseofTheDeadGods"] = [["Throne Exit"], ["QueenArena Exit"], ["DookuArena Exit"]];
-            canReachRules["Flawless"] = [["Boss_Behemoth", "Boss_Beholder", "Boss_MamaTick", "Boss_TimeKeeper", "Boss_Giant", "Boss_GardenerBoss", "Boss_KingsHand",
-                "Boss_AmazonBrutal", "Boss_Queen", "Boss_Collector"]];
-            canReachRules["BlobbyFlameMagma"] = [["Boss_KingsHand"]];
+            canReachRules["ShipwreckKey"] = [["SewerShort"]];
+            canReachRules["VortexBadSeed"] = [["SewerShort"], ["DookuCastle"], ["Greenhouse"]];
+            canReachRules["CurseofTheDeadGods"] = [["Throne"], ["QueenArena"], ["DookuArena"]];
+            canReachRules["Flawless"] = [["Bridge", "BeholderPit", "SwampHeart", "TopClockTower", "Giant", "GardenerStage", "Throne",
+                "Lighthouse", "QueenArena", "Collector"]];
+            canReachRules["BlobbyFlameMagma"] = [["Throne"], ["Cemetery"]];
 
             BuildReachRules(canReachRules);
 
@@ -92,21 +95,21 @@ namespace DeadCellsArchipelago {
             if (ItemsData.ContainsKey("Terraria"))
             {
                 if (ItemsData["Terraria"].accessible)
-                    ItemsData["Terraria"].accessible = HasItems([["BackpackUnlock"]]) && CanReachLocations([["Boss_KingsHand"], ["Cemetery Enter"]]);
+                    ItemsData["Terraria"].accessible = HasItems([["BackpackUnlock"]]) && CanReachBiome([["Throne"], ["Cemetery"]]);
                 ItemsData["Terraria"].requirements = [["BackpackUnlock"]];
             }
 
             if (ItemsData.ContainsKey("CavernKey"))
             {
                 if (ItemsData["CavernKey"].accessible)
-                    ItemsData["CavernKey"].accessible = HasItems([["HomKey"]]) && CanReachLocations([["Boss_KingsHand"]]);
+                    ItemsData["CavernKey"].accessible = HasItems([["HomKey"]]) && CanReachBiome([["Throne"]]);
                 ItemsData["CavernKey"].requirements = [["HomKey"]];
             }
 
             if (ItemsData.ContainsKey("LongBow"))
             {
                 if (ItemsData["LongBow"].accessible)
-                    ItemsData["LongBow"].accessible = HasItems([["TeleportKey", "LadderKey"]]) || (HasItems([["TeleportKey"]]) && CanReachLocations([["Boss_Death"]]));
+                    ItemsData["LongBow"].accessible = HasItems([["TeleportKey", "LadderKey"]]) || (HasItems([["TeleportKey"]]) && CanReachBiome([["DeathArena"]]));
                 ItemsData["LongBow"].requirements = [["TeleportKey", "LadderKey"], ["TeleportKey", "Boss_Death"]];
             }
 
@@ -168,8 +171,8 @@ namespace DeadCellsArchipelago {
             worldDepthRules["PrisonerShaman"] = 5;
             worldDepthRules["Guacamelee"] = 5;
 
-            worldDepthRules["Shockwave"] = 7;
-            worldDepthRules["ExplosiveGrenade"] = 7;
+            worldDepthRules["Shockwave"] = -1;
+            worldDepthRules["ExplosiveGrenade"] = -1;
             worldDepthRules["Crusher"] = 7;
             worldDepthRules["P_Bleed"] = 7;
             worldDepthRules["PrisonerCarduus"] = 7;
@@ -236,13 +239,28 @@ namespace DeadCellsArchipelago {
             return false;
         }
 
+        //Check if this biome is accessible
+        private static bool CanReachBiome(List<List<string>> allLocations)
+        {
+            foreach (List<string> locations in allLocations)
+            {
+                bool line = true;
+                foreach (string location in locations)
+                {
+                    line = line && biomes[location].accessible;
+                }
+                if (line) return true;
+            }
+            return false;
+        }
+
         //return 1 for trial 1 & 2 accessible, 2 for trial 3 & 4 accessible. If None accessible, return 0
         private static int GetBossRushLevel()
         {
             List<List<string>> AllBosses = [
-                ["Boss_Behemoth", "Boss_Beholder", "Boss_MamaTick", "Boss_Death"],
-                ["Boss_TimeKeeper", "Boss_Giant", "Boss_GardenerBoss", "Boss_DookuBeast"],
-                ["Boss_KingsHand", "Boss_AmazonSurvival", "Boss_Queen", "Boss_DookuBeast"]
+                ["Bridge", "BeholderPit", "SwampHeart", "DeathArena"],
+                ["TopClockTower", "Giant", "GardenerStage", "DookuArena"],
+                ["Throne", "Lighthouse", "QueenArena", "DookuArena"]
             ];
 
             if (!HasItems([["BossRushUnlock"]])) return 0;
@@ -252,7 +270,7 @@ namespace DeadCellsArchipelago {
             {
                 foreach (string boss in AllBosses[i])
                 {
-                    if (CanReachLocations([[boss]])) bosses[i]++;
+                    if (CanReachBiome([[boss]])) bosses[i]++;
                 }
             }
             if (bosses[0] >= 2 && bosses[1] >= 2 && bosses[2] >= 1) return 2;
@@ -261,27 +279,27 @@ namespace DeadCellsArchipelago {
         }
 
         //return the maximal depth possible
-        private static int GetMaxWorldDepth()
+        public static int GetMaxWorldDepth()
         {
             List<List<string>> AllBiomes = [
-                ["PrisonStart Enter"],
-                ["PrisonCourtyard Enter", "SewerShort Enter", "PrisonDepths Enter", "PrisonCorrupt Enter", "Greenhouse Enter", "PurpleGarden Enter"],
-                ["PrisonRoof Enter", "Ossuary Enter", "SewerDepths Enter", "Swamp Enter", "DookuCastle Enter"],
-                ["Bridge Enter", "BeholderPit Enter", "SwampHeart Enter", "DeathArena Enter"],
-                ["StiltVillage Enter", "AncientTemple Enter", "Cemetery Enter", "Tumulus Enter"],
-                ["ClockTower Enter", "Crypt Enter", "Cavern Enter", "Cliff Enter"],
-                ["TopClockTower Enter", "Giant Enter", "GardenerStage Enter"],
-                ["Castle Enter", "Distillery Enter", "Shipwreck Enter", "DookuCastleHard Enter"],
-                ["Throne Enter", "Lighthouse Enter", "DookuArena Enter"],
-                ["Astrolab Enter"],
-                ["Observatory Enter", "QueenArena Enter"]
+                ["PrisonStart"],
+                ["PrisonCourtyard", "SewerShort", "PrisonDepths", "PrisonCorrupt", "Greenhouse", "PurpleGarden"],
+                ["PrisonRoof", "Ossuary", "SewerDepths", "Swamp", "DookuCastle"],
+                ["Bridge", "BeholderPit", "SwampHeart", "DeathArena"],
+                ["StiltVillage", "AncientTemple", "Cemetery", "Tumulus"],
+                ["ClockTower", "Crypt", "Cavern", "Cliff"],
+                ["TopClockTower", "Giant", "GardenerStage"],
+                ["Castle", "Distillery", "Shipwreck", "DookuCastleHard"],
+                ["Throne", "Lighthouse", "DookuArena"],
+                ["Astrolab"],
+                ["Observatory", "QueenArena"]
             ];
 
             for (int i = AllBiomes.Count-1; i >= 0; i--)
             {
                 foreach (string biome in AllBiomes[i])
                 {
-                    if (CanReachLocations([[biome]])) return i;
+                    if (CanReachBiome([[biome]])) return i;
                 }
             }
             return 0;
@@ -341,7 +359,7 @@ namespace DeadCellsArchipelago {
             {
                 if (ItemsData.ContainsKey(rule.Key) && ItemsData[rule.Key].accessible)
                 {
-                    ItemsData[rule.Key].accessible = CanReachLocations(rule.Value);
+                    ItemsData[rule.Key].accessible = CanReachBiome(rule.Value);
                 }
             }
         }
@@ -365,9 +383,17 @@ namespace DeadCellsArchipelago {
 
             foreach (KeyValuePair<string, int> rule in rules)
             {
-                if (ItemsData.ContainsKey(rule.Key) && ItemsData[rule.Key].accessible)
+                int value = rule.Value;
+                if (value == -1)
                 {
-                    ItemsData[rule.Key].accessible = maxWorldDepth >= rule.Value;
+                    if (SAVED_DATA!.CountReceivedStemCell() >= 3)
+                        value = 5;
+                    else
+                        value = 7;
+                }
+                if (ItemsData.ContainsKey(rule.Key) && !ItemsData[rule.Key].accessible)
+                {
+                    ItemsData[rule.Key].accessible = CanReachBiome([["Bank"]]) && maxWorldDepth >= value;
                 }
             }
         }
