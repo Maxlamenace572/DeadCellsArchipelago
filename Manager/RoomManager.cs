@@ -32,6 +32,7 @@ namespace DeadCellsArchipelago {
         private static dc.String tempString = "".AsHaxeString();
         private static bool ldatChanged = false;
         public static bool addBackLoreRooms = false;
+        public static int countPrisonStartLoreRoom;
 
         public static void InitializeRoomHooks()
         {
@@ -61,6 +62,8 @@ namespace DeadCellsArchipelago {
             Hook_LootGen.generate += OnGenerateLoot;
             Hook_StoryManager.levelRequiresLoreRoom += OnLevelRequiresLoreRoom;
             Hook_StoryManager.wasLoreRoomGeneratedRecently += OnWasLoreRoomGeneratedRecently;
+            Hook_PrisonStart.buildLoreRooms += OnBuildLoreRoomsPrisonStart;
+            Hook_PrisonStart.canGenerateThisLoreRoom += OnCanGenerateThisLoreRoomPrisonStart;
 
             Log.Information("[AP] Room Hooks loaded");
         }
@@ -414,6 +417,23 @@ namespace DeadCellsArchipelago {
         {
             if (addBackLoreRooms) return false;
             return orig(self, r);
+        }
+
+        private static void OnBuildLoreRoomsPrisonStart(Hook_PrisonStart.orig_buildLoreRooms orig, PrisonStart self)
+        {
+            countPrisonStartLoreRoom = 0;
+            orig(self);
+        }
+
+        private static bool OnCanGenerateThisLoreRoomPrisonStart(Hook_PrisonStart.orig_canGenerateThisLoreRoom orig, PrisonStart self, virtual_Intention_arc_examinables_fxEmitters_levels_onlyUseOnce_rarity_requiredLore_requiredMeta_room_roomLoot_sprites_status_structMode_ lore)
+        {
+            bool res = orig(self, lore);
+            if (self.friendLoreRoomGenerated && countPrisonStartLoreRoom < 4)
+            {
+                countPrisonStartLoreRoom++;
+                self.friendLoreRoomGenerated = false;
+            }
+            return res;
         }
     }
 }
