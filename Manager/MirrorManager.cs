@@ -82,7 +82,7 @@ namespace DeadCellsArchipelago {
 
         public static string? GetRandomAccessibleCheck()
         {
-            if (ARCHIPELAGO == null) return null;
+            if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return null;
 
             HashSet<string> remainingItems = StartCalculate(CalculateRegionData())["AllR"];
             List<string> accessibleItems = [];

@@ -113,6 +113,8 @@ namespace DeadCellsArchipelago {
                 }
                 if (resetOnNextPrisonStart)
                 {
+                    if (ARCHIPELAGO != null && ARCHIPELAGO.isConnected)
+                        ARCHIPELAGO.energyLinkManager?.DepositCells(GLOBAL_DATA!.currentCells);
                     ResetDataNewRun();
                     SendNewAspect();
                     resetOnNextPrisonStart = false;

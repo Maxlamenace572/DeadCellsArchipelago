@@ -312,7 +312,7 @@ namespace DeadCellsArchipelago
 
         public void SendVictory()
         {
-            if (session == null) return;
+            if (session == null || !isConnected) return;
             
             var statusUpdate = new StatusUpdatePacket
             {
@@ -337,7 +337,7 @@ namespace DeadCellsArchipelago
 
         public void HintLocation(string internalId)
         {
-            if (session == null) return;
+            if (session == null || !isConnected) return;
 
             string locationName = internalId;
             if (IdToNameKeyExist(locationName))
@@ -357,13 +357,13 @@ namespace DeadCellsArchipelago
 
         public void UpdateRevealedHints()
         {
-            if (session == null) return;
+            if (session == null || !isConnected) return;
             Hints = session.Hints.GetHints(session.Players.ActivePlayer.Slot, session.Players.ActivePlayer.Team).ToList();
         }
 
         public bool IsLocationHinted(string internalId)
         {
-            if (session == null) return false;
+            if (session == null || !isConnected) return false;
 
             string locationName = internalId;
             if (IdToNameKeyExist(locationName))
