@@ -133,7 +133,7 @@ namespace DeadCellsArchipelago {
                 popUpWarpButton.SetEnabled(true);
             }
             else if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains)) showButton = false;
-            else if ((SAVED_DATA!.IsCheckSent($"{topLine!.biomeId} Enter") && IsLevelAfterCurrent(topLine!.biomeId)) || GLOBAL_DATA!.debugWarp)
+            else if ((USER!.userStats.hasSeenLevel(topLine!.biomeId.AsHaxeString()) && IsLevelAfterCurrent(topLine!.biomeId)) || GLOBAL_DATA!.debugWarp)
             {
                 showButton = true;
                 popUpWarpButton.ChangeText("Warp");
