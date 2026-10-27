@@ -2,7 +2,9 @@
     "PrisonStart": [
         {
             "to": "PrisonCourtyard",
-            "require": [[]]
+            "require": [
+                []
+            ]
         },
         {
             "to": "SewerShort",
@@ -84,7 +86,9 @@
         },
         {
             "to": "PrisonRoof",
-            "require": [[]]
+            "require": [
+                []
+            ]
         },
         {
             "to": "SewerDepths",
@@ -116,7 +120,9 @@
         },
         {
             "to": "PrisonRoof",
-            "require": [[]]
+            "require": [
+                []
+            ]
         }
     ],
     "PurpleGarden": [
@@ -179,7 +185,9 @@
     "PrisonRoof": [
         {
             "to": "Bridge",
-            "require": [[]]
+            "require": [
+                []
+            ]
         },
         {
             "to": "BeholderPit",
@@ -194,7 +202,9 @@
     "Ossuary": [
         {
             "to": "Bridge",
-            "require": [[]]
+            "require": [
+                []
+            ]
         }
     ],
     "SewerDepths": [
@@ -498,6 +508,14 @@
                     "DookuCastleHard"
                 ]
             ]
+        },
+        {
+            "to": "Distillery",
+            "require": [
+                [
+                    "Distillery"
+                ]
+            ]
         }
     ],
     "Giant": [
@@ -525,6 +543,14 @@
                     "Throne"
                 ]
             ]
+        },
+        {
+            "to": "Distillery",
+            "require": [
+                [
+                    "Distillery"
+                ]
+            ]
         }
     ],
     "GardenerStage": [
@@ -544,9 +570,27 @@
                     "Castle"
                 ]
             ]
+        },
+        {
+            "to": "Distillery",
+            "require": [
+                [
+                    "Distillery"
+                ]
+            ]
         }
     ],
     "Castle": [
+        {
+            "to": "Throne",
+            "require": [
+                [
+                    "Throne"
+                ]
+            ]
+        }
+    ],
+    "Distillery": [
         {
             "to": "Throne",
             "require": [
@@ -585,17 +629,8 @@
                     "Astrolab"
                 ]
             ]
-        },
-        {
-            "to": "Distillery",
-            "require": [
-                [
-                    "Distillery"
-                ]
-            ]
         }
     ],
-    "Distillery": [{}],
     "Lighthouse": [
         {
             "to": "QueenArena",

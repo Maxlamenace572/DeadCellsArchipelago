@@ -22,6 +22,7 @@ using dc.cine;
 using dc.en.inter.exit;
 using dc.pr;
 using dc.tool;
+using dc.hxd;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager
@@ -33,6 +34,7 @@ namespace DeadCellsArchipelago {
         private static bool ldatChanged = false;
         public static bool addBackLoreRooms = false;
         public static int countPrisonStartLoreRoom;
+        private static bool addDistillery;
 
         public static void InitializeRoomHooks()
         {
@@ -64,6 +66,8 @@ namespace DeadCellsArchipelago {
             Hook_StoryManager.wasLoreRoomGeneratedRecently += OnWasLoreRoomGeneratedRecently;
             Hook_PrisonStart.buildLoreRooms += OnBuildLoreRoomsPrisonStart;
             Hook_PrisonStart.canGenerateThisLoreRoom += OnCanGenerateThisLoreRoomPrisonStart;
+            Hook_T_Castle.buildMainRooms += OnBuildMainRoomsT_Castle;
+            Hook_UserStats.getReachedBiomeCount += OnGetReachedBiomeCount;
 
             Log.Information("[AP] Room Hooks loaded");
         }
@@ -434,6 +438,21 @@ namespace DeadCellsArchipelago {
                 self.friendLoreRoomGenerated = false;
             }
             return res;
+        }
+
+        private static RoomNode OnBuildMainRoomsT_Castle(Hook_T_Castle.orig_buildMainRooms orig, T_Castle self)
+        {
+            addDistillery = true;
+            var res = orig(self);
+            addDistillery = false;
+            return res;
+        }
+
+        private static int OnGetReachedBiomeCount(Hook_UserStats.orig_getReachedBiomeCount orig, UserStats self, dc.String id)
+        {
+            if (addDistillery)
+                return 1;
+            return orig(self, id);
         }
     }
 }
