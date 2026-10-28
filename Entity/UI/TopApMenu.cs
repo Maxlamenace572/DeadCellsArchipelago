@@ -86,7 +86,8 @@ namespace DeadCellsArchipelago {
                 },
                 onMove = (e) =>
                 {
-                    focusManager.InitializeModFocus();
+                    if (focusManager.page == 0) focusManager.InitializeModFocus();
+                    else focusManager.ChangeFocusCursor(this);
                 },
                 onOut = (e) =>
                 {
@@ -182,7 +183,7 @@ namespace DeadCellsArchipelago {
                 },
                 onMove = (e) =>
                 {
-                    focusManager!.ChangeFocusCursor(this);
+                    focusManager.ChangeFocusCursor(this);
                 }
             };
         }
