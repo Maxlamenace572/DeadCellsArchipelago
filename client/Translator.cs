@@ -8,7 +8,6 @@ namespace DeadCellsArchipelago
         public static Dictionary<string, string> IdToApName = new Dictionary<string, string>();
         public static Dictionary<string, string> ApNameToId = new Dictionary<string, string>();
 
-
         public static Dictionary<string, string> LoadModApTranslation()
         {
                 var json = File.ReadAllText(GetModApTradFilePath());
@@ -32,7 +31,7 @@ namespace DeadCellsArchipelago
 
         public static string GetModApTradFilePath()
         {
-            return Path.Combine(GetBaseFolder(), "gameId-apName.json");
+            return Path.Combine(GetJsonFolder(), "gameId-apName.json");
         }
 
         public static bool IdToNameKeyExist(string id)

@@ -81,7 +81,8 @@ namespace DeadCellsArchipelago {
                     ARCHIPELAGO.fatalFalls,
                     ARCHIPELAGO.theQueenAndTheSea,
                     ARCHIPELAGO.returnToCastlevania,
-                    ARCHIPELAGO.flawlessScroll);
+                    ARCHIPELAGO.flawlessScroll,
+                    ARCHIPELAGO.enemySanity);
 
                 var json = JsonConvert.SerializeObject(GLOBAL_DATA, Formatting.Indented);
                 System.IO.File.WriteAllText(savePath, json);
@@ -97,6 +98,11 @@ namespace DeadCellsArchipelago {
         public static string GetBaseFolder()
         {
             return ModEntry.ModInfos!.ModRoot.FullPath;
+        }
+
+        public static string GetJsonFolder()
+        {
+            return System.IO.Path.Combine(GetBaseFolder(), "json");
         }
 
         public static string GetSaveFolder()

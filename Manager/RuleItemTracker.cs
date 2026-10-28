@@ -440,7 +440,7 @@ namespace DeadCellsArchipelago {
 
         public static string GetItemDescriptionFilePath()
         {
-            return Path.Combine(GetBaseFolder(), "itemDescription.json");
+            return Path.Combine(GetJsonFolder(), "itemDescription.json");
         }
 
         private static void AddDescriptions()

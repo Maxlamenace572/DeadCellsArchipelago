@@ -153,7 +153,7 @@ namespace DeadCellsArchipelago
 
         public static string GetTrackerDataFilePath()
         {
-            return Path.Combine(GetBaseFolder(), "trackerData.json");
+            return Path.Combine(GetJsonFolder(), "trackerData.json");
         }
 
         public static List<string> GetBiomesId()
@@ -206,7 +206,7 @@ namespace DeadCellsArchipelago
 
         public static string GetRegionDataFilePath()
         {
-            return Path.Combine(GetBaseFolder(), "region.json");
+            return Path.Combine(GetJsonFolder(), "region.json");
         }
 
         public static bool IsItemAccessible(string itemId)
@@ -238,7 +238,7 @@ namespace DeadCellsArchipelago
 
         public static string GetMobBiomeDataFilePath()
         {
-            return Path.Combine(GetBaseFolder(), "mobBiome.json");
+            return Path.Combine(GetJsonFolder(), "mobBiome.json");
         }
     }
 

@@ -8,6 +8,7 @@ using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuneManager;
 using static DeadCellsArchipelago.BossManager;
 using static DeadCellsArchipelago.MirrorManager;
+using dc.hl.types;
 
 namespace DeadCellsArchipelago {
     public static class EnemyManager
@@ -26,6 +27,7 @@ namespace DeadCellsArchipelago {
             Hook_MobsGen.getDmgTier += OnGetDmgTier;
             Hook_UserStats.getKilledMobCount += OnGetKilledMobCount;
             dc.en.Hook_Mob.addToLoot += OnAddToLoot;
+            Hook_MobsGen.hasRequiredDepth += OnHasRequiredDepth;
             
             Log.Information("[AP] Enemy Hooks loaded");
         }
@@ -135,6 +137,14 @@ namespace DeadCellsArchipelago {
         {
             if (k is LootType.Blueprint) blueprintsGenerated++;
             orig(self, k, isFlawlessLoot);
+        }
+
+        private static bool OnHasRequiredDepth(Hook_MobsGen.orig_hasRequiredDepth orig, MobsGen self, int levelDepth, ArrayDyn depthList)
+        {
+            if (levelDepth == 1)
+                levelDepth = Data.Class.level.byId.get(USER!.game.data.bankEntranceLevel).worldDepth +1;
+
+            return orig(self, levelDepth, depthList);
         }
     }
 }
