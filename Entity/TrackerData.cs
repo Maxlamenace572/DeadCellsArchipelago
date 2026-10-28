@@ -72,7 +72,7 @@ namespace DeadCellsArchipelago
                                     biomes[source.biome].accessible && source.min_bc <= SAVED_DATA.CountReceivedStemCell()))
                                     itD.accessible = true;
                             }
-                            if (itD.accessible && entry.Value.rarity != null && new[] {"Legendary", "Rare", "Uncommon" }.Any(entry.Value.rarity.Contains))
+                            if (itD.accessible && entry.Value.rarity != null && new[] {"Legendary", "Rare", "Uncommon", "ForceGrenade"}.Any(entry.Value.rarity.Contains))
                             {
                                 itD.accessible = SAVED_DATA.IsItemReceived("PokebombUnlock");
                                 itD.requirements.Add(["PokebombUnlock"]);

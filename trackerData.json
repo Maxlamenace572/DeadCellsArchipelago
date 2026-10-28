@@ -8924,6 +8924,7 @@
     "P_U28_PerkGoldShield": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "ForceGrenade",
         "sources": [
             {
                 "biome": "Bank",
@@ -8937,6 +8938,7 @@
     "P_U28_PerkGoldSpeed": {
         "type": "blueprint_enemy",
         "dlc": "",
+        "rarity": "ForceGrenade",
         "sources": [
             {
                 "biome": "Bank",
