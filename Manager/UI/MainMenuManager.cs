@@ -562,8 +562,9 @@ namespace DeadCellsArchipelago {
         public static bool CanPlay()
         {
             var savePath = GetSaveFilePath((int) Main.Class.ME.options.curSlot!);
+
+            if(ARCHIPELAGO != null && ARCHIPELAGO.isConnected && TooOldApworld()) return false;
             if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) return File.Exists(savePath);
-            
             if (!File.Exists(savePath)) return true;
 
             JsonDocument document = JsonDocument.Parse(File.ReadAllText(savePath));
@@ -583,6 +584,7 @@ namespace DeadCellsArchipelago {
             {
                 oldText ??= menuItem.t.text.ToString();
                 if (ARCHIPELAGO == null || !ARCHIPELAGO.isConnected) menuItem.t.set_text($"{oldText} (not connected)".AsHaxeString());
+                else if (TooOldApworld()) menuItem.t.set_text($"{oldText} (incompatible apworld)".AsHaxeString());
                 else menuItem.t.set_text($"{oldText} (seed not matching)".AsHaxeString());
                 menuItem.t.set_textColor((int) APColor.Gray);
                 menuItem.isEnable = false;
