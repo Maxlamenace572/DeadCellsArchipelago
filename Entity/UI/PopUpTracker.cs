@@ -121,7 +121,9 @@ namespace DeadCellsArchipelago {
 
         public void UpdateWarpButton()
         {
-            if (topLine!.biomeId == SAVED_DATA!.currentLevelId && topLine!.biomeId != "PrisonStart")
+            if (USER!.game.isTraining() || USER.game.isScoring() || USER.game.isBossRush())
+                showButton = false;
+            else if (topLine!.biomeId == SAVED_DATA!.currentLevelId && topLine!.biomeId != "PrisonStart")
             {
                 showButton = true;
                 popUpWarpButton.ChangeText("Reload");
@@ -132,7 +134,8 @@ namespace DeadCellsArchipelago {
                 };
                 popUpWarpButton.SetEnabled(true);
             }
-            else if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains)) showButton = false;
+            else if (new[] {"Other", "Bank", "PrisonStart"}.Any(topLine!.biomeId.Contains))
+                showButton = false;
             else if ((USER!.userStats.hasSeenLevel(topLine!.biomeId.AsHaxeString()) && IsLevelAfterCurrent(topLine!.biomeId)) || GLOBAL_DATA!.debugWarp)
             {
                 showButton = true;
