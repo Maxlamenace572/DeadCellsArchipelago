@@ -44,12 +44,17 @@ namespace DeadCellsArchipelago {
         private static bool OnBlueprintPicked(Hook_Hero.orig_pickBlueprint orig, Hero self, dc.String k)
         {
             //the blueprint is comming from the game, so we need to send a archipelago check
+            bool res;
             if(!InCosmeticList(k.ToString()) || GLOBAL_DATA!.includeCosmetics)
             {
                 SendBlueprintCheck(k.ToString());
-                return true;
+                res = true;
             }
-            return orig(self, k);
+            else
+                res = orig(self, k);
+            
+            HERO!.updatePokemonableIcons();
+            return res;
         }
 
         //Instantly unlock the blueprint
