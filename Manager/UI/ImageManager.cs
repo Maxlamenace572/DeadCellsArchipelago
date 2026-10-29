@@ -6,6 +6,7 @@ using Serilog;
 using dc.ui.hud;
 using dc.ui;
 using static DeadCellsArchipelago.ModAssetManager;
+using static DeadCellsArchipelago.MainMenuManager;
 
 namespace DeadCellsArchipelago {
     public static class ImageManager
@@ -116,7 +117,7 @@ namespace DeadCellsArchipelago {
             Bounds boundsParent = parent.getSize(new Bounds());
             Bounds boundsChild = child.getSize(new Bounds());
 
-            child.x = parent.x + ((boundsParent.xMax - boundsChild.xMax) /2);
+            child.x = parent.x + (boundsParent.xMax - boundsChild.xMax) /2 /screenScale;
             child.posChanged = true;
         }
 
@@ -125,7 +126,7 @@ namespace DeadCellsArchipelago {
             Bounds boundsParent = parent.getSize(new Bounds());
             Bounds boundsChild = child.getSize(new Bounds());
 
-            child.y = parent.y + ((boundsParent.yMax - boundsChild.yMax) /2);
+            child.y = parent.y + (boundsParent.yMax - boundsChild.yMax) /2 /screenScale;
             child.posChanged = true;
         }
     }
