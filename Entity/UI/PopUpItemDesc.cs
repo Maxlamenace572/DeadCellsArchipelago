@@ -252,7 +252,7 @@ namespace DeadCellsArchipelago {
                     scaleY = textBaseScale * scale
                 };
                 desc.set_text(itD.description.AsHaxeString());
-                desc.set_maxWidth(480);
+                desc.set_maxWidth(480 * (screenScale/textBaseScale));
             }
 
 
