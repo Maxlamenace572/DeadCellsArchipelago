@@ -2,6 +2,7 @@ using System.Text.Json;
 using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.TrackerData;
 using static DeadCellsArchipelago.ModAssetManager;
+using dc.haxe;
 
 namespace DeadCellsArchipelago {
     public static class RuleItemTracker
@@ -12,8 +13,6 @@ namespace DeadCellsArchipelago {
         {
             biomes = b;
             Dictionary<string, List<List<string>>> hasRules = [];
-            hasRules["BumpBoots"] = [["LadderKey"]];
-            hasRules["ExplosiveGrenade"] = [["LadderKey"]];
             hasRules["PrisonCourtyard Exit"] = [["LadderKey"]];
             
             hasRules["Crowbar"] = [["TeleportKey"]];
@@ -393,7 +392,7 @@ namespace DeadCellsArchipelago {
                 }
                 if (ItemsData.ContainsKey(rule.Key) && !ItemsData[rule.Key].accessible)
                 {
-                    ItemsData[rule.Key].accessible = CanReachBiome([["Bank"]]) && maxWorldDepth >= value;
+                    ItemsData[rule.Key].accessible = CanReachBiome([["Bank"]]) && maxWorldDepth >= value && HasItems(ItemsData[rule.Key].requirements);
                 }
             }
         }
