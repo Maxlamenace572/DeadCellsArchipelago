@@ -5,6 +5,7 @@ namespace DeadCellsArchipelago {
         public bool IsHorizontal;
         public int[] previousIndex = new int[2];
         public int[] currentIndex = new int[2];
+        public int[] resetIndex = [0, 0];
         public int[] listSizes = new int[2];
 
         public override FocusItem? GetUp()
@@ -42,10 +43,7 @@ namespace DeadCellsArchipelago {
             if (currentIndex[coord] == limit)
             {
                 if(orig != null)
-                {
-                    currentIndex[0] = 0;
-                    currentIndex[1] = 0;
-                }
+                    currentIndex = (int[]) resetIndex.Clone();
                 else
                     currentIndex = (int[]) previousIndex.Clone();
                 return orig;
@@ -58,10 +56,7 @@ namespace DeadCellsArchipelago {
             previousIndex = (int[]) currentIndex.Clone();
 
             if(orig != null)
-            {
-                currentIndex[0] = 0;
-                currentIndex[1] = 0;
-            }
+                currentIndex = (int[]) resetIndex.Clone();
             else
                 currentIndex = (int[]) previousIndex.Clone();
             return orig;

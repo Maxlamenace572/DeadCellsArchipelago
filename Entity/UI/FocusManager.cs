@@ -88,7 +88,7 @@ namespace DeadCellsArchipelago {
             if (currentFocus is FocusList list && newFocus != currentFocus)
             {
                 list.previousIndex = (int[]) list.currentIndex.Clone();
-                list.currentIndex = [0, 0];
+                list.currentIndex = (int[]) list.resetIndex.Clone();
             }
             currentFocus.StopHighlight();
             newFocus.Highlight();

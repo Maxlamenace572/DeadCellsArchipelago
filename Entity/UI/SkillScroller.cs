@@ -69,23 +69,17 @@ namespace DeadCellsArchipelago {
                         }
                     }
 
-                    if(interactiveLines)
-                    {
-                        lastMousePosY += flow.y - res;
-                        UpdateCursorFocusScroller();
-                    }
+                    lastMousePosY += flow.y - res;
+                    UpdateCursorFocusScroller();
 
                     flow.y = res;
                     flow.posChanged = true;
 
                 };
                 flow.interactive.onMove = (e) => {
-                    if(interactiveLines)
-                    {
-                        lastMousePosY = e.relY;
-                        lastMousePosX = e.relX;
-                        UpdateCursorFocusScroller();
-                    }
+                    lastMousePosY = e.relY;
+                    lastMousePosX = e.relX;
+                    UpdateCursorFocusScroller();
                 };
                 flow.interactive.onClick = (e) =>
                 {
@@ -97,7 +91,7 @@ namespace DeadCellsArchipelago {
         public void UpdateCursorFocusScroller()
         {
             cursorHighLight = true;
-            if (typeof(T) == typeof(ItemLine))
+            if (typeof(T) == typeof(ItemLine) || typeof(T) == typeof(LogLine))
             {
                 previousIndex[1] = currentIndex[1];
                 currentIndex[1] = (int) lastMousePosY / tempHeight;
@@ -206,6 +200,9 @@ namespace DeadCellsArchipelago {
                     }
                     index ++;
                 }
+                listSizes = [0, lines.Count];
+                resetIndex = [0, lines.Count-1];
+                currentIndex = (int[]) resetIndex.Clone();
                 tempHeight += 50 -2;
             }
             mask.updateMask();
@@ -216,6 +213,10 @@ namespace DeadCellsArchipelago {
             if (typeof(T) == typeof(ItemLine))
             {
                 ((ItemLine)(Line) lines[currentIndex[1]]).Highlight();
+            }
+            else if (typeof(T) == typeof(LogLine))
+            {
+                ((LogLine)(Line) lines[currentIndex[1]]).Highlight();
             }
             else if (typeof(T) == typeof(BiomeLine))
             {
@@ -234,6 +235,10 @@ namespace DeadCellsArchipelago {
             if (typeof(T) == typeof(ItemLine) && previousIndex[1] < lines.Count)
             {
                 ((ItemLine)(Line) lines[previousIndex[1]]).StopHighlight();
+            }
+            else if (typeof(T) == typeof(LogLine))
+            {
+                ((LogLine)(Line) lines[previousIndex[1]]).StopHighlight();
             }
             else if (typeof(T) == typeof(BiomeLine))
             {
