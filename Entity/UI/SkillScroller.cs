@@ -20,7 +20,7 @@ namespace DeadCellsArchipelago {
         public double lastMousePosX;
         public int maskHeight;
         public bool interactiveLines;
-
+        bool cursorHighLight;
 
         public SkillScroller(double x, double y, dc.h2d.Object parent, int maskHeight, bool interactiveLines, bool vert, bool hori)
         {
@@ -96,6 +96,7 @@ namespace DeadCellsArchipelago {
 
         public void UpdateCursorFocusScroller()
         {
+            cursorHighLight = true;
             if (typeof(T) == typeof(ItemLine))
             {
                 previousIndex[1] = currentIndex[1];
@@ -225,6 +226,7 @@ namespace DeadCellsArchipelago {
                 SetScrollDownAtIndex();
             else if (previousIndex[1] > currentIndex[1])
                 SetScrollUpAtIndex();
+            cursorHighLight = false;
         }
 
         public override void StopHighlight()
@@ -310,7 +312,9 @@ namespace DeadCellsArchipelago {
             if (flow == null) return;
             if (flow.y + currentIndex[1] * tempHeight + (tempHeight - flow.verticalSpacing) > maskHeight)
             {
+                double temp = flow.y;
                 flow.y = -(currentIndex[1] * tempHeight) + (maskHeight - (tempHeight - flow.verticalSpacing));
+                if (!cursorHighLight) lastMousePosY += temp - flow.y;
                 flow.posChanged = true;
             }
         }
@@ -320,7 +324,9 @@ namespace DeadCellsArchipelago {
             if (flow == null) return;
             if (flow.y + currentIndex[1] * tempHeight < 0)
             {
+                double temp = flow.y;
                 flow.y = -(currentIndex[1] * tempHeight);
+                if (!cursorHighLight) lastMousePosY += temp - flow.y;
                 flow.posChanged = true;
             }
         }
