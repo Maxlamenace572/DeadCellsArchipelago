@@ -56,7 +56,7 @@ namespace DeadCellsArchipelago {
             {
                 x = bgField.x+6,
                 y = bgField.y+2,
-                inputWidth = (int) width+12,
+                inputWidth = (int) ((width+12) * (screenScale/textBaseScale)),
                 scaleX = textBaseScale * scale,
                 scaleY = textBaseScale * scale,
                 onMove = (e) =>
