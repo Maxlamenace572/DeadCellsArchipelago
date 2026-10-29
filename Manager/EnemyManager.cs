@@ -8,6 +8,7 @@ using static DeadCellsArchipelago.ItemManager;
 using static DeadCellsArchipelago.RuneManager;
 using static DeadCellsArchipelago.BossManager;
 using static DeadCellsArchipelago.MirrorManager;
+using static DeadCellsArchipelago.Translator;
 using dc.hl.types;
 
 namespace DeadCellsArchipelago {
@@ -40,6 +41,11 @@ namespace DeadCellsArchipelago {
             if (randomNumber == 1)
             {
                 DropItemToPlayer("TimeDistorsion");
+            }
+
+            if (GLOBAL_DATA!.enemySanity && IdToNameKeyExist($"E_{self._infos.id}") && !SAVED_DATA!.IsCheckSent($"E_{self._infos.id}"))
+            {
+                SendEnemyCheck($"E_{self._infos.id}") ;
             }
 
             EnemyKilled(self._infos.id.ToString());
@@ -145,6 +151,18 @@ namespace DeadCellsArchipelago {
                 levelDepth = Data.Class.level.byId.get(USER!.game.data.bankEntranceLevel).worldDepth +1;
 
             return orig(self, levelDepth, depthList);
+        }
+
+        public static void SendEnemyCheck(string enemyId)
+        {
+            if (ARCHIPELAGO != null)
+            {
+                ARCHIPELAGO.SendCheck(enemyId);
+            }
+            else
+            {
+                SAVED_DATA?.SaveCheckSent(enemyId);
+            }
         }
     }
 }

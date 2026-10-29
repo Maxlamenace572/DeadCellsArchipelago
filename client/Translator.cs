@@ -10,9 +10,18 @@ namespace DeadCellsArchipelago
 
         public static Dictionary<string, string> LoadModApTranslation()
         {
-                var json = File.ReadAllText(GetModApTradFilePath());
-                var result = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-                return result ?? throw new InvalidDataException("error on the JSON translator");
+            var json = File.ReadAllText(GetModApTradFilePath());
+            var result = JsonSerializer.Deserialize<Dictionary<string, string>>(json)!;
+
+            foreach (KeyValuePair<string, string> line in result)
+            {
+                if (line.Key.StartsWith("E_") && line.Key != "E_prefix")
+                {
+                    result[line.Key] = $"{result["E_prefix"]}{line.Value}";
+                }
+            }
+
+            return result;
         }
 
         public static Dictionary<string, string> Invert(Dictionary<string, string> source)
@@ -41,7 +50,8 @@ namespace DeadCellsArchipelago
                 if (id[^6..] == " Enter")
                 {
                     return IdToApName.ContainsKey(id[..^6]);
-                } else if (id[^5..] == " Exit")
+                }
+                else if (id[^5..] == " Exit")
                 {
                     return IdToApName.ContainsKey(id[..^5]);
                 }
@@ -56,7 +66,8 @@ namespace DeadCellsArchipelago
                 if (name[^6..] == " Enter")
                 {
                     return ApNameToId.ContainsKey(name[..^6]);
-                } else if (name[^5..] == " Exit")
+                }
+                else if (name[^5..] == " Exit")
                 {
                     return ApNameToId.ContainsKey(name[..^5]);
                 }
@@ -71,7 +82,8 @@ namespace DeadCellsArchipelago
                 if (id[^6..] == " Enter")
                 {
                     return $"{IdToApName[id[..^6]]} Enter";
-                } else if (id[^5..] == " Exit")
+                }
+                else if (id[^5..] == " Exit")
                 {
                     return $"{IdToApName[id[..^5]]} Exit";
                 }
@@ -86,27 +98,13 @@ namespace DeadCellsArchipelago
                 if (name[^6..] == " Enter")
                 {
                     return $"{ApNameToId[name[..^6]]} Enter";
-                } else if (name[^5..] == " Exit")
+                }
+                else if (name[^5..] == " Exit")
                 {
                     return $"{ApNameToId[name[..^5]]} Exit";
                 }
             }
             return ApNameToId[name];
-        }
-
-        public static bool FullNameToIdKeyExist(string name)
-        {
-            if (name.Length >= 6)
-            {
-                if (name[^6..] == " Enter")
-                {
-                    name = name[..^6];
-                } else if (name[^5..] == " Exit")
-                {
-                    name = name[..^5];
-                }
-            }
-            return ApNameToId.ContainsKey(name);
         }
     }
 }

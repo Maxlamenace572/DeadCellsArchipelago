@@ -259,7 +259,7 @@ namespace DeadCellsArchipelago
                 string locationName = session.Locations.GetLocationNameFromId(locationId);
 
                 string locationGameId = locationName;
-                if (FullNameToIdKeyExist(locationGameId))
+                if (NameToIdKeyExist(locationGameId))
                 {
                     locationGameId = GetId(locationGameId);
                 }
@@ -280,7 +280,7 @@ namespace DeadCellsArchipelago
             foreach(long locationId in newCheckedLocations)
             {
                 string locationGameId = session.Locations.GetLocationNameFromId(locationId);;
-                if (FullNameToIdKeyExist(locationGameId)) locationGameId = GetId(locationGameId);
+                if (NameToIdKeyExist(locationGameId)) locationGameId = GetId(locationGameId);
 
                 if (!SAVED_DATA.IsCheckSent(locationGameId)) SaveChecks(locationGameId);
             }
