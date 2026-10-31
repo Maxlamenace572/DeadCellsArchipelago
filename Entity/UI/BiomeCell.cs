@@ -10,6 +10,7 @@ using static DeadCellsArchipelago.ImageManager;
 using static DeadCellsArchipelago.PauseMenuManager;
 using static DeadCellsArchipelago.MainMenuManager;
 using static DeadCellsArchipelago.TrackerData;
+using static DeadCellsArchipelago.ItemManager;
 
 namespace DeadCellsArchipelago {
     public class BiomeCell
@@ -211,7 +212,8 @@ namespace DeadCellsArchipelago {
         {
             foreach(KeyValuePair<string, HashSet<string>> toChecks in data)
             {
-                if (toChecks.Key[0] == 'T' || toChecks.Key == "AllT") continue;
+                if (toChecks.Key[0] == 'T' || toChecks.Key[^1] == 'T' ||
+                    (toChecks.Key[^1] != 'R' && (toChecks.Key[^1] - '0') > SAVED_DATA!.CountReceivedStemCell())) continue;
                 foreach(string toCheck in toChecks.Value)
                 {
                     if (ItemsData[toCheck].accessible) return true;

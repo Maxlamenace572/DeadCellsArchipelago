@@ -146,10 +146,6 @@ namespace DeadCellsArchipelago
                         trapWeights["Trap_FlawlessChallenge"] = 1;
                     }
 
-                    foreach (KeyValuePair<string, int> test in trapWeights)
-                        Log.Error($"{test.Key} : {test.Value}");
-                    
-
                     energyLinkManager = new EnergyLinkManager(session);
                     if (deathLinkEnabled >= 0) deathLinkManager = new DeathLinkManager(session, deathLinkGroup, disableDeathLinkForAspects, deathTrap, deathTrapLink);
                     if (damageLink) damageLinkManager = new DamageLinkManager(session, damageLinkGroup);
