@@ -170,6 +170,17 @@ namespace DeadCellsArchipelago {
             {
                 DecNumber();
                 DropItemToPlayer(itemId);
+                switch (itemId)
+                {
+                    case "AnyUp":
+                    SAVED_DATA!.tripleUpsTaken--;
+                    break;
+                case "BTUp":
+                case "BSUp":
+                case "TSUp":
+                    SAVED_DATA!.doubleUpsTaken--;
+                    break;
+                }
             }
         }
 

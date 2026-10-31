@@ -152,6 +152,11 @@ namespace DeadCellsArchipelago {
                 ldat.doubleUps -= SAVED_DATA!.doubleUpsTaken;
                 if (ldat.tripleUps - SAVED_DATA!.tripleUpsTaken < 0) ldat.bonusTripleScrollAfterBC = null;
                 ldat.tripleUps = System.Math.Max(ldat.tripleUps - SAVED_DATA!.tripleUpsTaken, 0);
+                if (ldat.quarterUpsBC3 - SAVED_DATA!.quarterUpsBC3Taken < 0)
+                {
+                    SAVED_DATA!.quarterUpsBC4Taken = SAVED_DATA!.quarterUpsBC3Taken - ldat.quarterUpsBC3;
+                    SAVED_DATA!.quarterUpsBC3Taken = ldat.quarterUpsBC3;
+                }
                 ldat.quarterUpsBC3 -= SAVED_DATA!.quarterUpsBC3Taken;
                 ldat.quarterUpsBC4 -= SAVED_DATA!.quarterUpsBC4Taken;
 

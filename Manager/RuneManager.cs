@@ -88,6 +88,20 @@ namespace DeadCellsArchipelago {
                         y = 10
                     };
                     break;
+                case "AnyUp":
+                    SAVED_DATA!.tripleUpsTaken++;
+                    orig(self, from, i);
+                    break;
+                case "BTUp":
+                case "BSUp":
+                case "TSUp":
+                    SAVED_DATA!.doubleUpsTaken++;
+                    orig(self, from, i);
+                    break;
+                case "QuarterUp":
+                    SAVED_DATA!.quarterUpsBC3Taken++;
+                    orig(self, from, i);
+                    break;
                 default:
                     orig(self, from, i);
                     break;
