@@ -16,6 +16,7 @@ namespace DeadCellsArchipelago {
         public bool returnToCastlevania = false;
         public bool flawlessScrolls = false;
         public bool enemySanity = false;
+        public Dictionary<string, int> trapWeights = [];
         public Dictionary<string, int> ProgressionItem { get; set; } = [];
         public Dictionary<string, int> BossHeadKilled { get; set; } = [];
         public Dictionary<int, int> ProgressionForge { get; set; } = [];
@@ -26,7 +27,7 @@ namespace DeadCellsArchipelago {
         public int currentCells = 0;
         public bool debugWarp = false;
 
-        public void InitValues(int bsc, bool cosmetics, bool asp, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs, bool es)
+        public void InitValues(int bsc, bool cosmetics, bool asp, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs, bool es, Dictionary<string, int> tw)
         {
             bscLevelToWin = bsc;
             includeCosmetics = cosmetics;
@@ -39,6 +40,7 @@ namespace DeadCellsArchipelago {
             returnToCastlevania = rtc;
             flawlessScrolls = fs;
             enemySanity = es;
+            trapWeights = tw;
 
             if (!includeAspects) SAVED_DATA!.GiveAspectsCheck();
         }

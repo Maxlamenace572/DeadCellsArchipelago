@@ -12,6 +12,7 @@ using Archipelago.MultiClient.Net.MessageLog.Messages;
 using System.Net.WebSockets;
 using dc;
 using Archipelago.MultiClient.Net.Models;
+using Newtonsoft.Json.Linq;
 
 namespace DeadCellsArchipelago
 {
@@ -56,6 +57,7 @@ namespace DeadCellsArchipelago
         public bool flawlessScroll;
         public bool enemySanity;
         private List<Hint> Hints = [];
+        public Dictionary<string, int> trapWeights = [];
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -122,6 +124,31 @@ namespace DeadCellsArchipelago
                     if (slotData.ContainsKey("health_curse_link")) healthCurseLink = Convert.ToBoolean(slotData["health_curse_link"]);
                     if (slotData.ContainsKey("trap_link")) trapLink = Convert.ToBoolean(slotData["trap_link"]);
                     if (slotData.ContainsKey("trap_link_group")) trapLinkGroup = Convert.ToString(slotData["trap_link_group"]) ?? "";
+
+                    if (slotData.ContainsKey("trap_weights"))
+                    {
+                        Dictionary<string, int> temp = ((JObject)slotData["trap_weights"]).ToObject<Dictionary<string, int>>()!;
+
+                        trapWeights["Trap_Curse"] = temp["trap_weight_curse"];
+                        trapWeights["Trap_SpawnElite"] = temp["trap_weight_elite"];
+                        trapWeights["Trap_RemoveGold"] = temp["trap_weight_gold"];
+                        trapWeights["Trap_BreakWeapon"] = temp["trap_weight_weapon_break"];
+                        trapWeights["Trap_InvertControls"] = temp["trap_weight_reverse"];
+                        trapWeights["Trap_FlawlessChallenge"] = temp["trap_weight_challenge"];
+                    } 
+                    else
+                    {
+                        trapWeights["Trap_Curse"] = 1;
+                        trapWeights["Trap_SpawnElite"] = 1;
+                        trapWeights["Trap_RemoveGold"] = 1;
+                        trapWeights["Trap_BreakWeapon"] = 1;
+                        trapWeights["Trap_InvertControls"] = 1;
+                        trapWeights["Trap_FlawlessChallenge"] = 1;
+                    }
+
+                    foreach (KeyValuePair<string, int> test in trapWeights)
+                        Log.Error($"{test.Key} : {test.Value}");
+                    
 
                     energyLinkManager = new EnergyLinkManager(session);
                     if (deathLinkEnabled >= 0) deathLinkManager = new DeathLinkManager(session, deathLinkGroup, disableDeathLinkForAspects, deathTrap, deathTrapLink);

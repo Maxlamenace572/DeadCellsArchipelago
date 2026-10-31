@@ -987,15 +987,19 @@ namespace DeadCellsArchipelago {
 
         public static string RandomTrapId()
         {
-            List<string> trap = [
-                "Trap_Curse",
-                "Trap_SpawnElite",
-                "Trap_RemoveGold",
-                "Trap_BreakWeapon",
-                "Trap_InvertControls",
-                "Trap_FlawlessChallenge"
-            ];
-            return trap[new Random().Next(0, trap.Count)];
+            int totalWeight = GLOBAL_DATA!.trapWeights.Values.Sum();
+
+            int roll = new Random().Next(0, totalWeight);
+
+            foreach (KeyValuePair<string, int> trap in GLOBAL_DATA!.trapWeights)
+            {
+                roll -= trap.Value;
+
+                if (roll < 0)
+                    return trap.Key;
+            }
+
+            return GLOBAL_DATA!.trapWeights.Keys.First();
         }
 
         private static void OnHiddenTrigger(Hook_HiddenTrigger.orig_trigger orig, HiddenTrigger self, Entity by)
