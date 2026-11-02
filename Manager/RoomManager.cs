@@ -113,6 +113,7 @@ namespace DeadCellsArchipelago {
         //when the level is generating, we do the checks biomes and add a void challenge for the trap
         private static ArrayObj OnGenerateLevel(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
         {
+            self.countTryWithDifferentSeed = 0;
             changeNextCallDmgTier = false;
             changeNextCallLifeTier = false;
             if(ldat.id.ToString() == "PrisonStart")
@@ -212,7 +213,6 @@ namespace DeadCellsArchipelago {
 
         private static void OnActiviteExit(Hook_Exit.orig_onActivate orig, Exit self, Hero by, bool lp)
         {
-            Log.Error($"{self.destName} : {self.destColor}");
             ResetFrontPokebomb();
 
             if (USER!.game.isTraining())
@@ -507,6 +507,9 @@ namespace DeadCellsArchipelago {
                     string newDest = biomeTransitions.BiomeTransition[newBiome];
                     orig(arg1, lvl, x, y, newDest.AsHaxeString(), _destName, _destColor);
                 }
+
+                else
+                    orig(arg1, lvl, x, y, destLevel, _destName, _destColor);
             }
             
             else

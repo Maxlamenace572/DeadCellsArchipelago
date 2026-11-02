@@ -1067,5 +1067,34 @@ namespace DeadCellsArchipelago {
                 "QuickFists", "P_Health", "BarrelLauncher"
             }.Any(itemId.Contains);
         }
+
+        public static ItemDrop DropRandomFillerItemToPlayer(bool wasLegendary)
+        {
+            List<string> classic = ["HugeGem", "SmallMeat", "Map"];
+            List<string> legendary = ["LegendGem", "FlaskRefill", "Pokebomb"];
+            string selectedItem;
+            if (wasLegendary)
+                selectedItem = legendary[new Random().Next(0, legendary.Count)];
+            else
+                selectedItem = classic[new Random().Next(0, classic.Count)];
+
+            InventItem inventItem = CreateInventItemById(selectedItem)!;
+
+            bool inArmoryValue = false;
+            ItemDrop itemDrop = new ItemDrop(
+                HERO!._level,
+                HERO.cx,
+                HERO.cy,
+                inventItem,
+                true,
+                new Ref<bool>(ref inArmoryValue)
+            );
+
+            itemDrop.init();
+            itemDrop.onDropAsLoot();
+            itemDrop.dx = HERO.dx;
+
+            return itemDrop;
+        }
     }
 }

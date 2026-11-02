@@ -12,10 +12,10 @@ using dc.hl.types;
 using dc.level;
 using dc.level.lore;
 using dc.level.@struct;
-using dc.pow;
 using dc.pr;
 using dc.tool;
 using dc.tool.atk;
+using dc.tool.utils;
 using Hashlink.Virtuals;
 using HaxeProxy.Runtime;
 using ModCore.Utilities;
@@ -71,6 +71,15 @@ namespace DeadCellsArchipelago {
             Hook_Knight.onFocus += OnFocusKnight;
             dc.en.inter.Hook_Throne.initGfx += OnInitGfxInterThrone;
             Hook_StoryManager.onNewGame += OnNewGame;
+
+            Hook_GuacameleeChicken.dropItem += OnDropItemGuacameleeChicken;
+            Hook_SlayTheSpireNeow.dropItem += OnDropItemSlayTheSpireNeow;
+            Hook_StaphyRoomCine.dropLilStaphy += OnDropLilStaphy;
+            Hook_MerchantPan.dropPan += OnDropPan;
+            Hook_NunchuckPitcher.dropLoot += OnDropLootNunchuckPitcher;
+            Hook__ItemUtils.dropAndUnlockItem += OnDropAndUnlockItem;
+            Hook_SpeakingFlyingSword.forceEquipItem += OnForceEquipItem;
+            Hook_MariaRoom.onCustomEvent += OnCustomEventMariaRoom;
 
             Serilog.Log.Information("[AP] Special Unlock Hooks loaded");
         }
@@ -150,10 +159,18 @@ namespace DeadCellsArchipelago {
         }
 
         private static void OnCustomEventLoreManager(Hook_LoreManager.orig_onCustomEvent orig, LoreManager self, dc.String id, Examinable e)
-        {//Sypha and Trevor (part1)
-            useModdedHasUnlock = true;
-            orig(self, id, e);
-            useModdedHasUnlock = false;
+        {//Sypha and Trevor (part1) & Trident drop
+            if (id.ToString() == "dropTrident")
+            {
+                USER!.itemMeta.unlockItem("Trident".AsHaxeString());
+                DropRandomFillerItemToPlayer(true);
+            }
+            else
+            {
+                useModdedHasUnlock = true;
+                orig(self, id, e);
+                useModdedHasUnlock = false;
+            }
         }
 
         private static bool OnCreateExaminableArenaEntrance(Hook_ArenaEntrance.orig_onCreateExaminable orig, ArenaEntrance self, dc.String custId, Examinable exam)
@@ -363,6 +380,57 @@ namespace DeadCellsArchipelago {
             useModdedHasUnlock = true;
             orig(self, gameSeed);
             useModdedHasUnlock = false;
+        }
+
+        //items with drop replaced (Trident drop is with Sypha and Trevor (part1))
+        private static void OnDropItemGuacameleeChicken(Hook_GuacameleeChicken.orig_dropItem orig, GuacameleeChicken self, dc.String k)
+        {//PolloPower
+            USER!.itemMeta.unlockItem(k);
+            DropRandomFillerItemToPlayer(false);
+        }
+
+        private static void OnDropItemSlayTheSpireNeow(Hook_SlayTheSpireNeow.orig_dropItem orig, SlayTheSpireNeow self)
+        {//DiverseDeckJuggernaut
+            if (self.dropped) return;
+            self.dropped = true;
+            USER!.itemMeta.unlockItem("DiverseDeckJuggernaut".AsHaxeString());
+            DropRandomFillerItemToPlayer(false);
+        }
+
+        private static void OnDropLilStaphy(Hook_StaphyRoomCine.orig_dropLilStaphy orig, StaphyRoomCine self, int cx, int cy)
+        {//SpawnLilStaphy
+            DropRandomFillerItemToPlayer(true);
+        }
+
+        private static void OnDropPan(Hook_MerchantPan.orig_dropPan orig, MerchantPan self)
+        {//Pan
+            if (self.hasGiven) return;
+            self.hasGiven = true;
+            USER!.itemMeta.unlockItem(MerchantPan.Class.k);
+            DropRandomFillerItemToPlayer(false);
+        }
+
+        private static void OnDropLootNunchuckPitcher(Hook_NunchuckPitcher.orig_dropLoot orig, NunchuckPitcher self)
+        {//NunchuckPan
+            USER!.itemMeta.unlockItem("NunchuckPan".AsHaxeString());
+            DropRandomFillerItemToPlayer(false);
+        }
+
+        private static ItemDrop OnDropAndUnlockItem(Hook__ItemUtils.orig_dropAndUnlockItem orig, Game game, dc.String itemKind, int cx, int cy)
+        {//several items from lore rooms
+            USER!.itemMeta.unlockItem(itemKind);
+            return DropRandomFillerItemToPlayer(false);
+        }
+
+        private static void OnForceEquipItem(Hook_SpeakingFlyingSword.orig_forceEquipItem orig, SpeakingFlyingSword self)
+        {//FlyingSword
+            DropRandomFillerItemToPlayer(true);
+        }
+
+        private static void OnCustomEventMariaRoom(Hook_MariaRoom.orig_onCustomEvent orig, MariaRoom self, dc.String id, Examinable e)
+        {//SpawnCat
+            USER!.itemMeta.unlockItem("SpawnCat".AsHaxeString());
+            DropRandomFillerItemToPlayer(false);
         }
     }
 }
