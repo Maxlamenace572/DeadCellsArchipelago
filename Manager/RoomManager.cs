@@ -17,12 +17,14 @@ using static DeadCellsArchipelago.PokeManager;
 using static DeadCellsArchipelago.HeroManager;
 using static DeadCellsArchipelago.EnemyManager;
 using static DeadCellsArchipelago.WorldMapManager;
+using static DeadCellsArchipelago.ModAssetManager;
 using Hashlink.Proxy;
 using dc.cine;
 using dc.en.inter.exit;
 using dc.pr;
 using dc.tool;
 using dc.hxd;
+using System.Text.Json;
 
 namespace DeadCellsArchipelago {
     public static class RoomManager
@@ -35,6 +37,7 @@ namespace DeadCellsArchipelago {
         public static bool addBackLoreRooms = false;
         public static int countPrisonStartLoreRoom;
         private static bool addDistillery;
+        public static BiomeTransitions biomeTransitions = new();
 
         public static void InitializeRoomHooks()
         {
@@ -68,6 +71,10 @@ namespace DeadCellsArchipelago {
             Hook_PrisonStart.canGenerateThisLoreRoom += OnCanGenerateThisLoreRoomPrisonStart;
             Hook_T_Castle.buildMainRooms += OnBuildMainRoomsT_Castle;
             Hook_UserStats.getReachedBiomeCount += OnGetReachedBiomeCount;
+            Hook__Exit.__constructor__ += OnConstructorExit;
+            Hook_Exit.getDestName += OnGetDestName;
+            Hook_Exit.getDestBasedOnNextLevels += OnGetDestBasedOnNextLevels;
+            Hook_Exit.initGfx += OnInitGfx;
 
             Log.Information("[AP] Room Hooks loaded");
         }
@@ -205,6 +212,7 @@ namespace DeadCellsArchipelago {
 
         private static void OnActiviteExit(Hook_Exit.orig_onActivate orig, Exit self, Hero by, bool lp)
         {
+            Log.Error($"{self.destName} : {self.destColor}");
             ResetFrontPokebomb();
 
             if (USER!.game.isTraining())
@@ -458,6 +466,96 @@ namespace DeadCellsArchipelago {
             if (addDistillery)
                 return 1;
             return orig(self, id);
+        }
+
+        public static BiomeTransitions LoadBiomeTransitions()
+        {
+            var json = System.IO.File.ReadAllText(GetBiomeTransitionsPath());
+            return JsonSerializer.Deserialize<BiomeTransitions>(json)!;
+        }
+
+        public static string GetBiomeTransitionsPath()
+        {
+            return System.IO.Path.Combine(GetJsonFolder(), "biomeTransitions.json");
+        }
+
+        private static void OnConstructorExit(Hook__Exit.orig___constructor__ orig, Exit arg1, Level lvl, int x, int y, dc.String destLevel, dc.String _destName, int? _destColor)
+        {
+            if (GLOBAL_DATA!.roomRando.Mode == "off")
+                orig(arg1, lvl, x, y, destLevel, _destName, _destColor);
+
+            else if (destLevel != null)
+            {
+                if (SAVED_DATA!.currentLevelId == "T_SewerDepthsAfterPrison" )
+                    orig(arg1, lvl, x, y, "StiltVillage".AsHaxeString(), _destName, _destColor);
+
+                else if (SAVED_DATA!.currentLevelId == "T_ThroneAfterDistillery" )
+                    orig(arg1, lvl, x, y, "Castle".AsHaxeString(), _destName, _destColor);
+                
+                else if (SAVED_DATA!.currentLevelId == "T_SwampAfterPrison" )
+                    orig(arg1, lvl, x, y, "Shipwreck".AsHaxeString(), _destName, _destColor);
+
+                else if (biomeTransitions.MultiTransition.Contains(SAVED_DATA!.currentLevelId))
+                {
+                    string newBiome = GLOBAL_DATA!.roomRando.Map[destLevel.ToString()];
+                    orig(arg1, lvl, x, y, newBiome.AsHaxeString(), _destName, _destColor);
+                }
+                else if (biomeTransitions.TransitionBiome.ContainsKey(destLevel.ToString()))
+                {
+                    string oldBiome = biomeTransitions.TransitionBiome[destLevel.ToString()];
+                    string newBiome = GLOBAL_DATA!.roomRando.Map[oldBiome];
+                    string newDest = biomeTransitions.BiomeTransition[newBiome];
+                    orig(arg1, lvl, x, y, newDest.AsHaxeString(), _destName, _destColor);
+                }
+            }
+            
+            else
+                orig(arg1, lvl, x, y, destLevel, _destName, _destColor);
+        }
+
+        private static dc.String OnGetDestName(Hook_Exit.orig_getDestName orig, Exit self)
+        {
+            if(self.destLevel != null && GLOBAL_DATA!.roomRando.Mode != "off")
+            {
+                if(self.destLevel.ToString() == "T_SewerDepthsAfterPrison"){Log.Error($"{Lang.Class.t.texts.get("Gué des brumes".AsHaxeString())} <-");
+                    return Lang.Class.t.get("Gué des brumes".AsHaxeString(), null);}
+                else if (self.destLevel.ToString() == "T_ThroneAfterDistillery" )
+                    return Lang.Class.t.get("Château de Haute-Cime".AsHaxeString(), null);
+                else if (self.destLevel.ToString() == "T_SwampAfterPrison" )
+                    return Lang.Class.t.get("Infested Shipwreck".AsHaxeString(), null);
+            }
+
+            return orig(self);
+        }
+
+        private static dc.String OnGetDestBasedOnNextLevels(Hook_Exit.orig_getDestBasedOnNextLevels orig, Exit self)
+        {
+            if(self.destLevel != null && GLOBAL_DATA!.roomRando.Mode != "off")
+            {
+                if(self.destLevel.ToString() == "T_SewerDepthsAfterPrison")
+                    return "StiltVillage".AsHaxeString();
+                else if (self.destLevel.ToString() == "T_ThroneAfterDistillery" )
+                    return "Castle".AsHaxeString();
+                else if (self.destLevel.ToString() == "T_SwampAfterPrison" )
+                    return "Shipwreck".AsHaxeString();
+            }
+                
+            return orig(self);
+        }
+
+        private static void OnInitGfx(Hook_Exit.orig_initGfx orig, Exit self)
+        {
+            if(self.destLevel != null && GLOBAL_DATA!.roomRando.Mode != "off")
+            {
+                if (self.destLevel.ToString() == "T_SewerDepthsAfterPrison")
+                    self.destColor = 3062659;
+                else if (self.destLevel.ToString() == "T_ThroneAfterDistillery" )
+                    self.destColor = 14085636;
+                else if (self.destLevel.ToString() == "T_SwampAfterPrison" )
+                    self.destColor = 13542177;
+            }
+                
+            orig(self);
         }
     }
 }

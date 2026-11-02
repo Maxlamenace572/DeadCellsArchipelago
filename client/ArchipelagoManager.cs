@@ -58,6 +58,7 @@ namespace DeadCellsArchipelago
         public bool enemySanity;
         private List<Hint> Hints = [];
         public Dictionary<string, int> trapWeights = [];
+        public RoomRandoData roomRando = new();
         
         public void Connect(string serverUrl, string slotName, string? password = null)
         {
@@ -145,6 +146,8 @@ namespace DeadCellsArchipelago
                         trapWeights["Trap_InvertControls"] = 1;
                         trapWeights["Trap_FlawlessChallenge"] = 1;
                     }
+
+                    if (slotData.ContainsKey("room_randomizer")) roomRando.LoadData(JToken.FromObject(slotData["room_randomizer"]));
 
                     energyLinkManager = new EnergyLinkManager(session);
                     if (deathLinkEnabled >= 0) deathLinkManager = new DeathLinkManager(session, deathLinkGroup, disableDeathLinkForAspects, deathTrap, deathTrapLink);

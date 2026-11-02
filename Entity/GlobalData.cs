@@ -26,8 +26,10 @@ namespace DeadCellsArchipelago {
         public int reducedPercentageShop = 0;
         public int currentCells = 0;
         public bool debugWarp = false;
+        public RoomRandoData roomRando = new();
 
-        public void InitValues(int bsc, bool cosmetics, bool asp, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs, bool es, Dictionary<string, int> tw)
+        public void InitValues(int bsc, bool cosmetics, bool asp, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs, bool es,
+                                Dictionary<string, int> tw, RoomRandoData rr)
         {
             bscLevelToWin = bsc;
             includeCosmetics = cosmetics;
@@ -41,6 +43,7 @@ namespace DeadCellsArchipelago {
             flawlessScrolls = fs;
             enemySanity = es;
             trapWeights = tw;
+            roomRando = rr;
 
             if (!includeAspects) SAVED_DATA!.GiveAspectsCheck();
         }

@@ -53,6 +53,7 @@ namespace DeadCellsArchipelago
             Save.Class.NUM_SLOTS = 99;
             IdToApName = LoadModApTranslation();
             ApNameToId = Invert(IdToApName);
+            biomeTransitions = LoadBiomeTransitions();
             
             InitializeBossHooks();
             InitializeItemHooks();
@@ -77,7 +78,6 @@ namespace DeadCellsArchipelago
             Log.Information("[AP] Archipelago hooks loaded");
             //BrBlueprint
             //BossRushData
-            //for biome rando: LevelTransition.Class.@goto("Lighthouse".AsHaxeString());
         }
 
         public void OnHeroUpdate(double dt)
@@ -99,6 +99,7 @@ namespace DeadCellsArchipelago
 
                 if (shouldGiveItemsNewRun && SAVED_DATA != null)
                 {
+                    //LevelTransition.Class.@goto("Lighthouse".AsHaxeString());
                     shouldGiveItemsNewRun = false;
                     if (SAVED_DATA.IsItemReceived("ShipwreckKey"))
                     {
