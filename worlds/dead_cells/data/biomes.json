@@ -1,0 +1,137 @@
+{
+  "PrisonStart": {
+    "depth": 0
+  },
+  "Bank": {},
+  "PrisonCourtyard": {
+    "depth": 1
+  },
+  "SewerShort": {
+    "depth": 1
+  },
+  "Greenhouse": {
+    "depth": 1,
+    "dlc": "TheBadSeed"
+  },
+  "PurpleGarden": {
+    "depth": 1,
+    "dlc": "Purple"
+  },
+  "PrisonDepths": {
+    "depth": 1
+  },
+  "PrisonCorrupt": {
+    "depth": 1
+  },
+  "PrisonRoof": {
+    "depth": 2
+  },
+  "Ossuary": {
+    "depth": 2
+  },
+  "SewerDepths": {
+    "depth": 2
+  },
+  "Swamp": {
+    "depth": 2,
+    "dlc": "TheBadSeed"
+  },
+  "DookuCastle": {
+    "depth": 2,
+    "dlc": "Purple"
+  },
+  "Bridge": {
+    "depth": 3
+  },
+  "BeholderPit": {
+    "depth": 3
+  },
+  "SwampHeart": {
+    "depth": 3,
+    "dlc": "TheBadSeed"
+  },
+  "DeathArena": {
+    "depth": 3,
+    "dlc": "Purple"
+  },
+  "StiltVillage": {
+    "depth": 4
+  },
+  "AncientTemple": {
+    "depth": 4
+  },
+  "Cemetery": {
+    "depth": 4
+  },
+  "Tumulus": {
+    "depth": 4,
+    "dlc": "FatalFalls"
+  },
+  "ClockTower": {
+    "depth": 5
+  },
+  "Crypt": {
+    "depth": 5
+  },
+  "Cavern": {
+    "depth": 5,
+    "dlc": "RiseOfTheGiant"
+  },
+  "Cliff": {
+    "depth": 5,
+    "dlc": "FatalFalls"
+  },
+  "TopClockTower": {
+    "depth": 6
+  },
+  "Giant": {
+    "depth": 6,
+    "dlc": "RiseOfTheGiant"
+  },
+  "GardenerStage": {
+    "depth": 6,
+    "dlc": "FatalFalls"
+  },
+  "Castle": {
+    "depth": 7
+  },
+  "Shipwreck": {
+    "depth": 7,
+    "dlc": "TheQueenAndTheSea"
+  },
+  "DookuCastleHard": {
+    "depth": 7,
+    "dlc": "Purple"
+  },
+  "Throne": {
+    "depth": 8
+  },
+  "Distillery": {
+    "depth": 7,
+    "min_bc": 1
+  },
+  "Lighthouse": {
+    "depth": 8,
+    "dlc": "TheQueenAndTheSea"
+  },
+  "DookuArena": {
+    "depth": 8,
+    "dlc": "Purple"
+  },
+  "Astrolab": {
+    "depth": 9,
+    "dlc": "RiseOfTheGiant",
+    "min_bc": 5
+  },
+  "QueenArena": {
+    "depth": 10,
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Observatory": {
+    "depth": 10,
+    "dlc": "RiseOfTheGiant",
+    "min_bc": 5
+  },
+  "Challenge": {},
+  "BossRush": {}
+}

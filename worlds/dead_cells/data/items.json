@@ -1,0 +1,3018 @@
+{
+  "Vine Rune": {
+    "id": 0,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Teleportation Rune": {
+    "id": 1,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Challenger's Rune": {
+    "id": 2,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Customization Rune": {
+    "id": 3,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Ram Rune": {
+    "id": 4,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Spider Rune": {
+    "id": 5,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Homunculus Rune": {
+    "id": 6,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Explorer's Rune": {
+    "id": 7,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Progressive Stem Cell": {
+    "id": 8,
+    "class": "progression",
+    "cat": "rune",
+    "count_option": "boss_cells"
+  },
+  "Crowned Key": {
+    "id": 16,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Boss Rush Unlock": {
+    "id": 17,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Bank Unlock": {
+    "id": 18,
+    "class": "progression",
+    "cat": "rune",
+    "unlock_for": "Bank"
+  },
+  "Boss Rush Statue": {
+    "id": 19,
+    "class": "progression",
+    "cat": "rune"
+  },
+  "Cavern Key": {
+    "id": 20,
+    "class": "progression",
+    "cat": "rune",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Training Room Key": {
+    "id": 21,
+    "class": "useful",
+    "cat": "rune"
+  },
+  "Dash": {
+    "id": 22,
+    "class": "progression",
+    "cat": "rune",
+    "dlc": "Purple"
+  },
+  "High Jump": {
+    "id": 23,
+    "class": "progression",
+    "cat": "rune",
+    "dlc": "Purple"
+  },
+  "Progressive Flask": {
+    "id": 256,
+    "class": "progression",
+    "cat": "upgrade",
+    "count": 4
+  },
+  "Backpack": {
+    "id": 260,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Advanced Forge 1": {
+    "id": 261,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Recycling Tubes": {
+    "id": 262,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Hunter's Mirror": {
+    "id": 263,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "The Specialist's Showroom": {
+    "id": 264,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Restock": {
+    "id": 265,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Merchandise Categories": {
+    "id": 266,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Progressive Recycling": {
+    "id": 267,
+    "class": "progression",
+    "cat": "upgrade",
+    "count": 2
+  },
+  "Random Starter Bow": {
+    "id": 269,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Random Starter Shield": {
+    "id": 270,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Random Melee Weapon": {
+    "id": 271,
+    "class": "progression",
+    "cat": "upgrade"
+  },
+  "Progressive Gold Reserves": {
+    "id": 272,
+    "class": "progression",
+    "cat": "upgrade",
+    "count": 5
+  },
+  "Balanced Blade": {
+    "id": 512,
+    "class": "useful",
+    "cat": "melee",
+    "start": "weapon"
+  },
+  "Spite Sword": {
+    "id": 513,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Assassin's Dagger": {
+    "id": 514,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Blood Sword": {
+    "id": 515,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Twin Daggers": {
+    "id": 516,
+    "class": "useful",
+    "cat": "melee",
+    "start": "weapon"
+  },
+  "Broadsword": {
+    "id": 517,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Shovel": {
+    "id": 518,
+    "class": "progression",
+    "cat": "melee"
+  },
+  "Cursed Sword": {
+    "id": 519,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Sadist's Stiletto": {
+    "id": 520,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Swift Sword": {
+    "id": 521,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Giantkiller": {
+    "id": 522,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Shrapnel Axes": {
+    "id": 523,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Seismic Strike": {
+    "id": 524,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "War Spear": {
+    "id": 525,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Impaler": {
+    "id": 526,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Symmetrical Lance": {
+    "id": 527,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Rapier": {
+    "id": 528,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Meat Skewer": {
+    "id": 529,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Nutcracker": {
+    "id": 530,
+    "class": "useful",
+    "cat": "melee",
+    "start": "weapon"
+  },
+  "Spartan Sandals": {
+    "id": 531,
+    "class": "progression_skip_balancing",
+    "cat": "melee"
+  },
+  "Spiked Boots": {
+    "id": 532,
+    "class": "progression_skip_balancing",
+    "cat": "melee"
+  },
+  "Hayabusa Boots": {
+    "id": 533,
+    "class": "progression_skip_balancing",
+    "cat": "melee"
+  },
+  "Hayabusa Gauntlets": {
+    "id": 534,
+    "class": "progression_skip_balancing",
+    "cat": "melee"
+  },
+  "Valmont's Whip": {
+    "id": 535,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Wrenching Whip": {
+    "id": 536,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Oiled Sword": {
+    "id": 537,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Torch": {
+    "id": 538,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Frantic Sword": {
+    "id": 539,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Flawless": {
+    "id": 540,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Flint": {
+    "id": 541,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Tentacle": {
+    "id": 542,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Vorpan": {
+    "id": 543,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Flashing Fans": {
+    "id": 544,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheBadSeed"
+  },
+  "Scythe Claw": {
+    "id": 545,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheBadSeed"
+  },
+  "Rhythm n' Bouzouki": {
+    "id": 546,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheBadSeed"
+  },
+  "Crowbar": {
+    "id": 547,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Snake Fangs": {
+    "id": 548,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "FatalFalls"
+  },
+  "Iron Staff": {
+    "id": 549,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "FatalFalls"
+  },
+  "Ferryman's Lantern": {
+    "id": 550,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "FatalFalls"
+  },
+  "Hattori's Katana": {
+    "id": 551,
+    "class": "progression",
+    "cat": "melee"
+  },
+  "Tombstone": {
+    "id": 552,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Oven Axe": {
+    "id": 553,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Toothpick": {
+    "id": 554,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Machete and Pistol": {
+    "id": 555,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Hard Light Sword": {
+    "id": 556,
+    "class": "progression",
+    "cat": "melee"
+  },
+  "Pure Nail": {
+    "id": 557,
+    "class": "progression",
+    "cat": "melee"
+  },
+  "Bone": {
+    "id": 558,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Abyssal Trident": {
+    "id": 559,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Hand Hook": {
+    "id": 560,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Maw of the Deep": {
+    "id": 561,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Bladed Tonfas": {
+    "id": 562,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Wrecking Ball": {
+    "id": 563,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Queen's Rapier": {
+    "id": 564,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Dagger of Profit": {
+    "id": 565,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Gold Digger": {
+    "id": 566,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "King Scepter": {
+    "id": 567,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Baseball Bat": {
+    "id": 568,
+    "class": "progression",
+    "cat": "melee"
+  },
+  "Panchaku": {
+    "id": 569,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Starfury": {
+    "id": 570,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Alucard's Sword": {
+    "id": 571,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "Purple"
+  },
+  "Morning Star": {
+    "id": 572,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "Purple"
+  },
+  "Bible": {
+    "id": 573,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "Purple"
+  },
+  "Whip Sword": {
+    "id": 574,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "Purple"
+  },
+  "Vampire Killer": {
+    "id": 575,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "Purple"
+  },
+  "Death's Scythe": {
+    "id": 576,
+    "class": "useful",
+    "cat": "melee",
+    "dlc": "Purple"
+  },
+  "Sewing Scissors": {
+    "id": 577,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Giant Comb": {
+    "id": 578,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Misericorde": {
+    "id": 579,
+    "class": "useful",
+    "cat": "melee"
+  },
+  "Multiple-nocks Bow": {
+    "id": 768,
+    "class": "useful",
+    "cat": "ranged",
+    "start": "weapon"
+  },
+  "Bow and Endless Quiver": {
+    "id": 769,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Marksman's Bow": {
+    "id": 770,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Sonic Carbine": {
+    "id": 771,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Infantry Bow": {
+    "id": 772,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Quick Bow": {
+    "id": 773,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Ice Bow": {
+    "id": 774,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Heavy Crossbow": {
+    "id": 775,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Repeater Crossbow": {
+    "id": 776,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Ice Crossbow": {
+    "id": 777,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Explosive Crossbow": {
+    "id": 778,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Alchemic Carbine": {
+    "id": 779,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Boomerang": {
+    "id": 780,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Hemorrhage": {
+    "id": 781,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "RiseOfTheGiant"
+  },
+  "The Boy's Axe": {
+    "id": 782,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "RiseOfTheGiant"
+  },
+  "War Javelin": {
+    "id": 783,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Hokuto's Bow": {
+    "id": 784,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Nerves of Steel": {
+    "id": 785,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Throwing Knife": {
+    "id": 786,
+    "class": "useful",
+    "cat": "ranged",
+    "start": "weapon"
+  },
+  "Electric Whip": {
+    "id": 787,
+    "class": "useful",
+    "cat": "ranged",
+    "start": "weapon"
+  },
+  "Firebrands": {
+    "id": 788,
+    "class": "useful",
+    "cat": "ranged",
+    "start": "weapon"
+  },
+  "Ice Shards": {
+    "id": 789,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Pyrotechnics": {
+    "id": 790,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Lightning Bolt": {
+    "id": 791,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Fire Blast": {
+    "id": 792,
+    "class": "progression",
+    "cat": "ranged"
+  },
+  "Frost Blast": {
+    "id": 793,
+    "class": "useful",
+    "cat": "ranged",
+    "start": "weapon"
+  },
+  "Magic Missiles": {
+    "id": 794,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Blowgun": {
+    "id": 795,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "TheBadSeed"
+  },
+  "Barrel Launcher": {
+    "id": 796,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Killing Deck": {
+    "id": 797,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Gilded Yumi": {
+    "id": 798,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Money Shooter": {
+    "id": 799,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Magic Bow": {
+    "id": 800,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Throwable Objects": {
+    "id": 801,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Laser Glaive": {
+    "id": 802,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Peril Glyphs": {
+    "id": 803,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Cross": {
+    "id": 804,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "Purple"
+  },
+  "Throwing Axe": {
+    "id": 805,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "Purple"
+  },
+  "Medusa's Head": {
+    "id": 806,
+    "class": "useful",
+    "cat": "ranged",
+    "dlc": "Purple"
+  },
+  "Anathema": {
+    "id": 807,
+    "class": "useful",
+    "cat": "ranged"
+  },
+  "Front Line Shield": {
+    "id": 1024,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Cudgel": {
+    "id": 1025,
+    "class": "useful",
+    "cat": "shield",
+    "start": "weapon"
+  },
+  "Punishment": {
+    "id": 1026,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Knockback Shield": {
+    "id": 1027,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Rampart": {
+    "id": 1028,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Assault Shield": {
+    "id": 1029,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Bloodthirsty Shield": {
+    "id": 1030,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Greed Shield": {
+    "id": 1031,
+    "class": "useful",
+    "cat": "shield",
+    "start": "weapon"
+  },
+  "Spiked Shield": {
+    "id": 1032,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Parry Shield": {
+    "id": 1033,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Force Shield": {
+    "id": 1034,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Thunder Shield": {
+    "id": 1035,
+    "class": "useful",
+    "cat": "shield",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Ice Shield": {
+    "id": 1036,
+    "class": "useful",
+    "cat": "shield"
+  },
+  "Alucard's Shield": {
+    "id": 1037,
+    "class": "useful",
+    "cat": "shield",
+    "dlc": "Purple"
+  },
+  "Death Orb": {
+    "id": 1280,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Tornado": {
+    "id": 1281,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Knife Dance": {
+    "id": 1282,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Corrupted Power": {
+    "id": 1283,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Vampirism": {
+    "id": 1284,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Tonic": {
+    "id": 1285,
+    "class": "useful",
+    "cat": "power",
+    "start": "weapon"
+  },
+  "Grappling Hook": {
+    "id": 1286,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Phaser": {
+    "id": 1287,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Corrosive Cloud": {
+    "id": 1288,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Lacerating Aura": {
+    "id": 1289,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Wave of Denial": {
+    "id": 1290,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Wings of the Crow": {
+    "id": 1291,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Great Owl of War": {
+    "id": 1292,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Lightspeed": {
+    "id": 1293,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Giant Whistle": {
+    "id": 1294,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Telluric Shock": {
+    "id": 1295,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Collector's Syringe": {
+    "id": 1296,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Smoke Bomb": {
+    "id": 1297,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "TheBadSeed"
+  },
+  "Mushroom Boi!": {
+    "id": 1298,
+    "class": "progression",
+    "cat": "power",
+    "dlc": "TheBadSeed"
+  },
+  "Ice Armor": {
+    "id": 1299,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Lightning Rods": {
+    "id": 1300,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "FatalFalls"
+  },
+  "Scarecrow's Sickles": {
+    "id": 1301,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "FatalFalls"
+  },
+  "Serenade": {
+    "id": 1302,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "FatalFalls"
+  },
+  "Cocoon": {
+    "id": 1303,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "FatalFalls"
+  },
+  "Face Flask": {
+    "id": 1304,
+    "class": "progression",
+    "cat": "power"
+  },
+  "Pollo Power": {
+    "id": 1305,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Leghugger": {
+    "id": 1306,
+    "class": "progression",
+    "cat": "power",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Diverse Deck": {
+    "id": 1307,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Taunt": {
+    "id": 1308,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Rebound Stone": {
+    "id": 1309,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "Purple"
+  },
+  "Maria's Cat": {
+    "id": 1310,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "Purple"
+  },
+  "Bat Volley": {
+    "id": 1311,
+    "class": "useful",
+    "cat": "power",
+    "dlc": "Purple"
+  },
+  "Indulgence": {
+    "id": 1312,
+    "class": "useful",
+    "cat": "power"
+  },
+  "Powerful Grenade": {
+    "id": 1536,
+    "class": "useful",
+    "cat": "grenade"
+  },
+  "Infantry Grenade": {
+    "id": 1537,
+    "class": "useful",
+    "cat": "grenade",
+    "start": "weapon"
+  },
+  "Cluster Grenade": {
+    "id": 1538,
+    "class": "useful",
+    "cat": "grenade"
+  },
+  "Magnetic Grenade": {
+    "id": 1539,
+    "class": "useful",
+    "cat": "grenade"
+  },
+  "Stun Grenade": {
+    "id": 1540,
+    "class": "useful",
+    "cat": "grenade"
+  },
+  "Ice Grenade": {
+    "id": 1541,
+    "class": "useful",
+    "cat": "grenade",
+    "start": "weapon"
+  },
+  "Fire Grenade": {
+    "id": 1542,
+    "class": "useful",
+    "cat": "grenade"
+  },
+  "Root Grenade": {
+    "id": 1543,
+    "class": "useful",
+    "cat": "grenade"
+  },
+  "Oil Grenade": {
+    "id": 1544,
+    "class": "useful",
+    "cat": "grenade"
+  },
+  "Swarm": {
+    "id": 1545,
+    "class": "progression",
+    "cat": "grenade"
+  },
+  "Holy Water": {
+    "id": 1546,
+    "class": "useful",
+    "cat": "grenade",
+    "dlc": "Purple"
+  },
+  "Double Crossb-o-matic": {
+    "id": 1792,
+    "class": "progression_skip_balancing",
+    "cat": "deployable"
+  },
+  "Sinew Slicer": {
+    "id": 1793,
+    "class": "progression_skip_balancing",
+    "cat": "deployable",
+    "start": "weapon"
+  },
+  "Heavy Turret": {
+    "id": 1794,
+    "class": "progression_skip_balancing",
+    "cat": "deployable"
+  },
+  "Barnacle": {
+    "id": 1795,
+    "class": "progression_skip_balancing",
+    "cat": "deployable"
+  },
+  "Flamethrower Turret": {
+    "id": 1796,
+    "class": "useful",
+    "cat": "deployable"
+  },
+  "Cleaver": {
+    "id": 1797,
+    "class": "progression_skip_balancing",
+    "cat": "deployable"
+  },
+  "Wolf Trap": {
+    "id": 1798,
+    "class": "useful",
+    "cat": "deployable",
+    "start": "weapon"
+  },
+  "Crusher": {
+    "id": 1799,
+    "class": "progression_skip_balancing",
+    "cat": "deployable"
+  },
+  "Explosive Decoy": {
+    "id": 1800,
+    "class": "progression_skip_balancing",
+    "cat": "deployable"
+  },
+  "Emergency Door": {
+    "id": 1801,
+    "class": "useful",
+    "cat": "deployable"
+  },
+  "Tesla Coil": {
+    "id": 1802,
+    "class": "progression_skip_balancing",
+    "cat": "deployable"
+  },
+  "Scavenged Bombard": {
+    "id": 1803,
+    "class": "progression_skip_balancing",
+    "cat": "deployable",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Killer Instinct": {
+    "id": 2048,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Combo": {
+    "id": 2049,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Vengeance": {
+    "id": 2050,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Melee": {
+    "id": 2051,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Open Wounds": {
+    "id": 2052,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Tainted Flask": {
+    "id": 2053,
+    "class": "progression",
+    "cat": "mutation"
+  },
+  "Adrenaline": {
+    "id": 2054,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Frenzy": {
+    "id": 2055,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Scheme": {
+    "id": 2056,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Initiative": {
+    "id": 2057,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Predator": {
+    "id": 2058,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Porcupack": {
+    "id": 2059,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Support": {
+    "id": 2060,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Dead Inside": {
+    "id": 2061,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Tranquility": {
+    "id": 2062,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Ripper": {
+    "id": 2063,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Parting Gift": {
+    "id": 2064,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Barbed Tips": {
+    "id": 2065,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Point Blank": {
+    "id": 2066,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Networking": {
+    "id": 2067,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Crow's Foot": {
+    "id": 2068,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Tactical Retreat": {
+    "id": 2069,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Heart of Ice": {
+    "id": 2070,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Acrobatipack": {
+    "id": 2071,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Ranger's Gear": {
+    "id": 2072,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Berserker": {
+    "id": 2073,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Blind Faith": {
+    "id": 2074,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Counterattack": {
+    "id": 2075,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "What Doesn't Kill Me": {
+    "id": 2076,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Necromancy": {
+    "id": 2077,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Gastronomy": {
+    "id": 2078,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Extended Healing": {
+    "id": 2079,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Spite": {
+    "id": 2080,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Masochist": {
+    "id": 2081,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Kill Rhythm": {
+    "id": 2082,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Armadillopack": {
+    "id": 2083,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Ygdar Orus Li Ox": {
+    "id": 2084,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Frostbite": {
+    "id": 2085,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Recovery": {
+    "id": 2086,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Emergency Triage": {
+    "id": 2087,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Velocity": {
+    "id": 2088,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Soldier's Resistance": {
+    "id": 2089,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Acceptance": {
+    "id": 2090,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Alienation": {
+    "id": 2091,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Hunter's Instinct": {
+    "id": 2092,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Disengagement": {
+    "id": 2093,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "No Mercy": {
+    "id": 2094,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Instinct of the Master of Arms": {
+    "id": 2095,
+    "class": "useful",
+    "cat": "mutation",
+    "start": "mutation"
+  },
+  "Ammo": {
+    "id": 2096,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Gold Plating": {
+    "id": 2097,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Get Rich Quick": {
+    "id": 2098,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Midas' Blood": {
+    "id": 2099,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Wish": {
+    "id": 2100,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Cursed Flask": {
+    "id": 2101,
+    "class": "progression",
+    "cat": "mutation"
+  },
+  "Damned Vigor": {
+    "id": 2102,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Demon Strength": {
+    "id": 2103,
+    "class": "useful",
+    "cat": "mutation"
+  },
+  "Blood Drinker": {
+    "id": 2304,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Stomper": {
+    "id": 2305,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Shatter": {
+    "id": 2306,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Toxin Lover": {
+    "id": 2307,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Relentless": {
+    "id": 2308,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Gotta Go Fast": {
+    "id": 2309,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Tinker": {
+    "id": 2310,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Firestarter": {
+    "id": 2311,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Menagerie": {
+    "id": 2312,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Grenadier": {
+    "id": 2313,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Superconductor": {
+    "id": 2314,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Assassin": {
+    "id": 2315,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Damned": {
+    "id": 2316,
+    "class": "useful",
+    "cat": "aspect"
+  },
+  "Scroll of Power": {
+    "id": 4096,
+    "class": "useful",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Assassin's Scroll": {
+    "id": 4097,
+    "class": "useful",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Minotaur's Scroll": {
+    "id": 4098,
+    "class": "useful",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Guardian's Scroll": {
+    "id": 4099,
+    "class": "useful",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Epic Scrolls of Power": {
+    "id": 4100,
+    "class": "useful",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Dead Man's Bag": {
+    "id": 4101,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Residual Cells": {
+    "id": 4102,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Kebab": {
+    "id": 4103,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Drumstick": {
+    "id": 4104,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Carrot": {
+    "id": 4105,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Big ol' raddish": {
+    "id": 4106,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Guts": {
+    "id": 4107,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Monster's Eye": {
+    "id": 4108,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Cherries": {
+    "id": 4109,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Watermelon": {
+    "id": 4110,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Pastry": {
+    "id": 4111,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Turkey": {
+    "id": 4112,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Le Croissant": {
+    "id": 4113,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "La Baguette": {
+    "id": 4114,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Small Medkit": {
+    "id": 4115,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Large Medkit": {
+    "id": 4116,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Gruyère": {
+    "id": 4117,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Camembert": {
+    "id": 4118,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Flask Recharge": {
+    "id": 4119,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Cough Syrup": {
+    "id": 4120,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Small Cough Syrup": {
+    "id": 4121,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Liposuction": {
+    "id": 4122,
+    "class": "filler",
+    "cat": "consumable",
+    "filler_pool": true
+  },
+  "Fragment of the Philosopher's Stone": {
+    "id": 4352,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Ruby": {
+    "id": 4353,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Blue Sapphire": {
+    "id": 4354,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Amethyst": {
+    "id": 4355,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Malachite": {
+    "id": 4356,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Shiny Pebble": {
+    "id": 4357,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Ingot": {
+    "id": 4358,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Gold Tooth": {
+    "id": 4359,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Gold Cell": {
+    "id": 4360,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Golden Arrow": {
+    "id": 4361,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Corrupted Artifact": {
+    "id": 4362,
+    "class": "filler",
+    "cat": "loot",
+    "filler_pool": true
+  },
+  "Golden Outfit": {
+    "id": 4608,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Legendary Warrior's Outfit": {
+    "id": 4609,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Ninja Outfit": {
+    "id": 4610,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Ghost Outfit": {
+    "id": 4611,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Donatello Outfit": {
+    "id": 4612,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Festive Outfit": {
+    "id": 4613,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Fisherman's Outfit": {
+    "id": 4614,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Skeleton Outfit": {
+    "id": 4615,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Carduus Outfit": {
+    "id": 4616,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Aphrodite Outfit": {
+    "id": 4617,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Shaman Outfit": {
+    "id": 4618,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Cloud Outfit": {
+    "id": 4619,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Drifter Outfit": {
+    "id": 4620,
+    "class": "progression",
+    "cat": "skin"
+  },
+  "A Thousand and One Nights Outfit": {
+    "id": 4621,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Dictator Outfit": {
+    "id": 4622,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Warrior Outfit": {
+    "id": 4623,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Mage Outfit": {
+    "id": 4624,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Neon Outfit": {
+    "id": 4625,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Bobby Outfit (Zombie)": {
+    "id": 4626,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Demon Outfit": {
+    "id": 4627,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Robin Hood Outfit": {
+    "id": 4628,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Desert Dweller Outfit": {
+    "id": 4629,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Galaxy Outfit": {
+    "id": 4630,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Baguette Outfit": {
+    "id": 4631,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Reverse Burglar's Outfit": {
+    "id": 4632,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Gardener's Outfit": {
+    "id": 4633,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Mushroom Boi's Outfit": {
+    "id": 4634,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Mushroom King Outfit": {
+    "id": 4635,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Banished's Outfit": {
+    "id": 4636,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Blowgunner's Outfit": {
+    "id": 4637,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Tick Trainer's Outfit": {
+    "id": 4638,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "The Royal Gardener's Outfit": {
+    "id": 4639,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Retro Outfit": {
+    "id": 4640,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "HEV Outfit": {
+    "id": 4641,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Lizard Outfit": {
+    "id": 4642,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Apostate Outfit": {
+    "id": 4643,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Almost-Yourself Outfit": {
+    "id": 4644,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Kamikaze Outfit": {
+    "id": 4645,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Arbalester's Outfit": {
+    "id": 4646,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Blade Master's Outfit": {
+    "id": 4647,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "King Outfit": {
+    "id": 4648,
+    "class": "progression_deprioritized",
+    "cat": "skin"
+  },
+  "White King Outfit": {
+    "id": 4649,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Classic Concierge Outfit": {
+    "id": 4650,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Piccolo Concierge Outfit": {
+    "id": 4651,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Misunderstood Concierge Outfit": {
+    "id": 4652,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Ascended Concierge Outfit": {
+    "id": 4653,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Ultimate Concierge Outfit": {
+    "id": 4654,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Classic Conjunctivius Outfit": {
+    "id": 4655,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Starved Conjunctivius Outfit": {
+    "id": 4656,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Enraged Conjunctivius Outfit": {
+    "id": 4657,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Revolted Conjunctivius Outfit": {
+    "id": 4658,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Legendary Conjuctivius Outfit": {
+    "id": 4659,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Classic Temporal Outfit": {
+    "id": 4660,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Desert Temporal Outfit": {
+    "id": 4661,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Volcanic Temporal Outfit": {
+    "id": 4662,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Hunter's Temporal Outfit": {
+    "id": 4663,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Collector's Temporal Outfit": {
+    "id": 4664,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Classic Giant Outfit": {
+    "id": 4665,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Disappointed Giant's Outfit": {
+    "id": 4666,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Cursed Giant's Outfit": {
+    "id": 4667,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Misunderstood Giant's Outfit": {
+    "id": 4668,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Frustrated Giant's Outfit": {
+    "id": 4669,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "RiseOfTheGiant"
+  },
+  "The Hand of the King Outfit": {
+    "id": 4670,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Loyal Hand of the King Outfit": {
+    "id": 4671,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Incorruptible Hand of the King Outfit": {
+    "id": 4672,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Faithful Hand of the King Outfit": {
+    "id": 4673,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Devoted Hand of the King Outfit": {
+    "id": 4674,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Rocky Outfit": {
+    "id": 4675,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Fallen Collector's Outfit": {
+    "id": 4676,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Giant Tick Outfit": {
+    "id": 4677,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Annoyed Tick Outfit": {
+    "id": 4678,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Irritated Tick Outfit": {
+    "id": 4679,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Mad Tick Outfit": {
+    "id": 4680,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Furious Tick Outfit": {
+    "id": 4681,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Sacrificial Tick Outfit": {
+    "id": 4682,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Classic Scarecrow Outfit": {
+    "id": 4683,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Green Thumb Scarecrow Outfit": {
+    "id": 4684,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Wicked Scarecrow of the West Outfit": {
+    "id": 4685,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Cutecrow Outfit": {
+    "id": 4686,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Gothic Scarecrow Outfit": {
+    "id": 4687,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Cultist Outfit": {
+    "id": 4688,
+    "class": "progression",
+    "cat": "skin",
+    "dlc": "FatalFalls",
+    "keep_without_cosmetics": true
+  },
+  "Flawless Concierge Outfit": {
+    "id": 4689,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Flawless Conjunctivius Outfit": {
+    "id": 4690,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Flawless Temporal Outfit": {
+    "id": 4691,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Flawless Giant Outfit": {
+    "id": 4692,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Flawless Hand of the King Outfit": {
+    "id": 4693,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Flawless Tick Outfit": {
+    "id": 4694,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheBadSeed"
+  },
+  "Flawless Scarecrow Outfit": {
+    "id": 4695,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "FatalFalls"
+  },
+  "Winter Outfit": {
+    "id": 4696,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Flying Alcoholic Outfit": {
+    "id": 4697,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Vessel's Outfit": {
+    "id": 4698,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Pentinent's Outfit": {
+    "id": 4699,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Luchador's Outfit": {
+    "id": 4700,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Little Bone's Outfit": {
+    "id": 4701,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "The Magician's Outfit": {
+    "id": 4702,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Explorer's Outfit": {
+    "id": 4703,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Knight's Outfit": {
+    "id": 4704,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Armored Shrimp Carcass Outfit": {
+    "id": 4705,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Mutineer Outfit": {
+    "id": 4706,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Servant Outfit": {
+    "id": 4707,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Toxic Servant Outfit": {
+    "id": 4708,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Silver Servant Outfit": {
+    "id": 4709,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Aurora Servant Outfit": {
+    "id": 4710,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "King's Servant Outfit": {
+    "id": 4711,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Flawless Servant Outfit": {
+    "id": 4712,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Queen Outfit": {
+    "id": 4713,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "White Gold Queen Outfit": {
+    "id": 4714,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Cherry Blossom Queen Outfit": {
+    "id": 4715,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Frozen Queen Outfit": {
+    "id": 4716,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Spicy Queen Outfit": {
+    "id": 4717,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Flawless Queen Outfit": {
+    "id": 4718,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Delayed Hedgehog Outfit": {
+    "id": 4719,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "TheQueenAndTheSea"
+  },
+  "Gentleman's Outfit": {
+    "id": 4720,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Robber Outfit": {
+    "id": 4721,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Bobby Outfit (Lore Room)": {
+    "id": 4722,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Shovel Knight Outfit": {
+    "id": 4723,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Modernized Bomber Outfit": {
+    "id": 4724,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "ZERO Outfit": {
+    "id": 4725,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Commando Outfit": {
+    "id": 4726,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Familiar Outfit": {
+    "id": 4727,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Ironclad Outfit": {
+    "id": 4728,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Boss Knight Outfit": {
+    "id": 4729,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Barbarian Boss Knight Outfit": {
+    "id": 4730,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Triumphant Boss Knight Outfit": {
+    "id": 4731,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Luminous Boss Knight Outfit": {
+    "id": 4732,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Triumph Outfit": {
+    "id": 4733,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Bisonnica Triumph Outfit": {
+    "id": 4734,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Mentoral Triumph Outfit": {
+    "id": 4735,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Radiant Triumph Outfit": {
+    "id": 4736,
+    "class": "filler",
+    "cat": "skin"
+  },
+  "Simon Outfit": {
+    "id": 4737,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Alucard Outfit": {
+    "id": 4738,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Richter Outfit": {
+    "id": 4739,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Sypha Outfit": {
+    "id": 4740,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Trevor Outfit": {
+    "id": 4741,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Maria Renard Outfit": {
+    "id": 4742,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Hector Outfit": {
+    "id": 4743,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Haunted Armor Outfit": {
+    "id": 4744,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Death Outfit": {
+    "id": 4745,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Cold Death Outfit": {
+    "id": 4746,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Red Death Outfit": {
+    "id": 4747,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Edgy Death Outfit": {
+    "id": 4748,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Spectral Death Outfit": {
+    "id": 4749,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Flawless Death Outfit": {
+    "id": 4750,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Dracula Outfit": {
+    "id": 4751,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Mathias Cronqvist Outfit": {
+    "id": 4752,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Doctor Dracula Outfit": {
+    "id": 4753,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Pompous Dracula Outfit": {
+    "id": 4754,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Vigilante Dracula Outfit": {
+    "id": 4755,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Flawless Dracula Outfit": {
+    "id": 4756,
+    "class": "filler",
+    "cat": "skin",
+    "dlc": "Purple"
+  },
+  "Bobby Head": {
+    "id": 5120,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Concierge Flame": {
+    "id": 5121,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Conjunctivius Tentacles": {
+    "id": 5122,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Mama Tick Eye": {
+    "id": 5123,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Time Keeper Mask": {
+    "id": 5124,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Giant Flame": {
+    "id": 5125,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Scarecrow Hat": {
+    "id": 5126,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Hand of the King Flame": {
+    "id": 5127,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Servant Mask": {
+    "id": 5128,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Queen Flame": {
+    "id": 5129,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Collector Hood": {
+    "id": 5130,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Black Hole": {
+    "id": 5131,
+    "class": "filler",
+    "cat": "head"
+  },
+  "White Hole": {
+    "id": 5132,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Violet Hole": {
+    "id": 5133,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Red Hole": {
+    "id": 5134,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Green Hole": {
+    "id": 5135,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Blue Hole": {
+    "id": 5136,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Biter Head": {
+    "id": 5137,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Vortex": {
+    "id": 5138,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Sanguine Vortex": {
+    "id": 5139,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Abyssal Vortex": {
+    "id": 5140,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Dark Vortex": {
+    "id": 5141,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Guillain Head": {
+    "id": 5142,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Fisherman Hood": {
+    "id": 5143,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Leghugger Head": {
+    "id": 5144,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Flawless Torch": {
+    "id": 5145,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Cell Head": {
+    "id": 5146,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Evil Minion Head": {
+    "id": 5147,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Toxic Blob": {
+    "id": 5148,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Glitch Head": {
+    "id": 5149,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Mushroom Boi Cap": {
+    "id": 5150,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Horde Zero Hood": {
+    "id": 5151,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Magma Blob": {
+    "id": 5152,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Shadow Blob": {
+    "id": 5153,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Sweet Blob": {
+    "id": 5154,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Spatial Anomaly": {
+    "id": 5155,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Menacing Anomaly": {
+    "id": 5156,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Dark Blowtorch": {
+    "id": 5157,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Blowtorch": {
+    "id": 5158,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Golden Blowtorch": {
+    "id": 5159,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Bright Red Blowtorch": {
+    "id": 5160,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Boss Cell Head": {
+    "id": 5161,
+    "class": "filler",
+    "cat": "head"
+  },
+  "Curse Trap": {
+    "id": 5376,
+    "class": "trap",
+    "cat": "trap"
+  },
+  "Elite Trap": {
+    "id": 5377,
+    "class": "trap",
+    "cat": "trap"
+  },
+  "Gold Trap": {
+    "id": 5378,
+    "class": "trap",
+    "cat": "trap"
+  },
+  "Weapon Break Trap": {
+    "id": 5379,
+    "class": "trap",
+    "cat": "trap"
+  },
+  "Reverse Trap": {
+    "id": 5380,
+    "class": "trap",
+    "cat": "trap"
+  },
+  "Challenge Trap": {
+    "id": 5381,
+    "class": "trap",
+    "cat": "trap"
+  },
+  "Prison Depths Unlock": {
+    "id": 5632,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "PrisonDepths"
+  },
+  "Corrupted Prison Unlock": {
+    "id": 5633,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "PrisonCorrupt"
+  },
+  "Ossuary Unlock": {
+    "id": 5634,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "Ossuary"
+  },
+  "Ancient Sewers Unlock": {
+    "id": 5635,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "SewerDepths"
+  },
+  "Insufferable Crypt Unlock": {
+    "id": 5636,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "BeholderPit"
+  },
+  "Stilt Village Unlock": {
+    "id": 5637,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "StiltVillage"
+  },
+  "Slumbering Sanctuary Unlock": {
+    "id": 5638,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "AncientTemple"
+  },
+  "Graveyard Unlock": {
+    "id": 5639,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "Cemetery"
+  },
+  "Clock Tower Unlock": {
+    "id": 5640,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "ClockTower"
+  },
+  "Forgotten Sepulcher Unlock": {
+    "id": 5641,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "Crypt"
+  },
+  "Clock Room Unlock": {
+    "id": 5642,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "TopClockTower"
+  },
+  "High Peak Castle Unlock": {
+    "id": 5643,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "Castle"
+  },
+  "Derelict Distillery Unlock": {
+    "id": 5644,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "Distillery"
+  },
+  "Throne Room Unlock": {
+    "id": 5645,
+    "class": "progression",
+    "cat": "unlock",
+    "unlock_for": "Throne"
+  },
+  "Cavern Unlock": {
+    "id": 5646,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "RiseOfTheGiant",
+    "unlock_for": "Cavern"
+  },
+  "Guardian's Haven Unlock": {
+    "id": 5647,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "RiseOfTheGiant",
+    "unlock_for": "Giant"
+  },
+  "Astrolab Unlock": {
+    "id": 5648,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "RiseOfTheGiant",
+    "unlock_for": "Astrolab"
+  },
+  "Observatory Unlock": {
+    "id": 5649,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "RiseOfTheGiant",
+    "unlock_for": "Observatory"
+  },
+  "Dilapidated Arboretum Unlock": {
+    "id": 5650,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "TheBadSeed",
+    "unlock_for": "Greenhouse"
+  },
+  "Morass of the Banished Unlock": {
+    "id": 5651,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "TheBadSeed",
+    "unlock_for": "Swamp"
+  },
+  "Nest Unlock": {
+    "id": 5652,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "TheBadSeed",
+    "unlock_for": "SwampHeart"
+  },
+  "Fractured Shrines Unlock": {
+    "id": 5653,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "FatalFalls",
+    "unlock_for": "Tumulus"
+  },
+  "Undying Shores Unlock": {
+    "id": 5654,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "FatalFalls",
+    "unlock_for": "Cliff"
+  },
+  "Mausoleum Unlock": {
+    "id": 5655,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "FatalFalls",
+    "unlock_for": "GardenerStage"
+  },
+  "Infested Shipwreck Unlock": {
+    "id": 5656,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "TheQueenAndTheSea",
+    "unlock_for": "Shipwreck"
+  },
+  "Lighthouse Unlock": {
+    "id": 5657,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "TheQueenAndTheSea",
+    "unlock_for": "Lighthouse"
+  },
+  "Crown Unlock": {
+    "id": 5658,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "TheQueenAndTheSea",
+    "unlock_for": "QueenArena"
+  },
+  "Castle Outskirts Unlock": {
+    "id": 5659,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "Purple",
+    "unlock_for": "PurpleGarden"
+  },
+  "Dracula's Castle Unlock": {
+    "id": 5660,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "Purple",
+    "unlock_for": "DookuCastle"
+  },
+  "Defiled Necropolis Unlock": {
+    "id": 5661,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "Purple",
+    "unlock_for": "DeathArena"
+  },
+  "2nd Dracula's Castle Unlock": {
+    "id": 5662,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "Purple",
+    "unlock_for": "DookuCastleHard"
+  },
+  "Master's Keep Unlock": {
+    "id": 5663,
+    "class": "progression",
+    "cat": "unlock",
+    "dlc": "Purple",
+    "unlock_for": "DookuArena"
+  },
+  "Concierge Defeated": {
+    "id": 5888,
+    "class": "progression",
+    "cat": "event"
+  },
+  "Conjunctivius Defeated": {
+    "id": 5889,
+    "class": "progression",
+    "cat": "event"
+  },
+  "Mama Tick Defeated": {
+    "id": 5890,
+    "class": "progression",
+    "cat": "event",
+    "dlc": "TheBadSeed"
+  },
+  "Death Defeated": {
+    "id": 5891,
+    "class": "progression",
+    "cat": "event",
+    "dlc": "Purple"
+  },
+  "Time Keeper Defeated": {
+    "id": 5892,
+    "class": "progression",
+    "cat": "event"
+  },
+  "Scarecrow Defeated": {
+    "id": 5893,
+    "class": "progression",
+    "cat": "event",
+    "dlc": "FatalFalls"
+  },
+  "Giant Defeated": {
+    "id": 5894,
+    "class": "progression",
+    "cat": "event",
+    "dlc": "RiseOfTheGiant"
+  },
+  "Hand of the King Defeated": {
+    "id": 5895,
+    "class": "progression",
+    "cat": "event"
+  },
+  "Queen Defeated": {
+    "id": 5896,
+    "class": "progression",
+    "cat": "event"
+  },
+  "Dracula Defeated": {
+    "id": 5897,
+    "class": "progression",
+    "cat": "event",
+    "dlc": "Purple"
+  },
+  "Collector Defeated": {
+    "id": 5898,
+    "class": "progression",
+    "cat": "event",
+    "dlc": "RiseOfTheGiant"
+  }
+}

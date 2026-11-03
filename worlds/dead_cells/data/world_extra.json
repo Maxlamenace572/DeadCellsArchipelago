@@ -1,0 +1,50 @@
+{
+  "_doc": "Graph edges that regions.json does not carry (Menu, endings). Same grammar as regions.json. extra_transitions: edges added only if regions.json lacks the same (from, to) pair.",
+  "menu": [
+    {
+      "to": "PrisonStart",
+      "require": [
+        []
+      ]
+    },
+    {
+      "to": "Challenge",
+      "require": [
+        [
+          "Challenger's Rune"
+        ]
+      ]
+    },
+    {
+      "to": "BossRush",
+      "require": [
+        [
+          "Boss Rush Unlock"
+        ]
+      ]
+    }
+  ],
+  "extra_transitions": {},
+  "endings": {
+    "Throne": [
+      []
+    ],
+    "Observatory": [
+      []
+    ],
+    "QueenArena": [
+      []
+    ],
+    "DookuArena": [
+      []
+    ]
+  },
+  "true_ending_only_at_bc": {
+    "bc": 5,
+    "sources_pruned": [
+      "Throne",
+      "QueenArena",
+      "DookuArena"
+    ]
+  }
+}

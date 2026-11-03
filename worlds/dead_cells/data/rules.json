@@ -1,0 +1,367 @@
+{
+    "_doc": [
+        "Extra access rules, ON TOP of 'reach one of the drop biomes at the right Boss Cell level'.",
+        "Grammar (same as regions.json): string = one token; [a, b] = AND; [[a, b], [c]] = OR of AND-groups.",
+        "Tokens: 'Item Name' | 'Item Name:N' (count) | 'Boss_X' (boss defeated) | 'region:<biomeId>' | 'loc:<Location Name>' (reachable, false if absent)",
+        "        'depth:N' (a biome of depth N is reachable) | 'count:<kind>:N' (N locations of a kind reachable) | 'tier:T:N' (N bosses of tier T beaten) | '@macro'",
+        "boss_tiers = BOSS RUSH tiers only (the room randomizer has its own, in room_rando.json).",
+        "Dracula (Boss_DookuBeast) has two phases: phase 1 counts as a tier 2 boss, phase 2 as a tier 3 boss.",
+        "The Collector is not part of the boss rush. The three Amazons are a single fight: Boss_AmazonBrutal stands for all three."
+    ],
+    "macros": {
+        "cursed_biome": [
+            [
+                "region:SewerShort"
+            ],
+            [
+                "region:PurpleGarden"
+            ],
+            [
+                "region:Greenhouse"
+            ]
+        ]
+    },
+    "count_kinds": {
+        "skin": [
+            "skin"
+        ],
+        "head": [
+            "head"
+        ],
+        "item": [
+            "skin",
+            "item_no_blueprint",
+            "blueprint_floor",
+            "blueprint_enemy"
+        ]
+    },
+    "boss_tiers": {
+        "1": [
+            "Boss_Behemoth",
+            "Boss_Beholder",
+            "Boss_MamaTick",
+            "Boss_Death"
+        ],
+        "2": [
+            "Boss_TimeKeeper",
+            "Boss_Giant",
+            "Boss_GardenerBoss",
+            "Boss_DookuBeast"
+        ],
+        "3": [
+            "Boss_KingsHand",
+            "Boss_Queen",
+            "Boss_AmazonBrutal",
+            "Boss_DookuBeast"
+        ]
+    },
+    "locations": {
+        "Abyssal Trident": "Ram Rune",
+        "Acceptance": [
+            [
+                "Vine Rune",
+                "Ram Rune",
+                "Insufferable Crypt Unlock",
+                "Graveyard Unlock",
+                "Teleportation Rune",
+                "Forgotten Sepulcher Unlock",
+                "Spider Rune"
+            ],
+            [
+                "Vine Rune",
+                "Ram Rune",
+                "Insufferable Crypt Unlock",
+                "Graveyard Unlock",
+                "Teleportation Rune",
+                "Forgotten Sepulcher Unlock",
+                "Homunculus Rune"
+            ]
+        ],
+        "Alucard's Sword": "High Jump",
+        "Anathema": "@cursed_biome",
+        "Barbarian Boss Knight Outfit": [
+            "tier:1:2",
+            "tier:2:2",
+            "tier:3:1"
+        ],
+        "Bisonnica Triumph Outfit": [
+            "tier:1:2",
+            "tier:2:2",
+            "tier:3:1"
+        ],
+        "Biter Head": "Swarm",
+        "Blue Hole": [
+            "Vine Rune",
+            "Teleportation Rune",
+            "Challenger's Rune",
+            "Customization Rune",
+            "Ram Rune",
+            "Spider Rune",
+            "Homunculus Rune",
+            "Explorer's Rune",
+            "Backpack",
+            "Advanced Forge 1",
+            "Recycling Tubes",
+            "Hunter's Mirror",
+            "The Specialist's Showroom",
+            "Restock",
+            "Merchandise Categories",
+            "Random Starter Bow",
+            "Random Starter Shield",
+            "Random Melee Weapon",
+            "Progressive Flask:4",
+            "Progressive Recycling:2",
+            "Progressive Gold Reserves:5"
+        ],
+        "Boss Knight Outfit": [
+            "tier:1:1",
+            "tier:2:1",
+            "tier:3:1"
+        ],
+        "Boss Rush Statue": [
+            "tier:1:1",
+            "tier:2:1",
+            "tier:3:1"
+        ],
+        "Bright Red Blowtorch": "Fire Blast",
+        "Cavern Key": [
+            "Homunculus Rune",
+            "Hand of the King Defeated"
+        ],
+        "Crowbar": "Teleportation Rune",
+        "Crowned Key": "region:SewerShort",
+        "Cursed Flask": "@cursed_biome",
+        "Damned Vigor": "@cursed_biome",
+        "Dark Vortex": "count:head:14",
+        "Demon Strength": "@cursed_biome",
+        "Disengagement": "Homunculus Rune",
+        "Explorer's Outfit": [
+            [
+                "loc:Throne Room Exit"
+            ],
+            [
+                "loc:Crown Exit"
+            ],
+            [
+                "loc:Master's Keep Exit"
+            ]
+        ],
+        "Explosive Crossbow": [
+            [
+                "Vine Rune",
+                "Ram Rune",
+                "Spider Rune"
+            ],
+            [
+                "Vine Rune",
+                "Ram Rune",
+                "Homunculus Rune"
+            ]
+        ],
+        "Extended Healing": "Teleportation Rune",
+        "Familiar Outfit": [
+            [
+                "loc:Cavern Key",
+                "Backpack"
+            ],
+            [
+                "region:Cemetery",
+                "Backpack"
+            ]
+        ],
+        "Fisherman Hood": "count:head:35",
+        "Flawless Torch": [
+            "loc:Kleio",
+            "loc:The Concierge",
+            "loc:Conjunctivius",
+            "loc:The Collector",
+            "loc:Scarecrow",
+            "loc:The Giant",
+            "loc:The Hand of the King",
+            "loc:Mama Tick",
+            "loc:The Queen",
+            "loc:The Time Keeper"
+        ],
+        "Giant Comb": "count:skin:51",
+        "Gold Reserves V": "Homunculus Rune",
+        "Golden Outfit": "The Specialist's Showroom",
+        "Green Hole": "count:item:75",
+        "Guillain Head": [
+            "Boss Rush Unlock",
+            "Boss Rush Statue",
+            "Bank Unlock"
+        ],
+        "HEV Outfit": "Teleportation Rune",
+        "High Jump": "Dash",
+        "Horde Zero Hood": [
+            [
+                "Double Crossb-o-matic"
+            ],
+            [
+                "Sinew Slicer"
+            ],
+            [
+                "Heavy Turret"
+            ],
+            [
+                "Barnacle"
+            ],
+            [
+                "Cleaver"
+            ],
+            [
+                "Crusher"
+            ],
+            [
+                "Explosive Decoy"
+            ],
+            [
+                "Tesla Coil"
+            ],
+            [
+                "Scavenged Bombard"
+            ]
+        ],
+        "Indulgence": "@cursed_biome",
+        "King Outfit": "Homunculus Rune",
+        "Lacerating Aura": "Challenger's Rune",
+        "Leghugger Head": "Leghugger",
+        "Luchador's Outfit": [
+            [
+                "depth:5",
+                "Spartan Sandals"
+            ],
+            [
+                "depth:5",
+                "Spiked Boots"
+            ],
+            [
+                "depth:5",
+                "Hayabusa Boots"
+            ],
+            [
+                "depth:5",
+                "Hayabusa Gauntlets"
+            ]
+        ],
+        "Luminous Boss Knight Outfit": [
+            "tier:1:1",
+            "tier:2:1",
+            "tier:3:1"
+        ],
+        "Magma Blob": [
+            [
+                "loc:Cavern Key"
+            ],
+            [
+                "region:Cemetery"
+            ]
+        ],
+        "Marksman's Bow": [
+            [
+                "Teleportation Rune",
+                "Vine Rune"
+            ],
+            [
+                "Teleportation Rune",
+                "loc:Death"
+            ]
+        ],
+        "Meat Skewer": "Challenger's Rune",
+        "Mentoral Triumph Outfit": [
+            "tier:1:2",
+            "tier:2:2",
+            "tier:3:1"
+        ],
+        "Misericorde": "@cursed_biome",
+        "Modernized Bomber Outfit": "Baseball Bat",
+        "Mushroom Boi Cap": "Mushroom Boi!",
+        "Parry Shield": [
+            "Spider Rune",
+            "Ram Rune"
+        ],
+        "Parting Gift": "Ram Rune",
+        "Pentinent's Outfit": "Face Flask",
+        "Peril Glyphs": [
+            "tier:1:1",
+            "tier:2:1",
+            "tier:3:1"
+        ],
+        "Promenade of the Condemned Exit": "Vine Rune",
+        "Radiant Triumph Outfit": [
+            "tier:1:2",
+            "tier:2:2",
+            "tier:3:1"
+        ],
+        "Red Hole": "count:head:7",
+        "Richter Mode Exit": "High Jump",
+        "Richter Outfit": "High Jump",
+        "Ripper": "Spider Rune",
+        "Sacrificial Tick Outfit": "Mushroom Boi!",
+        "Sanguine Vortex": [
+            [
+                "region:SewerShort"
+            ],
+            [
+                "region:DookuCastle"
+            ],
+            [
+                "region:Greenhouse"
+            ]
+        ],
+        "Sewing Scissors": "count:skin:16",
+        "Shovel Knight Outfit": "Shovel",
+        "Sonic Carbine": "Spider Rune",
+        "Spatial Anomaly": "count:head:31",
+        "Swift Sword": "Challenger's Rune",
+        "Taunt": [
+            "tier:1:1",
+            "tier:2:1",
+            "tier:3:1"
+        ],
+        "The Magician's Outfit": [
+            "Hard Light Sword",
+            "Drifter Outfit"
+        ],
+        "The Royal Gardener's Outfit": "Teleportation Rune",
+        "Triumph Outfit": [
+            "tier:1:2",
+            "tier:2:2",
+            "tier:3:1"
+        ],
+        "Triumphant Boss Knight Outfit": [
+            "tier:1:1",
+            "tier:2:1",
+            "tier:3:1"
+        ],
+        "Vessel's Outfit": "Pure Nail",
+        "War Javelin": [
+            "Spider Rune",
+            "Homunculus Rune"
+        ],
+        "White Hole": [
+            [
+                "Progressive Flask:1",
+                "Cursed Flask",
+                "Tainted Flask"
+            ],
+            [
+                "region:Bank"
+            ]
+        ],
+        "White King Outfit": [
+            [
+                "Homunculus Rune"
+            ],
+            [
+                "King Outfit"
+            ]
+        ],
+        "Wish": [
+            "tier:1:2",
+            "tier:2:2",
+            "tier:3:1"
+        ],
+        "ZERO Outfit": "Hattori's Katana"
+    }
+}

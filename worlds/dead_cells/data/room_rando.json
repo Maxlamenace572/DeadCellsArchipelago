@@ -1,0 +1,40 @@
+{
+  "_doc": [
+    "Room randomizer settings. A 'room' is a biome. The mapping is a permutation of biomes as DESTINATIONS:",
+    "every door that would lead to D now leads to map[D]. A biome keeps its own exits and everything inside it.",
+    "Requirements live on the DOORS and never move: they are physical obstacles on the exit (abilities, Boss Cells, boss defeated...). The only exception is the biome unlock item, a constraint added by the mod on the destination biome: it follows the biome the door really leads to.",
+    "fixed: biomes that never move (the start). Biomes without depth (Bank, BossRush, Challenge) never move either:",
+    "the Bank is not part of the graph, it replaces a level at random.",
+    "boss_tiers: tiers used by the Tier mode: the boss arenas of each tier are shuffled together. NOT the boss rush tiers:",
+    "Dracula (DookuArena) is tier 3 here, and the Collector (Observatory) is a tier 3 boss.",
+    "groups: optional overrides {biome id: group 1..3} for Tier mode. By default a normal biome belongs to the group delimited by",
+    "the boss tiers around its depth (before the tier 1 bosses = 1, between tier 1 and 2 = 2, between tier 2 and 3 = 3).",
+    "Astrolab (depth 9, after every tier boss) is put in group 3 so that it can move in Tier mode."
+  ],
+  "fixed": [
+    "PrisonStart"
+  ],
+  "boss_tiers": {
+    "1": [
+      "Bridge",
+      "BeholderPit",
+      "SwampHeart",
+      "DeathArena"
+    ],
+    "2": [
+      "TopClockTower",
+      "Giant",
+      "GardenerStage"
+    ],
+    "3": [
+      "Throne",
+      "Lighthouse",
+      "QueenArena",
+      "DookuArena",
+      "Observatory"
+    ]
+  },
+  "groups": {
+    "Astrolab": 3
+  }
+}

@@ -8,6 +8,7 @@ These appear in the player's YAML configuration file.
 
 from dataclasses import dataclass
 from Options import (
+    Choice,
     Toggle, DeathLink, Range, PerGameCommonOptions, FreeText, StartInventoryPool, OptionGroup
 )
 
@@ -79,10 +80,9 @@ class BossCells(Range):
     at this difficulty level or higher.
 
     0 = No Boss Cells (easiest)
-    5 = 5 Boss Cells (hardest, requires Rise of the Giant DLC for Astrolab route)
-
-    Note: Setting this to 5 without enabling Rise of the Giant DLC will
-    restrict the 5BC Astrolab route, so the Throne -> End path will be used.
+    5 = 5 Boss Cells (hardest). The 5 Boss Cells ending is only reachable through the
+        Astrolab and Observatory, so it REQUIRES the Rise of the Giant DLC:
+        generation fails if you pick 5 without it.
     """
     display_name = "Boss Cells Goal"
     range_start = 0
@@ -91,8 +91,8 @@ class BossCells(Range):
 
 class ScrewDistillery(Toggle):
     """
-    Remove all "Derelict Distillery"-exclusive Locations from the pool, as well 
-    as its "Unlock" item (if your BSC goal is 0BSC this will be happen by default)
+    Remove all "Derelict Distillery"-exclusive Locations from the pool, as well
+    as its "Unlock" item (if your BSC goal is 0BSC this happens by default).
     """
     display_name = "Exclude Distillery"
     default = 0
@@ -103,18 +103,98 @@ class ScrewDistillery(Toggle):
 
 class TrapPercentage(Range):
     """
-    Percentage of filler item slots that will be replaced by trap items.
+    Percentage of the item pool slots that will hold a trap instead of a useful/filler item.
     Traps are sent to the Dead Cells player and trigger negative in-game effects
     such as curses, elite spawns, gold loss, or inverted controls.
-
-    0  = No traps
-    25 = 25% of fillers are traps (recommended)
-    100 = All filler slots are traps (very punishing)
+    Which traps are used is controlled by the individual trap weights below.
     """
     display_name = "Trap Percentage"
     range_start = 0
     range_end = 100
     default = 5
+
+class _TrapWeight(Range):
+    range_start = 0
+    range_end = 10
+    default = 1
+
+
+class CurseTrapWeight(_TrapWeight):
+    """
+    Relative weight of the "Curse Trap" among the traps (0 = never, 10 = most likely).
+    If every trap weight is 0, no trap is added to the pool.
+    """
+    display_name = "Curse Trap Weight"
+
+
+class EliteTrapWeight(_TrapWeight):
+    """
+    Relative weight of the "Elite Trap" among the traps (0 = never, 10 = most likely).
+    If every trap weight is 0, no trap is added to the pool.
+    """
+    display_name = "Elite Trap Weight"
+
+
+class GoldTrapWeight(_TrapWeight):
+    """
+    Relative weight of the "Gold Trap" among the traps (0 = never, 10 = most likely).
+    If every trap weight is 0, no trap is added to the pool.
+    """
+    display_name = "Gold Trap Weight"
+
+
+class WeaponBreakTrapWeight(_TrapWeight):
+    """
+    Relative weight of the "Weapon Break Trap" among the traps (0 = never, 10 = most likely).
+    If every trap weight is 0, no trap is added to the pool.
+    """
+    display_name = "Weapon Break Trap Weight"
+
+
+class ReverseTrapWeight(_TrapWeight):
+    """
+    Relative weight of the "Reverse Trap" among the traps (0 = never, 10 = most likely).
+    If every trap weight is 0, no trap is added to the pool.
+    """
+    display_name = "Reverse Trap Weight"
+
+
+class ChallengeTrapWeight(_TrapWeight):
+    """
+    Relative weight of the "Challenge Trap" among the traps (0 = never, 10 = most likely).
+    If every trap weight is 0, no trap is added to the pool.
+    """
+    display_name = "Challenge Trap Weight"
+
+
+class EnemySanity(Toggle):
+    """
+    Adds a "Kill <enemy>" location for every enemy type: the first time you kill each one sends a check.
+    Only enemies that can appear in your seed (enabled DLCs, reachable biomes, Boss Cells goal) get a location.
+    Bosses are not included: they are already checks.
+    """
+    display_name = "Enemy Sanity"
+    default = 0
+
+
+class RoomRandomizer(Choice):
+    """
+    WIP, DO NOT BRING IN MULTIPLAYER
+    Shuffles which biome each door leads to. A biome keeps its own exits and content; only destinations change.
+
+    Off:     vanilla layout.
+    Depth:   biomes of the same depth are shuffled together.
+    Tier:    biomes are shuffled inside 3 groups (before the first bosses, between the first and second boss tiers,
+             between the second and third), and the bosses of each tier are shuffled together, so every group
+             still ends with a random boss of its tier.
+    Chaotic: every biome and boss is shuffled with no constraint.
+    """
+    display_name = "Room Randomizer"
+    option_off = 0
+    option_depth = 1
+    option_tier = 2
+    option_chaotic = 3
+    default = 0
 
 
 class IncludeCosmetics(Toggle):
@@ -317,44 +397,53 @@ class DeadCellsOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
 
     # DLC toggles
-    dlc_rise_of_the_giant:    DLCRiseOfTheGiant
-    dlc_the_bad_seed:         DLCTheBadSeed
-    dlc_fatal_falls:          DLCFatalFalls
-    dlc_the_queen_and_the_sea: DLCTheQueenAndTheSea
-    dlc_return_to_castlevania: DLCReturnToCastlevania
+    dlc_rise_of_the_giant:      DLCRiseOfTheGiant
+    dlc_the_bad_seed:           DLCTheBadSeed
+    dlc_fatal_falls:            DLCFatalFalls
+    dlc_the_queen_and_the_sea:  DLCTheQueenAndTheSea
+    dlc_return_to_castlevania:  DLCReturnToCastlevania
 
     # Misc Randomization
 
     # Goal
-    boss_cells: BossCells
+    boss_cells:         BossCells
+    enemy_sanity:       EnemySanity
+    room_randomizer:    RoomRandomizer
+    exclude_distillery: ScrewDistillery
 
     # Item pool
-    trap_percentage:       TrapPercentage
-    include_cosmetics:     IncludeCosmetics
-    include_aspects:       IncludeAspects
-    include_base_weapons:  IncludeBaseWeapons
-    include_base_mutations: IncludeBaseMutations
+    trap_percentage:            TrapPercentage
+    trap_weight_curse:          CurseTrapWeight
+    trap_weight_elite:          EliteTrapWeight
+    trap_weight_gold:           GoldTrapWeight
+    trap_weight_weapon_break:   WeaponBreakTrapWeight
+    trap_weight_reverse:        ReverseTrapWeight
+    trap_weight_challenge:      ChallengeTrapWeight
+    include_cosmetics:          IncludeCosmetics
+    include_aspects:            IncludeAspects
+    include_base_weapons:       IncludeBaseWeapons
+    include_base_mutations:     IncludeBaseMutations
 
     # Multiplayer
-    death_link: DeadCellsDeathLink
-    death_link_group: DeathLinkGroupName
-    death_link_aspect: DisableDeathLinkForAspects
-    death_trap: DeathTrap
-    death_trap_link: DeathTrapLinkTrigger
+    death_link:         DeadCellsDeathLink
+    death_link_group:   DeathLinkGroupName
+    death_link_aspect:  DisableDeathLinkForAspects
+    death_trap:         DeathTrap
+    death_trap_link:    DeathTrapLinkTrigger
     
-    damage_link: DeadCellsDamageLink
-    damage_link_group: DamageLinkGroupName
+    damage_link:        DeadCellsDamageLink
+    damage_link_group:  DamageLinkGroupName
     
-    health_link: DeadCellsHealthLink
-    health_link_group: HealthLinkGroupName
-    health_curse_link: DeadCellsHealthCurseLink
+    health_link:        DeadCellsHealthLink
+    health_link_group:  HealthLinkGroupName
+    health_curse_link:  DeadCellsHealthCurseLink
     
-    trap_link: DeadCellsTrapLink
-    trap_link_group: TrapLinkGroupName
+    trap_link:          DeadCellsTrapLink
+    trap_link_group:    TrapLinkGroupName
     
     # Gameplay
-    respawn_up: RespawnUpScroll
-    flawless_scroll: GiveScrollOnFlawlessBoss
+    respawn_up:         RespawnUpScroll
+    flawless_scroll:    GiveScrollOnFlawlessBoss
 
 dead_cells_option_groups = [
     OptionGroup(
@@ -363,11 +452,23 @@ dead_cells_option_groups = [
     ),
     OptionGroup(
         "Goal Settings",
-        [BossCells]
+        [BossCells, ScrewDistillery]
+    ),
+    OptionGroup(
+        "Extra Locations",
+        [EnemySanity]
+    ),
+    OptionGroup(
+        "Room Randomizer",
+        [RoomRandomizer]
     ),
     OptionGroup(
         "Item Pool Settings",
         [IncludeCosmetics, IncludeAspects, IncludeBaseWeapons, IncludeBaseMutations, TrapPercentage]
+    ),
+    OptionGroup(
+        "Trap Weights",
+        [CurseTrapWeight, EliteTrapWeight, GoldTrapWeight, WeaponBreakTrapWeight, ReverseTrapWeight, ChallengeTrapWeight]
     ),
     OptionGroup(
         "Multiplayer Link Settings",
