@@ -321,5 +321,18 @@ namespace DeadCellsArchipelago {
                 SendItemWithoutBlueprintCheck(aspects[new Random().Next(0, aspects.Count)]);
             }
         }
+
+        public static void ClearInventoryOnWWarp(string warpFrom, string warpTo)
+        {
+            if (warpFrom == warpTo && warpFrom == "PrisonCourtyard")
+                HERO!.inventory.removeAll("CourtyardKey".AsHaxeString());
+            
+            else if ((HERO!.inventory.countItemKind("CourtyardKey".AsHaxeString()) == 3 ||
+                (HERO!.inventory.countItemKind("CourtyardKey".AsHaxeString()) == 2 && HERO!.inventory.countItemKind("ConvertedKey".AsHaxeString()) == 1)) &&
+                USER!.bossRuneActivated < 3 && SAVED_DATA!.IsItemReceived("BeholderPit"))
+                HERO!.inventory.removeOne("CourtyardKey".AsHaxeString());
+
+            HERO.hudInitItems();
+        }
     }
 }

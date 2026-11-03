@@ -14,6 +14,7 @@ using static DeadCellsArchipelago.ModAssetManager;
 using static DeadCellsArchipelago.MainMenuManager;
 using static DeadCellsArchipelago.WorldMapManager;
 using static DeadCellsArchipelago.RoomManager;
+using static DeadCellsArchipelago.HeroManager;
 
 namespace DeadCellsArchipelago {
     public static class PauseMenuManager
@@ -482,6 +483,7 @@ namespace DeadCellsArchipelago {
                 addBackLoreRooms = true;
                 isReload = false;
             }
+            ClearInventoryOnWWarp(SAVED_DATA!.currentLevelId, warpToBiome);
             LevelTransition.Class.@goto(warpToBiome.AsHaxeString());
             SAVED_DATA!.currentLevelId = warpToBiome;
             SAVED_DATA!.lastLevelDepthSeen = GetMapLevelDepth(warpToBiome);
