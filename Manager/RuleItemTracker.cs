@@ -304,6 +304,12 @@ namespace DeadCellsArchipelago {
             return 0;
         }
 
+        public static int GetMaxWorldDepth(Dictionary<string, Biome> b)
+        {
+            biomes = b;
+            return GetMaxWorldDepth();
+        }
+
         private static int GetNbItemSend()
         {
             if(!itemList.Any()) InitLists();

@@ -42,7 +42,7 @@ namespace DeadCellsArchipelago {
             double scaleText = 1.0/(3*screenScale);
             text = new dc.ui.Text(null, true, false, new Ref<double>(ref scaleText), null, null);
 
-            if(itemId.Length >= 5 && (itemId[^5..] == "Enter" || itemId[^5..] == " Exit" || itemId[..5] == "Boss_"))
+            if(itemId.Length >= 5 && (itemId[^5..] == "Enter" || itemId[^5..] == " Exit" || itemId[..5] == "Boss_" || itemId[..2] == "E_"))
             {
                 if(itemId[^5..] == "Enter")
                 {
@@ -88,7 +88,10 @@ namespace DeadCellsArchipelago {
                 }
                 else
                 {
-                    itemId = itemId[5..];
+                    if (itemId[..5] == "Boss_")
+                        itemId = itemId[5..];
+                    else
+                        itemId = itemId[2..];
                     Icon bossIcon = Icon.Class.createMobIcon(itemId.AsHaxeString(), skill);
                     double px = 0.5;
                     double py = 0.5;

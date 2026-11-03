@@ -82,6 +82,57 @@ namespace DeadCellsArchipelago
                     }
                 }
             }
+
+            if (GLOBAL_DATA!.enemySanity)
+            {
+                var json = File.ReadAllText(GetMobBiomeDataFilePath());
+                Dictionary<string, BiomeMobs> biomeMobs = 
+                    JsonSerializer.Deserialize<Dictionary<string, BiomeMobs>>(json)!;
+                
+                int maxDepth = GetMaxWorldDepth(biomes);
+                
+                foreach(KeyValuePair<string, Biome> biome in biomes)
+                {
+                    foreach (MobInBiome mob in biomeMobs[biome.Key].mobs)
+                    {
+                        if(CanGoDLC(biomeMobs[biome.Key].dlc) && NotBoss(mob.name))
+                        {
+                            bool added = false;
+                            string mobId = $"E_{mob.name}";
+                            
+                            
+                            for (int i = mob.min_bc; i <= Math.Min(mob.max_bc, GLOBAL_DATA.bscLevelToWin); i++)
+                            {
+                                string key = biome.Key + i;
+                                IncToDict(ref res, key, mobId);
+                                added = true;
+                            }
+                            
+                            if (added)
+                            {
+                                res["AllT"].Add(mobId);
+                                if(!SAVED_DATA!.IsCheckSent(mobId))
+                                {
+                                    res["AllR"].Add(mobId);
+                                    
+                                    ItemData itD = new();
+                                    if (ItemsData.ContainsKey(mobId))
+                                        itD = ItemsData[mobId];
+                                    else
+                                        ItemsData[mobId] = itD;
+                                    
+                                    itD.min_bc = Math.Min(mob.min_bc, itD.min_bc);
+                                    itD.mobs.Add(mob.name);
+                                    itD.biomes.Add(biome.Key);
+                                    itD.accessible = itD.accessible || (biomes[biome.Key].accessible && mob.min_bc <= SAVED_DATA.CountReceivedStemCell() &&
+                                                                        (mob.depth == null || mob.depth.Any(d => d <= maxDepth)));
+                                }   
+                            }
+                        }
+                    }
+                }
+            }
+
             AddSpecialRules(biomes);
             foreach (string biomeId in GetBiomesId())
             {
@@ -101,6 +152,12 @@ namespace DeadCellsArchipelago
                 }
             }
             return res;
+        }
+
+        private static bool NotBoss(string mobId)
+        {
+            return !new[] {"Behemoth", "Beholder", "MamaTick", "Death", "TimeKeeper", "Giant", "GardenerBoss", "KingsHand", "AmazonSurvival", "AmazonTactic", "AmazonBrutal",
+                "Queen", "DookuBeast", "Collector"}.Any(mobId.Contains);
         }
 
         public static bool CanGoDLC(string dlc)
@@ -322,6 +379,7 @@ namespace DeadCellsArchipelago
     public class BiomeMobs
     {
         public List<MobInBiome> mobs { get; set; } = [];
+        public string dlc { get; set; } = "";
     }
 
     public class MobInBiome
