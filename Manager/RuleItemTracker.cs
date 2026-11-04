@@ -85,7 +85,7 @@ namespace DeadCellsArchipelago {
             canReachRules["VortexBadSeed"] = [["SewerShort"], ["DookuCastle"], ["Greenhouse"]];
             canReachRules["CurseofTheDeadGods"] = [["Throne"], ["QueenArena"], ["DookuArena"]];
             canReachRules["Flawless"] = [["Bridge", "BeholderPit", "SwampHeart", "TopClockTower", "Giant", "GardenerStage", "Throne",
-                "Lighthouse", "QueenArena", "Collector"]];
+                "Lighthouse", "QueenArena", "Observatory"]];
             canReachRules["BlobbyFlameMagma"] = [["Throne"], ["Cemetery"]];
 
             BuildReachRules(canReachRules);
