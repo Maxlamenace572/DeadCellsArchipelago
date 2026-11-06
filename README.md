@@ -4,6 +4,8 @@ This is an [Archipelago](https://github.com/ArchipelagoMW/Archipelago) mod for D
 
 In its current state, this implementation is best suited for long sync or async games, as there are multiple situations where you can become blocked. For short sync, you should use advanced YAML parameters such as `start_inventory`, `exclude_locations`, etc.
 
+This fork may be, and will be not up to date, as it is made specifically to remove one change from the Archipelago mod itself (Hunter's Mirror change w/hints) due to ASync banning that and there being no option. I might add an option to disable that later.
+
 ## Setup
 
 ### Installer
