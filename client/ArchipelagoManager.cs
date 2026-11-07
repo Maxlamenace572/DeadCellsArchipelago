@@ -55,6 +55,7 @@ namespace DeadCellsArchipelago
         public bool trapLink;
         public string trapLinkGroup = "";
         public bool flawlessScroll;
+        public bool mirrorHint;
         public bool enemySanity;
         private List<Hint> Hints = [];
         public Dictionary<string, int> trapWeights = [];
