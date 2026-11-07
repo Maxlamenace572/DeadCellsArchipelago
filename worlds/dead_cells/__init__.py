@@ -122,6 +122,7 @@ class DeadCellsWorld(World):
             "enemy_sanity":                 bool(o.enemy_sanity.value),
             "exclude_distillery":           bool(o.exclude_distillery.value),
             "flawless_scroll":              bool(o.flawless_scroll.value),
+            "mirror_hint":                  bool(o.mirror_hint.value),
             "health_link":                  bool(o.health_link.value),
             "health_link_group":            str(o.health_link_group.value),
             "health_curse_link":            bool(o.health_curse_link.value),

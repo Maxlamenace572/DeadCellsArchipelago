@@ -388,6 +388,14 @@ class GiveScrollOnFlawlessBoss(Toggle):
     display_name = "Flawless Boss Scroll"
     default = 0
 
+class MirrorHint(Toggle):
+    """
+    Killing the enemy in the mirror will randomly hint at one of your accessible checks and slightly reduce the price of the mod shop. 
+    This option will disable hinting from this feature if set to 0.
+    """
+    display_name = "Hunter's Mirror Hinting"
+    default = 1
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Option set — referenced in __init__.py as DeadCellsWorld.options_dataclass
 # ─────────────────────────────────────────────────────────────────────────────
@@ -444,6 +452,7 @@ class DeadCellsOptions(PerGameCommonOptions):
     # Gameplay
     respawn_up:         RespawnUpScroll
     flawless_scroll:    GiveScrollOnFlawlessBoss
+    mirror_hint:        MirrorHint
 
 dead_cells_option_groups = [
     OptionGroup(
