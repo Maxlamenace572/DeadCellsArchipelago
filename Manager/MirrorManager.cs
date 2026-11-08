@@ -70,7 +70,7 @@ namespace DeadCellsArchipelago {
             GLOBAL_DATA.currentMirrorEnemy = null;
 
             string? locationToHint = GetRandomAccessibleCheck();
-            if (locationToHint == null)
+            if (locationToHint == null || !ARCHIPELAGO.mirrorHint)
                 IncreaseShopSales(4);
             else
             {
