@@ -33,5 +33,6 @@ namespace DeadCellsArchipelago
         public Dictionary<string, string> TransitionBiome { get; set; } = [];
         public Dictionary<string, string> BiomeTransition { get; set; } = [];
         public HashSet<string> MultiTransition { get; set; } = [];
+        public Dictionary<string, string> BiomeDlc { get; set; } = [];
     }
 }

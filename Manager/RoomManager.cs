@@ -486,21 +486,21 @@ namespace DeadCellsArchipelago {
 
             else if (destLevel != null)
             {
-                if (SAVED_DATA!.currentLevelId == "T_SewerDepthsAfterPrison" )
+                if (SAVED_DATA!.currentLevelId == "T_SewerDepthsAfterPrison")
                     orig(arg1, lvl, x, y, "StiltVillage".AsHaxeString(), _destName, _destColor);
 
-                else if (SAVED_DATA!.currentLevelId == "T_ThroneAfterDistillery" )
+                else if (SAVED_DATA!.currentLevelId == "T_ThroneAfterDistillery")
                     orig(arg1, lvl, x, y, "Castle".AsHaxeString(), _destName, _destColor);
                 
-                else if (SAVED_DATA!.currentLevelId == "T_SwampAfterPrison" )
+                else if (SAVED_DATA!.currentLevelId == "T_SwampAfterPrison")
                     orig(arg1, lvl, x, y, "Shipwreck".AsHaxeString(), _destName, _destColor);
 
-                else if (biomeTransitions.MultiTransition.Contains(SAVED_DATA!.currentLevelId))
+                else if (biomeTransitions.MultiTransition.Contains(SAVED_DATA!.currentLevelId) && IsDlcBiomeActive(destLevel.ToString()))
                 {
                     string newBiome = GLOBAL_DATA!.roomRando.Map[destLevel.ToString()];
                     orig(arg1, lvl, x, y, newBiome.AsHaxeString(), _destName, _destColor);
                 }
-                else if (biomeTransitions.TransitionBiome.ContainsKey(destLevel.ToString()))
+                else if (biomeTransitions.TransitionBiome.ContainsKey(destLevel.ToString()) && IsDlcBiomeActive(destLevel.ToString()))
                 {
                     string oldBiome = biomeTransitions.TransitionBiome[destLevel.ToString()];
                     string newBiome = GLOBAL_DATA!.roomRando.Map[oldBiome];
@@ -559,6 +559,35 @@ namespace DeadCellsArchipelago {
             }
                 
             orig(self);
+        }
+
+        private static bool IsDlcBiomeActive(string destId)
+        {
+            string dlc;
+            if (biomeTransitions.BiomeDlc.ContainsKey(destId))
+                dlc = biomeTransitions.BiomeDlc[destId];
+            else
+            {
+                string destBiome = biomeTransitions.TransitionBiome[destId];
+                dlc = biomeTransitions.BiomeDlc[destBiome];
+            }
+
+            switch (dlc)
+            {
+                case "":
+                    return true;
+                case "RiseOfTheGiant":
+                    return GLOBAL_DATA!.riseOfTheGiant;
+                case "TheBadSeed":
+                    return GLOBAL_DATA!.theBadSeed;
+                case "FatalFalls":
+                    return GLOBAL_DATA!.fatalFalls;
+                case "TheQueenAndTheSea":
+                    return GLOBAL_DATA!.theQueenAndTheSea;
+                case "Purple":
+                    return GLOBAL_DATA!.returnToCastlevania;
+            }
+            return false;
         }
     }
 }
