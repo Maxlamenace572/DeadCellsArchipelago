@@ -503,29 +503,8 @@ namespace DeadCellsInstaller
                 return;
             }
 
-            // ── STEP 1 : .NET 10 ────────────────────────────────────────
-            SetStatus("Checking for .NET 10 Runtime…");
-            Log("→ Checking for .NET 10 Runtime…");
-
-            if (!CheckDotnet10Runtime())
-            {
-                Log("  .NET 10 Runtime not found. Downloading installer…");
-                await InstallDotnet10();
-                SetProgress(10);
-
-                // On vérifie en ciblant aussi l'exe local (pas encore dans PATH)
-                if (!CheckDotnet10Runtime())
-                {
-                    LogError("  .NET 10 Runtime installation failed. Cancelling.");
-                    return;
-                }
-                Log("  .NET 10 Runtime installed successfully. ✓");
-            }
-            else
-            {
-                Log("  .NET 10 Runtime already present. ✓");
-            }
-            SetProgress(10);
+            // ── STEP 1 : .NET 11 ────────────────────────────────────────
+            if (!await EnsureDotnet11Runtime()) return;
 
             // ── STEP 2 : Core ────────────────────────────────────────────
             if (psEnabled)
@@ -571,9 +550,8 @@ namespace DeadCellsInstaller
             }
 
             SetProgress(100);
-            Log("  Installation complete! Launching…");
-            SetStatus("Done — launching game…");
-            LaunchGame();
+            Log("  Installation complete! ✓");
+            SetStatus("Done.");
         }
 
         // ════════════════════════════════════════════════════════════════
@@ -584,6 +562,13 @@ namespace DeadCellsInstaller
             bool psEnabled = ArePowerShellScriptsEnabled();
             bool gog       = chkGog.Checked;
             string coremodDir = Path.Combine(deadCellsDir, "coremod");
+
+            // DCCM nécessite .NET 11 : on vérifie / installe le runtime avant la mise à jour
+            if (!await EnsureDotnet11Runtime())
+            {
+                SetStatus("DCCM update cancelled.");
+                return;
+            }
 
             string localDccm  = ReadLocalDccmVersion(Path.Combine(coremodDir, "ModCoreVersion.txt"));
             string remoteDccm = await GetRemoteDccmVersion();
@@ -598,6 +583,9 @@ namespace DeadCellsInstaller
                 SetStatus("DCCM is already up to date.");
                 return;
             }
+
+            // Le processus .NET Host (dotnet.exe) verrouille les fichiers et bloque l'installation
+            KillDotnetHost();
 
             if (psEnabled)
             {
@@ -621,6 +609,34 @@ namespace DeadCellsInstaller
             SetProgress(100);
             SetStatus("DCCM updated!");
             Log("  DCCM update complete. ✓");
+        }
+
+        // ════════════════════════════════════════════════════════════════
+        //  HELPERS – Arrêt du .NET Host
+        //  Le processus ".NET Host" (dotnet.exe) peut rester actif en arrière-plan
+        //  et verrouiller les fichiers de coremod\core, ce qui bloque la mise à jour.
+        // ════════════════════════════════════════════════════════════════
+        private void KillDotnetHost()
+        {
+            Log("→ Stopping .NET Host processes…");
+            int killed = 0;
+            foreach (var p in Process.GetProcessesByName("dotnet"))
+            {
+                try
+                {
+                    p.Kill();
+                    p.WaitForExit(5000);
+                    killed++;
+                }
+                catch (Exception ex)
+                {
+                    Log($"  Could not stop dotnet.exe (PID {p.Id}) : {ex.Message}");
+                }
+                finally { p.Dispose(); }
+            }
+            Log(killed > 0
+                ? $"  {killed} .NET Host process(es) stopped. ✓"
+                : "  No .NET Host process running. ✓");
         }
 
         // ════════════════════════════════════════════════════════════════
@@ -753,7 +769,7 @@ namespace DeadCellsInstaller
         }
 
         // ════════════════════════════════════════════════════════════════
-        //  HELPERS – .NET 10
+        //  HELPERS – .NET 11
         //
         //  PROBLÈME : dotnet-install.ps1 installe dans AppData\Local\Microsoft\dotnet
         //  mais DeadCellsModding.exe cherche le runtime dans C:\Program Files\dotnet\
@@ -761,7 +777,7 @@ namespace DeadCellsInstaller
         //  Solution : télécharger l'installeur officiel .exe Microsoft qui installe
         //  dans Program Files, visible de tous les exes du système.
         // ════════════════════════════════════════════════════════════════
-        private bool CheckDotnet10Runtime()
+        private bool CheckDotnet11Runtime()
         {
             // Vérification directe dans C:\Program Files\dotnet\shared\Microsoft.NETCore.App\
             string systemRuntimeDir = Path.Combine(
@@ -772,7 +788,7 @@ namespace DeadCellsInstaller
             {
                 foreach (var dir in Directory.GetDirectories(systemRuntimeDir))
                 {
-                    if (Regex.IsMatch(Path.GetFileName(dir), @"^10\."))
+                    if (Regex.IsMatch(Path.GetFileName(dir), @"^11\."))
                         return true;
                 }
             }
@@ -795,7 +811,7 @@ namespace DeadCellsInstaller
                     {
                         string output = p.StandardOutput.ReadToEnd();
                         p.WaitForExit();
-                        if (Regex.IsMatch(output, @"Microsoft\.NETCore\.App 10\.", RegexOptions.Multiline))
+                        if (Regex.IsMatch(output, @"Microsoft\.NETCore\.App 11\.", RegexOptions.Multiline))
                             return true;
                     }
                 }
@@ -804,16 +820,41 @@ namespace DeadCellsInstaller
             return false;
         }
 
-        private async Task InstallDotnet10()
+        private async Task<bool> EnsureDotnet11Runtime()
+        {
+            SetStatus("Checking for .NET 11 Runtime…");
+            Log("→ Checking for .NET 11 Runtime…");
+
+            if (CheckDotnet11Runtime())
+            {
+                Log("  .NET 11 Runtime already present. ✓");
+                SetProgress(10);
+                return true;
+            }
+
+            Log("  .NET 11 Runtime not found. Downloading installer…");
+            await InstallDotnet11();
+            SetProgress(10);
+
+            if (!CheckDotnet11Runtime())
+            {
+                LogError("  .NET 11 Runtime installation failed. Cancelling.");
+                return false;
+            }
+            Log("  .NET 11 Runtime installed successfully. ✓");
+            return true;
+        }
+
+        private async Task InstallDotnet11()
         {
             // URL stable officielle Microsoft — installe dans C:\Program Files\dotnet\
             // contrairement à dotnet-install.ps1 qui installe dans AppData
             const string runtimeInstallerUrl =
-                "https://aka.ms/dotnet/10.0/dotnet-runtime-win-x64.exe";
+                "https://aka.ms/dotnet/11.0/dotnet-runtime-win-x64.exe";
 
-            string installerPath = Path.Combine(Path.GetTempPath(), "dotnet10-runtime-installer.exe");
+            string installerPath = Path.Combine(Path.GetTempPath(), "dotnet11-runtime-installer.exe");
 
-            Log("  Downloading .NET 10 Runtime installer…");
+            Log("  Downloading .NET 11 Runtime installer…");
             using (var client = NewHttpClient())
             using (var response = await client.GetAsync(runtimeInstallerUrl, HttpCompletionOption.ResponseHeadersRead))
             {
@@ -832,12 +873,12 @@ namespace DeadCellsInstaller
                         {
                             string mb  = (read / 1048576.0).ToString("0.0");
                             string mb2 = (total.Value / 1048576.0).ToString("0.0");
-                            SetStatus($"Downloading .NET 10 Runtime… ({mb} / {mb2} MB)");
+                            SetStatus($"Downloading .NET 11 Runtime… ({mb} / {mb2} MB)");
                         }
                     }
                 }
             }
-            Log("  Running .NET 10 Runtime installer (a UAC prompt may appear)…");
+            Log("  Running .NET 11 Runtime installer (a UAC prompt may appear)…");
 
             // /install /quiet /norestart — silencieux, installe dans Program Files
             var psi = new ProcessStartInfo(installerPath, "/install /quiet /norestart")
@@ -849,8 +890,8 @@ namespace DeadCellsInstaller
             {
                 await Task.Run(() => p.WaitForExit());
                 // Exit code 3010 = succès avec redémarrage requis (acceptable)
-                if (p.ExitCode != 0 && p.ExitCode != 3010 && !CheckDotnet10Runtime())
-                    throw new Exception($".NET 10 Runtime installer failed (code {p.ExitCode}).");
+                if (p.ExitCode != 0 && p.ExitCode != 3010 && !CheckDotnet11Runtime())
+                    throw new Exception($".NET 11 Runtime installer failed (code {p.ExitCode}).");
             }
             try { File.Delete(installerPath); } catch { }
         }
