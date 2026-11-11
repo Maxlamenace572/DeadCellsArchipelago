@@ -24,6 +24,8 @@ namespace DeadCellsArchipelago {
         public int tripleUpsTaken = 0;
         public int quarterUpsBC3Taken = 0;
         public int quarterUpsBC4Taken = 0;
+        public int mobDmgTier = 0;
+        public int mobLifeTier = 0;
 
         public void InitValues(string seed)
         {

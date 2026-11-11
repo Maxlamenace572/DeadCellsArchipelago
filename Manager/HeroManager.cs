@@ -84,6 +84,8 @@ namespace DeadCellsArchipelago {
                 SAVED_DATA.lastLevelDepthSeen = 0;
                 SAVED_DATA.isDoingChallenge = false;
                 SAVED_DATA.ResetUps();
+                SAVED_DATA!.mobLifeTier = 0;
+                SAVED_DATA!.mobDmgTier = 0;
                 if (USER != null) SAVED_DATA.numberOfPokebombUse = USER.bossRuneActivated+1;
                 SAVED_DATA.hasDoneBank = false;
                 trapChallenge = false;

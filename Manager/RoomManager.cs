@@ -38,6 +38,7 @@ namespace DeadCellsArchipelago {
         public static int countPrisonStartLoreRoom;
         private static bool addDistillery;
         public static BiomeTransitions biomeTransitions = new();
+        private static bool skipMobScaling;
 
         public static void InitializeRoomHooks()
         {
@@ -113,6 +114,8 @@ namespace DeadCellsArchipelago {
         //when the level is generating, we do the checks biomes and add a void challenge for the trap
         private static ArrayObj OnGenerateLevel(Hook_LevelGen.orig_generate orig, LevelGen self, User user, int seed, virtual_baseLootLevel_biome_bonusTripleScrollAfterBC_cellBonus_dlc_doubleUps_eliteRoomChance_eliteWanderChance_flagsProps_group_icon_id_index_loreDescriptions_mapDepth_minGold_mobDensity_mobs_name_nextLevels_parallax_props_quarterUpsBC3_quarterUpsBC4_specificLoots_specificSubBiome_transitionTo_tripleUps_worldDepth_ ldat, Ref<bool> resetCount)
         {
+            if (self.countTryWithDifferentSeed != 0)
+                skipMobScaling = true;
             self.countTryWithDifferentSeed = 0;
             changeNextCallDmgTier = false;
             changeNextCallLifeTier = false;
@@ -343,6 +346,13 @@ namespace DeadCellsArchipelago {
                     SAVED_DATA!.lastLevelDepthSeen = GetMapLevelDepth(destinationId);
                 }
             }
+
+            if(kind == " Enter" && GLOBAL_DATA!.roomRando.Mode == "chaotic" && !skipMobScaling)
+            {
+                SAVED_DATA!.mobLifeTier += 2 * USER!.bossRuneActivated;
+                SAVED_DATA!.mobDmgTier += 4 + USER!.bossRuneActivated;
+            }
+            skipMobScaling = false;
         }
 
         public static void CloseModal()
