@@ -23,13 +23,14 @@ namespace DeadCellsArchipelago {
         public HashSet<string> FlawlessBoss { get; set; } = [];
         public Dictionary<string, int> MirrorEnemies { get; set; } = [];
         public string? currentMirrorEnemy = null;
+        public bool mirrorHint;
         public int reducedPercentageShop = 0;
         public int currentCells = 0;
         public bool debugWarp = false;
         public RoomRandoData roomRando = new();
 
         public void InitValues(int bsc, bool cosmetics, bool asp, bool rus, bool rotg, bool tbs, bool ff, bool tqats, bool rtc, bool fs, bool es,
-                                Dictionary<string, int> tw, RoomRandoData rr)
+                                Dictionary<string, int> tw, RoomRandoData rr, bool mh)
         {
             bscLevelToWin = bsc;
             includeCosmetics = cosmetics;
@@ -44,6 +45,7 @@ namespace DeadCellsArchipelago {
             enemySanity = es;
             trapWeights = tw;
             roomRando = rr;
+            mirrorHint = mh;
 
             if (!includeAspects) SAVED_DATA!.GiveAspectsCheck();
         }

@@ -279,7 +279,7 @@ namespace DeadCellsArchipelago
 
             HashSet<string> accessibleMobs = [];
             Dictionary<string, Biome> biomes = CalculateRegionData();
-            int maxDepth = GetMaxWorldDepth();
+            int maxDepth = GetMaxWorldDepth(biomes);
             
             foreach(KeyValuePair<string, Biome> biome in biomes)
             {
@@ -387,6 +387,6 @@ namespace DeadCellsArchipelago
         public int min_bc { get; set; } = 0;
         public int max_bc { get; set; } = 5;
         public string name { get; set; } = "";
-        public List<int>? depth { get; set; } = [];
+        public List<int>? depth { get; set; }
     }
 }

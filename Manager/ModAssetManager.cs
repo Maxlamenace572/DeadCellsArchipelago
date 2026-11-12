@@ -84,7 +84,8 @@ namespace DeadCellsArchipelago {
                     ARCHIPELAGO.flawlessScroll,
                     ARCHIPELAGO.enemySanity,
                     ARCHIPELAGO.trapWeights,
-                    ARCHIPELAGO.roomRando);
+                    ARCHIPELAGO.roomRando,
+                    ARCHIPELAGO.mirrorHint);
 
                 var json = JsonConvert.SerializeObject(GLOBAL_DATA, Formatting.Indented);
                 System.IO.File.WriteAllText(savePath, json);
